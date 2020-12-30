@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const { useBreakpoint } = Grid;
 
 
-const statusTutor = false
+const statusTutor = true
 const auth = false
 
 

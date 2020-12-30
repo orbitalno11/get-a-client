@@ -1,0 +1,104 @@
+:root {
+  --main-color:#F26419;
+  --blue-color: #33658A;
+  --yello-color : #F6AE2D;
+  --white-color : #FFFFFF;
+  --gray-color : #C4C4C4;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.menuBar {
+  background-color: var(--main-color) !important;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: solid 1px #e8e8e8;
+  overflow: auto;
+  box-shadow: 0 0 30px #f3f1f1;
+}
+
+.menuBar .floatRight{
+  margin-left: auto
+}
+
+.logo {
+  float: left;
+  color: var(--white-color) ;
+  font-weight: 700;
+  width: 150px;
+  align-items: center;
+  font-size: 20pt;
+}
+
+.ant-menu-horizontal > .ant-menu-item:hover,
+.ant-menu-horizontal > .ant-menu-submenu:hover,
+.ant-menu-horizontal > .ant-menu-item-active,
+.ant-menu-horizontal > .ant-menu-submenu-active,
+.ant-menu-horizontal > .ant-menu-item-open,
+.ant-menu-horizontal > .ant-menu-submenu-open,
+.ant-menu-horizontal > .ant-menu-item-selected,
+.ant-menu-horizontal > .ant-menu-submenu-selected {
+  color:  var(--white-color)  !important;
+  border-bottom: 2px solid  var(--white-color) !important;
+}
+
+
+
+.ant-menu-horizontal a{
+  color:  var(--white-color)  !important;
+}
+
+
+.buttonBlueColor{
+  background-color: var(--blue-color) !important;
+  border-width: 0ch  !important;
+  color:var(--white-color)  !important;
+}
+.buttonText{
+  color:var(--white-color)  !important;
+}
+
+.navbarBottom {
+  overflow: hidden;
+  background-color: var(--white-color) ;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  border-top-style: solid;
+  border-top-color: var(--main-color);
+
+}
+
+.iconMenu{
+  padding: 10px;
+  
+}
+
+.icon{
+  font-size: 25px;
+  color : var(--gray-color) !important;
+}
+
+.icon :active{
+  color : var(--main-color) !important;
+}
+
+
+

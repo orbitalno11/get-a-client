@@ -1,6 +1,6 @@
-import React, { Fragment } from "react"
-import { Menu, Grid, Button, Row, Col } from "antd";
-import { Link } from "react-router-dom";
+import React, { Fragment, useState } from 'react'
+import { Menu, Grid, Button, Row, Col } from 'antd';
+import { Link } from 'react-router-dom';
 import {    faHome, 
             faChalkboardTeacher, 
             faSearch, 
@@ -8,8 +8,8 @@ import {    faHome,
             faUserCircle,
             faTachometerAlt,
             faGraduationCap,
-            faBell } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+            faBell } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const { useBreakpoint } = Grid;
 
 
@@ -45,23 +45,23 @@ const UserMenu = () => {
 const TutorMenu = () => {
     return (
         <Menu className="menuBar" mode="horizontal" defaultSelectedKeys={["/"]} >
-            <Menu.Item key="/" className="modified-item ">
+            <Menu.Item key="/" >
                 <Link to="/">
                     หน้าแรก
                 </Link>
             </Menu.Item>
-            <Menu.Item key="/manageCouse" className="modified-item " >
+            <Menu.Item key="/manageCouse"  >
                 <Link to="/manageCouse">
                     จัดการคอร์สเรียน
                 </Link>
             </Menu.Item>
-            <Menu.Item key="/notification" className="modified-item " >
+            <Menu.Item key="/notification"  >
                 <Link to="/notification">
                     แจ้งเตือน
                 </Link>
             </Menu.Item>
             {
-                auth ? (<Menu.Item key="logout" className="modified-item " >ออกจากระบบ</Menu.Item>) : null
+                auth ? (<Menu.Item key="logout"  >ออกจากระบบ</Menu.Item>) : null
             }
         </Menu>
     )

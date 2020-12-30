@@ -1,16 +1,23 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { Layout } from 'antd';
 
-import NavMenu from '../NavMenu'
+import MenuAdmin from '../pages/admin/MenuAdmin'
 import Home from '../pages/users/Home'
+const { Header, Content, Footer, Sider } = Layout;
 
 export default function AdminLayout() {
     return (
         <div>
-             <NavMenu/>
-             <Switch>
-                <Route  path="/admin" component={Home}/>
-            </Switch>
+            <Layout>
+                <MenuAdmin />
+                <Layout style={{ marginLeft: 200,backgroundColor:'#FFFFFF' }}>
+                    <Switch>
+                        <Route path="/" component={Home} />
+                    </Switch>
+                </Layout>
+            </Layout>
+
         </div>
     )
 }

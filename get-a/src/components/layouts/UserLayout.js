@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom'
 import NavMenu from '../NavMenu'
 
 import Home from '../pages/users/Home'
+import Login from '../pages/users/Login'
 
 
 export default function UserLayout() {
@@ -12,7 +13,9 @@ export default function UserLayout() {
         <div>
             <NavMenu/>
             <Switch>
-                <Route path="/" component={Home}/>
+                <Route exact path="/" component={Home}/>
+                <Route exact path="/login" component={Login}/>
+
             </Switch>
         </div>
     )

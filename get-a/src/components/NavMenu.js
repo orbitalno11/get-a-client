@@ -1,6 +1,6 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 import { Menu, Grid, Button, Row, Col } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import {    faHome, 
             faChalkboardTeacher, 
             faSearch, 
@@ -133,6 +133,7 @@ const ToturMenuMobile = () => {
     )
 }
 const MenuDesktop = () => {
+   
     return (
         <nav className="menuBar">
             <div  >
@@ -148,7 +149,10 @@ const MenuDesktop = () => {
                     {
                         !auth ? (
                             <Col style={{ display: "flex", alignItems: "center" }}>
-                                <Button className="buttonBlueColor" shape="round" size="middle" >เข้าสู่ระบบ</Button>
+                                <Link to="/login">
+                                    <Button id="/login" className="buttonBlueColor" shape="round" size="middle">เข้าสู่ระบบ</Button>
+                                </Link>
+                                
                                 <Button className="buttonText" type="text" >หรือ เข้าสู่ระบบ</Button>
                             </Col>
                         ) : null
@@ -174,7 +178,9 @@ const NavMenu = () => {
     const screens = useBreakpoint();
     return (
         <Fragment>
+            <div className="fixMenu">
             {screens.xs || (screens.sm && !screens.md ) ? <MenuMobile/>: <MenuDesktop/>}
+            </div>
         </Fragment>
     )
 }

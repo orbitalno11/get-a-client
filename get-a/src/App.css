@@ -21,22 +21,42 @@
     transform: rotate(360deg);
   }
 }
+/* General */
 
+.h1{
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.white{
+  color:var(--white-color)
+}
+
+
+/* General */
 
 /* Nav Menu */
+.fixMenu{
+  position:fixed;
+  width:100%
+}
+
 .menuBar {
   background-color: var(--main-color) !important;
   height: 60px;
   display: flex;
   align-items: center;
   padding: 0 20px;
-  border-bottom: solid 1px #e8e8e8;
+  border-bottom: solid 0px transparent;
   overflow: auto;
   /* box-shadow: 0 0 30px #f3f1f1; */
 }
 
 .menuBar .floatRight{
-  margin-left: auto
+  /* position: fixed; */
+  margin-left: auto ;
+  /* float: right; */
+  
 }
 .logo {
   float: left;
@@ -139,3 +159,24 @@
 }
 
 /* Nav Menu */
+
+
+.login-page{
+  background-color: var(--main-color);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.input-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-login{
+   width: 80%;
+   margin-top: 20px;
+}

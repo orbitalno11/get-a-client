@@ -5,6 +5,7 @@
   --white-color : #FFFFFF;
   --gray-color : #C4C4C4;
   --side-menu-color : #303A53;
+  --error-color : #840c0c;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -24,12 +25,19 @@
 /* General */
 
 .h1{
-  font-size: 40px;
+  font-size: 50px;
   font-weight: 700;
 }
 
 .white{
   color:var(--white-color)
+}
+
+.error-input{
+  font-size: 12px;
+  color:var(--error-color);
+  padding-left: 10px;
+  margin-top: 5px;
 }
 
 
@@ -53,11 +61,9 @@
 }
 
 .menuBar .floatRight{
-  /* position: fixed; */
   margin-left: auto ;
-  /* float: right; */
-  
 }
+
 .logo {
   float: left;
   color: var(--white-color) ;
@@ -96,8 +102,14 @@
   border-width: 0ch  !important;
   color:var(--white-color)  !important;
 }
+
+
 .buttonText{
   color:var(--white-color)  !important;
+}
+
+.buttonText :hover{
+  font-weight: 600;
 }
 
 .navbarBottom {
@@ -167,16 +179,57 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-flow: column;
+  margin-top: 0;
 }
 
 
-.input-center{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+.login-page .buttonText :hover{
+  border-bottom: 2px solid  var(--white-color) !important;
 }
 
-.input-login{
-   width: 80%;
-   margin-top: 20px;
+
+
+.input-form{
+  width: 30%;
+  margin-top: 30px;
+}
+
+.input{
+  margin: 0 auto;
+  border: none; /* <-- This thing here */
+  border:solid 1px #ccc;
+  border-radius: 20px;
+  padding: 8px;
+  padding-left: 20px;
+  width: 100%;
+  outline:none;
+
+}
+
+
+input :focus{
+  outline: none !important
+
+}
+
+.title {
+  margin-right: auto;
+  color:var(--white-color)
+}
+
+
+.margintop10{
+  margin-top: 10px;
+}
+
+.margintop20{
+  margin-top: 20px;
+}
+
+@media only screen and (max-width: 830px) {
+  .input-form{
+    width: 60%;
+  }
 }

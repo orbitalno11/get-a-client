@@ -1,14 +1,16 @@
 import React, { Fragment } from 'react'
 import { Menu, Grid, Button, Row, Col } from 'antd';
-import { Link} from 'react-router-dom';
-import {    faHome, 
-            faChalkboardTeacher, 
-            faSearch, 
-            faHeart, 
-            faUserCircle,
-            faTachometerAlt,
-            faGraduationCap,
-            faBell } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+import {
+    faHome,
+    faChalkboardTeacher,
+    faSearch,
+    faHeart,
+    faUserCircle,
+    faTachometerAlt,
+    faGraduationCap,
+    faBell
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const { useBreakpoint } = Grid;
 
@@ -111,7 +113,7 @@ const ToturMenuMobile = () => {
                     <FontAwesomeIcon icon={faTachometerAlt} className="icon" />
                 </Link>
             </Col>
-           
+
             <Col span={6.5} className="iconMenu">
                 <Link to="/">
                     <FontAwesomeIcon icon={faGraduationCap} className="icon" />
@@ -127,13 +129,13 @@ const ToturMenuMobile = () => {
                     <FontAwesomeIcon icon={faBell} className="icon" />
                 </Link>
             </Col>
-           
+
         </Row>
 
     )
 }
 const MenuDesktop = () => {
-   
+
     return (
         <nav className="menuBar">
             <div  >
@@ -152,8 +154,9 @@ const MenuDesktop = () => {
                                 <Link to="/login">
                                     <Button id="/login" className="buttonBlueColor" shape="round" size="middle">เข้าสู่ระบบ</Button>
                                 </Link>
-                                
-                                <Button className="buttonText" type="text" >หรือ เข้าสู่ระบบ</Button>
+                                <Link to="/register">
+                                    <Button className="buttonText" type="link" >หรือ เข้าสู่ระบบ</Button>
+                                </Link>
                             </Col>
                         ) : null
                     }
@@ -179,7 +182,7 @@ const NavMenu = () => {
     return (
         <Fragment>
             <div className="fixMenu">
-            {screens.xs || (screens.sm && !screens.md ) ? <MenuMobile/>: <MenuDesktop/>}
+                {screens.xs || (screens.sm && !screens.md) ? <MenuMobile /> : <MenuDesktop />}
             </div>
         </Fragment>
     )

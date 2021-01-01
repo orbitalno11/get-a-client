@@ -22,7 +22,6 @@ import AdminLayout from './components/layouts/AdminLayout'
 import UserLayout from './components/layouts/UserLayout'
 
 //Page 
-import Home from './components/pages/users/Home'
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 

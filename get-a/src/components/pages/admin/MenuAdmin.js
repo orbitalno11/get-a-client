@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom';
 
-const { SubMenu } = Menu;
 const { Sider } = Layout;
 
 export default function MenuAdmin() {

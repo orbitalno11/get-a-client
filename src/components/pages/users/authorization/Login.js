@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import { useForm } from "react-hook-form";
 import { loginSchema } from '../../../../validation/validation'
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default function Login() {
 
@@ -35,9 +35,9 @@ export default function Login() {
                 </div>
                 <Button className="buttonBlueColor margintop20" shape="round" size="large" htmlType="submit">เข้าสู่ระบบ</Button>
                 <div className="margintop10" >
-                    <Link to="/register/select">
+                    <NavLink to="/register/select">
                         <Button className="buttonText" type="link" >สมัครสมาชิก</Button>
-                    </Link>
+                    </NavLink>
 
                 </div>
             </div>

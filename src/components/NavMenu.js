@@ -154,7 +154,7 @@ const MenuDesktop = () => {
                                 <Link to="/login">
                                     <Button id="/login" className="buttonBlueColor" shape="round" size="middle">เข้าสู่ระบบ</Button>
                                 </Link>
-                                <Link to="/register">
+                                <Link to="/register/select">
                                     <Button className="buttonText" type="link" >หรือ เข้าสู่ระบบ</Button>
                                 </Link>
                             </Col>

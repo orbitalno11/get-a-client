@@ -1,11 +1,9 @@
 import React from 'react'
 import { Button } from 'antd';
 import { useForm } from "react-hook-form";
-import { loginSchema } from '../../../validation/validation'
+import { loginSchema } from '../../../../validation/validation'
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link } from 'react-router-dom';
-
-
 
 export default function Login() {
 
@@ -19,10 +17,7 @@ export default function Login() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            {
-                console.log(errors)
-            }
-            <div className="login-page">
+            <div className="center-page background-main">
                 <span className="h1 white">GET-A</span>
                 <div className="input-form">
 
@@ -40,7 +35,7 @@ export default function Login() {
                 </div>
                 <Button className="buttonBlueColor margintop20" shape="round" size="large" htmlType="submit">เข้าสู่ระบบ</Button>
                 <div className="margintop10" >
-                    <Link to="/register">
+                    <Link to="/register/select">
                         <Button className="buttonText" type="link" >สมัครสมาชิก</Button>
                     </Link>
 

@@ -4,14 +4,13 @@ import {
   Switch
 } from 'react-router-dom';
 
-
-import { createStore, applyMiddleware } from "redux";
-import rootReducer from './redux/reducers';
 import { Provider } from 'react-redux'
-import thunk from "redux-thunk";
 
 import 'antd/dist/antd.css';
 import './App.css';
+
+import store from './redux/store'
+
 
 //Route 
 import AdminRoute from './components/common/AdminRoute'
@@ -23,7 +22,6 @@ import UserLayout from './components/layouts/UserLayout'
 
 //Page 
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
 
 function App() {
 

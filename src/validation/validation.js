@@ -1,30 +1,7 @@
-import * as yup from "yup";
+import {loginSchema} from './authorization/loginSchema' 
+import {learnnerRegisSchema} from './authorization/learnnerRegisSchema' 
+import {tutorRegisSchema} from './authorization/tutorRegisSchema' 
 
-const loginSchema = yup.object().shape({
-    email: yup.string().email().required(),
-    password: yup.string().required(),
-});
-
-const learnnerRegisSchema = yup.object().shape({
-    profile: yup.object(),
-    firstname: yup.string().required(),
-    lastname: yup.string().required(),
-    grade: yup.string().required(),
-    email: yup.string().email().required(),
-    password: yup.string().required(),
-    comfirmpassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match').required(),
-});
-
-
-const tutorRegisSchema = yup.object().shape({
-    profile: yup.object(),
-    firstname: yup.string().required(),
-    lastname: yup.string().required(),
-    subject: yup.array().max(3,"Max").nullable(),
-    email: yup.string().email().required(),
-    password: yup.string().required(),
-    comfirmpassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match').required()
-});
 
 export {
     loginSchema ,

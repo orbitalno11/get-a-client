@@ -1,6 +1,6 @@
 import { Button, Col, Row } from 'antd'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import {
     faBookReader,
     faChalkboardTeacher
@@ -34,12 +34,12 @@ export default function RegisterSelect() {
                 {
                     typeRegister.map((item) => (
                         <Col justify="space-around" align="middle" key={item.type} xs={24} sm={24} md={12}>
-                            <Link to={`/register/form/${item.id}`}>
+                            <NavLink to={`/register/form/${item.id}`}>
                                 <Button className="big-button white" style={{ backgroundColor: item.color }} shape="round">
                                     <FontAwesomeIcon icon={item.type === "LEARNER" ? faBookReader : faChalkboardTeacher} style={iconStyle} />
                                     <br /> {item.type}
                                 </Button>
-                            </Link>
+                            </NavLink>
                         </Col>
                     ))
                 }

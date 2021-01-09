@@ -18,6 +18,7 @@ import UserLayout  from './components/layouts/UserLayout'
 //Page 
 import Login  from './components/pages/users/Login'
 
+// rebase 1
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
         <AdminRoute exact  path="/admin" component={AdminLayout}/>
 
         <UserRoute exact  path="/" component={UserLayout}/>
-
+        
         <Route path="*">
           {/* <Redirect path="/"/> */}
         </Route>

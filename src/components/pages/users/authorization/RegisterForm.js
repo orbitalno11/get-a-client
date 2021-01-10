@@ -45,7 +45,6 @@ export default function RegisterForm() {
         console.log(JSON.stringify(data));
     };
 
-
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="align-center-page" >

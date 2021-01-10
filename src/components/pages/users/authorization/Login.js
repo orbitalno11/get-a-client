@@ -7,7 +7,6 @@ import { NavLink } from 'react-router-dom';
 
 export default function Login() {
 
-
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(loginSchema),
     });
@@ -20,7 +19,6 @@ export default function Login() {
             <div className="center-page background-main">
                 <span className="h1 white">GET-A</span>
                 <div className="input-form">
-
                     <p className="title ">อีเมล</p>
                     <input className="input" type="email" name="email" ref={register} />
                     {
@@ -31,19 +29,14 @@ export default function Login() {
                     {
                         errors.password && <p className="error-input">{errors.password.message}</p>
                     }
-
                 </div>
                 <Button className="buttonBlueColor margintop20" shape="round" size="large" htmlType="submit">เข้าสู่ระบบ</Button>
                 <div className="margintop10" >
-                    <NavLink to="/register/select">
+                    <NavLink to="/register">
                         <Button className="buttonText" type="link" >สมัครสมาชิก</Button>
                     </NavLink>
-
                 </div>
             </div>
-
         </form>
     )
-
-
 }

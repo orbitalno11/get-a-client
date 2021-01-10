@@ -1,7 +1,6 @@
 import { Badge, Image, Upload, Row, Col, Grid, Select, Button } from 'antd'
 import React, { useState } from 'react'
 import { Controller, useForm } from "react-hook-form";
-
 import {
     faEdit
 } from '@fortawesome/free-solid-svg-icons';
@@ -30,7 +29,6 @@ export default function RegisterForm() {
     const inputForm = {
         width: ((screens.sm && !screens.lg) || (!screens.sm && screens.xs)) ? '70%' : '35%',
     }
-
 
     const { register, handleSubmit, errors, control } = useForm({
         resolver: yupResolver(type === '0' ? tutorRegisSchema : learnnerRegisSchema),
@@ -76,7 +74,6 @@ export default function RegisterForm() {
                 {
                     errors.profile && <p className="error-input">{errors.profile.message}</p>
                 }
-
                 <Row className="input-form" style={inputForm} justify="space-between">
                     <Col className="margintop10" xs={24} sm={24} md={24} >
                         <p>ชื่อ</p>
@@ -84,7 +81,6 @@ export default function RegisterForm() {
                         {
                             errors.firstname && <p className="error-input">{errors.firstname.message}</p>
                         }
-
                     </Col>
                     <Col className="margintop10" xs={24} sm={24} md={24} >
                         <p>นามสกุล</p>
@@ -106,14 +102,12 @@ export default function RegisterForm() {
                             control={control}
                             defaultValue={type === '0' ? ["20"] : ""}
                         />
-
                         {
                             type === '0' ?
                                 errors.subject && <p className="error-input">{errors.subject.message}</p>
                                 :
                                 errors.grade && <p className="error-input">{errors.grade.message}</p>
                         }
-
                     </Col>
                     <Col className="margintop10" xs={24} sm={24} md={24} >
                         <p>อีเมล</p>
@@ -136,7 +130,6 @@ export default function RegisterForm() {
                             errors.comfirmpassword && <p className="error-input">{errors.comfirmpassword.message}</p>
                         }
                     </Col>
-
                 </Row>
                 <Button className="buttonBlueColor margintop20" shape="round" size="large" htmlType="submit">ลงทะเบียน</Button>
             </div>

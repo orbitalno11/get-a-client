@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function RegisterSelect() {
+export default function Register() {
     const iconStyle = {
         fontSize: '50px',
         marginBottom: '10px'
@@ -34,7 +34,7 @@ export default function RegisterSelect() {
                 {
                     typeRegister.map((item) => (
                         <Col justify="space-around" align="middle" key={item.type} xs={24} sm={24} md={12}>
-                            <NavLink to={`/register/form/${item.id}`}>
+                            <NavLink to={`/register/${item.id}`}>
                                 <Button className="big-button white" style={{ backgroundColor: item.color }} shape="round">
                                     <FontAwesomeIcon icon={item.type === "LEARNER" ? faBookReader : faChalkboardTeacher} style={iconStyle} />
                                     <br /> {item.type}
@@ -43,10 +43,6 @@ export default function RegisterSelect() {
                         </Col>
                     ))
                 }
-
-             
-
-
             </Row>
         </div>
     )

@@ -3,15 +3,10 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-
 import { Provider } from 'react-redux'
-
 import 'antd/dist/antd.css';
 import './App.css';
-
 import store from './redux/store'
-
-
 //Route 
 import AdminRoute from './components/common/AdminRoute'
 import UserRoute from './components/common/UserRoute'
@@ -34,7 +29,6 @@ function App() {
           <Route path="*">
             {/* <Redirect path="/"/> */}
           </Route>
-
         </Switch>
       </Router>
     </Provider>

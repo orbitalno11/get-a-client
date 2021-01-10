@@ -1,14 +1,10 @@
 import React from 'react'
-
 import { Route, Switch } from 'react-router-dom'
-
 import NavMenu from '../NavMenu'
-
 import Home from '../pages/users/Home'
 import Login from '../pages/users/authorization/Login'
-import RegisterSelect from '../pages/users/authorization/RegisterSelect'
+import Register from '../pages/users/authorization/Register'
 import RegisterForm from '../pages/users/authorization/RegisterForm'
-
 
 export default function UserLayout() {
     return (
@@ -17,9 +13,8 @@ export default function UserLayout() {
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/login" component={Login} />
-                <Route exact path="/register/select" component={RegisterSelect} />
-                <Route exact path="/register/form/:id" component={RegisterForm} />
-
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/register/:id" component={RegisterForm} />
             </Switch>
         </div>
     )

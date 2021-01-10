@@ -28,7 +28,7 @@ export default function Register() {
     return (
         <div className={style.alignCenterPage}>
             <span className="h2 ">ประเภทสมาชิก</span>
-            <Row className="row-width" >
+            <Row className={style.rowWidth} >
                 {
                     typeRegister.map((item) => (
                         <Col justify="space-around" align="middle" key={item.type} xs={24} sm={24} md={12}>

@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { learnnerRegisSchema, tutorRegisSchema } from '../../../../validation/validation'
 import { yupResolver } from '@hookform/resolvers/yup';
 import moment from 'moment';
+import style from './styles.module.scss'
 
 function getBase64(file) {
     return new Promise((resolve, reject) => {
@@ -50,7 +51,7 @@ export default function RegisterForm() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="align-center-page" >
+            <div className={style.alignCenterPage} >
                 <span className="h2">ลงทะเบียน{type === '0' ? "ครูสอนพิเศษ" : "นักเรียน"}</span>
                 <Controller
                     as={

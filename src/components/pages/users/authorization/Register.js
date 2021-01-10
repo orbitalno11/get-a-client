@@ -6,13 +6,11 @@ import {
     faChalkboardTeacher
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import style from './styles.module.scss'
+
 
 export default function Register() {
-    const iconStyle = {
-        fontSize: '50px',
-        marginBottom: '10px'
-    }
-
+ 
     const typeRegister = [
         {
             id : '0',
@@ -28,7 +26,7 @@ export default function Register() {
         },
     ]
     return (
-        <div className="align-center-page">
+        <div className={style.alignCenterPage}>
             <span className="h2 ">ประเภทสมาชิก</span>
             <Row className="row-width" >
                 {
@@ -36,7 +34,7 @@ export default function Register() {
                         <Col justify="space-around" align="middle" key={item.type} xs={24} sm={24} md={12}>
                             <NavLink to={`/register/${item.id}`}>
                                 <Button className="big-button white" style={{ backgroundColor: item.color }} shape="round">
-                                    <FontAwesomeIcon icon={item.type === "LEARNER" ? faBookReader : faChalkboardTeacher} style={iconStyle} />
+                                    <FontAwesomeIcon icon={item.type === "LEARNER" ? faBookReader : faChalkboardTeacher} className={style.iconStyle} />
                                     <br /> {item.type}
                                 </Button>
                             </NavLink>

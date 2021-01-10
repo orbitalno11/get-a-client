@@ -24,11 +24,6 @@
 }
 /* General */
 
-.h1{
-  font-size: 50px;
-  font-weight: 700;
-}
-
 .h2{
   font-size: 35px;
   font-weight: 700;
@@ -53,6 +48,9 @@
   margin-top: 20px;
 }
 
+.marginbottom{
+  padding-bottom: 20px;
+}
 
 .input{
   margin: 0 auto;
@@ -92,8 +90,12 @@ input :focus{
   outline: none !important
 }
 
-.row-width {
-  width: 40% !important;
+.body {
+  padding-top: 110px;
+}
+
+.paddingBody {
+  padding: 7%;
 }
 
 
@@ -234,44 +236,12 @@ input :focus{
 /* Nav Menu */
 
 /* Body */
-.align-center-page{
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  flex-flow: column;
-  margin-top: 0;
-  padding-top: 130px;
-}
-
-
-.center-page{
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column;
-  margin-top: 0;
-}
-
-.center-page .buttonText :hover{
-  border-bottom: 2px solid  var(--white-color) !important;
-}
-
 
 .input-form{
   width: 30%;
   margin-top: 30px;
 }
 
-
-.title {
-  margin-right: auto;
-  color:var(--white-color)
-}
-
-.background-main{
-  background-color: var(--main-color);
-}
 
 .big-button{
   height : 160px ;
@@ -284,8 +254,8 @@ input :focus{
 
 .image-person {
   border-radius: 50% !important;
-  height: 140px;
-  width: 140px;
+  height: 120px;
+  width: 120px;
 }
 
 .icon-addimage{

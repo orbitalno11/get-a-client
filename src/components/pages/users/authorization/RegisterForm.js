@@ -1,4 +1,4 @@
-import { Badge, Image, Upload, Row, Col, Grid, Select, Button } from 'antd'
+import { Badge, Image, Upload, Row, Col, Grid, Select, Button, DatePicker } from 'antd'
 import React, { useState } from 'react'
 import { Controller, useForm } from "react-hook-form";
 import {
@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useParams } from 'react-router-dom';
 import { learnnerRegisSchema, tutorRegisSchema } from '../../../../validation/validation'
 import { yupResolver } from '@hookform/resolvers/yup';
+import moment from 'moment';
 
 function getBase64(file) {
     return new Promise((resolve, reject) => {
@@ -25,6 +26,8 @@ export default function RegisterForm() {
     const screens = useBreakpoint();
     const params = useParams();
     const type = params.id
+
+    
 
     const inputForm = {
         width: ((screens.sm && !screens.lg) || (!screens.sm && screens.xs)) ? '70%' : '35%',
@@ -86,6 +89,37 @@ export default function RegisterForm() {
                         <input className="input" type="text" name="lastname" ref={register} />
                         {
                             errors.lastname && <p className="error-input">{errors.lastname.message}</p>
+                        }
+                    </Col>
+                    <Col className="margintop10" xs={24} sm={24} md={24} >
+                        <p>เพศ</p>
+                        <Controller
+                            as={
+                                <Select name="gender"  >
+                                    <Select.Option value="male" >male</Select.Option>
+                                    <Select.Option value="female" >female</Select.Option>
+                                </Select>
+                            }
+                            name="gender"
+                            control={control}
+                            defaultValue=""
+                        />
+                        {
+                            errors.gender && <p className="error-input">{errors.gender.message}</p>
+                        }
+                    </Col>
+                    <Col className="margintop10" xs={24} sm={24} md={24} >
+                        <p>วันเดือนปีเกิด</p>
+                        <Controller
+                            as={
+                                <DatePicker />
+                            }
+                            name="dateOfBirth"
+                            control={control}
+                            defaultValue={moment()}
+                        />
+                        {
+                            errors.dateOfBirth && <p className="error-input">{errors.dateOfBirth.message}</p>
                         }
                     </Col>
                     <Col className="margintop10" xs={24} sm={24} md={24} >

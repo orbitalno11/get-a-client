@@ -16,7 +16,7 @@ const { useBreakpoint } = Grid;
 
 
 const statusTutor = true
-const auth = false
+const auth = true
 
 
 const UserMenu = () => {
@@ -38,7 +38,22 @@ const UserMenu = () => {
                 </NavLink>
             </Menu.Item>
             {
-                auth ? (<Menu.Item key="logout" >ออกจากระบบ</Menu.Item>) : null
+            auth ? (
+                        <Menu.Item key="/profile" >
+                            <NavLink to="/profile">
+                                โปรไฟล์
+                        </NavLink>
+                        </Menu.Item>
+                ) : null
+            }
+            {
+                auth ? (
+                        <Menu.Item key="/logout" >
+                            <NavLink to="/logout">
+                                ออกจากระบบ
+                        </NavLink>
+                        </Menu.Item>
+                ) : null
             }
         </Menu>
     )
@@ -63,7 +78,22 @@ const TutorMenu = () => {
                 </NavLink>
             </Menu.Item>
             {
-                auth ? (<Menu.Item key="logout"  >ออกจากระบบ</Menu.Item>) : null
+            auth ? (
+                        <Menu.Item key="/profile" >
+                            <NavLink to="/profile">
+                                โปรไฟล์
+                        </NavLink>
+                        </Menu.Item>
+                ) : null
+            }
+            {
+                auth ? (
+                        <Menu.Item key="/logout" >
+                            <NavLink to="/logout">
+                                ออกจากระบบ
+                        </NavLink>
+                        </Menu.Item>
+                ) : null
             }
         </Menu>
     )

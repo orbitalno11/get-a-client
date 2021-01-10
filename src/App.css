@@ -66,10 +66,12 @@
   outline:none;
 }
 
+.ant-picker,
 .ant-select{
   width: 100% !important; 
 }
 
+.ant-picker,
 .ant-select-selector {
   border: none !important;
   border:solid 1px #ccc !important;
@@ -78,7 +80,12 @@
   padding: 4.5px !important;
   padding-left: 20px !important;
   padding-right: 20px !important;
+}
 
+.ant-picker{
+  padding: 8px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }
 
 input :focus{

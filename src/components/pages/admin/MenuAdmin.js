@@ -1,8 +1,6 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Layout, Menu } from 'antd';
-import { Link } from 'react-router-dom';
-
-const { SubMenu } = Menu;
+import { NavLink } from 'react-router-dom';
 const { Sider } = Layout;
 
 export default function MenuAdmin() {
@@ -18,25 +16,25 @@ export default function MenuAdmin() {
             </div>
             <Menu className="side-menu" mode="inline" defaultSelectedKeys={["/admin/home"]}>
                 <Menu.Item key="/admin/home" >
-                    <Link >หน้าหลัก</Link>
+                    <NavLink >หน้าหลัก</NavLink>
                 </Menu.Item>
                 <Menu.SubMenu key="manage" title="จัดการข้อมูลผู้สมัครสอน">
                     <Menu.Item key="/admin/manageprofile">
-                        <Link >เอกสารยืนยันตัวตน</Link>
+                        <NavLink >เอกสารยืนยันตัวตน</NavLink>
                     </Menu.Item>
                     <Menu.Item key="/admin/manageeducation">
-                        <Link >เอกสารยืนยัน<br />ประวัติการศึกษา</Link>
+                        <NavLink >เอกสารยืนยัน<br />ประวัติการศึกษา</NavLink>
                     </Menu.Item>
                 </Menu.SubMenu>
                 <Menu.SubMenu key="coin" title="จัดการเหรียญ">
                     <Menu.Item key="/admin/reqcoin">
-                        <Link>จัดการคำขอเหรียญ</Link>
+                        <NavLink>จัดการคำขอเหรียญ</NavLink>
                     </Menu.Item>
                     <Menu.Item key="/admin/exchagecoinn">
-                        <Link>จัดการอัตราการ<br />แลกเปลี่ยน</Link>
+                        <NavLink>จัดการอัตราการ<br />แลกเปลี่ยน</NavLink>
                     </Menu.Item>
                     <Menu.Item key="/admin/managecoin">
-                        <Link>จัดการซื้อเหรียญ</Link>
+                        <NavLink>จัดการซื้อเหรียญ</NavLink>
                     </Menu.Item>
                 </Menu.SubMenu>
             </Menu>

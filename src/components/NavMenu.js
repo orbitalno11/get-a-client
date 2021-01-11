@@ -1,42 +1,57 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 import { Menu, Grid, Button, Row, Col } from 'antd';
-import { Link } from 'react-router-dom';
-import {    faHome, 
-            faChalkboardTeacher, 
-            faSearch, 
-            faHeart, 
-            faUserCircle,
-            faTachometerAlt,
-            faGraduationCap,
-            faBell } from '@fortawesome/free-solid-svg-icons';
+import { NavLink } from 'react-router-dom';
+import {
+    faHome,
+    faChalkboardTeacher,
+    faSearch,
+    faHeart,
+    faUserCircle,
+    faTachometerAlt,
+    faGraduationCap,
+    faBell
+} from '@fortawesome/free-solid-svg-icons';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const { useBreakpoint } = Grid;
-
-
-const statusTutor = false
-const auth = false
-
+const statusTutor = true
+const auth = true
 
 const UserMenu = () => {
 
     return (
         <Menu className="menuBar" mode="horizontal" defaultSelectedKeys={["/"]} >
             <Menu.Item key="/">
-                <Link to="/">
+                <NavLink to="/">
                     หน้าแรก
-                </Link>
+                </NavLink>
             </Menu.Item>
             <Menu.Item key="/tutor" >
-                <Link to="/tutor">
+                <NavLink to="/tutor">
                     ติวเตอร์
-                </Link></Menu.Item>
+                </NavLink></Menu.Item>
             <Menu.Item key="/couse" >
-                <Link to="/tutor">
+                <NavLink to="/tutor">
                     คอร์สเรียน
-                </Link>
+                </NavLink>
             </Menu.Item>
             {
-                auth ? (<Menu.Item key="logout" >ออกจากระบบ</Menu.Item>) : null
+            auth ? (
+                        <Menu.Item key="/profile" >
+                            <NavLink to="/profile">
+                                โปรไฟล์
+                        </NavLink>
+                        </Menu.Item>
+                ) : null
+            }
+            {
+                auth ? (
+                        <Menu.Item key="/logout" >
+                            <NavLink to="/logout">
+                                ออกจากระบบ
+                        </NavLink>
+                        </Menu.Item>
+                ) : null
             }
         </Menu>
     )
@@ -46,22 +61,37 @@ const TutorMenu = () => {
     return (
         <Menu className="menuBar" mode="horizontal" defaultSelectedKeys={["/"]} >
             <Menu.Item key="/" >
-                <Link to="/">
+                <NavLink to="/">
                     หน้าแรก
-                </Link>
+                </NavLink>
             </Menu.Item>
             <Menu.Item key="/manageCouse"  >
-                <Link to="/manageCouse">
+                <NavLink to="/manageCouse">
                     จัดการคอร์สเรียน
-                </Link>
+                </NavLink>
             </Menu.Item>
             <Menu.Item key="/notification"  >
-                <Link to="/notification">
+                <NavLink to="/notification">
                     แจ้งเตือน
-                </Link>
+                </NavLink>
             </Menu.Item>
             {
-                auth ? (<Menu.Item key="logout"  >ออกจากระบบ</Menu.Item>) : null
+            auth ? (
+                        <Menu.Item key="/profile" >
+                            <NavLink to="/profile">
+                                โปรไฟล์
+                        </NavLink>
+                        </Menu.Item>
+                ) : null
+            }
+            {
+                auth ? (
+                        <Menu.Item key="/logout" >
+                            <NavLink to="/logout">
+                                ออกจากระบบ
+                        </NavLink>
+                        </Menu.Item>
+                ) : null
             }
         </Menu>
     )
@@ -72,29 +102,29 @@ const UserMenuMobile = () => {
     return (
         <Row justify="space-around">
             <Col span={4} className="iconMenu">
-                <Link to="/">
+                <NavLink to="/">
                     <FontAwesomeIcon icon={faHome} className="icon" />
-                </Link>
+                </NavLink>
             </Col>
             <Col span={4} className="iconMenu">
-                <Link to="/">
+                <NavLink to="/">
                     <FontAwesomeIcon icon={faChalkboardTeacher} className="icon" />
-                </Link>
+                </NavLink>
             </Col>
             <Col span={4} className="iconMenu">
-                <Link to="/">
+                <NavLink to="/">
                     <FontAwesomeIcon icon={faSearch} className="icon" />
-                </Link>
+                </NavLink>
             </Col>
             <Col span={4} className="iconMenu">
-                <Link to="/">
+                <NavLink to="/">
                     <FontAwesomeIcon icon={faHeart} className="icon" />
-                </Link>
+                </NavLink>
             </Col>
             <Col span={4} className="iconMenu">
-                <Link to="/">
+                <NavLink to="/">
                     <FontAwesomeIcon icon={faUserCircle} className="icon" />
-                </Link>
+                </NavLink>
             </Col>
         </Row>
 
@@ -107,27 +137,26 @@ const ToturMenuMobile = () => {
     return (
         <Row justify="space-around">
             <Col span={6.5} className="iconMenu">
-                <Link to="/">
+                <NavLink to="/">
                     <FontAwesomeIcon icon={faTachometerAlt} className="icon" />
-                </Link>
+                </NavLink>
             </Col>
-           
+
             <Col span={6.5} className="iconMenu">
-                <Link to="/">
+                <NavLink to="/">
                     <FontAwesomeIcon icon={faGraduationCap} className="icon" />
-                </Link>
+                </NavLink>
             </Col>
             <Col span={6.5} className="iconMenu">
-                <Link to="/">
+                <NavLink to="/">
                     <FontAwesomeIcon icon={faChalkboardTeacher} className="icon" />
-                </Link>
+                </NavLink>
             </Col>
             <Col span={6.5} className="iconMenu">
-                <Link to="/">
+                <NavLink to="/">
                     <FontAwesomeIcon icon={faBell} className="icon" />
-                </Link>
+                </NavLink>
             </Col>
-           
         </Row>
 
     )
@@ -148,8 +177,12 @@ const MenuDesktop = () => {
                     {
                         !auth ? (
                             <Col style={{ display: "flex", alignItems: "center" }}>
-                                <Button className="buttonBlueColor" shape="round" size="middle" >เข้าสู่ระบบ</Button>
-                                <Button className="buttonText" type="text" >หรือ เข้าสู่ระบบ</Button>
+                                <NavLink to="/login">
+                                    <Button id="/login" className="buttonBlueColor" shape="round" size="middle">เข้าสู่ระบบ</Button>
+                                </NavLink>
+                                <NavLink to="/register">
+                                    <Button className="buttonText" type="link" >หรือ เข้าสู่ระบบ</Button>
+                                </NavLink>
                             </Col>
                         ) : null
                     }
@@ -174,7 +207,9 @@ const NavMenu = () => {
     const screens = useBreakpoint();
     return (
         <Fragment>
-            {screens.xs || (screens.sm && !screens.md ) ? <MenuMobile/>: <MenuDesktop/>}
+            <div className="fixMenu">
+                {screens.xs || (screens.sm && !screens.md) ? <MenuMobile /> : <MenuDesktop />}
+            </div>
         </Fragment>
     )
 }

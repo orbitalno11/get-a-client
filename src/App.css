@@ -5,6 +5,7 @@
   --white-color : #FFFFFF;
   --gray-color : #C4C4C4;
   --side-menu-color : #303A53;
+  --error-color : #840c0c;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -21,23 +22,107 @@
     transform: rotate(360deg);
   }
 }
+/* General */
 
+.h2{
+  font-size: 35px;
+  font-weight: 700;
+}
+
+.white{
+  color:var(--white-color) !important
+}
+
+.error-input{
+  font-size: 12px;
+  color:var(--error-color);
+  padding-left: 10px;
+  margin-top: 5px;
+}
+
+.margintop10{
+  margin-top: 10px;
+}
+
+.margintop20{
+  margin-top: 20px;
+}
+
+.marginbottom{
+  padding-bottom: 20px;
+}
+
+.input{
+  margin: 0 auto;
+  border: none; /* <-- This thing here */
+  border:solid 1px #ccc;
+  border-radius: 20px;
+  padding: 8px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+  outline:none;
+}
+
+.ant-picker,
+.ant-select{
+  width: 100% !important; 
+}
+
+.ant-picker,
+.ant-select-selector {
+  border: none !important;
+  border:solid 1px #ccc !important;
+  border-radius: 20px !important;
+  height: auto !important;
+  padding: 4.5px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+.ant-picker{
+  padding: 8px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+input :focus{
+  outline: none !important
+}
+
+
+.body {
+  padding-top: 110px;
+}
+
+.paddingBody {
+  padding: 7%;
+}
+
+
+/* General */
 
 /* Nav Menu */
+.fixMenu{
+  position:fixed;
+  width:100%;
+  z-index:999;
+}
+
 .menuBar {
   background-color: var(--main-color) !important;
   height: 60px;
   display: flex;
   align-items: center;
   padding: 0 20px;
-  border-bottom: solid 1px #e8e8e8;
+  border-bottom: solid 0px transparent;
   overflow: auto;
-  box-shadow: 0 0 30px #f3f1f1;
 }
 
 .menuBar .floatRight{
-  margin-left: auto
+  margin-left: auto ;
 }
+
 .logo {
   float: left;
   color: var(--white-color) ;
@@ -57,14 +142,17 @@
 .ant-menu-horizontal > .ant-menu-item-active,
 .ant-menu-horizontal > .ant-menu-submenu-active,
 .ant-menu-horizontal > .ant-menu-item-open,
-.ant-menu-horizontal > .ant-menu-submenu-open,
-.ant-menu-horizontal > .ant-menu-item-selected,
-.ant-menu-horizontal > .ant-menu-submenu-selected {
+.ant-menu-horizontal > .ant-menu-submenu-open
+{
   color:  var(--white-color)  !important;
   border-bottom: 2px solid  var(--white-color) !important;
 }
 
-
+.ant-menu-horizontal > .ant-menu-item-selected,
+.ant-menu-horizontal > .ant-menu-submenu-selected 
+{
+  border-bottom: 2px solid  transparent !important;
+}
 
 .ant-menu-horizontal a{
   color:  var(--white-color)  !important;
@@ -76,8 +164,13 @@
   border-width: 0ch  !important;
   color:var(--white-color)  !important;
 }
+
 .buttonText{
   color:var(--white-color)  !important;
+}
+
+.buttonText :hover{
+  font-weight: 600;
 }
 
 .navbarBottom {
@@ -139,3 +232,68 @@
 }
 
 /* Nav Menu */
+
+/* Body */
+
+
+.input-form{
+  width: 30%;
+  margin-top: 30px;
+}
+
+
+.big-button{
+  height : 160px ;
+  width : 80%;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+
+.image-person {
+  border-radius: 50% !important;
+  height: 120px;
+  width: 120px;
+}
+
+.icon-addimage{
+  font-size: 15px;
+  color: var(--side-menu-color);
+  cursor: pointer;
+}
+
+.ant-badge-count, 
+.ant-badge-dot, 
+.ant-badge 
+.ant-scroll-number-custom-component {
+  position :absolute ;
+  bottom: 0 ;
+  top:auto;
+}
+
+
+@media only screen and (max-width: 830px) {
+  .input-form{
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .big-button{
+    width : 100%;
+    height : 160px ;
+    margin-top: 20px;
+  }
+
+  .icon-addimage{
+    font-size: 13px;
+  }
+
+
+  .image-person {
+    height: 120px;
+    width: 120px;
+  }
+}
+

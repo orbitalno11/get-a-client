@@ -1,0 +1,57 @@
+$white: #FFFFFF;
+$main : #F26419;
+.white{
+    color:$white !important
+}
+
+.h1{
+  @extend .white;
+  font-size: 50px;
+  font-weight: 700;
+}
+
+
+.body {
+  padding-top: 110px;
+}
+  
+.alignCenterPage{
+  @extend .body;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  margin-top: 0;
+  padding-bottom: 20px !important;
+}
+
+
+.loginPage{
+  @extend .alignCenterPage;
+  height: 100vh;
+  justify-content: center;
+  background-color: $main;
+}
+
+.buttonText{
+  color:$white  !important;
+}
+
+.loginPage .buttonText :hover{
+  border-bottom: 2px solid  var(--white-color) !important;
+}
+
+.title {
+  margin-right: auto;
+  margin-top: 10px;
+  color:$white
+}
+
+.iconStyle{
+  font-size:50px;
+  margin-bottom : 10px
+}
+
+.rowWidth {
+  width: 40% !important;
+}

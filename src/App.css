@@ -154,8 +154,6 @@ input :focus{
   border-bottom: 2px solid  transparent !important;
 }
 
-
-
 .ant-menu-horizontal a{
   color:  var(--white-color)  !important;
 }
@@ -166,7 +164,6 @@ input :focus{
   border-width: 0ch  !important;
   color:var(--white-color)  !important;
 }
-
 
 .buttonText{
   color:var(--white-color)  !important;
@@ -299,3 +296,4 @@ input :focus{
     width: 120px;
   }
 }
+

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Layout, Menu } from 'antd';
 import { NavLink } from 'react-router-dom';
-
 const { Sider } = Layout;
 
 export default function MenuAdmin() {

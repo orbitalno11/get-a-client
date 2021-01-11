@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import 'antd/dist/antd.css';
 import './App.css';
 import store from './redux/store'
+
 //Route 
 import AdminRoute from './components/common/AdminRoute'
 import UserRoute from './components/common/UserRoute'
@@ -17,9 +18,7 @@ import UserLayout from './components/layouts/UserLayout'
 
 //Page 
 
-
 function App() {
-
   return (
     <Provider store={store}>
       <Router>

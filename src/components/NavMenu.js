@@ -11,13 +11,11 @@ import {
     faGraduationCap,
     faBell
 } from '@fortawesome/free-solid-svg-icons';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const { useBreakpoint } = Grid;
-
-
 const statusTutor = true
 const auth = true
-
 
 const UserMenu = () => {
 
@@ -159,13 +157,11 @@ const ToturMenuMobile = () => {
                     <FontAwesomeIcon icon={faBell} className="icon" />
                 </NavLink>
             </Col>
-
         </Row>
 
     )
 }
 const MenuDesktop = () => {
-
     return (
         <nav className="menuBar">
             <div  >

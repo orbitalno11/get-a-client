@@ -1,0 +1,83 @@
+$yellow : #F6AE2D;
+$gray : #C4C4C4;
+
+.cardRound{
+    border: 2px solid red;
+    border-radius: 25px;
+}
+
+.alignCenter{
+    display: flex;
+}
+
+.image {
+    border-radius: 50% !important;
+    height: 86px;
+    width: 86px;
+  }
+
+.borderGrid{
+    -webkit-box-shadow :none;
+    padding: 4px !important;
+    padding-left: 10px!important;
+    padding-right: 10px!important;
+    display: flex;
+    align-items: center;
+}
+
+.gridImage{
+    @extend .borderGrid ;
+    width: 30% !important;
+}
+
+.gridText{
+    @extend .borderGrid ;
+    width: 70%!important;
+}
+
+.gridButton{
+    @extend .borderGrid ;
+    width: 20% !important;
+}
+
+.gridhalf{
+    @extend .borderGrid ;
+    width: 50% !important;
+    height: 40px !important;
+}
+
+.gridfull{
+    @extend .borderGrid ;
+    width: 100% !important;
+    height: 40px !important;
+
+}
+
+.gridhalfSmall{
+    @extend .gridhalf;
+    height: auto !important;
+}
+
+.icon{
+    font-size: 16pt;
+    color:$gray;
+}
+
+.iconSmall{
+    font-size: 14pt;
+    color:$gray;
+}
+
+.textIconSmall{
+    font-size: 13px;
+    margin-left: 10px;
+}
+
+.textIcon{
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.floatRight{
+    margin-left: auto;
+}

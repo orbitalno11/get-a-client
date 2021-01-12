@@ -1,0 +1,26 @@
+.alignPage{
+    display: flex;
+    align-items: center;
+}
+
+.educationRow{
+    @extend .alignPage;
+    padding-top: 20px;
+    flex-flow: row;
+}
+
+.smallSizeIcon {
+    font-size: 20pt;
+    margin-right: 20px;
+}
+
+.largeSizeIcon{
+    @extend .smallSizeIcon;
+    margin-left: 30px;
+    font-size: 30pt;
+}
+
+.floatLeft{
+    margin-left: auto;
+    margin-right: 10px;
+}

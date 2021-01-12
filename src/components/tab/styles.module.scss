@@ -1,0 +1,28 @@
+$yellow : #F6AE2D;
+$black : #000000;
+$white : #FFFFFF;
+$blue : #33658A;
+$main : #F26419;
+
+.tab{
+    height: 40px;
+    width: 130px;
+    text-align: center;
+    border:solid 1px  !important;
+    color: #FFFFFF !important;
+    line-height: 40px !important;
+}
+
+
+.tabFirst{
+    @extend .tab;
+    border-top-left-radius: 15px !important;
+    border-bottom-left-radius: 15px !important;
+}
+
+
+.tabLast{
+    @extend .tab;
+    border-top-right-radius: 15px !important;
+    border-bottom-right-radius: 15px !important;
+}

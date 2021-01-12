@@ -1,0 +1,39 @@
+$main : #F26419;
+$white : #FFFFFF;
+
+.header{
+    position: fixed;
+    height: 83px;
+    width: 100%;
+    background-color:$main;
+    border-bottom-left-radius: 40% 30%;
+    border-bottom-right-radius: 40% 30%;
+    z-index: 10;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+.leftHeader {
+    padding-left: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.rightHeader{
+    margin-left: auto;
+    padding-right: 32px;
+}
+
+.h1 {
+    font-size: 30px ;
+    font-weight: 500;
+    padding-left: 10px;
+    color:$white 
+}
+
+.icon{
+    font-size: 35px ;
+    color:$white 
+}
+  

@@ -63,7 +63,7 @@ export default function RegisterForm() {
                         >
                             <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[2, 0]}>
                                 <Image
-                                    className="image-person"
+                                    className={style.imagepPerson}
                                     src={image}
                                     preview={false}
                                 />

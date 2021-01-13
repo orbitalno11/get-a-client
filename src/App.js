@@ -17,6 +17,7 @@ import UserLayout  from './components/layouts/UserLayout'
 
 //Page 
 import Login  from './components/pages/users/Login'
+import MainLayout from './components/pages/admin/layout/MainLayout'
 
 // rebase 1
 
@@ -27,7 +28,7 @@ function App() {
 
         <Route exact path="/login " component={Login}/>
 
-        <AdminRoute exact  path="/admin" component={AdminLayout}/>
+        <AdminRoute exact  path="/admin" component={MainLayout}/>
 
         <UserRoute exact  path="/" component={UserLayout}/>
         

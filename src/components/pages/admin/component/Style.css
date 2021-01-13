@@ -1,0 +1,16 @@
+.button-modalcoin{
+  background: #F6AE2D;
+  border-radius: 20px;
+  width: 200px;
+  color:white;
+  border-color: #F6AE2D;
+  font-size: 110%;
+  padding-top: 3px;
+}
+.link-modalcoin{
+  justify-content: 'center';
+  margin-top: '50px';
+  margin-bottom: '20px';
+  text-align:'center';
+  font-size:'20px';
+}

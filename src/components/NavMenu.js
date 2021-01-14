@@ -77,8 +77,8 @@ const TutorMenu = () => {
             </Menu.Item>
             {
             auth ? (
-                        <Menu.Item key="/profile" >
-                            <NavLink to="/profile">
+                        <Menu.Item key="/profile/tutor" >
+                            <NavLink to="/profile/tutor">
                                 โปรไฟล์
                         </NavLink>
                         </Menu.Item>

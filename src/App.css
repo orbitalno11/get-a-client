@@ -294,3 +294,10 @@ input :focus{
   background-color:  var(--white-color) !important; 
   width : 0%
 }
+
+.ant-card-body{
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+}

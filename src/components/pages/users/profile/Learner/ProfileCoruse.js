@@ -25,14 +25,14 @@ export default function ProfileCoruse() {
         },
     ]
     return (
-        <div className={screens.lg?null:style.subProfile}>
-            <Title level={screens.lg?3:5}>คอร์สที่เคยเรียน</Title>
+        <div className={screens.md?null:style.subProfile}>
+            <Title level={screens.md?3:5}>คอร์สที่เคยเรียน</Title>
             <TabHorizontal tabStart={tabStart} tabDetail={tabDetail}/>
             <Row justify="space-between" className={style.alignCenter}>
-                <Col  xl={11}  md={16} sm={16}  xs={22} className={style.padding}>
+                <Col  xs={24}  sm={12}  md={18} lg={17}  xl={12}  className={style.padding}>
                 <CardCorses/>
                 </Col>
-                <Col  xl={11}  md={16} sm={16} xs={22}className={style.padding}>
+                <Col  xs={24}  sm={12} md={18} lg={17} xl={12} className={style.padding}>
                 <CardCorses/>
                 </Col>
             </Row>

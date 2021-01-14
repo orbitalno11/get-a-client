@@ -1,11 +1,15 @@
 $yello : #F6AE2D;
 $black : #000000;
+$green : #00B900;
+$red : #AB330F;
 
 .body {
     padding-top: 110px;
-    padding-left: 6%;
-    padding-right: 6%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 60px;
 }
+
 
 
 .imageProfile {
@@ -31,7 +35,11 @@ $black : #000000;
 }
 
 .subTitle{
+    @extend .TitleCoin;
     padding-left: 20px;
+}
+
+.TitleCoin{
     margin-top: 20px;
     display: flex;
     align-items: center;
@@ -61,3 +69,32 @@ $black : #000000;
 .padding{
     padding: 10px;
 }
+
+.floatLeft{
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+
+.iconCheck{
+    margin-right: 30px;
+}
+
+.fontGreen{
+    color:$green !important;
+}
+
+.iconTick{
+    @extend .iconCheck;
+    @extend .fontGreen;
+    font-size: 30pt;
+}
+
+.marginTop {
+    margin-top: 35px;
+}
+
+.marginTop20 {
+    margin-top: 20px;
+}
+

@@ -1,12 +1,14 @@
 import React, { Fragment } from 'react'
-import { Typography, Image, Button } from 'antd';
+import { Typography, Image, Button, Badge } from 'antd';
 import {
     faCoins,
     faMapMarkerAlt,
-    faBookReader
+    faBookReader,
+    faEdit
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import style from '../../styles.module.scss'
+import { NavLink } from 'react-router-dom';
 
 const { Title } = Typography;
 export default function ProfileDetail() {
@@ -18,7 +20,11 @@ export default function ProfileDetail() {
                     src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
                     preview={false}
                 />
-                <Title level={3} className={style.marginLeft}>พิคาชู <br /> หนูเทพซาโตชิ</Title>
+                <NavLink to="/tutor/profile/edit">
+                    <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[18, 0]}>
+                        <Title level={3} className={style.marginLeft}>พิคาชู <br /> หนูเทพซาโตชิ </Title>
+                    </Badge>
+                </NavLink>
             </div>
             <div className={style.subProfile}>
                 <div className={style.TitleCoin}>

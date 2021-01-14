@@ -3,14 +3,21 @@ $black : #000000;
 $green : #00B900;
 $red : #AB330F;
 
-.body {
-    padding-top: 110px;
+.paddingbody{
     padding-left: 5%;
     padding-right: 5%;
-    padding-bottom: 60px;
 }
 
+.paddingEdit{
+    padding-left: 10%;
+    padding-right: 10%;
+}
 
+.body {
+    @extend .paddingbody;
+    padding-top: 110px;
+    padding-bottom: 60px;
+}
 
 .imageProfile {
     border-radius: 50% !important;
@@ -96,5 +103,21 @@ $red : #AB330F;
 
 .marginTop20 {
     margin-top: 20px;
+}
+
+.buttonEdit{
+    @extend .marginTop;
+    @extend .alignCenter;
+    padding-bottom: 60px;
+}
+
+.banner{
+    height: 220px;
+    padding-top: 60px;
+    width: 100%;
+    background-image: url(../../../images/background.jpg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 

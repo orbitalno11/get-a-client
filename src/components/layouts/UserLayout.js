@@ -5,8 +5,9 @@ import Home from '../pages/users/Home'
 import Login from '../pages/users/authorization/Login'
 import Register from '../pages/users/authorization/Register'
 import RegisterForm from '../pages/users/authorization/RegisterForm'
-import ProfileLearner from '../pages/users/profile/Profile/Learner/Profile'
-import ProfileTutor from '../pages/users/profile/Profile/Tutor/Profile'
+import ProfileLearner from '../pages/users/profile/profile/learner/Profile'
+import ProfileTutor from '../pages/users/profile/profile/tutor/Profile'
+import EditProfileDetail from '../pages/users/profile/editProfile/tutor/EditProfileDetail'
 
 export default function UserLayout() {
     return (
@@ -18,7 +19,8 @@ export default function UserLayout() {
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/register/:id" component={RegisterForm} />
                 <Route exact path="/profile" component={ProfileLearner} />
-                <Route exact path="/profile/tutor" component={ProfileTutor} />
+                <Route exact path="/tutor/profile" component={ProfileTutor} />
+                <Route exact path="/tutor/profile/edit" component={EditProfileDetail} />
             </Switch>
         </div>
     )

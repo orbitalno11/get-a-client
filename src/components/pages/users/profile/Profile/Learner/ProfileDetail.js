@@ -7,8 +7,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import style from '../../styles.module.scss'
-
 const { Title } = Typography;
+
 export default function ProfileDetail() {
     return (
         <Fragment>

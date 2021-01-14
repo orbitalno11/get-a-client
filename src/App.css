@@ -133,6 +133,7 @@ input :focus{
   align-items: center;
   font-size: 18pt;
 }
+
 .logoSide {
   background-color: var(--main-color) !important;
 }
@@ -161,6 +162,12 @@ input :focus{
 
 .buttonBlueColor{
   background-color: var(--blue-color) !important;
+  border-width: 0ch  !important;
+  color:var(--white-color)  !important;
+}
+
+.buttonMainColor{
+  background-color: var(--main-color) !important;
   border-width: 0ch  !important;
   color:var(--white-color)  !important;
 }

@@ -5,8 +5,9 @@ export const profileTutorSchema = yup.object().shape({
     firstname: yup.string().required(),
     lastname: yup.string().required(),
     gender: yup.string().required(),
-    email: yup.string().email(),
+    email: yup.string().email().required(),
     facebook: yup.string(),
     line: yup.string(),
+    phone: yup.string(),
     introduce: yup.string(),
 });

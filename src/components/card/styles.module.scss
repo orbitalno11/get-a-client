@@ -22,13 +22,15 @@ $yello : #F6AE2D;
 
 
 .floatRight{
-    @extend .alignCenter;
-    margin-left: auto;
+    // @extend .alignCenter;
+    // margin-left: auto;
+    // 
+    float: right;
 }
 
 
 .image {
     border-radius: 50% !important;
-    height: 90px;
-    width: 90px;
+    height: 80px;
+    width: 80px;
   }

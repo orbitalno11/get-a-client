@@ -1,8 +1,8 @@
 import { Col, Row, Typography, Grid } from 'antd';
 import React from 'react'
-import TabHorizontal from '../../../../tab/TabHorizontal'
-import CardCorses from '../../../../card/CardCorse'
-import style from '../styles.module.scss'
+import TabHorizontal from '../../../../../tab/TabHorizontal'
+import CardCorses from '../../../../../card/CardCorse'
+import style from '../../styles.module.scss'
 
 const { useBreakpoint } = Grid;
 const { Title } = Typography;

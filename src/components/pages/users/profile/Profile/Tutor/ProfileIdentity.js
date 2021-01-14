@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Col, Row, Grid, Typography, Button, Divider } from 'antd'
-import style from '../styles.module.scss'
+import style from '../../styles.module.scss'
 import {
     faCheck, faMapMarkerAlt
 } from '@fortawesome/free-solid-svg-icons';

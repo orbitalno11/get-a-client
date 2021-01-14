@@ -5,8 +5,8 @@ import Home from '../pages/users/Home'
 import Login from '../pages/users/authorization/Login'
 import Register from '../pages/users/authorization/Register'
 import RegisterForm from '../pages/users/authorization/RegisterForm'
-import ProfileLearner from '../pages/users/profile/Learner/Profile'
-import ProfileTutor from '../pages/users/profile/Tutor/Profile'
+import ProfileLearner from '../pages/users/profile/Profile/Learner/Profile'
+import ProfileTutor from '../pages/users/profile/Profile/Tutor/Profile'
 
 export default function UserLayout() {
     return (

@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react'
-import { Typography, Image } from 'antd';
+import { Typography, Image, Button } from 'antd';
 import {
     faCoins,
     faMapMarkerAlt,
     faBookReader
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import style from '../styles.module.scss'
+import style from '../../styles.module.scss'
 
 const { Title } = Typography;
 export default function ProfileDetail() {
@@ -21,10 +21,14 @@ export default function ProfileDetail() {
                 <Title level={3} className={style.marginLeft}>พิคาชู <br /> หนูเทพซาโตชิ</Title>
             </div>
             <div className={style.subProfile}>
-                <Title level={5}>เหรียญของคุณ</Title>
+                <div className={style.TitleCoin}>
+                    <Title level={5}>เหรียญของคุณ</Title>
+                    <Button className={style.floatLeft}>dd</Button>
+                </div>
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faCoins} className={style.iconcoin} />
-                    <span>dddddddddddddddddddddd</span>
+                    <span>dd</span>
+                    <Button className={style.floatLeft}>dd</Button>
                 </div>
             </div>
             <div className={style.subProfile}>
@@ -32,6 +36,7 @@ export default function ProfileDetail() {
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
                     <span>dd</span>
+                    <Button className={style.floatLeft}>dd</Button>
                 </div>
             </div>
             <div className={style.subProfile}>
@@ -39,10 +44,12 @@ export default function ProfileDetail() {
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faBookReader} className={style.iconcoin} />
                     <span>dd</span>
+                    <Button className={style.floatLeft}>dd</Button>
                 </div>
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faBookReader} className={style.iconcoin} />
                     <span>dd</span>
+                    <Button className={style.floatLeft}>dd</Button>
                 </div>
             </div>
         </Fragment>

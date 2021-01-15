@@ -4,7 +4,8 @@ import {
     faCoins,
     faMapMarkerAlt,
     faBookReader,
-    faEdit
+    faEdit ,
+    faBook
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import style from '../../styles.module.scss'
@@ -29,33 +30,50 @@ export default function ProfileDetail() {
             <div className={style.subProfile}>
                 <div className={style.TitleCoin}>
                     <Title level={5}>เหรียญของคุณ</Title>
-                    <Button className={style.floatLeft}>dd</Button>
                 </div>
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faCoins} className={style.iconcoin} />
-                    <span>dd</span>
-                    <Button className={style.floatLeft}>dd</Button>
+                    <span>100,000 เหรียญ</span>
+                    <div className={style.floatLeft}>
+                        <Button className="buttonColor backgroupYello" style={{width:'100px'}} shape="round" size="middle">แลกเหรียญ</Button>
+                    </div>
                 </div>
             </div>
             <div className={style.subProfile}>
                 <Title level={5}>สถานที่สะดวกเรียน</Title>
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
-                    <span>dd</span>
-                    <Button className={style.floatLeft}>dd</Button>
+                    <span >บางมด, กทม.</span>
+                    <div className={style.floatLeft}>
+                        <Button className="buttonColor backgroupBlue" style={{width:'100px'}} shape="round" size="middle">แก้ไข</Button>
+                    </div>
+                </div>
+            </div>
+            <div className={style.subProfile}>
+                <Title level={5}>วิชาที่สอน</Title>
+                <div className={style.subTitle}>
+                    <FontAwesomeIcon icon={faBook} className={style.iconmarker} />
+                    <span>คณิตศาสตร์</span>
+                    <div className={style.floatLeft}>
+                    <Button className="buttonColor backgroupBlue" style={{width:'100px'}} shape="round" size="middle">แก้ไข</Button>
+                    </div>
+                </div>
+                <div className={style.subTitle}>
+                    <FontAwesomeIcon icon={faBook} className={style.iconmarker} />
+                    <span>อังกฤษ</span>
+                    <div className={style.floatLeft}>
+                    <Button className="buttonColor backgroupBlue" style={{width:'100px'}} shape="round" size="middle">แก้ไข</Button>
+                    </div>
                 </div>
             </div>
             <div className={style.subProfile}>
                 <Title level={5}>ช่องทางติดต่อ</Title>
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faBookReader} className={style.iconcoin} />
-                    <span>dd</span>
-                    <Button className={style.floatLeft}>dd</Button>
-                </div>
-                <div className={style.subTitle}>
-                    <FontAwesomeIcon icon={faBookReader} className={style.iconcoin} />
-                    <span>dd</span>
-                    <Button className={style.floatLeft}>dd</Button>
+                    <span>Picacha</span>
+                    <div className={style.floatLeft}>
+                    <Button className="buttonColor backgroupBlue" style={{width:'100px'}} shape="round" size="middle">แก้ไข</Button>
+                    </div>
                 </div>
             </div>
         </Fragment>

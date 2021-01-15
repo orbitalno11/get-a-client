@@ -2,6 +2,8 @@ $yello : #F6AE2D;
 $black : #000000;
 $green : #00B900;
 $red : #AB330F;
+$blue : #33658A;
+$gray : #C4C4C4;
 
 .paddingbody{
     padding-left: 5%;
@@ -11,6 +13,16 @@ $red : #AB330F;
 .paddingEdit{
     padding-left: 10%;
     padding-right: 10%;
+}
+
+.alignCenter{
+    display: flex;
+    justify-content: center;
+}
+
+.alignPage{
+    display: flex;
+    align-items: center;
 }
 
 .body {
@@ -27,8 +39,7 @@ $red : #AB330F;
 
 
 .profileSet{
-    display: flex;
-    align-items: center;
+    @extend .alignPage;
     flex-flow: row;
 }
 
@@ -47,14 +58,13 @@ $red : #AB330F;
 }
 
 .TitleCoin{
+    @extend .alignPage;
     margin-top: 20px;
-    display: flex;
-    align-items: center;
     flex-flow: row;
 }
 
 .icon{
-    font-size: 22pt;
+    font-size: 20pt;
     margin-right: 20px;
 }
 
@@ -65,12 +75,13 @@ $red : #AB330F;
 
 .iconmarker{
     @extend .icon;
-    color:$black;
+    color:$gray;
 }
 
-.alignCenter{
-    display: flex;
-    justify-content: center;
+.iconMap{
+    @extend .icon;
+    @extend .fontBlue;
+    font-size: 18pt;
 }
 
 .padding{
@@ -79,7 +90,7 @@ $red : #AB330F;
 
 .floatLeft{
     margin-left: auto;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 
@@ -91,9 +102,19 @@ $red : #AB330F;
     color:$green !important;
 }
 
+.fontBlue{
+    color:$blue !important;
+}
+
 .iconTick{
     @extend .iconCheck;
     @extend .fontGreen;
+    font-size: 30pt;
+}
+
+.iconEducation {
+    @extend .icon;
+    margin-left: 30px;
     font-size: 30pt;
 }
 
@@ -112,12 +133,11 @@ $red : #AB330F;
 }
 
 .banner{
+    @extend .alignPage;
     height: 220px;
     padding-top: 60px;
     width: 100%;
     background-image: url(../../../images/background.jpg);
-    display: flex;
-    align-items: center;
     justify-content: center;
 }
 

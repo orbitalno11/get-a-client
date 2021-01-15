@@ -6,6 +6,7 @@
   --gray-color : #C4C4C4;
   --side-menu-color : #303A53;
   --error-color : #840c0c;
+  --green-color : #00B900;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -100,6 +101,31 @@ input :focus{
 }
 
 
+.buttonColor{
+  border-width: 0ch  !important;
+  color:var(--white-color)  !important;
+}
+
+.backgroupYello{
+  background-color: var(--yello-color) !important;
+}
+
+.backgroupGreen{
+  background-color: var(--green-color) !important;
+}
+
+.backgroupMain{
+  background-color: var(--main-color) !important;
+}
+
+.backgroupBlue{
+  background-color: var(--blue-color) !important;
+}
+
+.backgroupGray{
+  background-color: var(--gray-color) !important;
+}
+
 /* General */
 
 /* Nav Menu */
@@ -134,9 +160,6 @@ input :focus{
   font-size: 18pt;
 }
 
-.logoSide {
-  background-color: var(--main-color) !important;
-}
 
 .ant-menu-horizontal > .ant-menu-item:hover,
 .ant-menu-horizontal > .ant-menu-submenu:hover,
@@ -160,17 +183,6 @@ input :focus{
 }
 
 
-.buttonBlueColor{
-  background-color: var(--blue-color) !important;
-  border-width: 0ch  !important;
-  color:var(--white-color)  !important;
-}
-
-.buttonMainColor{
-  background-color: var(--main-color) !important;
-  border-width: 0ch  !important;
-  color:var(--white-color)  !important;
-}
 
 .buttonText{
   color:var(--white-color)  !important;

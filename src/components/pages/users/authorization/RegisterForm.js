@@ -165,7 +165,7 @@ export default function RegisterForm() {
                         }
                     </Col>
                 </Row>
-                <Button className="buttonBlueColor margintop20" shape="round" size="large" htmlType="submit">ลงทะเบียน</Button>
+                <Button className="buttonColor backgroupMain margintop20" shape="round" size="large" htmlType="submit">ลงทะเบียน</Button>
             </div>
         </form>
     )

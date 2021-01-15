@@ -31,7 +31,7 @@ export default function Login() {
                         errors.password && <p className="error-input">{errors.password.message}</p>
                     }
                 </div>
-                <Button className="buttonBlueColor margintop20" shape="round" size="large" htmlType="submit">เข้าสู่ระบบ</Button>
+                <Button className="buttonColor backgroupBlue margintop20" shape="round" size="large" htmlType="submit">เข้าสู่ระบบ</Button>
                 <div className="margintop10" >
                     <NavLink to="/register">
                         <Button className={style.buttonText} type="link" >สมัครสมาชิก</Button>

@@ -4,7 +4,7 @@ import { Layout } from 'antd';
 
 import MenuAdmin from '../pages/admin/MenuAdmin'
 import Home from '../pages/users/Home'
-const { Header, Content, Footer, Sider } = Layout;
+// const { Header, Content, Footer, Sider } = Layout;
 
 export default function AdminLayout() {
     return (

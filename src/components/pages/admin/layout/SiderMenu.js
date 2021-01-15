@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   DashboardOutlined,
   FundProjectionScreenOutlined,
@@ -16,33 +16,33 @@ const { SubMenu } = Menu;
 const { Sider } = Layout;
 
 function SiderMenu({ handleOnCollapse, collapsed }) {
-  const history = useHistory();
+  // const history = useHistory();
 
-  const handleSiderMenuClick = action => {
-    console.log('menu:', action);
-    switch (action.key) {
-      case 'dashboard':
-        history.push('/admin');
-        break;
-      case 'request':
-        history.push('/request');
-        break;
-      case 'exchangeRate':
-        history.push('/exchangeRate');
-        break;
-      case 'timeExchange':
-        history.push('/time/exchangeRate');
-        break;
-      case 'verifyTutor':
-        history.push('/verify/tutor');
-        break;
-      case 'verifyEducation':
-        history.push('/verify/educated');
-        break;
-      default:
-        history.push('/');
-    }
-  };
+  // const handleSiderMenuClick = action => {
+  //   console.log('menu:', action);
+  //   switch (action.key) {
+  //     case 'dashboard':
+  //       history.push('/admin');
+  //       break;
+  //     case 'request':
+  //       history.push('/request');
+  //       break;
+  //     case 'exchangeRate':
+  //       history.push('/exchangeRate');
+  //       break;
+  //     case 'timeExchange':
+  //       history.push('/time/exchangeRate');
+  //       break;
+  //     case 'verifyTutor':
+  //       history.push('/verify/tutor');
+  //       break;
+  //     case 'verifyEducation':
+  //       history.push('/verify/educated');
+  //       break;
+  //     default:
+  //       history.push('/');
+  //   }
+  // };
 
   return (
     <div>
@@ -56,13 +56,13 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
         <div className="menu-logo">
           <p className="logo-text">GETA</p>
         </div>
-        <Menu mode="inline" theme="dark" onClick={handleSiderMenuClick}>
-          <Menu.Item key="dashboard">
+        <Menu mode="inline" theme="dark" defaultSelectedKeys={["/admin/home"]}>
+          <Menu.Item key="/admin/home">
             <DashboardOutlined />
             <span className="nav-text">หน้าแรก</span>
           </Menu.Item>
           <SubMenu
-            key="manageTutor"
+            key="manage"
             title={
               <span>
                 <TeamOutlined />
@@ -70,15 +70,15 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
               </span>
             }
           >
-            <Menu.Item key="verifyTutor">
-              <span className="nav-text">เอกสารยืนยันตัว</span>
+            <Menu.Item key="/admin/manageprofile">
+              <Link to="/admin/manageprofile"><span className="nav-text">เอกสารยืนยันตัว</span></Link>
             </Menu.Item>
-            <Menu.Item key="verifyEducation">
-              <span className="nav-text">เอกสารยืนยันประวัติการศึกษา</span>
+            <Menu.Item key="/admin/manageducation">
+              <Link to="/admin/manageducation"><span className="nav-text">เอกสารยืนยันประวัติการศึกษา</span></Link>
             </Menu.Item>
           </SubMenu>
           <SubMenu
-            key="manageCoin"
+            key="coin"
             title={
               <span>
                 <PartitionOutlined />
@@ -86,14 +86,14 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
               </span>
             }
           >
-            <Menu.Item key="request">
-              <span className="nav-text">จัดการคำขอเหรียญ</span>
+            <Menu.Item key="/admin/requestcoin">
+              <Link to="/admin/requstcoin"><span className="nav-text">จัดการคำขอเหรียญ</span></Link>
             </Menu.Item>
-            <Menu.Item key="exchangeRate">
-              <span className="nav-text">จัดการอัตราการแลกเปลี่ยน</span>
+            <Menu.Item key="/admin/exchagecoin">
+              <Link to="/admin/exchagecoin"><span className="nav-text">จัดการอัตราการแลกเปลี่ยน</span></Link>
             </Menu.Item>
-            <Menu.Item key="timeExchange">
-              <span className="nav-text">จัดการช่วงการแลกเปลี่ยน</span>
+            <Menu.Item key="/admin/managecoin">
+              <Link to="/admin/managecoin"><span className="nav-text">จัดการช่วงการแลกเปลี่ยน</span></Link>
             </Menu.Item>
           </SubMenu>
         </Menu>

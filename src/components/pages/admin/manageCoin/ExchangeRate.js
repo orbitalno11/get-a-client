@@ -1,4 +1,4 @@
-import { Row, Col, Table, Tag, Space } from 'antd';
+import { Row, Col, Table} from 'antd';
 import React from 'react';
 import './Style.css';
 import ModalRate from '../component/ModalRate';

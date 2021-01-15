@@ -4,7 +4,6 @@ import { Layout } from "antd";
 import "./Style.css";
 import SiderMenu from "./SiderMenu";
 import LayoutBanner from "./LayoutBanner";
-import Home from "../../users/Home";
 import Request from "../manageCoin/Request"
 import ExchangeRate from "../manageCoin/ExchangeRate"
 import TimeExchange from "../manageCoin/TimeExchange"
@@ -31,8 +30,8 @@ function MainLayout() {
             <Switch>
               {/* <Route path="/" component={Home} /> */}
               {/* <Route path="/" component={Request} /> */}
-              <Route path="/" component={ExchangeRate} />
-              {/* <Route path="/" component={TimeExchange} /> */}
+              {/* <Route path="/" component={ExchangeRate} /> */}
+              <Route path="/" component={TimeExchange} />
             </Switch>
           </div>
         </Content>

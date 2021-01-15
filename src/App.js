@@ -12,7 +12,7 @@ import AdminRoute from './components/common/AdminRoute'
 import UserRoute from './components/common/UserRoute'
 
 //Layout
-import AdminLayout  from './components/layouts/AdminLayout'
+// import AdminLayout  from './components/layouts/AdminLayout'
 import UserLayout  from './components/layouts/UserLayout'
 
 //Page 

@@ -10,17 +10,17 @@ export default function ProfileLearner() {
     console.log(screens)
     return (
         <Row className={style.body}>
-            <Col xs={24} sm={18} md={10} lg={9} xl={8} >
+            <Col xs={24} sm={24} md={11} lg={9} xl={8} >
                 <ProfileDetail />
             </Col>
             {
                 !screens.md ? null 
                     :
-                    <Col lg={1} xl={2}>
+                    <Col lg={1} xl={2} md={1}>
                         <Divider type="vertical" style={{ height: '100%' }} />
                     </Col>
             }
-            <Col xs={24} sm={24} md={12} lg={12} xl={12} >
+            <Col xs={24} sm={24} md={11} lg={12} xl={12} >
                 <ProfileCoruse />
             </Col>
         </Row>

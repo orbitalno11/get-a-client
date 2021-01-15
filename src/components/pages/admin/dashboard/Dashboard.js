@@ -1,13 +1,7 @@
 import React from 'react';
 import { Card, Col, Row, Layout, Tooltip } from 'antd';
 import { InfoCircleFilled, CaretUpFilled } from '@ant-design/icons';
-import ChartCard from '../../component/chart/ChartCard';
-import MiniArea from '../../component/chart/MiniArea';
-import MiniBar from '../../component/chart/MiniBar';
-import MiniProgress from '../../component/chart/MiniProgress';
-import { movementSummary, visitSummary } from './Constants';
-import ProductBarChart from '../../component/chart/ProductBarChart';
-import ProductPieChart from '../../component/chart/ProductPieChart';
+import ProductBarChart from '../component/chart/ProductBarChart';
 
 function Dashboard() {
   const topColResponsiveProps = {

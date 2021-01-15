@@ -14,7 +14,7 @@ function Request() {
   };
   return (
     <div>
-      <Row style={{ marginLeft: '30px' }}>
+      <Row style={{ marginLeft: '30px' }} {...ResponsiveProps}>
         <Col span={1} style={{ marginRight: '-10px' }}>
           <DollarCircleOutlined
             style={{ fontSize: '16px', color: '#F6AE2D' }}

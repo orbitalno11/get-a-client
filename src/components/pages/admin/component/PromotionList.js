@@ -4,8 +4,8 @@ import { CaretRightOutlined } from "@ant-design/icons";
 import "./Style.css";
 import TableCoin from "./TableCoin";
 import ModalBuyCoin from "./ModalBuyCoin";
-import ModalDelete from "./ModalDelete";
-import ModalEdit from "./ModalEdit";
+import ModalDeletePro from "./ModalDeletePro";
+import ModalEditPro from "./ModalEditPro";
 
 const { Panel } = Collapse;
 
@@ -40,8 +40,8 @@ function ModalRate() {
             </Col>
             <Col span={21}><TableCoin /></Col>
             <Col span={24} style={{marginTop:"2em",paddingLeft:"58em"}}>
-              <ModalDelete/>
-              <ModalEdit/>
+              <ModalDeletePro/>
+              <ModalEditPro/>
             </Col>
           </Row>
         </Panel>

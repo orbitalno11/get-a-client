@@ -12,7 +12,7 @@ export default function MenuAdmin() {
             className="side"
         >
             <div >
-                <span className="logo logoSide">GET-A</span>
+                <span className="logo backgroupMain">GET-A</span>
             </div>
             <Menu className="side-menu" mode="inline" defaultSelectedKeys={["/admin/home"]}>
                 <Menu.Item key="/admin/home" >

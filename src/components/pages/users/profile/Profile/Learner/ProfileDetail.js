@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Typography, Image, Badge, Button } from 'antd';
+import { Typography, Image, Badge, Button, Grid } from 'antd';
 import {
     faCoins,
     faMapMarkerAlt,
@@ -10,8 +10,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import style from '../../styles.module.scss'
 import { NavLink } from 'react-router-dom';
 const { Title } = Typography;
+const { useBreakpoint } = Grid;
 
 export default function ProfileDetail() {
+    const screens = useBreakpoint();
     return (
         <Fragment>
             <div className={style.profileSet}>
@@ -23,19 +25,19 @@ export default function ProfileDetail() {
                 <NavLink to="/learner/profile/edit">
                     <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[18, 0]}>
                         <Title level={3} className={style.marginLeft}>พิคาชู <br /> หนูเทพซาโตชิ </Title>
-                        
+
                     </Badge>
                 </NavLink>
             </div>
             <div className={style.subProfile}>
-            <div className={style.TitleCoin}>
+                <div className={style.TitleCoin}>
                     <Title level={5}>เหรียญของคุณ</Title>
                 </div>
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faCoins} className={style.iconcoin} />
                     <span>100,000 เหรียญ</span>
                     <div className={style.floatLeft}>
-                        <Button className="backgroupYello buttonColor"  shape="round" size="middle">ซื้อเหรียญ</Button>
+                        <Button className="backgroupYello buttonColor" shape="round" size="middle" style={{width:'100px'}}>ซื้อเหรียญ</Button>
                     </div>
                 </div>
             </div>
@@ -44,6 +46,14 @@ export default function ProfileDetail() {
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
                     <span>บางมด, กทม.</span>
+                    {
+                        screens.md ? null :
+                        <div className={style.floatLeft}>
+                            <NavLink to="/learner/profile/edit/map">
+                                    <Button className="backgroupBlue buttonColor" shape="round" size="middle" style={{width:'100px'}}>แก้ไข</Button>
+                            </NavLink>
+                            </div>
+                    }
                 </div>
             </div>
             <div className={style.subProfile}>

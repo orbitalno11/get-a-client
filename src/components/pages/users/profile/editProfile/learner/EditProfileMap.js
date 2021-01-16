@@ -9,9 +9,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const { Title } = Typography;
 
 export default function EditProfileMap({ refs }) {
+    console.log(refs)
     return (
-        <div className={refs ? style.paddingbody : style.paddingEdit}>
-            <div className={refs ? style.body : style.TitleCoin}>
+        <div className={refs ? style.paddingbody : style.bodyMobile }>
+            <div className={style.TitleCoin }>
                 <Title level={4}>สถานที่ปัจจุบัน</Title>
                 <div className={style.floatLeft}>
                     <Button className="buttonColor backgroupBlue" size="middle" shape="round" >ใช้ที่อยู่นี้</Button>
@@ -21,7 +22,7 @@ export default function EditProfileMap({ refs }) {
                 <FontAwesomeIcon icon={faCrosshairs} className={style.iconMap} />
                 <span >126 ถ.ประชาอุทิศ แขวงบางมด เขตทุ่งครุ กทม.</span>
             </div>
-            <div className={refs ? style.body : style.TitleCoin}>
+            <div className={style.TitleCoin }>
                 <Title level={4}>เลือกจากแผนที่</Title>
             </div>
         </div>

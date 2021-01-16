@@ -21,7 +21,7 @@ export default function EditProfileDetail({ refs, error, controls }) {
 
     const editForm = () => {
         return (
-            <div>
+            <div className={refs ? null : null }>
                 <Upload
                     showUploadList={false}
                     // onChange={onChange}
@@ -77,11 +77,13 @@ export default function EditProfileDetail({ refs, error, controls }) {
                                 errors.grade && <p className="error-input">{errors.grade.message}</p>
                         }
                     </Col>
+                </Row>
+                <Row className={style.alignCenter}>
                     {
                         refs ? null
-                            : 
-                            <Col span={18} className={style.marginTop20}>
-                                <Button htmlType="submit">dd</Button>
+                            :
+                            <Col className={style.marginTop20}>
+                                <Button className="backgroupMain buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
                             </Col>
                     }
                 </Row>
@@ -91,7 +93,7 @@ export default function EditProfileDetail({ refs, error, controls }) {
     return (
         <Fragment>
             {
-                refs ? <div>{editForm()}</div> : <form className={refs?style.body:null} onSubmit={handleSubmit(onSubmit)}>{editForm()}</form>
+                refs ? <div>{editForm()}</div> : <form className={refs ? style.body : null} onSubmit={handleSubmit(onSubmit)}>{editForm()}</form>
             }
         </Fragment>
     )

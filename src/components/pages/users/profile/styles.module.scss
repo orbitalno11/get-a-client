@@ -31,6 +31,11 @@ $gray : #C4C4C4;
     padding-bottom: 60px;
 }
 
+.bodyMobile{
+    @extend .paddingEdit;
+    @extend .body;
+}
+
 .imageProfile {
     border-radius: 50% !important;
     height: 130px;
@@ -59,7 +64,7 @@ $gray : #C4C4C4;
 
 .TitleCoin{
     @extend .alignPage;
-    margin-top: 20px;
+    padding-top: 20px;
     flex-flow: row;
 }
 

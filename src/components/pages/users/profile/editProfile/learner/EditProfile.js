@@ -19,12 +19,16 @@ export default function EditProfile() {
         console.log(value)
     }
 
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+    const editProfile = () => {
+        return (
             <div className={style.body}>
                 <Row justify="center">
                     <Col lg={11} md={11} sm={24}>
-                        <EditProfileDetail refs={register} error={errors} controls={control} />
+                        {
+                            screens.md
+                                ? <EditProfileDetail refs={register} error={errors} controls={control} />
+                                : <EditProfileDetail />
+                        }
                     </Col>
                     {
                         !screens.md ? null
@@ -34,15 +38,29 @@ export default function EditProfile() {
                                     <Divider type="vertical" style={{ height: '100%' }} />
                                 </Col>
                                 <Col lg={11} md={11} sm={24}>
-                                    <EditProfileMap/>
+                                    <EditProfileMap refs={register} />
                                 </Col>
                             </Fragment>
                     }
                 </Row>
-                <Row justify="center" className={style.marginTop}>
-                    <Button className="backgroupMain buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
-                </Row>
+                {
+                    screens.md ?
+                        <Row justify="center" className={style.marginTop}>
+                            <Button className="backgroupMain buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
+                        </Row>
+                        : null
+                }
             </div>
-        </form>
+        )
+    }
+
+    return (
+        <Fragment>
+            {
+                screens.md ?
+                    <form onSubmit={handleSubmit(onSubmit)}>{editProfile()}</form>
+                    : editProfile()
+            }
+        </Fragment>
     )
 }

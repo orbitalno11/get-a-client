@@ -59,7 +59,7 @@ export default function RegisterForm() {
                             showUploadList={false}
                             onChange={onChange}
                             name="profile"
-                            className="margintop20"
+                            className={style.margintop20}
                         >
                             <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[2, 0]}>
                                 <Image
@@ -78,21 +78,21 @@ export default function RegisterForm() {
                     errors.profile && <p className="error-input">{errors.profile.message}</p>
                 }
                 <Row className="input-form" style={inputForm} justify="space-between">
-                    <Col className="margintop10" xs={24} sm={24} md={24} >
+                    <Col className={style.margintop10} xs={24} sm={24} md={24} >
                         <p>ชื่อ</p>
                         <input className="input" type="text" name="firstname" ref={register} />
                         {
                             errors.firstname && <p className="error-input">{errors.firstname.message}</p>
                         }
                     </Col>
-                    <Col className="margintop10" xs={24} sm={24} md={24} >
+                    <Col className={style.margintop10} xs={24} sm={24} md={24} >
                         <p>นามสกุล</p>
                         <input className="input" type="text" name="lastname" ref={register} />
                         {
                             errors.lastname && <p className="error-input">{errors.lastname.message}</p>
                         }
                     </Col>
-                    <Col className="margintop10" xs={24} sm={24} md={24} >
+                    <Col className={style.margintop10} xs={24} sm={24} md={24} >
                         <p>เพศ</p>
                         <Controller
                             as={
@@ -109,7 +109,7 @@ export default function RegisterForm() {
                             errors.gender && <p className="error-input">{errors.gender.message}</p>
                         }
                     </Col>
-                    <Col className="margintop10" xs={24} sm={24} md={24} >
+                    <Col className={style.margintop10} xs={24} sm={24} md={24} >
                         <p>วันเดือนปีเกิด</p>
                         <Controller
                             as={
@@ -123,7 +123,7 @@ export default function RegisterForm() {
                             errors.dateOfBirth && <p className="error-input">{errors.dateOfBirth.message}</p>
                         }
                     </Col>
-                    <Col className="margintop10" xs={24} sm={24} md={24} >
+                    <Col className={style.margintop10} xs={24} sm={24} md={24} >
                         <p>{type === '0' ? "วิชาที่สอน" : "ระดับชั้น"}</p>
                         <Controller
                             as={
@@ -143,21 +143,21 @@ export default function RegisterForm() {
                                 errors.grade && <p className="error-input">{errors.grade.message}</p>
                         }
                     </Col>
-                    <Col className="margintop10" xs={24} sm={24} md={24} >
+                    <Col className={style.margintop10} xs={24} sm={24} md={24} >
                         <p>อีเมล</p>
                         <input className="input" type="email" name="email" ref={register} />
                         {
                             errors.email && <p className="error-input">{errors.email.message}</p>
                         }
                     </Col>
-                    <Col className="margintop10" xs={24} sm={24} md={24} >
+                    <Col className={style.margintop10} xs={24} sm={24} md={24} >
                         <p>รหัสผ่าน</p>
                         <input className="input" type="password" name="password" ref={register} />
                         {
                             errors.password && <p className="error-input">{errors.password.message}</p>
                         }
                     </Col>
-                    <Col className="margintop10" xs={24} sm={24} md={24} >
+                    <Col className={style.margintop10} xs={24} sm={24} md={24} >
                         <p>ยืนยันรหัสผ่าน</p>
                         <input className="input" type="comfirmpassword" name="comfirmpassword" ref={register} />
                         {
@@ -165,7 +165,9 @@ export default function RegisterForm() {
                         }
                     </Col>
                 </Row>
-                <Button className="buttonColor backgroupMain margintop20" shape="round" size="large" htmlType="submit">ลงทะเบียน</Button>
+                <div className={style.margintop20}>
+                <Button className="buttonColor backgroupMain" shape="round" size="large" htmlType="submit">ลงทะเบียน</Button>
+                </div>
             </div>
         </form>
     )

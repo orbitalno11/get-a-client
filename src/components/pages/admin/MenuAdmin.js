@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom';
 
@@ -18,11 +18,11 @@ export default function MenuAdmin() {
             </div>
             <Menu className="side-menu" mode="inline" defaultSelectedKeys={["/admin/home"]}>
                 <Menu.Item key="/admin/home" >
-                    <Link >หน้าหลัก</Link>
+                    <Link to='/admin/home'>หน้าหลัก</Link>
                 </Menu.Item>
                 <Menu.SubMenu key="manage" title="จัดการข้อมูลผู้สมัครสอน">
                     <Menu.Item key="/admin/manageprofile">
-                        <Link >เอกสารยืนยันตัวตน</Link>
+                        <Link>เอกสารยืนยันตัวตน</Link>
                     </Menu.Item>
                     <Menu.Item key="/admin/manageeducation">
                         <Link >เอกสารยืนยัน<br />ประวัติการศึกษา</Link>
@@ -33,7 +33,7 @@ export default function MenuAdmin() {
                         <Link>จัดการคำขอเหรียญ</Link>
                     </Menu.Item>
                     <Menu.Item key="/admin/exchagecoin">
-                        <Link>จัดการอัตราการ<br />แลกเปลี่ยน</Link>
+                        <Link to='/admin/exchagecoin'>จัดการอัตราการ<br />แลกเปลี่ยน</Link>
                     </Menu.Item>
                     <Menu.Item key="/admin/managecoin">
                         <Link>จัดการซื้อเหรียญ</Link>

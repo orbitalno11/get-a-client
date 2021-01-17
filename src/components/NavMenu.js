@@ -10,7 +10,7 @@ import {    faHome,
             faGraduationCap,
             faBell } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import "./Style.css";
+import "./Style.css";
 const { useBreakpoint } = Grid;
 
 

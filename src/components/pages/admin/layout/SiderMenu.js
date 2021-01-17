@@ -3,9 +3,7 @@ import { Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import {
   DashboardOutlined,
-  FundProjectionScreenOutlined,
   PartitionOutlined,
-  SettingOutlined,
   TeamOutlined,
 } from '@ant-design/icons';
 import './Style.css';
@@ -57,9 +55,9 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
           <p className="logo-text">GETA</p>
         </div>
         <Menu mode="inline" theme="dark" defaultSelectedKeys={["/admin/home"]}>
-          <Menu.Item key="/admin/home">
-            <DashboardOutlined />
-            <span className="nav-text">หน้าแรก</span>
+          <Menu.Item key="/admin">
+            {/* <DashboardOutlined /> */}
+            <Link to="/admin"><DashboardOutlined /><span className="nav-text">หน้าแรก</span></Link>
           </Menu.Item>
           <SubMenu
             key="manage"

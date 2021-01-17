@@ -28,7 +28,7 @@ function App() {
 
         <Route exact path="/login " component={Login}/>
 
-        <AdminRoute exact  path="/admin" component={MainLayout}/>
+        <AdminRoute  path="/admin" component={MainLayout}/>
 
         <UserRoute exact  path="/" component={UserLayout}/>
         
@@ -41,7 +41,5 @@ function App() {
     
   );
 }
-
-// rebase dev
 
 export default App;

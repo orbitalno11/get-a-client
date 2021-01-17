@@ -1,27 +1,4 @@
-/* :root {
-    --main-color:#F26419;
-    --blue-color: #33658A;
-    --yello-color : #F6AE2D;
-    --white-color : #FFFFFF;
-    --gray-color : #C4C4C4;
-    --side-menu-color : #303A53;
-  }
-  
-  @media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-      animation: App-logo-spin infinite 20s linear;
-    }
-  }
-  
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-.menuBar {
+/* .menuBar {
     background-color: var(--main-color) !important;
     height: 60px;
     display: flex;
@@ -133,4 +110,5 @@
   .side .ant-menu-item :hover,
   .side .ant-menu-item-selected a {
     color : var(--main-color) !important;
-  } */
+  }
+   */

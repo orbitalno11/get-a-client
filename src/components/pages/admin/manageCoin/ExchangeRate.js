@@ -1,20 +1,18 @@
-import { Row, Col, Table, Tag, Space } from 'antd';
+import { Row, Col, Table} from 'antd';
 import React from 'react';
 import './Style.css';
 import ModalRate from '../component/ModalRate';
 
 const columns = [
   {
-    title: 'วันที่แก้ไข',
-    dataIndex: 'date',
-    key: 'date',
-    // render: text => <p style={{textAlign:'center'}}>{text}</p>,
+    title: "วันที่แก้ไข",
+    dataIndex: "date",
+    key: "date",
   },
   {
-    title: 'อัตราการแลกเปลี่ยนต่อ 1 coin',
-    dataIndex: 'ratecoin',
-    key: 'ratecoin',
-    // render: text => <p style={{textAlign:'center'}}>{text}</p>,
+    title: "อัตราการแลกเปลี่ยนต่อ 1 coin",
+    dataIndex: "ratecoin",
+    key: "ratecoin",
   },
 ];
 
@@ -52,23 +50,22 @@ function ExchangeRate() {
   };
   return (
     <div {...ResponsiveProps}>
-      <Row style={{ marginLeft: '30px' }}>
+      <Row style={{ marginLeft: "30px" }}>
         <Col span={24}>
-          {/* <a style={{ color: '#F5732E' }}>แก้ไข</a> */}
           <ModalRate/>
         </Col>
-        <Col span={24} style={{ fontSize: '17px', marginTop: '15px' }}>
+        <Col span={24} style={{ fontSize: "17px", marginTop: "15px" }}>
           อัตราการแลกเปลี่ยนปัจจุบัน
         </Col>
         <div className="rate-coin">1 coin = 2 บาท</div>
-        <Col span={24} style={{ fontSize: '17px', marginTop: '3%' }}>
+        <Col span={24} style={{ fontSize: "17px", marginTop: "3%" }}>
           ประวัติอัตราการแลกเปลี่ยน
         </Col>
       </Row>
       <Table
           columns={columns}
           dataSource={data}
-          style={{ marginLeft: '30px', marginTop: '2%',width:'35%'}}
+          style={{ marginLeft: "30px", marginTop: "2%",width:"35%"}}
         />
     </div>
   );

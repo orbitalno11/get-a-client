@@ -1,16 +1,93 @@
-.button-modalcoin{
-  background: #F6AE2D;
-  border-radius: 20px;
-  width: 200px;
-  color:white;
-  border-color: #F6AE2D;
-  font-size: 110%;
-  padding-top: 3px;
+.ant-space-item .button-modalcoin {
+  background: #f6ae2d !important;
+  border-radius: 20px !important;
+  width: 200px !important;
+  color: white !important;
+  border-color: #f6ae2d !important;
+  font-size: 110% !important;
+  padding-top: 3px !important;
+  /* margin-left: 2.3em; */
 }
-.link-modalcoin{
-  justify-content: 'center';
-  margin-top: '50px';
-  margin-bottom: '20px';
-  text-align:'center';
-  font-size:'20px';
+.link-modalcoin {
+  justify-content: "center";
+  margin-top: "50px";
+  margin-bottom: "20px";
+  text-align: "center";
+  font-size: "20px";
+}
+.ant-modal-confirm .ant-modal-confirm-btns{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: none;
+  margin-top: 30px;
+  margin-left: -1px;
+}
+
+/* TableCoin */
+#customers {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 15px;
+  text-align: center;
+  border-collapse: collapse;
+  font-size:18px;
+}
+#customers td, #customers th {
+  border: 1px solid rgb(240, 233, 233);
+  padding: 8px;
+  text-align: center;
+  border-bottom: 2px solid #ddd;  
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #303A53;
+  color: white;
+}
+.ant-space-item .button-modalDelete {
+  background: #AB330F !important;
+  border-radius: 10px !important;
+  width:5rem !important;
+  color: white !important;
+  border-color: #AB330F !important;
+  padding-top: 3px !important;
+  margin-left: 10px;
+}
+.ant-space-item .button-modalEdit {
+  background: #F26419 !important;
+  border-radius: 10px !important;
+  width:5rem !important;
+  color: white !important;
+  border-color: #F26419 !important;
+  padding-top: 3px !important;
+  margin-left: 10px;
+}
+
+/* PromotionList */
+.ant-collapse {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(160, 145, 145, 0.85);
+  font-size: 18px;
+  line-height: 1.5715;
+  list-style: none;
+  background-color: #fafafa;
+  border: 1px solid #d9d9d9;
+  border-bottom: 0;
+  border-radius: 2px;
+  font-weight:normal;
+}
+.datetime{
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+}
+.edit-delete{
+  margin-top:2em !important;
+  float:right!important;
 }

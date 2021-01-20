@@ -2,6 +2,8 @@ import React from 'react';
 import { Chart, Interval, Tooltip } from 'bizcharts';
 import { Card } from 'antd';
 
+//TODO เผื่อทำdashboard
+
 const barData = [
   { x: 'W-1', y: 44 },
   { x: 'W-2', y: 201 },

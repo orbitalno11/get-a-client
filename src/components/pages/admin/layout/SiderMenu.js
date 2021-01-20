@@ -1,11 +1,9 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {
   DashboardOutlined,
-  FundProjectionScreenOutlined,
   PartitionOutlined,
-  SettingOutlined,
   TeamOutlined,
 } from '@ant-design/icons';
 import './Style.css';
@@ -16,33 +14,6 @@ const { SubMenu } = Menu;
 const { Sider } = Layout;
 
 function SiderMenu({ handleOnCollapse, collapsed }) {
-  const history = useHistory();
-
-  const handleSiderMenuClick = action => {
-    console.log('menu:', action);
-    switch (action.key) {
-      case 'dashboard':
-        history.push('/admin');
-        break;
-      case 'request':
-        history.push('/request');
-        break;
-      case 'exchangeRate':
-        history.push('/exchangeRate');
-        break;
-      case 'timeExchange':
-        history.push('/time/exchangeRate');
-        break;
-      case 'verifyTutor':
-        history.push('/verify/tutor');
-        break;
-      case 'verifyEducation':
-        history.push('/verify/educated');
-        break;
-      default:
-        history.push('/');
-    }
-  };
 
   return (
     <div>
@@ -56,13 +27,12 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
         <div className="menu-logo">
           <p className="logo-text">GETA</p>
         </div>
-        <Menu mode="inline" theme="dark" onClick={handleSiderMenuClick}>
-          <Menu.Item key="dashboard">
-            <DashboardOutlined />
-            <span className="nav-text">หน้าแรก</span>
+        <Menu mode="inline" theme="dark" defaultSelectedKeys={["/admin/home"]}>
+          <Menu.Item key="/admin">
+            <NavLink Link to="/admin"><DashboardOutlined /><span className="nav-text">หน้าแรก</span></NavLink>
           </Menu.Item>
           <SubMenu
-            key="manageTutor"
+            key="manage"
             title={
               <span>
                 <TeamOutlined />
@@ -70,15 +40,15 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
               </span>
             }
           >
-            <Menu.Item key="verifyTutor">
-              <span className="nav-text">เอกสารยืนยันตัว</span>
+            <Menu.Item key="/admin/manageprofile">
+              <NavLink to="/admin/manageprofile"><span className="nav-text">เอกสารยืนยันตัว</span></NavLink>
             </Menu.Item>
-            <Menu.Item key="verifyEducation">
-              <span className="nav-text">เอกสารยืนยันประวัติการศึกษา</span>
+            <Menu.Item key="/admin/manageducation">
+              <NavLink to="/admin/manageducation"><span className="nav-text">เอกสารยืนยันประวัติการศึกษา</span></NavLink>
             </Menu.Item>
           </SubMenu>
           <SubMenu
-            key="manageCoin"
+            key="coin"
             title={
               <span>
                 <PartitionOutlined />
@@ -86,14 +56,14 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
               </span>
             }
           >
-            <Menu.Item key="request">
-              <span className="nav-text">จัดการคำขอเหรียญ</span>
+            <Menu.Item key="/admin/requestcoin">
+              <NavLink to="/admin/requstcoin"><span className="nav-text">จัดการคำขอเหรียญ</span></NavLink>
             </Menu.Item>
-            <Menu.Item key="exchangeRate">
-              <span className="nav-text">จัดการอัตราการแลกเปลี่ยน</span>
+            <Menu.Item key="/admin/exchagecoin">
+              <NavLink to="/admin/exchagecoin"><span className="nav-text">จัดการอัตราการแลกเปลี่ยน</span></NavLink>
             </Menu.Item>
-            <Menu.Item key="timeExchange">
-              <span className="nav-text">จัดการช่วงการแลกเปลี่ยน</span>
+            <Menu.Item key="/admin/managecoin">
+              <NavLink to="/admin/managecoin"><span className="nav-text">จัดการช่วงการแลกเปลี่ยน</span></NavLink>
             </Menu.Item>
           </SubMenu>
         </Menu>

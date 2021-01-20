@@ -1,16 +1,12 @@
 .container {
   display: flex;
   justify-content: center;
-  /* // align-items: center; */
 }
 .card-container {
   width: 300px;
   margin: 10px 20px 30px 30px;
   border-radius: 20px;
   border: 1px solid rgb(241, 239, 239);
-  /* // -webkit-box-shadow: 0 12px 20px rgba(128, 124, 124, 0.12);
-  // -moz-box-shadow: 0 12px 20px rgba(128, 124, 124, 0.12);
-  // box-shadow: 0 12px 20px rgba(128, 124, 124, 0.12); */
 }
 .title-card {
   margin-top: -11px;

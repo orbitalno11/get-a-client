@@ -2,11 +2,7 @@ import React from 'react';
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
-  QuestionCircleOutlined,
-  GlobalOutlined,
-  BellOutlined,
-  UserOutlined,
-  LogoutOutlined,
+  LogoutOutlined
 } from '@ant-design/icons';
 import { Layout, Menu, Badge, Breadcrumb } from 'antd';
 import './Style.css';
@@ -25,7 +21,7 @@ function LayoutBanner({ collapsed, handleOnCollapse }) {
     return <MenuFoldOutlined onClick={handleOnCollapse} className="trigger" />;
   };
 
-  const handleLanguageMenuClick = () => {};
+
   const handleSettingMenuClick = () => {};
   const handleLogout = () => {};
 
@@ -33,42 +29,16 @@ function LayoutBanner({ collapsed, handleOnCollapse }) {
     <Header className="header" style={{ background: '#fff', padding: 0 }}>
       <div
         style={{
-          float: 'left',
-          width: '100%',
-          alignSelf: 'center',
-          display: 'flex',
+          float: "left",
+          width: "100%",
+          alignSelf: "center",
+          display: "flex",
         }}
       >
         {window.innerWidth > 992 && getCollapseIcon()}
       </div>
-      {/* <Breadcrumb style={{ float: 'left' }}>
-        <Breadcrumb.Item>
-          <span>Home</span>
-        </Breadcrumb.Item>
-        <Breadcrumb.Item>
-          <span>LOGO</span>
-        </Breadcrumb.Item>
-      </Breadcrumb> */}
-      {/* <Menu
-        onClick={handleLanguageMenuClick}
-        mode="horizontal"
-        className="menu"
-      >
-        <SubMenu title={<BellOutlined />}>
-          <Menu.Item key="en">
-            <span role="img" aria-label="English">
-              จิราภรณ์ขอแลกเหรียญ
-            </span>
-          </Menu.Item>
-          <Menu.Item key="it">
-            <span role="img" aria-label="Italian">
-              พัชราภาส่งคำขอยืนยันตัวตน
-            </span>
-          </Menu.Item>
-        </SubMenu>
-      </Menu> */}
       <Menu onClick={handleSettingMenuClick} mode="horizontal" className="menu">
-        <SubMenu title={getUsernameAvatar('Cemal')}>
+        <SubMenu title={getUsernameAvatar("Cemal")}>
           <Menu.Item key="setting:2">
             <span>
               <LogoutOutlined onClick={handleLogout} />

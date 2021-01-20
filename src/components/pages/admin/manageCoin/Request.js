@@ -14,25 +14,25 @@ function Request() {
   };
   return (
     <div>
-      <Row style={{ marginLeft: '30px' }}>
-        <Col span={1} style={{ marginRight: '-10px' }}>
+      <Row style={{ marginLeft: "30px" }} {...ResponsiveProps}>
+        <Col span={1} style={{ marginRight: "-10px" }}>
           <DollarCircleOutlined
-            style={{ fontSize: '16px', color: '#F6AE2D' }}
+            style={{ fontSize: "16px", color: "#F6AE2D" }}
           />
         </Col>
-        <Col span={23} style={{ marginLeft: '-15px' }}>
+        <Col span={23} style={{ marginLeft: "-15px" }}>
           <p>คำขอการถอนเหรียญที่ยังไม่ได้อนุมัติ</p>
         </Col>
       </Row>
       <Row className="container" {...ResponsiveProps}>
-        <Card className="card-container">
+      <Card className="card-container">
           <Row>
             <Col
               span={16}
               style={{
-                marginTop: '-10px',
-                fontWeight: 'bold',
-                paddingLeft: '10px',
+                marginTop: "-10px",
+                fontWeight: "bold",
+                paddingLeft: "10px",
               }}
             >
               <p>จิราภรณ์ ธิงกะเบล</p>
@@ -40,10 +40,10 @@ function Request() {
             <Col
               span={8}
               style={{
-                fontSize: '10px',
-                color: 'gray',
-                marginTop: '-5px',
-                paddingLeft: '20px',
+                fontSize: "10px",
+                color: "gray",
+                marginTop: "-5px",
+                paddingLeft: "20px",
               }}
             >
               <p>16 ก.ค. 2563</p>
@@ -52,16 +52,16 @@ function Request() {
           <Row
             span={24}
             style={{
-              justifyContent: 'center',
-              fontSize: '40px',
-              marginTop: '10px',
+              justifyContent: "center",
+              fontSize: "40px",
+              marginTop: "10px",
             }}
           >
             <p>156 บาท</p>
           </Row>
           <Row
             span={24}
-            style={{ justifyContent: 'center', marginTop: '-15px' }}
+            style={{ justifyContent: "center", marginTop: "-15px" }}
           >
             <ModalCoin />
           </Row>
@@ -71,9 +71,9 @@ function Request() {
             <Col
               span={16}
               style={{
-                marginTop: '-10px',
-                fontWeight: 'bold',
-                paddingLeft: '10px',
+                marginTop: "-10px",
+                fontWeight: "bold",
+                paddingLeft: "10px",
               }}
             >
               <p>จิราภรณ์ ธิงกะเบล</p>
@@ -81,10 +81,10 @@ function Request() {
             <Col
               span={8}
               style={{
-                fontSize: '10px',
-                color: 'gray',
-                marginTop: '-5px',
-                paddingLeft: '20px',
+                fontSize: "10px",
+                color: "gray",
+                marginTop: "-5px",
+                paddingLeft: "20px",
               }}
             >
               <p>16 ก.ค. 2563</p>
@@ -93,16 +93,16 @@ function Request() {
           <Row
             span={24}
             style={{
-              justifyContent: 'center',
-              fontSize: '40px',
-              marginTop: '10px',
+              justifyContent: "center",
+              fontSize: "40px",
+              marginTop: "10px",
             }}
           >
             <p>156 บาท</p>
           </Row>
           <Row
             span={24}
-            style={{ justifyContent: 'center', marginTop: '-15px' }}
+            style={{ justifyContent: "center", marginTop: "-15px" }}
           >
             <ModalCoin />
           </Row>
@@ -112,9 +112,9 @@ function Request() {
             <Col
               span={16}
               style={{
-                marginTop: '-10px',
-                fontWeight: 'bold',
-                paddingLeft: '10px',
+                marginTop: "-10px",
+                fontWeight: "bold",
+                paddingLeft: "10px",
               }}
             >
               <p>จิราภรณ์ ธิงกะเบล</p>
@@ -122,10 +122,10 @@ function Request() {
             <Col
               span={8}
               style={{
-                fontSize: '10px',
-                color: 'gray',
-                marginTop: '-5px',
-                paddingLeft: '20px',
+                fontSize: "10px",
+                color: "gray",
+                marginTop: "-5px",
+                paddingLeft: "20px",
               }}
             >
               <p>16 ก.ค. 2563</p>
@@ -134,16 +134,16 @@ function Request() {
           <Row
             span={24}
             style={{
-              justifyContent: 'center',
-              fontSize: '40px',
-              marginTop: '10px',
+              justifyContent: "center",
+              fontSize: "40px",
+              marginTop: "10px",
             }}
           >
             <p>156 บาท</p>
           </Row>
           <Row
             span={24}
-            style={{ justifyContent: 'center', marginTop: '-15px' }}
+            style={{ justifyContent: "center", marginTop: "-15px" }}
           >
             <ModalCoin />
           </Row>

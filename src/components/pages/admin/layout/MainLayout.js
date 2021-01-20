@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Route, Switch } from 'react-router-dom'
 import { Layout } from "antd";
-import "../pages/admin/layout/Style.css";
-import SiderMenu from "../pages/admin/layout/SiderMenu";
-import LayoutBanner from "../pages/admin/layout/LayoutBanner";
-import Dashboard from "../pages/admin/dashboard/Dashboard";
-import Request from "../pages/admin/manageCoin/Request"
-import ExchangeRate from "../pages/admin/manageCoin/ExchangeRate"
-import TimeExchange from "../pages/admin/manageCoin/TimeExchange"
+import "./Style.css";
+import SiderMenu from "./SiderMenu";
+import LayoutBanner from "./LayoutBanner";
+import Home from "../../users/Home";
+import Request from "../manageCoin/Request"
+import ExchangeRate from "../manageCoin/ExchangeRate"
+import TimeExchange from "../manageCoin/TimeExchange"
 
 const { Content } = Layout;
 
-function AdminLayout() {
+function MainLayout() {
   const [collapsed, setCollapsed] = useState(false);
 
   const handleOnCollapse = () => {
@@ -29,10 +29,10 @@ function AdminLayout() {
         <Content style={{ margin: "24px 16px 0" }}>
           <div style={{ padding: 24, background: "#fff", minHeight: 20 }}>
             <Switch>
-              <Route exact path="/admin" component={Dashboard} />
-              <Route exact path="/admin/requstcoin" component={Request} />
-              <Route exact path="/admin/exchagecoin" component={ExchangeRate} />
-              <Route exact path="/admin/managecoin" component={TimeExchange} />
+              {/* <Route path="/" component={Home} /> */}
+              {/* <Route path="/" component={Request} /> */}
+              <Route path="/" component={ExchangeRate} />
+              {/* <Route path="/" component={TimeExchange} /> */}
             </Switch>
           </div>
         </Content>
@@ -40,4 +40,5 @@ function AdminLayout() {
     </Layout>
   );
 }
-export default AdminLayout;
+
+export default MainLayout;

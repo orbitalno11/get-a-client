@@ -16,9 +16,9 @@ export default function MenuAdmin() {
             </div>
             <Menu className="side-menu" mode="inline" defaultSelectedKeys={["/admin/home"]}>
                 <Menu.Item key="/admin/home" >
-                    <NavLink >หน้าหลัก</NavLink>
+                    <NavLink to="/admin/home">หน้าหลัก</NavLink>
                 </Menu.Item>
-                <Menu.SubMenu key="manage" title="จัดการข้อมูลผู้สมัครสอน">
+                {/* <Menu.SubMenu key="manage" title="จัดการข้อมูลผู้สมัครสอน">
                     <Menu.Item key="/admin/manageprofile">
                         <NavLink >เอกสารยืนยันตัวตน</NavLink>
                     </Menu.Item>
@@ -36,7 +36,7 @@ export default function MenuAdmin() {
                     <Menu.Item key="/admin/managecoin">
                         <NavLink>จัดการซื้อเหรียญ</NavLink>
                     </Menu.Item>
-                </Menu.SubMenu>
+                </Menu.SubMenu> */}
             </Menu>
         </Sider>
 

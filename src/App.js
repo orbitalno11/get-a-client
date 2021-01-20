@@ -17,7 +17,6 @@ import AdminLayout from './components/layouts/AdminLayout'
 import UserLayout from './components/layouts/UserLayout'
 
 //Page 
-
 function App() {
   return (
     <Provider store={store}>
@@ -28,6 +27,7 @@ function App() {
           <Route path="*">
             {/* <Redirect path="/"/> */}
           </Route>
+          
         </Switch>
       </Router>
     </Provider>

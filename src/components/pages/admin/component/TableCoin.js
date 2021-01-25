@@ -1,5 +1,4 @@
 import React from "react";
-import { Modal, Button, Space } from "antd";
 import "./Style.css";
 import ModalDelete from "./ModalDelete";
 import ModalEdit from "./ModalEdit";

@@ -1,0 +1,92 @@
+/* // TableVerifyTutor */
+#verify {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 15px;
+  border-collapse: collapse;
+  font-size:18px;
+  padding-left: 2em;
+}
+#verify td, #verify th {
+  padding: 8px;
+  border-bottom: 2px solid #ddd;  
+  padding-left: 2em;
+}
+
+#verify tr:hover {background-color: #ddd;}
+#verify th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #33658A;
+  color: white;
+  padding-left: 2em;
+}
+.icon-closeemail{
+  color: #F26419;
+}
+.icon-openemail{
+  color:#C4C4C4;
+}
+.text-verify{
+  font-size: 14px;
+  padding-top: 5px;
+  color: #a39b9b;
+}
+.time-verify{
+  font-size: 14px;
+  padding-top: 5px;
+  color: #a39b9b;
+  padding-left: 12em !important;
+}
+
+/* //profile// */
+#profile {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 15px;
+  border-collapse: collapse;
+  font-size:18px;
+  padding-left: 2em;
+}
+#profiletd, #profile th {
+  padding: 8px;
+  border-bottom: 2px solid white;  
+  padding-left: 2em;
+}
+
+#profile tr {background-color: white;}
+#profile th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #33658A;
+  color: white;
+  padding-left: 2em;
+}
+.button-cancle {
+  background: #f62d2d !important;
+  border-radius: 20px !important;
+  width: 200px !important;
+  color: white !important;
+  border-color: #f62d2d !important;
+  font-size: 110% !important;
+  padding-top: 1px !important;
+}
+.button-cancle:hover {
+  background-color: #d83808!important;
+  color: white !important;
+}
+.button-confirm {
+  background: #248a35 !important;
+  border-radius: 20px !important;
+  width: 200px !important;
+  color: white !important;
+  border-color: #248a35 !important;
+  font-size: 110% !important;
+  padding-top: 1px !important;
+  cursor: pointer;
+}
+
+.button-confirm:hover {
+  background-color: #117C3C!important;
+  color: white !important;
+}

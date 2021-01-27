@@ -8,7 +8,7 @@ import Modal from '../component/Modal';
 import { useHistory } from 'react-router';
 
 function Profile() {
-  const [isModalOpen, toggleModal] = useState(false);
+  const [ModalOpen, setModalOpen] = useState(false);
   const history = useHistory();
   const handleCancel = () => {
     history.goBack();
@@ -77,14 +77,14 @@ function Profile() {
                 <Button
                   type="button"
                   className="button-confirm"
-                  onClick={() => toggleModal(!isModalOpen)}
+                  onClick={() => setModalOpen(!ModalOpen)}
                 >
                   ยอมรับ
                 </Button>
-                <Modal isOpen={isModalOpen} toggle={toggleModal}>
+                <Modal isOpen={ModalOpen} toggle={setModalOpen}>
                   <h1 style={{marginTop:"1em"}}>ดำเนินการสำเร็จ</h1>
                   <Image width={150} src={Success} alt="success-image"/><br/>
-                  <Button onClick={handleCancel} className="vetify-modal">ปิด</Button>
+                  <Button onClick={handleCancel} className="vetify-modal" style={{marginTop:"1em"}}>ปิด</Button>
                 </Modal>
               </Col>
             </Row>

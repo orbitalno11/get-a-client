@@ -1,9 +1,9 @@
-import { Row, Col } from "antd";
-import React from "react";
-import "./Tutor.css";
+import { Row, Col } from 'antd';
+import React from 'react';
+import './Tutor.css';
 import { NavLink } from 'react-router-dom';
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function VerifyEducation() {
   return (

@@ -1,7 +1,7 @@
-import { Row, Col, Image, Button } from "antd";
-import React,{ useState } from "react";
-import "./Tutor.css";
-import ONET from "../../../images/ONET.jpg";
+import { Row, Col, Image, Button } from 'antd';
+import React,{ useState } from 'react';
+import './Tutor.css';
+import ONET from '../../../images/ONET.jpg';
 import Success from '../../../images/Success.png';
 import Modal from '../component/Modal';
 import { useHistory } from 'react-router';
@@ -83,7 +83,7 @@ function Educate() {
                 <Modal isOpen={ModalOpen} toggle={setModalOpen}>
                   <h1 style={{marginTop:"1em"}}>ดำเนินการสำเร็จ</h1>
                   <Image width={150} src={Success} alt="success-image"/><br/>
-                  <Button onClick={handleCancel} className="vetify-modal">ปิด</Button>
+                  <Button onClick={handleCancel} className="vetify-modal" style={{marginTop:"1em"}}>ปิด</Button>
                 </Modal>
               </Col>
             </Row>

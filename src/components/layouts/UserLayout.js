@@ -14,7 +14,6 @@ import EditProfileMap from '../pages/users/profile/editProfile/learner/EditProfi
 import PubilcProfile from '../pages/users/profile/profile/tutor/pubileProfile/PubilcProfile'
 import ProfileDetail from '../pages/users/profile/profile/tutor/pubileProfile/ProfileDetail'
 
-
 export default function UserLayout() {
     return (
         <div>

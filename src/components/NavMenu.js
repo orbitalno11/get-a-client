@@ -14,7 +14,7 @@ import {
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const { useBreakpoint } = Grid;
-const statusTutor = true
+const statusTutor = false
 const auth = true
 
 const UserMenu = () => {
@@ -77,8 +77,8 @@ const TutorMenu = () => {
             </Menu.Item>
             {
             auth ? (
-                        <Menu.Item key="/profile" >
-                            <NavLink to="/profile">
+                        <Menu.Item key="/tutor/profile" >
+                            <NavLink to="/tutor/profile">
                                 โปรไฟล์
                         </NavLink>
                         </Menu.Item>
@@ -122,7 +122,7 @@ const UserMenuMobile = () => {
                 </NavLink>
             </Col>
             <Col span={4} className="iconMenu">
-                <NavLink to="/">
+                <NavLink to="/profile">
                     <FontAwesomeIcon icon={faUserCircle} className="icon" />
                 </NavLink>
             </Col>
@@ -178,7 +178,7 @@ const MenuDesktop = () => {
                         !auth ? (
                             <Col style={{ display: "flex", alignItems: "center" }}>
                                 <NavLink to="/login">
-                                    <Button id="/login" className="buttonBlueColor" shape="round" size="middle">เข้าสู่ระบบ</Button>
+                                    <Button id="/login" className="buttonColor backgroundBlue" shape="round" size="middle">เข้าสู่ระบบ</Button>
                                 </NavLink>
                                 <NavLink to="/register">
                                     <Button className="buttonText" type="link" >หรือ เข้าสู่ระบบ</Button>

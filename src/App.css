@@ -1,17 +1,22 @@
 :root {
   --main-color:#F26419;
   --blue-color: #33658A;
-  --yello-color : #F6AE2D;
+  --yellow-color : #F6AE2D;
   --white-color : #FFFFFF;
   --gray-color : #C4C4C4;
   --side-menu-color : #303A53;
   --error-color : #840c0c;
+  --green-color : #00B900;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+body{
+  min-width: 480px;
 }
 
 @keyframes App-logo-spin {
@@ -40,18 +45,6 @@
   margin-top: 5px;
 }
 
-.margintop10{
-  margin-top: 10px;
-}
-
-.margintop20{
-  margin-top: 20px;
-}
-
-.marginbottom{
-  padding-bottom: 20px;
-}
-
 .input{
   margin: 0 auto;
   border: none; /* <-- This thing here */
@@ -62,6 +55,10 @@
   padding-right: 20px;
   width: 100%;
   outline:none;
+}
+
+.imageUpload>input {
+  display: none !important;
 }
 
 .ant-picker,
@@ -90,7 +87,6 @@ input :focus{
   outline: none !important
 }
 
-
 .body {
   padding-top: 110px;
 }
@@ -99,6 +95,30 @@ input :focus{
   padding: 7%;
 }
 
+.buttonColor{
+  border-width: 0ch  !important;
+  color:var(--white-color)  !important;
+}
+
+.backgroundYellow{
+  background-color: var(--yellow-color) !important;
+}
+
+.backgroundGreen{
+  background-color: var(--green-color) !important;
+}
+
+.backgroundMain{
+  background-color: var(--main-color) !important;
+}
+
+.backgroundBlue{
+  background-color: var(--blue-color) !important;
+}
+
+.backgroundGray{
+  background-color: var(--gray-color) !important;
+}
 
 /* General */
 
@@ -133,9 +153,6 @@ input :focus{
   align-items: center;
   font-size: 18pt;
 }
-.logoSide {
-  background-color: var(--main-color) !important;
-}
 
 .ant-menu-horizontal > .ant-menu-item:hover,
 .ant-menu-horizontal > .ant-menu-submenu:hover,
@@ -158,13 +175,6 @@ input :focus{
   color:  var(--white-color)  !important;
 }
 
-
-.buttonBlueColor{
-  background-color: var(--blue-color) !important;
-  border-width: 0ch  !important;
-  color:var(--white-color)  !important;
-}
-
 .buttonText{
   color:var(--white-color)  !important;
 }
@@ -182,12 +192,10 @@ input :focus{
   height: auto;
   border-top-style: solid;
   border-top-color: var(--main-color);
-
 }
 
 .iconMenu{
   padding: 10px;
-  
 }
 
 .icon{
@@ -215,7 +223,6 @@ input :focus{
   border: 0px transparent !important;
 }
 
-
 .side .ant-menu ,
 .side .ant-menu-item a,
 .side .ant-menu  :hover,
@@ -224,7 +231,6 @@ input :focus{
   color : var(--white-color) !important;
   background-color: var(--side-menu-color) !important;
   border: 0px transparent !important;
-
 }
 .side .ant-menu-item :hover,
 .side .ant-menu-item-selected a {
@@ -234,13 +240,10 @@ input :focus{
 /* Nav Menu */
 
 /* Body */
-
-
 .input-form{
   width: 30%;
   margin-top: 30px;
 }
-
 
 .big-button{
   height : 160px ;
@@ -248,13 +251,6 @@ input :focus{
   font-size: 15px;
   font-weight: 600;
   margin-top: 20px;
-}
-
-
-.image-person {
-  border-radius: 50% !important;
-  height: 120px;
-  width: 120px;
 }
 
 .icon-addimage{
@@ -290,10 +286,30 @@ input :focus{
     font-size: 13px;
   }
 
-
   .image-person {
     height: 120px;
     width: 120px;
   }
 }
 
+.ant-card-body{
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+}
+
+.ant-radio-button-wrapper-checked ,
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover::before , 
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before{
+  background-color: #FFFFFF;
+  outline: none!important;
+  border-width: 0ch  !important;
+  box-shadow: none  !important;
+}
+
+[ant-click-animating-without-extra-node]:after {
+  animation: 0s !important;
+  border-color: transparent !important;
+}
+ 

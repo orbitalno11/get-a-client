@@ -1,4 +1,4 @@
-import { Badge, Image, Upload, Row, Col, Grid, Select, Button, DatePicker } from 'antd'
+import { Badge, Image, Row, Col, Grid, Select, Button, DatePicker } from 'antd'
 import React, { useState } from 'react'
 import { Controller, useForm } from "react-hook-form";
 import {
@@ -11,24 +11,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import moment from 'moment';
 import style from './styles.module.scss'
 
-function getBase64(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-    }
-    );
-}
-
 export default function RegisterForm() {
     const [image, setimage] = useState("https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png")
     const { useBreakpoint } = Grid;
     const screens = useBreakpoint();
     const params = useParams();
     const type = params.id
-
-    
 
     const inputForm = {
         width: ((screens.sm && !screens.lg) || (!screens.sm && screens.xs)) ? '70%' : '35%',
@@ -38,11 +26,8 @@ export default function RegisterForm() {
         resolver: yupResolver(type === '0' ? tutorRegisSchema : learnnerRegisSchema),
     });
 
-    const onChange = async data => {
-        if (!data.file.url && !data.file.preview && data.file.originFileObj.type.match('image.*')) {
-            data.file.preview = await getBase64(data.file.originFileObj);
-        }
-        setimage(data.file.url || data.file.preview)
+    const onChange =  data => {
+        setimage(URL.createObjectURL(data.target.files[0]))
     }
 
     const onSubmit = data => {
@@ -52,47 +37,40 @@ export default function RegisterForm() {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className={style.alignCenterPage} >
+                <div className={style.marginbottom20}>
                 <span className="h2">ลงทะเบียน{type === '0' ? "ครูสอนพิเศษ" : "นักเรียน"}</span>
-                <Controller
-                    as={
-                        <Upload
-                            showUploadList={false}
-                            onChange={onChange}
-                            name="profile"
-                            className="margintop20"
-                        >
-                            <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[2, 0]}>
-                                <Image
-                                    className="image-person"
-                                    src={image}
-                                    preview={false}
-                                />
-                            </Badge>
-                        </Upload>
-                    }
-                    name="profile"
-                    control={control}
-                    defaultValue={{}}
-                />
+                </div>
+                <div className="imageUpload" >
+                    <label htmlFor="file-input" >
+                        <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[2, 0]}>
+                            <Image
+                                className={style.imagepPerson}
+                                src={image}
+                                preview={false}
+                            />
+                        </Badge>
+                    </label>
+                    <input id="file-input" name="profile" type="file" ref={register} onChange={onChange}/>
+                </div>
                 {
                     errors.profile && <p className="error-input">{errors.profile.message}</p>
                 }
                 <Row className="input-form" style={inputForm} justify="space-between">
-                    <Col className="margintop10" xs={24} sm={24} md={24} >
+                    <Col  xs={24} sm={24} md={24} >
                         <p>ชื่อ</p>
                         <input className="input" type="text" name="firstname" ref={register} />
                         {
                             errors.firstname && <p className="error-input">{errors.firstname.message}</p>
                         }
                     </Col>
-                    <Col className="margintop10" xs={24} sm={24} md={24} >
+                    <Col className={style.margintop10} xs={24} sm={24} md={24} >
                         <p>นามสกุล</p>
                         <input className="input" type="text" name="lastname" ref={register} />
                         {
                             errors.lastname && <p className="error-input">{errors.lastname.message}</p>
                         }
                     </Col>
-                    <Col className="margintop10" xs={24} sm={24} md={24} >
+                    <Col className={style.margintop10} xs={24} sm={24} md={24} >
                         <p>เพศ</p>
                         <Controller
                             as={
@@ -109,7 +87,7 @@ export default function RegisterForm() {
                             errors.gender && <p className="error-input">{errors.gender.message}</p>
                         }
                     </Col>
-                    <Col className="margintop10" xs={24} sm={24} md={24} >
+                    <Col className={style.margintop10} xs={24} sm={24} md={24} >
                         <p>วันเดือนปีเกิด</p>
                         <Controller
                             as={
@@ -123,7 +101,7 @@ export default function RegisterForm() {
                             errors.dateOfBirth && <p className="error-input">{errors.dateOfBirth.message}</p>
                         }
                     </Col>
-                    <Col className="margintop10" xs={24} sm={24} md={24} >
+                    <Col className={style.margintop10} xs={24} sm={24} md={24} >
                         <p>{type === '0' ? "วิชาที่สอน" : "ระดับชั้น"}</p>
                         <Controller
                             as={
@@ -143,21 +121,21 @@ export default function RegisterForm() {
                                 errors.grade && <p className="error-input">{errors.grade.message}</p>
                         }
                     </Col>
-                    <Col className="margintop10" xs={24} sm={24} md={24} >
+                    <Col className={style.margintop10} xs={24} sm={24} md={24} >
                         <p>อีเมล</p>
                         <input className="input" type="email" name="email" ref={register} />
                         {
                             errors.email && <p className="error-input">{errors.email.message}</p>
                         }
                     </Col>
-                    <Col className="margintop10" xs={24} sm={24} md={24} >
+                    <Col className={style.margintop10} xs={24} sm={24} md={24} >
                         <p>รหัสผ่าน</p>
                         <input className="input" type="password" name="password" ref={register} />
                         {
                             errors.password && <p className="error-input">{errors.password.message}</p>
                         }
                     </Col>
-                    <Col className="margintop10" xs={24} sm={24} md={24} >
+                    <Col className={style.margintop10} xs={24} sm={24} md={24} >
                         <p>ยืนยันรหัสผ่าน</p>
                         <input className="input" type="comfirmpassword" name="comfirmpassword" ref={register} />
                         {
@@ -165,7 +143,9 @@ export default function RegisterForm() {
                         }
                     </Col>
                 </Row>
-                <Button className="buttonBlueColor margintop20" shape="round" size="large" htmlType="submit">ลงทะเบียน</Button>
+                <div className={style.margintop20}>
+                    <Button className="buttonColor backgroundMain" shape="round" size="large" htmlType="submit">ลงทะเบียน</Button>
+                </div>
             </div>
         </form>
     )

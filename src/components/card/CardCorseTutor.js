@@ -1,12 +1,12 @@
-import React from 'react'
-import { Card, Typography } from 'antd';
-import styles from './styles.module.scss'
+import React from "react"
+import { Card, Typography } from "antd";
+import styles from "./styles.module.scss"
 import {
     faBookReader,
     faClock,
     faCoins,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const { Title } = Typography;
 
 

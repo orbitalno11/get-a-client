@@ -1,13 +1,13 @@
-import { Button, Col, Image, Row, Select, Typography, Grid } from 'antd'
-import TextArea from 'antd/lib/input/TextArea';
-import React, { Fragment, useCallback, useEffect, useState } from 'react'
-import style from '../../styles.module.scss'
-import { profileTutorSchema } from '../../../../../../validation/validation';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Controller, useForm } from 'react-hook-form';
-import Header from '../../../../../headerMobile/Header';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProfile } from '../../../../../../redux/actions/profileActions';
+import { Button, Col, Image, Row, Select, Typography, Grid } from "antd"
+import TextArea from "antd/lib/input/TextArea";
+import React, { Fragment, useCallback, useEffect, useState } from "react"
+import style from "../../styles.module.scss"
+import { profileTutorSchema } from "../../../../../../validation/validation";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Controller, useForm } from "react-hook-form";
+import Header from "../../../../../headerMobile/Header";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfile } from "../../../../../../redux/actions/profileActions";
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
@@ -27,10 +27,12 @@ export default function EditProfileDetail() {
 
     useEffect(() => {
         fetchProfile()
-        setDetailProfile(profile.profile)
     }, [fetchProfile])
 
-
+    useEffect(()=>{
+        setDetailProfile(profile.profile)
+    },[profile])
+    
     const onSubmit = (value) => {
         console.log(value)
     }

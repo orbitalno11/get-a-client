@@ -1,11 +1,11 @@
-import React, { Fragment, useCallback, useEffect } from 'react'
-import { Col, Row, Grid, Divider } from 'antd'
-import style from '../../styles.module.scss'
-import ProfileDetail from './ProfileDetail'
-import ProfileCoruse from './ProfileCoruse'
-import Header from '../../../../../headerMobile/Header'
-import { useDispatch } from 'react-redux'
-import { getProfile } from '../../../../../../redux/actions/profileActions';
+import React, { Fragment, useCallback, useEffect } from "react"
+import { Col, Row, Grid, Divider } from "antd"
+import style from "../../styles.module.scss"
+import ProfileDetail from "./ProfileDetail"
+import ProfileCoruse from "./ProfileCoruse"
+import Header from "../../../../../headerMobile/Header"
+import { useDispatch } from "react-redux"
+import { getProfile } from "../../../../../../redux/actions/profileActions";
 const { useBreakpoint } = Grid;
 
 export default function ProfileLearner() {
@@ -31,7 +31,7 @@ export default function ProfileLearner() {
                     screens.md &&
                     (
                         <Col lg={1} xl={2} md={1}>
-                            <Divider type="vertical" style={{ height: '100%' }} />
+                            <Divider type="vertical" style={{ height: "100%" }} />
                         </Col>
                     )
                 }

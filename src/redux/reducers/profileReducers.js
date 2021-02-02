@@ -4,7 +4,7 @@ import {
     ADD_EDUCATION , 
     DELETE_EDUCATION ,
     GET_HANDLE_PROFILE
-} from '../actions/types'
+} from "../actions/types"
 
 const initialState = {
     profile :  null,
@@ -53,3 +53,4 @@ export default (state = initialState , action)=>{
         }
     }
 } 
+

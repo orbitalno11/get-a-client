@@ -1,13 +1,13 @@
-import React, { Fragment, useEffect, useState } from 'react'
-import { Col, Row, Grid, Typography, Button, Divider } from 'antd'
-import style from '../../../styles.module.scss'
+import React, { Fragment, useEffect, useState } from "react"
+import { Col, Row, Grid, Typography, Button, Divider } from "antd"
+import style from "../../../styles.module.scss"
 import {
    faPlus
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { NavLink } from 'react-router-dom';
-import EducationTutor from '../../../../../../educationTutor/EducationTutor';
-import { useSelector } from 'react-redux';
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { NavLink } from "react-router-dom";
+import EducationTutor from "../../../../../../educationTutor/EducationTutor";
+import { useSelector } from "react-redux";
 const { useBreakpoint } = Grid;
 const { Title } = Typography;
 
@@ -28,7 +28,7 @@ export default function ProfileIdentity({}) {
                 <div className={style.TitleCoin}>
                     <Title level={screens.md ? 2 : 5}>ยืนยันตัวตน</Title>
                     <Col className={style.floatLeft}>
-                        <Button className="buttonColor backgroundGreen" shape="round" size="middle" style={{ width: '100px' }}>ยืนยัน</Button>
+                        <Button className="buttonColor backgroundGreen" shape="round" size="middle" style={{ width: "100px" }}>ยืนยัน</Button>
                     </Col>
                 </div>
             </div>
@@ -39,7 +39,7 @@ export default function ProfileIdentity({}) {
                     </Col>
                     <Col className={style.marginLeft}>
                         <NavLink to="/tutor/profile/add/education">
-                            <Button className="backgroundBlue buttonColor" shape="circle" icon={<FontAwesomeIcon icon={faPlus} style={{ color: 'white' }} />} />
+                            <Button className="backgroundBlue buttonColor" shape="circle" icon={<FontAwesomeIcon icon={faPlus} style={{ color: "white" }} />} />
                         </NavLink>
                     </Col>
                 </Row>

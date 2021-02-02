@@ -1,15 +1,15 @@
-import React, { Fragment, useEffect, useState } from 'react'
-import { Typography, Image, Badge, Button, Grid } from 'antd';
+import React, { Fragment, useEffect, useState } from "react"
+import { Typography, Image, Badge, Button, Grid } from "antd";
 import {
     faCoins,
     faMapMarkerAlt,
     faBookReader,
     faEdit
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import style from '../../styles.module.scss'
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import style from "../../styles.module.scss"
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
@@ -46,7 +46,7 @@ export default function ProfileDetail() {
                     <FontAwesomeIcon icon={faCoins} className={style.iconcoin} />
                     <span>{profileDetail && profileDetail.coin}</span>
                     <div className={style.floatLeft}>
-                        <Button className="backgroundYellow buttonColor" shape="round" size="middle" style={{ width: '100px' }}>ซื้อเหรียญ</Button>
+                        <Button className="backgroundYellow buttonColor" shape="round" size="middle" style={{ width: "100px" }}>ซื้อเหรียญ</Button>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@ export default function ProfileDetail() {
                         (
                             <div className={style.floatLeft}>
                                 <NavLink to="/learner/profile/edit/map">
-                                    <Button className="backgroundBlue buttonColor" shape="round" size="middle" style={{ width: '100px' }}>แก้ไข</Button>
+                                    <Button className="backgroundBlue buttonColor" shape="round" size="middle" style={{ width: "100px" }}>แก้ไข</Button>
                                 </NavLink>
                             </div>
                         )

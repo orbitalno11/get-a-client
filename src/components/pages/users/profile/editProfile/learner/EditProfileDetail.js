@@ -1,15 +1,15 @@
-import { Badge, Col, Image, Row, Button } from 'antd'
-import React, { Fragment, useCallback, useEffect, useState } from 'react'
-import style from '../../styles.module.scss'
+import { Badge, Col, Image, Row, Button } from "antd"
+import React, { Fragment, useCallback, useEffect, useState } from "react"
+import style from "../../styles.module.scss"
 import {
     faEdit
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { profileSchema } from '../../../../../../validation/validation';
-import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import { editProfileDetail, getProfile } from '../../../../../../redux/actions/profileActions';
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { profileSchema } from "../../../../../../validation/validation";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { editProfileDetail, getProfile } from "../../../../../../redux/actions/profileActions";
 
 export default function EditProfileDetail({ refs, error }) {
     const [image, setimage] = useState("https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png")
@@ -26,8 +26,11 @@ export default function EditProfileDetail({ refs, error }) {
 
     useEffect(() => {
         fetchProfile()
-        setDetailProfile(profile.profile)
     }, [fetchProfile])
+
+    useEffect(()=>{
+        setDetailProfile(profile.profile)
+    },[profile])
 
     const onChange = data => {
         setimage(URL.createObjectURL(data.target.files[0]))

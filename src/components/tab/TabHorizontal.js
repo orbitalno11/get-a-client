@@ -1,17 +1,15 @@
-import { Radio, Tabs } from 'antd'
-import React, { Fragment, useState } from 'react'
-import style from './styles.module.scss'
-
-const { TabPane } = Tabs;
+import { Radio } from "antd"
+import React, { Fragment, useState } from "react"
+import style from "./styles.module.scss"
 
 export default function TabHorizontal({ tabStart, tabDetail }) {
     const [tab, setTab] = useState(tabStart.key)
     const colorSelect = {
-        backgroundColor: '#F26419'
+        backgroundColor: "#F26419"
     }
 
     const colorNotSelect = {
-        backgroundColor: '#33658A'
+        backgroundColor: "#33658A"
     }
 
     const onHandleChangeTab = value => {

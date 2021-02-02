@@ -27,29 +27,29 @@ $main :#F26419;
 }
 
 .paddingTopBody{
-    padding-top: 110px;
+    padding-top: 7rem;
 }
 
 .body {
     @extend .paddingbody;
     @extend .paddingTopBody;
-    padding-bottom: 60px;
+    padding-bottom: 3.75rem;
 }
 
 .bodyEdit{
-    padding-top: 40px;
+    padding-top: 2.5rem;
 }
 
 .imageProfile {
     border-radius: 50% !important;
-    height: 130px;
-    width: 130px;
+    height: 8.12rem;
+    width: 8.12rem;
 }
 
 .imageProfilePubile {
     border-radius: 50% !important;
-    height: 150px;
-    width: 150px;
+    height: 9rem;
+    width: 9rem;
 }
 
 .profileSet{
@@ -58,27 +58,27 @@ $main :#F26419;
 }
 
 .marginLeft{
-    margin-left: 40px;
+    margin-left: 2.5rem;
 }
 
 .subProfile{
-    margin-top: 25px;
+    margin-top: 1.5rem;
 }
 
 .subTitle{
     @extend .TitleCoin;
-    padding-left: 20px;
+    padding-left: 1.25rem;
 }
 
 .TitleCoin{
     @extend .alignPage;
-    padding-top: 20px;
+    padding-top: 1.25rem;
     flex-flow: row;
 }
 
 .icon{
     font-size: 20pt;
-    margin-right: 20px;
+    margin-right: 1.25rem;
 }
 
 .iconcoin{
@@ -98,7 +98,7 @@ $main :#F26419;
 }
 
 .iconCheck{
-    margin-right: 30px;
+    margin-right: 2rem;
 }
 
 .iconTick{
@@ -109,17 +109,17 @@ $main :#F26419;
 
 .iconEducation {
     @extend .icon;
-    margin-left: 30px;
+    margin-left: 2rem;
     font-size: 30pt;
 }
 
 .padding{
-    padding: 10px;
+    padding: 0.6rem;
 }
 
 .floatLeft{
     margin-left: auto;
-    margin-right: 10px;
+    margin-right: 0.6rem;
 }
 
 .fontGreen{
@@ -131,24 +131,24 @@ $main :#F26419;
 }
 
 .marginTop {
-    margin-top: 35px;
+    margin-top: 2rem;
 }
 
 .marginTop20 {
-    margin-top: 20px;
+    margin-top: 1.25rem;
 }
 
 .buttonEdit{
     @extend .marginTop;
     @extend .alignCenter;
-    padding-bottom: 60px;
+    padding-bottom: 3.75rem;
 }
 
 .banner{
-    height: 220px;
-    padding-top: 50px;
+    height: 13.75rem;
+    padding-top: 3rem;
     width: 100%;
-    background-image: url(../../../images/background.jpg);
+    background-image: url(../../../images/background.webp);
 }
 
 .bannerEditProfile{
@@ -176,19 +176,19 @@ $main :#F26419;
     display: flex;
     flex-flow: column;
     position: absolute;
-    right: 5px;
+    right: 0.3rem;
 }
 
 .infoButton{
-    border-width: 2px  !important;
+    border-width: 0.1rem  !important;
     border-color: $main !important;
     color: $main  !important;
 }
 
 .colorGray{
     color:$gray !important;
-    border-width: 0px  !important;
-    margin-top: 10px
+    border-style: none  !important;
+    margin-top: 0.6rem
 }
 
 .contrainnerProfilePubile{
@@ -198,5 +198,5 @@ $main :#F26419;
 
 .bodymobileprofile{
     @extend .paddingbody;
-    padding-bottom: 60px;
+    padding-bottom: 3.75rem;
 }

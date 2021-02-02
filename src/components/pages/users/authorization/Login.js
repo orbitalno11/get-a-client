@@ -1,16 +1,17 @@
-import React from 'react'
-import { Button } from 'antd';
+import React, { useEffect } from "react"
+import { Button } from "antd";
 import { useForm } from "react-hook-form";
-import { loginSchema } from '../../../../validation/validation'
-import { yupResolver } from '@hookform/resolvers/yup';
-import { NavLink } from 'react-router-dom';
-import style from './styles.module.scss'
+import { loginSchema } from "../../../../validation/validation"
+import { yupResolver } from "@hookform/resolvers/yup";
+import { NavLink, Redirect } from "react-router-dom";
+import style from "./styles.module.scss"
 
 export default function Login() {
 
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(loginSchema),
     });
+
     const onSubmit = data => {
         alert(JSON.stringify(data));
     };

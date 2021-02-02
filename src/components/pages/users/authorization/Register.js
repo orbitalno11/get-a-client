@@ -1,25 +1,25 @@
-import { Button, Col, Row } from 'antd'
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Button, Col, Row } from "antd"
+import React from "react"
+import { NavLink } from "react-router-dom"
 import {
     faBookReader,
     faChalkboardTeacher
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import style from './styles.module.scss'
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import style from "./styles.module.scss"
 
 
 export default function Register() {
  
     const typeRegister = [
         {
-            id : '0',
+            id : "0",
             type: "TUTOR",
             icon: "",
             color: "#303A53"
         },
         {
-            id : '1',
+            id : "1",
             type: "LEARNER",
             icon: "faBookReader",
             color: "#F26419"

@@ -2,8 +2,8 @@ $yellow : #F6AE2D;
 $gray : #C4C4C4;
 
 .cardRound{
-    border: 2px solid red;
-    border-radius: 25px;
+    border: 0.2rem solid red;
+    border-radius: 1.5rem;
 }
 
 .alignCenter{
@@ -12,15 +12,15 @@ $gray : #C4C4C4;
 
 .image {
     border-radius: 50% !important;
-    height: 86px;
-    width: 86px;
+    height: 5.25rem;
+    width: 5.25rem;
   }
 
 .borderGrid{
     -webkit-box-shadow :none;
-    padding: 4px !important;
-    padding-left: 10px!important;
-    padding-right: 10px!important;
+    padding: 0.25rem !important;
+    padding-left: 0.6rem!important;
+    padding-right: 0.6rem!important;
     display: flex;
     align-items: center;
 }
@@ -33,6 +33,8 @@ $gray : #C4C4C4;
 .gridText{
     @extend .borderGrid ;
     width: 70%!important;
+    height: 6.25rem;
+    padding-left: 2rem !important;
 }
 
 .gridButton{
@@ -43,23 +45,24 @@ $gray : #C4C4C4;
 .gridhalf{
     @extend .borderGrid ;
     width: 50% !important;
-    height: 40px !important;
+    height: 2.5rem !important;
 }
 
 .gridfull{
     @extend .borderGrid ;
     width: 100% !important;
-    height: 40px !important;
+    height: 2.5rem !important;
 
 }
 
 .gridhalfSmall{
     @extend .gridhalf;
     height: auto !important;
+    padding-left: 1.25rem !important;
 }
 
 .icon{
-    font-size: 16pt;
+    font-size: 15pt;
     color:$gray;
 }
 
@@ -69,13 +72,13 @@ $gray : #C4C4C4;
 }
 
 .textIconSmall{
-    font-size: 13px;
-    margin-left: 10px;
+    font-size: 12pt;
+    margin-left: 0.6rem;
 }
 
 .textIcon{
-    font-size: 15px;
-    margin-left: 10px;
+    font-size: 12pt;
+    margin-left: 0.6rem;
 }
 
 .floatRight{

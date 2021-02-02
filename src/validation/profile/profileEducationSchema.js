@@ -1,12 +1,5 @@
 import * as yup from "yup";
 
-const FILE_SIZE = 160 * 1024;
-const SUPPORTED_FORMATS = [
-  "image/jpg",
-  "image/jpeg",
-  "image/gif",
-  "image/png"
-];
 export const profileEducationSchema = yup.object().shape({
     image: yup
     .mixed()

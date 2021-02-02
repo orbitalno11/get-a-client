@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function VerifyEducation() {
   return (
     <div>
-      <table id="verify">
+      <table className="verify">
         <tr>
           <th>เอกสารยืนยันประวัติการศึกษา</th>
         </tr>

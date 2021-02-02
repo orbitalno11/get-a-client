@@ -14,7 +14,7 @@ function Educate() {
   };
   return (
     <div>
-      <table id="profile">
+      <table className="profile">
         <tr>
           <th>จันจิรา ดินแดนมหัศจรรย์ดาวพระศุกร์</th>
         </tr>

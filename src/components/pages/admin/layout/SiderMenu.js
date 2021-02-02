@@ -40,11 +40,11 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
               </span>
             }
           >
-            <Menu.Item key="/admin/manageprofile">
-              <NavLink to="/admin/manageprofile"><span className="nav-text">เอกสารยืนยันตัว</span></NavLink>
+            <Menu.Item key="/admin/verifytutor">
+              <NavLink to="/admin/verifytutor"><span className="nav-text">เอกสารยืนยันตัว</span></NavLink>
             </Menu.Item>
-            <Menu.Item key="/admin/manageducation">
-              <NavLink to="/admin/manageducation"><span className="nav-text">เอกสารยืนยันประวัติการศึกษา</span></NavLink>
+            <Menu.Item key="/admin/verifyeducation">
+              <NavLink to="/admin/verifyducation"><span className="nav-text">เอกสารยืนยันประวัติการศึกษา</span></NavLink>
             </Menu.Item>
           </SubMenu>
           <SubMenu

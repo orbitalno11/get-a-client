@@ -34,9 +34,9 @@ function AdminLayout() {
           <div style={{ padding: 24, background: "#fff", minHeight: 20 }}>
             <Switch>
               <Route exact path="/admin" component={Dashboard} />
-              <Route exact path="/admin/manageprofile" component={VerifyTutor} />
+              <Route exact path="/admin/verifytutor" component={VerifyTutor} />
               <Route exact path="/admin/profile" component={Profile} />
-              <Route exact path="/admin/manageducation" component={VerifyEducation} />
+              <Route exact path="/admin/verifyducation" component={VerifyEducation} />
               <Route exact path="/admin/educate" component={Educate} />
               <Route exact path="/admin/requstcoin" component={Request} />
               <Route exact path="/admin/exchagecoin" component={ExchangeRate} />

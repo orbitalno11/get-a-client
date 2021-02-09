@@ -1,10 +1,9 @@
-/* // TableVerifyTutor */
+ /* TableVerifyTutor */
 .verify {
   border-collapse: collapse;
   width: 100%;
   margin-top: 15px;
   border-collapse: collapse;
-  font-size:18px;
   padding-left: 2em;
 }
 .verify td, .verify th {
@@ -14,6 +13,7 @@
 }
 
 .verify tr:hover {background-color: #ddd;}
+
 .verify th {
   padding-top: 12px;
   padding-bottom: 12px;
@@ -33,7 +33,7 @@
   color: #a39b9b;
 }
 .time-verify{
-  font-size: 14px;
+  font-size: 12px;
   padding-top: 5px;
   color: #a39b9b;
   padding-left: 12em !important;
@@ -45,9 +45,9 @@
   width: 100%;
   margin-top: 15px;
   border-collapse: collapse;
-  font-size:18px;
   padding-left: 2em;
 }
+
 .profiletd, .profile th {
   padding: 8px;
   border-bottom: 2px solid white;  
@@ -55,6 +55,7 @@
 }
 
 .profile tr {background-color: white;}
+
 .profile th {
   padding-top: 12px;
   padding-bottom: 12px;
@@ -71,10 +72,12 @@
   font-size: 110% !important;
   padding-top: 1px !important;
 }
+
 .button-cancle:hover {
   background-color: #d83808!important;
   color: white !important;
 }
+
 .button-confirm {
   background: #248a35 !important;
   border-radius: 20px !important;
@@ -89,101 +92,4 @@
 .button-confirm:hover {
   background-color: #117C3C!important;
   color: white !important;
-}
-
-@media screen and (min-width: 300px) {
-  container {
-      padding-left: 0;
-      padding-right: 0;
-  }
-
-  .tab-button-outer {
-      position: relative;
-      z-index: 2;
-      display: none;
-  }
-
-  /*.tab-select-outer {
-      display: none;
-  }*/
-
-  .tab-contents {
-      position: relative;
-      top: -1px;
-      margin-top: 0;
-      padding: 0 0 0 0;
-  }
-
-  .detailProduct {
-      font-family: mylightFont;
-      font-size: 12px !important;
-  }
-}
-
-@media screen and (min-width: 400px) {
-  /* .tab-button-outer {
-      position: relative;
-      z-index: 2;
-      display: block;
-  }
-
-  .tab-select-outer {
-      display: none;
-  }
-
-  .tab-contents {
-      position: relative;
-      top: -1px;
-      margin-top: 0;
-  }*/
-
-  .title {
-      font-family: myBoldFont;
-      font-size: 16px;
-  }
-
-  .detailProduct {
-      font-family: mylightFont;
-      font-size: 14px !important;
-  }
-}
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-  container {
-      padding-left: 0;
-      padding-right: 0;
-  }
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-  container {
-      padding-left: 0;
-      padding-right: 0;
-  }
-}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-  .tab-button-outer {
-      position: relative;
-      z-index: 2;
-      display: block;
-  }
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-  .text-verify .time-verify{
-    font-size: 8px;
-  }
-
-}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-  .text-verify .time-verify{
-    font-size: 8px;
-  }
 }

@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   LogoutOutlined
-} from '@ant-design/icons';
-import { Layout, Menu, Badge, Breadcrumb } from 'antd';
-import './Style.css';
-import { getUsernameAvatar } from '../component/UserAvatar';
+} from "@ant-design/icons";
+import { Layout, Menu} from "antd";
+import "./Style.css";
+import { getUsernameAvatar } from "../component/UserAvatar";
 
 const { Header } = Layout;
 const { SubMenu } = Menu;

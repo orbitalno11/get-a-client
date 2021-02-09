@@ -22,7 +22,7 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
         onCollapse={handleOnCollapse}
         collapsed={collapsed}
         width="256"
-        style={{ minHeight: '100vh' }}
+        style={{ minHeight: '100vh',fontSize:"15px" }}
       >
         <div className="menu-logo">
           <p className="logo-text">GETA</p>

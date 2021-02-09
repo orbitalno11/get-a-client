@@ -26,8 +26,6 @@ function TimeExchange() {
         <Header/>
         <PromotionList/>
       </Row>
- 
-     
     </div>
   );
 }

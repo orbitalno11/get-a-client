@@ -65,7 +65,7 @@ function ExchangeRate() {
       <Table
           columns={columns}
           dataSource={data}
-          style={{ marginLeft: "30px", marginTop: "2%",width:"35%"}}
+          style={{ marginLeft: "30px", marginTop: "2%"}}
         />
     </div>
   );

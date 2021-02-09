@@ -1,0 +1,101 @@
+$yellow: #f6ae2d;
+$black: #000000;
+$green: #00b900;
+$red: #ab330f;
+$blue: #33658a;
+$gray: #c4c4c4;
+$main: #f26419;
+
+.paddingbody {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.alignPage {
+  display: flex;
+  align-items: center;
+}
+
+.paddingTopBody {
+  padding-top: 110px;
+}
+
+.body {
+  @extend .paddingbody;
+  @extend .paddingTopBody;
+  padding-bottom: 60px;
+}
+
+.icon {
+  font-size: 20pt;
+  margin-right: 20px;
+}
+
+.iconcoin {
+  @extend .icon;
+  color: $yellow;
+}
+
+.iconBig {
+  font-size: 2.5rem;
+  margin-right: 1.5rem;
+  color: $yellow;
+}
+
+.coinlist {
+  padding-top: 3rem;
+  margin-left: -5rem;
+  font-size: 16px;
+}
+
+.coinshop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 8rem;
+  padding-top: 1rem;
+}
+
+.subcoin {
+  padding-top: 2.5em;
+  padding-left: 5em;
+}
+
+.payment {
+  padding-top: 2em;
+}
+
+.paymentPage {
+  @extend .coinshop;
+  margin-left: 6rem;
+  padding-top: 1.5rem;
+}
+
+.buttonpayment {
+  border: 0.1rem solid #f26419 !important;
+  color: black !important;
+}
+
+.buttonpayment:hover {
+  background-color: #fff !important;
+  color: #f26419 !important;
+  border-color: #f26419 !important;
+}
+
+้.hiscoin {
+  margin-left: 10rem;
+  padding-top: 5rem;
+}
+
+.coinbody{
+  @extend .paddingbody;
+  margin-left: 1rem;
+  padding-top: 2rem;
+  width: 100%;
+}
+
+.tablecoin{
+  width: 95%;
+  font-size: 30pt !important;
+}
+

@@ -1,17 +1,8 @@
 import React from 'react';
-import { Card, Col, Row, Layout, Tooltip } from 'antd';
+import { Card, Col, Row} from 'antd';
 import ProductBarChart from '../component/chart/ProductBarChart';
 
 function Dashboard() {
-  const topColResponsiveProps = {
-    xs: 24,
-    sm: 12,
-    md: 12,
-    lg: 12,
-    xl: 6,
-    style: { marginBottom: 24 },
-  };
-
   return (
     <>
       <Row gutter={24} type="flex">

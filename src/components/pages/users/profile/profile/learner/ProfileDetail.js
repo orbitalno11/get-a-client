@@ -1,29 +1,29 @@
-import React, { Fragment, useEffect, useState } from "react"
+import React, { Fragment, useEffect, useState } from "react";
 import { Typography, Image, Badge, Button, Grid } from "antd";
 import {
-    faCoins,
-    faMapMarkerAlt,
-    faBookReader,
-    faEdit
+  faCoins,
+  faMapMarkerAlt,
+  faBookReader,
+  faEdit,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import style from "../../styles.module.scss"
+import style from "../../styles.module.scss";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
 export default function ProfileDetail() {
-    const screens = useBreakpoint();
-    const profile = useSelector(state => state.profile)
-    const [profileDetail, setProfileDetail] = useState(null)
+  const screens = useBreakpoint();
+  const profile = useSelector((state) => state.profile);
+  const [profileDetail, setProfileDetail] = useState(null);
 
-    useEffect(() => {
-        if (profile.profile) {
-            setProfileDetail(profile.profile)
-        }
-    }, [profile])
-
+  useEffect(() => {
+    if (profile.profile) {
+      setProfileDetail(profile.profile);
+    }
+  }, [profile]);
+  
     return (
         <Fragment>
             <div className={style.profileSet}>

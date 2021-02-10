@@ -53,12 +53,12 @@ function showDescription() {
 function ModalBuyCoin() {
   return (
     <Space>
-      <a
+      <p
         onClick={showDescription}
         style={{ color: "#F5732E", textDecorationLine: "underline",fontSize:'14px' }}
       >
         เพิ่มการซื้อเหรียญ
-      </a>
+      </p>
     </Space>
   );
 }

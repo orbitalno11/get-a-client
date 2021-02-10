@@ -21,7 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-package-lock.json
 .eslintcache
 gitignore.log
 debug.log
+package-lock.json

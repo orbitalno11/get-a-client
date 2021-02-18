@@ -7,6 +7,7 @@
   --side-menu-color: #303a53;
   --error-color: #840c0c;
   --green-color: #00b900;
+  --red-color : #ab330f;
 }
 
 @keyframes App-logo-spin {
@@ -118,6 +119,10 @@ input :focus {
 
 .backgroundGray {
   background-color: var(--gray-color) !important;
+}
+
+.backgroundRed{
+  background-color: var(--red-color) !important;
 }
 
 /* General */

@@ -25,3 +25,8 @@ package-lock.json
 .eslintcache
 
 /src/config
+
+
+firebase.json
+.firebaserc
+.firebase

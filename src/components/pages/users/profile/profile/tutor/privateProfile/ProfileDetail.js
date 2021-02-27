@@ -1,16 +1,16 @@
-import React, { Fragment, useEffect, useState } from 'react'
-import { Typography, Image, Button, Badge } from 'antd';
+import React, { Fragment, useEffect, useState } from "react"
+import { Typography, Image, Button, Badge } from "antd";
 import {
     faCoins,
     faMapMarkerAlt,
     faBookReader,
     faEdit ,
     faBook
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import style from '../../../styles.module.scss'
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import style from "../../../styles.module.scss"
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 const { Title } = Typography;
 
 export default function ProfileDetail() {
@@ -45,7 +45,7 @@ export default function ProfileDetail() {
                     <FontAwesomeIcon icon={faCoins} className={style.iconcoin} />
                     <span>{profileDetail&&profileDetail.coin} เหรียญ</span>
                     <div className={style.floatLeft}>
-                        <Button className="buttonColor backgroundYellow" style={{width:'100px'}} shape="round" size="middle">แลกเหรียญ</Button>
+                        <Button className="buttonColor backgroundYellow" style={{width:"100px"}} shape="round" size="middle">แลกเหรียญ</Button>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@ export default function ProfileDetail() {
                     <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
                     <span >{profileDetail&&profileDetail.place}</span>
                     <div className={style.floatLeft}>
-                        <Button className="buttonColor backgroundBlue" style={{width:'100px'}} shape="round" size="middle">แก้ไข</Button>
+                        <Button className="buttonColor backgroundBlue" style={{width:"100px"}} shape="round" size="middle">แก้ไข</Button>
                     </div>
                 </div>
             </div>
@@ -65,14 +65,14 @@ export default function ProfileDetail() {
                     <FontAwesomeIcon icon={faBook} className={style.iconmarker} />
                     <span>คณิตศาสตร์</span>
                     <div className={style.floatLeft}>
-                    <Button className="buttonColor backgroundBlue" style={{width:'100px'}} shape="round" size="middle">แก้ไข</Button>
+                    <Button className="buttonColor backgroundBlue" style={{width:"100px"}} shape="round" size="middle">แก้ไข</Button>
                     </div>
                 </div>
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faBook} className={style.iconmarker} />
                     <span>อังกฤษ</span>
                     <div className={style.floatLeft}>
-                    <Button className="buttonColor backgroundBlue" style={{width:'100px'}} shape="round" size="middle">แก้ไข</Button>
+                    <Button className="buttonColor backgroundBlue" style={{width:"100px"}} shape="round" size="middle">แก้ไข</Button>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@ export default function ProfileDetail() {
                     <FontAwesomeIcon icon={faBookReader} className={style.iconcoin} />
                     <span>{profileDetail&&profileDetail.contact.facebook}</span>
                     <div className={style.floatLeft}>
-                    <Button className="buttonColor backgroundBlue" style={{width:'100px'}} shape="round" size="middle">แก้ไข</Button>
+                    <Button className="buttonColor backgroundBlue" style={{width:"100px"}} shape="round" size="middle">แก้ไข</Button>
                     </div>
                 </div>
             </div>

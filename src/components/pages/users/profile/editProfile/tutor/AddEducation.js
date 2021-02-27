@@ -1,16 +1,16 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react'
-import style from '../../styles.module.scss'
+import React, { Fragment, useCallback, useEffect, useState } from "react"
+import style from "../../styles.module.scss"
 import { Controller, useForm } from "react-hook-form";
-import { Button, Col, Row, Select, Typography, Grid } from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Button, Col, Row, Select, Typography, Grid } from "antd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faCloudUploadAlt
-} from '@fortawesome/free-solid-svg-icons';
-import { profileTestSchema, profileEducationSchema } from '../../../../../../validation/validation';
-import { yupResolver } from '@hookform/resolvers/yup';
-import Header from '../../../../../headerMobile/Header';
-import { useDispatch, useSelector } from 'react-redux';
-import { addHistory, getProfile } from '../../../../../../redux/actions/profileActions';
+} from "@fortawesome/free-solid-svg-icons";
+import { profileTestSchema, profileEducationSchema } from "../../../../../../validation/validation";
+import { yupResolver } from "@hookform/resolvers/yup";
+import Header from "../../../../../headerMobile/Header";
+import { useDispatch } from "react-redux";
+import { addHistory, getProfile } from "../../../../../../redux/actions/profileActions";
 const { useBreakpoint } = Grid;
 
 const { Title } = Typography;
@@ -20,7 +20,6 @@ export default function AddEducation() {
     const [imageName, setimageName] = useState(null);
     const dispatch = useDispatch()
     const screens = useBreakpoint();
-    const profile = useSelector(state => state.profile)
 
     const fetchProfile = useCallback(()=>{
         dispatch(getProfile())
@@ -38,7 +37,7 @@ export default function AddEducation() {
     const onChangeType = (value) => {
         setType(value)
         setimageName(null)
-        document.getElementById('myform').reset()
+        document.getElementById("myform").reset()
     }
 
     const onHandleChangeImage = (value) => {
@@ -51,7 +50,7 @@ export default function AddEducation() {
             name: data.type||data.grade,
             brance: data.subject||data.brance,
             grade: data.year||data.gradeScore,
-            status: '0'
+            status: "0"
         }
         dispatch(addHistory(education))
     };
@@ -158,7 +157,7 @@ export default function AddEducation() {
                             <div>
                                 <div className="imageUpload ">
                                     <label htmlFor="file-input">
-                                        <FontAwesomeIcon icon={faCloudUploadAlt} className={style.icon} style={{ fontSize: '30pt', marginTop: '5px' }} />
+                                        <FontAwesomeIcon icon={faCloudUploadAlt} className={style.icon} style={{ fontSize: "30pt", marginTop: "5px" }} />
                                     </label>
                                     <input id="file-input" type="file" name="image" onChange={onHandleChangeImage} ref={register} />
                                     <span>{imageName}</span>
@@ -166,8 +165,8 @@ export default function AddEducation() {
                             </div>
                             {errors.image && <p className="error-input">{errors.image.message}</p>}
                         </Col>
-                        <Col xl={type === "test" ? 24 : 10} md={type === "test" ? 24 : 20} sm={20} xs={24} className={style.marginTop + ' ' + style.alignCenter}>
-                            <Button className="buttonColor backgroundMain" size="large" shape="round" style={{ width: '120px', marginTop: '40px' }} htmlType="submit">บันทึก</Button>
+                        <Col xl={type === "test" ? 24 : 10} md={type === "test" ? 24 : 20} sm={20} xs={24} className={style.marginTop + " " + style.alignCenter}>
+                            <Button className="buttonColor backgroundMain" size="large" shape="round" style={{ width: "120px", marginTop: "40px" }} htmlType="submit">บันทึก</Button>
                         </Col>
                     </Row>
                 </form>

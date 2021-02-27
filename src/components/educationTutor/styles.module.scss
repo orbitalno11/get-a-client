@@ -5,22 +5,22 @@
 
 .educationRow{
     @extend .alignPage;
-    padding-top: 20px;
+    padding-top: 1.25rem;
     flex-flow: row;
 }
 
 .smallSizeIcon {
     font-size: 20pt;
-    margin-right: 20px;
+    margin-right: 1.25rem;
 }
 
 .largeSizeIcon{
     @extend .smallSizeIcon;
-    margin-left: 30px;
+    margin-left: 2rem;
     font-size: 30pt;
 }
 
 .floatLeft{
     margin-left: auto;
-    margin-right: 10px;
+    margin-right: 0.6rem;
 }

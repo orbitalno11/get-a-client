@@ -3,7 +3,7 @@ $white : #FFFFFF;
 
 .header{
     position: fixed;
-    height: 83px;
+    height: 5rem;
     width: 100%;
     background-color:$main;
     border-bottom-left-radius: 40% 30%;
@@ -15,25 +15,25 @@ $white : #FFFFFF;
 }
 
 .leftHeader {
-    padding-left: 32px;
+    padding-left: 2rem;
     display: flex;
     align-items: center;
 }
 
 .rightHeader{
     margin-left: auto;
-    padding-right: 32px;
+    padding-right: 2rem;
 }
 
 .h1 {
-    font-size: 30px ;
+    font-size: 20pt ;
     font-weight: 500;
-    padding-left: 10px;
+    padding-left: 0.6rem;
     color:$white 
 }
 
 .icon{
-    font-size: 35px ;
+    font-size: 35pt ;
     color:$white 
 }
   

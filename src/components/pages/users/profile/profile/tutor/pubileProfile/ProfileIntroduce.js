@@ -1,14 +1,14 @@
-import { Image, Row, Col, Typography, Grid, Button } from 'antd'
-import React, { Fragment, useEffect, useState } from 'react'
-import sampleperson from '../../../../../../images/sampleperson.png'
-import style from '../../../styles.module.scss'
+import { Image, Row, Col, Typography, Grid, Button } from "antd"
+import React, { Fragment, useEffect, useState } from "react"
+import profileSample from "../../../../../../images/profile.webp"
+import style from "../../../styles.module.scss"
 import {
     faInfo,
     faHeart
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const { useBreakpoint } = Grid;
 const { Title } = Typography;
@@ -28,11 +28,11 @@ export default function ProfileIntroduce({ mainPage }) {
                 <Col lg={4} md={6} sm={24} xs={24} className={screens.xs || (screens.sm && !screens.md) ? style.alignCenter : null} >
                     <Image
                         className={style.imageProfilePubile}
-                        src={sampleperson}
+                        src={profileSample}
                         preview={false}
                     ></Image>
                     {
-                        screens.xs || (screens.sm && !screens.md) &&
+                        ((screens.sm && !screens.md)|| screens.xs )  &&
                         (
                             <div className={style.infogroup}>
                                 {
@@ -43,7 +43,7 @@ export default function ProfileIntroduce({ mainPage }) {
                                         </NavLink>
                                     )
                                 }
-                                <Button className={style.colorGray} shape="circle" icon={<FontAwesomeIcon icon={faHeart} style={{ fontSize: '19pt' }} />} />
+                                <Button className={style.colorGray} shape="circle" icon={<FontAwesomeIcon icon={faHeart} style={{ fontSize: "19pt" }} />} />
                             </div>
                         )
                     }

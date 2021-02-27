@@ -1,9 +1,9 @@
-import { Col, Row, Typography, Grid } from 'antd';
-import React, { useEffect, useState } from 'react'
-import TabHorizontal from '../../../../../tab/TabHorizontal'
-import CardCorseLearner from '../../../../../card/CardCorseLearner'
-import style from '../../styles.module.scss'
-import { useSelector } from 'react-redux';
+import { Col, Row, Typography, Grid } from "antd";
+import React, { useEffect, useState } from "react"
+import TabHorizontal from "../../../../../tab/TabHorizontal"
+import CardCorseLearner from "../../../../../card/CardCorseLearner"
+import style from "../../styles.module.scss"
+import { useSelector } from "react-redux";
 
 const { useBreakpoint } = Grid;
 const { Title } = Typography;

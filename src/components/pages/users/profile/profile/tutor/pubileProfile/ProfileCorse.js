@@ -1,9 +1,9 @@
-import { Col, Row, Grid } from 'antd'
-import Title from 'antd/lib/typography/Title'
-import React, { Fragment, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import CardCorseTutor from '../../../../../../card/CardCorseTutor'
-import style from '../../../styles.module.scss'
+import { Col, Row, Grid } from "antd"
+import Title from "antd/lib/typography/Title"
+import React, { Fragment, useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import CardCorseTutor from "../../../../../../card/CardCorseTutor"
+import style from "../../../styles.module.scss"
 const { useBreakpoint } = Grid;
 
 export default function ProfileCorse() {

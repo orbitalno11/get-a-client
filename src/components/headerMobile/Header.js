@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react"
 import {
     faChevronLeft,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import style from './styles.module.scss'
-import { NavLink, useHistory } from 'react-router-dom';
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import style from "./styles.module.scss"
+import { NavLink, useHistory } from "react-router-dom";
 
 export default function Header({ title, pageBack }) {
     const history = useHistory();
@@ -15,7 +15,7 @@ export default function Header({ title, pageBack }) {
                 {
                     pageBack &&
                     (
-                        pageBack === 'goback' ?
+                        pageBack === "goback" ?
                             (
                                 <FontAwesomeIcon onClick={() => history.goBack()} className={style.icon} icon={faChevronLeft} />
                             ) :

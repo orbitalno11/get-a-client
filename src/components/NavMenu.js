@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react'
-import { Menu, Grid, Button, Row, Col } from 'antd';
-import { NavLink } from 'react-router-dom';
+import React, { Fragment } from "react"
+import { Menu, Grid, Button, Row, Col } from "antd";
+import { NavLink } from "react-router-dom";
 import {
     faHome,
     faChalkboardTeacher,
@@ -10,11 +10,11 @@ import {
     faTachometerAlt,
     faGraduationCap,
     faBell
-} from '@fortawesome/free-solid-svg-icons';
+} from "@fortawesome/free-solid-svg-icons";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const { useBreakpoint } = Grid;
-const statusTutor = false
+const statusTutor = true
 const auth = true
 
 const UserMenu = () => {
@@ -61,7 +61,7 @@ const TutorMenu = () => {
     return (
         <Menu className="menuBar" mode="horizontal" defaultSelectedKeys={["/"]} >
             <Menu.Item key="/" >
-                <NavLink to="/">
+                <NavLink to="/tutor">
                     หน้าแรก
                 </NavLink>
             </Menu.Item>
@@ -137,7 +137,7 @@ const ToturMenuMobile = () => {
     return (
         <Row justify="space-around">
             <Col span={6.5} className="iconMenu">
-                <NavLink to="/">
+                <NavLink to="/tutor">
                     <FontAwesomeIcon icon={faTachometerAlt} className="icon" />
                 </NavLink>
             </Col>

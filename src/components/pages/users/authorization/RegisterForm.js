@@ -1,15 +1,15 @@
-import { Badge, Image, Row, Col, Grid, Select, Button, DatePicker } from 'antd'
-import React, { useState } from 'react'
+import { Badge, Image, Row, Col, Grid, Select, Button, DatePicker } from "antd"
+import React, { useState } from "react"
 import { Controller, useForm } from "react-hook-form";
 import {
     faEdit
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useParams } from 'react-router-dom';
-import { learnnerRegisSchema, tutorRegisSchema } from '../../../../validation/validation'
-import { yupResolver } from '@hookform/resolvers/yup';
-import moment from 'moment';
-import style from './styles.module.scss'
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useParams } from "react-router-dom";
+import { learnnerRegisSchema, tutorRegisSchema } from "../../../../validation/validation"
+import { yupResolver } from "@hookform/resolvers/yup";
+import moment from "moment";
+import style from "./styles.module.scss"
 
 export default function RegisterForm() {
     const [image, setimage] = useState("https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png")
@@ -19,11 +19,11 @@ export default function RegisterForm() {
     const type = params.id
 
     const inputForm = {
-        width: ((screens.sm && !screens.lg) || (!screens.sm && screens.xs)) ? '70%' : '35%',
+        width: ((screens.sm && !screens.lg) || (!screens.sm && screens.xs)) ? "70%" : "35%",
     }
 
     const { register, handleSubmit, errors, control } = useForm({
-        resolver: yupResolver(type === '0' ? tutorRegisSchema : learnnerRegisSchema),
+        resolver: yupResolver(type === "0" ? tutorRegisSchema : learnnerRegisSchema),
     });
 
     const onChange =  data => {
@@ -36,9 +36,10 @@ export default function RegisterForm() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
+            <div className={style.buttom}>
             <div className={style.alignCenterPage} >
                 <div className={style.marginbottom20}>
-                <span className="h2">ลงทะเบียน{type === '0' ? "ครูสอนพิเศษ" : "นักเรียน"}</span>
+                <span className="h2">ลงทะเบียน{type === "0" ? "ครูสอนพิเศษ" : "นักเรียน"}</span>
                 </div>
                 <div className="imageUpload" >
                     <label htmlFor="file-input" >
@@ -102,20 +103,20 @@ export default function RegisterForm() {
                         }
                     </Col>
                     <Col className={style.margintop10} xs={24} sm={24} md={24} >
-                        <p>{type === '0' ? "วิชาที่สอน" : "ระดับชั้น"}</p>
+                        <p>{type === "0" ? "วิชาที่สอน" : "ระดับชั้น"}</p>
                         <Controller
                             as={
-                                <Select name={type === '0' ? "subject" : "grade"} optionLabelProp="label" mode={type === '0' ? "multiple" : false}  >
+                                <Select name={type === "0" ? "subject" : "grade"} optionLabelProp="label" mode={type === "0" ? "multiple" : false}  >
                                     <Select.Option value="20" label="20">20</Select.Option>
                                     <Select.Option value="30" label="30">30</Select.Option>
                                 </Select>
                             }
-                            name={type === '0' ? "subject" : "grade"}
+                            name={type === "0" ? "subject" : "grade"}
                             control={control}
-                            defaultValue={type === '0' ? ["20"] : ""}
+                            defaultValue={type === "0" ? ["20"] : ""}
                         />
                         {
-                            type === '0' ?
+                            type === "0" ?
                                 errors.subject && <p className="error-input">{errors.subject.message}</p>
                                 :
                                 errors.grade && <p className="error-input">{errors.grade.message}</p>
@@ -146,6 +147,7 @@ export default function RegisterForm() {
                 <div className={style.margintop20}>
                     <Button className="buttonColor backgroundMain" shape="round" size="large" htmlType="submit">ลงทะเบียน</Button>
                 </div>
+            </div>
             </div>
         </form>
     )

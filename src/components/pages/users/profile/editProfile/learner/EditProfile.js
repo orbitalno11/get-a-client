@@ -1,12 +1,12 @@
-import { Col, Divider, Row, Grid, Button } from 'antd'
-import React, { Fragment } from 'react'
-import { profileSchema } from '../../../../../../validation/validation';
-import style from '../../styles.module.scss'
-import EditProfileDetail from './EditProfileDetail'
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import EditProfileMap from './EditProfileMap';
-import Header from '../../../../../headerMobile/Header';
+import { Col, Divider, Row, Grid, Button } from "antd"
+import React, { Fragment } from "react"
+import { profileSchema } from "../../../../../../validation/validation";
+import style from "../../styles.module.scss"
+import EditProfileDetail from "./EditProfileDetail"
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import EditProfileMap from "./EditProfileMap";
+import Header from "../../../../../headerMobile/Header";
 
 const { useBreakpoint } = Grid;
 
@@ -36,7 +36,7 @@ export default function EditProfile() {
                             (
                                 <Fragment>
                                     <Col sm={1} lg={1} xl={2} className={style.alignCenter}>
-                                        <Divider type="vertical" style={{ height: '100%' }} />
+                                        <Divider type="vertical" style={{ height: "100%" }} />
                                     </Col>
                                     <Col lg={11} md={11} sm={24}>
                                         <EditProfileMap refs={register} />

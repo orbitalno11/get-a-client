@@ -1,16 +1,17 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react'
-import { Typography, Grid } from 'antd'
+import React, { Fragment, useCallback, useEffect, useState } from "react"
+import { Typography, Grid } from "antd"
 import {
     faMapMarkerAlt,
     faUser
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import style from '../../../styles.module.scss'
-import EducationTutor from '../../../../../../educationTutor/EducationTutor';
-import ProfileIntroduce from './ProfileIntroduce';
-import Header from '../../../../../../headerMobile/Header';
-import { useDispatch, useSelector } from 'react-redux';
-import { getHandleProfile } from '../../../../../../../redux/actions/profileActions';
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import style from "../../../styles.module.scss"
+import EducationTutor from "../../../../../../educationTutor/EducationTutor";
+import ProfileIntroduce from "./ProfileIntroduce";
+import Header from "../../../../../../headerMobile/Header";
+import { useDispatch, useSelector } from "react-redux";
+import { getHandleProfile } from "../../../../../../../redux/actions/profileActions";
+
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
@@ -37,7 +38,7 @@ export default function ProfileDetail({ mainPage }) {
             {!mainPage && (screens.xs || (screens.sm && !screens.md)) && <Header pageBack="goback" />}
             <div className={screens.xs || (screens.sm && !screens.md) ? style.paddingbody : !mainPage ? style.bodyEdit : null}>
                 {
-                    mainPage &&
+                    !mainPage &&
                     (
                         <div className={screens.xs || (screens.sm && !screens.md) ? style.paddingTopBody : style.banner}  >
                             <ProfileIntroduce />
@@ -47,15 +48,16 @@ export default function ProfileDetail({ mainPage }) {
                 <div className={mainPage && (screens.xs || (screens.sm && !screens.md)) ? style.marginTop20 : style.contrainnerProfilePubile}>
                     <div className={style.TitleCoin}>
                         <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
-                        <span>{profile ? profile.place : null}</span>
+                        <span>{profile && profile.place}</span>
                     </div>
                     <div className={style.TitleCoin}>
                         <FontAwesomeIcon icon={faUser} className={style.iconmarker} />
-                        <span>{profile ? profile.coin : null} คน.</span>
+                        <span>{profile && profile.coin } คน.</span>
                     </div>
                 </div>
                 {
-                    (mainPage && !(screens.xs || (screens.sm && !screens.md))) || !mainPage &&
+                    ((mainPage && !(screens.xs || (screens.sm && !screens.md))) ||  !mainPage )&&
+                    
                         (
                             <div className={style.marginTop}>
                                 <div className={style.contrainnerProfilePubile} >

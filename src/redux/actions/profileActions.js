@@ -4,7 +4,7 @@ import {
     , GET_EDUCATION
     , ADD_EDUCATION
     , DELETE_EDUCATION
-} from './types'
+} from "./types"
 
 const data =
 {
@@ -41,18 +41,18 @@ const data =
     },
     history : [
         {
-            type: 'education',
-            name: 'โรงชื่อยาว',
-            brance: ' วิทยาศาสตร์ - คณิตศาสตร์',
-            grade: '4.00',
-            status: '2'
+            type: "education",
+            name: "โรงชื่อยาว",
+            brance: " วิทยาศาสตร์ - คณิตศาสตร์",
+            grade: "4.00",
+            status: "2"
         },
         {
-            type: 'test',
-            name: 'ผลสอบ O-NET',
-            brance: 'คณิตศาสตร์',
-            grade: '150',
-            status: '0'
+            type: "test",
+            name: "ผลสอบ O-NET",
+            brance: "คณิตศาสตร์",
+            grade: "150",
+            status: "0"
         },
 
     ]

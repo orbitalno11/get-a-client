@@ -1,12 +1,12 @@
-import {  Row, Col, Grid } from 'antd'
-import React, { Fragment, useCallback, useEffect } from 'react'
-import { useDispatch } from 'react-redux';
-import { getHandleProfile } from '../../../../../../../redux/actions/profileActions';
-import Header from '../../../../../../headerMobile/Header';
-import style from '../../../styles.module.scss'
-import ProfileCorse from './ProfileCorse';
-import ProfileDetail from './ProfileDetail';
-import ProfileIntroduce from './ProfileIntroduce';
+import {  Row, Col, Grid } from "antd"
+import React, { Fragment, useCallback, useEffect } from "react"
+import { useDispatch } from "react-redux";
+import { getHandleProfile } from "../../../../../../../redux/actions/profileActions";
+import Header from "../../../../../../headerMobile/Header";
+import style from "../../../styles.module.scss"
+import ProfileCorse from "./ProfileCorse";
+import ProfileDetail from "./ProfileDetail";
+import ProfileIntroduce from "./ProfileIntroduce";
 const { useBreakpoint } = Grid;
 
 export default function PubilcProfile() {
@@ -23,7 +23,7 @@ export default function PubilcProfile() {
 
     return (
         <Fragment>
-            {screens.xs || (screens.sm && !screens.md) ? <Header pageBack="goback" /> : null}
+            {(screens.xs || (screens.sm && !screens.md) )&& <Header pageBack="goback" /> }
             <div className={screens.xs || (screens.sm && !screens.md) ? style.bodymobileprofile : style.bodyEdit}>
                 <div className={screens.xs || (screens.sm && !screens.md) ?style.paddingTopBody : style.banner}  >
                     <ProfileIntroduce  mainPage={true}/>

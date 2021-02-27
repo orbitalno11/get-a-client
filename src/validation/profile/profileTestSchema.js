@@ -1,12 +1,12 @@
 import * as yup from "yup";
-
-const FILE_SIZE = 160 * 1024;
-const SUPPORTED_FORMATS = [
-  "image/jpg",
-  "image/jpeg",
-  "image/gif",
-  "image/png"
-];
+// Note : Maybe use
+// const FILE_SIZE = 160 * 1024;
+// const SUPPORTED_FORMATS = [
+//   "image/jpg",
+//   "image/jpeg",
+//   "image/gif",
+//   "image/png"
+// ];
 export const profileTestSchema = yup.object().shape({
     image: yup
     .mixed()

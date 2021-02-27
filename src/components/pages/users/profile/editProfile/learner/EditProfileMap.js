@@ -1,11 +1,11 @@
-import { Button, Grid, Typography } from 'antd';
-import React, { Fragment } from 'react'
-import style from '../../styles.module.scss'
+import { Button, Grid, Typography } from "antd";
+import React, { Fragment } from "react"
+import style from "../../styles.module.scss"
 import {
     faCrosshairs
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Header from '../../../../../headerMobile/Header';
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Header from "../../../../../headerMobile/Header";
 const { useBreakpoint } = Grid;
 const { Title } = Typography;
 

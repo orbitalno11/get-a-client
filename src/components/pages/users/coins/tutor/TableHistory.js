@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
-import { Grid, Table} from "antd";
+import { Table} from "antd";
 import style from "./styles.module.scss";
-const { useBreakpoint } = Grid;
+
 const { Column } = Table;
 
 const data = [
@@ -26,7 +26,7 @@ const data = [
 ];
 
 export default function TableHistory() {
-  const screens = useBreakpoint();
+  
   return (
     <Fragment>
       <div className={style.coinbody}>

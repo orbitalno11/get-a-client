@@ -1,10 +1,4 @@
-import {
-    GET_PROFILE , 
-    GET_EDUCATION ,
-    ADD_EDUCATION , 
-    DELETE_EDUCATION ,
-    GET_HANDLE_PROFILE
-} from "../actions/types"
+import { profileConstants } from "../constants"
 
 const initialState = {
     profile :  null,
@@ -13,33 +7,33 @@ const initialState = {
     loading : false
 }
 
-export default (state = initialState , action)=>{
+const profileReducer = (state = initialState , action)=>{
     switch(action.type){
-        case GET_PROFILE:
+        case profileConstants.GET_PROFILE:
             return {
                 ...state ,
                 profile : action.payload ,
                 loading : false
             }
-        case GET_HANDLE_PROFILE :
+        case profileConstants.GET_HANDLE_PROFILE :
             return {
                 ...state ,
                 profileHandle : action.payload ,
                 loading : false
             }
-        case GET_EDUCATION: 
+        case profileConstants.GET_EDUCATION: 
             return {
                 ...state ,
                 education :  action.payload ,
                 loading : false
             }
-        case ADD_EDUCATION : 
+        case profileConstants.ADD_EDUCATION : 
             return {
                 ...state , 
                 education : [...state.education,action.payload],
                 loading : false
             }
-        case DELETE_EDUCATION :
+        case profileConstants.DELETE_EDUCATION :
             return {
                 ...state , 
                 education : [
@@ -54,3 +48,4 @@ export default (state = initialState , action)=>{
     }
 } 
 
+export default profileReducer;

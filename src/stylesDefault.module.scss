@@ -1,0 +1,92 @@
+$orange:#F26419;
+$blue: #33658A;
+$yellow: #F6AE2D;
+$white: #FFFFFF;
+$gray : #C4C4C4;
+$side : #303A53;
+$red : #840c0c;
+$green : #00B900;
+$black : #000000;
+
+
+
+// for register page 
+.titleH1{
+    font-size: 3.5rem;
+    font-weight: 600;
+}
+
+.titleH2{
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+  
+.titleH3{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.titleH4{
+    font-size: 1.35rem;
+    font-weight: 600;
+}
+
+.titleH5{
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.textSmall{
+    font-size: 1rem;
+}
+    
+.textNormal{
+    font-size: 1.25rem;
+}
+
+.iconLargeRegister{
+    font-size: 3.125rem;
+}
+
+.iconLarge{
+    font-size: 1.8rem;
+}
+
+.iconNormal{
+    font-size: 1.25rem;
+}
+
+.iconsmall{
+    font-size: 1rem;
+}
+
+.paddingbody{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.paddingTopBody{
+    padding-top: 7rem;
+}
+
+.paddingBottomBody {
+    padding-bottom: 3.75rem;
+}
+
+.body {
+    @extend .paddingbody;
+    @extend .paddingTopBody;
+    @extend .paddingBottomBody;
+}
+
+.bodymobileprofile{
+    @extend .paddingbody;
+    @extend .paddingBottomBody;
+}
+
+
+.borderOrange{
+    border: 0.2rem solid $orange;
+    border-radius: 6%;
+    padding: 1.25rem;
+}

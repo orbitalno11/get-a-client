@@ -7,13 +7,19 @@ import {
     faCoins,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useHistory } from "react-router";
 const { Title } = Typography;
 
 
 export default function CardCorseTutor() {
+    const history = useHistory();
+
+    const redirectToCoursePage = () =>{
+        history.push("/course/1")
+    }
 
     return (
-        <Card className={styles.cardRound} >
+        <Card className={styles.cardRound} onClick={()=>{redirectToCoursePage()}}>
             <Card.Grid hoverable={false} className={styles.gridhalf}>
                 <Title level={3}>คณิตศาสตร์</Title>
             </Card.Grid>

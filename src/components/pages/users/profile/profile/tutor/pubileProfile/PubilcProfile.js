@@ -1,7 +1,7 @@
 import {  Row, Col, Grid } from "antd"
 import React, { Fragment, useCallback, useEffect } from "react"
 import { useDispatch } from "react-redux";
-import { getHandleProfile } from "../../../../../../../redux/actions/profileActions";
+import { getHandleProfile } from "../../../../../../../redux/actions/profile.actions";
 import Header from "../../../../../../headerMobile/Header";
 import style from "../../../styles.module.scss"
 import ProfileCorse from "./ProfileCorse";

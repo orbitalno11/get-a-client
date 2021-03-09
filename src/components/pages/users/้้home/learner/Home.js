@@ -11,7 +11,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Button, Grid } from "antd"
 import React, { Fragment } from "react"
-import { chunksArray, SliderComponent } from "../../../../Slider/SliderComponent"
+import { chunksArray, SliderComponent } from "../../../../slider/SliderComponent"
 import style from "../styles.module.scss"
 import CourseComponet from "./CourseComponet"
 import Header from "../../../../headerMobile/Header"

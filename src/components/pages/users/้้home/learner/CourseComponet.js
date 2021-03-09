@@ -1,7 +1,7 @@
 import { Grid, Typography } from "antd";
 import React from "react"
 import CardCorseLearner from "../../../../card/CardCorseLearner";
-import { chunksArray, SliderComponent } from "../../../../Slider/SliderComponent";
+import { chunksArray, SliderComponent } from "../../../../slider/SliderComponent";
 import style from "../styles.module.scss"
 const { useBreakpoint } = Grid;
 const { Title } = Typography;

@@ -5,6 +5,7 @@ import EditProfileDetail from "../pages/users/profile/editProfile/tutor/EditProf
 import AddEducation from "../pages/users/profile/editProfile/tutor/AddEducation"
 import Home from "../pages/users/home/tutor/Home"
 
+
 export default function UserLayout() {
     return (
         <div>
@@ -17,3 +18,4 @@ export default function UserLayout() {
         </div>
     )
 }
+

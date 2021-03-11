@@ -11,9 +11,9 @@ export default function Payment() {
 
   return (
     <Fragment>
-      {screens.xs || (screens.sm && !screens.md) ? (
+      {(screens.xs || (screens.sm && !screens.md)) && (
         <Header pageBack="/coin" />
-      ) : null}
+      )}
       {screens.xs || (screens.sm && !screens.md) ? (
         <Row className={style.body}>
           <Col xs={24} sm={24} md={11} lg={9} xl={8}>

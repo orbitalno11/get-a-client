@@ -3,7 +3,7 @@ import { Grid, Row, Col, Typography, Button,Divider } from "antd";
 import { faCoins, faCheck,faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TableList from "./TableList";
-import style from "./styles.module.scss";
+import style from "../styles.module.scss";
 
 const { useBreakpoint } = Grid;
 const { Title } = Typography;

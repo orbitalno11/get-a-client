@@ -24,19 +24,19 @@ export default function CoinDetail() {
       <div>
         {screens.md && (
           <Col lg={24} xl={24} md={24}>
-            <Title level={1}>ร้านค้า</Title>
+            <Title level={2}>ร้านค้า</Title>
           </Col>
         )}
       </div>
       <div className={style.coinshop}>
         <div style={{ fontSize: "40px" }}>
-          <FontAwesomeIcon icon={faCoins} className={style.iconBig} />
+          <FontAwesomeIcon icon={faCoins} className={style.Big} />
           <span>{profileDetail && profileDetail.coin}</span>
         </div>
         <div className={style.coinlist}>
           <Row>
             <Col xs={7} sm={8} md={6} lg={8} xl={8}>
-              <FontAwesomeIcon icon={faCoins} className={style.iconcoin} />
+              <FontAwesomeIcon icon={faCoins} className={style.coins} />
             </Col>
             <Col xs={8} sm={9} md={9} lg={10} xl={10}>
               196 เหรียญ
@@ -57,7 +57,7 @@ export default function CoinDetail() {
           </Row>
           <Row>
             <Col xs={7} sm={8} md={6} lg={8} xl={8}>
-              <FontAwesomeIcon icon={faCoins} className={style.iconcoin} />
+              <FontAwesomeIcon icon={faCoins} className={style.coins} />
             </Col>
             <Col xs={8} sm={9} md={9} lg={10} xl={10}>
               340 เหรียญ
@@ -78,7 +78,7 @@ export default function CoinDetail() {
           </Row>
           <Row>
             <Col xs={7} sm={8} md={6} lg={8} xl={8}>
-              <FontAwesomeIcon icon={faCoins} className={style.iconcoin} />
+              <FontAwesomeIcon icon={faCoins} className={style.coins} />
             </Col>
             <Col xs={8} sm={9} md={9} lg={10} xl={10}>
               426 เหรียญ
@@ -99,7 +99,7 @@ export default function CoinDetail() {
           </Row>
           <Row>
             <Col xs={7} sm={8} md={6} lg={8} xl={8}>
-              <FontAwesomeIcon icon={faCoins} className={style.iconcoin} />
+              <FontAwesomeIcon icon={faCoins} className={style.coins} />
             </Col>
             <Col xs={8} sm={9} md={9} lg={10} xl={10}>
               727 เหรียญ

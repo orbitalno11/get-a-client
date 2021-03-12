@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Table} from "antd";
-import style from "./styles.module.scss";
+import style from "../styles.module.scss";
 
 const { Column } = Table;
 

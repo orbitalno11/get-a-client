@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Row, Grid, Tabs } from "antd";
-import style from "./styles.module.scss";
+import style from "../styles.module.scss";
 import RedeemDetail from "./RedeemDetail";
 import RedeemList from "./RedeemList";
 import TableHistory from "./TableHistory";
@@ -13,7 +13,7 @@ export default function Redeem() {
   return (
     <Fragment>
       {screens.xs || (screens.sm && !screens.md) ? (
-        <Header title="จัดการเหรียญ" pageBack="/tutor/profile" />
+        <Header title="จัดการเหรียญ" pageBack="/tutor/1" />
       ) : null}
       <Tabs defaultActiveKey="1" centered className={style.pageredeem}>
         <TabPane tab="แลกเหรียญ" key="1">

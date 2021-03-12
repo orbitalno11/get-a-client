@@ -3,7 +3,7 @@ import { Grid, Row, Col, Typography, Button } from "antd";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TableHistory from "./TableHistory";
-import style from "./styles.module.scss";
+import style from "../styles.module.scss";
 
 
 const { useBreakpoint } = Grid;

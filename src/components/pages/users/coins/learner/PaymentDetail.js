@@ -27,13 +27,13 @@ export default function PaymentDetail() {
       <div>
         {screens.md && (
           <Col lg={24} xl={24} md={24}>
-            <Title level={1}>ร้านค้า</Title>
+            <Title className={style.titleH3}>ร้านค้า</Title>
           </Col>
         )}
       </div>
       <div className={style.paymentPage}>
         <div style={{ fontSize: "30px" }}>
-          <FontAwesomeIcon icon={faCoins} className={style.iconBig} />
+          <FontAwesomeIcon icon={faCoins} className={style.Big} />
           <span>169 เหรียญ</span>
         </div>
         <div className={style.subcoin}>

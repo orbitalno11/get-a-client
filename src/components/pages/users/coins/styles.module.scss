@@ -1,19 +1,8 @@
-$yellow: #f6ae2d;
-$black: #000000;
-$green: #00b900;
-$red: #ab330f;
-$blue: #33658a;
-$gray: #c4c4c4;
-$main: #f26419;
+@import "../../../../stylesDefault.module.scss";
 
 .paddingbody {
   padding-left: 5%;
   padding-right: 5%;
-}
-
-.alignPage {
-  display: flex;
-  align-items: center;
 }
 
 .paddingTopBody {
@@ -26,17 +15,13 @@ $main: #f26419;
   padding-bottom: 60px;
 }
 
-.icon {
-  font-size: 20pt;
-  margin-right: 20px;
-}
-
-.iconcoin {
-  @extend .icon;
+.coins {
+  @extend .iconLarge;
+  margin-right: 1.25rem;
   color: $yellow;
 }
 
-.iconBig {
+.Big {
   font-size: 2.5rem;
   margin-right: 1.5rem;
   color: $yellow;
@@ -99,3 +84,75 @@ $main: #f26419;
   font-size: 30pt !important;
 }
 
+.alignCenter {
+  display: flex;
+  justify-content: center;
+}
+
+.alignCenterBtn {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.subProfile {
+  margin-top: 1.56rem;
+}
+
+.pageredeem {
+  @extend .paddingTopBody;
+  padding-bottom: 3.75rem;
+}
+
+.pageredeemsm {
+  padding-left: 18%;
+  padding-right: 18%;
+}
+
+.subredeem {
+  font-size: 1.4rem;
+  padding-left: 1rem;
+  padding-top: 0.8rem;
+}
+
+.subredeem2 {
+  font-size: 1.5rem;
+  padding-left: 1rem;
+  padding-top: 0.8rem;
+}
+
+.iconredeem {
+  font-size: 1.8rem;
+  margin-right: 1.5rem;
+  color: $yellow;
+}
+
+.iconSmall {
+  font-size: 1rem;
+  margin-right: 1.5rem;
+  color: $yellow;
+}
+
+.iconSmall2 {
+  font-size: 1.3rem;
+  margin-right: 1.5rem;
+  color: $yellow;
+}
+
+.flexredeem {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.columredeem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.8rem;
+}
+
+.allow{
+  margin-top: -5rem;
+  margin-left: 18rem;
+}

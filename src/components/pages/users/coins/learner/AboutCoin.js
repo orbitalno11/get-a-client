@@ -10,8 +10,8 @@ export default function CoinDetail() {
   return (
     <Fragment>
       <div className={screens.md ? null : style.subProfile}>
-        <Title level={screens.md ? 3 : 5}>รายละเอียดเกี่ยวกับเหรียญ</Title>
-        <Row>
+        <Title className={style.titleH5}>รายละเอียดเกี่ยวกับเหรียญ</Title>
+        <Row style={{marginTop:"2rem"}}>
           มาราธอนมวลชนแจ๊กเก็ตพรีเมียมตนเอง บอยคอตเบิร์ดแฮปปี้ สติกเกอร์
           รีพอร์ทโมจินาฏยศาลาวาทกรรมแพ็ค แกรนด์มาร์ตอพาร์ตเมนท์เทรลเลอร์ทาวน์
           เมจิกอึ้มฟลุก กุนซือแมมโบ้โมเต็ลโอวัลติน แจมมอนสเตอร์ผู้นำโลชั่น

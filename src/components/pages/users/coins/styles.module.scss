@@ -121,19 +121,19 @@
   padding-top: 0.8rem;
 }
 
-.iconredeem {
-  font-size: 1.8rem;
+.redeem {
+  @extend .iconLarge;
   margin-right: 1.5rem;
   color: $yellow;
 }
 
-.iconSmall {
-  font-size: 1rem;
+.Small {
+  @extend .iconsmall;
   margin-right: 1.5rem;
   color: $yellow;
 }
 
-.iconSmall2 {
+.Xs {
   font-size: 1.3rem;
   margin-right: 1.5rem;
   color: $yellow;

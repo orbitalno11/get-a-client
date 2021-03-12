@@ -33,7 +33,7 @@ export default function PaymentDetail() {
       <div>
         {screens.md && (
           <Col lg={24} xl={24} md={24}>
-            <Title level={2}>ประวัติการซื้อเหรียญ</Title>
+            <span className={style.titleH2}>ประวัติการซื้อเหรียญ</span>
           </Col>
         )}
       </div>

@@ -1,10 +1,9 @@
 import React, { Fragment } from "react";
-import { Typography, Grid, Col, Button, Radio, Row,Divider,Image } from "antd";
+import { Grid, Col, Button, Radio, Row,Divider,Image } from "antd";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../styles.module.scss";
 import Linepay from "../../../../images/Linepay2.webp"
-const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
 export default function PaymentDetail() {
@@ -27,7 +26,7 @@ export default function PaymentDetail() {
       <div>
         {screens.md && (
           <Col lg={24} xl={24} md={24}>
-            <Title className={style.titleH3}>ร้านค้า</Title>
+            <span className={style.titleH2}>ร้านค้า</span>
           </Col>
         )}
       </div>
@@ -48,7 +47,7 @@ export default function PaymentDetail() {
         </div>
         <Divider type="horizontal" style={{ height: "100%" }} />
         <div>
-          <Title level={4}>ชำระผ่าน</Title>
+          <span className={style.titleH5}>ชำระผ่าน</span>
           <div>            
               <Radio style={radioStyle} value={1} onChange={onChange}>
                 <Image src={Linepay} preview={false} />

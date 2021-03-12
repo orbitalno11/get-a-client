@@ -12,9 +12,9 @@ export default function Redeem() {
   const screens = useBreakpoint();
   return (
     <Fragment>
-      {screens.xs || (screens.sm && !screens.md) ? (
+      {(screens.xs || (screens.sm && !screens.md)) && (
         <Header title="จัดการเหรียญ" pageBack="/tutor/1" />
-      ) : null}
+      )}
       <Tabs defaultActiveKey="1" centered className={style.pageredeem}>
         <TabPane tab="แลกเหรียญ" key="1">
           {screens.xs || (screens.sm && !screens.md) ? (

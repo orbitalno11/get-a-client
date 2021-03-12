@@ -1,11 +1,10 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Typography, Grid, Col, Divider, Row, Button } from "antd";
+import { Grid, Col, Divider, Row, Button } from "antd";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../styles.module.scss";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
 export default function CoinDetail() {
@@ -24,7 +23,7 @@ export default function CoinDetail() {
       <div>
         {screens.md && (
           <Col lg={24} xl={24} md={24}>
-            <Title level={2}>ร้านค้า</Title>
+            <span className={style.titleH2}>ร้านค้า</span>
           </Col>
         )}
       </div>

@@ -1,12 +1,11 @@
 import React, { Fragment } from "react";
-import { Grid, Row, Col, Typography, Button,Divider } from "antd";
+import { Grid, Row, Col,Button,Divider } from "antd";
 import { faCoins, faCheck,faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TableList from "./TableList";
 import style from "../styles.module.scss";
 
 const { useBreakpoint } = Grid;
-const { Title } = Typography;
 
 export default function RedeemList() {
   const screens = useBreakpoint();
@@ -17,7 +16,7 @@ export default function RedeemList() {
           <div style={{ paddingTop: "1.8rem" }}>
             <Row>
               <Col xs={4} sm={8}>
-                <FontAwesomeIcon icon={faCoins} className={style.iconSmall2} />
+                <FontAwesomeIcon icon={faCoins} className={style.Xs} />
               </Col>
               <Col xs={16} sm={16}>
                 10,000 เหรียญ
@@ -25,7 +24,7 @@ export default function RedeemList() {
             </Row>
             <Row style={{ paddingTop: "0.3rem" }}>
               <Col xs={4} sm={8}>
-                <Title level={5}>THB</Title>
+                <span className={style.titleH5}>THB</span>
               </Col>
               <Col xs={16} sm={16}>
                 10,000 เหรียญ
@@ -73,7 +72,7 @@ export default function RedeemList() {
           <div style={{ paddingTop: "1rem" }}>
             <Row>
               <Col xs={4} sm={8}>
-                <FontAwesomeIcon icon={faCoins} className={style.iconSmall2} />
+                <FontAwesomeIcon icon={faCoins} className={style.Xs} />
               </Col>
               <Col xs={16} sm={16}>
                 10,000 เหรียญ
@@ -81,7 +80,7 @@ export default function RedeemList() {
             </Row>
             <Row style={{ paddingTop: "0.3rem" }}>
               <Col xs={4} sm={8}>
-                <Title level={5}>THB</Title>
+                <span className={style.titleH5}>THB</span>
               </Col>
               <Col xs={16} sm={16}>
                 10,000 เหรียญ

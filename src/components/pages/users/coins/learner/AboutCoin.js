@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
-import { Typography, Grid, Row } from "antd";
+import { Grid, Row } from "antd";
 import style from "../styles.module.scss";
-const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
 export default function CoinDetail() {
@@ -10,8 +9,8 @@ export default function CoinDetail() {
   return (
     <Fragment>
       <div className={screens.md ? null : style.subProfile}>
-        <Title className={style.titleH5}>รายละเอียดเกี่ยวกับเหรียญ</Title>
-        <Row style={{marginTop:"2rem"}}>
+        <span className={style.titleH2}>รายละเอียดเกี่ยวกับเหรียญ</span>
+        <Row style={{marginTop:"1.5rem"}}>
           มาราธอนมวลชนแจ๊กเก็ตพรีเมียมตนเอง บอยคอตเบิร์ดแฮปปี้ สติกเกอร์
           รีพอร์ทโมจินาฏยศาลาวาทกรรมแพ็ค แกรนด์มาร์ตอพาร์ตเมนท์เทรลเลอร์ทาวน์
           เมจิกอึ้มฟลุก กุนซือแมมโบ้โมเต็ลโอวัลติน แจมมอนสเตอร์ผู้นำโลชั่น

@@ -41,7 +41,7 @@ export default function CoinDetail() {
               196 เหรียญ
             </Col>
             <Col xs={7} sm={7} md={9} lg={6} xl={6}>
-              <NavLink to="/coinshop/payment">
+              <a href="/coinshop/payment">
                 <Button
                   className="backgroundGreen buttonColor"
                   shape="round"
@@ -50,7 +50,7 @@ export default function CoinDetail() {
                 >
                   THB 59.00
                 </Button>
-              </NavLink>
+              </a>
             </Col>
             <Divider type="horizontal" style={{ height: "100%" }} />
           </Row>

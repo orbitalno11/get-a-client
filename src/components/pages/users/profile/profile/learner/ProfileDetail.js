@@ -42,9 +42,9 @@ export default function ProfileDetail() {
                 <div className={style.TitleCoin}>
                     <Title level={5}>เหรียญของคุณ</Title>
                     <div className={style.floatLeft}>
-                        <NavLink to="/historycoin">
+                        <a href="/historycoin">
                             <Button type="link" style={{ width: "100px",color:"GrayText" }}>ดูประวัติเหรียญ</Button>
-                        </NavLink>
+                        </a>
                     </div>
                     
                 </div>
@@ -52,9 +52,9 @@ export default function ProfileDetail() {
                     <FontAwesomeIcon icon={faCoins} className={style.iconcoin} />
                     <span>{profileDetail && profileDetail.coin}</span>
                     <div className={style.floatLeft}>
-                        <NavLink to="/coin">
+                        <a href="/coin">
                             <Button className="backgroundGreen buttonColor" shape="round" size="middle"  style={{ width: "100px" }}>ซื้อเหรียญ</Button>
-                        </NavLink>
+                        </a>
                     </div>
 
                 </div>

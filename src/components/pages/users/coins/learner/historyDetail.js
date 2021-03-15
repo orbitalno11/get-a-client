@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
-import { Typography, Grid, Table, Col} from "antd";
+import { Grid, Table, Col} from "antd";
 import style from "../styles.module.scss";
-const { Title } = Typography;
 const { useBreakpoint } = Grid;
 const { Column } = Table;
 

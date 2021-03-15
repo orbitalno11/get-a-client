@@ -7,19 +7,19 @@ const { Column } = Table;
 const data = [
   {
     key: "1",
-    date: "31 ธันวาคม 2563",
+    date: "31/12/2563",
     status: "เติมเหรียญ",
     coin: "169",
   },
   {
     key: "2",
-    date: "1 มกราคม 2564",
+    date: "01/01/2564",
     status: "จ่ายเหรียญ",
     coin: "30",
   },
   {
     key: "3",
-    date: "30 มกราคม 2564",
+    date: "30/01/2564",
     status: "จ่ายเหรียญ",
     coin: "40",
   },

@@ -16,49 +16,46 @@
 }
 
 .coins {
-  @extend .iconLarge;
+  font-size: 1.7rem;
   margin-right: 1.25rem;
   color: $yellow;
 }
 
 .Big {
-  font-size: 2.5rem;
+  @extend .iconLarge;
   margin-right: 1.5rem;
   color: $yellow;
 }
 
 .coinlist {
   padding-top: 3rem;
-  margin-left: -5rem;
-  font-size: 16px;
+  margin-left: 3%;
 }
 
 .coinshop {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 8rem;
+  margin-left: 30%;
   padding-top: 1rem;
 }
 
 .subcoin {
-  padding-top: 2.5em;
-  padding-left: 5em;
+  padding-top: 1rem;
+  padding-left: 3rem;
 }
 
 .payment {
-  padding-top: 2em;
+  padding-top: 3rem;
 }
 
 .paymentPage {
-  @extend .coinshop;
-  margin-left: 6rem;
+  margin-left: 3rem;
   padding-top: 1.5rem;
 }
 
 .buttonpayment {
-  border: 0.1rem solid #f26419 !important;
+  border: 0.15rem solid #f26419 !important;
   color: black !important;
+  padding: 4px 16px !important;
+  height: auto!important;
 }
 
 .buttonpayment:hover {
@@ -81,7 +78,6 @@
 
 .tablecoin{
   width: 95%;
-  font-size: 30pt !important;
 }
 
 .alignCenter {
@@ -122,13 +118,13 @@
 }
 
 .redeem {
-  @extend .iconLarge;
+  @extend .iconNormal;
   margin-right: 1.5rem;
   color: $yellow;
 }
 
 .Small {
-  @extend .iconsmall;
+  @extend .iconSmall;
   margin-right: 1.5rem;
   color: $yellow;
 }
@@ -137,6 +133,7 @@
   font-size: 1.3rem;
   margin-right: 1.5rem;
   color: $yellow;
+  margin-top: 0.27rem;
 }
 
 .flexredeem {
@@ -154,5 +151,5 @@
 
 .allow{
   margin-top: -5rem;
-  margin-left: 18rem;
+  margin-left: 90%;
 }

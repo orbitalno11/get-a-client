@@ -27,14 +27,14 @@ export default function CoinDetail() {
           </Col>
         )}
       </div>
-      <div className={style.coinshop}>
-        <div style={{ fontSize: "40px" }}>
+      <div>
+        <div className={style.coinshop}> 
           <FontAwesomeIcon icon={faCoins} className={style.Big} />
           <span>{profileDetail && profileDetail.coin}</span>
         </div>
         <div className={style.coinlist}>
           <Row>
-            <Col xs={7} sm={8} md={6} lg={8} xl={8}>
+            <Col xs={7} sm={8} md={6} lg={7} xl={7}>
               <FontAwesomeIcon icon={faCoins} className={style.coins} />
             </Col>
             <Col xs={8} sm={9} md={9} lg={10} xl={10}>
@@ -55,7 +55,7 @@ export default function CoinDetail() {
             <Divider type="horizontal" style={{ height: "100%" }} />
           </Row>
           <Row>
-            <Col xs={7} sm={8} md={6} lg={8} xl={8}>
+            <Col xs={7} sm={8} md={6} lg={7} xl={7}>
               <FontAwesomeIcon icon={faCoins} className={style.coins} />
             </Col>
             <Col xs={8} sm={9} md={9} lg={10} xl={10}>
@@ -76,7 +76,7 @@ export default function CoinDetail() {
             <Divider type="horizontal" style={{ height: "100%" }} />
           </Row>
           <Row>
-            <Col xs={7} sm={8} md={6} lg={8} xl={8}>
+            <Col xs={7} sm={8} md={6} lg={7} xl={7}>  
               <FontAwesomeIcon icon={faCoins} className={style.coins} />
             </Col>
             <Col xs={8} sm={9} md={9} lg={10} xl={10}>
@@ -97,7 +97,7 @@ export default function CoinDetail() {
             <Divider type="horizontal" style={{ height: "100%" }} />
           </Row>
           <Row>
-            <Col xs={7} sm={8} md={6} lg={8} xl={8}>
+            <Col xs={7} sm={8} md={6} lg={7} xl={7}>
               <FontAwesomeIcon icon={faCoins} className={style.coins} />
             </Col>
             <Col xs={8} sm={9} md={9} lg={10} xl={10}>

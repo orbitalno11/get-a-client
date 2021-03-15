@@ -16,7 +16,7 @@ export default function RedeemDetail() {
           <div style={{ paddingTop: "1.5rem"}}>
             <span className={style.titleH5}>คุณมี</span>
             <Row className={style.subredeem2}>
-              <Col xs={5} sm={5}>
+              <Col xs={4} sm={3}>
                 <FontAwesomeIcon icon={faCoins} className={style.redeem} />
               </Col>
               <Col xs={19} sm={19}>
@@ -32,10 +32,10 @@ export default function RedeemDetail() {
               </Col>
             </Row>
             <Row style={{ paddingTop: "1.8rem" }}>
-              <Col xs={10} sm={11}>
+              <Col xs={8} sm={6}>
                 <span className={style.titleH5}>อัตราแลก</span>
               </Col>
-              <Col xs={4} sm={4}>
+              <Col xs={4} sm={3}>
                 <FontAwesomeIcon icon={faCoins} className={style.Xs} />
               </Col>
               <Col xs={10} sm={9}>
@@ -46,7 +46,7 @@ export default function RedeemDetail() {
                 <Button
                   className="backgroundGreen buttonColor"
                   shape="round"
-                  size="small"
+                  size="middle"
                   style={{ width: "100px" }}
                 >
                   แลกเหรียญ
@@ -92,7 +92,7 @@ export default function RedeemDetail() {
                 <Button
                   className="backgroundGreen buttonColor"
                   shape="round"
-                  size="small"
+                  size="middle"
                   style={{ width: "100px" }}
                 >
                   แลกเหรียญ

@@ -10,7 +10,7 @@ $black : #000000;
 
 // for register page 
 .titleH1{
-    font-size: 3.5rem;
+    font-size: 3.75rem;
     font-weight: 600;
 }
 
@@ -47,15 +47,39 @@ $black : #000000;
 }
 
 .iconLarge{
-    font-size: 1.8rem;
+    font-size: 2rem;
 }
 
 .iconNormal{
-    font-size: 1.25rem;
+    font-size: 1.35rem;
 }
 
-.iconsmall{
-    font-size: 1rem;
+.iconSmall{
+    font-size: 1.15rem;
+}
+
+.paddingbody{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.paddingTopBody{
+    padding-top: 7rem;
+}
+
+.paddingBottomBody {
+    padding-bottom: 3.75rem;
+}
+
+.body {
+    @extend .paddingbody;
+    @extend .paddingTopBody;
+    @extend .paddingBottomBody;
+}
+
+.bodymobileprofile{
+    @extend .paddingbody;
+    @extend .paddingBottomBody;
 }
 
 .paddingbody{

@@ -31,27 +31,27 @@ export default function RedeemList() {
               </Col>
             </Row>
             <Row style={{ paddingTop: "0.2rem", marginTop: "-0.5rem" }}>
-              <Col xs={4} sm={8}>
+              <Col xs={5} sm={8}>
                 วันที่ขอ
               </Col>
               <Col xs={16} sm={16}>
-                30 ธันวาคม 2563
+                30/12/2563
               </Col>
             </Row>
             <Row style={{ paddingTop: "0.2rem" }}>
-              <Col xs={6} sm={8}>
+              <Col xs={9} sm={8}>
                 วันที่พิจารณา
               </Col>
-              <Col xs={16} sm={16}>
-                4 มกราคม 2564
+              <Col xs={15} sm={16}>
+               04/01/2564
               </Col>
             </Row>
             <Row style={{ paddingTop: "0.2rem" }}>
-              <Col xs={6} sm={8}>
+              <Col xs={7} sm={8}>
                 วันที่อนุมัติ
               </Col>
               <Col xs={16} sm={16}>
-              4 มกราคม 2564
+              04/01/2564
               </Col>
             </Row>
           </div>
@@ -87,27 +87,27 @@ export default function RedeemList() {
               </Col>
             </Row>
             <Row style={{ paddingTop: "0.2rem", marginTop: "-0.5rem" }}>
-              <Col xs={4} sm={8}>
+              <Col xs={5} sm={8}>
                 วันที่ขอ
               </Col>
               <Col xs={16} sm={16}>
-                30 ธันวาคม 2563
+                30/12/2563
               </Col>
             </Row>
             <Row style={{ paddingTop: "0.2rem" }}>
-              <Col xs={6} sm={8}>
+              <Col xs={9} sm={8}>
                 วันที่พิจารณา
               </Col>
-              <Col xs={16} sm={16}>
-                4 มกราคม 2564
+              <Col xs={15} sm={16}>
+                04/01/2564
               </Col>
             </Row>
             <Row style={{ paddingTop: "0.2rem" }}>
-              <Col xs={6} sm={8}>
+              <Col xs={7} sm={8}>
                 วันที่อนุมัติ
               </Col>
               <Col xs={16} sm={16}>
-              4 มกราคม 2564
+              04/01/2564
               </Col>
             </Row>
           </div>

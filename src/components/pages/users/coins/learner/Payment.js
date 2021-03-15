@@ -22,11 +22,11 @@ export default function Payment() {
         </Row>
       ) : (
         <Row className={style.body}>
-          <Col xs={24} sm={24} md={11} lg={9} xl={8}>
+          <Col xs={24} sm={24} md={10} lg={9} xl={8}>
             <PaymentDetail />
           </Col>
           {screens.md && (
-            <Col md={2} lg={2} xl={2}>
+            <Col md={3} lg={2} xl={2}>
               <Divider
                 type="vertical"
                 style={{ height: "100%", marginLeft: "3rem" }}

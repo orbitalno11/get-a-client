@@ -29,23 +29,23 @@
 }
 /* General */
 
-.h2 {
+.h2{
   font-size: 35px;
   font-weight: 700;
 }
 
-.white {
-  color: var(--white-color) !important;
+.white{
+  color:var(--white-color) !important
 }
 
-.error-input {
-  font-size: 12px;
+.error-input{
+  font-size: 0.9rem;
   color:var(--error-color);
   padding-left: 0.625rem;
   margin-top: 0.3rem;
 }
 
-.input {
+.input{
   margin: 0 auto;
   border: none; /* <-- This thing here */
   border:solid 1px #ccc;
@@ -54,21 +54,21 @@
   padding-left: 1.25rem;
   padding-right: 1.25rem;
   width: 100%;
-  outline: none;
+  outline:none;
 }
 
-.imageUpload > input {
+.imageUpload>input {
   display: none !important;
 }
 
 .ant-picker,
-.ant-select {
-  width: 100% !important;
+.ant-select{
+  width: 100% !important; 
 }
 
 .ant-picker,
 .ant-select-selector {
-  border: none !important;
+  border: none !important; 
   border:solid 1px #ccc !important;
   border-radius: 1.25rem !important;
   height: auto !important;
@@ -77,14 +77,18 @@
   padding-right: 1.25rem !important;
 }
 
-.ant-picker {
+.ant-picker{
   padding: 8px !important;
   padding-left: 1.25rem !important;
   padding-right: 1.25rem !important;
 }
 
-input :focus {
-  outline: none !important;
+.ant-select-arrow{
+  display: none;
+}
+
+input :focus{
+  outline: none !important
 }
 
 .body {
@@ -101,23 +105,23 @@ input :focus {
   height: auto;
 }
 
-.backgroundYellow {
+.backgroundYellow{
   background-color: var(--yellow-color) !important;
 }
 
-.backgroundGreen {
+.backgroundGreen{
   background-color: var(--green-color) !important;
 }
 
-.backgroundMain {
-  background-color: var(--main-color) !important;
+.backgroundOrange{
+  background-color: var(--orange-color) !important;
 }
 
-.backgroundBlue {
+.backgroundBlue{
   background-color: var(--blue-color) !important;
 }
 
-.backgroundGray {
+.backgroundGray{
   background-color: var(--gray-color) !important;
 }
 
@@ -128,14 +132,14 @@ input :focus {
 /* General */
 
 /* Nav Menu */
-.fixMenu {
-  position: fixed;
-  width: 100%;
-  z-index: 999;
+.fixMenu{
+  position:fixed;
+  width:100%;
+  z-index:999;
 }
 
 .menuBar {
-  background-color: var(--main-color) !important;
+  background-color: var(--orange-color) !important;
   height: 3.75rem;
   display: flex;
   align-items: center;
@@ -144,13 +148,13 @@ input :focus {
   overflow: auto;
 }
 
-.menuBar .floatRight {
-  margin-left: auto;
+.menuBar .floatRight{
+  margin-left: auto ;
 }
 
 .logo {
   float: left;
-  color: var(--white-color);
+  color: var(--white-color) ;
   font-weight: 700;
   width: 100%;
   height: 3.125rem;
@@ -174,77 +178,78 @@ input :focus {
 .ant-menu-horizontal > .ant-menu-submenu-selected 
 {
   border-bottom: 0.125rem solid  transparent !important;
-
 }
 
-.ant-menu-horizontal a {
-  color: var(--white-color) !important;
+.ant-menu-horizontal a{
+  color:  var(--white-color)  !important;
 }
 
-.buttonText {
-  color: var(--white-color) !important;
+.buttonText{
+  color:var(--white-color)  !important;
 }
 
-.buttonText :hover {
+.buttonText :hover{
   font-weight: 600;
 }
 
 .navbarBottom {
   overflow: hidden;
-  background-color: var(--white-color);
+  background-color: var(--white-color) ;
   position: fixed;
   bottom: 0;
   width: 100%;
   height: auto;
   border-top-style: solid;
-  border-top-color: var(--main-color);
+  border-top-color: var(--orange-color);
 }
 
 .iconMenu{
   padding: 0.625rem;
 }
 
-.icon {
+.icon{
   font-size: 25px;
-  color: var(--gray-color) !important;
+  color : var(--gray-color) !important;
 }
 
-.icon :active {
-  color: var(--main-color) !important;
+.icon :active{
+  color : var(--orange-color) !important;
 }
 
-.side {
-  overflow: auto !important;
-  height: 100vh !important;
-  position: fixed !important;
-  left: 0px;
-  background-color: var(--side-menu-color) !important;
+.side{
+    overflow: auto  !important;
+    height: 100vh !important;
+    position: fixed !important;
+    left: 0px;
+    background-color: var(--side-menu-color) !important;
 }
 
-.side .ant-menu > .ant-menu-item-selected,
-.side .ant-menu > .ant-menu-submenu-title {
-  color: var(--main-color) !important;
+.side .ant-menu > .ant-menu-item-selected ,
+.side .ant-menu > .ant-menu-submenu-title 
+{
+  color : var(--orange-color) !important;
   background-color: var(--side-menu-color) !important;
   border: 0px transparent !important;
 }
 
-.side .ant-menu,
+.side .ant-menu ,
 .side .ant-menu-item a,
-.side .ant-menu :hover,
-.side .ant-menu-submenu-selected {
-  color: var(--white-color) !important;
+.side .ant-menu  :hover,
+.side .ant-menu-submenu-selected 
+ {
+  color : var(--white-color) !important;
   background-color: var(--side-menu-color) !important;
   border: 0px transparent !important;
 }
 .side .ant-menu-item :hover,
 .side .ant-menu-item-selected a {
-  color: var(--main-color) !important;
+  color : var(--orange-color) !important;
 }
 
 /* Nav Menu */
 
 /* Body */
-.input-form {
+.input-form{
   width: 30%;
   margin-top: 30px;
 }
@@ -257,18 +262,19 @@ input :focus {
   margin-top: 1.25rem;
 }
 
-.icon-addimage {
+.icon-addimage{
   font-size: 15px;
   color: var(--side-menu-color);
   cursor: pointer;
 }
 
-.ant-badge-count,
-.ant-badge-dot,
-.ant-badge .ant-scroll-number-custom-component {
-  position: absolute;
-  bottom: 0;
-  top: auto;
+.ant-badge-count, 
+.ant-badge-dot, 
+.ant-badge 
+.ant-scroll-number-custom-component {
+  position :absolute ;
+  bottom: 0 ;
+  top:auto;
 }
 
 @media only screen and (max-width: 768px) {
@@ -278,7 +284,7 @@ input :focus {
     margin-top: 1.25rem;
   }
 
-  .icon-addimage {
+  .icon-addimage{
     font-size: 13px;
   }
 
@@ -320,38 +326,9 @@ input :focus {
   background: #ffb58d !important;
   border-bottom: 1px solid #f26419 !important;
 }
+
 .ant-image-img {
   display:initial !important; 
   width: 100%;
   height: auto;
-}
-
-@media screen and (min-width: 260px) {
-  .ant-table {
-    font-size: 27%;
-  }
-}
-
-@media only screen and (min-width: 600px) {
-  .ant-table {
-    font-size: 35%;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .ant-table {
-    font-size: 38%;
-  }
-}
-
-@media only screen and (min-width: 992px) {
-  .ant-table {
-    font-size: 43%;
-  }
-}
-
-@media only screen and (min-width: 1200px) {
-  .ant-table {
-    font-size: 35%;
-  }
 }

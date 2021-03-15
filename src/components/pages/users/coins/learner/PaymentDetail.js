@@ -31,7 +31,7 @@ export default function PaymentDetail() {
         )}
       </div>
       <div className={style.paymentPage}>
-        <div style={{ fontSize: "30px" }}>
+        <div>
           <FontAwesomeIcon icon={faCoins} className={style.Big} />
           <span>169 เหรียญ</span>
         </div>
@@ -63,7 +63,7 @@ export default function PaymentDetail() {
               ยกเลิก
             </Button>
             <Button
-              className="backgroundMain buttonColor"
+              className="backgroundOrange buttonColor"
               shape="round"
               size="middle"
               style={{ width: "100px" }}

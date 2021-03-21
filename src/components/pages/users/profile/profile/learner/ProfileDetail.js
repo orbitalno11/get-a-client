@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import style from '../../styles.module.scss'
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-const { Title } = Typography;
+const { Title,Link } = Typography;
 const { useBreakpoint } = Grid;
 
 export default function ProfileDetail() {
@@ -42,9 +42,9 @@ export default function ProfileDetail() {
                 <div className={style.TitleCoin}>
                     <Title level={5}>เหรียญของคุณ</Title>
                     <div className={style.floatLeft}>
-                        <a href="/historycoin">
+                        <Link href="/historycoin">
                             <Button type="link" style={{ width: "100px",color:"GrayText" }}>ดูประวัติเหรียญ</Button>
-                        </a>
+                        </Link>
                     </div>
                     
                 </div>
@@ -52,9 +52,9 @@ export default function ProfileDetail() {
                     <FontAwesomeIcon icon={faCoins} className={style.iconcoin} />
                     <span>{profileDetail && profileDetail.coin}</span>
                     <div className={style.floatLeft}>
-                        <a href="/coin">
+                        <Link href="/coin">
                             <Button className="backgroundGreen buttonColor" shape="round" size="middle"  style={{ width: "100px" }}>ซื้อเหรียญ</Button>
-                        </a>
+                        </Link>
                     </div>
 
                 </div>

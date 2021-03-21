@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Grid, Col, Divider, Row, Button } from "antd";
+import { Grid, Col, Divider, Row, Button,Typography } from "antd";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../styles.module.scss";
-import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 const { useBreakpoint } = Grid;
+const { Link } = Typography;
 
 export default function CoinDetail() {
   const screens = useBreakpoint();
@@ -41,7 +41,7 @@ export default function CoinDetail() {
               196 เหรียญ
             </Col>
             <Col xs={7} sm={7} md={9} lg={6} xl={6}>
-              <a href="/coinshop/payment">
+              <Link href="/coinshop/payment">
                 <Button
                   className="backgroundGreen buttonColor"
                   shape="round"
@@ -50,7 +50,7 @@ export default function CoinDetail() {
                 >
                   THB 59.00
                 </Button>
-              </a>
+              </Link>
             </Col>
             <Divider type="horizontal" style={{ height: "100%" }} />
           </Row>
@@ -62,7 +62,7 @@ export default function CoinDetail() {
               340 เหรียญ
             </Col>
             <Col xs={7} sm={7} md={9} lg={6} xl={6}>
-              <NavLink to="/Payment">
+            <Link href="/Payment">
                 <Button
                   className="backgroundGreen buttonColor"
                   shape="round"
@@ -71,7 +71,7 @@ export default function CoinDetail() {
                 >
                   THB 119.00
                 </Button>
-              </NavLink>
+              </Link>
             </Col>
             <Divider type="horizontal" style={{ height: "100%" }} />
           </Row>
@@ -83,7 +83,7 @@ export default function CoinDetail() {
               426 เหรียญ
             </Col>
             <Col xs={7} sm={7} md={9} lg={6} xl={6}>
-              <NavLink to="/Payment">
+              <Link href="/Payment">
                 <Button
                   className="backgroundGreen buttonColor"
                   shape="round"
@@ -92,7 +92,7 @@ export default function CoinDetail() {
                 >
                   THB 149.00
                 </Button>
-              </NavLink>
+              </Link>
             </Col>
             <Divider type="horizontal" style={{ height: "100%" }} />
           </Row>
@@ -104,7 +104,7 @@ export default function CoinDetail() {
               727 เหรียญ
             </Col>
             <Col xs={7} sm={7} md={9} lg={6} xl={6}>
-              <NavLink to="/Payment">
+              <Link href="/Payment">
                 <Button
                   className="backgroundGreen buttonColor"
                   shape="round"
@@ -113,7 +113,7 @@ export default function CoinDetail() {
                 >
                   THB 299.00
                 </Button>
-              </NavLink>
+              </Link>
             </Col>
             <Divider type="horizontal" style={{ height: "100%" }} />
           </Row>

@@ -1,5 +1,5 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react"
-import { Typography, Grid } from "antd"
+import { Typography } from "antd"
 import {
     faMapMarkerAlt,
     faUser
@@ -10,19 +10,18 @@ import EducationTutor from "../../../../../../educationTutor/EducationTutor";
 import ProfileIntroduce from "./ProfileIntroduce";
 import Header from "../../../../../../headerMobile/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { getHandleProfile } from "../../../../../../../redux/actions/profileActions";
+import { profileAction } from "../../../../../../../redux/actions/profile.actions";
+import isMobile from "../../../../../../isMobile/isMobile";
 
 const { Title } = Typography;
-const { useBreakpoint } = Grid;
 
 export default function ProfileDetail({ mainPage }) {
-    const screens = useBreakpoint();
     const dispatch = useDispatch()
     const data = useSelector(state => state.profile)
     const [profile, setProfile] = useState(null)
 
     const fetchProfile = useCallback(() => {
-        dispatch(getHandleProfile())
+        dispatch(profileAction.getHandleProfile())
     }, [dispatch])
 
     useEffect(() => {
@@ -35,17 +34,17 @@ export default function ProfileDetail({ mainPage }) {
 
     return (
         <Fragment>
-            {!mainPage && (screens.xs || (screens.sm && !screens.md)) && <Header pageBack="goback" />}
-            <div className={screens.xs || (screens.sm && !screens.md) ? style.paddingbody : !mainPage ? style.bodyEdit : null}>
+            {!mainPage && isMobile() && <Header pageBack="goback" />}
+            <div className={isMobile() ? style.bodymobileprofile : !mainPage ? style.bodyEdit : null}>
                 {
                     !mainPage &&
                     (
-                        <div className={screens.xs || (screens.sm && !screens.md) ? style.paddingTopBody : style.banner}  >
+                        <div className={isMobile() ? style.paddingTopBody : style.banner}  >
                             <ProfileIntroduce />
                         </div>
                     )
                 }
-                <div className={mainPage && (screens.xs || (screens.sm && !screens.md)) ? style.marginTop20 : style.contrainnerProfilePubile}>
+                <div className={mainPage && isMobile() ? style.marginTop20 : style.contrainnerProfilePubile}>
                     <div className={style.TitleCoin}>
                         <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
                         <span>{profile && profile.place}</span>
@@ -56,7 +55,7 @@ export default function ProfileDetail({ mainPage }) {
                     </div>
                 </div>
                 {
-                    ((mainPage && !(screens.xs || (screens.sm && !screens.md))) ||  !mainPage )&&
+                    ((mainPage && !isMobile()) ||  !mainPage )&&
                     
                         (
                             <div className={style.marginTop}>

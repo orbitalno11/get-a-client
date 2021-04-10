@@ -3,15 +3,11 @@ import style from "./styles.module.scss"
 import { faGraduationCap ,faMinus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Button } from "antd"
-import { removeHistory } from "../../redux/actions/profileActions"
-import { useDispatch } from "react-redux"
-
 
 export default function EducationTutor({ data, addData, status, size ,index}) {
-    const dispatch = useDispatch()
 
-    const removeEducation = (key) =>{
-        dispatch(removeHistory(key))
+    const removeEducation = () =>{
+        // for remove education list
     }
 
     return (

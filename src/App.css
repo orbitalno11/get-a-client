@@ -1,16 +1,13 @@
 :root {
-  --main-color:#F26419;
-  --blue-color: #33658A;
-  --yellow-color : #F6AE2D;
-  --white-color : #FFFFFF;
-  --gray-color : #C4C4C4;
-  --side-menu-color : #303A53;
-  --error-color : #840c0c;
-  --green-color : #00B900;
-}
-
-body{
-  min-width: 480px;
+  --orange-color: #f26419;
+  --blue-color: #33658a;
+  --yellow-color: #f6ae2d;
+  --white-color: #ffffff;
+  --gray-color: #c4c4c4;
+  --side-menu-color: #303a53;
+  --error-color: #840c0c;
+  --green-color: #00b900;
+  --red-color : #ab330f;
 }
 
 @keyframes App-logo-spin {
@@ -33,7 +30,7 @@ body{
 }
 
 .error-input{
-  font-size: 12px;
+  font-size: 0.9rem;
   color:var(--error-color);
   padding-left: 0.625rem;
   margin-top: 0.3rem;
@@ -60,9 +57,13 @@ body{
   width: 100% !important; 
 }
 
+.ant-select-arrow{
+  display: none;
+}
+
 .ant-picker,
 .ant-select-selector {
-  border: none !important;
+  border: none !important; 
   border:solid 1px #ccc !important;
   border-radius: 1.25rem !important;
   height: auto !important;
@@ -75,6 +76,10 @@ body{
   padding: 8px !important;
   padding-left: 1.25rem !important;
   padding-right: 1.25rem !important;
+}
+
+.ant-select-arrow{
+  display: none;
 }
 
 input :focus{
@@ -92,6 +97,7 @@ input :focus{
 .buttonColor{
   border-style: none  !important;
   color:var(--white-color)  !important;
+  height: auto;
 }
 
 .backgroundYellow{
@@ -102,8 +108,8 @@ input :focus{
   background-color: var(--green-color) !important;
 }
 
-.backgroundMain{
-  background-color: var(--main-color) !important;
+.backgroundOrange{
+  background-color: var(--orange-color) !important;
 }
 
 .backgroundBlue{
@@ -112,6 +118,10 @@ input :focus{
 
 .backgroundGray{
   background-color: var(--gray-color) !important;
+}
+
+.backgroundRed{
+  background-color: var(--red-color) !important;
 }
 
 /* General */
@@ -124,7 +134,7 @@ input :focus{
 }
 
 .menuBar {
-  background-color: var(--main-color) !important;
+  background-color: var(--orange-color) !important;
   height: 3.75rem;
   display: flex;
   align-items: center;
@@ -185,7 +195,7 @@ input :focus{
   width: 100%;
   height: auto;
   border-top-style: solid;
-  border-top-color: var(--main-color);
+  border-top-color: var(--orange-color);
 }
 
 .iconMenu{
@@ -198,7 +208,7 @@ input :focus{
 }
 
 .icon :active{
-  color : var(--main-color) !important;
+  color : var(--orange-color) !important;
 }
 
 .side{
@@ -212,7 +222,7 @@ input :focus{
 .side .ant-menu > .ant-menu-item-selected ,
 .side .ant-menu > .ant-menu-submenu-title 
 {
-  color : var(--main-color) !important;
+  color : var(--orange-color) !important;
   background-color: var(--side-menu-color) !important;
   border: 0px transparent !important;
 }
@@ -228,7 +238,7 @@ input :focus{
 }
 .side .ant-menu-item :hover,
 .side .ant-menu-item-selected a {
-  color : var(--main-color) !important;
+  color : var(--orange-color) !important;
 }
 
 /* Nav Menu */
@@ -265,7 +275,7 @@ input :focus{
 @media only screen and (max-width: 768px) {
   .big-button{
     width : 100%;
-    height : 3.75rem ;
+    height : 10rem ;
     margin-top: 1.25rem;
   }
 
@@ -295,7 +305,6 @@ input :focus{
 .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before{
   background-color: #FFFFFF;
   outline: none!important;
-  border-style: none  !important;
   box-shadow: none  !important;
 }
 
@@ -303,4 +312,17 @@ input :focus{
   animation: 0s !important;
   border-color: transparent !important;
 }
- 
+
+.ant-table-thead > tr > th {
+  color: rgba(0, 0, 0, 0.85) !important;
+  font-weight: 500 !important;
+  text-align: center !important;
+  background: #ffb58d !important;
+  border-bottom: 1px solid #f26419 !important;
+}
+
+.ant-image-img {
+  display:initial !important; 
+  width: 100%;
+  height: auto;
+}

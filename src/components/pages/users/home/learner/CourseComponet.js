@@ -1,15 +1,15 @@
 import { Grid, Typography } from "antd";
 import React from "react"
-import CardCorseLearner from "../../../../card/CardCorseLearner";
+import CardCourseLearner from "../../../../card/CardCourseLearner";
 import { chunksArray, SliderComponent } from "../../../../slider/SliderComponent";
 import style from "../styles.module.scss"
 const { useBreakpoint } = Grid;
 const { Title } = Typography;
 
-export default function CourseComponet({ title, link, array }) {
+export default function CourseComponet({ title, array }) {
 
     const screens = useBreakpoint();
-
+  
     const componentListTutor = () => {
         let size = 2
         if (screens.lg) {
@@ -22,20 +22,21 @@ export default function CourseComponet({ title, link, array }) {
             }
         }
 
-        const chunksArrays = chunksArray(array, size)
 
+        const chunksArrays = chunksArray(array, size)
         return (
             chunksArrays && chunksArrays.map((item, index) => (
                 <div key={index} className={style.row}>
                     {
                         item && item.map((item1, index) => (
                             <div className={!screens.md ? !screens.sm ? (style.paddingCoruseCardXS) : (style.paddingCoruseCardSM) : (style.paddingCoruseCard)} key={index}>
-                                <CardCorseLearner data={item1} />
+                                <CardCourseLearner data={item1} />
                             </div>
                         ))
                     }
                 </div>
-            ))
+            )
+            )
         )
     }
 

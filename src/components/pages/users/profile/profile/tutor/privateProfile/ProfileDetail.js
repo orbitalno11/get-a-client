@@ -31,7 +31,7 @@ export default function ProfileDetail() {
                     src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
                     preview={false}
                 />
-                <NavLink to="/tutor/profile/edit">
+                <NavLink to="/tutor/1/edit">
                     <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[18, 0]}>
                         <Title level={3} className={style.marginLeft}>{profileDetail&&profileDetail.firstname}<br/>{profileDetail&&profileDetail.lastname} </Title>
                     </Badge>
@@ -45,7 +45,9 @@ export default function ProfileDetail() {
                     <FontAwesomeIcon icon={faCoins} className={style.iconcoin} />
                     <span>{profileDetail&&profileDetail.coin} เหรียญ</span>
                     <div className={style.floatLeft}>
-                        <Button className="buttonColor backgroundYellow" style={{width:"100px"}} shape="round" size="middle">แลกเหรียญ</Button>
+                        <NavLink to="/tutor/coin">
+                            <Button className="buttonColor backgroundYellow" style={{width:"100px"}} shape="round" size="middle">แลกเหรียญ</Button>
+                        </NavLink>
                     </div>
                 </div>
             </div>

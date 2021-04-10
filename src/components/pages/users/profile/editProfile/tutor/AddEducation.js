@@ -1,7 +1,7 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react"
 import style from "../../styles.module.scss"
 import { Controller, useForm } from "react-hook-form";
-import { Button, Col, Row, Select, Typography, Grid } from "antd";
+import { Button, Col, Row, Select, Typography } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faCloudUploadAlt
@@ -10,8 +10,8 @@ import { profileTestSchema, profileEducationSchema } from "../../../../../../val
 import { yupResolver } from "@hookform/resolvers/yup";
 import Header from "../../../../../headerMobile/Header";
 import { useDispatch } from "react-redux";
-import { addHistory, getProfile } from "../../../../../../redux/actions/profileActions";
-const { useBreakpoint } = Grid;
+import { profileAction } from "../../../../../../redux/actions/profile.actions";
+import isMobile from "../../../../../isMobile/isMobile";
 
 const { Title } = Typography;
 
@@ -19,10 +19,9 @@ export default function AddEducation() {
     const [type, setType] = useState("test");
     const [imageName, setimageName] = useState(null);
     const dispatch = useDispatch()
-    const screens = useBreakpoint();
 
     const fetchProfile = useCallback(()=>{
-        dispatch(getProfile())
+        dispatch(profileAction.getProfile())
     },[dispatch])
 
     useEffect(() => {
@@ -44,20 +43,20 @@ export default function AddEducation() {
         setimageName(value.target.files[0].name)
     }
 
-    const onSubmit = data => {
-        const education = {
-            type: data.type,
-            name: data.type||data.grade,
-            brance: data.subject||data.brance,
-            grade: data.year||data.gradeScore,
-            status: "0"
-        }
-        dispatch(addHistory(education))
+    const onSubmit = () => {
+        // const education = {
+        //     type: data.type,
+        //     name: data.type||data.grade,
+        //     brance: data.subject||data.brance,
+        //     grade: data.year||data.gradeScore,
+        //     status: "0"
+        // }
+        // dispatch(addHistory(education))
     };
 
     return (
         <Fragment>
-            {screens.xs || (screens.sm && !screens.md) ? <Header title="เพิ่มข้อมูล" pageBack="/tutor/profile"/> : null}
+            {isMobile() && <Header title="เพิ่มข้อมูล" pageBack="/tutor/1"/> }
             <div className={style.body}>
                 <form id="myform" onSubmit={handleSubmit(onSubmit)}>
                     <Row justify="center" >
@@ -166,7 +165,7 @@ export default function AddEducation() {
                             {errors.image && <p className="error-input">{errors.image.message}</p>}
                         </Col>
                         <Col xl={type === "test" ? 24 : 10} md={type === "test" ? 24 : 20} sm={20} xs={24} className={style.marginTop + " " + style.alignCenter}>
-                            <Button className="buttonColor backgroundMain" size="large" shape="round" style={{ width: "120px", marginTop: "40px" }} htmlType="submit">บันทึก</Button>
+                            <Button className="buttonColor backgroundOrange" size="large" shape="round" style={{ width: "120px", marginTop: "40px" }} htmlType="submit">บันทึก</Button>
                         </Col>
                     </Row>
                 </form>

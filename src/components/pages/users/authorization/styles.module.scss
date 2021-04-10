@@ -1,12 +1,12 @@
-$white: #FFFFFF;
-$main : #F26419;
+@import "../../../../stylesDefault.module.scss";
+
 .white{
     color:$white !important
 }
 
 .h1{
   @extend .white;
-  font-size: 50px;
+  @extend .titleH1;
   font-weight: 700;
 }
 
@@ -34,10 +34,11 @@ $main : #F26419;
   @extend .alignCenterPage;
   height: 100vh;
   justify-content: center;
-  background-color: $main;
+  background-color: $orange;
 }
 
 .buttonText{
+  @extend .paddingBottomBody;
   color:$white  !important;
 }
 
@@ -46,13 +47,14 @@ $main : #F26419;
 }
 
 .title {
+  @extend .textNormal;
   margin-right: auto;
   margin-top: 0.6rem;
   color:$white
 }
 
 .iconStyle{
-  font-size:50px;
+  @extend .iconLargeRegister;
   margin-bottom : 0.6rem
 }
 

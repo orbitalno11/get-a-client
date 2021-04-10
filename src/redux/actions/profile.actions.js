@@ -1,44 +1,39 @@
-import { sizeModal } from "../../components/modal/SizeModal"
-import { typeModal } from "../../components/modal/TypeModal"
-import apiGetA from "../../utils/setAxios"
 import { profileConstants } from "../constants"
-import { loadingActions } from "./loading.actions"
-import { modalAction } from "./modal.actions"
 
 const data =
 {
     firstname: "พิคาชู",
-    lastname: "หนูเทพซาโตชิ",
-    sex: 1,
+    lastname : "หนูเทพซาโตชิ",
+    sex : 1,
     coin: "1000",
     place: "บางมด, ทุ่งครุ",
-    introduction: "แนะนำตัว",
+    introduction : "แนะนำตัว",
     contact: {
         facebook: "Picacha",
-        email: "Picacha.k@gmail.com",
-        line: "Picacha",
-        phone: "09123456"
+        email : "Picacha.k@gmail.com",
+        line : "Picacha",
+        phone : "09123456"
     },
-    grade: "10",
+    grade : "10",
     course: {
         tutor:
             [
                 {
-                    name: "หนูเทพซาโตชิ",
-                    place: "บางมด, ทุ่งครุ",
-                    subject: "ชีววิทยา",
-                    date: "1 มกราคม 2563"
+                    name :  "หนูเทพซาโตชิ",
+                    place : "บางมด, ทุ่งครุ",
+                    subject : "ชีววิทยา" ,
+                    date : "1 มกราคม 2563"
                 },
                 {
-                    name: "พิคาชู หนูเทพซาโตชิ",
-                    place: "บางมด, ทุ่งครุ",
-                    subject: "ชีววิทยา",
-                    date: "1 มกราคม 2563"
+                    name :  "พิคาชู หนูเทพซาโตชิ",
+                    place : "บางมด, ทุ่งครุ",
+                    subject : "ชีววิทยา" ,
+                    date : "1 มกราคม 2563"
                 }
             ],
-        course: []
+        course : []
     },
-    history: [
+    history : [
         {
             type: "education",
             name: "โรงชื่อยาว",
@@ -69,15 +64,14 @@ function getProfile() {
             dispatch(failure(err.response.data.message.message))
         })
     }
-    function success(data) { return { type: profileConstants.GET_PROFILE_SUCCESS, payload: data } }
-    function failure(err) { return { type: profileConstants.GET_PROFILE_FAILURE, payload: err } }
 }
 
-function getHandleProfile() {
-    return async dispatch => {
-        dispatch(success(data))
+export const getHandleProfile = () => async (dispatch) => {
+    try {
+        dispatch(setHandleProfile(data))
+    } catch (error) {
+        // todo handle error
     }
-    function success(data) { return { type: profileConstants.GET_HANDLE_PROFILE, payload: data } }
 }
 
 function updateProfileLearner(data, profileId) {
@@ -107,14 +101,20 @@ function updateProfileLearner(data, profileId) {
             }))
         })
     }
-
-    function success() { return { type: profileConstants.UPDATE_PROFILE_SUCCESS } }
-    function failure(err) { return { type: profileConstants.UPDATE_PROFILE_SUCCESS, payload : err} }
 }
 
+export const addHistory = (data) => async(dispatch) =>{
+    try{
+        dispatch(addEducation(data))
+    }catch (error){
+        // todo handle error
+    }
+}
 
-export const profileAction = {
-    getProfile,
-    getHandleProfile,
-    updateProfileLearner
+export const removeHistory = (data) => async(dispatch) =>{
+    try{
+        dispatch(removeEducation(data))
+    }catch (error){
+        // todo handle error
+    }
 }

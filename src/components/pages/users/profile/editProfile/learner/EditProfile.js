@@ -23,7 +23,7 @@ export default function EditProfile() {
     const editProfile = () => {
         return (
             <Fragment>
-                {screens.xs || (screens.sm && !screens.md) ? <Header title="แก้ไขข้อมูล" pageBack="/profile" /> : null}
+                {screens.xs || (screens.sm && !screens.md) ? <Header title="แก้ไขข้อมูล" pageBack="/learner/1" /> : null}
                 <div className={style.body}>
                     <Row justify="center">
                         <Col lg={11} md={11} sm={24}>

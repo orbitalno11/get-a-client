@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 const { useBreakpoint } = Grid;
 const { Title } = Typography;
 
-export default function ProfileIntroduce({ mainPage }) {
+export default function ProfileIntroduce({ mainPage, review}) {
     const screens = useBreakpoint();
     const data = useSelector(state => state.profile)
     const [profile, setProfile] = useState(null)
@@ -32,13 +32,13 @@ export default function ProfileIntroduce({ mainPage }) {
                         preview={false}
                     ></Image>
                     {
-                        ((screens.sm && !screens.md)|| screens.xs )  &&
+                        (!review &&((screens.sm && !screens.md)|| screens.xs )) &&
                         (
                             <div className={style.infogroup}>
                                 {
                                     mainPage &&
                                     (
-                                        <NavLink to={`/profile/tutor/history/${1}`}>
+                                        <NavLink to={`/profile/${1}`}>
                                             <Button className={style.infoButton} shape="circle" icon={<FontAwesomeIcon icon={faInfo} />} />
                                         </NavLink>
                                     )
@@ -57,10 +57,9 @@ export default function ProfileIntroduce({ mainPage }) {
                             </Title>
                         )
                     }
-
                     <span className={screens.xs || (screens.sm && !screens.md) ? style.textAlign : null}>
                         {
-                            profile && profile.introduction
+                            (!review && profile) && profile.introduction
                         }
                     </span>
                 </Col>

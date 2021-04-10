@@ -4,6 +4,14 @@ $gray : #C4C4C4;
 .cardRound{
     border: 0.2rem solid red;
     border-radius: 1.5rem;
+    cursor: pointer;
+}
+
+.cardRoundReview{
+    border: 0.15rem solid gray;
+    border-radius: 1.5rem;
+    padding : 0rem 0.5rem 0rem 0.5rem;
+    cursor: pointer;
 }
 
 .alignCenter{

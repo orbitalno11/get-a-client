@@ -3,12 +3,18 @@ import { Card, Typography, Image } from "antd";
 import styles from "./styles.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { useHistory } from "react-router";
 const { Title } = Typography;
 
 export default function CardCorseLearner({ data, profile , width}) {
+    const history = useHistory();
+
+    const redirectToCoursePage = () =>{
+        history.push("/course/1")
+    }
 
     return (
-        <Card className={styles.cardRound}>
+        <Card className={styles.cardRound} onClick={()=>{redirectToCoursePage()}}>
             <Card.Grid hoverable={false} className={styles.gridImage} >
                 <Image
                     src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"

@@ -18,15 +18,6 @@
     transform: rotate(360deg);
   }
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 /* General */
 
 .h2{
@@ -64,6 +55,10 @@
 .ant-picker,
 .ant-select{
   width: 100% !important; 
+}
+
+.ant-select-arrow{
+  display: none;
 }
 
 .ant-picker,
@@ -310,7 +305,6 @@ input :focus{
 .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before{
   background-color: #FFFFFF;
   outline: none!important;
-  border-style: none  !important;
   box-shadow: none  !important;
 }
 

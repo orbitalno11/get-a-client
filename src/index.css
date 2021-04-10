@@ -1,10 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Prompt&display=swap");
+
 @font-face {
   font-family: "FC-Iconic";
   src: local("FC-Iconic"), url("../src/components/font/FC-Iconic/FCIconicRegular.ttf") format("opentype");
 }
 
 * {
-  font-family: "FC-Iconic";
-  font-size: 1rem;
+  font-family: "FC-Iconic","Prompt", sans-serif;
+  font-size: 1.1rem;
 }
 

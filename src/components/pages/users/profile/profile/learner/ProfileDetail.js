@@ -32,7 +32,7 @@ export default function ProfileDetail() {
                     src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
                     preview={false}
                 />
-                <NavLink to="/learner/profile/edit">
+                <NavLink to="/learner/1/edit">
                     <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[18, 0]}>
                         <Title level={3} className={style.marginLeft}>{profileDetail && profileDetail.firstname}  {profileDetail && profileDetail.lastname}</Title>
                     </Badge>
@@ -68,7 +68,7 @@ export default function ProfileDetail() {
                         !screens.md &&
                         (
                             <div className={style.floatLeft}>
-                                <NavLink to="/learner/profile/edit/map">
+                                <NavLink to="/learner/1/edit/map">
                                     <Button className="backgroundBlue buttonColor" shape="round" size="middle" style={{ width: "100px" }}>แก้ไข</Button>
                                 </NavLink>
                             </div>

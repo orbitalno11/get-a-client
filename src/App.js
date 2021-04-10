@@ -41,12 +41,9 @@ import Favorite from "./components/pages/users/profile/favorite/Favorite"
 import Search from "./components/pages/users/search/Search";
 import ResultSearch from "./components/pages/users/search/ResultSearch";
 import OnlineCourseList from "./components/pages/users/onlineCourseList/OnlineCourseList"
-import { BASE_API_URL } from "./config/environmentConfig";
-import setAuthToken from "./utils/setAuthToken";
+import { setAuthToken } from "./utils/setAxios";
 import jwtDecode from "jwt-decode";
 import { userActions } from "./redux/actions";
-
-axios.defaults.baseURL = BASE_API_URL
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)

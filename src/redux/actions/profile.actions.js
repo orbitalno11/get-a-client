@@ -52,36 +52,17 @@ const data =
     ]
 }
 
-export const setProfile = (payload) =>({
-    type: profileConstants.GET_PROFILE,
-    payload: payload,
-})
-
-export const setHandleProfile = (payload) =>({
-    type: profileConstants.GET_HANDLE_PROFILE,
-    payload: payload,
-})
-
-export const setEducation = (payload) =>({
-    type: profileConstants.GET_EDUCATION,
-    payload: payload,
-})
-
-export const addEducation = (payload) =>({
-    type: profileConstants.ADD_EDUCATION,
-    payload: payload,
-})
-
-export const removeEducation = (payload) =>({
-    type: profileConstants.DELETE_EDUCATION,
-    payload: payload,
-})
-
-export const getProfile = () => async (dispatch) => {
-    try {
-        dispatch(setProfile(data))
-    } catch (error) {
-        // todo handle error
+function getProfile() {
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiGetA.get("/me").then(res => {
+            dispatch(loadingActions.stopLoading())
+            const profileDetail = res.data.data
+            dispatch(success(profileDetail))
+        }).catch(err => {
+            dispatch(loadingActions.stopLoading())
+            dispatch(failure(err.response.data.message.message))
+        })
     }
 }
 
@@ -93,12 +74,32 @@ export const getHandleProfile = () => async (dispatch) => {
     }
 }
 
-export const editProfileDetail = () => async (dispatch) =>{
-    // @parm profile
-    try {
-        dispatch(setProfile(data))
-    } catch (error) {
-        // todo handle error
+function updateProfileLearner(data, profileId) {
+    
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiGetA.post(`/me`,data, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            }
+        }).then(() => {
+            dispatch(success())
+            dispatch(getProfile(profileId))
+            dispatch(modalAction.openModal({
+                text: "แก้ไขข้อมูลสำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.corrent
+            }))
+
+        }).catch((err) => {
+            dispatch(loadingActions.stopLoading())
+            dispatch(failure(err.response.data.message.message))
+            dispatch(modalAction.openModal({
+                text: "แก้ไขข้อมูลไม่สำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.wrong
+            }))
+        })
     }
 }
 

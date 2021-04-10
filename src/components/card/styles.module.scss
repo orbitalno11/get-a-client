@@ -60,6 +60,11 @@
     width: auto;
 }
 
+.imageClip{
+    height: 6rem;
+    width: auto;
+}
+
 .borderGrid{
     -webkit-box-shadow :none;
     padding: 0px !important;
@@ -79,6 +84,14 @@
 .icon {
   @extend .iconSmall;
   color: $gray;
+}
+
+.gridRow{
+    @extend .borderGrid;
+    width: 70% !important;
+    flex-flow: column;
+    align-items: flex-start;
+    padding-left: 2.5rem!important;
 }
 
 .gridRow{

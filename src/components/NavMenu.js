@@ -23,6 +23,7 @@ const NavMenu = () => {
     const statusTutor = auth.role === 2
     const status = auth.isAuthenticated
     const admin = auth.role === 0
+    const profileURL = "/learner/"+auth.profile
     const UserMenu = () => {
 
         return (
@@ -48,8 +49,8 @@ const NavMenu = () => {
                 </Menu.Item>
                 {
                     status ? (
-                        <Menu.Item key="/learner/1" >
-                            <NavLink to="/learner/1">
+                        <Menu.Item key={ profileURL } >
+                            <NavLink to={ profileURL }>
                                 โปรไฟล์
                         </NavLink>
                         </Menu.Item>
@@ -133,7 +134,7 @@ const NavMenu = () => {
                     </NavLink>
                 </Col>
                 <Col span={4} className="iconMenu">
-                    <NavLink to="/learner/1">
+                    <NavLink to={ profileURL }>
                         <FontAwesomeIcon icon={faUserCircle} className="icon" />
                     </NavLink>
                 </Col>

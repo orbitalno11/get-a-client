@@ -1,131 +1,192 @@
-import { Badge, Col, Image, Row, Button } from "antd"
-import React, { Fragment, useCallback, useEffect, useState } from "react"
+import { Badge, Col, DatePicker, Image, Row, Select } from "antd"
+import React, { Fragment, useEffect, useState } from "react"
 import style from "../../styles.module.scss"
 import {
     faEdit
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { profileSchema } from "../../../../../../validation/validation";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { editProfileDetail, getProfile } from "../../../../../../redux/actions/profile.actions";
+import { Controller } from "react-hook-form";
+import { useSelector } from "react-redux";
+import { useCallback } from "react";
+import { defaultValue } from "../../../../../defaultValue";
+import findKeyObject from "../../../../../defaultFunction/findKeyObject";
+import moment from 'moment';
+import ModalComponent from "../../../../../modal/ModalComponent";
+import InputComponents from "../../../../../input/InputComponets";
 
-export default function EditProfileDetail({ refs, error }) {
-    const [image, setimage] = useState("https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png")
-    const { register, handleSubmit, errors } = useForm({
-        resolver: yupResolver(profileSchema),
-    });
-    const dispatch = useDispatch()
+export default function EditProfileDetail({ register, error, controls, reset }) {
     const profile = useSelector(state => state.profile)
-    const [detailProfile, setDetailProfile] = useState(null)
+    const detailProfile = profile.profile && profile.profile
+    const [image, setimage] = useState("")
+
 
     const fetchProfile = useCallback(() => {
-        dispatch(getProfile())
-    }, [dispatch])
+        if (profile.profile) {
+            setimage(profile.profile.profileUrl)
+            reset({
+                firstname: detailProfile.firstname,
+                lastname: detailProfile.lastname,
+                gender: findKeyObject(defaultValue.gender, detailProfile.gender),
+                dateOfBirth: moment(detailProfile.dateOfBirth, defaultValue.dateFormat),
+                grade: 12,
+                email: detailProfile.email,
+                facebook: detailProfile.contact.facebookUrl,
+                line: detailProfile.contact.lineId,
+                phoneNumber: detailProfile.contact.phoneNumber
+            })
+        }
+    }, [profile])
 
     useEffect(() => {
         fetchProfile()
     }, [fetchProfile])
 
-    useEffect(()=>{
-        setDetailProfile(profile.profile)
-    },[profile])
-
     const onChange = data => {
-        setimage(URL.createObjectURL(data.target.files[0]))
+        const fileInput = data.target.files[0]
+        if (fileInput) {
+            const imageURL = URL.createObjectURL(fileInput)
+            setimage({ file: fileInput, imageURL: imageURL })
+        }
     }
 
-    const onSubmit = (value) => {
-        dispatch(editProfileDetail(value))
-    }
-
-    const editForm = () => {
-        return (
-            detailProfile !== null ?
-                (
-                    <div>
-                        <div className={style.alignCenter}>
-                            <div className="imageUpload" >
-                                <label htmlFor="file-input" >
-                                    <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[2, 0]}>
-                                        <Image
-                                            className={style.imageProfile}
-                                            src={image}
-                                            preview={false}
-                                        />
-                                    </Badge>
-                                </label>
-                                <input id="file-input" name="profile" type="file" ref={register} onChange={onChange} />
-                            </div>
-                        </div>
-                        <Row justify="space-around" align="middle">
-                            <Col span={18} className={style.marginTop20}>
-                                <p>ชื่อ</p>
-                                <input className="input" type="text" name="firstname" ref={refs ? refs : register} defaultValue={detailProfile !== null && detailProfile.firstname} />
-                                {
-                                    error ?
-                                        error.firstname && <p className="error-input">{error.firstname.message}</p>
-                                        :
-                                        errors.firstname && <p className="error-input">{errors.firstname.message}</p>
-                                }
-                            </Col>
-                            <Col span={18} className={style.marginTop20}>
-                                <p>นามสกุล</p>
-                                <input className="input" type="text" name="lastname" ref={refs ? refs : register} defaultValue={detailProfile !== null && detailProfile.lastname} />
-                                {
-                                    error ?
-                                        error.lastname && <p className="error-input">{error.lastname.message}</p>
-                                        :
-                                        errors.lastname && <p className="error-input">{errors.lastname.message}</p>
-                                }
-                            </Col>
-                            <Col span={18} className={style.marginTop20}>
-                                <p>อีเมล</p>
-                                <input className="input" type="text" name="email" ref={refs ? refs : register} defaultValue={detailProfile !== null && detailProfile.contact.email} />
-                                {
-                                    error ?
-                                        error.email && <p className="error-input">{error.email.message}</p>
-                                        :
-                                        errors.email && <p className="error-input">{errors.email.message}</p>
-                                }
-                            </Col>
-                            <Col span={18} className={style.marginTop20}>
-                                <p>ระดับชั้น</p>
-                                <input className="input" type="text" name="grade" ref={refs ? refs : register} defaultValue={detailProfile !== null && detailProfile.grade} />
-                                {
-                                    error ?
-                                        error.grade && <p className="error-input">{error.grade.message}</p>
-                                        :
-                                        errors.grade && <p className="error-input">{errors.grade.message}</p>
-                                }
-                            </Col>
-                        </Row>
-                        <Row className={style.alignCenter}>
-                            {
-                                !refs &&
-                                (
-                                    <Col className={style.marginTop20}>
-                                        <Button className="backgroundOrange buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
-                                    </Col>
-                                )
-                            }
-                        </Row>
-                    </div>
-                )
-                : null
-        )
-    }
     return (
         <Fragment>
-            {
-                refs ?
-                    (
-                        <div>{editForm()}</div>
-                    ) : (
-                        <form className={refs ? style.body : null} onSubmit={handleSubmit(onSubmit)}>{editForm()}</form>
-                    )
-            }
+            <ModalComponent />
+            <div className={style.alignCenter}>
+                <div className="imageUpload" >
+                    <label htmlFor="file-input" >
+                        <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[2, 0]}>
+                            <Image
+                                className={style.imageProfile}
+                                src={image.imageURL ? image.imageURL : image}
+                                preview={false}
+                            />
+                        </Badge>
+                    </label>
+                    <input id="file-input" name="image" type="file" ref={register && register} onChange={onChange} />
+                </div>
+            </div>
+
+            <Row justify="space-around" align="middle">
+                <Col span={18} className={style.marginTop20}>
+                    <InputComponents
+                        title="ชื่อ"
+                        type="text"
+                        name="firstname"
+                        register={register}
+                        error={error.firstname}
+                        placeholder="ชื่อ"
+                    />
+                </Col>
+                <Col span={18} className={style.marginTop20}>
+                    <InputComponents
+                        title="นามสกุล"
+                        type="text"
+                        name="lastname"
+                        register={register}
+                        error={error.lastname}
+                        placeholder="นามสกุล"
+                    />
+                </Col>
+                <Col span={18} className={style.marginTop20}>
+                    <p>เพศ</p>
+                    <Controller
+                        as={
+                            <Select name="gender"  >
+                                {
+                                    defaultValue.gender && Object.entries(defaultValue.gender).map(([key, value]) => (
+                                        <Select.Option key={value} value={value}>{key}</Select.Option>
+                                    ))
+                                }
+                            </Select>
+                        }
+                        name="gender"
+                        control={controls}
+                        placeholder="เพศ"
+                        defaultValue={2}
+                    />
+                    {
+                        error && error.gender && <p className="error-input">{error.gender.message}</p>
+                    }
+                </Col>
+                <Col className={style.marginTop20} span={18} >
+                    <p>วันเดือนปีเกิด</p>
+                    <Controller
+                        as={
+                            <DatePicker placeholder="" />
+                        }
+                        name="dateOfBirth"
+                        placeholder="วันเดือนปีเกิด"
+                        control={controls}
+                        defaultValue={moment()}
+                    />
+                    {
+                        error.dateOfBirth && <p className="error-input">{error.dateOfBirth.message}</p>
+                    }
+                </Col>
+                <Col span={18} className={style.marginTop20}>
+                    <p>ระดับชั้น</p>
+                    <Controller
+                        as={
+                            <Select name="grade"  >
+                                {
+                                    defaultValue.grade && Object.entries(defaultValue.grade).map(([key, value]) => (
+                                        <Select.Option key={value} value={value}>{key}</Select.Option>
+                                    ))
+                                }
+                            </Select>
+                        }
+                        name="grade"
+                        placeholder="ระดับชั้น"
+                        control={controls}
+                        defaultValue={1}
+                    />
+                    {
+                        error && error.grade && <p className="error-input">{error.grade.message}</p>
+                    }
+                </Col>
+                <Col span={18} className={style.marginTop20}>
+                    <InputComponents
+                        title="อีเมล"
+                        type="email"
+                        name="email"
+                        register={register}
+                        error={error.email}
+                        placeholder="อีเมล"
+                    />
+                </Col>
+                <Col span={18} className={style.marginTop20}>
+                    <InputComponents
+                        title="Facebook"
+                        type="text"
+                        name="facebook"
+                        register={register}
+                        error={error.facebook}
+                        placeholder="facebook"
+                    />
+                </Col>
+                <Col span={18} className={style.marginTop20}>
+                    <InputComponents
+                        title="ID Line"
+                        type="text"
+                        name="line"
+                        register={register}
+                        error={error.line}
+                        placeholder="ID Line"
+                    />
+
+                </Col>
+                <Col span={18} className={style.marginTop20}>
+                    <InputComponents
+                        title="เบอร์โทรศัพท์"
+                        type="text"
+                        name="phoneNumber"
+                        register={register}
+                        error={error.phoneNumber}
+                        placeholder="เบอร์โทรศัพท์"
+                    />
+                </Col>
+            </Row>
         </Fragment>
     )
 }

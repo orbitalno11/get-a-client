@@ -39,11 +39,13 @@ const type = {
     "กลุ่ม":0,
     "เดี่ยว":1,
 }
+const dateFormat = "YYYY-MM-DD"
 
 export const defaultValue = {
     gender,
     grade,
     subject,
     dateOfWeek,
-    type
+    type,
+    dateFormat
 }

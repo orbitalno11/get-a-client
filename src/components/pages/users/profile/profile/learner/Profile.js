@@ -5,41 +5,56 @@ import ProfileDetail from "./ProfileDetail"
 import ProfileCourse from "./ProfileCourse"
 import Header from "../../../../../headerMobile/Header"
 import { useDispatch } from "react-redux"
-import { getProfile } from "../../../../../../redux/actions/profile.actions";
+import { profileAction } from "../../../../../../redux/actions/profile.actions";
 import isMobile from "../../../../../isMobile/isMobile"
+import { useSelector } from "react-redux"
 const { useBreakpoint } = Grid;
+import ModalComponent from "../../../../../modal/ModalComponent";
 
 export default function ProfileLearner() {
     const screens = useBreakpoint();
+    const auth = useSelector(state => state.auth)
+    const loading = useSelector(state => state.loading.loading)
     const dispatch = useDispatch()
 
     const fetchProfile = useCallback(() => {
-        dispatch(getProfile())
+        dispatch(profileAction.getProfile(auth.role === 1 && auth.profile))
     }, [dispatch])
 
     useEffect(() => {
         fetchProfile()
     }, [fetchProfile])
 
+
     return (
         <Fragment>
-            {isMobile() && <Header title="โปรไฟล์" /> }
-            <Row className={style.body}>
-                <Col xs={24} sm={24} md={11} lg={9} xl={8} >
-                    <ProfileDetail />
-                </Col>
-                {
-                    screens.md &&
-                    (
-                        <Col lg={1} xl={2} md={1}>
-                            <Divider type="vertical" style={{ height: "100%" }} />
-                        </Col>
-                    )
-                }
-                <Col xs={24} sm={24} md={12} lg={14} xl={14} >
-                    <ProfileCourse />
-                </Col>
-            </Row>
+             {isMobile() && <Header title="โปรไฟล์" /> }
+             <ModalComponent />
+            {
+                !loading ? (
+                    <Fragment>
+                        <Row className={style.body}>
+                            <Col xs={24} sm={24} md={11} lg={9} xl={8} >
+                                <ProfileDetail />
+                            </Col>
+                            {
+                                screens.md &&
+                                (
+                                    <Col lg={1} xl={2} md={1}>
+                                        <Divider type="vertical" style={{ height: "100%" }} />
+                                    </Col>
+                                )
+                            }
+                            <Col xs={24} sm={24} md={12} lg={14} xl={14} >
+                                <ProfileCourse />
+                            </Col>
+                        </Row>
+                    </Fragment>
+                ) : (
+                    <div className={style.loader}></div>
+                )
+            }
+
         </Fragment>
     )
 }

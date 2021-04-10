@@ -10,7 +10,7 @@ import EducationTutor from "../../../../../../educationTutor/EducationTutor";
 import ProfileIntroduce from "./ProfileIntroduce";
 import Header from "../../../../../../headerMobile/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { getHandleProfile } from "../../../../../../../redux/actions/profile.actions";
+import { profileAction } from "../../../../../../../redux/actions/profile.actions";
 import isMobile from "../../../../../../isMobile/isMobile";
 
 const { Title } = Typography;
@@ -21,7 +21,7 @@ export default function ProfileDetail({ mainPage }) {
     const [profile, setProfile] = useState(null)
 
     const fetchProfile = useCallback(() => {
-        dispatch(getHandleProfile())
+        dispatch(profileAction.getHandleProfile())
     }, [dispatch])
 
     useEffect(() => {

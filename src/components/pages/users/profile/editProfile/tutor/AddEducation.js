@@ -10,7 +10,7 @@ import { profileTestSchema, profileEducationSchema } from "../../../../../../val
 import { yupResolver } from "@hookform/resolvers/yup";
 import Header from "../../../../../headerMobile/Header";
 import { useDispatch } from "react-redux";
-import { addHistory, getProfile } from "../../../../../../redux/actions/profile.actions";
+import { profileAction } from "../../../../../../redux/actions/profile.actions";
 import isMobile from "../../../../../isMobile/isMobile";
 
 const { Title } = Typography;
@@ -21,7 +21,7 @@ export default function AddEducation() {
     const dispatch = useDispatch()
 
     const fetchProfile = useCallback(()=>{
-        dispatch(getProfile())
+        dispatch(profileAction.getProfile())
     },[dispatch])
 
     useEffect(() => {
@@ -43,15 +43,15 @@ export default function AddEducation() {
         setimageName(value.target.files[0].name)
     }
 
-    const onSubmit = data => {
-        const education = {
-            type: data.type,
-            name: data.type||data.grade,
-            brance: data.subject||data.brance,
-            grade: data.year||data.gradeScore,
-            status: "0"
-        }
-        dispatch(addHistory(education))
+    const onSubmit = () => {
+        // const education = {
+        //     type: data.type,
+        //     name: data.type||data.grade,
+        //     brance: data.subject||data.brance,
+        //     grade: data.year||data.gradeScore,
+        //     status: "0"
+        // }
+        // dispatch(addHistory(education))
     };
 
     return (

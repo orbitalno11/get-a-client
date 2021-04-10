@@ -35,9 +35,12 @@ const dateOfWeek = {
     "วันเสาร์":7
 }
 
+const dateFormat = "YYYY-MM-DD"
+
 export const defaultValue = {
     gender,
     grade,
     subject,
-    dateOfWeek
+    dateOfWeek,
+    dateFormat
 }

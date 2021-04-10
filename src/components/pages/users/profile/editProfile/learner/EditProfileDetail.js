@@ -1,49 +1,51 @@
-import { Badge, Col, Image, Row, Button } from "antd"
-import React, { Fragment, useCallback, useEffect, useState } from "react"
+import { Badge, Col, DatePicker, Image, Row, Select } from "antd"
+import React, { Fragment, useEffect, useState } from "react"
 import style from "../../styles.module.scss"
 import {
     faEdit
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { profileSchema } from "../../../../../../validation/validation";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { editProfileDetail, getProfile } from "../../../../../../redux/actions/profile.actions";
+import { Controller } from "react-hook-form";
+import { useSelector } from "react-redux";
+import { useCallback } from "react";
+import { defaultValue } from "../../../../../defaultValue";
+import findKeyObject from "../../../../../defaultFunction/findKeyObject";
+import moment from 'moment';
+// import { profileAction } from "../../../../../../redux/actions/profile.actions";
 
-export default function EditProfileDetail({ refs, error }) {
-    const [image, setimage] = useState("https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png")
-    const { register, handleSubmit, errors } = useForm({
-        resolver: yupResolver(profileSchema),
-    });
-    const dispatch = useDispatch()
+export default function EditProfileDetail({ register, error, controls }) {
+    const [image, setimage] = useState("")
+
+    // const dispatch = useDispatch()
     const profile = useSelector(state => state.profile)
     const [detailProfile, setDetailProfile] = useState(null)
 
     const fetchProfile = useCallback(() => {
-        dispatch(getProfile())
-    }, [dispatch])
+        if (profile.profile) {
+            setDetailProfile(profile.profile)
+            setimage(profile.profile.profileUrl)
+        }
+    }, [profile])
+
 
     useEffect(() => {
         fetchProfile()
     }, [fetchProfile])
 
-    useEffect(()=>{
-        setDetailProfile(profile.profile)
-    },[profile])
-
     const onChange = data => {
-        setimage(URL.createObjectURL(data.target.files[0]))
+        const fileInput = data.target.files[0]
+        if (fileInput) {
+            const imageURL = URL.createObjectURL(fileInput)
+            setimage({ file: fileInput, imageURL: imageURL })
+        }
     }
 
-    const onSubmit = (value) => {
-        dispatch(editProfileDetail(value))
-    }
-
-    const editForm = () => {
-        return (
-            detailProfile !== null ?
+    return (
+        <Fragment>
+            {
+                detailProfile &&
                 (
+
                     <div>
                         <div className={style.alignCenter}>
                             <div className="imageUpload" >
@@ -51,80 +53,115 @@ export default function EditProfileDetail({ refs, error }) {
                                     <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[2, 0]}>
                                         <Image
                                             className={style.imageProfile}
-                                            src={image}
+                                            src={image.imageURL ? image.imageURL : image}
                                             preview={false}
                                         />
                                     </Badge>
                                 </label>
-                                <input id="file-input" name="profile" type="file" ref={register} onChange={onChange} />
+                                <input id="file-input" name="image" type="file" ref={register && register} onChange={onChange} />
                             </div>
                         </div>
+
                         <Row justify="space-around" align="middle">
                             <Col span={18} className={style.marginTop20}>
                                 <p>ชื่อ</p>
-                                <input className="input" type="text" name="firstname" ref={refs ? refs : register} defaultValue={detailProfile !== null && detailProfile.firstname} />
+                                <input className="input" type="text" name="firstname" ref={register && register} defaultValue={detailProfile && detailProfile.firstname} />
                                 {
-                                    error ?
-                                        error.firstname && <p className="error-input">{error.firstname.message}</p>
-                                        :
-                                        errors.firstname && <p className="error-input">{errors.firstname.message}</p>
+                                    error && error.firstname && <p className="error-input">{error.firstname.message}</p>
                                 }
                             </Col>
                             <Col span={18} className={style.marginTop20}>
                                 <p>นามสกุล</p>
-                                <input className="input" type="text" name="lastname" ref={refs ? refs : register} defaultValue={detailProfile !== null && detailProfile.lastname} />
+                                <input className="input" type="text" name="lastname" ref={register && register} defaultValue={detailProfile && detailProfile.lastname} />
                                 {
-                                    error ?
-                                        error.lastname && <p className="error-input">{error.lastname.message}</p>
-                                        :
-                                        errors.lastname && <p className="error-input">{errors.lastname.message}</p>
+                                    error && error.firstname && <p className="error-input">{error.lastname.message}</p>
                                 }
                             </Col>
                             <Col span={18} className={style.marginTop20}>
-                                <p>อีเมล</p>
-                                <input className="input" type="text" name="email" ref={refs ? refs : register} defaultValue={detailProfile !== null && detailProfile.contact.email} />
+                                <p>เพศ</p>
+                                <Controller
+                                    as={
+                                        <Select name="gender"  >
+                                            {
+                                                defaultValue.gender && Object.entries(defaultValue.gender).map(([key, value]) => (
+                                                    <Select.Option key={value} value={value}>{key}</Select.Option>
+                                                ))
+                                            }
+                                        </Select>
+                                    }
+                                    name="gender"
+                                    control={controls}
+                                    defaultValue={detailProfile.gender && findKeyObject(defaultValue.gender,detailProfile.gender)}
+                                />
                                 {
-                                    error ?
-                                        error.email && <p className="error-input">{error.email.message}</p>
-                                        :
-                                        errors.email && <p className="error-input">{errors.email.message}</p>
+                                    error && error.email && <p className="error-input">{error.grade.message}</p>
+                                }
+                            </Col>
+                            <Col className={style.marginTop20} span={18} >
+                                <p>วันเดือนปีเกิด</p>
+                                <Controller
+                                    as={
+                                        <DatePicker placeholder="" />
+                                    }
+                                    name="dateOfBirth"
+                                    control={controls}
+                                    defaultValue={moment(detailProfile.dateOfBirth && detailProfile.dateOfBirth, defaultValue.dateFormat)}
+                                />
+                                {
+                                    error.dateOfBirth && <p className="error-input">{error.dateOfBirth.message}</p>
                                 }
                             </Col>
                             <Col span={18} className={style.marginTop20}>
                                 <p>ระดับชั้น</p>
-                                <input className="input" type="text" name="grade" ref={refs ? refs : register} defaultValue={detailProfile !== null && detailProfile.grade} />
+                                <Controller
+                                    as={
+                                        <Select name="grade"  >
+                                            {
+                                                defaultValue.grade && Object.entries(defaultValue.grade).map(([key, value]) => (
+                                                    <Select.Option key={value} value={value}>{key}</Select.Option>
+                                                ))
+                                            }
+                                        </Select>
+                                    }
+                                    name="grade"
+                                    control={controls}
+                                    defaultValue={null}
+                                />
                                 {
-                                    error ?
-                                        error.grade && <p className="error-input">{error.grade.message}</p>
-                                        :
-                                        errors.grade && <p className="error-input">{errors.grade.message}</p>
+                                    error && error.grade && <p className="error-input">{error.grade.message}</p>
+                                }
+                            </Col>
+                            <Col span={18} className={style.marginTop20}>
+                                <p>อีเมล</p>
+                                <input className="input" type="text" name="email" ref={register && register} defaultValue={detailProfile && detailProfile.email} />
+                                {
+                                    error && error.email && <p className="error-input">{error.email.message}</p>
+                                }
+                            </Col>
+                            <Col span={18} className={style.marginTop20}>
+                                <p>Facebook</p>
+                                <input className="input" type="text" name="facebook" ref={register && register} defaultValue={detailProfile && detailProfile.contact.facebookUrl} />
+                                {
+                                    error && error.facebook && <p className="error-input">{error.facebook.message}</p>
+                                }
+                            </Col>
+                            <Col span={18} className={style.marginTop20}>
+                                <p>ID Line</p>
+                                <input className="input" type="text" name="line" ref={register && register} defaultValue={detailProfile && detailProfile.contact.lineId} />
+                                {
+                                    error && error.line && <p className="error-input">{error.line.message}</p>
+                                }
+                            </Col>
+                            <Col span={18} className={style.marginTop20}>
+                                <p>เบอร์โทรศัพท์</p>
+                                <input className="input" type="text" name="phoneNumber" ref={register && register} defaultValue={detailProfile && detailProfile.contact.phoneNumber} />
+                                {
+                                    error && error.phoneNumber && <p className="error-input">{error.phoneNumber.message}</p>
                                 }
                             </Col>
                         </Row>
-                        <Row className={style.alignCenter}>
-                            {
-                                !refs &&
-                                (
-                                    <Col className={style.marginTop20}>
-                                        <Button className="backgroundOrange buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
-                                    </Col>
-                                )
-                            }
-                        </Row>
                     </div>
                 )
-                : null
-        )
-    }
-    return (
-        <Fragment>
-            {
-                refs ?
-                    (
-                        <div>{editForm()}</div>
-                    ) : (
-                        <form className={refs ? style.body : null} onSubmit={handleSubmit(onSubmit)}>{editForm()}</form>
-                    )
             }
         </Fragment>
     )

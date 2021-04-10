@@ -89,7 +89,7 @@ export default function ProfileCoruse() {
         <div className={screens.md ? null : style.subProfile}>
             <Title level={screens.md ? 3 : 5}>คอร์สที่เคยเรียน</Title>
             <Row justify="space-around" align="middle" className={style.marginTop20}>
-                <TabHorizontal tabStart={tabStart} tabDetail={tabDetail} />
+                <TabHorizontal type="tab" tabStart={tabStart} tabDetail={tabDetail} />
             </Row>
         </div>
     )

@@ -9,10 +9,6 @@
   --green-color : #00B900;
 }
 
-body{
-  min-width: 480px;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -60,6 +56,10 @@ body{
   width: 100% !important; 
 }
 
+.ant-select-arrow{
+  display: none;
+}
+
 .ant-picker,
 .ant-select-selector {
   border: none !important;
@@ -92,6 +92,7 @@ input :focus{
 .buttonColor{
   border-style: none  !important;
   color:var(--white-color)  !important;
+  height: auto;
 }
 
 .backgroundYellow{
@@ -265,7 +266,7 @@ input :focus{
 @media only screen and (max-width: 768px) {
   .big-button{
     width : 100%;
-    height : 3.75rem ;
+    height : 10rem ;
     margin-top: 1.25rem;
   }
 
@@ -295,7 +296,6 @@ input :focus{
 .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before{
   background-color: #FFFFFF;
   outline: none!important;
-  border-style: none  !important;
   box-shadow: none  !important;
 }
 

@@ -1,5 +1,5 @@
-$white: #FFFFFF;
-$main : #F26419;
+@import "../profile/styles.module.scss";
+
 .white{
     color:$white !important
 }
@@ -34,7 +34,7 @@ $main : #F26419;
   @extend .alignCenterPage;
   height: 100vh;
   justify-content: center;
-  background-color: $main;
+  background-color: $orange;
 }
 
 .buttonText{

@@ -30,3 +30,5 @@ package-lock.json
 firebase.json
 .firebaserc
 .firebase
+
+.env

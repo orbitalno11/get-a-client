@@ -10,7 +10,7 @@ import { profileTestSchema, profileEducationSchema } from "../../../../../../val
 import { yupResolver } from "@hookform/resolvers/yup";
 import Header from "../../../../../headerMobile/Header";
 import { useDispatch } from "react-redux";
-import { addHistory, getProfile } from "../../../../../../redux/actions/profileActions";
+import { addHistory, getProfile } from "../../../../../../redux/actions/profile.actions";
 const { useBreakpoint } = Grid;
 
 const { Title } = Typography;
@@ -57,7 +57,7 @@ export default function AddEducation() {
 
     return (
         <Fragment>
-            {screens.xs || (screens.sm && !screens.md) ? <Header title="เพิ่มข้อมูล" pageBack="/tutor/profile"/> : null}
+            {screens.xs || (screens.sm && !screens.md) ? <Header title="เพิ่มข้อมูล" pageBack="/tutor/1"/> : null}
             <div className={style.body}>
                 <form id="myform" onSubmit={handleSubmit(onSubmit)}>
                     <Row justify="center" >
@@ -166,7 +166,7 @@ export default function AddEducation() {
                             {errors.image && <p className="error-input">{errors.image.message}</p>}
                         </Col>
                         <Col xl={type === "test" ? 24 : 10} md={type === "test" ? 24 : 20} sm={20} xs={24} className={style.marginTop + " " + style.alignCenter}>
-                            <Button className="buttonColor backgroundMain" size="large" shape="round" style={{ width: "120px", marginTop: "40px" }} htmlType="submit">บันทึก</Button>
+                            <Button className="buttonColor backgroundOrange" size="large" shape="round" style={{ width: "120px", marginTop: "40px" }} htmlType="submit">บันทึก</Button>
                         </Col>
                     </Row>
                 </form>

@@ -1,16 +1,16 @@
-import React, { Fragment, useEffect, useState } from "react"
-import { Typography, Image, Badge, Button, Grid } from "antd";
+import React, { Fragment, useEffect, useState } from 'react'
+import { Typography, Image, Badge, Button, Grid } from 'antd';
 import {
     faCoins,
     faMapMarkerAlt,
     faBookReader,
     faEdit
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import style from "../../styles.module.scss"
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
-const { Title } = Typography;
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import style from '../../styles.module.scss'
+import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+const { Title,Link } = Typography;
 const { useBreakpoint } = Grid;
 
 export default function ProfileDetail() {
@@ -32,7 +32,7 @@ export default function ProfileDetail() {
                     src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
                     preview={false}
                 />
-                <NavLink to="/learner/profile/edit">
+                <NavLink to="/learner/1/edit">
                     <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[18, 0]}>
                         <Title level={3} className={style.marginLeft}>{profileDetail && profileDetail.firstname}  {profileDetail && profileDetail.lastname}</Title>
                     </Badge>
@@ -41,13 +41,22 @@ export default function ProfileDetail() {
             <div className={style.subProfile}>
                 <div className={style.TitleCoin}>
                     <Title level={5}>เหรียญของคุณ</Title>
+                    <div className={style.floatLeft}>
+                        <Link href="/historycoin">
+                            <Button type="link" style={{ width: "100px",color:"GrayText" }}>ดูประวัติเหรียญ</Button>
+                        </Link>
+                    </div>
+                    
                 </div>
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faCoins} className={style.iconcoin} />
                     <span>{profileDetail && profileDetail.coin}</span>
                     <div className={style.floatLeft}>
-                        <Button className="backgroundYellow buttonColor" shape="round" size="middle" style={{ width: "100px" }}>ซื้อเหรียญ</Button>
+                        <Link href="/coin">
+                            <Button className="backgroundGreen buttonColor" shape="round" size="middle"  style={{ width: "100px" }}>ซื้อเหรียญ</Button>
+                        </Link>
                     </div>
+
                 </div>
             </div>
             <div className={style.subProfile}>
@@ -59,7 +68,7 @@ export default function ProfileDetail() {
                         !screens.md &&
                         (
                             <div className={style.floatLeft}>
-                                <NavLink to="/learner/profile/edit/map">
+                                <NavLink to="/learner/1/edit/map">
                                     <Button className="backgroundBlue buttonColor" shape="round" size="middle" style={{ width: "100px" }}>แก้ไข</Button>
                                 </NavLink>
                             </div>

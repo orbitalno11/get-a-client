@@ -1,6 +1,6 @@
 import React from 'react';
-import { Modal, Input, Space,Row, Col,Button } from 'antd';
-import { DeleteOutlined,ExclamationCircleOutlined,SendOutlined  } from '@ant-design/icons';
+import { Modal,Space,Button } from 'antd';
+import { DeleteOutlined} from '@ant-design/icons';
 import './Style.css';
 
 const { confirm } = Modal;
@@ -18,10 +18,10 @@ function showDescription() {
     // okType: 'success',
     cancelText: 'ยกเลิก',
     onOk() {
-      console.log('Ok');
+      // todo onOk action
     },
     onCancel() {
-      console.log('Cancel');
+      // todo onCancel action
     },
     width: 750,
   });

@@ -1,5 +1,5 @@
 
-$main : #F26419;
+@import "../profile/styles.module.scss";
 
 @mixin paddingSide($top,$right,$bottom,$left) {
     padding :$top $right $bottom $left
@@ -77,7 +77,7 @@ $main : #F26419;
     width: 3.75rem !important;
 }
 
-.iconsmall{
+.iconSmall{
     @extend .iconSubject;
     height: 3rem !important;
     width: 3rem !important;
@@ -113,7 +113,6 @@ $main : #F26419;
 .paddingTop{
     padding-top: 2rem;
 }
-
 
 .paddingTop60{
     padding-top: 3.75rem;

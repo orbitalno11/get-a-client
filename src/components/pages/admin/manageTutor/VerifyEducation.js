@@ -45,7 +45,7 @@ function VerifyEducation() {
     <div>
       <Row style={{ marginLeft: '30px' }}>
         <Col span={24}>
-          <a style={{ color: '#F5732E' }}>แก้ไข</a>
+          <p style={{ color: '#F5732E' }}>แก้ไข</p>
         </Col>
         <Col span={24} style={{ fontSize: '17px', marginTop: '15px' }}>
           อัตราการแลกเปลี่ยนปัจจุบัน

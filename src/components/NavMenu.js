@@ -14,8 +14,9 @@ import {
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const { useBreakpoint } = Grid;
-const statusTutor = true
+const statusTutor = false
 const auth = true
+const admin = false
 
 const UserMenu = () => {
 
@@ -36,21 +37,21 @@ const UserMenu = () => {
                 </NavLink>
             </Menu.Item>
             {
-            auth ? (
-                        <Menu.Item key="/profile" >
-                            <NavLink to="/profile">
-                                โปรไฟล์
+                auth ? (
+                    <Menu.Item key="/learner/1" >
+                        <NavLink to="/learner/1">
+                            โปรไฟล์
                         </NavLink>
-                        </Menu.Item>
+                    </Menu.Item>
                 ) : null
             }
             {
                 auth ? (
-                        <Menu.Item key="/logout" >
-                            <NavLink to="/logout">
-                                ออกจากระบบ
+                    <Menu.Item key="/logout" >
+                        <NavLink to="/logout">
+                            ออกจากระบบ
                         </NavLink>
-                        </Menu.Item>
+                    </Menu.Item>
                 ) : null
             }
         </Menu>
@@ -60,7 +61,7 @@ const UserMenu = () => {
 const TutorMenu = () => {
     return (
         <Menu className="menuBar" mode="horizontal" defaultSelectedKeys={["/"]} >
-            <Menu.Item key="/" >
+            <Menu.Item key="/tutor" >
                 <NavLink to="/tutor">
                     หน้าแรก
                 </NavLink>
@@ -76,21 +77,21 @@ const TutorMenu = () => {
                 </NavLink>
             </Menu.Item>
             {
-            auth ? (
-                        <Menu.Item key="/tutor/profile" >
-                            <NavLink to="/tutor/profile">
-                                โปรไฟล์
+                auth ? (
+                    <Menu.Item key="/tutor/1" >
+                        <NavLink to="/tutor/1">
+                            โปรไฟล์
                         </NavLink>
-                        </Menu.Item>
+                    </Menu.Item>
                 ) : null
             }
             {
                 auth ? (
-                        <Menu.Item key="/logout" >
-                            <NavLink to="/logout">
-                                ออกจากระบบ
+                    <Menu.Item key="/logout" >
+                        <NavLink to="/logout">
+                            ออกจากระบบ
                         </NavLink>
-                        </Menu.Item>
+                    </Menu.Item>
                 ) : null
             }
         </Menu>
@@ -117,12 +118,12 @@ const UserMenuMobile = () => {
                 </NavLink>
             </Col>
             <Col span={4} className="iconMenu">
-                <NavLink to="/">
+                <NavLink to="/favorite">
                     <FontAwesomeIcon icon={faHeart} className="icon" />
                 </NavLink>
             </Col>
             <Col span={4} className="iconMenu">
-                <NavLink to="/profile">
+                <NavLink to="/learner/1">
                     <FontAwesomeIcon icon={faUserCircle} className="icon" />
                 </NavLink>
             </Col>
@@ -207,10 +208,15 @@ const NavMenu = () => {
     const screens = useBreakpoint();
     return (
         <Fragment>
-            <div className="fixMenu">
-                {screens.xs || (screens.sm && !screens.md) ? <MenuMobile /> : <MenuDesktop />}
-            </div>
+            {
+                !admin && (
+                    <div className="fixMenu">
+                        {screens.xs || (screens.sm && !screens.md) ? <MenuMobile /> : <MenuDesktop />}
+                    </div>
+                )
+            }
         </Fragment>
+
     )
 }
 

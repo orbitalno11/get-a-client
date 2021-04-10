@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import Header from "../../../../../headerMobile/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfile } from "../../../../../../redux/actions/profileActions";
+import { getProfile } from "../../../../../../redux/actions/profile.actions";
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
@@ -33,8 +33,9 @@ export default function EditProfileDetail() {
         setDetailProfile(profile.profile)
     },[profile])
     
-    const onSubmit = (value) => {
-        console.log(value)
+    const onSubmit = () => {
+        // todo onSubmit
+        // value
     }
 
     return (
@@ -43,15 +44,14 @@ export default function EditProfileDetail() {
                 detailProfile !== null &&
                     (
                         <div>
-                            {screens.xs || (screens.sm && !screens.md) ? <Header title="แก้ไข" pageBack="/tutor/profile" /> : null}
+                            {screens.xs || (screens.sm && !screens.md) ? <Header title="แก้ไข" pageBack="/tutor/1" /> : null}
                             <div className={screens.xs || (screens.sm && !screens.md) ? null : style.bodyEdit}>
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     <div className={screens.xs || (screens.sm && !screens.md) ? style.mobilecenter : style.bannerEditProfile}>
                                         <Image
                                             className={style.imageProfile}
                                             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-                                            preview={false}
-                                        ></Image>
+                                            preview={false} />
                                     </div>
                                     <Row className={style.alignCenter}>
                                         <Title level={3} className={screens.xs || (screens.sm && !screens.md) ? null : style.marginTop} >แก้ไขโปรไฟล์</Title>
@@ -120,7 +120,7 @@ export default function EditProfileDetail() {
                                         </Col>
                                     </Row>
                                     <div className={style.buttonEdit}>
-                                        <Button className="backgroundMain buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
+                                        <Button className="backgroundOrange buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
                                     </div>
                                 </form>
                             </div>

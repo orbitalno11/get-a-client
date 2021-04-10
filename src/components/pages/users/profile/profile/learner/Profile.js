@@ -2,10 +2,10 @@ import React, { Fragment, useCallback, useEffect } from "react"
 import { Col, Row, Grid, Divider } from "antd"
 import style from "../../styles.module.scss"
 import ProfileDetail from "./ProfileDetail"
-import ProfileCoruse from "./ProfileCoruse"
+import ProfileCourse from "./ProfileCourse"
 import Header from "../../../../../headerMobile/Header"
 import { useDispatch } from "react-redux"
-import { getProfile } from "../../../../../../redux/actions/profileActions";
+import { getProfile } from "../../../../../../redux/actions/profile.actions";
 const { useBreakpoint } = Grid;
 
 export default function ProfileLearner() {
@@ -36,7 +36,7 @@ export default function ProfileLearner() {
                     )
                 }
                 <Col xs={24} sm={24} md={12} lg={14} xl={14} >
-                    <ProfileCoruse />
+                    <ProfileCourse />
                 </Col>
             </Row>
         </Fragment>

@@ -5,7 +5,7 @@ import ProfileDetail from "./ProfileDetail"
 import ProfileIdentity from "./ProfileIdentity"
 import Header from "../../../../../../headerMobile/Header"
 import { useDispatch } from "react-redux"
-import { getProfile } from "../../../../../../../redux/actions/profileActions";
+import { getProfile } from "../../../../../../../redux/actions/profile.actions";
 const { useBreakpoint } = Grid;
 
 export default function ProfileTutor() {

@@ -39,6 +39,7 @@ import NotificationDetail from "./components/pages/users/notifications/Notificat
 import Favorite from "./components/pages/users/profile/favorite/Favorite"
 import Search from "./components/pages/users/search/Search";
 import ResultSearch from "./components/pages/users/search/ResultSearch";
+import OnlineCourseList from "./components/pages/users/onlineCourseList/OnlineCourseList"
 
 function App() {
   return (
@@ -72,6 +73,7 @@ function App() {
           <Route exact path="/course/:id" component={ReviewPage} />
           <Route exact path="/search" component={Search} />
           <Route exact path="/search/:search" component={ResultSearch} />
+          <Route exact path="/course/online" component={OnlineCourseList} />
           <Route path="*">
             <Redirect path="/login" />
           </Route>

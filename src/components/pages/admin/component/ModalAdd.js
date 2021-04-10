@@ -23,10 +23,10 @@ function showDescription() {
     // okType: 'success',
     cancelText: 'ยกเลิก',
     onOk() {
-      console.log('Ok');
+        // todo onOk
     },
     onCancel() {
-      console.log('Cancel');
+        // todo onCancel
     },
     width: 750,
   });
@@ -34,9 +34,9 @@ function showDescription() {
 function ModalAdd() {
   return (
     <Space>
-      <a onClick={showDescription} style={{ color: '#F5732E',textDecorationLine:'underline'}}>
+      <p onClick={showDescription} style={{ color: '#F5732E',textDecorationLine:'underline'}}>
       เพิ่มการซื้อเหรียญ
-      </a>
+      </p>
     </Space>
   );
 }

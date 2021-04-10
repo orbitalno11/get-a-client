@@ -1,4 +1,4 @@
-import { Button, Grid, Typography } from "antd";
+import { Button, Typography } from "antd";
 import React, { Fragment } from "react"
 import style from "../../styles.module.scss"
 import {
@@ -6,15 +6,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../../../../../headerMobile/Header";
-const { useBreakpoint } = Grid;
+import isMobile from "../../../../../isMobile/isMobile";
 const { Title } = Typography;
 
 export default function EditProfileMap({ refs }) {
-    const screens = useBreakpoint();
 
     return (
         <Fragment>
-            {screens.xs || (screens.sm && !screens.md) ? <Header title="แก้ไขข้อมูล" pageBack="/profile"/> : null}
+            {isMobile() && <Header title="แก้ไขข้อมูล" pageBack="/learner/1"/> }
             <div className={refs ? style.paddingbody : style.body}>
                 <div className={style.TitleCoin}>
                     <Title level={4}>สถานที่ปัจจุบัน</Title>

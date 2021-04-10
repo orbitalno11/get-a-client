@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import EditProfileMap from "./EditProfileMap";
 import Header from "../../../../../headerMobile/Header";
+import isMobile from "../../../../../isMobile/isMobile";
 
 const { useBreakpoint } = Grid;
 
@@ -16,14 +17,15 @@ export default function EditProfile() {
         resolver: yupResolver(profileSchema),
     });
 
-    const onSubmit = (value) => {
-        console.log(value)
+    const onSubmit = () => {
+        // todo onSubmit
+        // value
     }
 
     const editProfile = () => {
         return (
             <Fragment>
-                {screens.xs || (screens.sm && !screens.md) ? <Header title="แก้ไขข้อมูล" pageBack="/profile" /> : null}
+                {isMobile() && <Header title="แก้ไขข้อมูล" pageBack="/learner/1" />}
                 <div className={style.body}>
                     <Row justify="center">
                         <Col lg={11} md={11} sm={24}>
@@ -49,7 +51,7 @@ export default function EditProfile() {
                         screens.md &&
                         (
                             <Row justify="center" className={style.marginTop}>
-                                <Button className="backgroundMain buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
+                                <Button className="backgroundOrange buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
                             </Row>
                         )
                     }

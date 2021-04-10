@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 const { useBreakpoint } = Grid;
 const { Title } = Typography;
 
-export default function ProfileIdentity({}) {
+export default function ProfileIdentity() {
     const screens = useBreakpoint();
     const profile = useSelector(state => state.profile)
     const [history, setHistory] = useState(null)
@@ -38,7 +38,7 @@ export default function ProfileIdentity({}) {
                         <Title level={screens.md ? 4 : 5}>เกียรติประวัติ  </Title>
                     </Col>
                     <Col className={style.marginLeft}>
-                        <NavLink to="/tutor/profile/add/education">
+                        <NavLink to="/tutor/1/add/education">
                             <Button className="backgroundBlue buttonColor" shape="circle" icon={<FontAwesomeIcon icon={faPlus} style={{ color: "white" }} />} />
                         </NavLink>
                     </Col>

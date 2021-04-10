@@ -1,4 +1,4 @@
-import { Button, Col, Image, Row, Select, Typography, Grid } from "antd"
+import { Button, Col, Image, Row, Select, Typography } from "antd"
 import TextArea from "antd/lib/input/TextArea";
 import React, { Fragment, useCallback, useEffect, useState } from "react"
 import style from "../../styles.module.scss"
@@ -7,12 +7,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import Header from "../../../../../headerMobile/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfile } from "../../../../../../redux/actions/profileActions";
+import { getProfile } from "../../../../../../redux/actions/profile.actions";
+import isMobile from "../../../../../isMobile/isMobile";
 const { Title } = Typography;
-const { useBreakpoint } = Grid;
 
 export default function EditProfileDetail() {
-    const screens = useBreakpoint();
     const dispatch = useDispatch()
     const profile = useSelector(state => state.profile)
     const [detailProfile, setDetailProfile] = useState(null)
@@ -33,8 +32,9 @@ export default function EditProfileDetail() {
         setDetailProfile(profile.profile)
     },[profile])
     
-    const onSubmit = (value) => {
-        console.log(value)
+    const onSubmit = () => {
+        // todo onSubmit
+        // value
     }
 
     return (
@@ -43,18 +43,17 @@ export default function EditProfileDetail() {
                 detailProfile !== null &&
                     (
                         <div>
-                            {screens.xs || (screens.sm && !screens.md) ? <Header title="แก้ไข" pageBack="/tutor/profile" /> : null}
-                            <div className={screens.xs || (screens.sm && !screens.md) ? null : style.bodyEdit}>
+                            {isMobile() && <Header title="แก้ไข" pageBack="/tutor/1" /> }
+                            <div className={!isMobile() && style.bodyEdit}>
                                 <form onSubmit={handleSubmit(onSubmit)}>
-                                    <div className={screens.xs || (screens.sm && !screens.md) ? style.mobilecenter : style.bannerEditProfile}>
+                                    <div className={isMobile() ? style.mobilecenter : style.bannerEditProfile}>
                                         <Image
                                             className={style.imageProfile}
                                             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-                                            preview={false}
-                                        ></Image>
+                                            preview={false} />
                                     </div>
                                     <Row className={style.alignCenter}>
-                                        <Title level={3} className={screens.xs || (screens.sm && !screens.md) ? null : style.marginTop} >แก้ไขโปรไฟล์</Title>
+                                        <Title level={3} className={!isMobile() && style.marginTop} >แก้ไขโปรไฟล์</Title>
                                     </Row>
                                     <Row className={style.paddingEdit} justify="space-between">
                                         <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
@@ -120,7 +119,7 @@ export default function EditProfileDetail() {
                                         </Col>
                                     </Row>
                                     <div className={style.buttonEdit}>
-                                        <Button className="backgroundMain buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
+                                        <Button className="backgroundOrange buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
                                     </div>
                                 </form>
                             </div>

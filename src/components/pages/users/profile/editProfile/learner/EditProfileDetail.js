@@ -9,7 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { profileSchema } from "../../../../../../validation/validation";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { editProfileDetail, getProfile } from "../../../../../../redux/actions/profileActions";
+import { editProfileDetail, getProfile } from "../../../../../../redux/actions/profile.actions";
 
 export default function EditProfileDetail({ refs, error }) {
     const [image, setimage] = useState("https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png")
@@ -106,7 +106,7 @@ export default function EditProfileDetail({ refs, error }) {
                                 !refs &&
                                 (
                                     <Col className={style.marginTop20}>
-                                        <Button className="backgroundMain buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
+                                        <Button className="backgroundOrange buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
                                     </Col>
                                 )
                             }

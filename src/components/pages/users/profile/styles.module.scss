@@ -1,15 +1,5 @@
-$yellow : #F6AE2D;
-$black : #000000;
-$green : #00B900;
-$red : #AB330F;
-$blue : #33658A;
-$gray : #C4C4C4;
-$main :#F26419;
+@import "../../../../stylesDefault.module.scss";
 
-.paddingbody{
-    padding-left: 5%;
-    padding-right: 5%;
-}
 
 .paddingEdit{
     padding-left: 10%;
@@ -24,16 +14,6 @@ $main :#F26419;
 .alignPage{
     display: flex;
     align-items: center;
-}
-
-.paddingTopBody{
-    padding-top: 7rem;
-}
-
-.body {
-    @extend .paddingbody;
-    @extend .paddingTopBody;
-    padding-bottom: 3.75rem;
 }
 
 .bodyEdit{
@@ -84,6 +64,10 @@ $main :#F26419;
 .iconcoin{
     @extend .icon;
     color:$yellow;
+}
+.iconbigcoin{
+    color:$yellow;
+    font-size: 50pt    
 }
 
 .iconmarker{
@@ -181,8 +165,8 @@ $main :#F26419;
 
 .infoButton{
     border-width: 0.1rem  !important;
-    border-color: $main !important;
-    color: $main  !important;
+    border-color: $orange !important;
+    color: $orange  !important;
 }
 
 .colorGray{
@@ -194,9 +178,4 @@ $main :#F26419;
 .contrainnerProfilePubile{
     @extend .paddingbody;
     @extend .marginTop20;
-}
-
-.bodymobileprofile{
-    @extend .paddingbody;
-    padding-bottom: 3.75rem;
 }

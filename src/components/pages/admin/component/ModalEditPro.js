@@ -6,13 +6,15 @@ import moment from 'moment';
 
 const { confirm } = Modal;
 
-function onChangeData(date, dateString) {
-    console.log(date, dateString);
+function onChangeData() {
+    // todo onChangeData action
+    // date, dateString
   }
-  
-  function onChangeTime(time, timeString) {
-    console.log(time, timeString);
-  }
+
+function onChangeTime() {
+    // todo onChangeTime action
+    //  time, timeString
+}
 
   function showDescription() {
     confirm({
@@ -56,10 +58,10 @@ function onChangeData(date, dateString) {
       // okType: 'success',
       cancelText: 'ยกเลิก',
       onOk() {
-        console.log('Ok');
+          // todo onOk action
       },
       onCancel() {
-        console.log('Cancel');
+          // todo onCancel action
       },
       width: 750,
     });

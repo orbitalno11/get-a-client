@@ -8,12 +8,14 @@ import moment from 'moment';
 
 const { confirm } = Modal;
 
-function onChangeData(date, dateString) {
-  console.log(date, dateString);
+function onChangeData() {
+  // todo onChangeData
+  // date, dateString
 }
 
-function onChangeTime(time, timeString) {
-  console.log(time, timeString);
+function onChangeTime() {
+  // todo onChangeTime
+  // date, dateString
 }
 
 function showDescription() {
@@ -57,10 +59,10 @@ function showDescription() {
     okText: 'ยืนยัน',
     cancelText: 'ยกเลิก',
     onOk() {
-      console.log('Ok');
+      // todo onOk
     },
     onCancel() {
-      console.log('Cancel');
+      // todo onCancel
     },
     width: 750,
   });

@@ -1,9 +1,7 @@
 import { Row, Col, Grid } from "antd"
 import React, { Fragment, useCallback, useEffect } from 'react'
-import { useDispatch } from "react-redux";
-import { getHandleProfile } from "../../../../redux/actions/profile.actions";
+import { useDispatch, useSelector } from "react-redux";
 import Header from "../../../headerMobile/Header";
-import ProfileIntroduce from "../profile/profile/tutor/pubileProfile/ProfileIntroduce";
 import AllReview from "./AllReview";
 import DetailCourse from "./DetailCourse";
 import ModalComponent from "../../../modal/ModalComponent"
@@ -11,23 +9,31 @@ import style from "./styles.module.scss"
 import { modalAction } from "../../../../redux/actions/modal.actions"
 import { sizeModal } from "../../../modal/SizeModal";
 import ReviewForm from "./ReviewForm";
+import { offlineCourse } from "../../../../redux/actions";
+import HeaderVerizontal from "../../../headerVerizontal/HeaderVerizontal";
+import { useParams } from "react-router";
 
 const { useBreakpoint } = Grid;
 
 export default function ReviewPage() {
     const screens = useBreakpoint();
     const dispatch = useDispatch()
+    const params = useParams();
+    const course = useSelector(state => state.offlineCourse.data)
+    const loading = useSelector(state => state.loading.loading)
+    const auth = useSelector(state => state.auth.status)
+    const owner = (course && auth) && (auth.id === course.owner.id)
     const learn_status = false
-    const status = "learner"
     const type = "course"
+    const idCourse = params.id
 
-    const fetchProfile = useCallback(() => {
-        dispatch(getHandleProfile())
+    const fetchCourse = useCallback(() => {
+        dispatch(offlineCourse.getOfflineCourse(idCourse))
     }, [dispatch])
 
     useEffect(() => {
-        fetchProfile()
-    }, [fetchProfile])
+        fetchCourse()
+    }, [fetchCourse])
 
     const handleOpenReviewForm = () => {
         dispatch(modalAction.openModal({
@@ -38,50 +44,59 @@ export default function ReviewPage() {
 
     return (
         <Fragment>
-            <ModalComponent />
-            {(screens.xs || (screens.sm && !screens.md)) && <Header pageBack="goback" />}
-            <div className={screens.xs || (screens.sm && !screens.md) ? style.bodymobileprofile : style.bodyEdit}>
-                {
-                    screens.md && (
-                        <div className={style.profile}  >
-                            <ProfileIntroduce mainPage={true} review={true} />
+            {
+                loading ? (
+                    <div className={style.loader}></div>
+                ) : (
+                    <div>
+                        <ModalComponent />
+                        {(screens.xs || (screens.sm && !screens.md)) && <Header pageBack="goback" />}
+                        <div className={screens.xs || (screens.sm && !screens.md) ? style.bodymobileprofile : `${style.bodyEdit} `}>
+                            {
+                                (screens.md && course) && (
+                                    <div className={style.profile}  >
+                                        <HeaderVerizontal mainPage={true} review={true} data={course.owner} />
+                                    </div>
+                                )
+                            }
+                            <Row className={!screens.md && style.paddingTopBody}>
+                                <Col className={screens.xs || (screens.sm && !screens.md) ? style.paddingBottomBody : `${style.paddingbody} ${style.paddingBottomBody}`} xl={9} lg={9} md={10} sm={24} xs={24} >
+                                    <DetailCourse mainPage={true} />
+                                </Col>
+                                <Col xl={13} lg={13} md={12} sm={24} xs={24} >
+                                    <AllReview />
+                                </Col>
+                            </Row>
                         </div>
-                    )
-                }
-                <Row className={!screens.md && style.paddingTopBody}>
-                    <Col className={screens.xs || (screens.sm && !screens.md) ? null : style.paddingbody} xl={9} lg={9} md={10} sm={24} xs={24} >
-                        <DetailCourse mainPage={true} />
-                    </Col>
-                    <Col xl={13} lg={13} md={12} sm={24} xs={24} >
-                        <AllReview />
-                    </Col>
-                </Row>
-            </div>
-            {
-                (!learn_status && !screens.md) && (
-                    <div className={style.navbarBottom}>
-                        <button className={style.leftbuttom} >สมัครเรียน</button>
-                        <button className={style.rightbottom} >ถามข้อมูล</button>
-                    </div>
-                )
-            }
-            {
-                (learn_status && !screens.md) && (
-                    <div className={style.navbarBottom} >
-                        <button className={style.reviewbottom} onClick={() => handleOpenReviewForm()} >ให้คะแนนการสอนนี้</button>
-                    </div>
-                )
-            }
-            {
-                (status === "tutor" && !screens.md) && (
-                    <div className={style.navbarBottom}>
-                        { type === "course" ? (
-                            <button className={style.leftbuttom} >อนุมัติคำขอ</button>
-                        ) : (
-                            <button className={style.leftbuttom} >จัดการบทเรียน</button>
-                        )
+                        {
+                            (!learn_status && !screens.md) && (
+                                <div className={style.navbarBottom}>
+                                    <button className={style.leftbuttom} >สมัครเรียน</button>
+                                    <button className={style.rightbottom} >ถามข้อมูล</button>
+                                </div>
+                            )
                         }
-                        <button className={style.rightbottom} >แก้ไข</button>
+                        {
+                            (learn_status && !screens.md) && (
+                                <div className={style.navbarBottom} >
+                                    <button className={style.reviewbottom} onClick={() => handleOpenReviewForm()} >ให้คะแนนการสอนนี้</button>
+                                </div>
+                            )
+                        }
+
+                        {
+                            (owner && !screens.md) && (
+                                <div className={style.navbarBottom}>
+                                    { type === "course" ? (
+                                        <button className={style.leftbuttom} >อนุมัติคำขอ</button>
+                                    ) : (
+                                        <button className={style.leftbuttom} >จัดการบทเรียน</button>
+                                    )
+                                    }
+                                    <button className={style.rightbottom} >แก้ไข</button>
+                                </div>
+                            )
+                        }
                     </div>
                 )
             }

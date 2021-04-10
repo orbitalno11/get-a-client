@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import CardReview from "../../../card/CardReview"
 import { Button, Col, Grid, Row } from "antd"
 import style from "./styles.module.scss"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { modalAction } from "../../../../redux/actions";
 import { sizeModal } from "../../../modal/SizeModal";
 import ReviewForm from "./ReviewForm";
@@ -11,8 +11,12 @@ const { useBreakpoint } = Grid;
 export default function AllReview() {
     const screens = useBreakpoint();
     const dispatch = useDispatch()
-    const learn_status = false
-    const status = "tutor"
+    const course = useSelector(state => state.offlineCourse.data)
+    const auth = useSelector(state => state.auth.status)
+    const learn_status = auth.role === 1
+    const status = false
+    const owner = (course && auth) && (auth.id === course.owner.id)
+    const review =course&&course.review
     const type = "course"
 
     const handleOpenReviewForm = () => {
@@ -42,19 +46,28 @@ export default function AllReview() {
                     }
                 </Row>
                 <div className={style.marginTop20}>
-                    <CardReview />
+                    {
+                        review&&review.length ? (
+                            <CardReview data={review} />
+                        ):
+                        (
+                            <span className={style.textNormal}>บทเรียนนี้ยังไม่มีผู้แสดงความคิดเห็น</span>
+                        )
+                        
+                    }
+
                 </div>
                 {
-                    (status !== "tutor" && screens.md)  && (
+                    (!status && !owner && screens.md) && (
                         <Col className={`${style.marginTop20} ${style.alignCenter}`}>
-                            <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>สมัครเรียน</Button>
+                            <Button className="buttonColor backgroundOrange"  shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>สมัครเรียน</Button>
                             <Button className="buttonColor backgroundBlue" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>สอบถามข้อมูล</Button>
                         </Col>
                     )
                 }
 
                 {
-                    (status === "tutor" && screens.md) && (
+                    (owner && screens.md) && (
                         <Col className={`${style.marginTop20} ${style.alignCenter}`}>
                             { type === "course" ? (
                                 <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>อนุมัติคำขอ</Button>

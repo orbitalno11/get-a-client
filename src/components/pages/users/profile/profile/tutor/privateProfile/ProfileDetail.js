@@ -31,7 +31,7 @@ export default function ProfileDetail() {
                     src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
                     preview={false}
                 />
-                <NavLink to="/tutor/profile/edit">
+                <NavLink to="/tutor/1/edit">
                     <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[18, 0]}>
                         <Title level={3} className={style.marginLeft}>{profileDetail&&profileDetail.firstname}<br/>{profileDetail&&profileDetail.lastname} </Title>
                     </Badge>

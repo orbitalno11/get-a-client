@@ -1,8 +1,7 @@
-$yellow : #F6AE2D;
-$gray : #C4C4C4;
+@import "../../stylesDefault.module.scss";
 
 .cardRound{
-    border: 0.2rem solid red;
+    border: 0.2rem solid $orange;
     border-radius: 1.5rem;
 }
 
@@ -16,9 +15,14 @@ $gray : #C4C4C4;
     width: 5.25rem;
   }
 
+.imageClip{
+    height: 6rem;
+    width: auto;
+}
+
 .borderGrid{
     -webkit-box-shadow :none;
-    padding: 0.25rem !important;
+    padding: 0px !important;
     padding-left: 0.6rem!important;
     padding-right: 0.6rem!important;
     display: flex;
@@ -28,6 +32,14 @@ $gray : #C4C4C4;
 .gridImage{
     @extend .borderGrid ;
     width: 30% !important;
+}
+
+.gridRow{
+    @extend .borderGrid;
+    width: 70% !important;
+    flex-flow: column;
+    align-items: flex-start;
+    padding-left: 2.5rem!important;
 }
 
 .gridText{
@@ -62,25 +74,23 @@ $gray : #C4C4C4;
 }
 
 .icon{
-    font-size: 15pt;
+    @extend .iconsmall;
     color:$gray;
+    margin-right: 0.5rem
 }
 
 .iconSmall{
-    font-size: 14pt;
+    @extend .iconsmall;
     color:$gray;
+    margin-right: 0.5rem
 }
 
-.textIconSmall{
-    font-size: 12pt;
+.iconyellow{
+    @extend .iconsmall;
+    color:$yellow;
+    margin-right: 0.75rem
+}
+
+.marginLeft{
     margin-left: 0.6rem;
-}
-
-.textIcon{
-    font-size: 12pt;
-    margin-left: 0.6rem;
-}
-
-.floatRight{
-    margin-left: auto;
 }

@@ -38,7 +38,7 @@ export default function ProfileIdentity({}) {
                         <Title level={screens.md ? 4 : 5}>เกียรติประวัติ  </Title>
                     </Col>
                     <Col className={style.marginLeft}>
-                        <NavLink to="/tutor/profile/add/education">
+                        <NavLink to="/tutor/1/add/education">
                             <Button className="backgroundBlue buttonColor" shape="circle" icon={<FontAwesomeIcon icon={faPlus} style={{ color: "white" }} />} />
                         </NavLink>
                     </Col>

@@ -3,7 +3,7 @@ import style from "./styles.module.scss"
 import { faGraduationCap ,faMinus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Button } from "antd"
-import { removeHistory } from "../../redux/actions/profileActions"
+import { removeHistory } from "../../redux/actions/profile.actions"
 import { useDispatch } from "react-redux"
 
 

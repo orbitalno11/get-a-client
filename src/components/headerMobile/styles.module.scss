@@ -1,11 +1,11 @@
-$main : #F26419;
+$orange : #F26419;
 $white : #FFFFFF;
 
 .header{
     position: fixed;
     height: 5rem;
     width: 100%;
-    background-color:$main;
+    background-color:$orange;
     border-bottom-left-radius: 40% 30%;
     border-bottom-right-radius: 40% 30%;
     z-index: 10;

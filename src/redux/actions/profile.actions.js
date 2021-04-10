@@ -1,10 +1,4 @@
-import {
-    GET_PROFILE
-    , GET_HANDLE_PROFILE
-    , GET_EDUCATION
-    , ADD_EDUCATION
-    , DELETE_EDUCATION
-} from "./types"
+import { profileConstants } from "../constants"
 
 const data =
 {
@@ -59,27 +53,27 @@ const data =
 }
 
 export const setProfile = (payload) =>({
-    type: GET_PROFILE,
+    type: profileConstants.GET_PROFILE,
     payload: payload,
 })
 
 export const setHandleProfile = (payload) =>({
-    type: GET_HANDLE_PROFILE,
+    type: profileConstants.GET_HANDLE_PROFILE,
     payload: payload,
 })
 
 export const setEducation = (payload) =>({
-    type: GET_EDUCATION,
+    type: profileConstants.GET_EDUCATION,
     payload: payload,
 })
 
 export const addEducation = (payload) =>({
-    type: ADD_EDUCATION,
+    type: profileConstants.ADD_EDUCATION,
     payload: payload,
 })
 
 export const removeEducation = (payload) =>({
-    type: DELETE_EDUCATION,
+    type: profileConstants.DELETE_EDUCATION,
     payload: payload,
 })
 

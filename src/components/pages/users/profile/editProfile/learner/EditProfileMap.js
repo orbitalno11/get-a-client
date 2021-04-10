@@ -14,7 +14,7 @@ export default function EditProfileMap({ refs }) {
 
     return (
         <Fragment>
-            {screens.xs || (screens.sm && !screens.md) ? <Header title="แก้ไขข้อมูล" pageBack="/profile"/> : null}
+            {screens.xs || (screens.sm && !screens.md) ? <Header title="แก้ไขข้อมูล" pageBack="/learner/1"/> : null}
             <div className={refs ? style.paddingbody : style.body}>
                 <div className={style.TitleCoin}>
                     <Title level={4}>สถานที่ปัจจุบัน</Title>

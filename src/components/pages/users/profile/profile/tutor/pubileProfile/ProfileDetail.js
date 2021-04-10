@@ -10,7 +10,7 @@ import EducationTutor from "../../../../../../educationTutor/EducationTutor";
 import ProfileIntroduce from "./ProfileIntroduce";
 import Header from "../../../../../../headerMobile/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { getHandleProfile } from "../../../../../../../redux/actions/profileActions";
+import { getHandleProfile } from "../../../../../../../redux/actions/profile.actions";
 
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
@@ -36,7 +36,7 @@ export default function ProfileDetail({ mainPage }) {
     return (
         <Fragment>
             {!mainPage && (screens.xs || (screens.sm && !screens.md)) && <Header pageBack="goback" />}
-            <div className={screens.xs || (screens.sm && !screens.md) ? style.paddingbody : !mainPage ? style.bodyEdit : null}>
+            <div className={screens.xs || (screens.sm && !screens.md) ? style.bodymobileprofile : !mainPage ? style.bodyEdit : null}>
                 {
                     !mainPage &&
                     (

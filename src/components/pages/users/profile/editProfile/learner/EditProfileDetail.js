@@ -9,7 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { profileSchema } from "../../../../../../validation/validation";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { editProfileDetail, getProfile } from "../../../../../../redux/actions/profileActions";
+import { editProfileDetail, getProfile } from "../../../../../../redux/actions/profile.actions";
 
 export default function EditProfileDetail({ refs, error }) {
     const [image, setimage] = useState("https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png")

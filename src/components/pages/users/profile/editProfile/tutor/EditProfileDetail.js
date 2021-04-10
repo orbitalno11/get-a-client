@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import Header from "../../../../../headerMobile/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfile } from "../../../../../../redux/actions/profileActions";
+import { getProfile } from "../../../../../../redux/actions/profile.actions";
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
@@ -43,7 +43,7 @@ export default function EditProfileDetail() {
                 detailProfile !== null &&
                     (
                         <div>
-                            {screens.xs || (screens.sm && !screens.md) ? <Header title="แก้ไข" pageBack="/tutor/profile" /> : null}
+                            {screens.xs || (screens.sm && !screens.md) ? <Header title="แก้ไข" pageBack="/tutor/1" /> : null}
                             <div className={screens.xs || (screens.sm && !screens.md) ? null : style.bodyEdit}>
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     <div className={screens.xs || (screens.sm && !screens.md) ? style.mobilecenter : style.bannerEditProfile}>

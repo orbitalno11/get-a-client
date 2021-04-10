@@ -10,7 +10,7 @@ import { profileTestSchema, profileEducationSchema } from "../../../../../../val
 import { yupResolver } from "@hookform/resolvers/yup";
 import Header from "../../../../../headerMobile/Header";
 import { useDispatch } from "react-redux";
-import { addHistory, getProfile } from "../../../../../../redux/actions/profileActions";
+import { addHistory, getProfile } from "../../../../../../redux/actions/profile.actions";
 const { useBreakpoint } = Grid;
 
 const { Title } = Typography;
@@ -57,7 +57,7 @@ export default function AddEducation() {
 
     return (
         <Fragment>
-            {screens.xs || (screens.sm && !screens.md) ? <Header title="เพิ่มข้อมูล" pageBack="/tutor/profile"/> : null}
+            {screens.xs || (screens.sm && !screens.md) ? <Header title="เพิ่มข้อมูล" pageBack="/tutor/1"/> : null}
             <div className={style.body}>
                 <form id="myform" onSubmit={handleSubmit(onSubmit)}>
                     <Row justify="center" >

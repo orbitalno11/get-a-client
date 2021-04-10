@@ -1,34 +1,55 @@
 import axios from "axios"
 import { authConstants } from "../constants"
 import { modalAction } from "./modal.actions"
-import auth from '../../config/firebase'
+import auth from "../../config/firebase"
 import setAuthToken from "../../utils/setAuthToken"
 import { sizeModal } from "../../components/modal/SizeModal"
+import jwtDecode from "jwt-decode"
 import { typeModal } from "../../components/modal/TypeModal"
+import { authErrorMessage } from "../../components/defaultValue"
 
 function startLoading() { return { type: authConstants.START_LOADING } }
 function stopLoading() { return { type: authConstants.STOP_LOADING } }
 
+function checkErrorMessage(errorMessage) {
+    let message = authErrorMessage.authMessage[errorMessage]
+    if (!message) {
+        message = authErrorMessage.authMessage["default"]
+    }
+    return message
+}
+
 function loginUser(loginData) {
     return async dispatch => {
         startLoading()
-  
-        auth.signInWithEmailAndPassword(loginData.email, loginData.password).then( () => {
-            // user
-            stopLoading()
-            auth.currentUser.getIdToken().then(token => {
-                localStorage.setItem('token', token);
-                setAuthToken(token)
-                dispatch(success(token))
-            })
-            // for student
-            window.location.href = "/"
-            // for tutor 
-            // window.location.href = "/tutor/"
+        auth.signInWithEmailAndPassword(loginData.email, loginData.password).then(user => {
+            if (user) {
+                auth.currentUser.getIdToken().then(token => {
+                    axios.get("/auth/token", {
+                        params: {
+                            token: token
+                        }
+                    }).then(res => {
+                        const getAToken = res.data.data
+                        const user = jwtDecode(getAToken);
+                        localStorage.setItem('token', getAToken);
+                        setAuthToken(getAToken)
+                        dispatch(success(user))
+                        stopLoading()
+                        if (user.role === 2) {
+                            window.location.href = "/tutor"
+                        } else if (user.role === 1) {
+                            window.location.href = "/"
+                        }
+                    })
+                })
+            }
+
         }).catch(err => {
+            stopLoading()
             dispatch(failure(err))
             dispatch(modalAction.openModal({
-                text: "เข้าสู่ระบบไม่สำเร็จ",
+                text: "ข้อมูลผู้ใช้งานไม่ถูกต้อง",
                 size: sizeModal.small,
                 alert: typeModal.wrong
             }))
@@ -48,17 +69,19 @@ function signUpLearner(signUpData) {
             }
         }).then(res => {
             stopLoading()
-            dispatch(success(res.data.data))
+            const message = checkErrorMessage(res.data.message)
+            dispatch(success(message))
             dispatch(modalAction.openModal({
-                text: "create account already , please login",
+                text: message,
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose : "/login"
+                afterClose: "/login"
             }))
         }).catch(err => {
-            dispatch(failure())
+            const message = checkErrorMessage(err.response.data.message.message)
+            dispatch(failure(message))
             dispatch(modalAction.openModal({
-                text: err.response.data.message,
+                text: message,
                 size: sizeModal.small,
                 alert: typeModal.wrong
             }))
@@ -77,17 +100,19 @@ function signUpTutor(signUpData) {
             }
         }).then(res => {
             stopLoading()
-            dispatch(success(res.data.data))
+            const message = checkErrorMessage(res.data.message)
+            dispatch(success(message))
             dispatch(modalAction.openModal({
-                text: "create account already , please login",
+                text: message,
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose : "/login"
+                afterClose: "/login"
             }))
         }).catch(err => {
-            dispatch(failure())
+            const message = checkErrorMessage(err.response.data.message.message)
+            dispatch(failure(message))
             dispatch(modalAction.openModal({
-                text: err.response.data.message,
+                text: message,
                 size: sizeModal.small,
                 alert: typeModal.wrong
             }))
@@ -104,9 +129,18 @@ function setUser(token) {
     }
 }
 
+function logout() {
+    localStorage.removeItem("token")
+    return {
+        type: authConstants.LOGOUT,
+    }
+}
+
+
 export const userActions = {
     signUpLearner,
     signUpTutor,
     loginUser,
-    setUser
-}; 
+    setUser,
+    logout
+};

@@ -8,6 +8,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "./styles.module.scss"
 import Header from "../../../headerMobile/Header"
+import { color } from "../../../defaultValue";
 
 export default function Register() {
     const { useBreakpoint } = Grid;
@@ -15,30 +16,30 @@ export default function Register() {
 
     const typeRegister = [
         {
-            id: "0",
+            id: "tutor",
             type: "TUTOR",
-            icon: "",
-            color: "#303A53"
+            icon: faChalkboardTeacher,
+            color: color.darkBlue
         },
         {
-            id: "1",
+            id: "learner",
             type: "LEARNER",
-            icon: "faBookReader",
-            color: "#F26419"
+            icon: faBookReader,
+            color: color.orange
         },
     ]
     return (
         <Fragment>
             {screens.xs || (screens.sm && !screens.md) ? <Header title="สมัครสมาชิก" /> : null}
             <div className={style.alignCenterPage}>
-                <span className="h2 ">ประเภทสมาชิก</span>
+                <span className={style.titleH2}>ประเภทสมาชิก</span>
                 <Row className={style.rowWidth} >
                     {
                         typeRegister.map((item) => (
                             <Col justify="space-around" align="middle" key={item.type} xs={24} sm={24} md={12}>
                                 <NavLink to={`/register/${item.id}`}>
                                     <Button className="big-button white" style={{ backgroundColor: item.color }} shape="round">
-                                        <FontAwesomeIcon icon={item.type === "LEARNER" ? faBookReader : faChalkboardTeacher} className={style.iconStyle} />
+                                        <FontAwesomeIcon icon={item.icon} className={style.iconStyle} />
                                         <br /> {item.type}
                                     </Button>
                                 </NavLink>
@@ -48,6 +49,5 @@ export default function Register() {
                 </Row>
             </div>
         </Fragment>
-
     )
 }

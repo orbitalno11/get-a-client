@@ -6,6 +6,7 @@ const gray = "#C4C4C4"
 const red = "#840c0c"
 const green = "#00B900"
 const black = "#000000"
+const darkBlue = "#303A53"
 
 export const color = {
     orange,
@@ -15,5 +16,6 @@ export const color = {
     gray,
     red,
     green,
-    black
+    black,
+    darkBlue
 }

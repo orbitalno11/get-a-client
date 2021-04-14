@@ -8,21 +8,22 @@ const data = [
   {
     key: "1",
     date: "31/12/2563",
-    status: "เติมเหรียญ",
-    coin: "169",
+    coin: "5,000",
+    bath: "2,500",
   },
   {
     key: "2",
-    date: "01/01/2564",
-    status: "จ่ายเหรียญ",
-    coin: "30",
+    date: "31/12/2563",
+    coin: "6,000",
+    bath: "3,000",
   },
   {
     key: "3",
-    date: "30/01/2564",
-    status: "จ่ายเหรียญ",
-    coin: "40",
+    date: "31/12/2563",
+    coin: "4,000",
+    bath: "2,000",
   },
+  
 ];
 
 export default function TableHistory() {
@@ -33,8 +34,8 @@ export default function TableHistory() {
         <Table dataSource={data} className={style.tablecoin} >
           <Column title="ลำดับ" dataIndex="key" key="key" align="center"/>
           <Column title="วันที่" dataIndex="date" key="date" align="center"/>
-          <Column title="การดำเนินการ" dataIndex="status" key="status" align="center" />
           <Column title="จำนวนเหรียญ" dataIndex="coin" key="coin" align="center" />
+          <Column title="ยอดเงิน(THB)" dataIndex="bath" key="bath" align="center" />
         </Table>
       </div>
     </Fragment>

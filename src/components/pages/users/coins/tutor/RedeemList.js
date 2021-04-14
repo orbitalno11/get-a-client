@@ -13,7 +13,7 @@ export default function RedeemList() {
     <Fragment>
       {screens.xs || (screens.sm && !screens.md) ? (
         <div className={style.pageredeemsm}>
-          <div style={{ paddingTop: "1.8rem" }}>
+          <div style={{ paddingTop: "1rem" }}>
             <Row>
               <Col xs={4} sm={8}>
                 <FontAwesomeIcon icon={faCoins} className={style.Xs} />

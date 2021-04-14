@@ -5,19 +5,19 @@ import TableHistory from "./TableHistory"
 
 const { useBreakpoint } = Grid;
 
-export default function HistoryDetail() {
+export default function History() {
   const screens = useBreakpoint();
   return (
     <Fragment>
       {screens.xs || (screens.sm && !screens.md) ? (
-        <div className={style.list}>
+        <div className={style.pageredeemsm}>
           <div style={{ paddingTop: "1rem" }}>
             <Row>
-              <Col xs={20} sm={20}>
-                <span>เติมเหรียญ</span>
+              <Col xs={17} sm={18}>
+                <span>5,000 Coin</span>
               </Col>
-              <Col xs={4} sm={4} className={style.marginright}> 
-                <span style={{color:"green"}}>+ 123</span>
+              <Col xs={7} sm={6} className={style.marginright}> 
+                <span style={{color:"green"}}>2,500 THB</span>
               </Col>
             </Row>
             <Row>
@@ -29,11 +29,11 @@ export default function HistoryDetail() {
           <Divider />
           <div style={{ paddingTop: "1rem" }}>
             <Row>
-              <Col xs={20} sm={20}>
-                <span>จ่ายเหรียญ</span>
+              <Col xs={17} sm={18}>
+                <span>6,000 Coin</span>
               </Col>
-              <Col xs={4} sm={4} className={style.marginright}> 
-                <span style={{color:"red"}}>- 20</span>
+              <Col xs={7} sm={6} className={style.marginright}> 
+                <span style={{color:"green"}}>3,000 THB</span>
               </Col>
             </Row>
             <Row>

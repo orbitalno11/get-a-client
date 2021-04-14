@@ -101,8 +101,8 @@
 }
 
 .pageredeemsm {
-  padding-left: 18%;
-  padding-right: 18%;
+  padding-left: 15%;
+  padding-right: 15%;
 }
 
 .subredeem {
@@ -150,6 +150,16 @@
 }
 
 .allow{
-  margin-top: -5rem;
-  margin-left: 90%;
+  margin-top: -5.5rem;
+  margin-left: auto;
+}
+
+.list{
+ @extend .paddingbody;
+ width: 100%;
+}
+
+.marginright{
+  display: flex;
+  justify-content: flex-end;
 }

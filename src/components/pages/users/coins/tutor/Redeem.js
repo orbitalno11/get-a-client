@@ -3,7 +3,7 @@ import { Row, Grid, Tabs } from "antd";
 import style from "../styles.module.scss";
 import RedeemDetail from "./RedeemDetail";
 import RedeemList from "./RedeemList";
-import TableHistory from "./TableHistory";
+import History from "./History";
 import Header from "../../../../headerMobile/Header";
 const { useBreakpoint } = Grid;
 const { TabPane } = Tabs;
@@ -28,8 +28,8 @@ export default function Redeem() {
         <TabPane tab="รายการเหรียญ" key="2">
           <RedeemList/>
         </TabPane>
-        <TabPane tab="ประวัติเหรียญ" key="3">
-          <TableHistory />
+        <TabPane tab="ประวัติแลกเหรียญ" key="3">
+          <History />
         </TabPane>
       </Tabs>
     </Fragment>

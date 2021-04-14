@@ -3,7 +3,7 @@ import { Grid, Row } from "antd";
 import style from "../styles.module.scss";
 const { useBreakpoint } = Grid;
 
-export default function CoinDetail() {
+export default function AboutCoin() {
   const screens = useBreakpoint();
 
   return (

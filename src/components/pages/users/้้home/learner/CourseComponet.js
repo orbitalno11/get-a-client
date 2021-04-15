@@ -9,7 +9,7 @@ const { Title } = Typography;
 export default function CourseComponet({ title, link, array }) {
 
     const screens = useBreakpoint();
-
+  
     const componentListTutor = () => {
         let size = 2
         if (screens.lg) {
@@ -22,8 +22,8 @@ export default function CourseComponet({ title, link, array }) {
             }
         }
 
-        const chunksArrays = chunksArray(array, size)
 
+        const chunksArrays = chunksArray(array, size)
         return (
             chunksArrays && chunksArrays.map((item, index) => (
                 <div key={index} className={style.row}>
@@ -35,7 +35,8 @@ export default function CourseComponet({ title, link, array }) {
                         ))
                     }
                 </div>
-            ))
+            )
+            )
         )
     }
 

@@ -1,5 +1,4 @@
-
-@import "../profile/styles.module.scss";
+$main : #F26419;
 
 @mixin paddingSide($top,$right,$bottom,$left) {
     padding :$top $right $bottom $left
@@ -113,7 +112,6 @@
 .paddingTop{
     padding-top: 2rem;
 }
-
 
 .paddingTop60{
     padding-top: 3.75rem;

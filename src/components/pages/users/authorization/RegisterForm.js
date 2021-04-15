@@ -24,7 +24,7 @@ export default function RegisterForm() {
     }
 
     const { register, handleSubmit, errors, control } = useForm({
-        resolver: yupResolver(type === "0" ? tutorRegisSchema : learnnerRegisSchema),
+        resolver: yupResolver(type === 'tutor' ? tutorRegisSchema : learnnerRegisSchema),
     });
 
     const onChange = data => {

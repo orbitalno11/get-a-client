@@ -180,43 +180,42 @@ export default function Home() {
     return (
         <Fragment >
             {screens.xs || (screens.sm && !screens.md) ? <Header title="โปรไฟล์" /> : null}
-            <div className={style.paddingBottomBody}>
-                <div className={style.banner}>
-                    ติวเตอร์ที่ใช่ สถานที่ที่ชอบ คุณภาพการสอนที่ลงตัว
-                </div>
-                <div className={style.paddingTop}>
-                    {
-                        screens.lg ?
-                            (
-                                <div className={style.subjectMenu}>
-                                    {
-                                        subject && subject.map((item, index) => {
-                                            return (
-                                                <div key={index} style={{ width: "100px" }}>
-                                                    <Button className={style.button}>
-                                                        <FontAwesomeIcon className={style.iconlarge} icon={item.icon} style={{ backgroundColor: item.color, fontSize: "10pt" }} />
-                                                        <p>{item.subject}</p>
-                                                    </Button>
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            ) :
-                            (
-                                <div className={style.Slide}>
-                                    <SliderComponent dot={true} item={renderSlides()} />
-                                </div>
-                            )
-                    }
-                </div>
-                <div className={style.paddingBody}>
-                    <CourseComponet title="ติวเตอร์ยอดนิยม" link="/" array={courseTutor} />
-                </div>
 
-                <div className={style.paddingBody}>
-                    <CourseComponet title="คอร์สเรียนยอดนิยม" link="/" array={courseTutor1} />
-                </div>
+            <div className={style.banner}>
+                ติวเตอร์ที่ใช่ สถานที่ที่ชอบ คุณภาพการสอนที่ลงตัว
+            </div>
+            <div className={style.paddingTop}>
+                {
+                    screens.lg ?
+                        (
+                            <div className={style.subjectMenu}>
+                                {
+                                    subject && subject.map((item, index) => {
+                                        return (
+                                            <div key={index} style={{ width: "100px" }}>
+                                                <Button className={style.button}>
+                                                    <FontAwesomeIcon className={style.iconlarge} icon={item.icon} style={{ backgroundColor: item.color, fontSize: "10pt" }} />
+                                                    <p>{item.subject}</p>
+                                                </Button>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                        ) :
+                        (
+                            <div className={style.Slide}>
+                                <SliderComponent dot={true} item={renderSlides()} />
+                            </div>
+                        )
+                }
+            </div>
+            <div className={style.paddingBody}>
+                <CourseComponet title="ติวเตอร์ยอดนิยม" link="/" array={courseTutor} />
+            </div>
+
+            <div className={style.paddingBody}>
+                <CourseComponet title="คอร์สเรียนยอดนิยม" link="/" array={courseTutor1} />
             </div>
         </Fragment>
     )

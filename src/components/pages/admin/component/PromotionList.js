@@ -1,6 +1,5 @@
 import React from "react";
-import { Collapse, Space, Row, Col, Input } from "antd";
-import { CaretRightOutlined } from "@ant-design/icons";
+import { Collapse, Space, Row, Col} from "antd";
 import "./Style.css";
 import TableCoin from "./TableCoin";
 import ModalBuyCoin from "./ModalBuyCoin";

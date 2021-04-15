@@ -1,20 +1,5 @@
 @import "../../../../stylesDefault.module.scss";
 
-.paddingbody {
-  padding-left: 5%;
-  padding-right: 5%;
-}
-
-.paddingTopBody {
-  padding-top: 110px;
-}
-
-.body {
-  @extend .paddingbody;
-  @extend .paddingTopBody;
-  padding-bottom: 60px;
-}
-
 .coins {
   font-size: 1.7rem;
   margin-right: 1.25rem;

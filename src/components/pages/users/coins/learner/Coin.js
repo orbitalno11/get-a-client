@@ -14,7 +14,7 @@ export default function Coin() {
 
   const dispatch = useDispatch();
 
-  const list = useSelector((state) => state.coin.data);
+  const list = useSelector((state) => state.coin.rateCoin);
 
   const loading = useSelector((state) => state.loading.loading);
 

@@ -8,6 +8,7 @@
   --error-color: #840c0c;
   --green-color: #00b900;
   --red-color : #ab330f;
+  --forest-color : #248a35;
 }
 
 @keyframes App-logo-spin {
@@ -122,6 +123,10 @@ input :focus{
 
 .backgroundRed{
   background-color: var(--red-color) !important;
+}
+
+.backgroundForest{
+  background-color: var(--forest-color) !important;
 }
 
 /* General */

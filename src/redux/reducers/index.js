@@ -4,13 +4,17 @@ import authReducers from "./auth.reducers"
 import modalReducers from "./modal.reducers"
 import offlineCourseReducer from "./offlineCourse.reducers"
 import loadingReducer from "./loading.reducers"
+import coinReducer from "./coin.reducers";
+import verifyReducer from "./verify.reducers"
 
 const rootReducer = combineReducers({
     profile:profileReducers,
     auth : authReducers,
     modal : modalReducers,
     offlineCourse : offlineCourseReducer,
-    loading : loadingReducer
+    loading : loadingReducer,
+    coin : coinReducer,
+    verify:verifyReducer
 });
 
 export default rootReducer;

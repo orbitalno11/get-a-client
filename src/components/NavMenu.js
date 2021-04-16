@@ -77,8 +77,8 @@ const NavMenu = () => {
                         หน้าแรก
                 </NavLink>
                 </Menu.Item>
-                <Menu.Item key="/manageCouse"  >
-                    <NavLink to="/manageCouse">
+                <Menu.Item key="/tutor/course"  >
+                    <NavLink to="/tutor/course">
                         จัดการคอร์สเรียน
                 </NavLink>
                 </Menu.Item>

@@ -7,25 +7,25 @@ import moment from "moment";
 import { verifyAction } from "../../../../redux/actions";
 import { useParams } from "react-router";
 
-export default function Educate() {
+export default function Testing() {
   const dispatch = useDispatch();
   const params = useParams();
-  const idEducation = params.id;
-  const list = useSelector((state) => state.verify.educateDetail);
-  const fetchEducation = useCallback(() => {
-    dispatch(verifyAction.geteEducationDetail(idEducation));
+  const idTest = params.id;
+  const list = useSelector((state) => state.verify.testDetail);
+  const fetchTest = useCallback(() => {
+    dispatch(verifyAction.geteTestingDetail(idTest));
   }, [dispatch]);
 
   useEffect(() => {
-    fetchEducation();
-  }, [fetchEducation]);
+    fetchTest();
+  }, [fetchTest]);
 
   const handleCancel = () => {
-    dispatch(verifyAction.geteManageEducation(idEducation, false))
+    dispatch(verifyAction.geteManageEducation(idTest, false))
   };
 
   const handleSubmit = () => {
-    dispatch(verifyAction.geteManageEducation(idEducation, true))
+    dispatch(verifyAction.geteManageEducation(idTest, true))
   }
 
   return (
@@ -59,22 +59,17 @@ export default function Educate() {
                     </Row>
                     <Row className={style.detailProfile}>
                       <Col span={24}>
-                        <b>สาขาวิชา :</b> {list.educationData.branchText}
+                        <b>การสอบ :</b> {list.exam.examText}
                       </Col>
                     </Row>
                     <Row className={style.detailProfile}>
                       <Col span={24}>
-                        <b>GPAX :</b> {list.educationData.gpax}
+                        <b>วิชา :</b> {list.exam.subjectText}
                       </Col>
                     </Row>
                     <Row className={style.detailProfile}>
                       <Col span={24}>
-                        <b>สถานะการศึกษาปัจจุบัน :</b> {list.educationData.status}
-                      </Col>
-                    </Row>
-                    <Row className={style.detailProfile}>
-                      <Col span={24}>
-                        <b>สถาบันการศึกษา :</b> {list.educationData.instituteText}
+                        <b>คะแนน :</b> {list.exam.score}
                       </Col>
                     </Row>
                     <Row className={style.detailProfile}>

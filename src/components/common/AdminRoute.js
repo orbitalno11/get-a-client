@@ -1,22 +1,18 @@
 import React from "react";
-import { Route } from "react-router-dom";
-import Proptype from "prop-types";
+import { Redirect, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const AdminRoute = ({ component: Component, ...rest }) => {
-
-    return (
-        <Route
-        {...rest}
-        render={(props) => <Component {...props} />
-        }
+  const auth = useSelector(state => state.auth)
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        auth.isAuthenticated && auth.role === 0 ? <Component {...props} /> :  <Redirect to="/login" /> 
+      }
     />
-)
+  )
 
 }
-
-AdminRoute.prototype = {
-  auth: Proptype.object.isRequired,
-};
-
 
 export default AdminRoute;

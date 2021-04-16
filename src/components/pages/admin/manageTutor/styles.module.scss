@@ -1,0 +1,33 @@
+@import "../../../../stylesDefault.module.scss";
+
+.iconCloseemail{
+  color:$orange;
+}
+
+.iconOpenemail{
+  color:$gray;
+}
+
+.textVerify{
+  font-size: 0.875rem;
+  padding-top: 0.3rem;
+  color: $silver;
+}
+
+.timeVerify{
+  font-size: 0.8rem;
+  padding-top: 0.3rem;
+  color:$silver;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; 
+}
+
+.detailProfile{
+  padding-top: 0.938rem;
+  padding-bottom: 0.188rem;
+}
+
+.approve{
+  margin-top: 2.5rem;
+}

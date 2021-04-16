@@ -103,6 +103,10 @@ input :focus{
   background-color: var(--red-color) !important;
 }
 
+.backgroundGreenAdmin{
+  background-color: var(--green-admin-color) !important;
+}
+
 /* General */
 
 /* Nav Menu */

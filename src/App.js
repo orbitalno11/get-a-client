@@ -8,6 +8,7 @@ import { Provider } from "react-redux"
 import "antd/dist/antd.css";
 import "./App.css";
 import store from "./redux/store"
+import axios from "axios";
 
 //Route 
 import AdminRoute from "./components/common/AdminRoute"
@@ -18,7 +19,6 @@ import AdminLayout from "./components/layouts/AdminLayout"
 import TutorLayout from "./components/layouts/TutorLayout"
 
 // config
-import { apiURL } from "./config/baseURL";
 import Home from "./components/pages/users/home/learner/Home";
 import Register from "./components/pages/users/authorization/Register";
 import Login from "./components/pages/users/authorization/Login";
@@ -30,6 +30,14 @@ import PubilcProfile from "./components/pages/users/profile/profile/tutor/pubile
 import NavMenu from "./components/NavMenu";
 import ProfileDetail from "./components/pages/users/profile/profile/tutor/pubileProfile/ProfileDetail";
 import ReviewPage from "./components/pages/users/review/ReviewPage";
+import Coins from './components/pages/users/coins/learner/Coin'
+import Payment from './components/pages/users/coins/learner/Payment'
+import HistoryCoin from "./components/pages/users/coins/learner/historycoin"
+import Redeem from "./components/pages/users/coins/tutor/Redeem"
+import { BASE_API_URL } from "./config/environmentConfig";
+
+// todo It can call by BASE_API_URL
+const apiUrl = BASE_API_URL
 
 function App() {
   return (
@@ -37,7 +45,6 @@ function App() {
       <Router>
         <NavMenu />
         <Switch>
-
           {/* Public Route */}
           <AdminRoute path="/admin" component={AdminLayout} />
 
@@ -45,10 +52,11 @@ function App() {
           <PrivateRoute exact path="/learner/:id" component={ProfileLearner} />
           <PrivateRoute exact path="/learner/:id/edit" component={EditProfile} />
           <PrivateRoute exact path="/learner/:id/edit/map" component={EditProfileMap} />
-          <PrivateRoute
-            path="/tutor"
-            component={TutorLayout}
-          />
+          <PrivateRoute exact path="/coin" component={Coins} />
+          <PrivateRoute exact path="/coinshop/payment" component={Payment} />
+          <PrivateRoute exact path="/historycoin" component={HistoryCoin}/>
+          <PrivateRoute exact path="/tutor/coin" component={Redeem} />
+          <PrivateRoute path="/tutor" component={TutorLayout}/>
 
           {/* Public Route */}
           <Route exact path="/" component={Home} />

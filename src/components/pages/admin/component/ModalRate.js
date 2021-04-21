@@ -34,9 +34,9 @@ function showDescription() {
 function ModalRate() {
   return (
     <Space>
-      <a onClick={showDescription} style={{ color: '#F5732E' }}>
+      <p onClick={showDescription} style={{ color: '#F5732E' }}>
         แก้ไข
-      </a>
+      </p>
     </Space>
   );
 }

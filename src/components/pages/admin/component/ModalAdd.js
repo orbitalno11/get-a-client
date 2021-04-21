@@ -34,9 +34,9 @@ function showDescription() {
 function ModalAdd() {
   return (
     <Space>
-      <a onClick={showDescription} style={{ color: '#F5732E',textDecorationLine:'underline'}}>
+      <p onClick={showDescription} style={{ color: '#F5732E',textDecorationLine:'underline'}}>
       เพิ่มการซื้อเหรียญ
-      </a>
+      </p>
     </Space>
   );
 }

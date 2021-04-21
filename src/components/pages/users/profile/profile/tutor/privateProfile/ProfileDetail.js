@@ -45,7 +45,9 @@ export default function ProfileDetail() {
                     <FontAwesomeIcon icon={faCoins} className={style.iconcoin} />
                     <span>{profileDetail&&profileDetail.coin} เหรียญ</span>
                     <div className={style.floatLeft}>
-                        <Button className="buttonColor backgroundYellow" style={{width:"100px"}} shape="round" size="middle">แลกเหรียญ</Button>
+                        <NavLink to="/tutor/coin">
+                            <Button className="buttonColor backgroundYellow" style={{width:"100px"}} shape="round" size="middle">แลกเหรียญ</Button>
+                        </NavLink>
                     </div>
                 </div>
             </div>

@@ -5,7 +5,7 @@ import CardCourseTutor from "../../../../../../card/CardCourseTutor"
 import style from "../../../styles.module.scss"
 const { useBreakpoint } = Grid;
 
-export default function ProfileCorse() {
+export default function ProfileCourse() {
     const screens = useBreakpoint();
     // When the profile use?
     // const data = useSelector(state => state.profile)

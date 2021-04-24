@@ -33,8 +33,9 @@ export default function EditProfileDetail() {
         setDetailProfile(profile.profile)
     },[profile])
     
-    const onSubmit = (value) => {
-        console.log(value)
+    const onSubmit = () => {
+        // todo onSubmit
+        // value
     }
 
     return (
@@ -50,8 +51,7 @@ export default function EditProfileDetail() {
                                         <Image
                                             className={style.imageProfile}
                                             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-                                            preview={false}
-                                        ></Image>
+                                            preview={false} />
                                     </div>
                                     <Row className={style.alignCenter}>
                                         <Title level={3} className={screens.xs || (screens.sm && !screens.md) ? null : style.marginTop} >แก้ไขโปรไฟล์</Title>

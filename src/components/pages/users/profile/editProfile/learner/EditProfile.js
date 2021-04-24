@@ -16,8 +16,9 @@ export default function EditProfile() {
         resolver: yupResolver(profileSchema),
     });
 
-    const onSubmit = (value) => {
-        console.log(value)
+    const onSubmit = () => {
+        // todo onSubmit
+        // value
     }
 
     const editProfile = () => {

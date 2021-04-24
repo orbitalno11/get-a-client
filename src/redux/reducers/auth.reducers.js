@@ -8,7 +8,6 @@ const initialState = {
 }
 
 const authReducer = (state = initialState, action) => {
-    console.log(action)
     switch (action.type) {
     case authConstants.START_LOADING:
         return {

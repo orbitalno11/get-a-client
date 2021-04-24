@@ -1,13 +1,12 @@
 import React, { Fragment } from 'react'
 import CardReview from "../../../card/CardReview"
-import { Button, Col, Grid, Radio, Row, Typography } from "antd"
+import { Button, Col, Grid, Row } from "antd"
 import style from "./styles.module.scss"
 import { useDispatch } from "react-redux";
 import { modalAction } from "../../../../redux/actions";
 import { sizeModal } from "../../../modal/SizeModal";
 import ReviewForm from "./ReviewForm";
 const { useBreakpoint } = Grid;
-const { Title } = Typography;
 
 export default function AllReview() {
     const screens = useBreakpoint();

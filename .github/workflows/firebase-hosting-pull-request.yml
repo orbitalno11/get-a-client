@@ -24,8 +24,6 @@ jobs:
           mv ./${{secrets.SECRET_FILE_REPOSITORY}}/client/dev/.env ./get-a-client/.env
           cd ./get-a-client
       - name: Build app
-        env:
-          CI: false
         run: |
           npm run build
       - name: Deploy preview

@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 const { useBreakpoint } = Grid;
 const { Title } = Typography;
 
-export default function ProfileIdentity({}) {
+export default function ProfileIdentity() {
     const screens = useBreakpoint();
     const profile = useSelector(state => state.profile)
     const [history, setHistory] = useState(null)

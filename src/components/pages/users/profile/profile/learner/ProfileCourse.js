@@ -1,14 +1,14 @@
 import { Col, Row, Typography, Grid } from "antd";
 import React, { useEffect, useState } from "react"
 import TabHorizontal from "../../../../../tab/TabHorizontal"
-import CardCorseLearner from "../../../../../card/CardCorseLearner"
+import CardCourseLearner from "../../../../../card/CardCourseLearner"
 import style from "../../styles.module.scss"
 import { useSelector } from "react-redux";
 
 const { useBreakpoint } = Grid;
 const { Title } = Typography;
 
-export default function ProfileCoruse() {
+export default function ProfileCourse() {
     const screens = useBreakpoint();
     const profile = useSelector(state => state.profile)
     const [course, setCourse] = useState(null)
@@ -29,7 +29,7 @@ export default function ProfileCoruse() {
                                 (
                                     course.course.tutor.map((item, index) => (
                                         <Col xs={24} sm={20} md={24} lg={20} xl={12} className={style.padding} key={index} >
-                                            <CardCorseLearner data={item} />
+                                            <CardCourseLearner data={item} />
                                         </Col>
                                     ))
                                 )
@@ -53,7 +53,7 @@ export default function ProfileCoruse() {
                                 (
                                     course.course.course.map((item, index) => (
                                         <Col xs={24} sm={20} md={24} lg={20} xl={12} className={style.padding} key={index} >
-                                            <CardCorseLearner data={item} />
+                                            <CardCourseLearner data={item} />
                                         </Col>
                                     ))
                                 )

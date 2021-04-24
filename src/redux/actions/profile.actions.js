@@ -81,7 +81,7 @@ export const getProfile = () => async (dispatch) => {
     try {
         dispatch(setProfile(data))
     } catch (error) {
-
+        // todo handle error
     }
 }
 
@@ -89,15 +89,16 @@ export const getHandleProfile = () => async (dispatch) => {
     try {
         dispatch(setHandleProfile(data))
     } catch (error) {
-
+        // todo handle error
     }
 }
 
-export const editProfileDetail = (profile) => async (dispatch) =>{
+export const editProfileDetail = () => async (dispatch) =>{
+    // @parm profile
     try {
         dispatch(setProfile(data))
     } catch (error) {
-
+        // todo handle error
     }
 }
 
@@ -105,7 +106,7 @@ export const addHistory = (data) => async(dispatch) =>{
     try{
         dispatch(addEducation(data))
     }catch (error){
-
+        // todo handle error
     }
 }
 
@@ -113,6 +114,6 @@ export const removeHistory = (data) => async(dispatch) =>{
     try{
         dispatch(removeEducation(data))
     }catch (error){
-
+        // todo handle error
     }
 }

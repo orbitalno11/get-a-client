@@ -1,5 +1,5 @@
 import React, { Fragment } from "react"
-import { Typography, Grid, Row } from "antd"
+import { Grid, Row } from "antd"
 import {
     faClock,
     faCoins,
@@ -7,9 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "./styles.module.scss"
-import Header from "../../../headerMobile/Header";
 
-const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
 export default function DetailCourse() {

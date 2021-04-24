@@ -31,8 +31,9 @@ export default function RegisterForm() {
         setimage(URL.createObjectURL(data.target.files[0]))
     }
 
-    const onSubmit = data => {
-        console.log(JSON.stringify(data));
+    const onSubmit = () => {
+        // todo submit action
+        // data as argument
     };
 
     return (

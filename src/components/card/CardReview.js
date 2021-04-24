@@ -1,7 +1,6 @@
 import React from "react"
-import { Card, Rate, Typography } from "antd";
+import { Card, Rate } from "antd";
 import styles from "./styles.module.scss"
-const { Title } = Typography;
 
 export default function CardReview() {
     return (

@@ -1,3 +1,4 @@
+import React from "react";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -8,7 +9,6 @@ import { Provider } from "react-redux"
 import "antd/dist/antd.css";
 import "./App.css";
 import store from "./redux/store"
-import axios from "axios";
 
 //Route 
 import AdminRoute from "./components/common/AdminRoute"
@@ -34,10 +34,6 @@ import Coins from './components/pages/users/coins/learner/Coin'
 import Payment from './components/pages/users/coins/learner/Payment'
 import HistoryCoin from "./components/pages/users/coins/learner/historycoin"
 import Redeem from "./components/pages/users/coins/tutor/Redeem"
-import { BASE_API_URL } from "./config/environmentConfig";
-
-// todo It can call by BASE_API_URL
-const apiUrl = BASE_API_URL
 
 function App() {
   return (

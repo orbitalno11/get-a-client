@@ -8,11 +8,13 @@ const { useBreakpoint } = Grid;
 
 export default function PaymentDetail() {
   const screens = useBreakpoint();
-  const [value, setValue] = React.useState(1);
+  // When the value is used? Why declare ?
+  // const [value, setValue] = React.useState(1);
 
-  const onChange = (e) => {
-    console.log("radio checked", e.target.value);
-    setValue(e.target.value);
+  const onChange = () => {
+    // param e
+    // Why set this value
+    // setValue(e.target.value);
   };
 
   const radioStyle = {

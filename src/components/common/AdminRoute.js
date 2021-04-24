@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import Proptype from "prop-types";
 
-const AdminRoute = ({ component: Component, auth, ...rest }) => {
+const AdminRoute = ({ component: Component, ...rest }) => {
 
     return (
         <Route

@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
 import { Row, Grid } from "antd";
 import style from "../styles.module.scss";
-import HistoryDetail from "./historyDetail";
+import HistoryDetail from "./HistoryDetails";
 import Header from "../../../../headerMobile/Header";
 const { useBreakpoint } = Grid;
 
-export default function Historycoin() {
+export default function HistoryCoin() {
   const screens = useBreakpoint();
 
   return (

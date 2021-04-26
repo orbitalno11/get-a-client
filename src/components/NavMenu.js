@@ -118,7 +118,7 @@ const UserMenuMobile = () => {
                 </NavLink>
             </Col>
             <Col span={4} className="iconMenu">
-                <NavLink to="/">
+                <NavLink to="/favorite">
                     <FontAwesomeIcon icon={faHeart} className="icon" />
                 </NavLink>
             </Col>

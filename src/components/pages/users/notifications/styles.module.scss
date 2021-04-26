@@ -1,0 +1,14 @@
+@import "../profile/styles.module.scss";
+
+.notify {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+.alignCennter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

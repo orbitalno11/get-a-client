@@ -5,7 +5,7 @@ import HistoryDetail from "./HistoryDetail";
 import Header from "../../../../headerMobile/Header";
 const { useBreakpoint } = Grid;
 
-export default function Historycoin() {
+export default function HistoryCoin() {
   const screens = useBreakpoint();
 
   return (

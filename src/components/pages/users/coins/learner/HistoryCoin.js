@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Row, Grid } from "antd";
 import style from "../styles.module.scss";
-import HistoryDetail from "./HistoryDetail";
+import HistoryDetail from "./HistoryDetails";
 import Header from "../../../../headerMobile/Header";
 const { useBreakpoint } = Grid;
 

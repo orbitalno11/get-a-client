@@ -166,7 +166,7 @@ export default function Home() {
                         item && item.map((item1, index) => (
                             <Fragment key={index}>
                                 <Button className={style.button}>
-                                    <FontAwesomeIcon className={style.iconsmall} icon={item1.icon} style={{ backgroundColor: item1.color, fontSize: "10pt" }} />
+                                    <FontAwesomeIcon className={style.iconSmall} icon={item1.icon} style={{ backgroundColor: item1.color, fontSize: "10pt" }} />
                                     <p>{item1.subject}</p>
                                 </Button>
                             </Fragment>

@@ -72,7 +72,6 @@ export default function ReviewPage() {
                     </div>
                 )
             }
-
             {
                 (status === "tutor" && !screens.md) && (
                     <div className={style.navbarBottom}>

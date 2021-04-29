@@ -38,7 +38,6 @@ export default function ProfileIntroduce({ mainPage, review}) {
                                 {
                                     mainPage &&
                                     (
-
                                         <NavLink to={`/profile/${1}`}>
                                             <Button className={style.infoButton} shape="circle" icon={<FontAwesomeIcon icon={faInfo} />} />
                                         </NavLink>

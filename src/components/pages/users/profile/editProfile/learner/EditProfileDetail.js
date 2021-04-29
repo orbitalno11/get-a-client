@@ -106,7 +106,7 @@ export default function EditProfileDetail({ refs, error }) {
                                 !refs &&
                                 (
                                     <Col className={style.marginTop20}>
-                                        <Button className="backgroundMain buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
+                                        <Button className="backgroundOrange buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
                                     </Col>
                                 )
                             }

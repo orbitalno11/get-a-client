@@ -37,6 +37,8 @@ import Redeem from "./components/pages/users/coins/tutor/Redeem"
 import Notification from "./components/pages/users/notifications/Notification"
 import NotificationDetail from "./components/pages/users/notifications/NotificationDetail"
 import Favorite from "./components/pages/users/profile/favorite/Favorite"
+import Search from "./components/pages/users/search/Search";
+import ResultSearch from "./components/pages/users/search/ResultSearch";
 
 function App() {
   return (
@@ -68,6 +70,8 @@ function App() {
           <Route exact path="/profile/:id/course" component={PubilcProfile} />
           <Route exact path="/profile/:id" component={ProfileDetail} />
           <Route exact path="/course/:id" component={ReviewPage} />
+          <Route exact path="/search" component={Search} />
+          <Route exact path="/search/:search" component={ResultSearch} />
           <Route path="*">
             <Redirect path="/login" />
           </Route>

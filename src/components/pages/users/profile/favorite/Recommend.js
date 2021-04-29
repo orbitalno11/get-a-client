@@ -1,6 +1,6 @@
 import { Col, Row, Typography, Grid } from "antd";
 import React, { useEffect, useState } from "react";
-import CardCorseLearner from "../../../../card/CardCourseLearner";
+import CardCourseLearner from "../../../../card/CardCourseLearner";
 import style from "../styles.module.scss";
 import { useSelector } from "react-redux";
 
@@ -30,7 +30,7 @@ export default function Recommend() {
           course.course.tutor.length !== 0 &&
           course.course.tutor.map((item, index) => (
             <Col xs={24} sm={24} md={12} lg={24} xl={24} className={style.padding} key={index}>
-              <CardCorseLearner data={item} />
+              <CardCourseLearner data={item} />
             </Col>
           ))}
       </Row>

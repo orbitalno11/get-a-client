@@ -36,7 +36,7 @@ export default function AllReview() {
                     {
                         learn_status && screens.md && (
                             <Col style={{ marginLeft: 'auto' }}>
-                                <Button className="buttonColor backgroundMain" shape="round" size="large" onClick={() => { handleOpenReviewForm() }}>ให้คะแนน</Button>
+                                <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => { handleOpenReviewForm() }}>ให้คะแนน</Button>
                             </Col>
                         )
                     }
@@ -47,7 +47,7 @@ export default function AllReview() {
                 {
                     (status !== "tutor" && screens.md)  && (
                         <Col className={`${style.marginTop20} ${style.alignCenter}`}>
-                            <Button className="buttonColor backgroundMain" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>สมัครเรียน</Button>
+                            <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>สมัครเรียน</Button>
                             <Button className="buttonColor backgroundBlue" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>สอบถามข้อมูล</Button>
                         </Col>
                     )
@@ -57,9 +57,9 @@ export default function AllReview() {
                     (status === "tutor" && screens.md) && (
                         <Col className={`${style.marginTop20} ${style.alignCenter}`}>
                             { type === "course" ? (
-                                <Button className="buttonColor backgroundMain" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>อนุมัติคำขอ</Button>
+                                <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>อนุมัติคำขอ</Button>
                             ) : (
-                                <Button className="buttonColor backgroundMain" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>จัดการบทเรียน</Button>
+                                <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>จัดการบทเรียน</Button>
                             )
                             }
                             <Button className="buttonColor backgroundBlue" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>แก้ไข</Button>

@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import React,{ Fragment } from "react";
 
 const InputComponents = ({ title, type, name, register, error, value, placeholder, required }) => {
     const _title = title && title;

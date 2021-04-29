@@ -27,15 +27,4 @@ yarn-debug.log*
 yarn-error.log*
 .eslintcache
 
-<<<<<<< HEAD
 .firebase
-=======
-/src/config
-
-
-firebase.json
-.firebaserc
-.firebase
-
-.env
->>>>>>> 40ec693af19f92a4f0d54544f764c32b51e44f94

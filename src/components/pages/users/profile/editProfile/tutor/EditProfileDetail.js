@@ -120,7 +120,7 @@ export default function EditProfileDetail() {
                                         </Col>
                                     </Row>
                                     <div className={style.buttonEdit}>
-                                        <Button className="backgroundMain buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
+                                        <Button className="backgroundOrange buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
                                     </div>
                                 </form>
                             </div>

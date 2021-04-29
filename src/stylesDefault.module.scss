@@ -88,3 +88,10 @@ $black : #000000;
     padding: 1.25rem;
 }
 
+.loader{
+    height:100%;
+    width:100%;
+    background:url("./components/images/loading.gif") no-repeat center center;
+    position:absolute;
+    z-index:10;
+} 

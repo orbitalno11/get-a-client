@@ -50,7 +50,7 @@ export default function EditProfile() {
                         screens.md &&
                         (
                             <Row justify="center" className={style.marginTop}>
-                                <Button className="backgroundMain buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
+                                <Button className="backgroundOrange buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
                             </Row>
                         )
                     }

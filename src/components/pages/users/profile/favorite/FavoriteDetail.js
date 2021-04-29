@@ -1,6 +1,6 @@
 import { Col, Row, Typography, Grid } from "antd";
 import React, { useEffect, useState } from "react";
-import CardCorseLearner from "../../../../card/CardCourseLearner";
+import CardCourseLearner from "../../../../card/CardCourseLearner";
 import style from "../styles.module.scss";
 import { useSelector } from "react-redux";
 
@@ -39,7 +39,7 @@ export default function FavoriteDetail() {
               className={style.padding}
               key={index}
             >
-              <CardCorseLearner data={item} />
+              <CardCourseLearner data={item} />
             </Col>
           ))}
       </Row>

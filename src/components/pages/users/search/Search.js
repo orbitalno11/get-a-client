@@ -120,7 +120,7 @@ export default function Search() {
 
                     </Row>
                     <Row justify="space-around">
-                        <Button className="backgroundMain buttonColor" style={{ marginTop: "2rem" }} shape="round" size="large" htmlType="submit" onClick={() => handleSearch()}>ค้นหา</Button>
+                        <Button className="backgroundOrange buttonColor" style={{ marginTop: "2rem" }} shape="round" size="large" htmlType="submit" onClick={() => handleSearch()}>ค้นหา</Button>
                     </Row> 
                 </Col>
             </Row>

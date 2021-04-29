@@ -149,7 +149,7 @@ export default function RegisterForm() {
                             </Col>
                         </Row>
                         <div className={style.margintop20}>
-                            <Button className="buttonColor backgroundMain" shape="round" size="large" htmlType="submit">ลงทะเบียน</Button>
+                            <Button className="buttonColor backgroundOrange" shape="round" size="large" htmlType="submit">ลงทะเบียน</Button>
                         </div>
                     </div>
                 </div>

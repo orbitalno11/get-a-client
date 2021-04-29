@@ -1,7 +1,6 @@
-import { Typography, Grid, Row, Col } from "antd";
+import { Grid, Row, Col } from "antd";
 import React, { Fragment } from 'react'
-import { useParams } from "react-router";
-import CardCorseLearner from "../../../card/CardCorseLearner"
+import CardCourseLearner from "../../../card/CardCourseLearner"
 import Header from "../../../headerMobile/Header";
 import TabHorizontal from "../../../tab/TabHorizontal";
 import style from './styles.module.scss'
@@ -9,8 +8,6 @@ const { useBreakpoint } = Grid;
 
 export default function ResultSearch() {
     const screens = useBreakpoint();
-    const params = useParams();
-    const search = params.search
 
     const courseTutor = [
         {
@@ -57,7 +54,7 @@ export default function ResultSearch() {
                 {
                     courseTutor && courseTutor.map((item1, index) => (
                         <Col lg={8} md={12} sm={24} xs={24} key={index} className={style.cardResult}>
-                            <CardCorseLearner data={item1} />
+                            <CardCourseLearner data={item1} />
                         </Col>
                     ))
                 }

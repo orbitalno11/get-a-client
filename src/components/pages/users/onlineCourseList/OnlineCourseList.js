@@ -1,4 +1,4 @@
-import { faCoins, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Col, Grid, Row } from "antd";
 import React, { Fragment } from 'react'

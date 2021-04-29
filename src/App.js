@@ -73,7 +73,7 @@ function App() {
           <Route exact path="/course/:id" component={ReviewPage} />
           <Route exact path="/search" component={Search} />
           <Route exact path="/search/:search" component={ResultSearch} />
-          <Route exact path="/course/online" component={OnlineCourseList} />
+          <Route exact path="/course/online/:id" component={OnlineCourseList} />
           <Route path="*">
             <Redirect path="/login" />
           </Route>

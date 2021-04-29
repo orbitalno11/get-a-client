@@ -11,7 +11,7 @@ import { useHistory } from "react-router";
 const { Title } = Typography;
 
 
-export default function CardCorseTutor() {
+export default function CardCourseTutor() {
     const history = useHistory();
 
     const redirectToCoursePage = () =>{

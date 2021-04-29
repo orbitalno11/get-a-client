@@ -5,7 +5,7 @@ import TableHistory from "./TableHistory"
 
 const { useBreakpoint } = Grid;
 
-export default function HistoryDetail() {
+export default function HistoryDetails() {
   const screens = useBreakpoint();
   return (
     <Fragment>

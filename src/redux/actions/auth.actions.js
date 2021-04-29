@@ -13,7 +13,8 @@ function loginUser(loginData) {
     return async dispatch => {
         startLoading()
   
-        auth.signInWithEmailAndPassword(loginData.email, loginData.password).then(user => {
+        auth.signInWithEmailAndPassword(loginData.email, loginData.password).then( () => {
+            // user
             stopLoading()
             auth.currentUser.getIdToken().then(token => {
                 localStorage.setItem('token', token);
@@ -26,7 +27,6 @@ function loginUser(loginData) {
             // window.location.href = "/tutor/"
         }).catch(err => {
             dispatch(failure(err))
-            console.log(err)
             dispatch(modalAction.openModal({
                 text: "เข้าสู่ระบบไม่สำเร็จ",
                 size: sizeModal.small,
@@ -86,7 +86,6 @@ function signUpTutor(signUpData) {
             }))
         }).catch(err => {
             dispatch(failure())
-            console.log(err.response.data)
             dispatch(modalAction.openModal({
                 text: err.response.data.message,
                 size: sizeModal.small,

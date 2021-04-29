@@ -1,3 +1,4 @@
+import React from "react";
 import { faCheckCircle, faTimesCircle } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import style from "./styles.module.scss"

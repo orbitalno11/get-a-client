@@ -1,3 +1,4 @@
+import React from "react";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -8,7 +9,6 @@ import { Provider } from "react-redux"
 import "antd/dist/antd.css";
 import "./App.css";
 import store from "./redux/store"
-import axios from "axios";
 
 //Route 
 import AdminRoute from "./components/common/AdminRoute"
@@ -30,14 +30,13 @@ import PubilcProfile from "./components/pages/users/profile/profile/tutor/pubile
 import NavMenu from "./components/NavMenu";
 import ProfileDetail from "./components/pages/users/profile/profile/tutor/pubileProfile/ProfileDetail";
 import ReviewPage from "./components/pages/users/review/ReviewPage";
-import Coins from './components/pages/users/coins/learner/Coin'
-import Payment from './components/pages/users/coins/learner/Payment'
-import HistoryCoin from "./components/pages/users/coins/learner/historycoin"
+import Coins from "./components/pages/users/coins/learner/Coin"
+import Payment from "./components/pages/users/coins/learner/Payment"
+import HistoryCoin from "./components/pages/users/coins/learner/HistoryCoin"
 import Redeem from "./components/pages/users/coins/tutor/Redeem"
-import { BASE_API_URL } from "./config/environmentConfig";
-
-// todo It can call by BASE_API_URL
-const apiUrl = BASE_API_URL
+import Notification from "./components/pages/users/notifications/Notification"
+import NotificationDetail from "./components/pages/users/notifications/NotificationDetail"
+import Favorite from "./components/pages/users/profile/favorite/Favorite"
 
 function App() {
   return (
@@ -56,6 +55,9 @@ function App() {
           <PrivateRoute exact path="/coinshop/payment" component={Payment} />
           <PrivateRoute exact path="/historycoin" component={HistoryCoin}/>
           <PrivateRoute exact path="/tutor/coin" component={Redeem} />
+          <PrivateRoute exact path="/notification" component={Notification} />
+          <PrivateRoute exact path="/notification/:id" component={NotificationDetail} />
+          <PrivateRoute exact path="/favorite" component={Favorite} />
           <PrivateRoute path="/tutor" component={TutorLayout}/>
 
           {/* Public Route */}

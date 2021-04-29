@@ -6,7 +6,7 @@ import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router";
 const { Title } = Typography;
 
-export default function CardCorseLearner({ data, profile , width}) {
+export default function CardCourseLearner({ data, profile }) {
     const history = useHistory();
 
     const redirectToCoursePage = () =>{

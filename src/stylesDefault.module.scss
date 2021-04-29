@@ -82,31 +82,6 @@ $black : #000000;
     @extend .paddingBottomBody;
 }
 
-.paddingbody{
-    padding-left: 5%;
-    padding-right: 5%;
-}
-
-.paddingTopBody{
-    padding-top: 7rem;
-}
-
-.paddingBottomBody {
-    padding-bottom: 3.75rem;
-}
-
-.body {
-    @extend .paddingbody;
-    @extend .paddingTopBody;
-    @extend .paddingBottomBody;
-}
-
-.bodymobileprofile{
-    @extend .paddingbody;
-    @extend .paddingBottomBody;
-}
-
-
 .borderOrange{
     border: 0.2rem solid $orange;
     border-radius: 6%;

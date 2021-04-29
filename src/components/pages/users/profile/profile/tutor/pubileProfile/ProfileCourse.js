@@ -1,19 +1,19 @@
 import { Col, Row, Grid } from "antd"
 import Title from "antd/lib/typography/Title"
-import React, { Fragment, useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import CardCorseTutor from "../../../../../../card/CardCorseTutor"
+import React, { Fragment } from "react"
+import CardCourseTutor from "../../../../../../card/CardCourseTutor"
 import style from "../../../styles.module.scss"
 const { useBreakpoint } = Grid;
 
-export default function ProfileCorse() {
+export default function ProfileCourse() {
     const screens = useBreakpoint();
-    const data = useSelector(state => state.profile)
-    const [profile, setProfile] = useState(null)
-
-    useEffect(() => {
-        setProfile(data.profileHandle)
-    }, [data])
+    // When the profile use?
+    // const data = useSelector(state => state.profile)
+    // const [profile, setProfile] = useState(null)
+    //
+    // useEffect(() => {
+    //     setProfile(data.profileHandle)
+    // }, [data])
 
     return (
         <Fragment>
@@ -23,10 +23,10 @@ export default function ProfileCorse() {
                         <Title level={4}>วิชาที่สอน</Title>
                     </Col>
                     <Col xs={24} sm={20} md={23} lg={20} xl={12} className={style.padding}>
-                        <CardCorseTutor />
+                        <CardCourseTutor />
                     </Col>
                     <Col xs={24} sm={20} md={23} lg={20} xl={12} className={style.padding}>
-                        <CardCorseTutor />
+                        <CardCourseTutor />
                     </Col>
                 </Row>
             </div>

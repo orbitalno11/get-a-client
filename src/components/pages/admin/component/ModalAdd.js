@@ -23,10 +23,10 @@ function showDescription() {
     // okType: 'success',
     cancelText: 'ยกเลิก',
     onOk() {
-      console.log('Ok');
+        // todo onOk
     },
     onCancel() {
-      console.log('Cancel');
+        // todo onCancel
     },
     width: 750,
   });

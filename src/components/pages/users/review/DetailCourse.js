@@ -7,6 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "./styles.module.scss"
+import ResponseMobile from "../../../response/ResponseMobile";
 const { useBreakpoint } = Grid;
 
 export default function DetailCourse() {
@@ -18,9 +19,9 @@ export default function DetailCourse() {
                 <Row className={!screens.md && style.alignCenter}>
                     <span className={style.titleH2}>คณิตศาสตร์</span>
                 </Row>
-                <div className={screens.xs || (screens.sm && !screens.md) ? style.paddingbody : null}>
+                <div className={ResponseMobile() && style.paddingbody}>
                     <div >
-                        <div className={(screens.xs || (screens.sm && !screens.md)) ? style.marginTop20 : style.contrainnerProfilePubile}>
+                        <div className={(ResponseMobile()) ? style.marginTop20 : style.contrainnerProfilePubile}>
                             <div className={style.TitleCoin}>
                                 <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
                                 <span className={style.textNormal}>ม.6, Admission</span>

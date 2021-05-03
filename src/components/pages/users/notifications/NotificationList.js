@@ -1,14 +1,14 @@
 import React, { Fragment } from "react";
-import { Typography, Grid, Col, Divider, Row } from "antd";
+import { Typography, Col, Divider, Row } from "antd";
 import style from "./styles.module.scss";
+import ResponseMobile from "../../../response/ResponseMobile";
 const { Link } = Typography;
-const { useBreakpoint } = Grid;
 
 export default function NotificationList() {
-  const screens = useBreakpoint();
+
   return (
     <Fragment>
-      {screens.xs || (screens.sm && !screens.md) ? (
+      {ResponseMobile() ? (
         <div className={style.notify}>
           <Link to="/notification/0">
             <Row style={{ color: "black" }}>

@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import EditProfileMap from "./EditProfileMap";
 import Header from "../../../../../headerMobile/Header";
+import ResponseMobile from "../../../../../response/ResponseMobile";
 
 const { useBreakpoint } = Grid;
 
@@ -24,7 +25,7 @@ export default function EditProfile() {
     const editProfile = () => {
         return (
             <Fragment>
-                {screens.xs || (screens.sm && !screens.md) ? <Header title="แก้ไขข้อมูล" pageBack="/learner/1" /> : null}
+                {ResponseMobile() && <Header title="แก้ไขข้อมูล" pageBack="/learner/1" />}
                 <div className={style.body}>
                     <Row justify="center">
                         <Col lg={11} md={11} sm={24}>

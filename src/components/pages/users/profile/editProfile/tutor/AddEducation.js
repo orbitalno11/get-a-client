@@ -1,7 +1,7 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react"
 import style from "../../styles.module.scss"
 import { Controller, useForm } from "react-hook-form";
-import { Button, Col, Row, Select, Typography, Grid } from "antd";
+import { Button, Col, Row, Select, Typography } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faCloudUploadAlt
@@ -11,7 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Header from "../../../../../headerMobile/Header";
 import { useDispatch } from "react-redux";
 import { addHistory, getProfile } from "../../../../../../redux/actions/profile.actions";
-const { useBreakpoint } = Grid;
+import ResponseMobile from "../../../../../response/ResponseMobile";
 
 const { Title } = Typography;
 
@@ -19,7 +19,6 @@ export default function AddEducation() {
     const [type, setType] = useState("test");
     const [imageName, setimageName] = useState(null);
     const dispatch = useDispatch()
-    const screens = useBreakpoint();
 
     const fetchProfile = useCallback(()=>{
         dispatch(getProfile())
@@ -57,7 +56,7 @@ export default function AddEducation() {
 
     return (
         <Fragment>
-            {screens.xs || (screens.sm && !screens.md) ? <Header title="เพิ่มข้อมูล" pageBack="/tutor/1"/> : null}
+            {ResponseMobile() && <Header title="เพิ่มข้อมูล" pageBack="/tutor/1"/> }
             <div className={style.body}>
                 <form id="myform" onSubmit={handleSubmit(onSubmit)}>
                     <Row justify="center" >

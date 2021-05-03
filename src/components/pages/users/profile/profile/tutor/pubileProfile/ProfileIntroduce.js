@@ -9,6 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import ResponseMobile from "../../../../../../response/ResponseMobile";
 
 const { useBreakpoint } = Grid;
 const { Title } = Typography;
@@ -25,7 +26,7 @@ export default function ProfileIntroduce({ mainPage, review}) {
     return (
         <Fragment>
             <Row className={style.paddingbody}>
-                <Col lg={4} md={6} sm={24} xs={24} className={screens.xs || (screens.sm && !screens.md) ? style.alignCenter : null} >
+                <Col lg={4} md={6} sm={24} xs={24} className={ResponseMobile() ? style.alignCenter : null} >
                     <Image
                         className={style.imageProfilePubile}
                         src={profileSample}
@@ -48,16 +49,16 @@ export default function ProfileIntroduce({ mainPage, review}) {
                         )
                     }
                 </Col>
-                <Col lg={17} md={17} sm={24} xs={24} className={screens.xs || (screens.sm && !screens.md) ? style.marginTop20 : style.columnJustify}>
+                <Col lg={17} md={17} sm={24} xs={24} className={ResponseMobile() ? style.marginTop20 : style.columnJustify}>
                     {
                         profile &&
                         (
-                            <Title className={screens.xs || (screens.sm && !screens.md) ? style.textAlign : null} level={3}>
+                            <Title className={ResponseMobile() && style.textAlign } level={3}>
                                 {profile.firstname}  {profile.lastname}
                             </Title>
                         )
                     }
-                    <span className={screens.xs || (screens.sm && !screens.md) ? style.textAlign : null}>
+                    <span className={ResponseMobile() && style.textAlign }>
                         {
                             (!review && profile) && profile.introduction
                         }

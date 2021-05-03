@@ -1,4 +1,4 @@
-import { Button, Col, Grid, Row } from "antd"
+import { Button, Col, Row } from "antd"
 import React, { Fragment } from "react"
 import { NavLink } from "react-router-dom"
 import {
@@ -9,10 +9,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "./styles.module.scss"
 import Header from "../../../headerMobile/Header"
 import { color } from "../../../defaultValue";
+import ResponseMobile from "../../../response/ResponseMobile";
 
 export default function Register() {
-    const { useBreakpoint } = Grid;
-    const screens = useBreakpoint();
 
     const typeRegister = [
         {
@@ -30,7 +29,7 @@ export default function Register() {
     ]
     return (
         <Fragment>
-            {screens.xs || (screens.sm && !screens.md) ? <Header title="สมัครสมาชิก" /> : null}
+            {ResponseMobile() && <Header title="สมัครสมาชิก" /> }
             <div className={style.alignCenterPage}>
                 <span className={style.titleH2}>ประเภทสมาชิก</span>
                 <Row className={style.rowWidth} >

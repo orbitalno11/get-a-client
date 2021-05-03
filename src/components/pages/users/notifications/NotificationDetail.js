@@ -1,14 +1,14 @@
 import React, { Fragment } from "react";
-import { Grid, Col, Row } from "antd";
+import { Col, Row } from "antd";
 import style from "./styles.module.scss";
 import Header from "../../../headerMobile/Header";
-const { useBreakpoint } = Grid;
+import ResponseMobile from "../../../response/ResponseMobile";
 
 export default function NotificationDetail() {
-  const screens = useBreakpoint();
+
   return (
     <Fragment>
-      {screens.xs || (screens.sm && !screens.md) ? (
+      {ResponseMobile() ? (
         <div>
             <Header pageBack="/notification" />
           <div className={style.body}>

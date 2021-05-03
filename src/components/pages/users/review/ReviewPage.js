@@ -11,6 +11,7 @@ import style from "./styles.module.scss"
 import { modalAction } from "../../../../redux/actions/modal.actions"
 import { sizeModal } from "../../../modal/SizeModal";
 import ReviewForm from "./ReviewForm";
+import ResponseMobile from "../../../response/ResponseMobile";
 
 const { useBreakpoint } = Grid;
 
@@ -39,8 +40,8 @@ export default function ReviewPage() {
     return (
         <Fragment>
             <ModalComponent />
-            {(screens.xs || (screens.sm && !screens.md)) && <Header pageBack="goback" />}
-            <div className={screens.xs || (screens.sm && !screens.md) ? style.bodymobileprofile : style.bodyEdit}>
+            {ResponseMobile() && <Header pageBack="goback" />}
+            <div className={ResponseMobile() ? style.bodymobileprofile : style.bodyEdit}>
                 {
                     screens.md && (
                         <div className={style.profile}  >
@@ -49,7 +50,7 @@ export default function ReviewPage() {
                     )
                 }
                 <Row className={!screens.md && style.paddingTopBody}>
-                    <Col className={screens.xs || (screens.sm && !screens.md) ? null : style.paddingbody} xl={9} lg={9} md={10} sm={24} xs={24} >
+                    <Col className={ResponseMobile() ? null : style.paddingbody} xl={9} lg={9} md={10} sm={24} xs={24} >
                         <DetailCourse mainPage={true} />
                     </Col>
                     <Col xl={13} lg={13} md={12} sm={24} xs={24} >

@@ -4,6 +4,7 @@ import style from "../styles.module.scss";
 import CoinDetail from "./CoinDetail";
 import Header from "../../../../headerMobile/Header";
 import Aboutcoin from "../learner/AboutCoin";
+import isMobile from "../../../../isMobile/isMobile";
 const { useBreakpoint } = Grid;
 
 export default function Coin() {
@@ -11,7 +12,7 @@ export default function Coin() {
 
   return (
     <Fragment>
-      {(screens.xs || (screens.sm && !screens.md)) && (
+      {isMobile() && (
         <Header title="ร้านค้า" />
       )}
       <Row className={style.body}>

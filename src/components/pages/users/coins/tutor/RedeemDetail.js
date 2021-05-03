@@ -1,17 +1,17 @@
 import React, { Fragment } from "react";
-import { Grid, Row, Col,Button } from "antd";
+import { Row, Col,Button } from "antd";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TableHistory from "./TableHistory";
 import style from "../styles.module.scss";
-const { useBreakpoint } = Grid;
+import isMobile from "../../../../isMobile/isMobile";
 
 
 export default function RedeemDetail() {
-  const screens = useBreakpoint();
+
   return (
     <Fragment>
-      {screens.xs || (screens.sm && !screens.md) ? (
+      {isMobile() ? (
         <div className={style.pageredeemsm}> 
           <div style={{ paddingTop: "1.5rem"}}>
             <span className={style.titleH5}>คุณมี</span>

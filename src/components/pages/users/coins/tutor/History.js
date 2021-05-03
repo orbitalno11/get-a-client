@@ -1,15 +1,14 @@
 import React, { Fragment } from "react";
-import { Grid, Row, Col,Divider} from "antd";
+import { Row, Col,Divider} from "antd";
 import style from "../styles.module.scss";
 import TableHistory from "./TableHistory"
-
-const { useBreakpoint } = Grid;
+import isMobile from "../../../../isMobile/isMobile";
 
 export default function History() {
-  const screens = useBreakpoint();
+
   return (
     <Fragment>
-      {screens.xs || (screens.sm && !screens.md) ? (
+      {isMobile() ? (
         <div className={style.pageredeemsm}>
           <div style={{ paddingTop: "1rem" }}>
             <Row>

@@ -2,6 +2,7 @@ import { Grid, Row, Col } from "antd";
 import React, { Fragment } from 'react'
 import CardCourseLearner from "../../../card/CardCourseLearner"
 import Header from "../../../headerMobile/Header";
+import ResponseMobile from "../../../response/ResponseMobile";
 import TabHorizontal from "../../../tab/TabHorizontal";
 import style from './styles.module.scss'
 const { useBreakpoint } = Grid;
@@ -89,7 +90,7 @@ export default function ResultSearch() {
 
     return (
         <Fragment>
-            {(screens.xs || (screens.sm && !screens.md)) && <Header pageBack="goback" title="ผลการค้นหา" />}
+            {(ResponseMobile()) && <Header pageBack="goback" title="ผลการค้นหา" />}
             <div className={`${style.bodymobileprofile} ${style.paddingTopBody}`} >
                 {
                     screens.md && (

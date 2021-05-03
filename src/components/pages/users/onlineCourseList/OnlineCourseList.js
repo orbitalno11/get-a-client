@@ -4,6 +4,7 @@ import { Button, Col, Grid, Row } from "antd";
 import React, { Fragment } from 'react'
 import CardOnlineCourse from "../../../card/CardOnlineCourse";
 import Header from "../../../headerMobile/Header";
+import ResponseMobile from "../../../response/ResponseMobile";
 import style from "./styles.module.scss"
 const { useBreakpoint } = Grid;
 
@@ -23,8 +24,8 @@ export default function OnlineCourseList() {
 
     return (
         <Fragment>
-            {screens.xs || (screens.sm && !screens.md) ? <Header title="" /> : null}
-            <div className={screens.xs || (screens.sm && !screens.md) ? `${style.bodymobileprofile} ${style.paddingTopBody}` : style.body}>
+            {ResponseMobile() && <Header title="" /> }
+            <div className={ResponseMobile() ?`${style.bodymobileprofile} ${style.paddingTopBody}` : style.body}>
                 <Row>
                     <Col span={20}>
                         <span className={style.titleH2}>ชื่อวิชา</span>

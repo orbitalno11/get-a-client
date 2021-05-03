@@ -1,17 +1,15 @@
 import React, { Fragment } from "react";
-import { Grid, Row, Col,Button,Divider } from "antd";
+import { Row, Col,Button,Divider } from "antd";
 import { faCoins, faCheck,faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TableList from "./TableList";
 import style from "../styles.module.scss";
-
-const { useBreakpoint } = Grid;
+import ResponseMobile from "../../../../response/ResponseMobile";
 
 export default function RedeemList() {
-  const screens = useBreakpoint();
   return (
     <Fragment>
-      {screens.xs || (screens.sm && !screens.md) ? (
+      {ResponseMobile() ? (
         <div className={style.pageredeemsm}>
           <div style={{ paddingTop: "1rem" }}>
             <Row>

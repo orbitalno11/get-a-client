@@ -4,6 +4,7 @@ import MultiLineChartComponent from "../../../../dashborad/MultiLineChartCompone
 import PieChartComponent from "../../../../dashborad/PieChartComponent";
 import style from "../styles.module.scss"
 import Header from "../../../../headerMobile/Header"
+import ResponseMobile from "../../../../response/ResponseMobile";
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
@@ -167,7 +168,7 @@ export default function Home() {
 
     return (
         <Fragment>
-            {screens.xs || (screens.sm && !screens.md) ? <Header title="โปรไฟล์" /> : null}
+            {ResponseMobile() && <Header title="โปรไฟล์" /> }
             <div className={style.paddingCenter}>
                 <Title level={2} >ยินดีต้อนรับ XXX</Title>
                 <Title level={4}>คุณมีผู้เรียน 20,000 คนในเดือนนี้ </Title>

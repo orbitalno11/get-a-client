@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Typography, Col, Divider, Row } from "antd";
 import style from "./styles.module.scss";
-import responseMobile from "../../../response/ResponseMobile";
+import responseMobile from "../../../response/responseMobile";
 const { Link } = Typography;
 
 export default function NotificationList() {

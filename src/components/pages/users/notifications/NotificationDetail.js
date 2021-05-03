@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Col, Row } from "antd";
 import style from "./styles.module.scss";
 import Header from "../../../headerMobile/Header";
-import responseMobile from "../../../response/ResponseMobile";
+import responseMobile from "../../../response/responseMobile";
 
 export default function NotificationDetail() {
 

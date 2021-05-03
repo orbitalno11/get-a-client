@@ -2,7 +2,7 @@ import { Grid, Row, Col } from "antd";
 import React, { Fragment } from 'react'
 import CardCourseLearner from "../../../card/CardCourseLearner"
 import Header from "../../../headerMobile/Header";
-import responseMobile from "../../../response/ResponseMobile";
+import responseMobile from "../../../response/responseMobile";
 import TabHorizontal from "../../../tab/TabHorizontal";
 import style from './styles.module.scss'
 const { useBreakpoint } = Grid;

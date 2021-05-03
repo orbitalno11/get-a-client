@@ -4,7 +4,7 @@ import style from "../styles.module.scss";
 import Header from "../../../../headerMobile/Header";
 import FavoriteDetail from "./FavoriteDetail";
 import Recommend from "./Recommend";
-import responseMobile from "../../../../response/ResponseMobile";
+import responseMobile from "../../../../response/responseMobile";
 const { useBreakpoint } = Grid;
 
 export default function Favorite() {

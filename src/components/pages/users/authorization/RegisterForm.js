@@ -17,7 +17,7 @@ import profile from "../../../images/profile.webp"
 import ModalComponent from "../../../modal/ModalComponent";
 import Header from "../../../headerMobile/Header";
 import { defaultValue } from "../../../defaultValue"
-import responseMobile from "../../../response/ResponseMobile";
+import responseMobile from "../../../response/responseMobile";
 
 export default function RegisterForm() {
     const [image, setimage] = useState({

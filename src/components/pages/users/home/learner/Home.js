@@ -15,7 +15,7 @@ import { chunksArray, SliderComponent } from "../../../../slider/SliderComponent
 import style from "../styles.module.scss"
 import CourseComponet from "./CourseComponet"
 import Header from "../../../../headerMobile/Header"
-import responseMobile from "../../../../response/ResponseMobile"
+import responseMobile from "../../../../response/responseMobile"
 const { useBreakpoint } = Grid;
 
 export default function Home() {

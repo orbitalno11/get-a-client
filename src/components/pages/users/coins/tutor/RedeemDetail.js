@@ -4,7 +4,7 @@ import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TableHistory from "./TableHistory";
 import style from "../styles.module.scss";
-import responseMobile from "../../../../response/ResponseMobile";
+import responseMobile from "../../../../response/responseMobile";
 
 
 export default function RedeemDetail() {

@@ -15,7 +15,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../redux/actions/auth.actions";
-import responseMobile from "./response/ResponseMobile";
+import responseMobile from "./response/responseMobile";
 
 const NavMenu = () => {
     const auth = useSelector(state => state.auth)

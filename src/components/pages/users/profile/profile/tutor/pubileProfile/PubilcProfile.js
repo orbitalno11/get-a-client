@@ -3,7 +3,7 @@ import React, { Fragment, useCallback, useEffect } from "react"
 import { useDispatch } from "react-redux";
 import { getHandleProfile } from "../../../../../../../redux/actions/profile.actions";
 import Header from "../../../../../../headerMobile/Header";
-import responseMobile from "../../../../../../response/ResponseMobile";
+import responseMobile from "../../../../../../response/responseMobile";
 import style from "../../../styles.module.scss"
 import ProfileCourse from "./ProfileCourse";
 import ProfileDetail from "./ProfileDetail";

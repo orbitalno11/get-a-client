@@ -5,7 +5,7 @@ import RedeemDetail from "./RedeemDetail";
 import RedeemList from "./RedeemList";
 import History from "./History";
 import Header from "../../../../headerMobile/Header";
-import responseMobile from "../../../../response/ResponseMobile";
+import responseMobile from "../../../../response/responseMobile";
 const { TabPane } = Tabs;
 
 export default function Redeem() {

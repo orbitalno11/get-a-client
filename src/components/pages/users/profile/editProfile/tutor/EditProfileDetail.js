@@ -8,7 +8,7 @@ import { Controller, useForm } from "react-hook-form";
 import Header from "../../../../../headerMobile/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../../../../../../redux/actions/profile.actions";
-import responseMobile from "../../../../../response/ResponseMobile";
+import responseMobile from "../../../../../response/responseMobile";
 const { Title } = Typography;
 
 export default function EditProfileDetail() {

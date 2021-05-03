@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../../../../../headerMobile/Header";
-import responseMobile from "../../../../../response/ResponseMobile";
+import responseMobile from "../../../../../response/responseMobile";
 const { Title } = Typography;
 
 export default function EditProfileMap({ refs }) {

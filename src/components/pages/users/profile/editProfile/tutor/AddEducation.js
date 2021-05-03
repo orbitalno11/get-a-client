@@ -11,7 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Header from "../../../../../headerMobile/Header";
 import { useDispatch } from "react-redux";
 import { addHistory, getProfile } from "../../../../../../redux/actions/profile.actions";
-import responseMobile from "../../../../../response/ResponseMobile";
+import responseMobile from "../../../../../response/responseMobile";
 
 const { Title } = Typography;
 

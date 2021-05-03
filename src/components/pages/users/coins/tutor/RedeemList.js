@@ -4,7 +4,7 @@ import { faCoins, faCheck,faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TableList from "./TableList";
 import style from "../styles.module.scss";
-import responseMobile from "../../../../response/ResponseMobile";
+import responseMobile from "../../../../response/responseMobile";
 
 export default function RedeemList() {
   return (

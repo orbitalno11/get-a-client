@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import EditProfileMap from "./EditProfileMap";
 import Header from "../../../../../headerMobile/Header";
-import responseMobile from "../../../../../response/ResponseMobile";
+import responseMobile from "../../../../../response/responseMobile";
 
 const { useBreakpoint } = Grid;
 

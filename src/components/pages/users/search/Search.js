@@ -5,7 +5,7 @@ import Header from "../../../headerMobile/Header";
 import style from "./styles.module.scss"
 import InputComponents from "../../../input/InputComponets"
 import TabHorizontal from "../../../tab/TabHorizontal"
-import responseMobile from "../../../response/ResponseMobile";
+import responseMobile from "../../../response/responseMobile";
 const { useBreakpoint } = Grid;
 
 export default function Search() {

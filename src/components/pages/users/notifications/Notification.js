@@ -4,7 +4,7 @@ import style from "./styles.module.scss";
 import Header from "../../../headerMobile/Header";
 import NotificationList from "./NotificationList";
 import NotificationDetail from "./NotificationDetail";
-import responseMobile from "../../../response/ResponseMobile";
+import responseMobile from "../../../response/responseMobile";
 const { useBreakpoint } = Grid;
 
 export default function Notification() {

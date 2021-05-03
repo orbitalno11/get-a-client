@@ -4,7 +4,7 @@ import style from "../styles.module.scss";
 import CoinDetail from "./CoinDetail";
 import Header from "../../../../headerMobile/Header";
 import Aboutcoin from "../learner/AboutCoin";
-import responseMobile from "../../../../response/ResponseMobile";
+import responseMobile from "../../../../response/responseMobile";
 const { useBreakpoint } = Grid;
 
 export default function Coin() {

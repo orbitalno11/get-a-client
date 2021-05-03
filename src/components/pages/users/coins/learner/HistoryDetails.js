@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Row, Col,Divider} from "antd";
 import style from "../styles.module.scss";
 import TableHistory from "./TableHistory"
-import responseMobile from "../../../../response/ResponseMobile";
+import responseMobile from "../../../../response/responseMobile";
 
 
 export default function HistoryDetails() {

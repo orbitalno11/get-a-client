@@ -11,7 +11,7 @@ import ProfileIntroduce from "./ProfileIntroduce";
 import Header from "../../../../../../headerMobile/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { getHandleProfile } from "../../../../../../../redux/actions/profile.actions";
-import responseMobile from "../../../../../../response/ResponseMobile";
+import responseMobile from "../../../../../../response/responseMobile";
 
 const { Title } = Typography;
 

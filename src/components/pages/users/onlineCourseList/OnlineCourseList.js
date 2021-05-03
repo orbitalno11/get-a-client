@@ -4,7 +4,7 @@ import { Button, Col, Grid, Row } from "antd";
 import React, { Fragment } from 'react'
 import CardOnlineCourse from "../../../card/CardOnlineCourse";
 import Header from "../../../headerMobile/Header";
-import responseMobile from "../../../response/ResponseMobile";
+import responseMobile from "../../../response/responseMobile";
 import style from "./styles.module.scss"
 const { useBreakpoint } = Grid;
 

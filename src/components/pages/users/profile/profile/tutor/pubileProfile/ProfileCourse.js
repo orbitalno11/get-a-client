@@ -2,7 +2,7 @@ import { Col, Row } from "antd"
 import Title from "antd/lib/typography/Title"
 import React, { Fragment } from "react"
 import CardCourseTutor from "../../../../../../card/CardCourseTutor"
-import responseMobile from "../../../../../../response/ResponseMobile"
+import responseMobile from "../../../../../../response/responseMobile"
 import style from "../../../styles.module.scss"
 
 export default function ProfileCourse() {

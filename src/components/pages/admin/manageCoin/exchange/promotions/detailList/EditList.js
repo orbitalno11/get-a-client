@@ -27,7 +27,7 @@ export default function EditList() {
   function ComponentSample() {
     return (
       <div style={{ paddingLeft: "1rem" }}>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <p className={style.titleH5}>แก้ไขการซื้อเหรียญ</p>
           <Row style={{ paddingTop: "1rem", marginBottom: "1.8rem" }}>
             <Col span={9}>

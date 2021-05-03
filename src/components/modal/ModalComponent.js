@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { modalAction } from "../../redux/actions";
 import style from "./styles.module.scss"
 import { alertIcon } from "../alertIcon/alertIconComponent";
+import { typeModal } from "./TypeModal";
 
 const ModalComponent = () => {
   const modal = useSelector(state => state.modal)
@@ -30,11 +31,11 @@ const ModalComponent = () => {
     }
   };
 
-  const checkAlert = (type) => {
-    if (type === "corrent") {
-      return <alertIcon.CorrectIcon />
-    } else {
-      return <alertIcon.WrongIcon />
+  const checkAlert = (type) =>{
+    if(type===typeModal.corrent){
+      return <alertIcon.CorrectIcon/>
+    }else{
+      return <alertIcon.WrongIcon/>
     }
   }
 

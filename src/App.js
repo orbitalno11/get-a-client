@@ -4,11 +4,12 @@ import {
   Redirect,
   Route,
   Switch
-} from "react-router-dom";
+} from "react-router-dom"
 import { Provider } from "react-redux"
-import "antd/dist/antd.css";
-import "./App.css";
+import "antd/dist/antd.css"
+import "./App.css"
 import store from "./redux/store"
+import axios from "axios"
 
 //Route 
 import AdminRoute from "./components/common/AdminRoute"
@@ -40,6 +41,25 @@ import Favorite from "./components/pages/users/profile/favorite/Favorite"
 import Search from "./components/pages/users/search/Search";
 import ResultSearch from "./components/pages/users/search/ResultSearch";
 import OnlineCourseList from "./components/pages/users/onlineCourseList/OnlineCourseList"
+import { BASE_API_URL } from "./config/environmentConfig";
+import setAuthToken from "./utils/setAuthToken";
+import jwtDecode from "jwt-decode";
+import { userActions } from "./redux/actions";
+
+axios.defaults.baseURL = BASE_API_URL
+
+if (localStorage.token) {
+  setAuthToken(localStorage.token)
+  const token = localStorage.token
+  const user = jwtDecode(token)
+  store.dispatch(userActions.setUser(user))
+  const currentTime = Date.now() / 1000
+
+  if (user.exp < currentTime) {
+      store.dispatch(userActions.logout())
+      window.location.href = "/login"
+  }
+}
 
 function App() {
   return (
@@ -80,7 +100,7 @@ function App() {
         </Switch>
       </Router>
     </Provider>
-  );
+  )
 }
 
-export default App;
+export default App

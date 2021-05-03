@@ -13,7 +13,7 @@ export default function AllReview() {
     const dispatch = useDispatch()
     const course = useSelector(state => state.offlineCourse.data)
     const auth = useSelector(state => state.auth.status)
-    const learn_status = auth.role === 1
+    const learn_status = auth&&auth.role === 1
     const status = false
     const owner = (course && auth) && (auth.id === course.owner.id)
     const review =course&&course.review

@@ -10,7 +10,7 @@ export default function CardCourseLearner({ data, profile }) {
     const history = useHistory();
 
     const redirectToCoursePage = () =>{
-        history.push("/course/MTH-1-12-a693cc8b-c001-456d-9aed-cef5319ecea7")
+        history.push("/course/MTH-1-12-d0a54622-bb89-49f5-a71b-93f70f469034")
     }
 
     return (

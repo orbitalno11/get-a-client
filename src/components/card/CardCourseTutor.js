@@ -10,7 +10,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory } from "react-router";
 const { Title } = Typography;
 
-
 export default function CardCourseTutor() {
     const history = useHistory();
 

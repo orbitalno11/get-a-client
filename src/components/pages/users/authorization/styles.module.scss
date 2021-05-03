@@ -1,4 +1,4 @@
-@import "../profile/styles.module.scss";
+@import "../../../../stylesDefault.module.scss";
 
 .white{
     color:$white !important
@@ -6,7 +6,7 @@
 
 .h1{
   @extend .white;
-  font-size: 50px;
+  @extend .titleH1;
   font-weight: 700;
 }
 
@@ -38,6 +38,7 @@
 }
 
 .buttonText{
+  @extend .paddingBottomBody;
   color:$white  !important;
 }
 
@@ -46,13 +47,14 @@
 }
 
 .title {
+  @extend .textNormal;
   margin-right: auto;
   margin-top: 0.6rem;
   color:$white
 }
 
 .iconStyle{
-  font-size:50px;
+  @extend .iconLargeRegister;
   margin-bottom : 0.6rem
 }
 

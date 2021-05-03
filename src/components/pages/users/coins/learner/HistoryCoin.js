@@ -5,7 +5,7 @@ import HistoryDetails from "./HistoryDetails";
 import Header from "../../../../headerMobile/Header";
 import ResponseMobile from "../../../../response/ResponseMobile";
 
-export default function Historycoin() {
+export default function HistoryCoin() {
 
   return (
     <Fragment>

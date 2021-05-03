@@ -2,7 +2,7 @@ import { Col, Row } from "antd"
 import Title from "antd/lib/typography/Title"
 import React, { Fragment } from "react"
 import CardCourseTutor from "../../../../../../card/CardCourseTutor"
-import ResponseMobile from "../../../../../../response/ResponseMobile"
+import responseMobile from "../../../../../../response/ResponseMobile"
 import style from "../../../styles.module.scss"
 
 export default function ProfileCourse() {
@@ -17,7 +17,7 @@ export default function ProfileCourse() {
     return (
         <Fragment>
             <div className={style.marginTop}>
-                <Row justify="space-around" align="middle" className={ResponseMobile() ? style.paddingbody : style.contrainnerProfilePubile}>
+                <Row justify="space-around" align="middle" className={responseMobile() ? style.paddingbody : style.contrainnerProfilePubile}>
                     <Col span={24}>
                         <Title level={4}>วิชาที่สอน</Title>
                     </Col>

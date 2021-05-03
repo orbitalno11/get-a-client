@@ -6,7 +6,7 @@ import ProfileIdentity from "./ProfileIdentity"
 import Header from "../../../../../../headerMobile/Header"
 import { useDispatch } from "react-redux"
 import { getProfile } from "../../../../../../../redux/actions/profile.actions";
-import ResponseMobile from "../../../../../../response/ResponseMobile"
+import responseMobile from "../../../../../../response/ResponseMobile"
 const { useBreakpoint } = Grid;
 
 export default function ProfileTutor() {
@@ -23,7 +23,7 @@ export default function ProfileTutor() {
 
     return (
         <Fragment>
-            {ResponseMobile() && <Header title="โปรไฟล์" /> }
+            {responseMobile() && <Header title="โปรไฟล์" /> }
             <Row className={style.body}>
                 <Col xs={24} sm={24} md={11} lg={9} xl={8} >
                     <ProfileDetail />

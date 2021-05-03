@@ -4,7 +4,7 @@ import style from "../styles.module.scss";
 import PaymentDetail from "./PaymentDetail";
 import Header from "../../../../headerMobile/Header";
 import Aboutcoin from "../learner/AboutCoin";
-import ResponseMobile from "../../../../response/ResponseMobile";
+import responseMobile from "../../../../response/ResponseMobile";
 const { useBreakpoint } = Grid;
 
 export default function Payment() {
@@ -12,10 +12,10 @@ export default function Payment() {
 
   return (
     <Fragment>
-      {ResponseMobile() && (
+      {responseMobile() && (
         <Header pageBack="/coin" />
       )}
-      {ResponseMobile() ? (
+      {responseMobile() ? (
         <Row className={style.body}>
           <Col xs={24} sm={24} md={11} lg={9} xl={8}>
             <PaymentDetail />

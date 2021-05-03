@@ -4,12 +4,12 @@ import { faCoins, faCheck,faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TableList from "./TableList";
 import style from "../styles.module.scss";
-import ResponseMobile from "../../../../response/ResponseMobile";
+import responseMobile from "../../../../response/ResponseMobile";
 
 export default function RedeemList() {
   return (
     <Fragment>
-      {ResponseMobile() ? (
+      {responseMobile() ? (
         <div className={style.pageredeemsm}>
           <div style={{ paddingTop: "1rem" }}>
             <Row>

@@ -2,13 +2,13 @@ import React, { Fragment } from "react";
 import { Col, Row } from "antd";
 import style from "./styles.module.scss";
 import Header from "../../../headerMobile/Header";
-import ResponseMobile from "../../../response/ResponseMobile";
+import responseMobile from "../../../response/ResponseMobile";
 
 export default function NotificationDetail() {
 
   return (
     <Fragment>
-      {ResponseMobile() ? (
+      {responseMobile() ? (
         <div>
             <Header pageBack="/notification" />
           <div className={style.body}>

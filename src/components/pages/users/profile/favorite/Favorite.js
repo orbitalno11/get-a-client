@@ -4,7 +4,7 @@ import style from "../styles.module.scss";
 import Header from "../../../../headerMobile/Header";
 import FavoriteDetail from "./FavoriteDetail";
 import Recommend from "./Recommend";
-import ResponseMobile from "../../../../response/ResponseMobile";
+import responseMobile from "../../../../response/ResponseMobile";
 const { useBreakpoint } = Grid;
 
 export default function Favorite() {
@@ -12,7 +12,7 @@ export default function Favorite() {
  
   return (
     <Fragment>
-      {ResponseMobile() ? (
+      {responseMobile() ? (
         <div>
           <Header title="ที่คุณถูกใจ" />
           <Row className={style.body}>

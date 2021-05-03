@@ -5,19 +5,19 @@ import RedeemDetail from "./RedeemDetail";
 import RedeemList from "./RedeemList";
 import History from "./History";
 import Header from "../../../../headerMobile/Header";
-import ResponseMobile from "../../../../response/ResponseMobile";
+import responseMobile from "../../../../response/ResponseMobile";
 const { TabPane } = Tabs;
 
 export default function Redeem() {
 
   return (
     <Fragment>
-      {ResponseMobile() && (
+      {responseMobile() && (
         <Header title="จัดการเหรียญ" pageBack="/tutor/1" />
       )}
       <Tabs defaultActiveKey="1" centered className={style.pageredeem}>
         <TabPane tab="แลกเหรียญ" key="1">
-          {ResponseMobile() ? (
+          {responseMobile() ? (
             <RedeemDetail />
           ) : (
             <Row className={style.alignCenter}>

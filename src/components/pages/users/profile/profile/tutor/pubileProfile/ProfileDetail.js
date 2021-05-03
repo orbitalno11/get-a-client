@@ -11,7 +11,7 @@ import ProfileIntroduce from "./ProfileIntroduce";
 import Header from "../../../../../../headerMobile/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { getHandleProfile } from "../../../../../../../redux/actions/profile.actions";
-import ResponseMobile from "../../../../../../response/ResponseMobile";
+import responseMobile from "../../../../../../response/ResponseMobile";
 
 const { Title } = Typography;
 
@@ -34,17 +34,17 @@ export default function ProfileDetail({ mainPage }) {
 
     return (
         <Fragment>
-            {!mainPage && ResponseMobile() && <Header pageBack="goback" />}
-            <div className={ResponseMobile() ? style.bodymobileprofile : !mainPage ? style.bodyEdit : null}>
+            {!mainPage && responseMobile() && <Header pageBack="goback" />}
+            <div className={responseMobile() ? style.bodymobileprofile : !mainPage ? style.bodyEdit : null}>
                 {
                     !mainPage &&
                     (
-                        <div className={ResponseMobile() ? style.paddingTopBody : style.banner}  >
+                        <div className={responseMobile() ? style.paddingTopBody : style.banner}  >
                             <ProfileIntroduce />
                         </div>
                     )
                 }
-                <div className={mainPage && ResponseMobile() ? style.marginTop20 : style.contrainnerProfilePubile}>
+                <div className={mainPage && responseMobile() ? style.marginTop20 : style.contrainnerProfilePubile}>
                     <div className={style.TitleCoin}>
                         <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
                         <span>{profile && profile.place}</span>
@@ -55,7 +55,7 @@ export default function ProfileDetail({ mainPage }) {
                     </div>
                 </div>
                 {
-                    ((mainPage && !ResponseMobile()) ||  !mainPage )&&
+                    ((mainPage && !responseMobile()) ||  !mainPage )&&
                     
                         (
                             <div className={style.marginTop}>

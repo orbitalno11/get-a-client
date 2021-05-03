@@ -28,7 +28,7 @@ export default function ExchangeDetail() {
   function ComponentSample() {
     return (
       <div style={{ paddingLeft: "1rem" }}>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <p className={style.titleH5}>แก้ไขอัตราการแลกเปลี่ยนเหรียญ</p>
           <Row style={{ paddingTop: "1rem", marginBottom: "1.8rem" }}>
             <Col span={11}>1 coins </Col>

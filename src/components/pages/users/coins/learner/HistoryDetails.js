@@ -4,7 +4,6 @@ import style from "../styles.module.scss";
 import TableHistory from "./TableHistory"
 import responseMobile from "../../../../response/responseMobile";
 
-
 export default function HistoryDetails() {
 
   return (

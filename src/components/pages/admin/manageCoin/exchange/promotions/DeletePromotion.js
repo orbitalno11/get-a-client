@@ -22,7 +22,7 @@ export default function DeletePromotion() {
         <Row className={style.btnRequest}>
           <Col span={6}>
             <Button
-              className="backgroundGreen buttonColor"
+              className="backgroundGreenAdmin buttonColor"
               shape="round"
               size="middle"
               style={{ width: "100px" }}

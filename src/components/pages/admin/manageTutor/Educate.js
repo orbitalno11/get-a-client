@@ -1,4 +1,4 @@
-import { Row, Col, Image, Button } from "antd";
+import { Row, Col, Image, Button} from "antd";
 import React, { Fragment } from "react";
 import style from "./styles.module.scss";
 import ONET from "../../../images/ONET.webp";

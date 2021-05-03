@@ -31,7 +31,7 @@ export default function Promotion() {
   function ComponentSample() {
     return (
       <div style={{ paddingLeft: "1rem", justifyContent: "center" }}>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <p className={style.titleH5}>เพิ่มโปรโมชั่น</p>
           <Row>
             <Col span={4}>ชื่อโปรโมชั่น :</Col>

@@ -4,6 +4,7 @@ import style from "../styles.module.scss";
 import PaymentDetail from "./PaymentDetail";
 import Header from "../../../../headerMobile/Header";
 import Aboutcoin from "../learner/AboutCoin";
+import isMobile from "../../../../isMobile/isMobile";
 const { useBreakpoint } = Grid;
 
 export default function Payment() {
@@ -11,10 +12,10 @@ export default function Payment() {
 
   return (
     <Fragment>
-      {(screens.xs || (screens.sm && !screens.md)) && (
+      {isMobile() && (
         <Header pageBack="/coin" />
       )}
-      {screens.xs || (screens.sm && !screens.md) ? (
+      {isMobile() ? (
         <Row className={style.body}>
           <Col xs={24} sm={24} md={11} lg={9} xl={8}>
             <PaymentDetail />

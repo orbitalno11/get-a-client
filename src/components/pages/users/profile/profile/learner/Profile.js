@@ -6,6 +6,7 @@ import ProfileCourse from "./ProfileCourse"
 import Header from "../../../../../headerMobile/Header"
 import { useDispatch } from "react-redux"
 import { getProfile } from "../../../../../../redux/actions/profile.actions";
+import isMobile from "../../../../../isMobile/isMobile"
 const { useBreakpoint } = Grid;
 
 export default function ProfileLearner() {
@@ -22,7 +23,7 @@ export default function ProfileLearner() {
 
     return (
         <Fragment>
-            {screens.xs || (screens.sm && !screens.md) ? <Header title="โปรไฟล์" /> : null}
+            {isMobile() && <Header title="โปรไฟล์" /> }
             <Row className={style.body}>
                 <Col xs={24} sm={24} md={11} lg={9} xl={8} >
                     <ProfileDetail />

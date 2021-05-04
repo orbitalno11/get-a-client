@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "./styles.module.scss"
 import Header from "../../../headerMobile/Header"
 import { color } from "../../../defaultValue";
-import responseMobile from "../../../response/responseMobile";
+import isMobile from "../../../isMobile/isMobile";
 
 export default function Register() {
 
@@ -29,7 +29,7 @@ export default function Register() {
     ]
     return (
         <Fragment>
-            {responseMobile() && <Header title="สมัครสมาชิก" /> }
+            {isMobile() && <Header title="สมัครสมาชิก" /> }
             <div className={style.alignCenterPage}>
                 <span className={style.titleH2}>ประเภทสมาชิก</span>
                 <Row className={style.rowWidth} >

@@ -11,7 +11,7 @@ import ProfileIntroduce from "./ProfileIntroduce";
 import Header from "../../../../../../headerMobile/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { getHandleProfile } from "../../../../../../../redux/actions/profile.actions";
-import responseMobile from "../../../../../../response/responseMobile";
+import isMobile from "../../../../../../isMobile/isMobile";
 
 const { Title } = Typography;
 
@@ -34,17 +34,17 @@ export default function ProfileDetail({ mainPage }) {
 
     return (
         <Fragment>
-            {!mainPage && responseMobile() && <Header pageBack="goback" />}
-            <div className={responseMobile() ? style.bodymobileprofile : !mainPage ? style.bodyEdit : null}>
+            {!mainPage && isMobile() && <Header pageBack="goback" />}
+            <div className={isMobile() ? style.bodymobileprofile : !mainPage ? style.bodyEdit : null}>
                 {
                     !mainPage &&
                     (
-                        <div className={responseMobile() ? style.paddingTopBody : style.banner}  >
+                        <div className={isMobile() ? style.paddingTopBody : style.banner}  >
                             <ProfileIntroduce />
                         </div>
                     )
                 }
-                <div className={mainPage && responseMobile() ? style.marginTop20 : style.contrainnerProfilePubile}>
+                <div className={mainPage && isMobile() ? style.marginTop20 : style.contrainnerProfilePubile}>
                     <div className={style.TitleCoin}>
                         <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
                         <span>{profile && profile.place}</span>
@@ -55,7 +55,7 @@ export default function ProfileDetail({ mainPage }) {
                     </div>
                 </div>
                 {
-                    ((mainPage && !responseMobile()) ||  !mainPage )&&
+                    ((mainPage && !isMobile()) ||  !mainPage )&&
                     
                         (
                             <div className={style.marginTop}>

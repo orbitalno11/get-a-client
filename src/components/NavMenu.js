@@ -15,7 +15,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../redux/actions/auth.actions";
-import responseMobile from "./response/responseMobile";
+import isMobile from "./isMobile/isMobile";
 
 const NavMenu = () => {
     const auth = useSelector(state => state.auth)
@@ -220,7 +220,7 @@ const NavMenu = () => {
             {
                 !admin && (
                     <div className="fixMenu">
-                        {responseMobile()? <MenuMobile /> : <MenuDesktop />}
+                        {isMobile()? <MenuMobile /> : <MenuDesktop />}
                     </div>
                 )
             }

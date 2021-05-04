@@ -4,14 +4,14 @@ import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TableHistory from "./TableHistory";
 import style from "../styles.module.scss";
-import responseMobile from "../../../../response/responseMobile";
+import isMobile from "../../../../isMobile/isMobile";
 
 
 export default function RedeemDetail() {
 
   return (
     <Fragment>
-      {responseMobile() ? (
+      {isMobile() ? (
         <div className={style.pageredeemsm}> 
           <div style={{ paddingTop: "1.5rem"}}>
             <span className={style.titleH5}>คุณมี</span>

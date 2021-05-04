@@ -1,14 +1,14 @@
 import React, { Fragment } from "react";
 import { Typography, Col, Divider, Row } from "antd";
 import style from "./styles.module.scss";
-import responseMobile from "../../../response/responseMobile";
+import isMobile from "../../../isMobile/isMobile";
 const { Link } = Typography;
 
 export default function NotificationList() {
 
   return (
     <Fragment>
-      {responseMobile() ? (
+      {isMobile() ? (
         <div className={style.notify}>
           <Link to="/notification/0">
             <Row style={{ color: "black" }}>

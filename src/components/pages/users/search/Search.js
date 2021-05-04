@@ -5,7 +5,7 @@ import Header from "../../../headerMobile/Header";
 import style from "./styles.module.scss"
 import InputComponents from "../../../input/InputComponets"
 import TabHorizontal from "../../../tab/TabHorizontal"
-import responseMobile from "../../../response/responseMobile";
+import isMobile from "../../../isMobile/isMobile";
 const { useBreakpoint } = Grid;
 
 export default function Search() {
@@ -79,7 +79,7 @@ export default function Search() {
 
     return (
         <Fragment>
-            {responseMobile() ? <Header title="ค้นหา" /> : null}
+            {isMobile() ? <Header title="ค้นหา" /> : null}
             <Row className={style.body}>
                 <Col lg={24} md={24} sm={24} xs={24}>
                     {

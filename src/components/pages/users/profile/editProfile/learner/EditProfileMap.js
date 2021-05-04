@@ -6,14 +6,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../../../../../headerMobile/Header";
-import responseMobile from "../../../../../response/responseMobile";
+import isMobile from "../../../../../isMobile/isMobile";
 const { Title } = Typography;
 
 export default function EditProfileMap({ refs }) {
 
     return (
         <Fragment>
-            {responseMobile() && <Header title="แก้ไขข้อมูล" pageBack="/learner/1"/> }
+            {isMobile() && <Header title="แก้ไขข้อมูล" pageBack="/learner/1"/> }
             <div className={refs ? style.paddingbody : style.body}>
                 <div className={style.TitleCoin}>
                     <Title level={4}>สถานที่ปัจจุบัน</Title>

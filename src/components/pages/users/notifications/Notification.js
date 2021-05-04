@@ -4,17 +4,17 @@ import style from "./styles.module.scss";
 import Header from "../../../headerMobile/Header";
 import NotificationList from "./NotificationList";
 import NotificationDetail from "./NotificationDetail";
-import responseMobile from "../../../response/responseMobile";
+import isMobile from "../../../isMobile/isMobile";
 const { useBreakpoint } = Grid;
 
 export default function Notification() {
   const screens = useBreakpoint();
   return (
     <Fragment>
-      {responseMobile() && (
+      {isMobile() && (
         <Header title="การแจ้งเตือน" />
       )}
-      {responseMobile() ? (
+      {isMobile() ? (
         <Row className={style.body}>
           <Col xs={24} sm={24} md={11} lg={9} xl={8}>
             <NotificationList />

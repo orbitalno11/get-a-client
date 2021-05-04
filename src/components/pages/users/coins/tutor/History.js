@@ -2,13 +2,13 @@ import React, { Fragment } from "react";
 import { Row, Col,Divider} from "antd";
 import style from "../styles.module.scss";
 import TableHistory from "./TableHistory"
-import responseMobile from "../../../../response/responseMobile";
+import isMobile from "../../../../isMobile/isMobile";
 
 export default function History() {
 
   return (
     <Fragment>
-      {responseMobile() ? (
+      {isMobile() ? (
         <div className={style.pageredeemsm}>
           <div style={{ paddingTop: "1rem" }}>
             <Row>

@@ -17,7 +17,7 @@ import profile from "../../../images/profile.webp"
 import ModalComponent from "../../../modal/ModalComponent";
 import Header from "../../../headerMobile/Header";
 import { defaultValue } from "../../../defaultValue"
-import responseMobile from "../../../response/responseMobile";
+import isMobile from "../../../isMobile/isMobile";
 
 export default function RegisterForm() {
     const [image, setimage] = useState({
@@ -77,7 +77,7 @@ export default function RegisterForm() {
 
     return (
         <Fragment>
-            {responseMobile() && <Header pageBack="goback" /> }
+            {isMobile() && <Header pageBack="goback" /> }
             <ModalComponent />
             <div className={style.paddingBottomBody}>
                 <form onSubmit={handleSubmit(onSubmit)}>

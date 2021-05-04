@@ -11,7 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Header from "../../../../../headerMobile/Header";
 import { useDispatch } from "react-redux";
 import { addHistory, getProfile } from "../../../../../../redux/actions/profile.actions";
-import responseMobile from "../../../../../response/responseMobile";
+import isMobile from "../../../../../isMobile/isMobile";
 
 const { Title } = Typography;
 
@@ -56,7 +56,7 @@ export default function AddEducation() {
 
     return (
         <Fragment>
-            {responseMobile() && <Header title="เพิ่มข้อมูล" pageBack="/tutor/1"/> }
+            {isMobile() && <Header title="เพิ่มข้อมูล" pageBack="/tutor/1"/> }
             <div className={style.body}>
                 <form id="myform" onSubmit={handleSubmit(onSubmit)}>
                     <Row justify="center" >

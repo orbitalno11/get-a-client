@@ -15,7 +15,7 @@ import { chunksArray, SliderComponent } from "../../../../slider/SliderComponent
 import style from "../styles.module.scss"
 import CourseComponet from "./CourseComponet"
 import Header from "../../../../headerMobile/Header"
-import responseMobile from "../../../../response/responseMobile"
+import isMobile from "../../../../isMobile/isMobile"
 const { useBreakpoint } = Grid;
 
 export default function Home() {
@@ -180,7 +180,7 @@ export default function Home() {
 
     return (
         <Fragment >
-            {responseMobile() && <Header title="โปรไฟล์" />}
+            {isMobile() && <Header title="โปรไฟล์" />}
             <div className={style.paddingBottomBody}>
                 <div className={style.banner}>
                     ติวเตอร์ที่ใช่ สถานที่ที่ชอบ คุณภาพการสอนที่ลงตัว

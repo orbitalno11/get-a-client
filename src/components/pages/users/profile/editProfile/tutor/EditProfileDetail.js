@@ -8,7 +8,7 @@ import { Controller, useForm } from "react-hook-form";
 import Header from "../../../../../headerMobile/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../../../../../../redux/actions/profile.actions";
-import responseMobile from "../../../../../response/responseMobile";
+import isMobile from "../../../../../isMobile/isMobile";
 const { Title } = Typography;
 
 export default function EditProfileDetail() {
@@ -43,17 +43,17 @@ export default function EditProfileDetail() {
                 detailProfile !== null &&
                     (
                         <div>
-                            {responseMobile() && <Header title="แก้ไข" pageBack="/tutor/1" /> }
-                            <div className={!responseMobile() && style.bodyEdit}>
+                            {isMobile() && <Header title="แก้ไข" pageBack="/tutor/1" /> }
+                            <div className={!isMobile() && style.bodyEdit}>
                                 <form onSubmit={handleSubmit(onSubmit)}>
-                                    <div className={responseMobile() ? style.mobilecenter : style.bannerEditProfile}>
+                                    <div className={isMobile() ? style.mobilecenter : style.bannerEditProfile}>
                                         <Image
                                             className={style.imageProfile}
                                             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
                                             preview={false} />
                                     </div>
                                     <Row className={style.alignCenter}>
-                                        <Title level={3} className={!responseMobile() && style.marginTop} >แก้ไขโปรไฟล์</Title>
+                                        <Title level={3} className={!isMobile() && style.marginTop} >แก้ไขโปรไฟล์</Title>
                                     </Row>
                                     <Row className={style.paddingEdit} justify="space-between">
                                         <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>

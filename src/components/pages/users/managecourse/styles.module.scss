@@ -1,0 +1,120 @@
+@import "../../../../stylesDefault.module.scss";
+
+.paddingmange {
+  padding: 1rem;
+}
+
+.marginTop {
+  margin-top: 2rem;
+}
+
+.floatleft {
+  margin-top: 2rem;
+  float: left;
+}
+
+.alignCenter{
+  display: flex;
+  justify-content: center;
+}
+
+.marginAccept {
+  margin-top: 1rem;
+}
+
+.imageProfile {
+  border-radius: 50% !important;
+  height: 6.12rem;
+  width: 6.12rem;
+}
+
+.paddingpage{
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.icon {
+  @extend .iconSmall;
+  color: $gray;
+}
+
+.request{
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+  margin-left:5% ; 
+}
+
+.marginpage{
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+.margincard{
+  margin-bottom: 1.7rem;
+}
+
+.pagecard{
+  display: flex;
+  justify-content:space-between;
+  margin-top: 1rem;
+}
+
+.paddingCardLessonSM{
+  padding-top: 6rem;
+  padding-bottom: 3.75rem;
+ @extend .paddingbody;
+}
+
+.paddingCardLessonXS{
+  padding-top: 6rem;
+  padding-bottom: 3.75rem;
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
+.VDO{
+  border: 0.1rem solid rgb(211, 211, 211);
+  border-radius: 1rem;
+  width: auto;
+  height: 10rem;
+ @extend .VDOClip;
+}
+
+.Cover{
+  @extend .VDO;
+  height: 20rem;
+}
+
+.VDOClip{
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.paddingVDO{
+padding-top: 1rem;
+}
+
+.marginRigth{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.paddindMd{
+  display: flex !important;
+  justify-content: center !important;
+  @extend .paddingmange;
+}
+
+.dividerCourse{
+  height: 0.2rem;
+  width: 100%;
+  background-color: $orange;
+  margin-Top:0.175rem;
+}
+
+.floatRight{
+  display: flex;
+  margin-Left: auto;
+}

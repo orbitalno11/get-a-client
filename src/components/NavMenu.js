@@ -1,5 +1,5 @@
 import React, { Fragment } from "react"
-import { Menu, Grid, Button, Row, Col } from "antd";
+import { Menu, Button, Row, Col } from "antd";
 import { NavLink } from "react-router-dom";
 import {
     faHome,
@@ -15,10 +15,9 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../redux/actions/auth.actions";
-const { useBreakpoint } = Grid;
+import isMobile from "./isMobile/isMobile";
 
 const NavMenu = () => {
-    const screens = useBreakpoint();
     const auth = useSelector(state => state.auth)
     const dispatch = useDispatch()
     const statusTutor = auth.role === 2
@@ -221,7 +220,7 @@ const NavMenu = () => {
             {
                 !admin && (
                     <div className="fixMenu">
-                        {screens.xs || (screens.sm && !screens.md) ? <MenuMobile /> : <MenuDesktop />}
+                        {isMobile()? <MenuMobile /> : <MenuDesktop />}
                     </div>
                 )
             }

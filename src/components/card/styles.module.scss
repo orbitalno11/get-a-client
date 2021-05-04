@@ -6,22 +6,54 @@
     cursor: pointer;
 }
 
-.cardRoundReview{
-    border: 0.15rem solid gray;
-    border-radius: 1.5rem;
-    padding : 0rem 0.5rem 0rem 0.5rem;
-    cursor: pointer;
-}
-
-.alignCenter{
-    display: flex;
+.alignCenter {
+  display: flex;
+  justify-content: center;
 }
 
 .image {
-    border-radius: 50% !important;
-    height: 5.25rem;
-    width: 5.25rem;
-  }
+  border-radius: 50% !important;
+  height: 5.25rem;
+  width: 5.25rem;
+}
+
+.borderGrid {
+  -webkit-box-shadow: none;
+  padding: 0.25rem !important;
+  padding-left: 0.6rem !important;
+  padding-right: 0.6rem !important;
+  display: flex;
+  align-items: center;
+}
+
+.gridImage {
+  @extend .borderGrid;
+  width: 30% !important;
+}
+
+.gridText {
+  @extend .borderGrid;
+  width: 70% !important;
+  height: 6.25rem;
+  padding-left: 2rem !important;
+}
+
+.gridButton {
+  @extend .borderGrid;
+  width: 20% !important;
+}
+
+.gridhalf {
+  @extend .borderGrid;
+  width: 50% !important;
+  height: 2.5rem !important;
+}
+
+.gridfull {
+  @extend .borderGrid;
+  width: 100% !important;
+  height: 2.5rem !important;
+}
 
 .imageClip{
     height: 6rem;
@@ -37,9 +69,16 @@
     align-items: center;
 }
 
-.gridImage{
-    @extend .borderGrid ;
-    width: 30% !important;
+.gridhalfSmall {
+  @extend .gridhalf;
+  height: auto !important;
+  padding-left: 1.25rem !important;
+
+}
+
+.icon {
+  @extend .iconSmall;
+  color: $gray;
 }
 
 .gridRow{
@@ -57,28 +96,43 @@
     padding-left: 2rem !important;
 }
 
-.gridButton{
-    @extend .borderGrid ;
-    width: 20% !important;
+.textIconSmall {
+  @extend .textSmall;
+  margin-left: 0.6rem;
 }
 
-.gridhalf{
-    @extend .borderGrid ;
-    width: 50% !important;
-    height: 2.5rem !important;
+.textIcon {
+  @extend .textSmall;
+  margin-left: 0.6rem;
 }
 
-.gridfull{
-    @extend .borderGrid ;
-    width: 100% !important;
-    height: 2.5rem !important;
-
+.floatRight {
+  margin-left: auto;
 }
 
-.gridhalfSmall{
-    @extend .gridhalf;
-    height: auto !important;
-    padding-left: 1.25rem !important;
+.paddingleftcourse {
+    padding-left: 1rem;
+  }
+  
+.paddingmanage {
+  padding: 0.4rem;
+}
+
+.update {
+  margin-top: -11.7rem;
+  margin-left: 85%;
+}
+
+.cardCourse{
+  border: 0.2rem solid #C4C4C4;
+  border-radius: 1.5rem;
+  width: 23rem;
+}
+
+.floatBell{
+  margin-left: auto;
+  color: $yellow !important;
+  @extend .iconNormal;
 }
 
 .icon{
@@ -102,3 +156,29 @@
 .marginLeft{
     margin-left: 0.6rem;
 }
+
+.imageClip {
+  height: 9rem;
+  width: 7rem;
+}
+
+.rate {
+  @extend .iconSmall;
+  color: $yellow;
+}
+
+.cardLessonXS {
+ @extend .cardRound;
+ width: 18rem;
+}
+
+.cardLesson {
+  @extend .cardRound;
+  width: 23rem;
+ }
+
+.dividerLine{
+  width: 100%;
+  background-color: $orange;
+}
+

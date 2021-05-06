@@ -9,7 +9,6 @@ import { Controller } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useCallback } from "react";
 import { defaultValue } from "../../../../../defaultValue";
-import findKeyObject from "../../../../../defaultFunction/findKeyObject";
 import moment from 'moment';
 
 export default function EditProfileDetail({ register, error, controls }) {
@@ -20,7 +19,6 @@ export default function EditProfileDetail({ register, error, controls }) {
 
     const fetchProfile = useCallback(() => {
         if (profile.profile) {
-            
             setimage(profile.profile.profileUrl)
         }
     }, [profile])
@@ -72,26 +70,6 @@ export default function EditProfileDetail({ register, error, controls }) {
                                 <input className="input" type="text" name="lastname" ref={register && register} defaultValue={detailProfile && detailProfile.lastname} />
                                 {
                                     error && error.lastname && <p className="error-input">{error.lastname.message}</p>
-                                }
-                            </Col>
-                            <Col span={18} className={style.marginTop20}>
-                                <p>เพศ</p>
-                                <Controller
-                                    as={
-                                        <Select name="gender"  >
-                                            {
-                                                defaultValue.gender && Object.entries(defaultValue.gender).map(([key, value]) => (
-                                                    <Select.Option key={value} value={value}>{key}</Select.Option>
-                                                ))
-                                            }
-                                        </Select>
-                                    }
-                                    name="gender"
-                                    control={controls}
-                                    defaultValue={detailProfile.gender && findKeyObject(defaultValue.gender,detailProfile.gender)}
-                                />
-                                {
-                                    error && error.email && <p className="error-input">{error.grade.message}</p>
                                 }
                             </Col>
                             <Col className={style.marginTop20} span={18} >

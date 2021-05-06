@@ -1,5 +1,5 @@
 import { Col, Divider, Row, Grid, Button } from "antd"
-import React, { Fragment } from "react"
+import React, { Fragment, useEffect } from "react"
 import { profileSchema } from "../../../../../../validation/validation";
 import style from "../../styles.module.scss"
 import EditProfileDetail from "./EditProfileDetail"
@@ -10,10 +10,9 @@ import Header from "../../../../../headerMobile/Header";
 import isMobile from "../../../../../isMobile/isMobile";
 import { useSelector, useDispatch } from "react-redux";
 import { profileAction } from "../../../../../../redux/actions/profile.actions";
-import { useCallback } from "react";
-import { useEffect } from "react";
 import { formUpdateProfile } from "../formUpdateProfile";
 import ModalComponent from "../../../../../modal/ModalComponent";
+// import { faCommentsDollar } from "@fortawesome/free-solid-svg-icons";
 
 const { useBreakpoint } = Grid;
 
@@ -27,20 +26,18 @@ export default function EditProfile() {
         resolver: yupResolver(profileSchema),
     });
 
-    const fetchProfile = useCallback(() => {
-        dispatch(profileAction.getProfile(auth.role === 1 && auth.profile))
-    }, [dispatch])
-
     useEffect(() => {
-        fetchProfile()
-    }, [fetchProfile])
+        dispatch(profileAction.getProfile(auth.role === 1 && auth.profile))
+    }, [])
 
     const onSubmit = (data) => {
         if (data) {
             const formData = formUpdateProfile("learner", data)
-            dispatch(profileAction.updateProfileLearner(formData, auth.role === 1 && auth.profile))
+            dispatch(profileAction.updateProfileLearner(formData, auth.profile))
         }
     }
+
+    console.log()
 
     return (
         <Fragment>

@@ -58,6 +58,7 @@ const data =
 }
 
 function getProfile(id) {
+    console.log("get")
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiGetA.get("/me", {
@@ -84,7 +85,7 @@ function getHandleProfile() {
     function success(data) { return { type: profileConstants.GET_HANDLE_PROFILE, payload: data } }
 }
 
-function updateProfileLearner(data) {
+function updateProfileLearner(data, profileId) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiGetA.post(`/me`,data, {
@@ -92,12 +93,13 @@ function updateProfileLearner(data) {
                 "Content-Type": "multipart/form-data",
             }
         }).then(() => {
-            dispatch(loadingActions.stopLoading())
             dispatch(success())
+            dispatch(getProfile(profileId))
             dispatch(modalAction.openModal({
                 text: "แก้ไขข้อมูลสำเร็จ",
                 size: sizeModal.small,
-                alert: typeModal.corrent
+                alert: typeModal.corrent,
+                afterClose: `/learner/${profileId}`
             }))
 
         }).catch((err) => {

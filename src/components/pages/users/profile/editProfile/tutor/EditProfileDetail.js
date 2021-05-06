@@ -21,9 +21,10 @@ const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
 export default function EditProfileDetail() {
-    const { profile, auth} = useSelector(state => state)
+    const { profile, auth, loading} = useSelector(state => state)
     const dispatch = useDispatch()
     const detailProfile = profile.profile && profile.profile
+    const loader = loading.loading
     const screens = useBreakpoint();
     const [image, setimage] = useState("")
 
@@ -35,7 +36,6 @@ export default function EditProfileDetail() {
         dispatch(profileAction.getProfile())
         if (profile.profile) {
             setimage(profile.profile.profileUrl)
-            console.log("dd")
             reset({
                 firstname: detailProfile.firstname,
                 lastname: detailProfile.lastname,
@@ -49,11 +49,11 @@ export default function EditProfileDetail() {
                 introduce: detailProfile.introduce
             })
         }
-    }, [profile])
+        console.log("dd")
+    }, [dispatch])
 
     useEffect(() => {
         fetchProfile()
-        
     }, [fetchProfile])
 
     const onChange = data => {
@@ -76,8 +76,7 @@ export default function EditProfileDetail() {
             {isMobile() && <Header title="แก้ไข" pageBack="/tutor/1" />}
             <ModalComponent />
             {
-                // detailProfile &&
-                // (
+                detailProfile && !loader ? (
                     <div>
                         <div className={screens.md ? style.bodyEdit : null}>
                             <form onSubmit={handleSubmit(onSubmit)}>
@@ -187,7 +186,7 @@ export default function EditProfileDetail() {
                                             }
                                             name="introduce"
                                             control={control}
-                                            defaultValue={""}
+                                            defaultValue={"ยินดีที่ได้รู้จัก"}
                                         />
                                         
                                     </Col>
@@ -198,7 +197,9 @@ export default function EditProfileDetail() {
                             </form>
                         </div>
                     </div>
-                // )
+                ) : (
+                    <div className={style.loader}></div>
+                )
             }
         </Fragment>
     )

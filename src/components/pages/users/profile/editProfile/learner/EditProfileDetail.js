@@ -11,14 +11,11 @@ import { useCallback } from "react";
 import { defaultValue } from "../../../../../defaultValue";
 import findKeyObject from "../../../../../defaultFunction/findKeyObject";
 import moment from 'moment';
-// import { profileAction } from "../../../../../../redux/actions/profile.actions";
 
 export default function EditProfileDetail({ register, error, controls }) {
-    const [image, setimage] = useState("")
-
-    // const dispatch = useDispatch()
-    const profile = useSelector(state => state.profile)
     const [detailProfile, setDetailProfile] = useState(null)
+    const [image, setimage] = useState("")
+    const profile = useSelector(state => state.profile)
 
     const fetchProfile = useCallback(() => {
         if (profile.profile) {
@@ -26,7 +23,6 @@ export default function EditProfileDetail({ register, error, controls }) {
             setimage(profile.profile.profileUrl)
         }
     }, [profile])
-
 
     useEffect(() => {
         fetchProfile()

@@ -44,15 +44,8 @@ export default function AddEducation() {
     }
 
     const onSubmit = () => {
-        // const education = {
-        //     type: data.type,
-        //     name: data.type||data.grade,
-        //     brance: data.subject||data.brance,
-        //     grade: data.year||data.gradeScore,
-        //     status: "0"
-        // }
-        // dispatch(addHistory(education))
-    };
+        // for submit
+    }
 
     return (
         <Fragment>

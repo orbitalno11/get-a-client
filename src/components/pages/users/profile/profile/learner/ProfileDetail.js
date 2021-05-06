@@ -26,6 +26,7 @@ export default function ProfileDetail() {
         }
     }, [profile])
 
+
     return (
         <Fragment>
             {

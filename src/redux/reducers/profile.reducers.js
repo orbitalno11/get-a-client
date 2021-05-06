@@ -6,25 +6,24 @@ const initialState = {
     error: null
 }
 
-const profileReducer = (state = initialState , action)=>{
-    switch(action.type){
-        case profileConstants.GET_PROFILE:
+const profileReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case profileConstants.GET_PROFILE_SUCCESS:
             return {
                 ...state,
                 profile: action.payload,
                 error: null
             }
-        case profileConstants.GET_HANDLE_PROFILE :
+        case profileConstants.GET_PROFILE_FAILURE:
             return {
                 ...state,
                 profile: null,
                 error: action.payload
             }
-        case profileConstants.GET_EDUCATION: 
+        case profileConstants.GET_HANDLE_PROFILE:
             return {
-                ...state ,
-                education :  action.payload ,
-                loading : false
+                ...state,
+                profileHandle: action.payload,
             }
         case profileConstants.UPDATE_PROFILE_SUCCESS:
             return {
@@ -40,6 +39,6 @@ const profileReducer = (state = initialState , action)=>{
             return state
         }
     }
-} 
+}
 
 export default profileReducer;

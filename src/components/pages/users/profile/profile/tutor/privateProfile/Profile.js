@@ -2,7 +2,7 @@ import React, { Fragment, useCallback, useEffect } from "react"
 import { Col, Row, Grid, Divider } from "antd"
 import style from "../../../styles.module.scss"
 import ProfileDetail from "./ProfileDetail"
-import ProfileIdentity from "./ProfileIdentity"
+// import ProfileIdentity from "./ProfileIdentity"
 import Header from "../../../../../../headerMobile/Header"
 import { useDispatch } from "react-redux"
 import { profileAction } from "../../../../../../../redux/actions/profile.actions";
@@ -37,7 +37,7 @@ export default function ProfileTutor() {
                     )
                 }
                 <Col xs={24} sm={24} md={12} lg={12} xl={12} >
-                    <ProfileIdentity />
+                    {/* <ProfileIdentity /> */}
                 </Col>
             </Row>
         </Fragment>

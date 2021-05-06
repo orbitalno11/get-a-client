@@ -23,6 +23,7 @@ const NavMenu = () => {
     const statusTutor = auth.role === 2
     const status = auth.isAuthenticated
     const admin = auth.role === 0
+    const profileTutor = "/tutor/"+auth.profile
     const UserMenu = () => {
 
         return (
@@ -88,8 +89,8 @@ const NavMenu = () => {
                 </Menu.Item>
                 {
                     status ? (
-                        <Menu.Item key="/tutor/1" >
-                            <NavLink to="/tutor/1">
+                        <Menu.Item key={ profileTutor } >
+                            <NavLink to={ profileTutor }>
                                 โปรไฟล์
                         </NavLink>
                         </Menu.Item>

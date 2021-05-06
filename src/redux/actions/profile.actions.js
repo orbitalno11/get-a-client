@@ -57,15 +57,10 @@ const data =
     ]
 }
 
-function getProfile(id) {
-    console.log("get")
+function getProfile() {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.get("/me", {
-            params: {
-                "id": id
-            }
-        }).then(res => {
+        await apiGetA.get("/me").then(res => {
             dispatch(loadingActions.stopLoading())
             const profileDetail = res.data.data
             dispatch(success(profileDetail))
@@ -86,6 +81,9 @@ function getHandleProfile() {
 }
 
 function updateProfileLearner(data, profileId) {
+    for (let [key, value] of data.entries()) {
+        console.log(`${key}: ${value}`);
+      }
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiGetA.post(`/me`,data, {

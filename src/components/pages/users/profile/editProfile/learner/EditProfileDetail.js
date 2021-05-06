@@ -13,13 +13,14 @@ import findKeyObject from "../../../../../defaultFunction/findKeyObject";
 import moment from 'moment';
 
 export default function EditProfileDetail({ register, error, controls }) {
-    const [detailProfile, setDetailProfile] = useState(null)
-    const [image, setimage] = useState("")
     const profile = useSelector(state => state.profile)
+    const detailProfile = profile.profile && profile.profile
+    const [image, setimage] = useState("")
+    
 
     const fetchProfile = useCallback(() => {
         if (profile.profile) {
-            setDetailProfile(profile.profile)
+            
             setimage(profile.profile.profileUrl)
         }
     }, [profile])
@@ -70,7 +71,7 @@ export default function EditProfileDetail({ register, error, controls }) {
                                 <p>นามสกุล</p>
                                 <input className="input" type="text" name="lastname" ref={register && register} defaultValue={detailProfile && detailProfile.lastname} />
                                 {
-                                    error && error.firstname && <p className="error-input">{error.lastname.message}</p>
+                                    error && error.lastname && <p className="error-input">{error.lastname.message}</p>
                                 }
                             </Col>
                             <Col span={18} className={style.marginTop20}>

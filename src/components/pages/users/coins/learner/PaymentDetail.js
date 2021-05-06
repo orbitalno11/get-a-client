@@ -1,28 +1,18 @@
 import React, { Fragment } from "react";
-import { Grid, Col, Button, Radio, Row,Divider,Image } from "antd";
+import { Grid, Col, Button, Radio, Row,Divider,Space} from "antd";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../styles.module.scss";
-import Linepay from "../../../../images/Linepay2.webp"
 const { useBreakpoint } = Grid;
 
 export default function PaymentDetail() {
   const screens = useBreakpoint();
-  // When the value is used? Why declare ?
-  // const [value, setValue] = React.useState(1);
+  const [value, setValue] = React.useState(1);
 
-  const onChange = () => {
-    // param e
-    // Why set this value
-    // setValue(e.target.value);
+  const onChange = (e) => {
+   setValue(e.target.value);
   };
 
-  const radioStyle = {
-    display: "block",
-    height: "30px",
-    lineHeight: "30px",
-    fontSize: "16px",
-  };
   return (
     <Fragment>
       <div>
@@ -50,10 +40,13 @@ export default function PaymentDetail() {
         <Divider type="horizontal" style={{ height: "100%" }} />
         <div>
           <span className={style.titleH5}>ชำระผ่าน</span>
-          <div>            
-              <Radio style={radioStyle} value={1} onChange={onChange}>
-                <Image src={Linepay} preview={false} />
-              </Radio>
+          <div style={{marginTop:"1rem"}}>
+            <Radio.Group onChange={onChange} value={value}>
+              <Space direction="vertical">
+                <Radio value={1}>SCB Easy App</Radio>
+                <Radio value={2}>QR CODE</Radio>
+              </Space>
+            </Radio.Group>
           </div>
           <Row className={style.payment}>
             <Button

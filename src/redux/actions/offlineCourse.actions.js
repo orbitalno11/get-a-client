@@ -1,4 +1,4 @@
-import axios from "axios"
+import apiGetA from "../../utils/setAxios"
 import { offlineCourseConstants } from "../constants"
 import { loadingActions } from "./loading.actions"
 
@@ -6,7 +6,7 @@ import { loadingActions } from "./loading.actions"
 function getOfflineCourse(id) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        axios.get(`/offline-course/${id}`)
+        apiGetA.get(`/offline-course/${id}`)
             .then(res => {
                 if (res.data.success) {
                     const data = res.data.data

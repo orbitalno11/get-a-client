@@ -1,8 +1,7 @@
-import axios from "axios"
 import { authConstants } from "../constants"
 import { modalAction } from "./modal.actions"
 import auth from "../../config/firebase"
-import setAuthToken from "../../utils/setAuthToken"
+import  apiGetA,{ setAuthToken } from "../../utils/setAxios"
 import { sizeModal } from "../../components/modal/SizeModal"
 import jwtDecode from "jwt-decode"
 import { typeModal } from "../../components/modal/TypeModal"
@@ -25,7 +24,7 @@ function loginUser(loginData) {
         auth.signInWithEmailAndPassword(loginData.email, loginData.password).then(user => {
             if (user) {
                 auth.currentUser.getIdToken().then(token => {
-                    axios.get("/auth/token", {
+                    apiGetA.get("/auth/token", {
                         params: {
                             token: token
                         }
@@ -63,7 +62,7 @@ function loginUser(loginData) {
 function signUpLearner(signUpData) {
     return async dispatch => {
         startLoading()
-        await axios.post("/learner/create", signUpData, {
+        await apiGetA.post("/learner/create", signUpData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -94,7 +93,7 @@ function signUpLearner(signUpData) {
 function signUpTutor(signUpData) {
     return async dispatch => {
         startLoading()
-        await axios.post("/tutor/create", signUpData, {
+        await apiGetA.post("/tutor/create", signUpData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }

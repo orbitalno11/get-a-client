@@ -12,13 +12,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { profileAction } from "../../../../../../redux/actions";
 import { defaultValue } from "../../../../../defaultValue";
-// import findKeyObject from "../../../../../defaultFunction/findKeyObject";
+import { formUpdateProfile } from "../formUpdateProfile";
+import findKeyObject from "../../../../../defaultFunction/findKeyObject";
+import ModalComponent from "../../../../../modal/ModalComponent";
 import moment from "moment";
+
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
 export default function EditProfileDetail() {
-    const profile = useSelector(state => state.profile)
+    const { profile, auth} = useSelector(state => state)
     const dispatch = useDispatch()
     const detailProfile = profile.profile && profile.profile
     const screens = useBreakpoint();
@@ -32,19 +35,26 @@ export default function EditProfileDetail() {
         dispatch(profileAction.getProfile())
         if (profile.profile) {
             setimage(profile.profile.profileUrl)
-            console.log(profile && profile.profile.firstname)
+            console.log("dd")
+            reset({
+                firstname: detailProfile.firstname,
+                lastname: detailProfile.lastname,
+                gender: findKeyObject(defaultValue.gender, detailProfile.gender),
+                dateOfBirth: moment(detailProfile.dateOfBirth, defaultValue.dateFormat),
+                subject: ['คณิตศาสตร์'],
+                email: detailProfile.email,
+                facebook: detailProfile.contact.facebookUrl,
+                line: detailProfile.contact.lineId,
+                phoneNumber: detailProfile.contact.phoneNumber,
+                introduce: detailProfile.introduce
+            })
         }
-    }, [])
+    }, [profile])
 
     useEffect(() => {
         fetchProfile()
-        reset({
-            firstname:
-              "firstname"
-          });
+        
     }, [fetchProfile])
-
-
 
     const onChange = data => {
         const fileInput = data.target.files[0]
@@ -55,16 +65,19 @@ export default function EditProfileDetail() {
     }
 
     const onSubmit = (data) => {
-        console.log(data)
+        if (data) {
+            const formData = formUpdateProfile("tutor", data)
+            dispatch(profileAction.updateProfileLearner(formData, auth.profile))
+        }
     }
 
     return (
         <Fragment>
             {isMobile() && <Header title="แก้ไข" pageBack="/tutor/1" />}
+            <ModalComponent />
             {
-
-                detailProfile &&
-                (
+                // detailProfile &&
+                // (
                     <div>
                         <div className={screens.md ? style.bodyEdit : null}>
                             <form onSubmit={handleSubmit(onSubmit)}>
@@ -79,7 +92,7 @@ export default function EditProfileDetail() {
                                                 />
                                             </Badge>
                                         </label>
-                                        <input id="file-input" name="image" type="file" ref={register && register} onChange={onChange} />
+                                        <input id="file-input" name="image" type="file" ref={register} onChange={onChange} />
                                     </div>
                                 </div>
                                 {
@@ -99,11 +112,12 @@ export default function EditProfileDetail() {
                                     </Col>
                                     <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
                                         <p>นามสกุล</p>
-                                        <input className="input" type="text" name="lastname" ref={register} defaultValue={detailProfile !== null && detailProfile.lastname} />
+                                        <input className="input" type="text" name="lastname" ref={register} />
                                         {
                                             errors.lastname && <p className="error-input">{errors.lastname.message}</p>
                                         }
                                     </Col>
+                                    <input  name="gender" type="string" ref={register} hidden/>
                                     <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
                                         <p>วันเดือนปีเกิด</p>
                                         <Controller
@@ -112,7 +126,7 @@ export default function EditProfileDetail() {
                                             }
                                             name="dateOfBirth"
                                             control={control}
-                                            defaultValue={moment(detailProfile.dateOfBirth && detailProfile.dateOfBirth, defaultValue.dateFormat)}
+                                            defaultValue={moment()}
                                         />
                                         {
                                             errors.dateOfBirth && <p className="error-input">{errors.dateOfBirth.message}</p>
@@ -139,7 +153,6 @@ export default function EditProfileDetail() {
                                             errors.subject && <p className="error-input">{errors.subject.message}</p>
                                         }
                                     </Col>
-                                    <input name="gender" ref={register && register} defaultValue={detailProfile && detailProfile.gender} hidden />
                                 </Row>
                                 <Row className={style.paddingEdit}>
                                     <Title level={5} className={style.marginTop}>ช่องทางในการติดต่อ</Title>
@@ -147,28 +160,36 @@ export default function EditProfileDetail() {
                                 <Row className={style.paddingEdit} justify="space-between">
                                     <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
                                         <p >อีเมล</p>
-                                        <input className="input" type="text" name="email" ref={register && register} defaultValue={detailProfile && detailProfile.email} />
+                                        <input className="input" type="text" name="email" ref={register}/>
                                         {
                                             errors.email && <p className="error-input">{errors.email.message}</p>
                                         }
                                     </Col>
                                     <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
                                         <p >facebook</p>
-                                        <input className="input" type="text" name="facebook" ref={register && register} defaultValue={detailProfile && detailProfile.contact.facebookUrl} />
+                                        <input className="input" type="text" name="facebook" ref={register}/>
                                     </Col>
                                     <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
                                         <p >Line</p>
-                                        <input className="input" type="text" name="line" ref={register && register} defaultValue={detailProfile && detailProfile.contact.lineId} />
+                                        <input className="input" type="text" name="line" ref={register}/>
                                     </Col>
                                     <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
                                         <p >หมายเลขโทรศัพท์</p>
-                                        <input className="input" type="text" name="phoneNumber" ref={register && register} defaultValue={detailProfile && detailProfile.contact.phoneNumber} />
+                                        <input className="input" type="text" name="phoneNumber" ref={register} />
                                     </Col>
                                 </Row>
                                 <Row className={style.paddingEdit} justify="space-between">
                                     <Col className={style.marginTop20} lg={24} sm={24} md={24} xs={24}>
                                         <p>ข้อความแนะนำตัว</p>
-                                        <TextArea className="input" name="introduce" size="large" ref={register} defaultValue={detailProfile !== null && detailProfile.introduction} />
+                                        <Controller
+                                            as={
+                                                <TextArea className="input" name="introduce" size="large"/>
+                                            }
+                                            name="introduce"
+                                            control={control}
+                                            defaultValue={""}
+                                        />
+                                        
                                     </Col>
                                 </Row>
                                 <div className={style.buttonEdit}>
@@ -177,7 +198,7 @@ export default function EditProfileDetail() {
                             </form>
                         </div>
                     </div>
-                )
+                // )
             }
         </Fragment>
     )

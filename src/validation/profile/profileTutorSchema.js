@@ -61,6 +61,6 @@ export const profileTutorSchema = yup.object().shape({
         .string(),
     line: yup
         .string(),
-    introduction: yup
+    introduce: yup
         .string()
 });

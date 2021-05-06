@@ -97,7 +97,6 @@ function updateProfileLearner(data, profileId) {
                 text: "แก้ไขข้อมูลสำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose: `/learner/${profileId}`
             }))
 
         }).catch((err) => {

@@ -36,15 +36,15 @@ export default function EditProfile() {
     }, [fetchProfile])
 
     const onSubmit = (data) => {
-        if(data){
-           const formData = formUpdateProfile("learner",data)
-           dispatch(profileAction.updateProfileLearner(formData,auth.role === 1 && auth.profile))
+        if (data) {
+            const formData = formUpdateProfile("learner", data)
+            dispatch(profileAction.updateProfileLearner(formData, auth.role === 1 && auth.profile))
         }
     }
 
-    const editProfile = () => {
-        return (
-            <Fragment>
+    return (
+        <Fragment>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 {isMobile() && <Header title="แก้ไขข้อมูล" pageBack="/learner/1" />}
                 <ModalComponent />
                 {
@@ -76,14 +76,7 @@ export default function EditProfile() {
                         <div className={style.loader}></div>
                     )
                 }
-
-            </Fragment>
-        )
-    }
-
-    return (
-        <Fragment>
-            <form onSubmit={handleSubmit(onSubmit)}>{editProfile()}</form>
+            </form>
         </Fragment>
     )
 }

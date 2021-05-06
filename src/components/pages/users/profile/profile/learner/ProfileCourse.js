@@ -3,21 +3,13 @@ import React, { useState } from "react"
 import TabHorizontal from "../../../../../tab/TabHorizontal"
 import CardCourseLearner from "../../../../../card/CardCourseLearner"
 import style from "../../styles.module.scss"
-// import { useSelector } from "react-redux";
 
 const { useBreakpoint } = Grid;
 const { Title } = Typography;
 
 export default function ProfileCourse() {
     const screens = useBreakpoint();
-    // const profile = useSelector(state => state.profile)
     const [course] = useState(null)
-
-    // useEffect(() => {
-    //     if (profile.profile.course) {
-    //         setCourse(profile.profile.course)
-    //     }
-    // }, [profile])
 
     const TabTutor = () => {
         return (

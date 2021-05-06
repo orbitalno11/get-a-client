@@ -19,9 +19,7 @@ export const formUpdateProfile=(type, data)=>{
     if(data.lineId){
         formData.append("lineId", data.line)
     }
-
-
-
+    
     if (type === "learner") {
         formData.append("grade",data.grade)
     } else if (type === "tutor") {

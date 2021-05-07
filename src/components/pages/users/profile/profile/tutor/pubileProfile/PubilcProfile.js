@@ -1,7 +1,5 @@
 import {  Row, Col } from "antd"
-import React, { Fragment, useCallback, useEffect } from "react"
-import { useDispatch } from "react-redux";
-import { profileAction } from "../../../../../../../redux/actions/profile.actions";
+import React, { Fragment } from "react"
 import Header from "../../../../../../headerMobile/Header";
 import isMobile from "../../../../../../isMobile/isMobile";
 import style from "../../../styles.module.scss"
@@ -10,16 +8,6 @@ import ProfileDetail from "./ProfileDetail";
 import ProfileIntroduce from "./ProfileIntroduce";
 
 export default function PubilcProfile() {
-    const dispatch = useDispatch()
-    
-    const fetchProfile = useCallback(() => {
-        dispatch(profileAction.getHandleProfile())
-    }, [dispatch])
-
-    useEffect(() => {
-        fetchProfile()
-    }, [fetchProfile])
-
     return (
         <Fragment>
             {(isMobile() )&& <Header pageBack="goback" /> }

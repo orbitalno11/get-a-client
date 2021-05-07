@@ -29,14 +29,12 @@ export default function TableHistory() {
   const screens = useBreakpoint();
   return (
     <Fragment>
-      <div>
+      <div className={style.coinbody}>
         {screens.md && (
-          <Col lg={24} xl={24} md={24}>
+          <Col lg={24} xl={24} md={24} style={{marginBottom:"1rem"}}>
             <span className={style.titleH2}>ประวัติการซื้อเหรียญ</span>
           </Col>
         )}
-      </div>
-      <div className={style.coinbody}>
         <Table dataSource={data} className={style.tablecoin} >
           <Column title="ลำดับ" dataIndex="key" key="key" align="center"/>
           <Column title="วันที่" dataIndex="date" key="date" align="center"/>

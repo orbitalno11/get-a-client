@@ -16,7 +16,7 @@ const grade = {
 const subject = {
     "คณิตศาสตร์":"MTH",
     "ภาษาไทย":"THA",
-    "วิทยศาตร์":"SCI",
+    "วิทยาศาตร์":"SCI",
     "ฟิสิกส์":"PHY",
     "เคมี":"CHM",
     "ชีววิทยา":"BIO",
@@ -35,9 +35,15 @@ const dateOfWeek = {
     "วันเสาร์":7
 }
 
+const type = {
+    "กลุ่ม":0,
+    "เดี่ยว":1,
+}
+
 export const defaultValue = {
     gender,
     grade,
     subject,
-    dateOfWeek
+    dateOfWeek,
+    type
 }

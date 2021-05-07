@@ -1,25 +1,24 @@
 import { profileConstants } from "../constants"
 
 const initialState = {
-    profile :  null,
-    profileHandle : null,
-    education : null,
-    loading : false
+    profile: null,
+    profileHandle: null,
+    error: null
 }
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case profileConstants.GET_PROFILE_SUCCESS:
             return {
-                ...state ,
-                profile : action.payload ,
-                loading : false
+                ...state,
+                profile: action.payload,
+                error: null
             }
         case profileConstants.GET_PROFILE_FAILURE:
             return {
-                ...state ,
-                profileHandle : action.payload ,
-                loading : false
+                ...state,
+                profile: null,
+                error: action.payload
             }
         case profileConstants.GET_HANDLE_PROFILE:
             return {
@@ -28,21 +27,16 @@ const profileReducer = (state = initialState, action) => {
             }
         case profileConstants.UPDATE_PROFILE_SUCCESS:
             return {
-                ...state , 
-                education : [...state.education,action.payload],
-                loading : false
+                ...state,
+                error: null
             }
-        case profileConstants.DELETE_EDUCATION :
+        case profileConstants.UPDATE_PROFILE_FAILURE:
             return {
-                ...state , 
-                education : [
-                    ...state.education.slice(0, action.payload),
-                    ...state.education.slice(action.payload + 1)
-                ],
-                loading : false
+                ...state,
+                error: action.payload
             }
-        default : {
-            return  state
+        default: {
+            return state
         }
     }
 }

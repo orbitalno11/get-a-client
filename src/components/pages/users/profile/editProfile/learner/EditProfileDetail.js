@@ -63,6 +63,9 @@ export default function EditProfileDetail({ register, error, controls, reset }) 
                             />
                         </Badge>
                     </label>
+                    {
+                        error && error.image && <p className="error-input">{error.image.message}</p>
+                    }
                     <input id="file-input" name="image" type="file" ref={register && register} onChange={onChange} />
                 </div>
             </div>

@@ -112,9 +112,72 @@ function updateProfileLearner(data, profileId) {
     function failure(err) { return { type: profileConstants.UPDATE_PROFILE_SUCCESS, payload : err} }
 }
 
+function setAddress(address) {
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiGetA.post("/me/address", address,
+        {
+            headers:{
+                "Authorization" :  "Bearer " + localStorage.token,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => {
+                console.log(res)
+                dispatch(loadingActions.stopLoading())
+                dispatch(success())
+            })
+            .catch(err => {
+                dispatch(loadingActions.stopLoading())
+                dispatch(failure(err.response.data.message.message))
+                console.log(err.response.data)
+            })
+    }
+    function success() { return { type: profileConstants.SET_ADDRESS_SUCCESS } }
+    function failure(err) { return { type: profileConstants.SET_ADDRESS_FAILURE, payload: err } }
+}
+
+function getAddress() {
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiGetA.get("/me/address")
+            .then(res => {
+                dispatch(loadingActions.stopLoading())
+                const data = res.data.data[0]
+                console.log(data)
+                let address = {}
+                if(data){
+                    address = {
+                        "address": data.address ? data.address : "",
+                        "hintAddress": data.hintAddress ? data.hintAddress : "",
+                        "road": data.road ? data.road : "",
+                        "subDistrict": data.subDistrict.id  ? data.subDistrict : "",
+                        "district": data.district.id ? data.district.id : "",
+                        "province": data.province.id ? data.province.id : "",
+                        "postcode": data.postcode ? data.postcode.id : "",
+                        "lat": data.lat ? data.lat : "",
+                        "lon": data.lon ? data.lon : "",
+                        "geoSubDistrict": data.subDistrict.title ? data.subDistrict.title : "",
+                        "geoDistrict": data.district.title ? data.district.title : "",
+                        "geoProvince": data.province.title ? data.province.title : "",
+                    }
+                    dispatch(success(address))
+                }
+            })
+            .catch(err => {
+                dispatch(loadingActions.stopLoading())
+                dispatch(failure(err.response.data.message.message))
+            })
+    }
+    function success(data) { return { type: profileConstants.GET_ADDRESS_SUCCESS, payload: data } }
+    function failure(err) { return { type: profileConstants.GET_ADDRESS_FAILURE, payload: err } }
+}
+
 
 export const profileAction = {
     getProfile,
     getHandleProfile,
-    updateProfileLearner
+    updateProfileLearner,
+    setAddress,
+    getAddress
 }

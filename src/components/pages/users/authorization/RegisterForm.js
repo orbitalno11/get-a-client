@@ -81,7 +81,7 @@ export default function RegisterForm() {
             <ModalComponent />
             <div className={style.paddingBottomBody}>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className={style.alignCenterPage} >
+                    <div className={style.alignCenterPageDestop} >
                         <div className={style.marginbottom20}>
                             <span className={style.titleH2}>ลงทะเบียน{type === "tutor" ? "ครูสอนพิเศษ" : "นักเรียน"}</span>
                         </div>

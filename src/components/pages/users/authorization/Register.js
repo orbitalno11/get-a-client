@@ -30,7 +30,7 @@ export default function Register() {
     return (
         <Fragment>
             {isMobile() && <Header title="สมัครสมาชิก" /> }
-            <div className={style.alignCenterPage}>
+            <div className={style.alignCenterPageDestop}>
                 <span className={style.titleH2}>ประเภทสมาชิก</span>
                 <Row className={style.rowWidth} >
                     {

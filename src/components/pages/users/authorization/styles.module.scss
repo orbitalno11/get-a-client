@@ -8,20 +8,25 @@
   @extend .white;
   @extend .titleH1;
   font-weight: 700;
+  padding-bottom: 0.5rem;
 }
 
 
 .body {
   padding-top: 7rem;
 }
-  
-.alignCenterPage{
-  @extend .body;
+
+.alignCenterPage {
   height: auto;
   display: flex;
   align-items: center;
   flex-flow: column;
   margin-top: 0;
+}
+
+.alignCenterPageDestop{
+  @extend .body;
+  @extend .alignCenterPage;
   padding-bottom: 1.25rem !important;
 }
 
@@ -32,7 +37,6 @@
 
 .loginPage{
   @extend .alignCenterPage;
-  height: 100vh;
   justify-content: center;
   background-color: $orange;
 }
@@ -49,7 +53,6 @@
 .title {
   @extend .textNormal;
   margin-right: auto;
-  margin-top: 0.6rem;
   color:$white
 }
 

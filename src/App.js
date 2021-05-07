@@ -9,7 +9,6 @@ import { Provider } from "react-redux"
 import "antd/dist/antd.css"
 import "./App.css"
 import store from "./redux/store"
-import axios from "axios"
 
 //Route 
 import AdminRoute from "./components/common/AdminRoute"

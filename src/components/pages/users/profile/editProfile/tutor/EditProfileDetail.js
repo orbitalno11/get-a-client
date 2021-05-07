@@ -163,7 +163,7 @@ export default function EditProfileDetail() {
                                     </Col>
 
                                     <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
-                                        <p>วิชาที่สอน</p>
+                                        <p>วิชาที่สอน (สอนได้มากสุด 3 วิชา)</p>
                                         <Controller
                                             as={
                                                 <Select name="subject" optionLabelProp="label" mode="multiple" >

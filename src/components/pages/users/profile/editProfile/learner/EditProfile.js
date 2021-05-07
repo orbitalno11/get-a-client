@@ -25,7 +25,7 @@ export default function EditProfile() {
     });
 
     useEffect(() => {
-        dispatch(profileAction.getProfile(auth.role === 1 && auth.profile))
+        dispatch(profileAction.getProfile(auth.profile))
        
     }, [])
 

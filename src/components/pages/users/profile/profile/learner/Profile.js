@@ -18,7 +18,7 @@ export default function ProfileLearner() {
     const dispatch = useDispatch()
 
     const fetchProfile = useCallback(() => {
-        dispatch(profileAction.getProfile(auth.role === 1 && auth.profile))
+        dispatch(profileAction.getProfile(auth.profile))
     }, [dispatch])
 
     useEffect(() => {

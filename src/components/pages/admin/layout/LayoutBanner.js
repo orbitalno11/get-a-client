@@ -11,7 +11,7 @@ import { getUsernameAvatar } from '../component/UserAvatar';
 const { Header } = Layout;
 const { SubMenu } = Menu;
 
-function LayoutBanner({ collapsed, handleOnCollapse }) {
+export default function LayoutBanner({ collapsed, handleOnCollapse }) {
   const getCollapseIcon = () => {
     if (collapsed) {
       return (
@@ -51,4 +51,3 @@ function LayoutBanner({ collapsed, handleOnCollapse }) {
   );
 }
 
-export default LayoutBanner;

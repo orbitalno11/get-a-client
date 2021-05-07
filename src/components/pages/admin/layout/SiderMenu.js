@@ -13,7 +13,7 @@ const { SubMenu } = Menu;
 
 const { Sider } = Layout;
 
-function SiderMenu({ handleOnCollapse, collapsed }) {
+export default function SiderMenu({ handleOnCollapse, collapsed }) {
 
   return (
     <div>
@@ -21,15 +21,15 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
         breakpoint="lg"
         onCollapse={handleOnCollapse}
         collapsed={collapsed}
-        width="256"
-        style={{ minHeight: '100vh' }}
+        width="250"
+        style={{ height: '100%', borderRight: 0 }}
       >
         <div className="menu-logo">
           <p className="logo-text">GETA</p>
         </div>
         <Menu mode="inline" theme="dark" defaultSelectedKeys={["/admin/home"]}>
           <Menu.Item key="/admin">
-            <NavLink Link to="/admin"><DashboardOutlined /><span className="nav-text">หน้าแรก</span></NavLink>
+            <NavLink to="/admin"><DashboardOutlined /><span className="nav-text">หน้าแรก</span></NavLink>
           </Menu.Item>
           <SubMenu
             key="manage"
@@ -40,11 +40,11 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
               </span>
             }
           >
-            <Menu.Item key="/admin/manageprofile">
-              <NavLink to="/admin/manageprofile"><span className="nav-text">เอกสารยืนยันตัว</span></NavLink>
+            <Menu.Item key="/admin/verify/profile">
+              <NavLink to="/admin/verify/profile"><span className="nav-text">เอกสารยืนยันตัว</span></NavLink>
             </Menu.Item>
-            <Menu.Item key="/admin/manageducation">
-              <NavLink to="/admin/manageducation"><span className="nav-text">เอกสารยืนยันประวัติการศึกษา</span></NavLink>
+            <Menu.Item key="/admin/verify/education">
+              <NavLink to="/admin/verify/education"><span className="nav-text">เอกสารยืนยันประวัติการศึกษา</span></NavLink>
             </Menu.Item>
           </SubMenu>
           <SubMenu
@@ -62,9 +62,6 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
             <Menu.Item key="/admin/exchagecoin">
               <NavLink to="/admin/exchagecoin"><span className="nav-text">จัดการอัตราการแลกเปลี่ยน</span></NavLink>
             </Menu.Item>
-            <Menu.Item key="/admin/managecoin">
-              <NavLink to="/admin/managecoin"><span className="nav-text">จัดการช่วงการแลกเปลี่ยน</span></NavLink>
-            </Menu.Item>
           </SubMenu>
         </Menu>
       </Sider>
@@ -72,4 +69,3 @@ function SiderMenu({ handleOnCollapse, collapsed }) {
   );
 }
 
-export default SiderMenu;

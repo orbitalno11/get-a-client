@@ -1,0 +1,116 @@
+@import "../../../../stylesDefault.module.scss";
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.cardContainer {
+  width: 15.625rem;
+  margin: 0.625rem 1.25rem 0.625rem 0.625rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgb(241, 239, 239);
+  cursor: pointer;
+}
+
+.coins {
+  @extend .iconNormal;
+  margin-right: 1.25rem;
+  color: $yellow;
+  margin-top: 0.25rem;
+}
+
+.pagepaddingleft{
+  padding-left: 2rem;
+}
+
+.rateCoin {
+  background: #f5732e;
+  font-size: 2.3rem;
+  border-radius: 1.25rem;
+  width: 10rem;
+  height: 5rem;
+  color: white;
+  border-color: #f5732e;
+  margin-top: 0.4rem;
+  @extend .container;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.hisexchange{
+  margin-top:0.37rem;
+  float: right;
+  color:#7c8ffa;
+  text-decoration-line: underline;
+  @extend .textSmall;
+
+}
+
+.paddingbody {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.coinbody{
+  @extend .paddingbody;
+  margin-left: 1rem;
+  padding-top: 2rem;
+  width: 100%;
+}
+
+.tablecoin{
+  width: 95%;
+}
+
+.btnRequest{
+  padding-top: 0.6rem;
+  justify-content: center !important;
+}
+
+.inputRate{
+  text-align: "center";
+  padding-top:"-0.3rem" !important;
+}
+
+.tablecoins {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 15px;
+  text-align: center;
+  border-collapse: collapse;
+  font-size:18px;
+}
+.tablecoins td, #tablecoins th {
+  border: 1px solid rgb(240, 233, 233);
+  padding: 8px;
+  text-align: center;
+  border-bottom: 2px solid #ddd;  
+}
+.tablecoins tr:nth-child(even){background-color: #f2f2f2;}
+.tablecoins tr:hover {background-color: #ddd;}
+.tablecoins th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #303A53;
+  color: white;
+}
+
+.delete {
+  @extend .iconNormal;
+  margin-right: 1.25rem;
+  color: $red;
+  margin-top: 0.25rem;
+}
+
+.datetime{
+  border: 0.1rem solid #d9d9d9;
+}
+
+.promotion{
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+}
+

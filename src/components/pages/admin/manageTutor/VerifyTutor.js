@@ -1,155 +1,49 @@
-import { Card, Row, Col } from 'antd';
-import React from 'react';
-import './Style.less';
-import { DollarCircleOutlined } from '@ant-design/icons';
-import ModalCoin from '../../component/ModalCoin';
+import { Row, Col, Typography } from "antd";
+import React, { Fragment } from "react";
+import style from "./styles.module.scss";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { verifyTutor } from "./Constants";
+const { Link } = Typography;
 
-function VerifyTutor() {
-  const ResponsiveProps = {
-    xs: 24,
-    sm: 8,
-    md: 8,
-    lg: 8,
-    xl: 8,
-  };
+export default function VerifyTutor() {
   return (
-    <div>
-      <Row style={{ marginLeft: '30px' }}>
-        <Col span={1} style={{ marginRight: '-10px' }}>
-          <DollarCircleOutlined
-            style={{ fontSize: '16px', color: '#F6AE2D' }}
-          />
-        </Col>
-        <Col span={23} style={{ marginLeft: '-15px' }}>
-          <p>คำขอการถอนเหรียญที่ยังไม่ได้อนุมัติ</p>
-        </Col>
-      </Row>
-      <Row className="container" {...ResponsiveProps}>
-        <Card className="card-container">
-          <Row>
-            <Col
-              span={16}
-              style={{
-                marginTop: '-10px',
-                fontWeight: 'bold',
-                paddingLeft: '10px',
-              }}
-            >
-              <p>จิราภรณ์ ธิงกะเบล</p>
-            </Col>
-            <Col
-              span={8}
-              style={{
-                fontSize: '10px',
-                color: 'gray',
-                marginTop: '-5px',
-                paddingLeft: '20px',
-              }}
-            >
-              <p>16 ก.ค. 2563</p>
-            </Col>
-          </Row>
-          <Row
-            span={24}
-            style={{
-              justifyContent: 'center',
-              fontSize: '40px',
-              marginTop: '10px',
-            }}
-          >
-            <p>156 บาท</p>
-          </Row>
-          <Row
-            span={24}
-            style={{ justifyContent: 'center', marginTop: '-15px' }}
-          >
-            <ModalCoin />
-          </Row>
-        </Card>
-        <Card className="card-container">
-          <Row>
-            <Col
-              span={16}
-              style={{
-                marginTop: '-10px',
-                fontWeight: 'bold',
-                paddingLeft: '10px',
-              }}
-            >
-              <p>จิราภรณ์ ธิงกะเบล</p>
-            </Col>
-            <Col
-              span={8}
-              style={{
-                fontSize: '10px',
-                color: 'gray',
-                marginTop: '-5px',
-                paddingLeft: '20px',
-              }}
-            >
-              <p>16 ก.ค. 2563</p>
-            </Col>
-          </Row>
-          <Row
-            span={24}
-            style={{
-              justifyContent: 'center',
-              fontSize: '40px',
-              marginTop: '10px',
-            }}
-          >
-            <p>156 บาท</p>
-          </Row>
-          <Row
-            span={24}
-            style={{ justifyContent: 'center', marginTop: '-15px' }}
-          >
-            <ModalCoin />
-          </Row>
-        </Card>
-        <Card className="card-container">
-          <Row>
-            <Col
-              span={16}
-              style={{
-                marginTop: '-10px',
-                fontWeight: 'bold',
-                paddingLeft: '10px',
-              }}
-            >
-              <p>จิราภรณ์ ธิงกะเบล</p>
-            </Col>
-            <Col
-              span={8}
-              style={{
-                fontSize: '10px',
-                color: 'gray',
-                marginTop: '-5px',
-                paddingLeft: '20px',
-              }}
-            >
-              <p>16 ก.ค. 2563</p>
-            </Col>
-          </Row>
-          <Row
-            span={24}
-            style={{
-              justifyContent: 'center',
-              fontSize: '40px',
-              marginTop: '10px',
-            }}
-          >
-            <p>156 บาท</p>
-          </Row>
-          <Row
-            span={24}
-            style={{ justifyContent: 'center', marginTop: '-15px' }}
-          >
-            <ModalCoin />
-          </Row>
-        </Card>
-      </Row>
-    </div>
+    <Fragment>
+      <table className="verify">
+        <thead>
+          <tr>
+            <th>เอกสารยืนยันตัวตน</th>
+          </tr>
+        </thead>
+        <tbody>
+          {verifyTutor &&
+            verifyTutor.map((item, index) => (
+              <tr key={index}>
+                <td>
+                  <Link href="/admin/verify/profile/1">
+                    <Row style={{ color: "#000000" }}>
+                      <Col md={2} lg={1} xl={1}>
+                        <FontAwesomeIcon
+                          icon={faEnvelope}
+                          className={style.iconCloseemail}
+                        />
+                      </Col>
+                      <Col md={10} lg={9} xl={7} className={style.textSmall}>
+                        {item && item.fullNameTaxt}
+                      </Col>
+                      <Col md={10} lg={10} xl={10} className={style.textVerify}>
+                        ได้ส่งเอกสารยืนยันตัวตนแล้ว
+                      </Col>
+                      <Col md={2} lg={4} xl={6} className={style.timeVerify}>
+                        {item && item.time}
+                      </Col>
+                    </Row>
+                  </Link>
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+    </Fragment>
   );
 }
-export default VerifyTutor;

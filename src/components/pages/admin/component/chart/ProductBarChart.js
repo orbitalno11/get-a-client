@@ -19,7 +19,7 @@ const barData = [
   { x: 'W-12', y: 27 },
 ];
 
-function ProductBarChart() {
+export default function ProductBarChart() {
   return (
     <Card bordered={false}>
       <Chart
@@ -35,4 +35,3 @@ function ProductBarChart() {
   );
 }
 
-export default ProductBarChart;

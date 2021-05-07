@@ -1,7 +1,7 @@
 import {  Row, Col } from "antd"
 import React, { Fragment, useCallback, useEffect } from "react"
 import { useDispatch } from "react-redux";
-import { getHandleProfile } from "../../../../../../../redux/actions/profile.actions";
+import { profileAction } from "../../../../../../../redux/actions/profile.actions";
 import Header from "../../../../../../headerMobile/Header";
 import isMobile from "../../../../../../isMobile/isMobile";
 import style from "../../../styles.module.scss"
@@ -13,7 +13,7 @@ export default function PubilcProfile() {
     const dispatch = useDispatch()
     
     const fetchProfile = useCallback(() => {
-        dispatch(getHandleProfile())
+        dispatch(profileAction.getHandleProfile())
     }, [dispatch])
 
     useEffect(() => {

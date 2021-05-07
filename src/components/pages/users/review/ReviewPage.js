@@ -12,6 +12,7 @@ import ReviewForm from "./ReviewForm";
 import { offlineCourse } from "../../../../redux/actions";
 import HeaderVerizontal from "../../../headerVerizontal/HeaderVerizontal";
 import { useParams } from "react-router";
+import isMobile from "../../../isMobile/isMobile";
 
 const { useBreakpoint } = Grid;
 
@@ -50,7 +51,7 @@ export default function ReviewPage() {
                 ) : (
                     <div>
                         <ModalComponent />
-                        {(screens.xs || (screens.sm && !screens.md)) && <Header pageBack="goback" />}
+                        {isMobile() && <Header pageBack="goback" />}
                         <div className={screens.xs || (screens.sm && !screens.md) ? style.bodymobileprofile : `${style.bodyEdit} `}>
                             {
                                 (screens.md && course) && (

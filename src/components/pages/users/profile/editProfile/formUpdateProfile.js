@@ -22,11 +22,13 @@ export const formUpdateProfile=(type, data)=>{
     
     if (type === "learner") {
         formData.append("grade",data.grade)
+        
     } else if (type === "tutor") {
         const length = data.subject.length
         for (let i = 0; i < length; i++) {
             formData.append(`subject${i + 1}`,defaultValue.subject[data.subject[i]])
         }
+        formData.append("introduction",data.introduce)
     }
     return formData
 }

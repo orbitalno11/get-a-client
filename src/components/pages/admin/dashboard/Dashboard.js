@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Col, Row} from 'antd';
 import ProductBarChart from '../component/chart/ProductBarChart';
 
-function Dashboard() {
+export default function Dashboard() {
   return (
     <>
       <Row gutter={24} type="flex">
@@ -28,4 +28,3 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;

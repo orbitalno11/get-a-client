@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import Header from "../../../../../headerMobile/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfile } from "../../../../../../redux/actions/profile.actions";
+import { profileAction } from "../../../../../../redux/actions/profile.actions";
 import isMobile from "../../../../../isMobile/isMobile";
 const { Title } = Typography;
 
@@ -16,12 +16,12 @@ export default function EditProfileDetail() {
     const profile = useSelector(state => state.profile)
     const [detailProfile, setDetailProfile] = useState(null)
 
-    const { register, handleSubmit, errors, control } = useForm({
+    const { register, handleSubmit, errors, control, reset } = useForm({
         resolver: yupResolver(profileTutorSchema),
     });
 
     const fetchProfile = useCallback(() => {
-        dispatch(getProfile())
+        dispatch(profileAction.getProfile())
     }, [dispatch])
 
     useEffect(() => {
@@ -30,6 +30,10 @@ export default function EditProfileDetail() {
 
     useEffect(()=>{
         setDetailProfile(profile.profile)
+        reset({
+            firstname:
+              "firstname"
+          });
     },[profile])
     
     const onSubmit = () => {

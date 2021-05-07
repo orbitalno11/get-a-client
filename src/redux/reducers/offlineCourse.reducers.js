@@ -5,7 +5,6 @@ const initialState = {
 }
 
 const offlineCourseReducer = (state = initialState, action) => {
-    console.log(action)
     switch (action.type) {
     case offlineCourseConstants.GET_OFFLINE_COURSE:
         return {

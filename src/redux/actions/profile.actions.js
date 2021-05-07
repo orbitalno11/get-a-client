@@ -1,39 +1,44 @@
+import { sizeModal } from "../../components/modal/SizeModal"
+import { typeModal } from "../../components/modal/TypeModal"
+import apiGetA from "../../utils/setAxios"
 import { profileConstants } from "../constants"
+import { loadingActions } from "./loading.actions"
+import { modalAction } from "./modal.actions"
 
 const data =
 {
     firstname: "พิคาชู",
-    lastname : "หนูเทพซาโตชิ",
-    sex : 1,
+    lastname: "หนูเทพซาโตชิ",
+    sex: 1,
     coin: "1000",
     place: "บางมด, ทุ่งครุ",
-    introduction : "แนะนำตัว",
+    introduction: "แนะนำตัว",
     contact: {
         facebook: "Picacha",
-        email : "Picacha.k@gmail.com",
-        line : "Picacha",
-        phone : "09123456"
+        email: "Picacha.k@gmail.com",
+        line: "Picacha",
+        phone: "09123456"
     },
-    grade : "10",
+    grade: "10",
     course: {
         tutor:
             [
                 {
-                    name :  "หนูเทพซาโตชิ",
-                    place : "บางมด, ทุ่งครุ",
-                    subject : "ชีววิทยา" ,
-                    date : "1 มกราคม 2563"
+                    name: "หนูเทพซาโตชิ",
+                    place: "บางมด, ทุ่งครุ",
+                    subject: "ชีววิทยา",
+                    date: "1 มกราคม 2563"
                 },
                 {
-                    name :  "พิคาชู หนูเทพซาโตชิ",
-                    place : "บางมด, ทุ่งครุ",
-                    subject : "ชีววิทยา" ,
-                    date : "1 มกราคม 2563"
+                    name: "พิคาชู หนูเทพซาโตชิ",
+                    place: "บางมด, ทุ่งครุ",
+                    subject: "ชีววิทยา",
+                    date: "1 มกราคม 2563"
                 }
             ],
-        course : []
+        course: []
     },
-    history : [
+    history: [
         {
             type: "education",
             name: "โรงชื่อยาว",
@@ -52,68 +57,64 @@ const data =
     ]
 }
 
-export const setProfile = (payload) =>({
-    type: profileConstants.GET_PROFILE,
-    payload: payload,
-})
-
-export const setHandleProfile = (payload) =>({
-    type: profileConstants.GET_HANDLE_PROFILE,
-    payload: payload,
-})
-
-export const setEducation = (payload) =>({
-    type: profileConstants.GET_EDUCATION,
-    payload: payload,
-})
-
-export const addEducation = (payload) =>({
-    type: profileConstants.ADD_EDUCATION,
-    payload: payload,
-})
-
-export const removeEducation = (payload) =>({
-    type: profileConstants.DELETE_EDUCATION,
-    payload: payload,
-})
-
-export const getProfile = () => async (dispatch) => {
-    try {
-        dispatch(setProfile(data))
-    } catch (error) {
-        // todo handle error
+function getProfile() {
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiGetA.get("/me").then(res => {
+            dispatch(loadingActions.stopLoading())
+            const profileDetail = res.data.data
+            dispatch(success(profileDetail))
+        }).catch(err => {
+            dispatch(loadingActions.stopLoading())
+            dispatch(failure(err.response.data.message.message))
+        })
     }
+    function success(data) { return { type: profileConstants.GET_PROFILE_SUCCESS, payload: data } }
+    function failure(err) { return { type: profileConstants.GET_PROFILE_FAILURE, payload: err } }
 }
 
-export const getHandleProfile = () => async (dispatch) => {
-    try {
-        dispatch(setHandleProfile(data))
-    } catch (error) {
-        // todo handle error
+function getHandleProfile() {
+    return async dispatch => {
+        dispatch(success(data))
     }
+    function success(data) { return { type: profileConstants.GET_HANDLE_PROFILE, payload: data } }
 }
 
-export const editProfileDetail = () => async (dispatch) =>{
-    // @parm profile
-    try {
-        dispatch(setProfile(data))
-    } catch (error) {
-        // todo handle error
+function updateProfileLearner(data, profileId) {
+    
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiGetA.post(`/me`,data, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            }
+        }).then(() => {
+            dispatch(success())
+            dispatch(getProfile(profileId))
+            dispatch(modalAction.openModal({
+                text: "แก้ไขข้อมูลสำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.corrent
+            }))
+
+        }).catch((err) => {
+            dispatch(loadingActions.stopLoading())
+            dispatch(failure(err.response.data.message.message))
+            dispatch(modalAction.openModal({
+                text: "แก้ไขข้อมูลไม่สำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.wrong
+            }))
+        })
     }
+
+    function success() { return { type: profileConstants.UPDATE_PROFILE_SUCCESS } }
+    function failure(err) { return { type: profileConstants.UPDATE_PROFILE_SUCCESS, payload : err} }
 }
 
-export const addHistory = (data) => async(dispatch) =>{
-    try{
-        dispatch(addEducation(data))
-    }catch (error){
-        // todo handle error
-    }
-}
 
-export const removeHistory = (data) => async(dispatch) =>{
-    try{
-        dispatch(removeEducation(data))
-    }catch (error){
-        // todo handle error
-    }
+export const profileAction = {
+    getProfile,
+    getHandleProfile,
+    updateProfileLearner
 }

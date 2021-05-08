@@ -19,17 +19,25 @@ export default function ProfileDetail() {
     const screens = useBreakpoint();
     const profile = useSelector(state => state.profile)
     const [profileDetail, setProfileDetail] = useState(null)
+    const [addressDetail, setAddressDetail] = useState("")
 
     useEffect(() => {
         if (profile.profile) {
             setProfileDetail(profile.profile)
         }
+        if(profile.address){
+            const address = profile.address
+            const addressText = address.address + " " + address.geoDistrict + " " +address.geoSubDistrict + " "+ address.geoProvince + " " + address.postcode
+            const hintAddress = address.hintAddress ? "("+ address.hintAddress + ")" : ""
+            setAddressDetail(addressText + "" +hintAddress)
+        }
     }, [profile])
 
+   
     return (
         <Fragment>
             {
-                profileDetail && (
+                profileDetail && addressDetail && (
                     <Fragment>
                         <div className={style.profileSet}>
                             <Image
@@ -68,7 +76,7 @@ export default function ProfileDetail() {
                             <Title level={5}>สถานที่สะดวกเรียน</Title>
                             <div className={style.subTitle}>
                                 <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
-                                <span>{profileDetail.address ? profileDetail.address : "ยังไม่ได้กำหนด"}</span>
+                                <span>{addressDetail ? addressDetail : "ยังไม่ได้กำหนด"}</span>
                                 {
                                     !screens.md &&
                                     (

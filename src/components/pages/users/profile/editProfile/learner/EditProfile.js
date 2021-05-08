@@ -18,16 +18,17 @@ export default function EditProfile() {
     const screens = useBreakpoint();
     const dispatch = useDispatch()
     const loading = useSelector(state => state.loading.loading)
-    const auth = useSelector(state => state.auth)
+    const {auth} = useSelector(state => state)
 
     const { register, handleSubmit, errors, control, reset } = useForm({
         resolver: yupResolver(profileSchema),
     });
 
     useEffect(() => {
-        dispatch(profileAction.getProfile(auth.profile))
-       
+        dispatch(profileAction.getProfile())
+        dispatch(profileAction.getAddress())
     }, [])
+
 
     const onSubmit = (data) => {
         if (data) {
@@ -56,7 +57,7 @@ export default function EditProfile() {
                                                 <Divider type="vertical" style={{ height: "100%" }} />
                                             </Col>
                                             <Col lg={11} md={11} sm={24}>
-                                                <EditProfileMap refs={register} />
+                                                <EditProfileMap />
                                             </Col>
                                         </Fragment>
                                     )

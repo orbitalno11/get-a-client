@@ -18,7 +18,7 @@ export default function EditProfileDetail({ register, error, controls, reset }) 
     const profile = useSelector(state => state.profile)
     const detailProfile = profile.profile && profile.profile
     const [image, setimage] = useState("")
-
+    
 
     const fetchProfile = useCallback(() => {
         if (profile.profile) {

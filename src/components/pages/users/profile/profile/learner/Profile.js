@@ -19,6 +19,7 @@ export default function ProfileLearner() {
 
     const fetchProfile = useCallback(() => {
         dispatch(profileAction.getProfile(auth.profile))
+        dispatch(profileAction.getAddress())
     }, [dispatch])
 
     useEffect(() => {

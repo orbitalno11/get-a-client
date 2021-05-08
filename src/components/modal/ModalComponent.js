@@ -59,7 +59,7 @@ const ModalComponent = () => {
         footer={null}
         onCancel={handleCancel}
         header={null}
-        closable={null}
+        closable={true}
         centered={true}
         width={size}
       >

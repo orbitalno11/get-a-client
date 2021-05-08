@@ -1,67 +1,96 @@
-import axios from "axios";
-import React from "react"
-import { mapKey } from "../../config/map/index";
-import {longdo, map, LongdoMap} from "./LongdoMap";
+import React, { Fragment } from "react"
+import { longdo, map, LongdoMap } from "./LongdoMap";
+import { apiURL } from "../../utils/setAxios"
+import { LONGDO_MAP_KEY } from "../../config/environmentConfig"
+import isEmpty from "../defaultFunction/checkEmptyObject";
 
-export default function MapComponent({ callBackLocation }) {
-    let location = null
-    let longitude = null
-    let latitude = null
+
+export default function MapComponent({ callBackLocation, initLocation, getCurrentLocation }) {
+    let location = {
+        lon: initLocation && initLocation.lon,
+        lat: initLocation && initLocation.lat
+    }
     let geolocation = null
 
-    const setMap = () =>{
+    const focusMarker = () => {
+        map.location({ lon: location.lon, lat: location.lat }, true);
+    }
+
+    const onClickMenubar = () => {
+        getCurrentLocation().then((res) => {
+            if (res && res.current) {
+                location = {
+                    lon: res.lon,
+                    lat: res.lat
+                }
+                rerverseGeocoding(res.current)
+                focusMarker()
+            }
+        })
+    }
+
+    const setMap = () => {
         map.Layers.setBase(longdo.Layers.GRAY);
+        map.Ui.Geolocation.visible(false)
+        map.Ui.Fullscreen.visible(false)
+        map.Ui.Toolbar.visible(false)
+        map.zoom(17, true);
+        focusMarker()
+
+        // set button current location
+        const menuBarControl = new longdo.MenuBar({
+            button: [
+                { label: 'ตำแหน่งปัจจุบัน', type: longdo.ButtonType.Push },
+            ], change: onClickMenubar
+        })
+        map.Ui.add(menuBarControl);
     }
 
-    const setLocation = () =>{
-        location = map.location(longdo.LocationMode.Pointer)
-        longitude = Number(location.lon).toFixed(6)
-        latitude = Number(location.lat).toFixed(6)
+    const setLocation = () => {
+        location = map.location()
     }
 
-    const setMarker = (lon,lat) =>{
-        const marker = new longdo.Marker({ lon: lon, lat: lat })
-        map.Overlays.clear();
-        map.Overlays.add(marker)
-    }
-
-    const rerverseGeocoding = () => {
-        delete axios.defaults.headers.common['Authorization']
-        axios.get("https://api.longdo.com/map/services/address?", {
+    const rerverseGeocoding = (current) => {
+        apiURL.apiMap.get("/services/address?", {
             params: {
-                key: mapKey,
-                locale : "th",
-                lon: longitude,
-                lat: latitude
+                key: LONGDO_MAP_KEY,
+                locale: "th",
+                lon: location.lon,
+                lat: location.lat,
             }
         })
-        .then(res => {
-            geolocation = res.data
-
-        })
-        .catch(err => {
-            console.log(err)
-            geolocation = null
-        })
+            .then(res => {
+                const dataAddress = res.data
+                if (dataAddress.country === "ประเทศไทย" && Number(dataAddress.geocode)) {
+                    geolocation = dataAddress
+                    callBackLocation(location, geolocation, current)
+                }
+            }).catch(() => {
+                callBackLocation()
+                geolocation = null
+            })
     }
 
-    const initMap = ()=>{
-        setMap()
-        // if(map && initLocation){
-        //     setMarker(Number(initLocation.lon),Number(initLocation.lat))
-        // }
-
-        map.Event.bind('click', function () {
-            setLocation()
-            rerverseGeocoding(longitude, latitude)
-            if(geolocation){
-                setMarker(longitude,latitude)
+    const initMap = () => {
+        if (!isEmpty(map)) {
+            setMap()
+            /// fisrt time marker with default location ~ current location or fixed location
+            if (initLocation.current && !initLocation.originalValue) {
+                rerverseGeocoding(true)
             }
-            callBackLocation(location,geolocation)
-        })
+            focusMarker()
+
+            map.Event.bind("drop", function () {
+                setLocation()
+                rerverseGeocoding(false)
+            })
+        }
     }
 
     return (
-        <LongdoMap id="longdo-map"  mapKey={mapKey} callbackfunction={initMap} />
+        <Fragment>
+             <LongdoMap id="longdo-map" callbackfunction={initMap} />
+        </Fragment>
+
     )
 }

@@ -1,6 +1,6 @@
 import { sizeModal } from "../../components/modal/SizeModal"
 import { typeModal } from "../../components/modal/TypeModal"
-import apiGetA from "../../utils/setAxios"
+import { apiURL } from "../../utils/setAxios"
 import { profileConstants } from "../constants"
 import { loadingActions } from "./loading.actions"
 import { modalAction } from "./modal.actions"
@@ -60,7 +60,7 @@ const data =
 function getProfile() {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.get("/me").then(res => {
+        await apiURL.apiGetA.get("/me").then(res => {
             dispatch(loadingActions.stopLoading())
             const profileDetail = res.data.data
             dispatch(success(profileDetail))
@@ -84,7 +84,7 @@ function updateProfileLearner(data, profileId) {
     
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.post(`/me`,data, {
+        await apiURL.apiGetA.post(`/me`,data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -115,22 +115,20 @@ function updateProfileLearner(data, profileId) {
 function setAddress(address) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.post("/me/address", address,
-        {
-            headers:{
-                "Authorization" :  "Bearer " + localStorage.token,
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(res => {
-                console.log(res)
-                dispatch(loadingActions.stopLoading())
+        await apiURL.apiGetA.post("/me/address", address)
+            .then(() => {
+                dispatch(modalAction.openModal({
+                    text: "แก้ไขข้อมูลสำเร็จ",
+                    size: sizeModal.small,
+                    alert: typeModal.corrent
+                }))
                 dispatch(success())
+                dispatch(getAddress())
             })
+
             .catch(err => {
                 dispatch(loadingActions.stopLoading())
                 dispatch(failure(err.response.data.message.message))
-                console.log(err.response.data)
             })
     }
     function success() { return { type: profileConstants.SET_ADDRESS_SUCCESS } }
@@ -140,36 +138,37 @@ function setAddress(address) {
 function getAddress() {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.get("/me/address")
+        await apiURL.apiGetA.get("/me/address")
             .then(res => {
                 dispatch(loadingActions.stopLoading())
-                const data = res.data.data[0]
-                console.log(data)
+                const data = res.data.data.filter(item => item.type === 1)[0]
                 let address = {}
                 if(data){
                     address = {
+                        "fullAddress" :data.fullAddressText,
                         "address": data.address ? data.address : "",
-                        "hintAddress": data.hintAddress ? data.hintAddress : "",
+                        "hintAddress": data.hintAddress ? data.hintAddress : null,
                         "road": data.road ? data.road : "",
-                        "subDistrict": data.subDistrict.id  ? data.subDistrict : "",
+                        "subDistrict": data.subDistrict.id  ? data.subDistrict.id : "",
                         "district": data.district.id ? data.district.id : "",
                         "province": data.province.id ? data.province.id : "",
-                        "postcode": data.postcode ? data.postcode.id : "",
-                        "lat": data.lat ? data.lat : "",
-                        "lon": data.lon ? data.lon : "",
+                        "postcode": data.postcode ? data.postcode : "",
+                        "lat": data.geoLocation ? data.geoLocation.latitude : "",
+                        "lon": data.geoLocation ? data.geoLocation.longitude : "",
                         "geoSubDistrict": data.subDistrict.title ? data.subDistrict.title : "",
                         "geoDistrict": data.district.title ? data.district.title : "",
                         "geoProvince": data.province.title ? data.province.title : "",
+                        "type" : data.type
                     }
-                    dispatch(success(address))
                 }
+                dispatch(success(address))
             })
             .catch(err => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response.data.message.message))
+                dispatch(failure(err.response.data.message))
             })
     }
-    function success(data) { return { type: profileConstants.GET_ADDRESS_SUCCESS, payload: data } }
+    function success(data) {  return { type: profileConstants.GET_ADDRESS_SUCCESS, payload: data } }
     function failure(err) { return { type: profileConstants.GET_ADDRESS_FAILURE, payload: err } }
 }
 

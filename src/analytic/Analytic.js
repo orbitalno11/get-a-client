@@ -1,4 +1,4 @@
-import apiGetA from "../utils/setAxios"
+import {apiURL} from "../utils/setAxios"
 
 export function launchAnalytic(fx) {
     Promise.resolve(fx()).catch()
@@ -6,13 +6,13 @@ export function launchAnalytic(fx) {
 
 export function trackTutorLogin() {
     launchAnalytic(async () => {
-        await apiGetA.get("/analytic/login")
+        await apiURL.apiGetA.get("/analytic/login")
     })
 }
 
 export function trackImpressTutorProfile(userId) {
     launchAnalytic(async () => {
-        await apiGetA.get("/analytic/tutor", {
+        await apiURL.apiGetA.get("/analytic/tutor", {
             params: {
                 userId: userId
             }
@@ -22,7 +22,7 @@ export function trackImpressTutorProfile(userId) {
 
 export function trackImpressCourseDetail(courseId, type) {
     launchAnalytic(async () => {
-        await apiGetA.get("/analytic/course", {
+        await apiURL.apiGetA.get("/analytic/course", {
             params: {
                 courseId: courseId,
                 type: type

@@ -6,6 +6,7 @@ const initialState = {
     profileHandle: null,
     error: null,
     address: null,
+    getAddress : false
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -41,12 +42,14 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 address: action.payload,
+                getAddress : true,
                 error: null
             }
         case profileConstants.GET_ADDRESS_FAILURE:
             return {
                 ...state,
                 address: null,
+                getAddress : false,
                 error: action.payload
             }
         case profileConstants.SET_ADDRESS_SUCCESS:

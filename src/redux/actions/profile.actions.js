@@ -144,12 +144,11 @@ function getAddress() {
             .then(res => {
                 dispatch(loadingActions.stopLoading())
                 const data = res.data.data[0]
-                console.log(data)
                 let address = {}
                 if(data){
                     address = {
                         "address": data.address ? data.address : "",
-                        "hintAddress": data.hintAddress ? data.hintAddress : "",
+                        "hintAddress": data.hintAddress ? data.hintAddress : null,
                         "road": data.road ? data.road : "",
                         "subDistrict": data.subDistrict.id  ? data.subDistrict : "",
                         "district": data.district.id ? data.district.id : "",
@@ -160,6 +159,7 @@ function getAddress() {
                         "geoSubDistrict": data.subDistrict.title ? data.subDistrict.title : "",
                         "geoDistrict": data.district.title ? data.district.title : "",
                         "geoProvince": data.province.title ? data.province.title : "",
+                        "type" : 0
                     }
                     dispatch(success(address))
                 }

@@ -144,6 +144,7 @@ function getAddress() {
             .then(res => {
                 dispatch(loadingActions.stopLoading())
                 const data = res.data.data[0]
+                console.log(data)
                 let address = {}
                 if(data){
                     address = {
@@ -153,7 +154,7 @@ function getAddress() {
                         "subDistrict": data.subDistrict.id  ? data.subDistrict : "",
                         "district": data.district.id ? data.district.id : "",
                         "province": data.province.id ? data.province.id : "",
-                        "postcode": data.postcode ? data.postcode : "",
+                        "postcode": data.postcode ? data.postcode.id : "",
                         "lat": data.lat ? data.lat : "",
                         "lon": data.lon ? data.lon : "",
                         "geoSubDistrict": data.subDistrict.title ? data.subDistrict.title : "",

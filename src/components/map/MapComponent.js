@@ -3,7 +3,7 @@ import React from "react"
 import { mapKey } from "../../config/map/index";
 import {longdo, map, LongdoMap} from "./LongdoMap";
 
-export default function MapComponent({ callBackLocation }) {
+export default function MapComponent({ callBackLocation, initLocation}) {
     let location = null
     let longitude = null
     let latitude = null
@@ -47,10 +47,11 @@ export default function MapComponent({ callBackLocation }) {
 
     const initMap = ()=>{
         setMap()
-        // if(map && initLocation){
-        //     setMarker(Number(initLocation.lon),Number(initLocation.lat))
-        // }
+        setMarker(initLocation.lon,initLocation.lat)
+        map.location({ lon:initLocation.lon, lat:initLocation.lat }, true);
+        // map.location(longdo.LocationMode.Geolocation);
 
+        // console.log(map.location(longdo.LocationMode.Pointer))
         map.Event.bind('click', function () {
             setLocation()
             rerverseGeocoding(longitude, latitude)

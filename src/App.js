@@ -36,7 +36,7 @@ import HistoryCoin from "./components/pages/users/coins/learner/HistoryCoin"
 import Redeem from "./components/pages/users/coins/tutor/Redeem"
 import Notification from "./components/pages/users/notifications/Notification"
 import NotificationDetail from "./components/pages/users/notifications/NotificationDetail"
-import Favorite from "./components/pages/users/profile/favorite/Favorite"
+import Favorite from "./components/pages/users/favorite/Favorite"
 import Search from "./components/pages/users/search/Search";
 import ResultSearch from "./components/pages/users/search/ResultSearch";
 import OnlineCourseList from "./components/pages/users/onlineCourseList/OnlineCourseList"

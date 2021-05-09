@@ -1,10 +1,10 @@
 import React, { Fragment} from "react";
 import { Col, Row, Grid, Divider } from "antd";
-import style from "../styles.module.scss";
-import Header from "../../../../headerMobile/Header";
+import style from "./styles.module.scss";
+import Header from "../../../headerMobile/Header";
 import FavoriteDetail from "./FavoriteDetail";
 import Recommend from "./Recommend";
-import isMobile from "../../../../isMobile/isMobile";
+import isMobile from "../../../isMobile/isMobile";
 const { useBreakpoint } = Grid;
 
 export default function Favorite() {

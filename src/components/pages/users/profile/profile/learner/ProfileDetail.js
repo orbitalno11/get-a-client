@@ -20,6 +20,9 @@ export default function ProfileDetail() {
     const profile = useSelector(state => state.profile)
     const [profileDetail, setProfileDetail] = useState(null)
     const [addressDetail, setAddressDetail] = useState("")
+    let addressText = "ยังไม่ได้กำหนด"
+    let hintAddress = "ยังไม่ได้กำหนด"
+    console.log(profile)
 
     useEffect(() => {
         if (profile.profile) {
@@ -27,8 +30,8 @@ export default function ProfileDetail() {
         }
         if(profile.address){
             const address = profile.address
-            const addressText = address.address + " " + address.geoDistrict + " " +address.geoSubDistrict + " "+ address.geoProvince + " " + address.postcode
-            const hintAddress = address.hintAddress ? "("+ address.hintAddress + ")" : ""
+            addressText = address.address + " " + address.geoDistrict + " " +address.geoSubDistrict + " "+ address.geoProvince + " " + address.postcode
+            hintAddress = address.hintAddress ? "("+ address.hintAddress + ")" : ""
             setAddressDetail(addressText + "" +hintAddress)
         }
     }, [profile])
@@ -37,7 +40,7 @@ export default function ProfileDetail() {
     return (
         <Fragment>
             {
-                profileDetail && addressDetail && (
+                profileDetail && (
                     <Fragment>
                         <div className={style.profileSet}>
                             <Image

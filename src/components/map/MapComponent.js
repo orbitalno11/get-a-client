@@ -4,9 +4,10 @@ import { mapKey } from "../../config/map/index";
 import {longdo, map, LongdoMap} from "./LongdoMap";
 
 export default function MapComponent({ callBackLocation, initLocation}) {
-    let location = null
-    let longitude = null
-    let latitude = null
+    let location = {
+        lon : initLocation && initLocation.lon,
+        lat : initLocation && initLocation.lat
+    }
     let geolocation = null
 
     const setMap = () =>{
@@ -15,29 +16,26 @@ export default function MapComponent({ callBackLocation, initLocation}) {
 
     const setLocation = () =>{
         location = map.location(longdo.LocationMode.Pointer)
-        longitude = Number(location.lon).toFixed(6)
-        latitude = Number(location.lat).toFixed(6)
     }
 
-    const setMarker = (lon,lat) =>{
-        const marker = new longdo.Marker({ lon: lon, lat: lat })
+    const setMarker = () =>{
+        const marker = new longdo.Marker({ lon: location.lon, lat: location.lat })
         map.Overlays.clear();
         map.Overlays.add(marker)
     }
 
     const rerverseGeocoding = () => {
-        delete axios.defaults.headers.common['Authorization']
         axios.get("https://api.longdo.com/map/services/address?", {
             params: {
                 key: mapKey,
                 locale : "th",
-                lon: longitude,
-                lat: latitude
+                lon: location.lon,
+                lat: location.lat,
             }
         })
         .then(res => {
             geolocation = res.data
-
+            callBackLocation( location , geolocation)
         })
         .catch(err => {
             console.log(err)
@@ -47,18 +45,18 @@ export default function MapComponent({ callBackLocation, initLocation}) {
 
     const initMap = ()=>{
         setMap()
-        setMarker(initLocation.lon,initLocation.lat)
-        map.location({ lon:initLocation.lon, lat:initLocation.lat }, true);
-        // map.location(longdo.LocationMode.Geolocation);
-
-        // console.log(map.location(longdo.LocationMode.Pointer))
+        /// fisrt time marker with default location ~ current location or fixed location
+        setMarker()
+        if(initLocation.type === 1){
+            rerverseGeocoding()
+        }
+        
         map.Event.bind('click', function () {
             setLocation()
-            rerverseGeocoding(longitude, latitude)
+            rerverseGeocoding()
             if(geolocation){
-                setMarker(longitude,latitude)
+                setMarker()
             }
-            callBackLocation(location,geolocation)
         })
     }
 

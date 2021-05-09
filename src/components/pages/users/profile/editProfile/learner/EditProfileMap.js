@@ -16,55 +16,73 @@ import { useState } from "react";
 import MapComponent from "../../../../../map/MapComponent";
 import InputComponents from "../../../../../input/InputComponets";
 import { color } from "../../../../../defaultValue";
+// import { useCurrentPosition } from "react-use-geolocation";
 
 export default function EditProfileMap({ previousAddress }) {
-    const { profile } = useSelector(state => state)
     const dispatch = useDispatch()
+    const { profile } = useSelector(state => state)
     const [address, setAddress] = useState(previousAddress && previousAddress)
-    const [addressFixedDetail, setAddressFixedDetail] = useState("")
-    const [myGeolocation, setMyGeolocation] = useState("")
-    const [initLocation, setInitLocation] = useState(null)
-    let addressText = ""
-    let hintAddress = ""
+    const [defineAddress, setDefineAddress] = useState("")
+    const [initalLocation, setInitalLocation] = useState(null)
+    const [detailAddress, setDetailAddress] = useState({})
 
     const warningText = {
         color: color.gray
     }
 
+    /// fetch address from reducer and check with previos value
     const fetchProfile = useCallback(() => {
-        if (previousAddress === undefined) {
+
+        if (address === undefined) {
             dispatch(profileAction.getAddress())
         }
 
-        console.log(profile.address && (previousAddress !== profile.address))
-
-        if (profile.address && (previousAddress !== profile.address)) {
-            console.log(profile.address)
-                setAddress(profile.address && profile.address)
-                console.log("dd")
+        if ((profile.address !== null) && (address !== profile.address)) {
+            setAddress(profile.address && profile.address)
         }
-    }, [address])
+    }, [profile.address])
 
     useEffect(() => {
         fetchProfile()
-        console.log(address)
-        if (address) {
-            addressText = address && (address.geoDistrict + " " + address.geoSubDistrict + " " + address.geoProvince + " " + address.postcode)
-            hintAddress = address && (address.hintAddress ? "(" + address.hintAddress + ")" : "")
-            setAddressFixedDetail(addressText + "" + hintAddress)
-            setInitLocation({
-                lat: 14.939293452903025,
-                lon: 100.0078059732914
-            })
-        }
+    }, [fetchProfile])
 
+
+    useEffect(() => {
+        /// set address when value not null and success in get data from db
+        if (address) {
+            setDetailAddress({
+                "address": address.address,
+                "hintAddress": address.hintAddress,
+                "detail": address.geoDistrict + " " + address.geoSubDistrict + " " + address.geoProvince + " " + address.postcode
+            })
+            setInitalLocation({
+                lat: 14.939293452903025,
+                lon: 100.0078059732914,
+                type: address.type
+            })
+            /// set address as current location when value is null and success in get data from db
+        } else if (!profile.getAddress) {
+            getCurrentLocation()
+        }
     }, [address])
 
+    const getCurrentLocation = () => {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                setInitalLocation({
+                    lat: position.coords.latitude,
+                    lon: position.coords.longitude,
+                    type: 1
+                })
+            },
+            error => alert(error.message),
+            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+        );
+    }
 
     function callLocation(location, geolocation) {
-        console.log(location)
-        if (location && geolocation && geolocation.geocode) {
-            let GeoLoacation = {
+        if (geolocation && geolocation.geocode) {
+            let geoLoacationDetail = {
                 "address": geolocation.aoi ? geolocation.aoi : "",
                 "hintAddress": "",
                 "road": "",
@@ -77,8 +95,18 @@ export default function EditProfileMap({ previousAddress }) {
                 "geoSubDistrict": geolocation.subdistrict,
                 "geoDistrict": geolocation.district,
                 "geoProvince": geolocation.province,
+                "type": (location.lat === initalLocation.lat && location.lon === initalLocation.lon) ? 1 : 0
             }
-            setMyGeolocation(GeoLoacation)
+
+            setDetailAddress({
+                "address": geoLoacationDetail.address,
+                "hintAddress": "",
+                "detail": geoLoacationDetail.geoDistrict + " " + geoLoacationDetail.geoSubDistrict + " " + geoLoacationDetail.geoProvince + " " + geoLoacationDetail.postcode
+            })
+
+            console.log(geolocation)
+
+            setDefineAddress(geoLoacationDetail)
         }
     }
 
@@ -86,20 +114,21 @@ export default function EditProfileMap({ previousAddress }) {
         let formAddress = {}
         if (type === "map") {
             formAddress = {
-                "address": myGeolocation.address,
+                "address": defineAddress.address,
                 "hintAddress": "",
                 "road": "",
-                "subDistrict": myGeolocation.subDistrict,
-                "district": myGeolocation.district,
-                "province": myGeolocation.province,
-                "postcode": myGeolocation.postcode,
-                "lat": myGeolocation.lat,
-                "lng": myGeolocation.lon,
+                "subDistrict": defineAddress.subDistrict,
+                "district": defineAddress.district,
+                "province": defineAddress.province,
+                "postcode": defineAddress.postcode,
+                "lat": defineAddress.lat,
+                "lng": defineAddress.lon,
                 "type": 1
             }
         }
         dispatch(profileAction.setAddress(formAddress))
     }
+
 
     return (
         <Fragment>
@@ -113,31 +142,24 @@ export default function EditProfileMap({ previousAddress }) {
                     </div>
                 </div>
                 <p style={warningText}>  (ที่อยู่ที่ได้จากแผนที่อาจไม่ละเอียด)</p>
-
                 <InputComponents
                     name="map"
                     placeholder="ที่อยู่อย่างละเอียด"
-                    defaultValue={address && address.address}
+                    // value={detailAddress.address}
                 />
                 <InputComponents
                     name="map"
                     placeholder="รายละเอียดเพิ่มเติม หรือ ลักษณะพิเศษที่สามารถสังเกตได้ เช่น ต้นไม้สีแดง"
-                    defaultValue={address && hintAddress}
+                    // value={detailAddress.hintAddress}
                 />
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faCrosshairs} className={style.iconMap} />
                     {
-                        myGeolocation ?
-                            (
-                                <span >{myGeolocation.address} {myGeolocation.road} {myGeolocation.geoSubDistrict} {myGeolocation.geoDistrict} {myGeolocation.geoProvince} {myGeolocation.postcode}</span>
-                            ) :
-                            (
-                                <span >{addressFixedDetail}</span>
-                            )
+                        <span >{detailAddress.detail}</span>
                     }
                 </div>
                 <div className={style.marginTop}>
-                    {initLocation && <MapComponent callBackLocation={callLocation} initLocation={initLocation} />}
+                    {initalLocation && <MapComponent callBackLocation={callLocation} initLocation={initalLocation} />}
                 </div>
 
 

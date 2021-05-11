@@ -16,7 +16,7 @@ import { profileAddressSchema } from "../../../../../../validation/profile/profi
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ModalComponent from "../../../../../modal/ModalComponent";
-import isEmpty from "../../../../../defaultFunction/checkEmtryObject";
+import isEmpty from "../../../../../defaultFunction/checkEmptyObject";
 
 export default function EditProfileMap({ previousAddress }) {
     const dispatch = useDispatch()

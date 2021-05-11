@@ -20,6 +20,7 @@ export function LongdoMap({ id, mapKey, callbackfunction }) {
 
         if (!existingScript) {
             const script = document.createElement("script");
+            console.log( `https://api.longdo.com/map/?key=${mapKey}`)
             script.src = `https://api.longdo.com/map/?key=${mapKey}`;
             script.id = "longdoMapScript";
             document.body.appendChild(script);

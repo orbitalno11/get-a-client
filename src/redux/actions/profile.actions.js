@@ -115,22 +115,20 @@ function updateProfileLearner(data, profileId) {
 function setAddress(address) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.post("/me/address", address,
-        {
-            headers:{
-                "Authorization" :  "Bearer " + localStorage.token,
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(res => {
-                console.log(res)
-                dispatch(loadingActions.stopLoading())
+        await apiGetA.post("/me/address", address)
+            .then(() => {
+                dispatch(modalAction.openModal({
+                    text: "แก้ไขข้อมูลสำเร็จ",
+                    size: sizeModal.small,
+                    alert: typeModal.corrent
+                }))
                 dispatch(success())
+                dispatch(getAddress())
             })
+            
             .catch(err => {
                 dispatch(loadingActions.stopLoading())
                 dispatch(failure(err.response.data.message.message))
-                console.log(err.response.data)
             })
     }
     function success() { return { type: profileConstants.SET_ADDRESS_SUCCESS } }
@@ -147,15 +145,16 @@ function getAddress() {
                 let address = {}
                 if(data){
                     address = {
+                        "fullAddress" :data.fullAddressText,
                         "address": data.address ? data.address : "",
                         "hintAddress": data.hintAddress ? data.hintAddress : null,
                         "road": data.road ? data.road : "",
-                        "subDistrict": data.subDistrict.id  ? data.subDistrict : "",
+                        "subDistrict": data.subDistrict.id  ? data.subDistrict.id : "",
                         "district": data.district.id ? data.district.id : "",
                         "province": data.province.id ? data.province.id : "",
-                        "postcode": data.postcode ? data.postcode.id : "",
-                        "lat": data.lat ? data.lat : "",
-                        "lon": data.lon ? data.lon : "",
+                        "postcode": data.postcode ? data.postcode : "",
+                        "lat": data.geoLocation ? data.geoLocation.latitude : "",
+                        "lon": data.geoLocation ? data.geoLocation.longitude : "",
                         "geoSubDistrict": data.subDistrict.title ? data.subDistrict.title : "",
                         "geoDistrict": data.district.title ? data.district.title : "",
                         "geoProvince": data.province.title ? data.province.title : "",

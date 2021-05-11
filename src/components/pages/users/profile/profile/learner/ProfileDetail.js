@@ -19,20 +19,15 @@ export default function ProfileDetail() {
     const screens = useBreakpoint();
     const profile = useSelector(state => state.profile)
     const [profileDetail, setProfileDetail] = useState(null)
-    const [addressDetail, setAddressDetail] = useState("")
-    let addressText = "ยังไม่ได้กำหนด"
-    let hintAddress = "ยังไม่ได้กำหนด"
-    console.log(profile)
+    const [addressDetail, setAddressDetail] = useState("ยังไม่ได้กำหนด")
 
     useEffect(() => {
         if (profile.profile) {
             setProfileDetail(profile.profile)
         }
         if(profile.address){
-            const address = profile.address
-            addressText = address.address + " " + address.geoDistrict + " " +address.geoSubDistrict + " "+ address.geoProvince + " " + address.postcode
-            hintAddress = address.hintAddress ? "("+ address.hintAddress + ")" : ""
-            setAddressDetail(addressText + "" +hintAddress)
+            const address = profile.address.fullAddress
+            setAddressDetail(address)
         }
     }, [profile])
 

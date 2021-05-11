@@ -1,5 +1,5 @@
-import { Button } from "antd";
-import React, { Fragment } from "react"
+import React, { Fragment, useEffect, useCallback, useState } from "react"
+import { Alert, Button, Spin } from "antd";
 import style from "../../styles.module.scss"
 import {
     faCrosshairs
@@ -7,28 +7,47 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../../../../../headerMobile/Header";
 import isMobile from "../../../../../isMobile/isMobile";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
-import { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { profileAction } from "../../../../../../redux/actions";
-import { useState } from "react";
 import MapComponent from "../../../../../map/MapComponent";
 import InputComponents from "../../../../../input/InputComponets";
 import { color } from "../../../../../defaultValue";
-// import { useCurrentPosition } from "react-use-geolocation";
+import { profileAddressSchema } from "../../../../../../validation/profile/profileAddressSchema";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import ModalComponent from "../../../../../modal/ModalComponent";
 
 export default function EditProfileMap({ previousAddress }) {
     const dispatch = useDispatch()
-    const { profile } = useSelector(state => state)
+    const { profile, loading } = useSelector(state => state)
     const [address, setAddress] = useState(previousAddress && previousAddress)
-    const [defineAddress, setDefineAddress] = useState("")
     const [initalLocation, setInitalLocation] = useState(null)
-    const [detailAddress, setDetailAddress] = useState({})
-
+    const [stageCurrentLocation, setStageCurrentLocation] = useState({
+        loading: false,
+        permission: true
+    })
+    const [detailAddress, setDetailAddress] = useState({
+        "address": "",
+        "hintAddress": "",
+        "detail": ""
+    })
     const warningText = {
         color: color.gray
     }
+
+    const marginSpin = {
+        marginRight: '1.6rem'
+    }
+
+    const styleLoadingMap = {
+        backgroundColor: color.gray,
+        height: "20rem",
+        width: "auto"
+    }
+
+    const { register, errors, handleSubmit, reset } = useForm({
+        resolver: yupResolver(profileAddressSchema),
+    });
 
     /// fetch address from reducer and check with previos value
     const fetchProfile = useCallback(() => {
@@ -46,7 +65,6 @@ export default function EditProfileMap({ previousAddress }) {
         fetchProfile()
     }, [fetchProfile])
 
-
     useEffect(() => {
         /// set address when value not null and success in get data from db
         if (address) {
@@ -56,114 +74,157 @@ export default function EditProfileMap({ previousAddress }) {
                 "detail": address.geoDistrict + " " + address.geoSubDistrict + " " + address.geoProvince + " " + address.postcode
             })
             setInitalLocation({
-                lat: 14.939293452903025,
-                lon: 100.0078059732914,
+                lat: address.lat,
+                lon: address.lon,
                 type: address.type
+            })
+            reset({
+                address: address.address,
+                hintAddress: address.hintAddress
             })
             /// set address as current location when value is null and success in get data from db
         } else if (!profile.getAddress) {
-            getCurrentLocation()
+            setCurrentLocation()
+                .then((location) => {
+                    setInitalLocation({
+                        lat: location.lat,
+                        lon: location.lon,
+                        type: 1
+                    })
+                }).catch(() => {
+                    /// set default location as bangkok
+                    setInitalLocation({
+                        lat: 13.736717,
+                        lon: 100.523186,
+                        type: 1
+                    })
+                })
         }
     }, [address])
 
-    const getCurrentLocation = () => {
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                setInitalLocation({
-                    lat: position.coords.latitude,
-                    lon: position.coords.longitude,
-                    type: 1
-                })
-            },
-            error => alert(error.message),
-            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-        );
+    const setCurrentLocation = () => {
+        return new Promise((resolve, reject) => {
+            setStageCurrentLocation({
+                ...stageCurrentLocation,
+                loading: true,
+            })
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    let coordinates = {
+                        lat: position.coords.latitude,
+                        lon: position.coords.longitude,
+                        type: 1
+                    }
+                    setStageCurrentLocation({
+                        loading: false,
+                        permission: true
+                    })
+                    resolve(coordinates)
+                },
+                (error) => {
+                    setStageCurrentLocation({
+                        loading: false,
+                        permission: false
+                    })
+                    reject(error)
+                },
+                { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 }
+            )
+        })
     }
 
-    function callLocation(location, geolocation) {
-        if (geolocation && geolocation.geocode) {
+    const callLocation = (location, geolocation) => {
+        if (location) {
             let geoLoacationDetail = {
-                "address": geolocation.aoi ? geolocation.aoi : "",
+                "address": (geolocation.aoi && geolocation.aoi !== undefined) ? geolocation.aoi : "",
                 "hintAddress": "",
                 "road": "",
                 "subDistrict": geolocation.geocode,
                 "district": geolocation.geocode.substring(0, 4),
                 "province": geolocation.geocode.substring(0, 2),
-                "postcode": geolocation.postcode,
+                "postcode": geolocation.postcode && geolocation.postcode !== undefined ? geolocation.postcode : "",
                 "lat": location.lat,
                 "lon": location.lon,
-                "geoSubDistrict": geolocation.subdistrict,
-                "geoDistrict": geolocation.district,
-                "geoProvince": geolocation.province,
+                "geoSubDistrict": geolocation.subdistrict && geolocation.subdistrict !== undefined ? geolocation.subdistrict : "",
+                "geoDistrict": geolocation.district && geolocation.district !== undefined ? geolocation.district : "",
+                "geoProvince": geolocation.province && geolocation.province !== undefined ? geolocation.province : "",
                 "type": (location.lat === initalLocation.lat && location.lon === initalLocation.lon) ? 1 : 0
             }
-
-            setDetailAddress({
-                "address": geoLoacationDetail.address,
-                "hintAddress": "",
-                "detail": geoLoacationDetail.geoDistrict + " " + geoLoacationDetail.geoSubDistrict + " " + geoLoacationDetail.geoProvince + " " + geoLoacationDetail.postcode
-            })
-
-            console.log(geolocation)
-
-            setDefineAddress(geoLoacationDetail)
+            setAddress(geoLoacationDetail)
         }
     }
 
-    const submitAddress = (type) => {
-        let formAddress = {}
-        if (type === "map") {
+
+
+    const submitAddress = (data) => {
+        if (data) {
+            let formAddress = {}
             formAddress = {
-                "address": defineAddress.address,
-                "hintAddress": "",
+                "address": data.address,
+                "hintAddress": data.hintAddress,
                 "road": "",
-                "subDistrict": defineAddress.subDistrict,
-                "district": defineAddress.district,
-                "province": defineAddress.province,
-                "postcode": defineAddress.postcode,
-                "lat": defineAddress.lat,
-                "lng": defineAddress.lon,
+                "subDistrict": address.subDistrict,
+                "district": address.district,
+                "province": address.province,
+                "postcode": address.postcode,
+                "lat": address.lat,
+                "lng": address.lon,
                 "type": 1
             }
+            dispatch(profileAction.setAddress(formAddress))
         }
-        dispatch(profileAction.setAddress(formAddress))
     }
-
 
     return (
         <Fragment>
             {isMobile() && <Header title="แก้ไขข้อมูล" pageBack="/learner/1" />}
-            <div className={!isMobile() ? style.paddingbody : style.body}>
-
-                <div className={style.TitleCoin}>
-                    <span className={style.titleH5}>เลือกจากแผนที่</span>
-                    <div className={style.floatLeft}>
-                        <Button className="buttonColor backgroundBlue" size="middle" shape="round" onClick={() => submitAddress("map")}>ใช้ที่อยู่นี้</Button>
-                    </div>
-                </div>
-                <p style={warningText}>  (ที่อยู่ที่ได้จากแผนที่อาจไม่ละเอียด)</p>
-                <InputComponents
-                    name="map"
-                    placeholder="ที่อยู่อย่างละเอียด"
-                    // value={detailAddress.address}
-                />
-                <InputComponents
-                    name="map"
-                    placeholder="รายละเอียดเพิ่มเติม หรือ ลักษณะพิเศษที่สามารถสังเกตได้ เช่น ต้นไม้สีแดง"
-                    // value={detailAddress.hintAddress}
-                />
-                <div className={style.subTitle}>
-                    <FontAwesomeIcon icon={faCrosshairs} className={style.iconMap} />
-                    {
-                        <span >{detailAddress.detail}</span>
-                    }
-                </div>
-                <div className={style.marginTop}>
-                    {initalLocation && <MapComponent callBackLocation={callLocation} initLocation={initalLocation} />}
-                </div>
-
-
-            </div>
+            <ModalComponent />
+            {
+                !loading.loading ? (
+                    <Fragment>
+                        <div className={previousAddress !== undefined ? style.paddingbody : style.body}>
+                            <form onSubmit={handleSubmit(submitAddress)}>
+                                <div className={style.alignPage}>
+                                    <span className={style.titleH5}>เลือกจากแผนที่</span>
+                                    <div className={style.floatLeft}>
+                                        <Button className="buttonColor backgroundBlue" size="middle" shape="round" htmlType="submit">ใช้ที่อยู่นี้</Button>
+                                    </div>
+                                </div>
+                                <p style={warningText}>  (ที่อยู่ที่ได้จากแผนที่อาจไม่ละเอียด)</p>
+                                {
+                                    !stageCurrentLocation.permission && (
+                                        <Alert
+                                            description="สิทธิ์ในการเข้าถึงที่ตั้งปัจจุบันถูกปฎิเสธ สามารถตั้งค่าสิทธิ์ได้ในการตั้งค่า"
+                                            type="error"
+                                        />
+                                    )
+                                }
+                                <InputComponents
+                                    name="address"
+                                    register={register}
+                                    error={errors.address}
+                                    placeholder="ที่อยู่อย่างละเอียด"
+                                />
+                                <InputComponents
+                                    name="hintAddress"
+                                    register={register}
+                                    error={errors.hintAddress}
+                                    placeholder="รายละเอียดเพิ่มเติม หรือ ลักษณะพิเศษที่สามารถสังเกตได้ เช่น ต้นไม้สีแดง"
+                                />
+                            </form>
+                            <div className={style.subTitle}>
+                                {
+                                    stageCurrentLocation.loading ? <Spin style={marginSpin} /> : <FontAwesomeIcon icon={faCrosshairs} className={style.iconMap} />
+                                }
+                                <span >{detailAddress.detail}</span>
+                            </div>
+                            <div className={style.marginTop}>
+                                {initalLocation ? <MapComponent callBackLocation={callLocation} initLocation={initalLocation} getCurrentLocation={setCurrentLocation} /> : <div style={styleLoadingMap}></div>}
+                            </div>
+                        </div>
+                    </Fragment>
+                ): (<div className={style.loader}></div>)
+            }
         </Fragment>
     )
 }

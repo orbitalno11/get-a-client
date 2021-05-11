@@ -18,7 +18,7 @@ export default function EditProfile() {
     const screens = useBreakpoint();
     const dispatch = useDispatch()
     const loading = useSelector(state => state.loading.loading)
-    const { auth,profile } = useSelector(state => state)
+    const { auth, profile } = useSelector(state => state)
 
     const { register, handleSubmit, errors, control, reset } = useForm({
         resolver: yupResolver(profileSchema),
@@ -38,39 +38,42 @@ export default function EditProfile() {
 
     return (
         <Fragment>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                {isMobile() && <Header title="แก้ไขข้อมูล" pageBack={"/learner/" + auth.profile} />}
 
-                {
-                    !loading ? (
-                        <div className={style.body}>
-                            <Row justify="center">
-                                <Col lg={11} md={11} sm={24}>
+            {isMobile() && <Header title="แก้ไขข้อมูล" pageBack={"/learner/" + auth.profile} />}
+
+            {
+                !loading ? (
+                    <div className={style.body}>
+                        <Row justify="center">
+                            <Col lg={11} md={11} sm={24}>
+                                <form onSubmit={handleSubmit(onSubmit)}>
                                     <EditProfileDetail register={register} error={errors} controls={control} reset={reset} />
-                                </Col>
-                                {
-                                    screens.md &&
-                                    (
-                                        <Fragment>
-                                            <Col sm={1} lg={1} xl={2} className={style.alignCenter}>
-                                                <Divider type="vertical" style={{ height: "100%" }} />
-                                            </Col>
-                                            <Col lg={11} md={11} sm={24}>
-                                                <EditProfileMap previousAddress = {profile.address && profile.address}/>
-                                            </Col>
-                                        </Fragment>
-                                    )
-                                }
-                            </Row>
-                            <Row justify="center" className={style.marginTop}>
-                                <Button className="backgroundOrange buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
-                            </Row>
-                        </div>
-                    ) : (
-                        <div className={style.loader}></div>
-                    )
-                }
-            </form>
+                                    <Row justify="center" className={style.marginTop}>
+                                        <Button className="backgroundOrange buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
+                                    </Row>
+                                </form>
+                            </Col>
+                            {
+                                screens.md &&
+                                (
+                                    <Fragment>
+                                        <Col sm={1} lg={1} xl={2} className={style.alignCenter}>
+                                            <Divider type="vertical" style={{ height: "100%" }} />
+                                        </Col>
+                                        <Col lg={11} md={11} sm={24}>
+                                            <EditProfileMap previousAddress={profile.address && profile.address} />
+                                        </Col>
+                                    </Fragment>
+                                )
+                            }
+                        </Row>
+
+                    </div>
+                ) : (
+                    <div className={style.loader}></div>
+                )
+            }
+
         </Fragment>
     )
 }

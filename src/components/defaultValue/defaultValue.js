@@ -39,6 +39,12 @@ const type = {
     "กลุ่ม":0,
     "เดี่ยว":1,
 }
+
+const typeAddress = {
+    "current":0,
+    "convenience":1,
+}
+
 const dateFormat = "YYYY-MM-DD"
 
 export const defaultValue = {
@@ -47,5 +53,6 @@ export const defaultValue = {
     subject,
     dateOfWeek,
     type,
-    dateFormat
+    dateFormat,
+    typeAddress
 }

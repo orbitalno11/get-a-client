@@ -19,7 +19,6 @@ export default function EditProfileDetail({ register, error, controls, reset }) 
     const detailProfile = profile.profile && profile.profile
     const [image, setimage] = useState("")
     
-
     const fetchProfile = useCallback(() => {
         if (profile.profile) {
             setimage(profile.profile.profileUrl)

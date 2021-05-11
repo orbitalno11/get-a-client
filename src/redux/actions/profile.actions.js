@@ -125,7 +125,7 @@ function setAddress(address) {
                 dispatch(success())
                 dispatch(getAddress())
             })
-            
+
             .catch(err => {
                 dispatch(loadingActions.stopLoading())
                 dispatch(failure(err.response.data.message.message))
@@ -158,17 +158,17 @@ function getAddress() {
                         "geoSubDistrict": data.subDistrict.title ? data.subDistrict.title : "",
                         "geoDistrict": data.district.title ? data.district.title : "",
                         "geoProvince": data.province.title ? data.province.title : "",
-                        "type" : 0
+                        "type" : data.type
                     }
-                    dispatch(success(address))
                 }
+                dispatch(success(address))
             })
             .catch(err => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response.data.message.message))
+                dispatch(failure(err.response.data.message))
             })
     }
-    function success(data) { return { type: profileConstants.GET_ADDRESS_SUCCESS, payload: data } }
+    function success(data) {  return { type: profileConstants.GET_ADDRESS_SUCCESS, payload: data } }
     function failure(err) { return { type: profileConstants.GET_ADDRESS_FAILURE, payload: err } }
 }
 

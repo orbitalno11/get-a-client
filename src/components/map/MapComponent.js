@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react"
 import { Fragment } from "react";
 import { mapKey } from "../../config/map/index";
+import { defaultValue } from "../defaultValue";
 import { longdo, map, LongdoMap } from "./LongdoMap";
 
 export default function MapComponent({ callBackLocation, initLocation, getCurrentLocation }) {
@@ -27,13 +28,12 @@ export default function MapComponent({ callBackLocation, initLocation, getCurren
     const onClickMenubar = (event) => {
         if (event.value === "current") {
             getCurrentLocation().then((res) => {
-                console.log(res)
-                if (res && res.type === 1) {
+                if (res && res.type === defaultValue.typeAddress.current) {
                     location = {
                         lon: res.lon,
                         lat: res.lat
                     }
-                    rerverseGeocoding()
+                    rerverseGeocoding(defaultValue.typeAddress.current)
                     focusMarker()
                 }
             })
@@ -44,7 +44,6 @@ export default function MapComponent({ callBackLocation, initLocation, getCurren
 
     const setMap = () => {
         map.Layers.setBase(longdo.Layers.GRAY);
-        // map.Ui.DPad.visible(false)
         map.Ui.Geolocation.visible(false)
         map.Ui.Fullscreen.visible(false)
         map.Ui.Toolbar.visible(false)
@@ -72,7 +71,7 @@ export default function MapComponent({ callBackLocation, initLocation, getCurren
         map.Overlays.add(marker)
     }
 
-    const rerverseGeocoding = () => {
+    const rerverseGeocoding = (type) => {
         setStatusSelectedLocation(false)
         axios.get("https://api.longdo.com/map/services/address?", {
             params: {
@@ -85,9 +84,8 @@ export default function MapComponent({ callBackLocation, initLocation, getCurren
             .then(res => {
                 const dataAddress = res.data
                 if (dataAddress.country === "ประเทศไทย" && Number(dataAddress.geocode)) {
-                    console.log(dataAddress)
                     geolocation = dataAddress
-                    callBackLocation(location, geolocation)
+                    callBackLocation(location, geolocation, type)
                     setStatusSelectedLocation(true)
                 }
             }).catch(() => {
@@ -99,14 +97,14 @@ export default function MapComponent({ callBackLocation, initLocation, getCurren
     const initMap = () => {
         setMap()
         /// fisrt time marker with default location ~ current location or fixed location
-        if (initLocation.type === 1) {
-            rerverseGeocoding()
+        if (initLocation.type === defaultValue.typeAddress.current && !initLocation.originalValue) {
+            rerverseGeocoding(defaultValue.typeAddress.current)
         }
         setMarker()
 
         map.Event.bind("click", function () {
             setLocation()
-            rerverseGeocoding()
+            rerverseGeocoding(defaultValue.typeAddress.convenience)
         })
     }
 

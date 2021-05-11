@@ -11,11 +11,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { profileAction } from "../../../../../../redux/actions";
 import MapComponent from "../../../../../map/MapComponent";
 import InputComponents from "../../../../../input/InputComponets";
-import { color } from "../../../../../defaultValue";
+import { color, defaultValue } from "../../../../../defaultValue";
 import { profileAddressSchema } from "../../../../../../validation/profile/profileAddressSchema";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ModalComponent from "../../../../../modal/ModalComponent";
+import isEmpty from "../../../../../defaultFunction/checkEmtryObject";
 
 export default function EditProfileMap({ previousAddress }) {
     const dispatch = useDispatch()
@@ -48,7 +49,6 @@ export default function EditProfileMap({ previousAddress }) {
     const { register, errors, handleSubmit, reset } = useForm({
         resolver: yupResolver(profileAddressSchema),
     });
-
     /// fetch address from reducer and check with previos value
     const fetchProfile = useCallback(() => {
 
@@ -59,15 +59,20 @@ export default function EditProfileMap({ previousAddress }) {
         if ((profile.address !== null) && (address !== profile.address)) {
             setAddress(profile.address && profile.address)
         }
+
+        // if(!profile.address && )
     }, [profile.address])
 
     useEffect(() => {
         fetchProfile()
     }, [fetchProfile])
 
+
     useEffect(() => {
         /// set address when value not null and success in get data from db
-        if (address) {
+        console.log(address)
+        console.log(isEmpty(address))
+        if (isEmpty(address)) {
             setDetailAddress({
                 "address": address.address,
                 "hintAddress": address.hintAddress,
@@ -76,27 +81,29 @@ export default function EditProfileMap({ previousAddress }) {
             setInitalLocation({
                 lat: address.lat,
                 lon: address.lon,
-                type: address.type
+                type: address.type,
+                originalValue: true
             })
             reset({
                 address: address.address,
                 hintAddress: address.hintAddress
             })
             /// set address as current location when value is null and success in get data from db
-        } else if (!profile.getAddress) {
-            setCurrentLocation()
-                .then((location) => {
+        } else if (profile.getAddress && !isEmpty(address)) {
+            setCurrentLocation().then((location) => {
                     setInitalLocation({
                         lat: location.lat,
                         lon: location.lon,
-                        type: 1
+                        type: location.type,
+                        originalValue: false
                     })
                 }).catch(() => {
                     /// set default location as bangkok
                     setInitalLocation({
                         lat: 13.736717,
                         lon: 100.523186,
-                        type: 1
+                        type: defaultValue.typeAddress.current,
+                        originalValue: false
                     })
                 })
         }
@@ -113,7 +120,7 @@ export default function EditProfileMap({ previousAddress }) {
                     let coordinates = {
                         lat: position.coords.latitude,
                         lon: position.coords.longitude,
-                        type: 1
+                        type: defaultValue.typeAddress.current
                     }
                     setStageCurrentLocation({
                         loading: false,
@@ -133,7 +140,7 @@ export default function EditProfileMap({ previousAddress }) {
         })
     }
 
-    const callLocation = (location, geolocation) => {
+    const callLocation = (location, geolocation, type) => {
         if (location) {
             let geoLoacationDetail = {
                 "address": (geolocation.aoi && geolocation.aoi !== undefined) ? geolocation.aoi : "",
@@ -148,13 +155,11 @@ export default function EditProfileMap({ previousAddress }) {
                 "geoSubDistrict": geolocation.subdistrict && geolocation.subdistrict !== undefined ? geolocation.subdistrict : "",
                 "geoDistrict": geolocation.district && geolocation.district !== undefined ? geolocation.district : "",
                 "geoProvince": geolocation.province && geolocation.province !== undefined ? geolocation.province : "",
-                "type": (location.lat === initalLocation.lat && location.lon === initalLocation.lon) ? 1 : 0
+                "type": type
             }
             setAddress(geoLoacationDetail)
         }
     }
-
-
 
     const submitAddress = (data) => {
         if (data) {
@@ -169,7 +174,7 @@ export default function EditProfileMap({ previousAddress }) {
                 "postcode": address.postcode,
                 "lat": address.lat,
                 "lng": address.lon,
-                "type": 1
+                "type": address.type
             }
             dispatch(profileAction.setAddress(formAddress))
         }
@@ -219,7 +224,7 @@ export default function EditProfileMap({ previousAddress }) {
                                 <span >{detailAddress.detail}</span>
                             </div>
                             <div className={style.marginTop}>
-                                {initalLocation ? <MapComponent callBackLocation={callLocation} initLocation={initalLocation} getCurrentLocation={setCurrentLocation} /> : <div style={styleLoadingMap}></div>}
+                                {initalLocation ? <MapComponent callBackLocation={callLocation} initLocation={initalLocation}  getCurrentLocation={setCurrentLocation} /> : <div style={styleLoadingMap}></div>}
                             </div>
                         </div>
                     </Fragment>

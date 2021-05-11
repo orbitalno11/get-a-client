@@ -60,7 +60,6 @@ export default function EditProfileMap({ previousAddress }) {
             setAddress(profile.address && profile.address)
         }
 
-        // if(!profile.address && )
     }, [profile.address])
 
     useEffect(() => {

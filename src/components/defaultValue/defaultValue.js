@@ -40,6 +40,28 @@ const type = {
     "เดี่ยว":1,
 }
 
+const examType = {
+    "O-NET":1,
+    "GAT":2,
+    "PAT":3
+}
+
+const educationStatus = {
+    "จบแล้ว" : "graduated",
+    "กำลังศึกษา" : "studying"
+}
+
+const typeIdentity = {
+    "education" : 0,
+    "testing" : 1
+}
+
+const requestStatus = {
+    "ผ่านการตรวจสอบ" : 1,
+    "กำลังตรวจสอบ" : 0,
+    "ไม่ผ่านการตรวจสอบ" : -1
+}
+
 const dateFormat = "YYYY-MM-DD"
 
 const constantLocation = {
@@ -56,5 +78,9 @@ export const defaultValue = {
     dateOfWeek,
     type,
     dateFormat,
-    constantLocation
+    constantLocation,
+    examType,
+    educationStatus,
+    typeIdentity,
+    requestStatus
 }

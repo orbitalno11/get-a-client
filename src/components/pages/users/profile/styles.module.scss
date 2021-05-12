@@ -175,3 +175,50 @@
   align-items: center;
   flex-flow: column;
 }
+
+.borderImage{
+    border: 0.05rem solid  !important;
+    border-color : $black !important
+}
+
+.educationRow{
+    @extend .VerizontalPage;
+    padding-top: 1.25rem;
+    flex-flow: row;
+}
+
+.smallSizeIcon {
+    font-size: 1.5rem;
+    margin-left: 1.25rem;
+    width: 4rem
+}
+
+.largeSizeIcon{
+    @extend .smallSizeIcon;
+    margin-left: 1.5rem;
+    font-size: 2.2rem;
+}
+
+.floatLeft{
+    margin-left: auto;
+    margin-right: 0.6rem;
+}
+
+
+.editButton {
+    @extend .buttonCircle;
+    background-color: $blue;
+}
+
+.removeButton {
+    @extend .buttonCircle;
+    margin-left: 0.2rem;
+    background-color: $gray;
+}
+
+.centerPage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+}

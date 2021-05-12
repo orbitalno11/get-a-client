@@ -111,3 +111,13 @@ $silver : #a39b9b;
   width: 320px !important;
   height: 180px !important;
 }
+
+.buttonCircle{
+    border-style: none  !important;
+    border-radius: 50%;
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 0.75rem !important;
+    color: $white;
+    cursor: pointer;
+}

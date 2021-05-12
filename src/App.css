@@ -65,6 +65,10 @@
   padding-right: 1.25rem !important;
 }
 
+.ant-picker-input > input{
+  font-size: 1.1rem;
+}
+
 .ant-select-arrow{
   display: none;
 }
@@ -337,4 +341,8 @@ input :focus{
   background-color: #33658A;
   color: white;
   padding-left: 2em;
+}
+
+::placeholder{
+  color:  var(--gray-color) !important
 }

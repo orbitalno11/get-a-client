@@ -1,12 +1,10 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react"
-import { Typography } from "antd"
 import {
     faMapMarkerAlt,
     faUser
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../../../styles.module.scss"
-import EducationTutor from "../../../../../../educationTutor/EducationTutor";
 import ProfileIntroduce from "./ProfileIntroduce";
 import Header from "../../../../../../headerMobile/Header";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,8 +12,6 @@ import { profileAction } from "../../../../../../../redux/actions";
 import isMobile from "../../../../../../isMobile/isMobile";
 import {trackImpressTutorProfile} from "../../../../../../../analytic/Analytic";
 import {useParams} from "react-router-dom";
-
-const { Title } = Typography;
 
 export default function ProfileDetail({ mainPage }) {
     const dispatch = useDispatch()
@@ -65,7 +61,8 @@ export default function ProfileDetail({ mainPage }) {
                         <span>{profile && profile.coin } คน.</span>
                     </div>
                 </div>
-                {
+                {/* wait for connect api in public profile */}
+                {/* {
                     ((mainPage && !isMobile()) ||  !mainPage )&&
                     
                         (
@@ -84,7 +81,7 @@ export default function ProfileDetail({ mainPage }) {
                                 </div>
                             </div>
                         )
-                }
+                } */}
             </div>
         </Fragment>
     )

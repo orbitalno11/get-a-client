@@ -45,13 +45,13 @@ export default function ReviewPage() {
 
     return (
         <Fragment>
+            {isMobile() && <Header pageBack="goback" />}
             {
                 loading ? (
                     <div className={style.loader}></div>
                 ) : (
                     <div>
                         <ModalComponent />
-                        {isMobile() && <Header pageBack="goback" />}
                         <div className={screens.xs || (screens.sm && !screens.md) ? style.bodymobileprofile : `${style.bodyEdit} `}>
                             {
                                 (screens.md && course) && (

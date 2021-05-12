@@ -34,13 +34,17 @@
   padding-bottom: 3.75rem
 }
 
+form{
+  display: none
+}
 
 .loginPage{
   @extend .alignCenterPage;
   justify-content: center;
   background-color: $orange;
+  height: 100%;
 }
-
+// className={isMobile() ? `${style.loginPage}` : `${style.loginPage} ${style.alignCenterPageDestop} `} 
 .buttonText{
   @extend .paddingBottomBody;
   color:$white  !important;

@@ -8,9 +8,9 @@ const { Title } = Typography;
 
 export default function CardCourseLearner({ data, profile }) {
     const history = useHistory();
-
+    const id ="MTH-1-12-d0a54622-bb89-49f5-a71b-93f70f469034"
     const redirectToCoursePage = () =>{
-        history.push("/course/MTH-1-12-d0a54622-bb89-49f5-a71b-93f70f469034")
+        history.push(`/course/${id}`)
     }
 
     return (

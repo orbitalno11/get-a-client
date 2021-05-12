@@ -1,97 +1,72 @@
-import { Col, Row,Divider, Image, Button } from "antd";
-import React from "react";
+import { Divider, Image, Button } from "antd";
+import React, { Fragment } from "react";
 import styles from "../styles.module.scss";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import isMobile from "../../../../isMobile/isMobile"
+import { color, defaultValue } from "../../../../defaultValue";
+import isMobile from "../../../../isMobile/isMobile";
+import { useDispatch } from "react-redux";
+import { offlineCourseAction } from "../../../../../redux/actions";
 
-export default function Request({data}) {
+export default function Request({ id,data }) {
+
+  const dispatch = useDispatch()
+
+  const marginLeft = {
+    marginLeft: "1rem",
+  }
+
+  const iconMarker = {
+    color: color.gray,
+    marginRight: "1rem"
+  }
+
+  const buttonEnroll = {
+    width:"5rem",
+    margin:"0.1rem 0.1rem 0.1rem 0.2rem",
+  }
+
+  const enrollCourse = (status) =>{
+    dispatch(offlineCourseAction.acceptEnrollOfflineCourse(id,data.userId,status))
+  }
+
+  const ButtonEnrool = () => {
+    return (
+      <div className={styles.floatLeft}>
+        <Button className="buttonColor backgroundOrange" size="medium" shape="round" style={buttonEnroll} onClick={()=>enrollCourse(defaultValue.enrollStatus["APPROVE"])}>อนุมัติ</Button>
+        <Button className="buttonColor backgroundGray" size="medium" shape="round" style={buttonEnroll} onClick={()=>enrollCourse(defaultValue.enrollStatus["DENIED"])}>ลบคำขอ</Button>
+      </div>
+    )
+  }
+
+
 
   return (
-    <div>
-      {isMobile() ? (
-        <Row className={styles.paddingpage}>
-          <Col xs={9} sm={8}>
-            <Image
-              className={styles.imageProfile}
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-              preview={false}
-            ></Image>
-          </Col>
-          <Col xs={15} sm={16}style={{ paddingTop: "1rem" }}>
-            <Col>
-              <span className={styles.titleH5}>{data && data.fullNameText}</span>
-            </Col>
-            <Col>
-              <FontAwesomeIcon icon={faMapMarkerAlt} className={styles.icon} />
-              <span style={{ marginLeft: "0.7rem" }}>{data && data.address}</span>
-            </Col>
-          </Col>
-          <Row className={styles.request}>
-            <Col xs={16} sm={16}>
-                    <Button
-                    className="buttonColor backgroundOrange"
-                    size="medium"
-                    shape="round"
-                    style={{ width: "120px" }}
-                    >
-                    อนุมัติ
-                    </Button>
-                </Col>
-                <Col xs={8} sm={8}>
-                    <Button
-                    className="buttonColor backgroundGray"
-                    size="medium"
-                    shape="round"
-                    style={{ width: "120px" }}
-                    >
-                    ลบคำขอ
-                    </Button>
-                </Col>
-          </Row>
-          <Divider type="horizontal" style={{ height: "100%" }} />
-        </Row>
-      ) : (
-        <Row className={styles.paddingpage}>
-          <Col xs={8} sm={9} md={6} lg={5} xl={3}>
-            <Image
-              className={styles.imageProfile}
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-              preview={false}
-            ></Image>
-          </Col>
-          <Col xs={8} sm={9} md={7} lg={10} xl={15} style={{ paddingTop: "1rem" }}>
-            <Col>
-              <span className={styles.titleH5}>{data && data.fullNameText}</span>
-            </Col>
-            <Col>
-              <FontAwesomeIcon icon={faMapMarkerAlt} className={styles.icon} />
-              <span style={{ marginLeft: "0.7rem" }}>{data && data.address}</span>
-            </Col>
-          </Col>
-          <Col xs={8} sm={9} md={5} lg={5} xl={3} style={{ paddingTop: "2rem" }}>
-            <Button
-              className="buttonColor backgroundOrange"
-              size="medium"
-              shape="round"
-              style={{ width: "120px" }}
-            >
-              อนุมัติ
-            </Button>
-          </Col>
-          <Col xs={8} sm={9} md={4} lg={4} xl={3} style={{ paddingTop: "2rem" }}>
-            <Button
-              className="buttonColor backgroundGray"
-              size="medium"
-              shape="round"
-              style={{ width: "120px" }}
-            >
-              ลบคำขอ
-            </Button>
-          </Col>
-          <Divider type="horizontal" style={{ height: "100%" }} />
-        </Row>
-      )}
-    </div>
+    <Fragment>
+      <div className={styles.profileSet}>
+        <Image
+          className={styles.imageProfilesmall}
+          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          preview={false}
+        />
+        <div>
+          <div style={marginLeft}>
+            <span className={styles.titleH5}>{data && data.fullNameText}</span>
+            <br />
+            <span >
+              <FontAwesomeIcon icon={faMapMarkerAlt} style={iconMarker} />
+              {data.address ? data.address : "ยังไม่ได้กำหนด"}
+            </span>
+          </div>
+          {
+            isMobile() && (<ButtonEnrool />)
+          }
+        </div>
+        {
+          !isMobile() && (<ButtonEnrool />)
+        }
+      </div>
+      <Divider type="horizontal" style={{ height: "100%" }} />
+    </Fragment>
   );
 }

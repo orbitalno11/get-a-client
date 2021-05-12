@@ -16,10 +16,20 @@ import style from "../styles.module.scss"
 import CourseComponet from "./CourseComponet"
 import Header from "../../../../headerMobile/Header"
 import isMobile from "../../../../isMobile/isMobile"
+import { useDispatch } from "react-redux"
+import { homeActions } from "../../../../../redux/actions"
+import { useEffect } from "react"
+import { useSelector } from "react-redux"
 const { useBreakpoint } = Grid;
 
 export default function Home() {
     const screens = useBreakpoint();
+    const dispatch = useDispatch()
+    const { offlineCourseRank } = useSelector(state => state.home)
+
+    useEffect(() => {
+        dispatch(homeActions.getRank(10))
+    }, [])
 
     const subject = [
         {
@@ -29,13 +39,13 @@ export default function Home() {
             color: "#F7D7C2"
         },
         {
-            subject: "คณิตศาสตร์2",
+            subject: "ภาษาไทย",
             link: "",
             icon: faInfinity,
             color: "#F7D7C2"
         },
         {
-            subject: "วิทยาศาสตร์",
+            subject: "วิทยาศาตร์",
             link: "",
             icon: faMicroscope,
             color: "#F7D7C2"
@@ -78,87 +88,8 @@ export default function Home() {
         },
     ]
 
-    const courseTutor = [
-        {
-            name: "1 หนูเทพซาโตชิ",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
-        },
-        {
-            name: "2 พิคาชู",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
-        },
-        {
-            name: "3 หนูเทพซาโตชิ",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
-        },
-        {
-            name: "4 พิคาชู หนูเทพซาโตชิ",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
-        },
-        {
-            name: "5 หนูเทพซาโตชิ",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
-        },
-        {
-            name: "6 พิคาชู หนูเทพซาโตชิ",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
-        }
-    ]
-
-
-    const courseTutor1 = [
-        {
-            name: "1 หนูเทพซาโตชิ",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
-        },
-        {
-            name: "2 พิคาชู",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
-        },
-        {
-            name: "3 หนูเทพซาโตชิ",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
-        },
-        {
-            name: "4 พิคาชู หนูเทพซาโตชิ",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
-        },
-        {
-            name: "5 หนูเทพซาโตชิ",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
-        },
-        {
-            name: "6 พิคาชู หนูเทพซาโตชิ",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
-        }
-    ]
-
     const renderSlides = () => {
-        let size = !screens.xs ? screens.md ? 6 : 5 : 4
+        let size = !screens.xs ? screens.md ? 6 : 5 : 3
         const chunksSubject = chunksArray(subject, size)
         return (
             chunksSubject && chunksSubject.map((item, index) => (
@@ -212,12 +143,12 @@ export default function Home() {
                     }
                 </div>
                 <div className={style.paddingBody}>
-                    <CourseComponet title="ติวเตอร์ยอดนิยม" link="/" array={courseTutor} />
+                    <CourseComponet title="คอร์สเรียนยอดนิยม" link="/" array={offlineCourseRank} />
                 </div>
-
-                <div className={style.paddingBody}>
+                {/* For Online Course */}
+                {/* <div className={style.paddingBody}>
                     <CourseComponet title="คอร์สเรียนยอดนิยม" link="/" array={courseTutor1} />
-                </div>
+                </div> */}
             </div>
         </Fragment>
     )

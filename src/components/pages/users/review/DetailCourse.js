@@ -1,23 +1,25 @@
 import React, { Fragment } from "react"
-import { Grid, Row, Rate } from "antd"
+import { Grid, Row } from "antd"
 import {
     faBook,
     faBookReader,
     faClock,
     faCoins,
+    faStar,
     faUser,
     faUserFriends,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "./styles.module.scss"
 import { useSelector } from "react-redux";
-import { SkeletonComponent } from "../../../loading/SkeletonComponent";
+import { color } from "../../../defaultValue";
 
 const { useBreakpoint } = Grid;
 
 export default function DetailCourse() {
     const screens = useBreakpoint();
     const course = useSelector(state => state.offlineCourse.data)
+    const owner = course && course.owner
 
     return (
         <Fragment>

@@ -1,47 +1,46 @@
 import React from "react"
-import { Card, Typography, Image } from "antd";
+import { Col, Image, Row } from "antd";
 import styles from "./styles.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faLocationArrow, faStar } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router";
-const { Title } = Typography;
+import { color } from "../defaultValue";
 
-export default function CardCourseLearner({ data, profile }) {
+export default function CardCourseLearner({ data }) {
     const history = useHistory();
-    const id ="MTH-1-12-d0a54622-bb89-49f5-a71b-93f70f469034"
-    const redirectToCoursePage = () =>{
-        history.push(`/course/${id}`)
+    const redirectToCoursePage = () => {
+        history.push(`/profile/${data.id}/course`)
     }
 
     return (
-        <Card className={styles.cardRound} onClick={()=>{redirectToCoursePage()}}>
-            <Card.Grid hoverable={false} className={styles.gridImage} >
+        <div className={styles.cardRound} style={{ padding: '1rem', width: "18rem", height: "13rem" }} onClick={() => redirectToCoursePage()}>
+            <Row align="center">
                 <Image
                     src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
                     className={styles.image}
                     preview={false}
                 />
-            </Card.Grid>
-            <Card.Grid hoverable={false} className={styles.gridText}>
-                <Title level={4}>{data && data.name}<br/> {data && data.name}</Title>
-            </Card.Grid>
-            <Card.Grid hoverable={false} className={styles.gridhalfSmall}>
-                <FontAwesomeIcon icon={faCoins} className={styles.iconSmall} />
-                <span className={styles.textIconSmall}>{data && data.place} </span>
-            </Card.Grid>
-            <Card.Grid hoverable={false} className={styles.gridhalfSmall}>
-                <FontAwesomeIcon icon={faCoins} className={styles.iconSmall} />
-                <span className={styles.textIconSmall}>{data && data.subject} </span>
-            </Card.Grid>
-            {
-                profile &&
-                (
-                    <Card.Grid hoverable={false} className={styles.gridfull}>
-                        <span className={styles.textIconSmall}>เริ่มเรียน  วันที่ {data && data.date} </span>
-                    </Card.Grid>
-                )
-            }
+                <Col span={24} align="center">
+                    <span className={styles.titleH4}>{data && data.fullNameText}</span>
+                </Col>
 
-        </Card>
+                <Col span={24} align="center">
+                    <span> 
+                    <FontAwesomeIcon icon={faStar} className={styles.icon} style={{color:color.yellow}}/>
+                        {data && data.rating}
+                        </span>
+                </Col>
+            </Row>
+            <Row>
+                <Col span={12} align="center">
+
+                    <span> <FontAwesomeIcon icon={faLocationArrow} className={styles.icon} /> {data.address ? data.address.district.title : "ยังไม่ได้กำหนด"}</span>
+                </Col>
+                <Col span={12} align="center">
+                    <span> <FontAwesomeIcon icon={faBook} className={styles.icon} /> {data && data.subject.title}</span>
+                </Col>
+            </Row>
+        </div>
+
     )
 }

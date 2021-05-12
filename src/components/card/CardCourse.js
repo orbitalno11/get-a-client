@@ -1,40 +1,39 @@
 import React from "react"
-import { Card} from "antd";
+import { Badge, Card } from "antd";
 import styles from "./styles.module.scss"
 import {
     faBookReader,
     faClock,
-    faCoins,
-    faBell,
     faUsers
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import findKeyObject from "../defaultFunction/findKeyObject";
+import { defaultValue } from "../defaultValue";
 
-export default function CardCourse({data}) {
+export default function CardCourse({ data }) {
+
+    const width = {
+        width : "20rem"
+    }
 
     return (
-        <Card className={styles.cardCourse} >
-            <Card.Grid hoverable={false} className={styles.gridhalf}>
-                <span className={styles.titleH5}>{data && data.subject}</span>
-            </Card.Grid>
-            <Card.Grid hoverable={false} className={styles.gridhalf}>
-               <FontAwesomeIcon icon={faBell} className={styles.floatBell} />
+        <Card className={styles.cardCourse} style={width}>
+            <Card.Grid hoverable={false} className={styles.gridfull}>
+            <Badge count={data ? data.requestNumber : 0} offset={[10, 10]} >
+                <span className={styles.titleH5}>{data && data.name}</span>
+                </Badge>
             </Card.Grid>
             <Card.Grid hoverable={false} className={styles.gridfull}>
-                <FontAwesomeIcon icon={faBookReader} className={styles.icon}/>
-                <span className={styles.textIcon}>{data && data.grade} , {data && data.name}</span>
-            </Card.Grid>
-            <Card.Grid hoverable={false} className={styles.gridhalf}>
-                <FontAwesomeIcon icon={faCoins} className={styles.icon}/>
-                <span className={styles.textIcon}>{data && data.cost} บาท/ชั่วโมง</span>
-            </Card.Grid>
-            <Card.Grid hoverable={false} className={styles.gridhalf}>
-                <FontAwesomeIcon icon={faUsers} className={styles.icon}/>
-                <span className={styles.textIcon}>{data && data.type}</span>
+                <FontAwesomeIcon icon={faBookReader} className={styles.icon} />
+                <span className={styles.marginLeft}>{data && data.grade.title} , {data && data.subject.title}</span>
             </Card.Grid>
             <Card.Grid hoverable={false} className={styles.gridfull}>
-                <FontAwesomeIcon icon={faClock} className={styles.icon}/>
-                <span className={styles.textIcon}>{data && data.dateOfWeek}  {data && data.startTime} - {data && data.endTime} น.</span>
+                <FontAwesomeIcon icon={faClock} className={styles.icon} />
+                <span className={styles.marginLeft}>  {data && data.timeText}</span>
+            </Card.Grid>
+            <Card.Grid hoverable={false} className={styles.gridhalf}>
+                <FontAwesomeIcon icon={faUsers} className={styles.icon} />
+                <span  className={styles.marginLeft}>{data && findKeyObject(defaultValue.type, data.courseType)}</span>
             </Card.Grid>
         </Card>
     )

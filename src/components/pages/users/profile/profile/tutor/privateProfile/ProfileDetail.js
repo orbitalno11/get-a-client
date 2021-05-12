@@ -101,9 +101,6 @@ export default function ProfileDetail() {
                                 <div className={style.subTitle} key={item.id}>
                                     <FontAwesomeIcon icon={faBook} className={style.iconmarker} />
                                     <span>{item.title}</span>
-                                    <div className={style.floatLeft}>
-                                        <Button className="buttonColor backgroundBlue" style={{ width: "100px" }} shape="round" size="middle">แก้ไข</Button>
-                                    </div>
                                 </div>
                             )
                         })

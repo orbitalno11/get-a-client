@@ -25,7 +25,6 @@ const subject = {
 }
 
 const dateOfWeek = {
-    "ไม่ระบุวัน":0,
     "วันอาทิตย์":1,
     "วันจันทร์":2,
     "วันอังคาร":3,
@@ -36,7 +35,7 @@ const dateOfWeek = {
 }
 
 const type = {
-    "กลุ่ม":0,
+    "กลุ่ม":2,
     "เดี่ยว":1,
 }
 
@@ -62,7 +61,19 @@ const requestStatus = {
     "ไม่ผ่านการตรวจสอบ" : -1
 }
 
+const typeAcion = {
+    "create":"create",
+    "edit":"edit"
+}
+
+const enrollStatus = {
+    "WAITING_FOR_APPROVE":"0",
+    "APPROVE":"approve",
+    "DENIED":"denied"
+}
+
 const dateFormat = "YYYY-MM-DD"
+const timeFormat = "HH:mm";
 
 const constantLocation = {
     defaultLat : 13.6500138,
@@ -82,5 +93,8 @@ export const defaultValue = {
     examType,
     educationStatus,
     typeIdentity,
-    requestStatus
+    requestStatus,
+    typeAcion,
+    timeFormat,
+    enrollStatus
 }

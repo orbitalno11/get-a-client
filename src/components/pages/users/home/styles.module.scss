@@ -20,7 +20,7 @@
     height: 22rem;
     padding-top: 3.2rem;
     width: 100%;
-    background-image: url(../../../images/background.webp);
+    background-image: url(../../../images/banner.webp);
     font-size: 20pt;
     font-weight: 600;
 }
@@ -31,7 +31,7 @@
 
 .paddingCoruseCard {
     @include paddingSide(0 ,2% , 2% ,0);
-    width : 80%;
+    width : 80%; 
 }
 
 .paddingCoruseCardSM {
@@ -110,4 +110,19 @@
 
 .paddingTop60{
     padding-top: 3.75rem;
+}
+
+.scroll {
+    margin: 4px, 4px;
+    padding: 4px;
+    width: 100%;
+    overflow-y: scroll;
+    white-space: nowrap;
+  
+}
+
+.row{
+    display: flex !important;
+    flex-flow: row;
+
 }

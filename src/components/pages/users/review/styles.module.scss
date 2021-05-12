@@ -1,19 +1,5 @@
 @import "../profile/styles.module.scss";
 
-.profile{
-    height: 13.75rem;
-    padding-top: 3rem;
-    width: 100%;
-}
-
-
-.navbarBottom {
-    overflow: hidden;
-    position: fixed;
-    bottom: 3rem;
-    width: 100%;
-    height: auto;
-  }
 
 .buttom50pct{
     @extend .textNormal;
@@ -22,18 +8,6 @@
     border-style: none !important;
     cursor: pointer;
     outline: none;
-}
-
-.leftbuttom{
-    @extend .buttom50pct;
-    background-color: $orange;
-    color : $white;
-}
-
-.rightbottom{
-    @extend .buttom50pct;
-    background-color: $blue;
-    color : $white;
 }
 
 .reviewbottom{

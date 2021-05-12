@@ -155,7 +155,7 @@ const NavMenu = () => {
                 </Col>
 
                 <Col span={6.5} className="iconMenu">
-                    <NavLink to="/">
+                    <NavLink to="/tutor/course">
                         <FontAwesomeIcon icon={faGraduationCap} className="icon" />
                     </NavLink>
                 </Col>

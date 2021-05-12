@@ -1,5 +1,5 @@
 import React, { Fragment } from "react"
-import { Col, Row, Grid, Typography, Button } from "antd"
+import { Col, Row, Grid, Button } from "antd"
 import style from "../../../styles.module.scss"
 import {
    faPlus
@@ -7,7 +7,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 const { useBreakpoint } = Grid;
-const { Title } = Typography;
 
 export default function ProfileIdentity() {
     const screens = useBreakpoint();
@@ -16,7 +15,7 @@ export default function ProfileIdentity() {
         <Fragment>
             <div className={screens.md ? null : style.subProfile}>
                 <div className={style.TitleCoin}>
-                    <Title level={screens.md ? 2 : 5}>ยืนยันตัวตน</Title>
+                    <h2 className={style.titleH4}>ยืนยันตัวตน</h2>
                     <Col className={style.floatLeft}>
                     <NavLink to={"/tutor/edit/identity"}>
                         <Button className="buttonColor backgroundGreen" shape="round" size="middle" style={{ width: "6.25rem" }}>ยืนยัน</Button>
@@ -27,7 +26,7 @@ export default function ProfileIdentity() {
             <div >
                 <Row className={screens.md ? style.marginTop20 : style.TitleCoin} >
                     <Col>
-                        <Title level={screens.md ? 4 : 5}>เกียรติประวัติ  </Title>
+                    <h2 className={style.titleH4}>เกียรติประวัติ</h2>
                     </Col>
                     <Col className={style.marginLeft}>
                         <NavLink to="/tutor/1/add/education">

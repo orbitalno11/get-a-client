@@ -9,10 +9,11 @@ import { profileAction } from "../../../../../../../redux/actions/profile.action
 import isMobile from "../../../../../../isMobile/isMobile"
 import { useSelector } from "react-redux"
 import ProfileIdentity from "./ProfileIdentity"
+import ProfileContact from "./ProfileContact"
 const { useBreakpoint } = Grid;
 
 export default function ProfileTutor() {
-    const loading = useSelector(state => state.loading.loading)
+    const { loading, profile } = useSelector(state => state)
     const screens = useBreakpoint();
     const dispatch = useDispatch()
 
@@ -29,10 +30,16 @@ export default function ProfileTutor() {
         <Fragment>
             {isMobile() && <Header title="โปรไฟล์" />}
             {
-                !loading ? (
+                !loading.loading ? (
                     <Row className={style.body}>
                         <Col xs={24} sm={24} md={11} lg={9} xl={8} >
                             <ProfileDetail />
+                            {
+                                screens.md &&
+                                (
+                                    <ProfileContact profileDetail={profile.profile} />
+                                )
+                            }
                         </Col>
                         {
                             screens.md &&
@@ -46,6 +53,12 @@ export default function ProfileTutor() {
 
                             {/* this component will show when connect api of tutor course */}
                             <ProfileIdentity />
+                            {
+                                !screens.md &&
+                                (
+                                    <ProfileContact profileDetail={profile.profile} />
+                                )
+                            }
                         </Col>
                     </Row>
                 ) : (

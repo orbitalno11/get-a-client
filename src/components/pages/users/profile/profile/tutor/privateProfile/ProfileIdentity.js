@@ -1,26 +1,16 @@
-import React, { Fragment, useEffect, useState } from "react"
-import { Col, Row, Grid, Typography, Button, Divider } from "antd"
+import React, { Fragment } from "react"
+import { Col, Row, Grid, Typography, Button } from "antd"
 import style from "../../../styles.module.scss"
 import {
    faPlus
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
-import EducationTutor from "../../../../../../educationTutor/EducationTutor";
-import { useSelector } from "react-redux";
 const { useBreakpoint } = Grid;
 const { Title } = Typography;
 
 export default function ProfileIdentity() {
     const screens = useBreakpoint();
-    const profile = useSelector(state => state.profile)
-    const [history, setHistory] = useState(null)
-
-    useEffect(() => {
-        if(profile.profile){
-            setHistory(profile.profile.history)
-        }
-    }, [profile])
 
     return (
         <Fragment>
@@ -28,7 +18,9 @@ export default function ProfileIdentity() {
                 <div className={style.TitleCoin}>
                     <Title level={screens.md ? 2 : 5}>ยืนยันตัวตน</Title>
                     <Col className={style.floatLeft}>
-                        <Button className="buttonColor backgroundGreen" shape="round" size="middle" style={{ width: "100px" }}>ยืนยัน</Button>
+                    <NavLink to={"/tutor/edit/identity"}>
+                        <Button className="buttonColor backgroundGreen" shape="round" size="middle" style={{ width: "6.25rem" }}>ยืนยัน</Button>
+                        </NavLink>
                     </Col>
                 </div>
             </div>
@@ -43,16 +35,8 @@ export default function ProfileIdentity() {
                         </NavLink>
                     </Col>
                 </Row>
-                {
-                    history!==null && history.map((item, index) => {
-                        return (                            
-                            <div key={index}>
-                                <EducationTutor data={item} addData={true} status={true}  index={index}/>
-                                <Divider />
-                            </div>
-                        )
-                    })
-                }
+                {/* for show list of education */}
+                {/* <EducationTutor data={item} addData={true} status={true}  index={index}/> */}
             </div>
         </Fragment>
     )

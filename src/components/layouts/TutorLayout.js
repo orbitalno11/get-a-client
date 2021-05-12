@@ -13,6 +13,7 @@ import MangeLesson from "../pages/users/managecourse/onlineCourse/lesson/MangeLe
 import AddClip from "../pages/users/managecourse/editOnlineCourse/edit/AddClip"
 import EditClip from "../pages/users/managecourse/editOnlineCourse/edit/EditClip"
 import VDO from "../pages/users/managecourse/onlineCourse/player/VDO"
+import ProfileIdentityForm from "../pages/users/profile/editProfile/tutor/ProfileIdentityForm"
 
 
 export default function UserLayout() {
@@ -31,6 +32,8 @@ export default function UserLayout() {
                 <Route exact path="/tutor/:id" component={ProfileTutor} />
                 <Route exact path="/tutor/:id/edit" component={EditProfileDetail} />
                 <Route exact path="/tutor/:id/add/education" component={AddEducation} />
+                <Route exact path="/tutor/edit/identity" component={ProfileIdentityForm} />
+
             </Switch>
     )
 }

@@ -22,13 +22,14 @@
 .alignCenterPageDestop{
   @extend .paddingTopBody;
   @extend .alignCenterPage;
-  padding-bottom: 1.25rem !important;
+  @extend .paddingBottomBody;
 }
 
 .loginPage{
   @extend .alignCenterPage;
+  @extend .paddingBottomBody;
   justify-content: center;
-  background-color: $orange;
+  padding-top: 3.75rem;
   height: 100%;
 }
 

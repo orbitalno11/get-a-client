@@ -13,10 +13,9 @@ import ProfileContact from "./ProfileContact"
 const { useBreakpoint } = Grid;
 
 export default function ProfileTutor() {
-    const { loading, profile } = useSelector(state => state)
+    const { profile } = useSelector(state => state)
     const screens = useBreakpoint();
     const dispatch = useDispatch()
-
 
     const fetchProfile = useCallback(() => {
         dispatch(profileAction.getProfile())
@@ -29,42 +28,30 @@ export default function ProfileTutor() {
     return (
         <Fragment>
             {isMobile() && <Header title="โปรไฟล์" />}
-            {
-                !loading.loading ? (
-                    <Row className={style.body}>
-                        <Col xs={24} sm={24} md={11} lg={9} xl={8} >
-                            <ProfileDetail />
-                            {
-                                screens.md &&
-                                (
-                                    <ProfileContact profileDetail={profile.profile} />
-                                )
-                            }
+            <Row className={style.body}>
+                <Col xs={24} sm={24} md={11} lg={9} xl={8} >
+                    <ProfileDetail />
+                </Col>
+                {
+                    screens.md &&
+                    (
+                        <Col md={1} lg={2} xl={3} className={style.horizontalCenter}>
+                            <Divider type="vertical" style={{ height: "100%" }} />
                         </Col>
-                        {
-                            screens.md &&
-                            (
-                                <Col md={1} lg={2} xl={3} className={style.horizontalCenter}>
-                                    <Divider type="vertical" style={{ height: "100%" }} />
-                                </Col>
-                            )
-                        }
-                        <Col xs={24} sm={24} md={12} lg={12} xl={12} >
+                    )
+                }
+                <Col xs={24} sm={24} md={12} lg={12} xl={12} >
 
-                            {/* this component will show when connect api of tutor course */}
-                            <ProfileIdentity />
-                            {
-                                !screens.md &&
-                                (
-                                    <ProfileContact profileDetail={profile.profile} />
-                                )
-                            }
-                        </Col>
-                    </Row>
-                ) : (
-                    <div className={style.loader}></div>
-                )
-            }
+                    {/* this component will show when connect api of tutor course */}
+                    <ProfileIdentity />
+                    {
+                        !screens.md &&
+                        (
+                            <ProfileContact profileDetail={profile.profile} />
+                        )
+                    }
+                </Col>
+            </Row>
         </Fragment>
     )
 }

@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import { SkeletonComponent } from "../loading/SkeletonComponent";
 
 const { useBreakpoint } = Grid;
 
@@ -43,11 +44,13 @@ export default function HeaderVerizontal({ mainPage, review, data}) {
                 </Col>
                 <Col lg={17} md={17} sm={24} xs={24} className={screens.xs || (screens.sm && !screens.md) ? style.marginTop20 : style.columnJustify}>
                     {
-                        data &&
+                        data ?
                         (
                             <span className={screens.xs || (screens.sm && !screens.md) ? `${style.textAlign} ${style.titleH2}` : style.titleH2} >
                                 {data.firstname}  {data.lastname}
                             </span>
+                        ):(
+                            <SkeletonComponent.SkeletonText size="default"/>
                         )
                     }
                 </Col>

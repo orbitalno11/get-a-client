@@ -59,7 +59,7 @@ if (localStorage.token) {
 
 function App() {
   return (
-    <Provider store={store}>
+      <Provider store={store}>
       <Router>
         <NavMenu />
         <Switch>

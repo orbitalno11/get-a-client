@@ -179,3 +179,9 @@
     @extend .paddingbody;
     @extend .marginTop20;
 }
+
+.alignPageIdentity {
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+}

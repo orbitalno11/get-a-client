@@ -19,7 +19,7 @@ export default function ManageClip() {
   return (
     <Fragment>
       {isMobile() && <Header  title="จัดการคลิป"/>}
-      <Row className={`${style.body} ${style.alignCenter}`}>
+      <Row className={`${style.body} ${style.horizontalCenter}`}>
         <Col md={24} lg={24} xl={24}>
           {screens.md && (
             <Row>

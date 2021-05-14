@@ -44,7 +44,7 @@ export default function ProfileTutor() {
                         {
                             screens.md &&
                             (
-                                <Col md={1} lg={2} xl={3} className={style.alignCenter}>
+                                <Col md={1} lg={2} xl={3} className={style.horizontalCenter}>
                                     <Divider type="vertical" style={{ height: "100%" }} />
                                 </Col>
                             )

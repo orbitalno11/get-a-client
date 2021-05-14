@@ -52,7 +52,7 @@ export default function EditProfile() {
                                     screens.md &&
                                     (
                                         <Fragment>
-                                            <Col sm={1} lg={1} xl={2} className={style.alignCenter}>
+                                            <Col sm={1} lg={1} xl={2} className={style.horizontalCenter}>
                                                 <Divider type="vertical" style={{ height: "100%" }} />
                                             </Col>
                                             <Col lg={11} md={11} sm={24}>

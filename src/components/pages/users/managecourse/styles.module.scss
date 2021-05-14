@@ -9,13 +9,8 @@
 }
 
 .floatleft {
-  margin-top: 2rem;
+  @extend .marginTop;
   float: left;
-}
-
-.alignCenter{
-  display: flex;
-  justify-content: center;
 }
 
 .marginAccept {
@@ -61,9 +56,9 @@
 }
 
 .paddingCardLessonSM{
+  @extend .paddingbody;
   padding-top: 6rem;
   padding-bottom: 3.75rem;
- @extend .paddingbody;
 }
 
 .paddingCardLessonXS{
@@ -78,18 +73,12 @@
   border-radius: 1rem;
   width: auto;
   height: 10rem;
- @extend .VDOClip;
+ @extend .centerPage;
 }
 
 .Cover{
   @extend .VDO;
   height: 20rem;
-}
-
-.VDOClip{
-  display: flex;
-  align-items: center;
-  justify-content: center
 }
 
 .paddingVDO{
@@ -102,8 +91,7 @@ padding-top: 1rem;
 }
 
 .paddindMd{
-  display: flex !important;
-  justify-content: center !important;
+  @extend .horizontalCenter;
   @extend .paddingmange;
 }
 

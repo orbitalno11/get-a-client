@@ -118,7 +118,7 @@ export default function EditProfileDetail() {
                                 </div>
                                 {
                                     screens.md && (
-                                        <Row className={style.alignCenter}>
+                                        <Row className={style.horizontalCenter}>
                                              <h2 className={`${style.marginTop} ${style.titleH2}`}>แก้ไขโปรไฟล์</h2>
                                         </Row>
                                     )

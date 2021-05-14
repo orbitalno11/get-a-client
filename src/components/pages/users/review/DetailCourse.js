@@ -24,7 +24,7 @@ export default function DetailCourse() {
             {
                     course && (
                         <div>
-                            <Row className={!screens.md && style.alignCenter} >
+                            <Row className={!screens.md && style.horizontalCenter} >
                                 <span className={style.titleH2}>{course.name}</span>
                             </Row>
                             <div className={screens.xs || (screens.sm && !screens.md) ? style.paddingbody : null}>

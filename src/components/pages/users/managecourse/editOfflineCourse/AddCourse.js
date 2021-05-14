@@ -181,7 +181,7 @@ export default function AddCourse() {
               md={24}
               sm={20}
               xs={24}
-              className={`${style.alignCenter}`}
+              className={`${style.horizontalCenter}`}
             >
               <Button
                 className="buttonColor backgroundOrange"

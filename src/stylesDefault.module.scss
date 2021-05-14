@@ -97,3 +97,18 @@ $silver : #a39b9b;
     z-index:10;
 } 
 
+.horizontalCenter {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.VerizontalPage {
+    display: flex;
+    align-items: center;
+}
+
+.centerPage{
+    display: flex;
+    align-items: center;
+    justify-content: center
+}

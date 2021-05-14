@@ -14,7 +14,7 @@ export default function ManageClip() {
       {isMobile() && (
         <Header pageBack="/tutor/online/{courseId}" />
       )}
-      <Row className={`${style.body} ${style.alignCenter}`}>
+      <Row className={`${style.body} ${style.horizontalCenter}`}>
         <Col xs={24} sm={24} md={24} lg={24} xl={14}>  
           <YoutubePlayer  
              src="https://www.youtube.com/watch?v=jspL0OWQfEs"

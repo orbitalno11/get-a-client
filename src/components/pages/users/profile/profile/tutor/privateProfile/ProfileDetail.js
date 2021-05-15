@@ -25,9 +25,21 @@ export default function ProfileDetail() {
     useEffect(() => {
         if (profile.profile) {
             setProfileDetail(profile.profile)
-            setAddress(profile.profile.address.filter(item=>item.type === 1))
+            setAddress(profile.profile.address.filter(item => item.type === 1))
         }
     }, [profile])
+
+    const SampleSubject = () => {
+        return (
+            <div className={style.subTitle}>
+                <FontAwesomeIcon icon={faBook} className={style.iconmarker} />
+                <span><SkeletonComponent.SkeletonText size="default" /></span>
+                <div className={style.floatLeft}>
+                    <Button className="buttonColor backgroundBlue" style={{ width: "100px" }} shape="round" size="middle">แก้ไข</Button>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <Fragment>
@@ -51,7 +63,8 @@ export default function ProfileDetail() {
                     }
                 </NavLink>
             </div>
-            <div className={style.subProfile}>
+            {/* hide the section coin */}
+            <div className={style.subProfile} hidden>
                 <div className={style.TitleCoin}>
                     <Title level={5}>เหรียญของคุณ</Title>
                 </div>
@@ -83,20 +96,27 @@ export default function ProfileDetail() {
             </div>
             <div className={style.subProfile}>
                 <Title level={5}>วิชาที่สอน</Title>
-                <div className={style.subTitle}>
-                    <FontAwesomeIcon icon={faBook} className={style.iconmarker} />
-                    <span>คณิตศาสตร์</span>
-                    <div className={style.floatLeft}>
-                        <Button className="buttonColor backgroundBlue" style={{ width: "100px" }} shape="round" size="middle">แก้ไข</Button>
-                    </div>
-                </div>
-                <div className={style.subTitle}>
-                    <FontAwesomeIcon icon={faBook} className={style.iconmarker} />
-                    <span>อังกฤษ</span>
-                    <div className={style.floatLeft}>
-                        <Button className="buttonColor backgroundBlue" style={{ width: "100px" }} shape="round" size="middle">แก้ไข</Button>
-                    </div>
-                </div>
+                {
+                    profileDetail ? (
+                        profileDetail.subject.map((item) => {
+                            return (
+                                <div className={style.subTitle} key={item.id}>
+                                    <FontAwesomeIcon icon={faBook} className={style.iconmarker} />
+                                    <span>{item.title}</span>
+                                    <div className={style.floatLeft}>
+                                        <Button className="buttonColor backgroundBlue" style={{ width: "100px" }} shape="round" size="middle">แก้ไข</Button>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    ) : (
+                        <Fragment>
+                            <SampleSubject />
+                            <SampleSubject />
+                            <SampleSubject />
+                        </Fragment>
+                    )
+                }
             </div>
         </Fragment>
     )

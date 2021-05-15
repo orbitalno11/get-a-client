@@ -31,6 +31,12 @@ export default function ProfileTutor() {
             <Row className={style.body}>
                 <Col xs={24} sm={24} md={11} lg={9} xl={8} >
                     <ProfileDetail />
+                    {
+                        screens.md &&
+                        (
+                            <ProfileContact profileDetail={profile.profile} />
+                        )
+                    }
                 </Col>
                 {
                     screens.md &&

@@ -24,7 +24,7 @@ export default function ProfileDetail() {
     useEffect(() => {
         if (profile.profile) {
             setProfileDetail(profile.profile)
-            setAddress(profile.profile.address.filter(item=>item.type === 1))
+            setAddress(profile.profile.address.filter(item => item.type === 1))
         }
     }, [profile])
 
@@ -50,7 +50,8 @@ export default function ProfileDetail() {
                     }
                 </Link>
             </div>
-            <div className={style.subProfile}>
+            {/* hide the section coin */}
+            <div className={style.subProfile} hidden>
                 <div className={style.TitleCoin}>
                     <Title level={5}>เหรียญของคุณ</Title>
                     <div className={style.floatLeft}>
@@ -95,7 +96,7 @@ export default function ProfileDetail() {
                     }
                 </div>
             </div>
-             <div className={style.subProfile}>
+            <div className={style.subProfile}>
                 <Title level={5}>ช่องทางติดต่อ</Title>
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faFacebook} className={style.iconcoin} style={{ color: color.blue }} />
@@ -106,7 +107,7 @@ export default function ProfileDetail() {
                             <SkeletonComponent.SkeletonText size="default" />
                         )
                     }
-                   
+
                 </div>
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faLine} className={style.iconcoin} style={{ color: color.green }} />
@@ -117,7 +118,7 @@ export default function ProfileDetail() {
                             <SkeletonComponent.SkeletonText size="default" />
                         )
                     }
-                    
+
                 </div>
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faPhoneAlt} className={style.iconcoin} style={{ color: color.gray }} />
@@ -128,7 +129,7 @@ export default function ProfileDetail() {
                             <SkeletonComponent.SkeletonText size="default" />
                         )
                     }
-                   
+
                 </div>
             </div>
         </Fragment>

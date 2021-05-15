@@ -198,5 +198,4 @@ export const verifyAction = {
     geteManageIdentity,
     geteManageEducation,
     geteManageTesting
-
 }

@@ -170,6 +170,11 @@ const NavMenu = () => {
                         <FontAwesomeIcon icon={faBell} className="icon" />
                     </NavLink>
                 </Col>
+                <Col span={4} className="iconMenu">
+                    <NavLink to={ profileTutorURL }>
+                        <FontAwesomeIcon icon={faUserCircle} className="icon" />
+                    </NavLink>
+                </Col>
             </Row>
 
         )

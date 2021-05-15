@@ -29,7 +29,6 @@ export default function Profile() {
     dispatch(verifyAction.geteManageEducation(idProfile, true))
   }
 
-
   return (
     <Fragment>
           {list && (

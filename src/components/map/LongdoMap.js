@@ -9,7 +9,6 @@ export let longdo;
 export let map;
 
 export function LongdoMap({ id, callbackfunction }) {
-
     const mapCallback = useCallback(() => {
         longdo = window.longdo
         if (!isEmpty(longdo)) {
@@ -22,17 +21,22 @@ export function LongdoMap({ id, callbackfunction }) {
 
     useEffect(() => {
         const existingScript = document.getElementById("longdoMapScript");
+        document.getElementById("warningBox").style.visibility="hidden"
 
         if (!existingScript) {
             const script = document.createElement("script");
             script.src = `${LONGDO_MAP_URL}/?key=${LONGDO_MAP_KEY}`;
             script.id = "longdoMapScript";
             document.body.appendChild(script);
-
             script.onload = () => {
                 mapCallback();
                 if (callbackfunction) callbackfunction();
             };
+
+            script.onerror = () => {
+               document.getElementById("warningBox").style.visibility="visible"
+            }
+
         }
 
         if (existingScript) mapCallback();
@@ -46,25 +50,25 @@ export function LongdoMap({ id, callbackfunction }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        textAlign : "center"
+        textAlign: "center"
     }
 
-    const iconWarning ={
-        fontSize : "4rem",
-        color : color.yellow,
+    const iconWarning = {
+        fontSize: "4rem",
+        color: color.yellow,
     }
 
-    const textWarning ={
-        marginTop:"1.25rem",
-        marginBottom : "2rem"
+    const textWarning = {
+        marginTop: "1.25rem",
+        marginBottom: "2rem"
     }
 
     return (
         <div id={id} style={styleMap}>
-            <div>
-            <FontAwesomeIcon icon={faExclamationTriangle} style={iconWarning} />
-            <p style={textWarning}>ไม่สามารถโหลดแผนที่ได้ กรุณาลองใหม่อีกครั้ง</p>
-            <Button type="primary" size="middle" onClick={()=>{ window.location.reload();}}>โหลดหน้านี้ใหม่</Button>
+            <div id="warningBox" >
+                <FontAwesomeIcon icon={faExclamationTriangle} style={iconWarning} />
+                <p style={textWarning}>ไม่สามารถโหลดแผนที่ได้ กรุณาลองใหม่อีกครั้ง</p>
+                <Button type="primary" size="middle" onClick={() => { window.location.reload(); }}>โหลดหน้านี้ใหม่</Button>
             </div>
         </div>
     )

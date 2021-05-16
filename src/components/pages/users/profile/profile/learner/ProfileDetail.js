@@ -40,7 +40,6 @@ export default function ProfileDetail() {
                     preview={false}
                 />
                 <Link to={`/learner/${auth.profile}/edit`}>
-
                     <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[12, 0]}>
                         <h2 className={`${style.marginLeft} ${style.titleH3}`}>
                             {

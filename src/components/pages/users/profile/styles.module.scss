@@ -176,11 +176,6 @@
   flex-flow: column;
 }
 
-.borderImage{
-    border: 0.05rem solid  !important;
-    border-color : $black !important
-}
-
 .educationRow{
     @extend .VerizontalPage;
     padding-top: 1.25rem;
@@ -210,6 +205,13 @@
     background-color: $blue;
 }
 
+
+.removeRedButton {
+    @extend .buttonCircle;
+    background-color: $red;
+}
+
+
 .removeButton {
     @extend .buttonCircle;
     margin-left: 0.2rem;
@@ -222,3 +224,12 @@
     justify-content: center;
     flex-flow: column;
 }
+
+.removeImage{
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+}
+  

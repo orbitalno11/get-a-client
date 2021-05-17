@@ -58,6 +58,22 @@ const coinReducer = (state = initialState , action)=>{
             }
 
         }
+        case coinConstants.GET_COIN_USER_LIST_SUCCESS:{
+            return {
+                ...state,
+                data : action.payload,
+                error : false
+            }
+
+        }
+        case coinConstants.GET_COIN_USER_LIST_FAILURE:{
+            return {
+                ...state,
+                data : null,
+                error : true
+            }
+
+        }
         default: return state    
     }
 } 

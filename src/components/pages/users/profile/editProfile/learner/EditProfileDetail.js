@@ -52,7 +52,7 @@ export default function EditProfileDetail({ register, error, controls, reset }) 
     return (
         <Fragment>
             <ModalComponent />
-            <div className={style.alignCenter}>
+            <div className={style.horizontalCenter}>
                 <div className="imageUpload" >
                     <label htmlFor="file-input" >
                         <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[2, 0]}>

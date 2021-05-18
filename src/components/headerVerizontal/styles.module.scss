@@ -25,13 +25,7 @@
     width: 9rem;
 }
 
-.alignCenter{
-    display: flex;
-    justify-content: center;
-}
-
-
 .columnJustify{
-    @extend .alignCenter;
+    @extend .horizontalCenter;
     flex-flow: column;
 }

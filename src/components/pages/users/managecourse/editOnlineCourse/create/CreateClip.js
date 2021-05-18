@@ -28,7 +28,7 @@ export default function CreateClip() {
         <Col xs={24} sm={24} md={9} lg={8} xl={10}>
             <CreateVDOClip/>
         </Col>
-        <Col xl={24} md={24} sm={20} xs={24} className={style.alignCenter}>
+        <Col xl={24} md={24} sm={20} xs={24} className={style.horizontalCenter}>
           <Button
             className="buttonColor backgroundOrange"
             size="large"

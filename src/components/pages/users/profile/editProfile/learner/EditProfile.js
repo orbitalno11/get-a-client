@@ -11,13 +11,14 @@ import isMobile from "../../../../../isMobile/isMobile";
 import { useSelector, useDispatch } from "react-redux";
 import { profileAction } from "../../../../../../redux/actions/profile.actions";
 import { formUpdateProfile } from "../formUpdateProfile";
+import Loading from "../../../../../loading/Loading";
 
 const { useBreakpoint } = Grid;
 
 export default function EditProfile() {
     const screens = useBreakpoint();
     const dispatch = useDispatch()
-    const loading = useSelector(state => state.loading.loading)
+    const loading = useSelector(state => state.loading)
     const auth = useSelector(state => state.auth)
 
     const { register, handleSubmit, errors, control, reset } = useForm({
@@ -26,7 +27,7 @@ export default function EditProfile() {
 
     useEffect(() => {
         dispatch(profileAction.getProfile(auth.profile))
-       
+
     }, [])
 
     const onSubmit = (data) => {
@@ -39,37 +40,35 @@ export default function EditProfile() {
     return (
         <Fragment>
             <form onSubmit={handleSubmit(onSubmit)}>
-                {isMobile() && <Header title="แก้ไขข้อมูล" pageBack={"/learner/"+auth.profile} />}
-               
+                {isMobile() && <Header title="แก้ไขข้อมูล" pageBack={"/learner/" + auth.profile} />}
                 {
-                    !loading ? (
-                        <div className={style.body}>
-                            <Row justify="center">
-                                <Col lg={11} md={11} sm={24}>
-                                    <EditProfileDetail register={register} error={errors} controls={control} reset={reset}/>
-                                </Col>
-                                {
-                                    screens.md &&
-                                    (
-                                        <Fragment>
-                                            <Col sm={1} lg={1} xl={2} className={style.alignCenter}>
-                                                <Divider type="vertical" style={{ height: "100%" }} />
-                                            </Col>
-                                            <Col lg={11} md={11} sm={24}>
-                                                <EditProfileMap refs={register} />
-                                            </Col>
-                                        </Fragment>
-                                    )
-                                }
-                            </Row>
-                            <Row justify="center" className={style.marginTop}>
-                                <Button className="backgroundOrange buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
-                            </Row>
-                        </div>
-                    ) : (
-                        <div className={style.loader}></div>
+                    loading.loading && (
+                        <Loading />
                     )
                 }
+                <div className={style.body}>
+                    <Row justify="center">
+                        <Col lg={11} md={11} sm={24}>
+                            <EditProfileDetail register={register} error={errors} controls={control} reset={reset} />
+                        </Col>
+                        {
+                            screens.md &&
+                            (
+                                <Fragment>
+                                    <Col sm={1} lg={1} xl={2} className={style.horizontalCenter}>
+                                        <Divider type="vertical" style={{ height: "100%" }} />
+                                    </Col>
+                                    <Col lg={11} md={11} sm={24}>
+                                        <EditProfileMap refs={register} />
+                                    </Col>
+                                </Fragment>
+                            )
+                        }
+                    </Row>
+                    <Row justify="center" className={style.marginTop}>
+                        <Button className="backgroundOrange buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
+                    </Row>
+                </div>
             </form>
         </Fragment>
     )

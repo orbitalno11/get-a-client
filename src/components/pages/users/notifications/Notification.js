@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Col, Row, Grid, Divider } from "antd";
-import style from "./styles.module.scss";
+import style from "../../../../stylesDefault.module.scss";
 import Header from "../../../headerMobile/Header";
 import NotificationList from "./NotificationList";
 import NotificationDetail from "./NotificationDetail";

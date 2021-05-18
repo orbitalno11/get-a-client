@@ -10,20 +10,7 @@
   --red-color : #ab330f;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 /* General */
-
-.h2{
-  font-size: 35px;
-  font-weight: 700;
-}
 
 .white{
   color:var(--white-color) !important
@@ -84,14 +71,6 @@
 
 input :focus{
   outline: none !important
-}
-
-.body {
-  padding-top: 6.87rem;
-}
-
-.paddingBody {
-  padding: 7%;
 }
 
 .buttonColor{
@@ -159,18 +138,14 @@ input :focus{
 }
 
 .ant-menu-horizontal > .ant-menu-item:hover,
-.ant-menu-horizontal > .ant-menu-submenu:hover,
 .ant-menu-horizontal > .ant-menu-item-active,
-.ant-menu-horizontal > .ant-menu-submenu-active,
-.ant-menu-horizontal > .ant-menu-item-open,
 .ant-menu-horizontal > .ant-menu-submenu-open
 {
   color:  var(--white-color)  !important;
   border-bottom: 0.125rem solid  var(--white-color) !important;
 }
 
-.ant-menu-horizontal > .ant-menu-item-selected,
-.ant-menu-horizontal > .ant-menu-submenu-selected 
+.ant-menu-horizontal > .ant-menu-item-selected
 {
   border-bottom: 0.125rem solid  transparent !important;
 }
@@ -208,36 +183,6 @@ input :focus{
 }
 
 .icon :active{
-  color : var(--orange-color) !important;
-}
-
-.side{
-    overflow: auto  !important;
-    height: 100vh !important;
-    position: fixed !important;
-    left: 0px;
-    background-color: var(--side-menu-color) !important;
-}
-
-.side .ant-menu > .ant-menu-item-selected ,
-.side .ant-menu > .ant-menu-submenu-title 
-{
-  color : var(--orange-color) !important;
-  background-color: var(--side-menu-color) !important;
-  border: 0px transparent !important;
-}
-
-.side .ant-menu ,
-.side .ant-menu-item a,
-.side .ant-menu  :hover,
-.side .ant-menu-submenu-selected 
- {
-  color : var(--white-color) !important;
-  background-color: var(--side-menu-color) !important;
-  border: 0px transparent !important;
-}
-.side .ant-menu-item :hover,
-.side .ant-menu-item-selected a {
   color : var(--orange-color) !important;
 }
 

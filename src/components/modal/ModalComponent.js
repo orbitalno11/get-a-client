@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { Modal } from 'antd';
 import { useDispatch, useSelector } from "react-redux";
 import { modalAction } from "../../redux/actions";
-import style from "./styles.module.scss"
 import { alertIcon } from "../alertIcon/alertIconComponent";
 import { typeModal } from "./TypeModal";
 
@@ -12,6 +11,19 @@ const ModalComponent = () => {
   const [afterClose, setAfterClose] = useState(null)
   const dispatch = useDispatch()
   const [size, setSize] = useState(null)
+
+  const alignCenter = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    padding: " 0.5rem 0.5rem 0.5rem 0.5rem"
+  }
+
+  const textAlert = {
+    fontSize: "1rem",
+    paddingTop: "1.5rem"
+  }
 
   useEffect(() => {
     setIsModalVisible(modal.status)
@@ -31,11 +43,11 @@ const ModalComponent = () => {
     }
   };
 
-  const checkAlert = (type) =>{
-    if(type===typeModal.corrent){
-      return <alertIcon.CorrectIcon/>
-    }else{
-      return <alertIcon.WrongIcon/>
+  const checkAlert = (type) => {
+    if (type === typeModal.corrent) {
+      return <alertIcon.CorrectIcon />
+    } else {
+      return <alertIcon.WrongIcon />
     }
   }
 
@@ -51,16 +63,16 @@ const ModalComponent = () => {
         centered={true}
         width={size}
       >
-        <div className={style.alignCenter}>
+        <div style={alignCenter}>
           {
             modal.text && (
               <div >
                 {modal.alert && checkAlert(modal.alert)}
-                <p className={style.textAlert}>{modal.text && modal.text}</p>
+                <p style={textAlert}>{modal.text && modal.text}</p>
               </div>
             )
           }
-          
+
         </div>
         {/* for emtry modal */}
         {

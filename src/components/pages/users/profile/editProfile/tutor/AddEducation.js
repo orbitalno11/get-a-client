@@ -156,7 +156,7 @@ export default function AddEducation() {
                             </div>
                             {errors.image && <p className="error-input">{errors.image.message}</p>}
                         </Col>
-                        <Col xl={type === "test" ? 24 : 10} md={type === "test" ? 24 : 20} sm={20} xs={24} className={style.marginTop + " " + style.alignCenter}>
+                        <Col xl={type === "test" ? 24 : 10} md={type === "test" ? 24 : 20} sm={20} xs={24} className={style.marginTop + " " + style.horizontalCenter}>
                             <Button className="buttonColor backgroundOrange" size="large" shape="round" style={{ width: "120px", marginTop: "40px" }} htmlType="submit">บันทึก</Button>
                         </Col>
                     </Row>

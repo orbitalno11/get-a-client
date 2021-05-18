@@ -59,7 +59,7 @@ export default function AllReview() {
                 </div>
                 {
                     (!status && !owner && screens.md) && (
-                        <Col className={`${style.marginTop20} ${style.alignCenter}`}>
+                        <Col className={`${style.marginTop20} ${style.horizontalCenter}`}>
                             <Button className="buttonColor backgroundOrange"  shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>สมัครเรียน</Button>
                             <Button className="buttonColor backgroundBlue" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>สอบถามข้อมูล</Button>
                         </Col>
@@ -68,7 +68,7 @@ export default function AllReview() {
 
                 {
                     (owner && screens.md) && (
-                        <Col className={`${style.marginTop20} ${style.alignCenter}`}>
+                        <Col className={`${style.marginTop20} ${style.horizontalCenter}`}>
                             { type === "course" ? (
                                 <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>อนุมัติคำขอ</Button>
                             ) : (

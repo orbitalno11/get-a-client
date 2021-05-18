@@ -9,20 +9,14 @@
     @include paddingSide(6.87rem,0.31rem ,3.75rem ,0.31rem )
 }
 
-.alignCennter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .paddingCenter{
     @extend .body;
-    @extend .alignCennter;
+    @extend .centerPage;
     flex-flow: column
 }
 
 .banner{
-    @extend .alignCennter;
+    @extend .centerPage;
     height: 22rem;
     padding-top: 3.2rem;
     width: 100%;

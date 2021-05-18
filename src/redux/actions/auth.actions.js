@@ -6,9 +6,7 @@ import { sizeModal } from "../../components/modal/SizeModal"
 import jwtDecode from "jwt-decode"
 import { typeModal } from "../../components/modal/TypeModal"
 import { authErrorMessage } from "../../components/defaultValue"
-
-function startLoading() { return { type: authConstants.START_LOADING } }
-function stopLoading() { return { type: authConstants.STOP_LOADING } }
+import { loadingActions } from "./loading.actions"
 
 function checkErrorMessage(errorMessage) {
     let message = authErrorMessage.authMessage[errorMessage]
@@ -20,7 +18,7 @@ function checkErrorMessage(errorMessage) {
 
 function loginUser(loginData) {
     return async dispatch => {
-        startLoading()
+        dispatch(loadingActions.startLoading())
         auth.signInWithEmailAndPassword(loginData.email, loginData.password).then(user => {
             if (user) {
                 auth.currentUser.getIdToken().then(token => {
@@ -34,7 +32,7 @@ function loginUser(loginData) {
                         localStorage.setItem('token', getAToken);
                         setAuthToken(getAToken)
                         dispatch(success(user))
-                        stopLoading()
+                        dispatch(loadingActions.stopLoading())
                         if (user.role === 2) {
                             window.location.href = "/tutor"
                         } else if (user.role === 1) {
@@ -45,7 +43,7 @@ function loginUser(loginData) {
             }
 
         }).catch(err => {
-            stopLoading()
+            dispatch(loadingActions.stopLoading())
             dispatch(failure(err))
             dispatch(modalAction.openModal({
                 text: "ข้อมูลผู้ใช้งานไม่ถูกต้อง",
@@ -61,13 +59,13 @@ function loginUser(loginData) {
 
 function signUpLearner(signUpData) {
     return async dispatch => {
-        startLoading()
+        dispatch(loadingActions.startLoading())
         await apiGetA.post("/learner/create", signUpData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
         }).then(res => {
-            stopLoading()
+            dispatch(loadingActions.stopLoading())
             const message = checkErrorMessage(res.data.message)
             dispatch(success(message))
             dispatch(modalAction.openModal({
@@ -77,6 +75,7 @@ function signUpLearner(signUpData) {
                 afterClose: "/login"
             }))
         }).catch(err => {
+            dispatch(loadingActions.stopLoading())
             const message = checkErrorMessage(err.response.data.message.message)
             dispatch(failure(message))
             dispatch(modalAction.openModal({
@@ -92,13 +91,13 @@ function signUpLearner(signUpData) {
 
 function signUpTutor(signUpData) {
     return async dispatch => {
-        startLoading()
+        dispatch(loadingActions.startLoading())
         await apiGetA.post("/tutor/create", signUpData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
         }).then(res => {
-            stopLoading()
+            dispatch(loadingActions.stopLoading())
             const message = checkErrorMessage(res.data.message)
             dispatch(success(message))
             dispatch(modalAction.openModal({
@@ -109,6 +108,7 @@ function signUpTutor(signUpData) {
             }))
         }).catch(err => {
             const message = checkErrorMessage(err.response.data.message.message)
+            dispatch(loadingActions.stopLoading())
             dispatch(failure(message))
             dispatch(modalAction.openModal({
                 text: message,

@@ -10,10 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../../../styles.module.scss"
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-// import { faFacebook, faLine } from "@fortawesome/free-brands-svg-icons";
 import ProfileSample from "../../../../../../images/profile.webp"
-
-// import { color } from "../../../../../../defaultValue";
 import { SkeletonComponent } from "../../../../../../loading/SkeletonComponent";
 const { Title } = Typography;
 

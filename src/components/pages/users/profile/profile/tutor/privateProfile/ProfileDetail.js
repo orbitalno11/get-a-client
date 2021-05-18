@@ -25,7 +25,9 @@ export default function ProfileDetail() {
     useEffect(() => {
         if (profile.profile) {
             setProfileDetail(profile.profile)
-            setAddress(profile.profile.address.filter(item => item.type === 1))
+            if(profile.profile.address){
+                setAddress(profile.profile.address.filter(item => item.type === 1))
+            }
         }
     }, [profile])
 
@@ -34,9 +36,6 @@ export default function ProfileDetail() {
             <div className={style.subTitle}>
                 <FontAwesomeIcon icon={faBook} className={style.iconmarker} />
                 <span><SkeletonComponent.SkeletonText size="default" /></span>
-                <div className={style.floatLeft}>
-                    <Button className="buttonColor backgroundBlue" style={{ width: "100px" }} shape="round" size="middle">แก้ไข</Button>
-                </div>
             </div>
         )
     }
@@ -84,7 +83,7 @@ export default function ProfileDetail() {
                     <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
                     {
                         profileDetail ? (
-                            <span>{address[0] ? address[0].fullAddressText : "ยังไม่ได้กำหนด"}</span>
+                            <span>{address ? address[0].fullAddressText : "ยังไม่ได้กำหนด"}</span>
                         ) : (
                             <SkeletonComponent.SkeletonText size="default" />
                         )

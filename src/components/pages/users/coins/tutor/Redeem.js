@@ -20,7 +20,7 @@ export default function Redeem() {
           {isMobile() ? (
             <RedeemDetail />
           ) : (
-            <Row className={style.alignCenter}>
+            <Row className={style.horizontalCenter}>
               <RedeemDetail />
             </Row>
           )}

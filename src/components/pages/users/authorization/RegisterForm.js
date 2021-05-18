@@ -18,8 +18,11 @@ import ModalComponent from "../../../modal/ModalComponent";
 import Header from "../../../headerMobile/Header";
 import { defaultValue } from "../../../defaultValue"
 import isMobile from "../../../isMobile/isMobile";
+import { useSelector } from "react-redux";
+import Loading from "../../../loading/Loading";
 
 export default function RegisterForm() {
+    const { loading } = useSelector(state => state)
     const [image, setimage] = useState({
         file: null,
         imageURL: null
@@ -29,6 +32,7 @@ export default function RegisterForm() {
     const screens = useBreakpoint();
     const params = useParams();
     const type = params.type
+    
     const inputForm = {
         width: ((screens.sm && !screens.lg) || (!screens.sm && screens.xs)) ? "70%" : "35%",
     }
@@ -61,13 +65,13 @@ export default function RegisterForm() {
             formdata.append("image", image.file)
             if (type === "learner") {
                 console.log(image.file)
-                formdata.append("grade",defaultValue.grade[data.grade])
+                formdata.append("grade", defaultValue.grade[data.grade])
                 dispatch(userActions.signUpLearner(formdata))
-                
+
             } else if (type === "tutor") {
                 const length = data.subject.length
                 for (let i = 0; i < length; i++) {
-                    formdata.append(`subject${i + 1}`,defaultValue.subject[data.subject[i]])
+                    formdata.append(`subject${i + 1}`, defaultValue.subject[data.subject[i]])
                 }
                 dispatch(userActions.signUpTutor(formdata))
             }
@@ -77,8 +81,13 @@ export default function RegisterForm() {
 
     return (
         <Fragment>
-            {isMobile() && <Header pageBack="goback" /> }
+            {isMobile() && <Header pageBack="goback" />}
             <ModalComponent />
+            {
+                loading.loading && (
+                    <Loading />
+                )
+            }
             <div className={style.paddingBottomBody}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={style.alignCenterPageDestop} >
@@ -164,7 +173,7 @@ export default function RegisterForm() {
                                                         Object.entries(defaultValue.subject).map(([key]) => (
                                                             <Select.Option key={key} value={key}>{key}</Select.Option>
                                                         ))
-                                                    ): 
+                                                    ) :
                                                     (
                                                         Object.entries(defaultValue.grade).map(([key]) => (
                                                             <Select.Option key={key} value={key}>{key}</Select.Option>

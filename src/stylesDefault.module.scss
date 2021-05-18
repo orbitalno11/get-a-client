@@ -89,11 +89,18 @@ $silver : #a39b9b;
     padding: 1.25rem;
 }
 
-.loader{
-    height:100%;
-    width:100%;
-    background:url("./components/images/loading.gif") no-repeat center center;
-    position:absolute;
-    z-index:10;
-} 
+.horizontalCenter {
+    display: flex !important;
+    justify-content: center !important;
+}
 
+.VerizontalPage {
+    display: flex;
+    align-items: center;
+}
+
+.centerPage{
+    display: flex;
+    align-items: center;
+    justify-content: center
+}

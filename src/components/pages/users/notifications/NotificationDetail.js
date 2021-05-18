@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Col, Row } from "antd";
-import style from "./styles.module.scss";
+import style from "../../../../stylesDefault.module.scss";
 import Header from "../../../headerMobile/Header";
 import isMobile from "../../../isMobile/isMobile";
 
@@ -12,7 +12,7 @@ export default function NotificationDetail() {
         <div>
             <Header pageBack="/notification" />
           <div className={style.body}>
-            <div className={style.alignCennter}>
+            <div className={style.centerPage}>
               <Row>
                 <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                   <span className={style.titleH2}>การแจ้งเตือน</span>
@@ -42,7 +42,7 @@ export default function NotificationDetail() {
           </div>
         </div>
       ) : (
-        <div className={style.alignCennter}>
+        <div className={style.centerPage}>
           <Row>
             <Col xs={24} sm={24} md={24} lg={24} xl={24}>
               <span className={style.titleH2}>การแจ้งเตือน</span>

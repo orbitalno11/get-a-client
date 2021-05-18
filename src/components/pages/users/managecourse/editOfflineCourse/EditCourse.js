@@ -180,7 +180,7 @@ export default function EditCourse() {
               md={24}
               sm={24}
               xs={24}
-              className={`${style.alignCenter}`}
+              className={`${style.horizontalCenter}`}
             >
               <Button
                 className="buttonColor backgroundOrange"

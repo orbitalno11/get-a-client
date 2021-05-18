@@ -1,10 +1,10 @@
 import React from "react"
-import style from "../../stylesDefault.module.scss"
+import styles from "./styles.module.scss";
 
-const Loading=()=>{
+export default function Loading() {
     return (
-        <div className={style.loader}></div>
+        <div className={styles.loading}>
+            <div className={styles.ldsRoller}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        </div>
     )
 }
-
-export default Loading ;

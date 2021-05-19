@@ -7,7 +7,6 @@ import jwtDecode from "jwt-decode"
 import { typeModal } from "../../components/modal/TypeModal"
 import { authErrorMessage } from "../../components/defaultValue"
 import { loadingActions } from "./loading.actions"
-import { trackTutorLogin } from "../../analytic/Analytic"
 
 function checkErrorMessage(errorMessage) {
     let message = authErrorMessage.authMessage[errorMessage]
@@ -35,7 +34,6 @@ function loginUser(loginData) {
                         dispatch(success(user))
                         dispatch(loadingActions.stopLoading())
                         if (user.role === 2) {
-                            trackTutorLogin()
                             window.location.href = "/tutor"
                         } else if (user.role === 1) {
                             window.location.href = "/"

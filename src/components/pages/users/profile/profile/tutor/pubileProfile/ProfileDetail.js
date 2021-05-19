@@ -10,10 +10,8 @@ import EducationTutor from "../../../../../../educationTutor/EducationTutor";
 import ProfileIntroduce from "./ProfileIntroduce";
 import Header from "../../../../../../headerMobile/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { profileAction } from "../../../../../../../redux/actions";
+import { profileAction } from "../../../../../../../redux/actions/profile.actions";
 import isMobile from "../../../../../../isMobile/isMobile";
-import {trackImpressTutorProfile} from "../../../../../../../analytic/Analytic";
-import {useParams} from "react-router-dom";
 
 const { Title } = Typography;
 
@@ -21,22 +19,13 @@ export default function ProfileDetail({ mainPage }) {
     const dispatch = useDispatch()
     const data = useSelector(state => state.profile)
     const [profile, setProfile] = useState(null)
-    const params = useParams()
-    const userId = params.id
 
     const fetchProfile = useCallback(() => {
         dispatch(profileAction.getHandleProfile())
     }, [dispatch])
 
-    const trackImpress = () => {
-        if (userId?.isSafeNotBlank()) {
-            trackImpressTutorProfile(userId)
-        }
-    }
-
     useEffect(() => {
         fetchProfile()
-        trackImpress()
     }, [fetchProfile])
 
     useEffect(() => {

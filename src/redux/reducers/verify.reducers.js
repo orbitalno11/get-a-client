@@ -15,7 +15,6 @@ const initialState = {
 }
 
 const verifyReducer = (state = initialState , action)=>{
-    console.log(action)
     switch(action.type){
         case verifyConstants.GET_IDENTITY_LIST_SUCCESS:{
             return {

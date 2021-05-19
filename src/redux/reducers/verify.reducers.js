@@ -11,9 +11,11 @@ const initialState = {
     manageEducate:null,
     manageTest:null,
     error: null
+    
 }
 
 const verifyReducer = (state = initialState , action)=>{
+    console.log(action)
     switch(action.type){
         case verifyConstants.GET_IDENTITY_LIST_SUCCESS:{
             return {
@@ -176,7 +178,7 @@ const verifyReducer = (state = initialState , action)=>{
         case verifyConstants.GET_MANAGE_IDENTITY_SUCCESS:{
             return {
                 ...state,
-                data : action.payload,
+                manageIdentity : action.payload,
                 error : false
                
             }
@@ -185,7 +187,7 @@ const verifyReducer = (state = initialState , action)=>{
         case verifyConstants.GET_MANAGE_IDENTITY_FAILURE:{
             return {
                 ...state,
-                data : null,
+                manageIdentity : null,
                 error : true
                
             }
@@ -194,7 +196,7 @@ const verifyReducer = (state = initialState , action)=>{
         case verifyConstants.GET_MANAGE_EDUCATION_SUCCESS:{
             return {
                 ...state,
-                data : action.payload,
+                manageEducate : action.payload,
                 error : false
                
             }
@@ -203,7 +205,7 @@ const verifyReducer = (state = initialState , action)=>{
         case verifyConstants.GET_MANAGE_EDUCATION_FAILURE:{
             return {
                 ...state,
-                data : null,
+                manageEducate : null,
                 error : true
                
             }
@@ -212,7 +214,7 @@ const verifyReducer = (state = initialState , action)=>{
         case verifyConstants.GET_MANAGE_TEST_SUCCESS:{
             return {
                 ...state,
-                data : action.payload,
+                manageTest : action.payload,
                 error : false
                
             }
@@ -221,7 +223,7 @@ const verifyReducer = (state = initialState , action)=>{
         case verifyConstants.GET_MANAGE_TEST_FAILURE:{
             return {
                 ...state,
-                data : null,
+                manageTest : null,
                 error : true
                
             }

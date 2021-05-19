@@ -20,6 +20,7 @@ export default function Profile() {
     fetchProfile();
   }, [fetchProfile]);
 
+
   const handleCancel = () => {
     dispatch(verifyAction.geteManageEducation(idProfile, false))
   };
@@ -27,6 +28,7 @@ export default function Profile() {
   const handleSubmit = () => {
     dispatch(verifyAction.geteManageEducation(idProfile, true))
   }
+
 
   return (
     <Fragment>

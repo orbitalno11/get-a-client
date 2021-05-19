@@ -11,7 +11,6 @@ const initialState = {
     manageEducate:null,
     manageTest:null,
     error: null
-    
 }
 
 const verifyReducer = (state = initialState , action)=>{

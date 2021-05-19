@@ -13,6 +13,7 @@ import { offlineCourse } from "../../../../redux/actions";
 import HeaderVerizontal from "../../../headerVerizontal/HeaderVerizontal";
 import { useParams } from "react-router";
 import isMobile from "../../../isMobile/isMobile";
+import { trackImpressCourseDetail } from "../../../../analytic/Analytic";
 
 const { useBreakpoint } = Grid;
 
@@ -33,6 +34,7 @@ export default function ReviewPage() {
 
     useEffect(() => {
         fetchCourse()
+        trackImpress()
     }, [fetchCourse])
 
     const handleOpenReviewForm = () => {
@@ -40,6 +42,13 @@ export default function ReviewPage() {
             body: <ReviewForm />,
             size: sizeModal.default,
         }))
+    }
+
+    const trackImpress = () => {
+        const courseType = 1 // set course type
+        if (idCourse?.isSafeNotBlank()) {
+            trackImpressCourseDetail(idCourse, courseType)
+        }
     }
 
     return (

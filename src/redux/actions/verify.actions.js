@@ -8,11 +8,7 @@ import { sizeModal } from "../../components/modal/SizeModal"
 function getIdentityVerifyList(){ 
         return async dispatch => {
             dispatch(loadingActions.startLoading())
-            await apiGetA.get("/verify/identities",{
-                params:{
-                    status:1
-                }
-            }).then(res => {
+            await apiGetA.get("/verify/identities").then(res => {
                 dispatch(loadingActions.stopLoading())
                 const verify = res.data.data
                 dispatch(success(verify))
@@ -29,11 +25,7 @@ function getIdentityVerifyList(){
 function geteEducationVerifyList(){ 
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.get("/verify/educations",{
-            params:{
-                status:1
-            }
-        }).then(res => {
+        await apiGetA.get("/verify/educations").then(res => {
             dispatch(loadingActions.stopLoading())
             const verify = res.data.data
             dispatch(success(verify))
@@ -50,11 +42,7 @@ function geteEducationVerifyList(){
 function geteTestVerifyList(){ 
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.get("/verify/testings",{
-            params:{
-                status:1
-            }
-        }).then(res => {
+        await apiGetA.get("/verify/testings").then(res => {
             dispatch(loadingActions.stopLoading())
             const verify = res.data.data
             dispatch(success(verify))

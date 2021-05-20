@@ -43,6 +43,8 @@ import { setAuthToken } from "./utils/setAxios";
 import jwtDecode from "jwt-decode";
 import { userActions } from "./redux/actions";
 import OfflineCourse from "./components/pages/users/managecourse/offlineCourse/OfflineCourse";
+import Ranking from "./components/pages/users/home/learner/Ranking";
+import ProfileCourse from "./components/pages/users/profile/profile/learner/ProfileCourse";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
@@ -73,6 +75,7 @@ function App() {
           <PrivateRoute exact path="/learner/:id" component={ProfileLearner} />
           <PrivateRoute exact path="/learner/:id/edit" component={EditProfile} />
           <PrivateRoute exact path="/learner/:id/edit/map" component={EditProfileMap} />
+          <PrivateRoute exact path="/course" component={ProfileCourse} />
           <PrivateRoute exact path="/coin" component={Coins} />
           <PrivateRoute exact path="/coinshop/payment" component={Payment} />
           <PrivateRoute exact path="/historycoin" component={HistoryCoin}/>
@@ -84,6 +87,7 @@ function App() {
 
           {/* Public Route */}
           <Route exact path="/" component={Home} />
+          <Route exact path="/rank/:type" component={Ranking} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register/:type" component={RegisterForm} />

@@ -55,7 +55,7 @@ export default function Request({ id,data }) {
             <br />
             <span >
               <FontAwesomeIcon icon={faMapMarkerAlt} style={iconMarker} />
-              {data.address ? data.address : "ยังไม่ได้กำหนด"}
+              {data.address ? data.address.district.title : "ยังไม่ได้กำหนด"}
             </span>
           </div>
           {

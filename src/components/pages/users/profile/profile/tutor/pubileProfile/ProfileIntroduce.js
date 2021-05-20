@@ -16,7 +16,7 @@ export default function ProfileIntroduce({ mainPage }) {
     return (
         <Fragment>
             <Row className={style.paddingbody} >
-                <Col lg={4} md={6} sm={24} xs={24} className={isMobile() ? style.alignCenter : null} align={isMobile() ? "center" : "flex-start"}>
+                <Col lg={5} md={6} sm={24} xs={24} className={isMobile() ? style.alignCenter : null} align={isMobile() ? "center" : "flex-start"} >
                     <Image
                         className={style.imageProfilePubile}
                         src={tutorHandle ? tutorHandle.picture : profileSample}
@@ -45,11 +45,10 @@ export default function ProfileIntroduce({ mainPage }) {
                         tutorHandle ?
                             (
                                 <Fragment>
-                                    <span className={style.titleH2} >
+                                    <h2 style={{ fontSize: "2rem", fontWeight: "800" }}>
                                         {tutorHandle.fullNameText}
-                                    </span>
-                                    <br/>
-                                    <span  >
+                                    </h2>
+                                    <span className={style.textNormal}>
                                         {tutorHandle.introduction}
                                     </span>
                                 </Fragment>

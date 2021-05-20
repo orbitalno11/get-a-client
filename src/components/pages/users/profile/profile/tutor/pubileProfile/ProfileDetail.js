@@ -13,17 +13,22 @@ import { tutorAction } from "../../../../../../../redux/actions";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
 import { SkeletonComponent } from "../../../../../../loading/SkeletonComponent";
+import { trackImpressTutorProfile } from "../../../../../../../analytic/Analytic";
+import EmptyImage from "../../../../../../loading/EmptyImage";
+import EducationTutor from "../../../editProfile/tutor/EducationTutor";
 
 export default function ProfileDetail({ mainPage }) {
     const dispatch = useDispatch()
-    const {tutorHandle} = useSelector(state => state.tutor)
+    const { tutorHandle } = useSelector(state => state.tutor)
+    const loading = useSelector(state => state.loading)
     const [profile] = useState(null)
-    const { id } = useParams()
+    const params = useParams()
+    const userId = params.id
     const address = tutorHandle && (tutorHandle.address && tutorHandle.address.district.title)
-    
+
     const fetchProfile = useCallback(() => {
-        if(!mainPage){
-            dispatch(tutorAction.getProfileTutor(id))
+        if (!mainPage) {
+            dispatch(tutorAction.getProfileTutor(userId))
         }
     }, [dispatch])
 
@@ -42,7 +47,7 @@ export default function ProfileDetail({ mainPage }) {
     return (
         <Fragment>
             {!mainPage && isMobile() && <Header pageBack="goback" />}
-            <div className={!mainPage ? style.paddingBottomBody : null}>
+            <div className={(isMobile() && !mainPage) ? style.paddingBottomBody : (!mainPage && style.bodyEdit)} >
                 {
                     !mainPage &&
                     (
@@ -57,19 +62,19 @@ export default function ProfileDetail({ mainPage }) {
                         {
                             tutorHandle ? (
                                 <span>{address ? address : "ยังไม่ได้กำหนด"}</span>
-                            ):(
-                                <SkeletonComponent.SkeletonText/>
+                            ) : (
+                                <SkeletonComponent.SkeletonText />
                             )
                         }
-                      
+
                     </div>
                     <div className={style.TitleCoin}>
                         <FontAwesomeIcon icon={faUser} className={style.iconmarker} />
                         {
                             tutorHandle ? (
                                 <span>{tutorHandle && tutorHandle.numberOfLearner} คน.</span>
-                            ):(
-                                <SkeletonComponent.SkeletonText/>
+                            ) : (
+                                <SkeletonComponent.SkeletonText />
                             )
                         }
                     </div>
@@ -88,8 +93,16 @@ export default function ProfileDetail({ mainPage }) {
                                                 <EducationTutor data={item} size="small" />
                                             </div>
                                         )
-                                    }): (
-                                        <p>ยังไม่มีประวัติการศึกษา</p>
+                                    }) : (
+                                        (!loading.loading && !mainPage) ? (
+                                            <div >
+                                                <EmptyImage size="default" />
+                                                <span >ยังไม่มีประวัติการศึกษา</span>
+                                            </div>
+                                        ) : (
+                                            <p>ยังไม่มีประวัติการศึกษา</p>
+                                        )
+
                                     )
                                 }
                             </div>

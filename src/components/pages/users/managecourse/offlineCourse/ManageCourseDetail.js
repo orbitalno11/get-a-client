@@ -12,6 +12,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
 import Loading from "../../../../loading/Loading";
+import EmptyImage from "../../../../loading/EmptyImage";
 
 export default function ManageCourseDetail() {
   const dispatch = useDispatch()
@@ -20,7 +21,7 @@ export default function ManageCourseDetail() {
 
   useEffect(() => {
     dispatch(tutorAction.getListOfflineCourse(auth.profile))
-    return () =>{
+    return () => {
       dispatch(tutorAction.clearListOfflineCourse())
     }
   }, [])
@@ -39,29 +40,44 @@ export default function ManageCourseDetail() {
           <Loading />
         )
       }
+
       {isMobile() ? (
         <div>
-          {offlineCourse &&
-            offlineCourse.map((item, index) => (
-              <div key={index}>
-                <Link to={`/tutor/course/${item.id}`}>
-                  <ListCourseTutor data={item} />
-                </Link>
-
+          {tutor.offlineCourse.success && (
+            offlineCourse ? (
+              offlineCourse.map((item, index) => (
+                <div key={index}>
+                  <Link to={`/tutor/course/${item.id}`}>
+                    <ListCourseTutor data={item} />
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <div align="center">
+                <EmptyImage size="default" />
               </div>
-            ))}
-         
+            )
+          )}
+
+
         </div>
       ) : (
         <Row>
-          {offlineCourse &&
-            offlineCourse.map((item, index) => (
-              <Col className={ style.paddingmange} key={index} xl={8} lg={12} md={12} sm={24} align="center">
-                <Link to={`/tutor/course/${item.id}`}>
-                  <CardCourse data={item} />
-                </Link>
-              </Col>
-            ))}
+          {tutor.offlineCourse.success && (
+            offlineCourse ? (
+              offlineCourse.map((item, index) => (
+                <Col className={style.paddingmange} key={index} xl={8} lg={12} md={12} sm={24} align="center">
+                  <Link to={`/tutor/course/${item.id}`}>
+                    <CardCourse data={item} />
+                  </Link>
+                </Col>
+              ))
+            ) : (
+              <div align="center">
+                <EmptyImage size="default" />
+              </div>
+            )
+          )}
         </Row>
       )}
 

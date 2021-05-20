@@ -24,8 +24,8 @@ export default function ProfileDetail() {
         if (profile.profile) {
             setProfileDetail(profile.profile)
         }
-        if (profile.address) {
-            const address = profile.address.fullAddress
+        if (profile.profile) {
+            const address = profile.profile.address && profile.profile.address
             setAddressDetail(address)
         }
     }, [profile])

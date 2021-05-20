@@ -1,3 +1,5 @@
+import { sizeModal } from "../../components/modal/SizeModal"
+import { typeModal } from "../../components/modal/TypeModal"
 import { apiURL } from "../../utils/setAxios"
 import { offlineCourseConstants } from "../constants"
 import { loadingActions } from "./loading.actions"
@@ -7,7 +9,7 @@ import { modalAction } from "./modal.actions"
 function updatefflineCourse(id, data) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.put(`/offline-course/${id}`, data)
+        await apiURL.apiGetA.put(`/offline-course/${id}`, data)
             .then(() => {
                 dispatch(loadingActions.stopLoading())
                 dispatch(success())
@@ -36,7 +38,7 @@ function updatefflineCourse(id, data) {
 function createOfflineCourse(data){
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        apiGetA.post("/offline-course/create",data)
+        await apiURL.apiGetA.post("/offline-course/create",data)
         .then(() => {
             dispatch(loadingActions.stopLoading())
             dispatch(success())
@@ -64,7 +66,7 @@ function createOfflineCourse(data){
 function getOfflineCourse(id) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        apiURL.apiGetA.get(`/offline-course/${id}`)
+        await apiURL.apiGetA.get(`/offline-course/${id}`)
             .then(res => {
                 if (res.data.success) {
                     const data = res.data.data
@@ -72,18 +74,20 @@ function getOfflineCourse(id) {
                     dispatch(loadingActions.stopLoading())
                 }
             })
-            .catch(() => {
+            .catch((err) => {
                 dispatch(loadingActions.stopLoading())
+                dispatch(failure(err.response.data))
             })
     }
 
-    function success(course) { return { type: offlineCourseConstants.GET_OFFLINE_COURSE, payload: course } }
+    function success(course) { return { type: offlineCourseConstants.GET_OFFLINE_COURSE_SUCCESS, payload: course } }
+    function failure(err) { return { type: offlineCourseConstants.GET_OFFLINE_COURSE_FAILURE, payload: err } }
 }
 
 function enRollOfflineCourse(id) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.post(`/offline-course/${id}/enroll`)
+        await apiURL.apiGetA.post(`/offline-course/${id}/enroll`)
             .then(() => {
                 dispatch(success())
                 dispatch(loadingActions.stopLoading())
@@ -112,7 +116,7 @@ function enRollOfflineCourse(id) {
 function getEnrollOfflineCourse(id) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.get(`/offline-course/${id}/enroll`)
+        await apiURL.apiGetA.get(`/offline-course/${id}/enroll`)
             .then((res) => {
                 if (res.data.success) {
                     const data = res.data.data
@@ -134,7 +138,7 @@ function getEnrollOfflineCourse(id) {
 function acceptEnrollOfflineCourse(idCourse, learnerid, status) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.get(`/offline-course/${idCourse}/accept`, {
+        await apiURL.apiGetA.get(`/offline-course/${idCourse}/accept`, {
             params: {
                 learnerId: learnerid,
                 action: status
@@ -165,6 +169,29 @@ function acceptEnrollOfflineCourse(idCourse, learnerid, status) {
 }
 
 
+function getLearnerOfflineCourse() {
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiURL.apiGetA.get("/learner/offline-course")
+            .then(res => {
+                if (res.data.success) {
+                    const data = res.data.data
+                    dispatch(success(data))
+                    dispatch(loadingActions.stopLoading())
+                }
+            })
+            .catch((err) => {
+                dispatch(loadingActions.stopLoading())
+                dispatch(failure(err.response.data))
+            })
+    }
+
+    function success(data) { return { type: offlineCourseConstants.GET_LEARNER_OFFLINE_COURSE_SUCCESS, payload: data } }
+    function failure(err) { return { type: offlineCourseConstants.GET_LEARNER_OFFLINE_COURSE_FAILURE, payload: err } }
+}
+
+
+
 function clearOfflineCourse() {
     return dispatch => dispatch({ type: offlineCourseConstants.CLEAR_OFFLINE_COURSE })
 }
@@ -176,5 +203,6 @@ export const offlineCourseAction = {
     clearOfflineCourse,
     enRollOfflineCourse,
     getEnrollOfflineCourse,
-    acceptEnrollOfflineCourse
+    acceptEnrollOfflineCourse,
+    getLearnerOfflineCourse
 }

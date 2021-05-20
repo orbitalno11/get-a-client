@@ -51,8 +51,6 @@ export default function AddCourse() {
 
   useEffect(() => {
     if (dataDetaill) {
-      console.log(dataDetaill.startTime)
-      console.log(new Date(dataDetaill.startTime))
       reset({
         namecourse: dataDetaill.name,
         subject: dataDetaill.subject.title,
@@ -71,9 +69,10 @@ export default function AddCourse() {
 
   const onSubmit = (data) => {
     if (data) {
+
       const formData = {
         "name": data.namecourse,
-        "subject": defaultValue.subject[data.subject],
+        "subject": id ? dataDetaill.subject.id :defaultValue.subject[data.subject],
         "description": data.description,
         "grade": defaultValue.grade[data.grade],
         "type": defaultValue.type[data.type],
@@ -128,7 +127,7 @@ export default function AddCourse() {
               <p>วิชา</p>
               <Controller
                 as={
-                  <Select name="subject">
+                  <Select name="subject" disabled={id?true:false}>
                     {defaultValue.subject &&
                       Object.entries(defaultValue.subject).map(
                         ([value]) => (

@@ -5,10 +5,6 @@
     padding :$top $right $bottom $left
 }
 
-.body {
-    @include paddingSide(6.87rem,0.31rem ,3.75rem ,0.31rem )
-}
-
 .paddingCenter{
     @extend .body;
     @extend .centerPage;
@@ -18,35 +14,30 @@
 .banner{
     @extend .centerPage;
     height: 22rem;
-    padding-top: 3.2rem;
+    left: 0;
+    top: 0;
     width: 100%;
-    background-image: url(../../../images/banner.webp);
-    font-size: 20pt;
-    font-weight: 600;
+    background-image: url(../../../images/banner2.webp);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $white;
+
+    @media only screen and (max-width: 768px){
+        text-align: center;
+        font-size: 1.5rem;
+    }
 }
 
 .paddingBody{
     @include paddingSide(2% ,10% ,0 ,10% )
 }
 
-.paddingCoruseCard {
-    @include paddingSide(0 ,2% , 2% ,0);
-    width : 80%; 
-}
-
-.paddingCoruseCardSM {
-    width : 80%;
-    margin: 0% 10% 0% 10%;
-}
-
-.paddingCoruseCardXS {
-    width : 100%;
-}
-
 .subjectMenu {
-    display: flex ;
+    @extend .horizontalCenter;
     flex-flow: row  ;
-    justify-content: center;
     height: 6.25rem;
     margin-top: 1.25rem;
 }
@@ -78,9 +69,8 @@
 }
 
 .flexRow{
-    display: flex;
+    @extend .VerizontalPage;
     flex-flow: row;
-    align-items: center;
 }
 
 .paddingLeft{
@@ -91,17 +81,6 @@
     text-align: center;
     width:100%;
     padding: 2rem;
-}
-
-@media only screen and (max-width: 768px) {
-    .banner{
-        height: 15rem;
-        font-size: 15pt;
-    }
-}
-
-.row{
-    display: flex !important;
 }
 
 .paddingTop{
@@ -117,12 +96,13 @@
     padding: 4px;
     width: 100%;
     overflow-y: scroll;
-    white-space: nowrap;
-  
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 .row{
     display: flex !important;
     flex-flow: row;
-
 }

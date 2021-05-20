@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row, Divider } from "antd";
+import { Col, Row, Divider, Badge } from "antd";
 import styles from "./styles.module.scss";
 import {
   faBell,
@@ -42,7 +42,9 @@ export default function ListCorseTutor({ data }) {
           </div>
         </Col>
         <Col className={styles.paddingmanage}>
+        <Badge count={data ? data.requestNumber : 0} offset={[0, 0]} >
           <FontAwesomeIcon icon={faBell} style={{color : data.requestNumber > 0 ? color.yellow : color.gray}} className={styles.floatBell} />
+          </Badge>
         </Col>
       </Row>
       <Divider style={{ backgroundColor: color.orange }} />

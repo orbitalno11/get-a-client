@@ -18,7 +18,7 @@ import { useState } from "react";
 import FormEnroll from "./FormEnroll";
 import { color } from "../../../../defaultValue";
 import { SkeletonComponent } from "../../../../loading/SkeletonComponent";
-
+import { trackImpressCourseDetail } from "../../../../../analytic/Analytic";
 const { useBreakpoint } = Grid;
 
 export default function OfflineCourse() {
@@ -33,12 +33,22 @@ export default function OfflineCourse() {
     const type = "course"
     const idCourse = params.id
 
+
     useEffect(() => {
         dispatch(offlineCourseAction.getOfflineCourse(idCourse))
+        trackImpress()
         return () => {
             dispatch(offlineCourseAction.clearOfflineCourse())
         }
     }, [])
+
+    const trackImpress = () => {
+        const courseType = 1 // set course type
+        if (idCourse?.isSafeNotBlank()) {
+            trackImpressCourseDetail(idCourse, courseType)
+        }
+    }
+
 
     const ContactTutor = () => {
         return (
@@ -67,12 +77,20 @@ export default function OfflineCourse() {
         )
     }
 
+    const switchComponent = (status) =>{
+        document.getElementById("switchComponent").scrollIntoView({ behavior: "smooth" })
+        setShowReview(status)
+    }
+
     const switchShow = () => {
         if (!isMobile() || showReview) {
+            // document.getElementById('componentSelector').scrollIntoView({ behavior: "smooth" })
             return <AllReview />
         } else {
+            // document.getElementById('componentSelector').scrollIntoView({ behavior: "smooth" })
             return <ContactTutor />
         }
+
     }
 
     const enrollCourse = () => {
@@ -119,7 +137,7 @@ export default function OfflineCourse() {
                             </Col>
                         )
                     }
-                    <Col xl={13} lg={13} md={14} sm={24} xs={24} >
+                    <Col xl={13} lg={13} md={14} sm={24} xs={24} id="switchComponent" >
                         {
                             switchShow()
                         }
@@ -143,7 +161,7 @@ export default function OfflineCourse() {
                     (!learn_status && !screens.md) && (
                         <div className={style.navbarBottom}>
                             <button className={style.leftbuttom} onClick={() => enrollCourse()}>สมัครเรียน</button>
-                            <button className={style.rightbottom} onClick={() => setShowReview(!showReview)}>
+                            <button className={style.rightbottom} onClick={() => switchComponent(!showReview)}>
                                 {
                                     showReview ? "ถามข้อมูล" : "ความคิดเห็น"
                                 }

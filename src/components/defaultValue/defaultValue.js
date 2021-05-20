@@ -96,5 +96,5 @@ export const defaultValue = {
     requestStatus,
     typeAcion,
     timeFormat,
-    enrollStatus
+    enrollStatus,
 }

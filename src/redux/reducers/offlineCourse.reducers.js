@@ -3,15 +3,35 @@ import { offlineCourseConstants } from "../constants"
 const initialState = {
     data: null,
     enrollList: null,
-    error: null
+    error: null,
+    learnerCourse : null
 }
 
 const offlineCourseReducer = (state = initialState, action) => {
     switch (action.type) {
-        case offlineCourseConstants.GET_OFFLINE_COURSE:
+        case offlineCourseConstants.GET_OFFLINE_COURSE_SUCCESS:
             return {
                 ...state,
-                data: action.payload
+                data: action.payload,
+                error: null
+            }
+        case offlineCourseConstants.GET_OFFLINE_COURSE_FAILURE:
+            return {
+                ...state,
+                data: null,
+                error: action.payload
+            }
+        case offlineCourseConstants.GET_LEARNER_OFFLINE_COURSE_SUCCESS:
+            return {
+                ...state,
+                learnerCourse: action.payload,
+                error: null
+            }
+        case offlineCourseConstants.GET_LEARNER_OFFLINE_COURSE_FAILURE:
+            return {
+                ...state,
+                learnerCourse: null,
+                error: action.payload
             }
         case offlineCourseConstants.CREATE_OFFLINE_COURSE_SUCCESS:
             return {
@@ -69,7 +89,7 @@ const offlineCourseReducer = (state = initialState, action) => {
             return {
                 ...state,
                 data: null,
-                enrollList : null,
+                enrollList: null,
                 error: null
             }
         default:

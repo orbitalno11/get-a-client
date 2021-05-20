@@ -346,3 +346,8 @@ input :focus{
 ::placeholder{
   color:  var(--gray-color) !important
 }
+
+span{
+  word-wrap: break-word !important;
+  white-space : normal;
+}

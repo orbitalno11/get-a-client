@@ -10,16 +10,18 @@ import { useEffect } from "react";
 import { offlineCourseAction } from "../../../../../redux/actions";
 import Loading from "../../../../loading/Loading";
 import ModalComponent from "../../../../modal/ModalComponent";
+import EmptyImage from "../../../../loading/EmptyImage";
+import isEmpty from "../../../../defaultFunction/checkEmptyObject"
 
 export default function EnrollRequest() {
   const dispatch = useDispatch()
   const params = useParams()
-  const { offlineCourse,loading } = useSelector(state => state)
-  const requestOfflineCourse = offlineCourse.enrollList && offlineCourse.enrollList.filter(item=>item.status === 0)
+  const { offlineCourse, loading } = useSelector(state => state)
+  const requestOfflineCourse = offlineCourse.enrollList && offlineCourse.enrollList.filter(item => item.status === 0)
 
   useEffect(() => {
     dispatch(offlineCourseAction.getEnrollOfflineCourse(params.id))
-    return ()=>{
+    return () => {
       dispatch(offlineCourseAction.clearOfflineCourse())
     }
   }, [])
@@ -29,13 +31,13 @@ export default function EnrollRequest() {
       {isMobile() && (
         <Header title="คำขอเรียน" pageBack />
       )}
-          {
+      {
         loading.loading && (
           <Loading />
         )
       }
       <div className={style.body}>
-      <ModalComponent />
+        <ModalComponent />
 
         {!isMobile() && (
           <Fragment>
@@ -44,10 +46,17 @@ export default function EnrollRequest() {
           </Fragment>
         )}
         {
-          requestOfflineCourse && (
+          !isEmpty(requestOfflineCourse ) ? (
             requestOfflineCourse.map((item, index) => (
               <Request id={params.id} data={item} key={index} />
             ))
+          ) : (
+            !loading.loading && (
+              <div align="center">
+                <EmptyImage size="default" />
+                <p className={style.textNormal}>ไม่มีคำขอเรียนจากนักเรียนในบทเรียนนี้ พรุ่งนี้ลองกลับมาดูใหม่นะ</p>
+              </div>
+            )
           )
         }
       </div>

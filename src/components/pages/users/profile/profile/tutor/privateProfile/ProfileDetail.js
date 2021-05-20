@@ -1,14 +1,14 @@
 import React, { Fragment, useEffect, useState } from "react"
 import { Image, Button, Badge, Typography } from "antd";
 import {
-    faCoins,
+    // faCoins,
     faMapMarkerAlt,
     faEdit,
     faBook
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../../../styles.module.scss"
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileSample from "../../../../../../images/profile.webp"
 import { SkeletonComponent } from "../../../../../../loading/SkeletonComponent";
@@ -62,7 +62,7 @@ export default function ProfileDetail() {
                 </NavLink>
             </div>
             {/* hide the section coin */}
-            <div className={style.subProfile} hidden>
+            {/* <div className={style.subProfile} hidden>
                 <div className={style.TitleCoin}>
                     <Title level={5}>เหรียญของคุณ</Title>
                 </div>
@@ -75,7 +75,7 @@ export default function ProfileDetail() {
                         </NavLink>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div className={style.subProfile}>
                 <Title level={5}>สถานที่สะดวกเรียน</Title>
                 <div className={style.subTitle}>
@@ -87,9 +87,9 @@ export default function ProfileDetail() {
                             <SkeletonComponent.SkeletonText size="default" />
                         )
                     }
-                    <div className={style.floatLeft}>
+                    <Link className={style.floatLeft} to={`/learner/${auth.profile}/edit/map`}>
                         <Button className="buttonColor backgroundBlue" style={{ width: "100px" }} shape="round" size="middle">แก้ไข</Button>
-                    </div>
+                    </Link>
                 </div>
             </div>
             <div className={style.subProfile}>

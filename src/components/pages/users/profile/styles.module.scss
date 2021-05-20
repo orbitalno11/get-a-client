@@ -18,8 +18,8 @@
 
 .imageProfilePubile {
     border-radius: 50% !important;
-    height: 9rem;
-    width: 9rem;
+    height: 10rem;
+    width: 10rem;
 }
 
 .profileSet{
@@ -55,10 +55,6 @@
     @extend .icon;
     color:$yellow;
 }
-.iconbigcoin{
-    color:$yellow;
-    font-size: 4rem    
-}
 
 .iconmarker{
     @extend .icon;
@@ -71,22 +67,6 @@
     font-size: 1.5rem;
 }
 
-.iconCheck{
-    margin-right: 2rem;
-}
-
-.iconTick{
-    @extend .iconCheck;
-    @extend .fontGreen;
-    font-size: 2.5rem;
-}
-
-.iconEducation {
-    @extend .icon;
-    margin-left: 2rem;
-    font-size: 2.5rem;
-}
-
 .padding{
     padding: 0.6rem;
 }
@@ -94,10 +74,6 @@
 .floatLeft{
     margin-left: auto;
     margin-right: 0.6rem;
-}
-
-.fontGreen{
-    color:$green !important;
 }
 
 .fontBlue{
@@ -119,10 +95,10 @@
 }
 
 .banner{
-    height: 13.75rem;
+    height: 16rem;
     padding-top: 3rem;
     width: 100%;
-    background-image: url(../../../images/banner.webp);
+    background-image: url(../../../images/bannerProfile.webp);
 }
 
 .bannerEditProfile{
@@ -134,11 +110,6 @@
 .columnJustify{
     @extend .horizontalCenter;
     flex-flow: column;
-}
-
-
-.textAlign{
-    text-align: center;
 }
 
 .mobilecenter{
@@ -175,7 +146,7 @@
     border-width: 0.1rem  !important;
     border-color: $orange !important;
     color: $orange  !important;
-    z-index: 10;
+    z-index: 5;
 }
 
 .alignPageIdentity {

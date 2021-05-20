@@ -8,6 +8,7 @@ import { sizeModal } from "../../../modal/SizeModal";
 import ReviewForm from "./ReviewForm";
 import { Link } from "react-router-dom";
 import FormEnroll from "../managecourse/offlineCourse/FormEnroll";
+import EmptyImage from "../../../loading/EmptyImage";
 const { useBreakpoint } = Grid;
 
 export default function AllReview() {
@@ -30,25 +31,25 @@ export default function AllReview() {
         margin: '0rem 0.5rem 0rem 0.5rem'
     }
 
-    const enrollCourse = () =>{
-        if(!auth.isAuthenticated){
+    const enrollCourse = () => {
+        if (!auth.isAuthenticated) {
             window.location.href = "/login"
-        }else{
+        } else {
             const dataEnroll = offlineCourse.data && {
-                id : offlineCourse.data.id,
-                name : offlineCourse.data.name,
-                subject : offlineCourse.data.subject.title,
-                grade : offlineCourse.data.grade.title,
-                owner : offlineCourse.data.owner.fullNameText
+                id: offlineCourse.data.id,
+                name: offlineCourse.data.name,
+                subject: offlineCourse.data.subject.title,
+                grade: offlineCourse.data.grade.title,
+                owner: offlineCourse.data.owner.fullNameText
             }
 
             dispatch(modalAction.openModal({
-                body: <FormEnroll data={dataEnroll}/>,
+                body: <FormEnroll data={dataEnroll} />,
                 size: sizeModal.default,
             }))
         }
     }
-    
+
 
     return (
         <Fragment>
@@ -65,7 +66,7 @@ export default function AllReview() {
                             (!status && !owner && screens.lg) && (
                                 <Fragment>
 
-                                    <Button className="buttonColor backgroundOrange" shape="round" size="large"  onClick={()=>enrollCourse()} style={paddingButton}>สมัครเรียน</Button>
+                                    <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => enrollCourse()} style={paddingButton}>สมัครเรียน</Button>
                                 </Fragment>
                             )
                         }
@@ -75,7 +76,7 @@ export default function AllReview() {
                                 <Fragment>
                                     { type === "course" ? (
                                         <Link to={`/tutor/course/${offlineCourse.data.id}/enroll`}>
-                                        <Button className="buttonColor backgroundOrange" shape="round" size="large" style={paddingButton}>อนุมัติคำขอ</Button>
+                                            <Button className="buttonColor backgroundOrange" shape="round" size="large" style={paddingButton}>อนุมัติคำขอ</Button>
                                         </Link>
                                     ) : (
                                         <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>จัดการบทเรียน</Button>
@@ -94,8 +95,15 @@ export default function AllReview() {
                     {
                         review && review.length ? (
                             <CardReview data={review} />
-                        ) :(
-                            <span className={style.textNormal}>บทเรียนนี้ยังไม่มีผู้แสดงความคิดเห็น</span>
+                        ) : (
+                            <div align="center">
+                                <EmptyImage size="default" />
+                                <p className={style.textNormal}>บทเรียนนี้ยังไม่มีผู้แสดงความคิดเห็น&nbsp;
+                                    {
+                                        owner ? " อย่าลืมบอกให้นักเรียนมาแสดงคิดเห็นกันนะ" : "สมัครเรียนเพื่อแสดงความคิดเห็นสิ"
+                                    }
+                                </p>
+                            </div>
                         )
                     }
                 </div>

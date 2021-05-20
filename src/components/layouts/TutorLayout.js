@@ -17,6 +17,7 @@ import ProfileIdentityForm from "../pages/users/profile/editProfile/tutor/Profil
 import OfflineCourse from "../pages/users/managecourse/offlineCourse/OfflineCourse"
 
 export default function UserLayout() {
+
     return (
             <Switch>
                 <Route exact path="/tutor" component={Home} />

@@ -173,60 +173,6 @@ const verifyReducer = (state = initialState , action)=>{
             }
 
         }
-        case verifyConstants.GET_MANAGE_IDENTITY_SUCCESS:{
-            return {
-                ...state,
-                manageIdentity : action.payload,
-                error : false
-               
-            }
-
-        }
-        case verifyConstants.GET_MANAGE_IDENTITY_FAILURE:{
-            return {
-                ...state,
-                manageIdentity : null,
-                error : true
-               
-            }
-
-        }
-        case verifyConstants.GET_MANAGE_EDUCATION_SUCCESS:{
-            return {
-                ...state,
-                manageEducate : action.payload,
-                error : false
-               
-            }
-
-        }
-        case verifyConstants.GET_MANAGE_EDUCATION_FAILURE:{
-            return {
-                ...state,
-                manageEducate : null,
-                error : true
-               
-            }
-
-        }
-        case verifyConstants.GET_MANAGE_TEST_SUCCESS:{
-            return {
-                ...state,
-                manageTest : action.payload,
-                error : false
-               
-            }
-
-        }
-        case verifyConstants.GET_MANAGE_TEST_FAILURE:{
-            return {
-                ...state,
-                manageTest : null,
-                error : true
-               
-            }
-
-        }
         default: return state    
     }
 } 

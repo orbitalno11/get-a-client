@@ -1,7 +1,7 @@
 import { authConstants } from "../constants"
 import { modalAction } from "./modal.actions"
 import auth from "../../config/firebase"
-import  apiGetA, { setAuthToken } from "../../utils/setAxios"
+import { setAuthToken, apiURL } from "../../utils/setAxios"
 import { sizeModal } from "../../components/modal/SizeModal"
 import jwtDecode from "jwt-decode"
 import { typeModal } from "../../components/modal/TypeModal"
@@ -31,7 +31,6 @@ function loginUser(loginData) {
                         const getAToken = res.data.data
                         const user = jwtDecode(getAToken);
                         localStorage.setItem('token', getAToken);
-                        console.log(user)
                         setAuthToken(getAToken)                    
                         dispatch(success(user))
                         dispatch(loadingActions.stopLoading())

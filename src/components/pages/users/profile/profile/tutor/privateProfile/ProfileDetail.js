@@ -19,11 +19,13 @@ export default function ProfileDetail() {
     const [profileDetail, setProfileDetail] = useState(null)
     const [address, setAddress] = useState(null)
 
+    console.log(profileDetail)
+
     useEffect(() => {
         if (profile.profile) {
             setProfileDetail(profile.profile)
             if(profile.profile.address){
-                setAddress(profile.profile.address.filter(item => item.type === 1))
+                setAddress(profile.profile.address)
             }
         }
     }, [profile])
@@ -80,7 +82,7 @@ export default function ProfileDetail() {
                     <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
                     {
                         profileDetail ? (
-                            <span>{address ? address[0].fullAddressText : "ยังไม่ได้กำหนด"}</span>
+                            <span>{address ? address : "ยังไม่ได้กำหนด"}</span>
                         ) : (
                             <SkeletonComponent.SkeletonText size="default" />
                         )

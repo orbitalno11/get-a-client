@@ -4,7 +4,9 @@ import { profileConstants } from "../constants"
 const initialState = {
     profile: null,
     profileHandle: null,
-    error: null
+    error: null,
+    address: {},
+    getAddress : false
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -32,6 +34,30 @@ const profileReducer = (state = initialState, action) => {
                 error: null
             }
         case profileConstants.UPDATE_PROFILE_FAILURE:
+            return {
+                ...state,
+                error: action.payload
+            }
+        case profileConstants.GET_ADDRESS_SUCCESS:
+            return {
+                ...state,
+                address: action.payload,
+                getAddress : true,
+                error: null
+            }
+        case profileConstants.GET_ADDRESS_FAILURE:
+            return {
+                ...state,
+                address: {},
+                getAddress : false,
+                error: action.payload
+            }
+        case profileConstants.SET_ADDRESS_SUCCESS:
+            return {
+                ...state,
+                error: null
+            }
+        case profileConstants.SET_ADDRESS_FAILURE:
             return {
                 ...state,
                 error: action.payload

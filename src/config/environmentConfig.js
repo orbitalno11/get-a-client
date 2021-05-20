@@ -15,6 +15,7 @@ const getBaseApiUrl = () => {
 
 export const ENVIRONMENT = process.env.REACT_APP_ENV
 export const LONGDO_MAP_KEY = process.env.REACT_APP_LONGDO_MAP_KEY
+export const LONGDO_MAP_URL = process.env.REACT_APP_MAP_URL
 export const BASE_API_URL = getBaseApiUrl()
 export const FIREBASE_CLIENT_CONFIG = {
     apiKey: process.env.REACT_APP_GOOGLE_API_KEY,

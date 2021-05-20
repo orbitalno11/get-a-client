@@ -1,7 +1,7 @@
 import { authConstants } from "../constants"
 import { modalAction } from "./modal.actions"
 import auth from "../../config/firebase"
-import  apiGetA,{ setAuthToken } from "../../utils/setAxios"
+import { setAuthToken, apiURL } from "../../utils/setAxios"
 import { sizeModal } from "../../components/modal/SizeModal"
 import jwtDecode from "jwt-decode"
 import { typeModal } from "../../components/modal/TypeModal"
@@ -23,7 +23,7 @@ function loginUser(loginData) {
         auth.signInWithEmailAndPassword(loginData.email, loginData.password).then(user => {
             if (user) {
                 auth.currentUser.getIdToken().then(token => {
-                    apiGetA.get("/auth/token", {
+                    apiURL.apiGetA.get("/auth/token", {
                         params: {
                             token: token
                         }
@@ -62,7 +62,7 @@ function loginUser(loginData) {
 function signUpLearner(signUpData) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.post("/learner/create", signUpData, {
+        await apiURL.apiGetA.post("/learner/create", signUpData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -94,7 +94,7 @@ function signUpLearner(signUpData) {
 function signUpTutor(signUpData) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.post("/tutor/create", signUpData, {
+        await apiURL.apiGetA.post("/tutor/create", signUpData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }

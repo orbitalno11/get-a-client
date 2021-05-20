@@ -58,10 +58,13 @@ if (localStorage.token) {
 }
 
 function App() {
+  const admin = store.getState().auth.role === 0
   return (
       <Provider store={store}>
       <Router>
-        <NavMenu />
+        {
+           !admin && <NavMenu />
+        }
         <Switch>
           {/* Public Route */}
           <AdminRoute path="/admin" component={AdminLayout} />

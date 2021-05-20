@@ -1,6 +1,6 @@
 import firebase from "firebase/app"
 import "firebase/auth"
-import { ENVIRONMENT, FIREBASE_CLIENT_CONFIG } from "../environmentConfig"
+import {ENVIRONMENT, FIREBASE_CLIENT_CONFIG} from "../environmentConfig"
 
 firebase.initializeApp(FIREBASE_CLIENT_CONFIG)
 const auth = firebase.auth()

@@ -1,4 +1,4 @@
-import  apiGetA  from "../../utils/setAxios"
+import { apiURL } from "../../utils/setAxios"
 import { verifyConstants } from "../constants"
 import { loadingActions } from "./loading.actions"
 import { modalAction } from "./modal.actions"
@@ -8,7 +8,7 @@ import { sizeModal } from "../../components/modal/SizeModal"
 function getIdentityVerifyList(){ 
         return async dispatch => {
             dispatch(loadingActions.startLoading())
-            await apiGetA.get("/verify/identities").then(res => {
+            await apiURL.apiGetA.get("/verify/identities").then(res => {
                 dispatch(loadingActions.stopLoading())
                 const verify = res.data.data
                 dispatch(success(verify))
@@ -25,7 +25,7 @@ function getIdentityVerifyList(){
 function geteEducationVerifyList(){ 
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.get("/verify/educations").then(res => {
+        await apiURL.apiGetA.get("/verify/educations").then(res => {
             dispatch(loadingActions.stopLoading())
             const verify = res.data.data
             dispatch(success(verify))
@@ -42,7 +42,7 @@ function geteEducationVerifyList(){
 function geteTestVerifyList(){ 
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.get("/verify/testings").then(res => {
+        await apiURL.apiGetA.get("/verify/testings").then(res => {
             dispatch(loadingActions.stopLoading())
             const verify = res.data.data
             dispatch(success(verify))
@@ -59,7 +59,7 @@ function geteTestVerifyList(){
 function geteProfileDetail(id){ 
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.get(`/verify/identity/${id}`)
+        await apiURL.apiGetA.get(`/verify/identity/${id}`)
         .then(res => {
             dispatch(loadingActions.stopLoading())
             const verify = res.data.data
@@ -77,7 +77,7 @@ function geteProfileDetail(id){
 function geteEducationDetail(id){ 
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.get(`/verify/education/${id}`)
+        await apiURL.apiGetA.get(`/verify/education/${id}`)
         .then(res => {
             dispatch(loadingActions.stopLoading())
             const verify = res.data.data
@@ -95,7 +95,7 @@ function geteEducationDetail(id){
 function geteTestingDetail(id){ 
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.get(`/verify/testing/${id}`)
+        await apiURL.apiGetA.get(`/verify/testing/${id}`)
         .then(res => {
             dispatch(loadingActions.stopLoading())
             const verify = res.data.data
@@ -113,7 +113,7 @@ function geteTestingDetail(id){
 function geteManageIdentity(requestId,approved){ 
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.get("/verify/identity", {
+        await apiURL.apiGetA.get("/verify/identity", {
             params: {
                 id : requestId,
                 approved :  approved
@@ -139,7 +139,7 @@ function geteManageIdentity(requestId,approved){
 function geteManageEducation(requestId,approved){ 
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.get("/verify/education", {
+        await apiURL.apiGetA.get("/verify/education", {
             params: {
                 id : requestId,
                 approved :  approved
@@ -165,7 +165,7 @@ function geteManageEducation(requestId,approved){
 function geteManageTesting(requestId,approved){ 
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.get("/verify/testing", {
+        await apiURL.apiGetA.get("/verify/testing", {
             params: {
                 id : requestId,
                 approved :  approved

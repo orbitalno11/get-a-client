@@ -39,7 +39,15 @@ const type = {
     "กลุ่ม":0,
     "เดี่ยว":1,
 }
+
 const dateFormat = "YYYY-MM-DD"
+
+const constantLocation = {
+    defaultLat : 13.6500138,
+    defaultLng : 100.4943362,
+    defaultAddress : "126 ถ. ประชาอุทิศ",
+    defaultDetailAddress : "แขวง บางมด เขตทุ่งครุ กรุงเทพมหานคร 10140"
+}
 
 export const defaultValue = {
     gender,
@@ -47,5 +55,6 @@ export const defaultValue = {
     subject,
     dateOfWeek,
     type,
-    dateFormat
+    dateFormat,
+    constantLocation
 }

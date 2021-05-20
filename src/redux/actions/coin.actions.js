@@ -1,11 +1,11 @@
-import  apiGetA  from "../../utils/setAxios"
+import { apiURL } from "../../utils/setAxios"
 import { coinConstants } from "../constants"
 import { loadingActions } from "./loading.actions"
 
 function getCoinRatesLearner(){ 
         return async dispatch => {
             dispatch(loadingActions.startLoading())
-            await apiGetA.get("/coin/rates?user=1").then(res => {
+            await apiURL.apiGetA.get("/coin/rates?user=1").then(res => {
                 dispatch(loadingActions.stopLoading())
                 const coin = res.data.data.filter((item) => item.type === "std")
                 dispatch(success(coin))
@@ -22,7 +22,7 @@ function getCoinRatesLearner(){
 function getCoinRatesTutor(){
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.get("/coin/rates?user=2").then(res => {
+        await apiURL.apiGetA.get("/coin/rates?user=2").then(res => {
             dispatch(loadingActions.stopLoading())
             const coin = res.data.data.filter((item) => item.type === "std")
             dispatch(success(coin))
@@ -38,7 +38,7 @@ function getCoinRatesTutor(){
 function getCoinRatesAdmin(){
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiGetA.get("/coin/rates?user=0").then(res => {
+        await apiURL.apiGetA.get("/coin/rates?user=0").then(res => {
             dispatch(loadingActions.stopLoading())
             const coin = res.data.data
             dispatch(success(coin))

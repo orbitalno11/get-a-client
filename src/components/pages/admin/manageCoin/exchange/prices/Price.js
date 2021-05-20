@@ -1,13 +1,13 @@
-import { Row, Col, Button, Input} from "antd";
-import React, { Fragment} from "react";
+import { Row, Col, Button, Input } from "antd";
+import React, { Fragment, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { exchangeSchema } from "../../../../../../validation/admin/exchangeSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../../styles.module.scss";
-import { useDispatch } from "react-redux";
-import { modalAction } from "../../../../../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { modalAction, coinAction } from "../../../../../../redux/actions";
 import ModalComponent from "../../../../../modal/ModalComponent";
 import { sizeModal } from "../../../../../modal/SizeModal";
 import { typeModal } from "../../../../../modal/TypeModal";
@@ -22,9 +22,14 @@ export default function Price() {
   const dispatch = useDispatch();
 
   const onSubmit = () => {
-    // todo onSubmit
-    // value
-  }
+    // valu
+  };
+
+  const list = useSelector((state) => state.coin.data);
+
+  useEffect(() => {
+    dispatch(coinAction.getCoinRatesAdmin());
+  }, []);
 
   function ComponentSample() {
     return (
@@ -132,7 +137,7 @@ export default function Price() {
           </Col>
         </Row>
       </Row>
-      <div style={{paddingLeft:"4rem"}}>
+      <div style={{ paddingLeft: "4rem" }}>
         <table className={style.tablecoins}>
           <thead>
             <tr>
@@ -142,11 +147,20 @@ export default function Price() {
             </tr>
           </thead>
           <tbody>
-            <tr style={{width:"1rem"}}>
-              <td>100 </td>
-              <td>500</td>
-              <td><Edit/>&emsp;<Delete /></td>
-            </tr>
+            {list &&
+              list
+              .filter((data) => data.type === "std")
+              .map((data, index) => (
+                <tr style={{ width: "1rem" }} key={index}>
+                  <td>{data && data.baht} </td>
+                  <td>{data && data.coin}</td>
+                  <td>
+                    <Edit />
+                    &emsp;
+                    <Delete />
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 const { useBreakpoint } = Grid;
 const { Link } = Typography;
 
-export default function CoinDetail() {
+export default function CoinDetail({data}) {
   const screens = useBreakpoint();
   const profile = useSelector((state) => state.profile);
   const [profileDetail, setProfileDetail] = useState(null);
@@ -38,7 +38,7 @@ export default function CoinDetail() {
               <FontAwesomeIcon icon={faCoins} className={style.coins} />
             </Col>
             <Col xs={8} sm={9} md={9} lg={10} xl={10}>
-              196 เหรียญ
+              {data && data.coin} เหรียญ
             </Col>
             <Col xs={7} sm={7} md={9} lg={6} xl={6}>
               <Link href="/coinshop/payment">
@@ -48,70 +48,7 @@ export default function CoinDetail() {
                   size="middle"
                   style={{ width: "100px" }}
                 >
-                  THB 59.00
-                </Button>
-              </Link>
-            </Col>
-            <Divider type="horizontal" style={{ height: "100%" }} />
-          </Row>
-          <Row>
-            <Col xs={7} sm={8} md={6} lg={7} xl={7}>
-              <FontAwesomeIcon icon={faCoins} className={style.coins} />
-            </Col>
-            <Col xs={8} sm={9} md={9} lg={10} xl={10}>
-              340 เหรียญ
-            </Col>
-            <Col xs={7} sm={7} md={9} lg={6} xl={6}>
-            <Link href="/Payment">
-                <Button
-                  className="backgroundGreen buttonColor"
-                  shape="round"
-                  size="middle"
-                  style={{ width: "100px" }}
-                >
-                  THB 119.00
-                </Button>
-              </Link>
-            </Col>
-            <Divider type="horizontal" style={{ height: "100%" }} />
-          </Row>
-          <Row>
-            <Col xs={7} sm={8} md={6} lg={7} xl={7}>  
-              <FontAwesomeIcon icon={faCoins} className={style.coins} />
-            </Col>
-            <Col xs={8} sm={9} md={9} lg={10} xl={10}>
-              426 เหรียญ
-            </Col>
-            <Col xs={7} sm={7} md={9} lg={6} xl={6}>
-              <Link href="/Payment">
-                <Button
-                  className="backgroundGreen buttonColor"
-                  shape="round"
-                  size="middle"
-                  style={{ width: "100px" }}
-                >
-                  THB 149.00
-                </Button>
-              </Link>
-            </Col>
-            <Divider type="horizontal" style={{ height: "100%" }} />
-          </Row>
-          <Row>
-            <Col xs={7} sm={8} md={6} lg={7} xl={7}>
-              <FontAwesomeIcon icon={faCoins} className={style.coins} />
-            </Col>
-            <Col xs={8} sm={9} md={9} lg={10} xl={10}>
-              727 เหรียญ
-            </Col>
-            <Col xs={7} sm={7} md={9} lg={6} xl={6}>
-              <Link href="/Payment">
-                <Button
-                  className="backgroundGreen buttonColor"
-                  shape="round"
-                  size="middle"
-                  style={{ width: "100px" }}
-                >
-                  THB 299.00
+                  THB {data && data.baht}
                 </Button>
               </Link>
             </Col>

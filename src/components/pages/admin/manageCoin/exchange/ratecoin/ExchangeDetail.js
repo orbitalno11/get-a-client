@@ -1,13 +1,13 @@
 import { Row, Col, Button, Input, Typography, Form } from "antd";
-import React, { Fragment} from "react";
+import React, { Fragment, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { exchangeSchema } from "../../../../../../validation/admin/exchangeSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../../styles.module.scss";
-import { useDispatch } from "react-redux";
-import { modalAction } from "../../../../../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { modalAction, coinAction } from "../../../../../../redux/actions";
 import ModalComponent from "../../../../../modal/ModalComponent";
 import { sizeModal } from "../../../../../modal/SizeModal";
 import { typeModal } from "../../../../../modal/TypeModal";
@@ -23,7 +23,13 @@ export default function ExchangeDetail() {
   const onSubmit = () => {
     // todo onSubmit
     // value
-  }
+  };
+
+  const list = useSelector((state) => state.coin.data);
+
+  useEffect(() => {
+    dispatch(coinAction.getCoinRatesAdmin());
+  }, []);
 
   function ComponentSample() {
     return (
@@ -119,11 +125,23 @@ export default function ExchangeDetail() {
               แก้ไข
             </Button>
           </Col>
+
           <Col span={24} className={style.rateCoin}>
-            <span className={style.textLarge}>1 coin = 2 บาท</span>
+            {list &&
+              list
+              .filter((data) => data.type === "transfer")
+              .map((data, index) => (
+                <span className={style.textLarge} key={index}>
+                  {data && data.coin} coin = {data && data.baht} บาท
+                </span>
+              ))}
           </Col>
+
           <Col span={24}>
-            <Link href="/admin/exchagecoin/history" className={style.hisexchange}>
+            <Link
+              href="/admin/exchagecoin/history"
+              className={style.hisexchange}
+            >
               ประวัติอัตราการแลกเปลี่ยน
             </Link>
           </Col>

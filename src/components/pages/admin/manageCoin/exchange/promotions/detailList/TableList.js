@@ -1,9 +1,9 @@
-import React, { Fragment} from "react";
+import React, { Fragment } from "react";
 import style from "../../../styles.module.scss";
 import EditList from "./EditList";
 import DeleteList from "./DeleteList";
 
-export default function TableList() {
+export default function TableList({ data }) {
   return (
     <Fragment>
       <div>
@@ -16,10 +16,14 @@ export default function TableList() {
             </tr>
           </thead>
           <tbody>
-            <tr style={{width:"1rem"}}>
-              <td>100 </td>
-              <td>500</td>
-              <td><EditList/>&emsp;<DeleteList /></td>
+            <tr style={{ width: "1rem" }}>
+              <td>{data && data.baht} </td>
+              <td>{data && data.coin}</td>
+              <td>
+                <EditList />
+                &emsp;
+                <DeleteList />
+              </td>
             </tr>
           </tbody>
         </table>

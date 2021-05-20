@@ -43,6 +43,9 @@ export default function SiderMenu({ handleOnCollapse, collapsed }) {
             <Menu.Item key="/admin/verify/profile">
               <NavLink to="/admin/verify/profile"><span className="nav-text">เอกสารยืนยันตัว</span></NavLink>
             </Menu.Item>
+            <Menu.Item key="/admin/verify/test">
+              <NavLink to="/admin/verify/test"><span className="nav-text">เอกสารยืนยันการสอบ</span></NavLink>
+            </Menu.Item>
             <Menu.Item key="/admin/verify/education">
               <NavLink to="/admin/verify/education"><span className="nav-text">เอกสารยืนยันประวัติการศึกษา</span></NavLink>
             </Menu.Item>

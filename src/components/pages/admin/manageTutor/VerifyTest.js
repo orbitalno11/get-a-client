@@ -8,15 +8,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { verifyAction } from "../../../../redux/actions";
 import { Link } from "react-router-dom";
 
-export default function VerifyEducation() {
+export default function VerifyTest() {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loading.loading);
-  const list = useSelector((state) => state.verify.educate);
+  const list = useSelector((state) => state.verify.test);
 
   useEffect(() => {
-    dispatch(verifyAction.geteEducationVerifyList());
+    dispatch(verifyAction.geteTestVerifyList());
   }, []);
-
+  
   return (
     <Fragment>
       {loading ? (
@@ -25,7 +25,7 @@ export default function VerifyEducation() {
         <table className="verify">
           <thead>
             <tr>
-              <th>เอกสารยืนยันประวัติการศึกษา</th>
+              <th>เอกสารยืนยันการสอบ</th>
             </tr>
           </thead>
           <tbody>
@@ -33,8 +33,8 @@ export default function VerifyEducation() {
               list.map((item, index) => (
                 <tr key={index}>
                   <td>
-                    <Link to={`/admin/verify/education/${item.id}`}>
-                      <Row style={{ color:"black"}}>
+                    <Link to={`/admin/verify/test/${item.id}`}>
+                      <Row style={{ color: "black" }}>
                         <Col md={2} lg={1} xl={1}>
                           <FontAwesomeIcon
                             icon={faEnvelope}
@@ -50,7 +50,7 @@ export default function VerifyEducation() {
                           xl={10}
                           className={style.textVerify}
                         >
-                          ได้ส่งเอกสารยืนยันประวัติการศึกษา
+                          ได้ส่งเอกสารยืนยันการสอบ {item && item.fullExamTitle}
                         </Col>
                         <Col md={2} lg={4} xl={6} className={style.timeVerify}>
                           {moment(item && item.created).format("HH:mm")}

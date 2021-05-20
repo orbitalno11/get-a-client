@@ -12,6 +12,8 @@ import VerifyEducation from "../pages/admin/manageTutor/VerifyEducation"
 import VerifyTutor from "../pages/admin/manageTutor/VerifyTutor"
 import Educate from "../pages/admin/manageTutor/Educate"
 import Profile from "../pages/admin/manageTutor/Profile"
+import VerifyTest from "../pages/admin/manageTutor/VerifyTest"
+import Testing from "../pages/admin/manageTutor/Testing"
 
 const { Content } = Layout;
 
@@ -41,6 +43,8 @@ function AdminLayout() {
               <Route exact path="/admin/verify/profile/:id" component={Profile} />
               <Route exact path="/admin/verify/education" component={VerifyEducation} />
               <Route exact path="/admin/verify/education/:id" component={Educate} />
+              <Route exact path="/admin/verify/test" component={VerifyTest} />
+              <Route exact path="/admin/verify/test/:id" component={Testing} />
             </Switch>
           </div>
         </Content>

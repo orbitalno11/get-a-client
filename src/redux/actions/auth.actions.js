@@ -1,7 +1,7 @@
 import { authConstants } from "../constants"
 import { modalAction } from "./modal.actions"
 import auth from "../../config/firebase"
-import { setAuthToken, apiURL } from "../../utils/setAxios"
+import  apiGetA, { setAuthToken } from "../../utils/setAxios"
 import { sizeModal } from "../../components/modal/SizeModal"
 import jwtDecode from "jwt-decode"
 import { typeModal } from "../../components/modal/TypeModal"
@@ -31,7 +31,8 @@ function loginUser(loginData) {
                         const getAToken = res.data.data
                         const user = jwtDecode(getAToken);
                         localStorage.setItem('token', getAToken);
-                        setAuthToken(getAToken)
+                        console.log(user)
+                        setAuthToken(getAToken)                    
                         dispatch(success(user))
                         dispatch(loadingActions.stopLoading())
                         if (user.role === 2) {
@@ -39,6 +40,8 @@ function loginUser(loginData) {
                             window.location.href = "/tutor"
                         } else if (user.role === 1) {
                             window.location.href = "/"
+                        } else if (user.role === 0) {
+                            window.location.href = "/admin"
                         }
                     })
                 })

@@ -53,7 +53,7 @@ export default function ManageCourseDetail() {
          
         </div>
       ) : (
-        <Row className={ style.pagecard}>
+        <Row>
           {offlineCourse &&
             offlineCourse.map((item, index) => (
               <Col className={ style.paddingmange} key={index} xl={8} lg={12} md={12} sm={24} align="center">

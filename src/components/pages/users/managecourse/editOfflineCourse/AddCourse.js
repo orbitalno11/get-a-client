@@ -269,7 +269,7 @@ export default function AddCourse() {
             </Col>
           </Row>
 
-          <Row xl={10} md={20} sm={20} xs={24} className={style.alignCenter}>
+          <Row align="center">
             <Button
               className="buttonColor backgroundOrange"
               size="large"

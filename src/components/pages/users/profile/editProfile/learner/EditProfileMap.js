@@ -18,6 +18,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import ModalComponent from "../../../../../modal/ModalComponent";
 import isEmpty from "../../../../../defaultFunction/checkEmptyObject";
 import { useCallback } from "react";
+import Loading from "../../../../../loading/Loading";
 
 export default function EditProfileMap() {
     const dispatch = useDispatch()
@@ -184,57 +185,58 @@ export default function EditProfileMap() {
             {isMobile() && <Header title="แก้ไขสถานที่" pageBack={"/learner/" + auth.profile} />}
             <ModalComponent />
             {
-                !loading.loading ? (
-                    <Fragment>
-                        <div className={style.body} style={widthForm} >
-                            <form onSubmit={handleSubmit(submitAddress)} >
-                                <div>
-                                    <div>
-                                        <h2 className={style.titleH3}>เลือกที่อยู่จากแผนที่</h2>
-                                    </div>
-                                    <div className={style.paddingBottom}>
-                                        {
-                                            !stageCurrentLocation.permission && (
-                                                <Alert
-                                                    description="สิทธิ์ในการเข้าถึงที่ตั้งปัจจุบันถูกปฎิเสธ สามารถตั้งค่าสิทธิ์ได้ในการตั้งค่า"
-                                                    type="error"
-
-                                                />
-                                            )
-                                        }
-                                    </div>
-                                    <div >
-                                        {
-                                            stageCurrentLocation.loading ? <Spin style={marginSpin} /> : <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconMap} />
-                                        }
-                                        <span >{detailAddress.detail}</span>
-                                    </div>
-                                    <div className={style.marginTop20}>
-                                        {initalLocation ? <MapComponent callBackLocation={callLocation} initLocation={initalLocation} getCurrentLocation={setCurrentLocation} /> : <div style={styleLoadingMap}></div>}
-                                    </div>
-                                    <div className={style.marginTop}>
-                                        <InputComponents
-                                            name="address"
-                                            register={register}
-                                            error={errors.address}
-                                            placeholder="ที่อยู่อย่างละเอียด"
-                                        />
-                                        <InputComponents
-                                            name="hintAddress"
-                                            register={register}
-                                            error={errors.hintAddress}
-                                            placeholder="รายละเอียดเพิ่มเติม หรือ ลักษณะพิเศษที่สามารถสังเกตได้ เช่น ต้นไม้สีแดง"
-                                        />
-                                        <div className={`${style.alignCenter} ${style.marginTop}`}>
-                                            <Button className="buttonColor backgroundOrange" size="large" shape="round" htmlType="submit">บันทึกข้อมูล</Button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </Fragment>
-                ) : (<div className={style.loader}></div>)
+                loading.loading && (
+                    <Loading />)
             }
+            <Fragment>
+                <div className={style.body} style={widthForm} >
+                    <form onSubmit={handleSubmit(submitAddress)} >
+                        <div>
+                            <div>
+                                <h2 className={style.titleH3}>เลือกที่อยู่จากแผนที่</h2>
+                            </div>
+                            <div className={style.paddingBottom}>
+                                {
+                                    !stageCurrentLocation.permission && (
+                                        <Alert
+                                            description="สิทธิ์ในการเข้าถึงที่ตั้งปัจจุบันถูกปฎิเสธ สามารถตั้งค่าสิทธิ์ได้ในการตั้งค่า"
+                                            type="error"
+
+                                        />
+                                    )
+                                }
+                            </div>
+                            <div >
+                                {
+                                    stageCurrentLocation.loading ? <Spin style={marginSpin} /> : <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconMap} />
+                                }
+                                <span >{detailAddress.detail}</span>
+                            </div>
+                            <div className={style.marginTop20}>
+                                {initalLocation ? <MapComponent callBackLocation={callLocation} initLocation={initalLocation} getCurrentLocation={setCurrentLocation} /> : <div style={styleLoadingMap}></div>}
+                            </div>
+                            <div className={style.marginTop}>
+                                <InputComponents
+                                    name="address"
+                                    register={register}
+                                    error={errors.address}
+                                    placeholder="ที่อยู่อย่างละเอียด"
+                                />
+                                <InputComponents
+                                    name="hintAddress"
+                                    register={register}
+                                    error={errors.hintAddress}
+                                    placeholder="รายละเอียดเพิ่มเติม หรือ ลักษณะพิเศษที่สามารถสังเกตได้ เช่น ต้นไม้สีแดง"
+                                />
+                                <div className={style.marginTop} align="center">
+                                    <Button className="buttonColor backgroundOrange" size="large" shape="round" htmlType="submit">บันทึกข้อมูล</Button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </Fragment>
+
         </Fragment>
     )
 }

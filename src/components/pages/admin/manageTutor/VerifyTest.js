@@ -1,4 +1,4 @@
-import { Row, Col} from "antd";
+import { Row, Col } from "antd";
 import React, { Fragment, useEffect } from "react";
 import style from "./styles.module.scss";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
@@ -7,27 +7,28 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyAction } from "../../../../redux/actions";
 import { Link } from "react-router-dom";
+import Loading from "../../../loading/Loading";
+import EmptyImage from "../../../loading/EmptyImage";
 
 export default function VerifyTest() {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.loading.loading);
+  const { loading } = useSelector((state) => state);
   const list = useSelector((state) => state.verify.test);
 
   useEffect(() => {
     dispatch(verifyAction.geteTestVerifyList());
   }, []);
-  
+
   return (
     <Fragment>
-      {loading ? (
-        <div className={style.loader}></div>
-      ) : (
-        <table className="verify">
-          <thead>
-            <tr>
-              <th>เอกสารยืนยันการสอบ</th>
-            </tr>
-          </thead>
+      {loading.loading && <Loading />}
+      <table className="verify">
+        <thead>
+          <tr>
+            <th className={style.textNormal}>เอกสารยืนยันการสอบ</th>
+          </tr>
+        </thead>
+        {list && list.length ? (
           <tbody>
             {list &&
               list.map((item, index) => (
@@ -41,7 +42,7 @@ export default function VerifyTest() {
                             className={style.iconCloseemail}
                           />
                         </Col>
-                        <Col md={10} lg={9} xl={7} className={style.textSmall}>
+                        <Col md={10} lg={9} xl={7} className={style.textNormal}>
                           {item && item.fullRequestName}
                         </Col>
                         <Col
@@ -61,8 +62,13 @@ export default function VerifyTest() {
                 </tr>
               ))}
           </tbody>
-        </table>
-      )}
+        ) : (
+          <div align="center">
+            <EmptyImage size="default" />
+            <p className={style.textNormal}>ยังไม่มีเอกสารยืนยันตัวตน&nbsp;</p>
+          </div>
+        )}
+      </table>
     </Fragment>
   );
 }

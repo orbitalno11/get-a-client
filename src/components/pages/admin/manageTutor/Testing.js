@@ -6,12 +6,14 @@ import ModalComponent from "../../../modal/ModalComponent";
 import moment from "moment";
 import { verifyAction } from "../../../../redux/actions";
 import { useParams } from "react-router";
+import Loading from "../../../loading/Loading";
 
 export default function Testing() {
   const dispatch = useDispatch();
   const params = useParams();
   const idTest = params.id;
   const list = useSelector((state) => state.verify.testDetail);
+  const { loading } = useSelector((state) => state);
   const fetchTest = useCallback(() => {
     dispatch(verifyAction.geteTestingDetail(idTest));
   }, [dispatch]);
@@ -21,60 +23,81 @@ export default function Testing() {
   }, [fetchTest]);
 
   const handleCancel = () => {
-    dispatch(verifyAction.geteManageEducation(idTest, false))
+    dispatch(verifyAction.geteManageTesting(idTest, false))
   };
 
   const handleSubmit = () => {
-    dispatch(verifyAction.geteManageEducation(idTest, true))
+    dispatch(verifyAction.geteManageTesting(idTest, true))
   }
 
   return (
     <Fragment>
+        {loading.loading && <Loading />}
           {list && (
             <table className="profile">
               <tbody>
                 <tr>
                   <td style={{ paddingLeft: "2.3rem" }}>
+                  <Row className={style.approve}>
+                      <Col md={5} lg={10} xl={3}>
+                        <Button
+                          className="buttonColor backgroundRed"
+                          style={{ width: "6rem" }}
+                          shape="round"
+                          size="middle"
+                          onClick={() => handleCancel()}
+                        >
+                          <span className={style.textNormal}>ปฏิเสธ</span>
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          className="buttonColor backgroundGreen"
+                          style={{ width: "6rem" }}
+                          shape="round"
+                          size="middle"
+                          onClick={() => handleSubmit()}
+                        >
+                          <span className={style.textNormal}>ยอมรับ</span>
+                        </Button>
+                      </Col>
+                    </Row>
                     <Row
                       style={{
                         paddingTop: "1.25rem",
                         paddingBottom: "0.25rem",
                       }}
                     >
-                      <Col span={24}>
+                      <Col span={24} className={style.textNormal}>
                         {" "}
                         {moment(list.created).format("DD/MM/YY")} &ensp;{" "}
                         {moment(list.created).format("HH:mm")} น.
                       </Col>
                     </Row>
                     <Row className={style.detailProfile}>
-                      <Col span={24}>
-                        <b>ชื่อ :</b> {list.firstname}
+                      <Col span={7}className={style.textNormal}>
+                        <b className={style.textNormal}>ชื่อ :</b> {list.firstname}
+                      </Col>
+                      <Col span={16} className={style.textNormal}>
+                        <b className={style.textNormal}>นามสกุล :</b> {list.lastname}
                       </Col>
                     </Row>
                     <Row className={style.detailProfile}>
-                      <Col span={24}>
-                        <b>นามสกุล :</b> {list.lastname}
+                      <Col span={7} className={style.textNormal}>
+                        <b className={style.textNormal}>การสอบ :</b> {list.exam.examText}
+                      </Col>
+                      <Col span={16} className={style.textNormal}>
+                        <b className={style.textNormal}>วิชา :</b> {list.exam.subjectText}
                       </Col>
                     </Row>
                     <Row className={style.detailProfile}>
-                      <Col span={24}>
-                        <b>การสอบ :</b> {list.exam.examText}
+                      <Col span={24} className={style.textNormal}>
+                        <b className={style.textNormal}>คะแนน :</b> {list.exam.score}
                       </Col>
                     </Row>
                     <Row className={style.detailProfile}>
-                      <Col span={24}>
-                        <b>วิชา :</b> {list.exam.subjectText}
-                      </Col>
-                    </Row>
-                    <Row className={style.detailProfile}>
-                      <Col span={24}>
-                        <b>คะแนน :</b> {list.exam.score}
-                      </Col>
-                    </Row>
-                    <Row className={style.detailProfile}>
-                      <Col span={24}><b>รูปเอกสารยืนยัน</b></Col>
-                      <Col span={7} style={{ paddingTop: "0.7rem" }}>
+                      <Col span={24}><b className={style.textNormal}>รูปเอกสารยืนยัน</b></Col>
+                      <Col span={5} style={{ paddingTop: "0.7rem" }}>
                         <Image
                           width={200}
                           src={
@@ -82,7 +105,7 @@ export default function Testing() {
                           }
                         />
                       </Col>
-                      <Col span={7} style={{ paddingTop: "0.7rem" }}>
+                      <Col span={5} style={{ paddingTop: "0.7rem" }}>
                         <Image
                           width={200}
                           src={
@@ -100,30 +123,6 @@ export default function Testing() {
                       </Col>
                     </Row>
                     <ModalComponent />
-                    <Row className={style.approve}>
-                      <Col md={9} lg={8} xl={5}>
-                        <Button
-                          className="buttonColor backgroundRed"
-                          style={{ width: "10rem" }}
-                          shape="round"
-                          size="middle"
-                          onClick={() => handleCancel()}
-                        >
-                          ปฎิเสธ
-                        </Button>
-                      </Col>
-                      <Col md={5} lg={10} xl={10}>
-                        <Button
-                          className="buttonColor backgroundGreen"
-                          style={{ width: "10rem" }}
-                          shape="round"
-                          size="middle"
-                          onClick={() => handleSubmit()}
-                        >
-                          ยอมรับ
-                        </Button>
-                      </Col>
-                    </Row>
                   </td>
                 </tr>
               </tbody>

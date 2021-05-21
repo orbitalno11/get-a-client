@@ -23,7 +23,7 @@ export default function PromotionList() {
     <Space direction="vertical" style={{ width: "100%" }}>
       {list &&
         list
-          .filter((data) => data.type === "std")
+          .filter((data) => data.type === "promo")
           .map((data, index) => (
             <Collapse key={index}>
               <Panel header={data && data.title}>

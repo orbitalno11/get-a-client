@@ -6,6 +6,7 @@ import offlineCourseReducer from "./offlineCourse.reducers"
 import loadingReducer from "./loading.reducers"
 import coinReducer from "./coin.reducers";
 import verifyReducer from "./verify.reducers"
+import tutorReducer from "./tutor.reducers"
 
 const rootReducer = combineReducers({
     profile:profileReducers,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     offlineCourse : offlineCourseReducer,
     loading : loadingReducer,
     coin : coinReducer,
-    verify:verifyReducer
+    verify:verifyReducer,
+    tutor : tutorReducer
 });
 
 export default rootReducer;

@@ -11,4 +11,4 @@ export default function resizeImage(image, file, width, height) {
             height
         );
     });
-}
+} 

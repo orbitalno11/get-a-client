@@ -35,7 +35,7 @@
   outline:none;
 }
 
-.imageUpload>input {
+.imageUpload >input{
   display: none !important;
 }
 
@@ -63,6 +63,10 @@
   padding: 8px !important;
   padding-left: 1.25rem !important;
   padding-right: 1.25rem !important;
+}
+
+.ant-picker-input > input{
+  font-size: 1.1rem;
 }
 
 .ant-select-arrow{
@@ -337,4 +341,8 @@ input :focus{
   background-color: #33658A;
   color: white;
   padding-left: 2em;
+}
+
+::placeholder{
+  color:  var(--gray-color) !important
 }

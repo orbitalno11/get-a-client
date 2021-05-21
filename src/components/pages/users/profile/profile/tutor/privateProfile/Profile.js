@@ -10,15 +10,19 @@ import isMobile from "../../../../../../isMobile/isMobile"
 import { useSelector } from "react-redux"
 import ProfileIdentity from "./ProfileIdentity"
 import ProfileContact from "./ProfileContact"
+import { tutorAction } from "../../../../../../../redux/actions/tutor.actions"
+import ModalComponent from "../../../../../../modal/ModalComponent"
 const { useBreakpoint } = Grid;
 
 export default function ProfileTutor() {
-    const { profile } = useSelector(state => state)
+    const { profile, auth } = useSelector(state => state)
     const screens = useBreakpoint();
     const dispatch = useDispatch()
 
     const fetchProfile = useCallback(() => {
         dispatch(profileAction.getProfile())
+        dispatch(tutorAction.getEducations(auth.profile))
+        dispatch(tutorAction.getTestings(auth.profile))
     }, [dispatch])
 
     useEffect(() => {
@@ -28,6 +32,7 @@ export default function ProfileTutor() {
     return (
         <Fragment>
             {isMobile() && <Header title="โปรไฟล์" />}
+            <ModalComponent />
             <Row className={style.body}>
                 <Col xs={24} sm={24} md={11} lg={9} xl={8} >
                     <ProfileDetail />

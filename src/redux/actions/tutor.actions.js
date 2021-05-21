@@ -50,8 +50,13 @@ function getTesting(id) {
                     subject : data.exam.subjectText,
                     score : data.exam.score,
                     year : "2000",
-                    image : data.verifiedData.documentUrl1
+                    image : [
+                        data.verifiedData.documentUrl1 ,
+                        data.verifiedData.documentUrl2 ,
+                        data.verifiedData.documentUrl3
+                    ]
                 }
+                console.log(data)
             }
             dispatch(success({
                 success : true ,
@@ -74,13 +79,18 @@ function getEducation(id) {
             const data = res.data.data
             let dataEducation = {}
             if(data){
+                console.log(data)
                 dataEducation = {
                     grade :"ม.6",
                     branch : data.educationData.branchText,
                     institute : data.educationData.instituteText,
                     gpax : data.educationData.gpax,
                     status : data.educationData.status,
-                    image : data.verifiedData.documentUrl1
+                    image : [
+                        data.verifiedData.documentUrl1 ,
+                        data.verifiedData.documentUrl2 ,
+                        data.verifiedData.documentUrl3
+                    ]
                 }
             }
             dispatch(success({

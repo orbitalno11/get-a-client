@@ -22,6 +22,7 @@ import resizeImage from "../../../../../defaultFunction/resizeImage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import Loading from "../../../../../loading/Loading";
+import findKeyObject from "../../../../../defaultFunction/findKeyObject";
 
 export default function AddEducation() {
     const params = useParams()
@@ -31,7 +32,7 @@ export default function AddEducation() {
     const dispatch = useDispatch()
     const edit = params.idEducation !== "created"
 
-    const [imageName, setimageName] = useState([]);
+    const [imageName, setImageName] = useState([]);
 
     const checkTypeTesting = () => {
         return type === String(defaultValue.typeIdentity["testing"])
@@ -106,14 +107,23 @@ export default function AddEducation() {
                         branch: dataDetail.data.branch,
                         institute: dataDetail.data.institute,
                         gpax: dataDetail.data.gpax,
-                        status: dataDetail.data.status,
+                        status: findKeyObject(defaultValue.educationStatus,dataDetail.data.status),
                     })
                 }
+                document.getElementById("image1").value = "image"
+                dataDetail.data.image && dataDetail.data.image.forEach((item, index) => {
+                    setImageName(value => {
+                        let array = [...value]
+                        if (item) {
+                            array[Number(index)] = {
+                                "name": item
+                            }
+                            return array
+                        }
+                        return array
+                    })
+                })
 
-                setimageName([{
-                    name: dataDetail.data.image
-                }
-                ])
             }
         }
     }, [dataDetail])
@@ -136,22 +146,21 @@ export default function AddEducation() {
         }
     }, [type])
 
+
     const onChangeType = (value) => {
         setType(String(value))
-        setimageName({
-            file: "",
-            name: ""
-        })
+        setImageName([])
         document.getElementById("myform").reset()
     }
 
     const onHandleChangeImage = async (value) => {
+        document.getElementById("image1").value = "image"
         const fileInput = value.target.files[0]
         if (fileInput) {
             try {
                 const newImageFile = await resizeImage(fileInput, "file", 720, 1280)
                 const imageURL = URL.createObjectURL(newImageFile)
-                setimageName([...imageName, {
+                setImageName([...imageName, {
                     name: imageURL,
                     file: newImageFile
                 }])
@@ -165,7 +174,15 @@ export default function AddEducation() {
         }
     }
 
+    useEffect(() => {
+        if (imageName.length === 0) {
+            document.getElementById("image1").value = ""
+        }
+    }, [imageName])
+
     const onSubmit = (data) => {
+        console.log(data)
+
         if (data) {
             let formData = new FormData()
             if (checkTypeTesting()) {
@@ -177,7 +194,9 @@ export default function AddEducation() {
                 imageName.forEach((item, index) =>
                     formData.append(`document${index + 1}`, item.file)
                 )
-
+                for (let [key, value] of formData.entries()) {
+                    console.log(`${key}: ${value}`);
+                  }
                 if (!edit) {
                     dispatch(tutorAction.createTesting(formData, auth.profile))
                 } else {
@@ -185,15 +204,18 @@ export default function AddEducation() {
                 }
 
             } else {
+               
                 formData.append("grade", defaultValue.grade[data.grade])
                 formData.append("branch", "1")
                 formData.append("institute", "1")
-                formData.append("status", edit ? data.status : defaultValue.educationStatus[data.status])
+                formData.append("status", defaultValue.educationStatus[data.status])
                 formData.append("gpax", data.gpax)
-                imageName.filter((item => item.file !== undefined)).forEach((item, index) =>
+                imageName.filter((item => item.file !== undefined)).forEach((item, index) => 
                     formData.append(`document${index + 1}`, item.file)
                 )
-
+                for (let [key, value] of formData.entries()) {
+                    console.log(`${key}: ${value}`);
+                  }
                 if (!edit) {
                     dispatch(tutorAction.createEducation(formData, auth.profile))
                 } else {
@@ -203,9 +225,9 @@ export default function AddEducation() {
         }
     }
 
-
     const removeImage = (index) => {
         imageName.splice(index, 1)
+        setImageName([...imageName])
     }
 
     const removeButton = {
@@ -214,6 +236,7 @@ export default function AddEducation() {
         marginTop: '-9.5rem',
         backgroundColor: color.red
     }
+
 
     return (
         <Fragment>
@@ -224,7 +247,7 @@ export default function AddEducation() {
                     <Loading />
                 )
             }
-            <div className={style.body}>
+            <div className={style.container}>
                 <form id="myform" onSubmit={handleSubmit(onSubmit)}>
                     <Row justify="center" >
                         <h3 className={style.titleH2}>{edit && "แก้ไข"}ประวัติการศึกษา</h3>
@@ -237,14 +260,14 @@ export default function AddEducation() {
                         )
                     }
                     <Row className={style.paddingbody} justify="space-around" align="top">
-                        <Col xl={10} lg={10} md={12} sm={20} xs={24} className={style.marginTop20}>
-                            <p>ประเภท</p>
+                        <Col xl={10} lg={10} md={20} sm={20} xs={24} className={style.marginTop20}>
+                            <p className={style.textNormal}>ประเภท</p>
                             <Select name="type" onChange={onChangeType} defaultValue={type} disabled={edit ? true : false}>
                                 <Select.Option value="1" >คะแนนสอบ</Select.Option>
                                 <Select.Option value="0" >ประวัติการศึกษา</Select.Option>
                             </Select>
                             <div className={style.marginTop20}>
-                                <p>{checkTypeTesting() ? "การสอบ" : "ระดับชั้น"}</p>
+                                <p className={style.textNormal}>{checkTypeTesting() ? "การสอบ" : "ระดับชั้น"}</p>
                                 <Controller
                                     as={
                                         <Select ref={register}>
@@ -254,8 +277,8 @@ export default function AddEducation() {
                                                         <Select.Option key={key} value={key}>{key}</Select.Option>
                                                     ))
                                                 ) : (
-                                                    defaultValue.grade && Object.entries(defaultValue.grade).map(([value, key]) => (
-                                                        <Select.Option key={key} value={key}>{value}</Select.Option>
+                                                    defaultValue.grade && Object.entries(defaultValue.grade).map(([value]) => (
+                                                        <Select.Option key={value} value={value}>{value}</Select.Option>
                                                     ))
                                                 )
                                             }
@@ -274,7 +297,7 @@ export default function AddEducation() {
                             </div>
 
                             <div className={style.marginTop20}>
-                                <p>{checkTypeTesting() ? "วิชา" : "สาขา"}</p>
+                                <p className={style.textNormal}>{checkTypeTesting() ? "วิชา" : "สาขา"}</p>
                                 <Controller
                                     as={
                                         <Select  >
@@ -302,7 +325,7 @@ export default function AddEducation() {
                             </div>
                             <div className={style.marginTop20}>
 
-                                <p>{checkTypeTesting() ? "คะแนนที่ได้" : "สถาบัน"}</p>
+                                <p className={style.textNormal}>{checkTypeTesting() ? "คะแนนที่ได้" : "สถาบัน"}</p>
                                 {
                                     checkTypeTesting() ? (
                                         <input className="input" type="number" step=".01" name="score" min="0" ref={register} placeholder="คะแนนที่ได้" />
@@ -328,12 +351,12 @@ export default function AddEducation() {
                             </div>
                             <div className={style.marginTop20}>
 
-                                <p>{checkTypeTesting() ? "ปี" : "เกรดเฉลี่ย"}</p>
+                                <p className={style.textNormal}>{checkTypeTesting() ? "ปี" : "เกรดเฉลี่ย"}</p>
                                 {
                                     checkTypeTesting() ? (
                                         <Controller
                                             as={
-                                                <DatePicker picker="year" />
+                                                <DatePicker picker="year" disabledDate={value => value && value > moment()}/>
                                             }
                                             name="year"
                                             control={control}
@@ -357,13 +380,13 @@ export default function AddEducation() {
                                 {
                                     !checkTypeTesting() && (
                                         <div>
-                                            <p>สถานะ</p>
+                                            <p className={style.textNormal}>สถานะ</p>
                                             <Controller
                                                 as={
                                                     <Select  >
                                                         {
                                                             defaultValue.educationStatus && Object.entries(defaultValue.educationStatus).map(([key, value]) => (
-                                                                <Select.Option key={value} value={value}>{key}</Select.Option>
+                                                                <Select.Option key={value} value={key}>{key}</Select.Option>
                                                             ))
                                                         }
                                                     </Select>
@@ -378,8 +401,8 @@ export default function AddEducation() {
                                 }
                             </div>
                         </Col>
-                        <Col xl={10} lg={10} md={12} sm={20} xs={24} className={style.marginTop20} align="center">
-                            <p>เอกสารยืนยัน </p>
+                        <Col xl={10} lg={10} md={20} sm={20} xs={24} className={style.marginTop20} align="center">
+                            <p className={style.textNormal}>เอกสารยืนยัน </p>
                             {
                                 !isEmpty(imageName) && (
                                     imageName.map((item, index) => {
@@ -393,7 +416,7 @@ export default function AddEducation() {
                                                     />
                                                 </div>
                                                 <div align="center" >
-                                                    <button className={style.editButton} style={removeButton} onClick={() => removeImage(index)}>
+                                                    <button type="button" className={style.editButton} style={removeButton} onClick={() => removeImage(index)}>
                                                         <FontAwesomeIcon icon={faTrash} />
                                                     </button>
                                                 </div>
@@ -413,15 +436,16 @@ export default function AddEducation() {
                                                     preview={false}
                                                 />
                                             </label>
-                                            <input id={`file-input-document1`} type="file" name={`image1`} onChange={onHandleChangeImage} ref={register} />
+                                            <input id={`file-input-document1`} type="file" name="image" onChange={onHandleChangeImage} ref={register} />
                                         </div>
                                     </div>
                                 )
                             }
-                            {errors[`image1`] && <p className="error-input">{errors[`image1`].message}</p>}
+                            <input text="text" id="image1" name="image1" ref={register} hidden />
+                            {errors["image1"] && <p className="error-input">{errors["image1"].message}</p>}
 
                         </Col>
-                        <Col xl={checkTypeTesting() ? 24 : 10} md={checkTypeTesting() ? 24 : 20} sm={20} xs={24} className={style.marginTop20 + " " + style.alignCenter}>
+                        <Col align="center" xl={checkTypeTesting() ? 24 : 10} md={checkTypeTesting() ? 24 : 20} sm={20} xs={24} className={style.marginTop20 + " " + style.alignCenter}>
                             <Button className="buttonColor backgroundOrange" size="large" shape="round" style={{ width: "120px", marginTop20: "40px" }} htmlType="submit">บันทึก</Button>
                         </Col>
                     </Row>

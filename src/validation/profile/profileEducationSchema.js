@@ -1,44 +1,22 @@
 import * as yup from "yup";
+import isEmpty from "../../components/defaultFunction/checkEmptyObject";
 import { defaultValue } from "../../components/defaultValue";
-import { imageConstants } from "../constants";
 
 export const profileEducationSchema = (edit) => {
     const schema = yup.object().shape({
-        image: yup
-            .mixed()
-            .nullable()
-            .test(
-                "is_upload",
-                "กรุณาเพิ่มเอกสารยืนยันคะแนนการสอบ",
-                (value) => {
-                    if (edit) {
-                        return true
-                    } else {
-                        return value[0] !== undefined
-                    }
+        image1: yup
+        .string()
+        .test(
+            "is_upload",
+            "กรุณาเพิ่มเอกสารยืนยันคะแนนการสอบ อย่างน้อย 1 รูป",
+            (value) => {
+                if (edit) {
+                    return true
+                } else {
+                    return !isEmpty(value) 
                 }
-            )
-            .test(
-                "fileSize",
-                "รูปภาพมีขนาดใหญ่เกินไป",
-                (value) => {
-                    if (value[0]) {
-                        return value[0].size <= imageConstants.FILE_IMAGE_IDENTITY
-                    } else if (edit && !value[0]) {
-                        return true
-                    }
-                }
-            ).test(
-                "fileFormat",
-                "ไม่รองรับประเภทของไฟล์นี้",
-                (value) => {
-                    if (value[0]) {
-                        return value[0] && imageConstants.SUPPORTED_FORMATS.includes(value[0].type)
-                    } else if (edit && !value[0]) {
-                        return true
-                    }
-                }
-            ),
+            }
+        ),
         grade: yup
             .string()
             .nullable()

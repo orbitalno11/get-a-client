@@ -1,4 +1,4 @@
-import { Radio, Tabs } from "antd"
+import { Radio, Row, Tabs } from "antd"
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
 import React, { Fragment, useState } from "react"
 import { color } from "../defaultValue";
@@ -20,43 +20,45 @@ export default function TabHorizontal({ type, tabStart, tabDetail, name, style }
     }
 
     const colorNotSelect = {
-        backgroundColor:color.blue,
+        backgroundColor: color.blue,
         borderColor: color.blue,
-        color: color.black
+        color: color.white
     }
 
     const onHandleChangeTab = value => {
         setTab(value.target.value)
     }
 
-    
     return (
         <Fragment>
             {
                 style === "TabPane" ? (
-                    <Tabs  defaultActiveKey={tabStart.key} className={style.tabs} centered={screens.md?false:true}>
+                    <Tabs defaultActiveKey={tabStart.key} className={style.tabs} centered={screens.md ? false : true}>
                         {
                             tabDetail !== null && tabDetail.map((item) =>
-                                <TabPane className={style.tabPane}  key={item.key} tab={item.name && item.name}>{item.tab}</TabPane>
+                                <TabPane className={style.tabPane} key={item.key} tab={item.name && item.name}>{item.tab}</TabPane>
                             )
                         }
                     </Tabs>
 
                 ) : (
                     <Fragment>
-                        <Radio.Group onChange={onHandleChangeTab} value={tab} defaultValue={tabStart.key} name={name && name} >
-                            {
-                                tabDetail !== null && tabDetail.map((item, index) =>
-                                (
-                                    <Radio.Button
-                                        className={type !== "tab" ? styles.radio : (index === 0 ? styles.tabFirst : styles.tabLast)}
-                                        style={tab === item.key ? colorSelect : (type !== "tab" ? colorNotSelectWhite : colorNotSelect)}
-                                        value={item.key}
-                                        key={item.key}
-                                    >{item.name}</Radio.Button>
-                                ))
-                            }
-                        </Radio.Group>
+                        <Row justify="center">
+                            <Radio.Group onChange={onHandleChangeTab} value={tab} defaultValue={tabStart.key} name={name && name} >
+                                {
+                                    tabDetail !== null && tabDetail.map((item, index) =>
+                                    (
+                                        <Radio.Button
+                                            className={type !== "tab" ? styles.radio : (index === 0 ? styles.tabFirst : styles.tabLast)}
+                                            style={tab === item.key ? colorSelect : (type !== "tab" ? colorNotSelectWhite : colorNotSelect)}
+                                            value={item.key}
+                                            key={item.key}
+                                        >{item.name}</Radio.Button>
+                                    ))
+                                }
+                            </Radio.Group>
+                        </Row>
+
                         {
                             type == "tab" && tabDetail !== null && tab !== null &&
                             (

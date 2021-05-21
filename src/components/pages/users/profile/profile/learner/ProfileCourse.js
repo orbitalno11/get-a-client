@@ -1,34 +1,53 @@
-import { Col, Row, Typography, Grid } from "antd";
+import { Col, Row, Grid } from "antd";
 import React, { useState } from "react"
 import TabHorizontal from "../../../../../tab/TabHorizontal"
 import CardCourseLearner from "../../../../../card/CardCourseLearner"
 import style from "../../styles.module.scss"
 
 const { useBreakpoint } = Grid;
-const { Title } = Typography;
 
 export default function ProfileCourse() {
     const screens = useBreakpoint();
-    const [course] = useState(null)
+    const [course] = useState({
+        tutor:
+            [
+                {
+                    name: "หนูเทพซาโตชิ",
+                    place: "บางมด, ทุ่งครุ",
+                    subject: "ชีววิทยา",
+                    date: "1 มกราคม 2563"
+                },
+                {
+                    name: "พิคาชู หนูเทพซาโตชิ",
+                    place: "บางมด, ทุ่งครุ",
+                    subject: "ชีววิทยา",
+                    date: "1 มกราคม 2563"
+                }
+            ],
+        course: [{
+            name: "พิคาชู หนูเทพซาโตชิ",
+            place: "บางมด, ทุ่งครุ",
+            subject: "ชีววิทยา",
+            date: "1 มกราคม 2563"
+        }]
+    })
 
     const TabTutor = () => {
         return (
-            <Row justify="space-around" align="middle" className={style.marginTop20}>
+            <Row className={style.marginTop20} justify={!screens.xl && "space-around"}>
                 {
-                    course !== null &&
+
+                    course.tutor ?
                         (
-                            course.course.tutor.length !== 0 ?
-                                (
-                                    course.course.tutor.map((item, index) => (
-                                        <Col xs={24} sm={20} md={24} lg={20} xl={12} className={style.padding} key={index} >
-                                            <CardCourseLearner data={item} />
-                                        </Col>
-                                    ))
-                                )
-                                :
-                                (
-                                    <Title level={4}>ยังไม่เคยเรียนพิเศษ</Title>
-                                )
+                            course.tutor.map((item, index) => (
+                                <Col xs={24} sm={20} md={24} lg={20} xl={12} className={style.padding} key={index} >
+                                    <CardCourseLearner data={item} />
+                                </Col>
+                            ))
+                        )
+                        :
+                        (
+                            <span className={style.titleH5}>ยังไม่เคยเรียนพิเศษ</span>
                         )
                 }
             </Row>
@@ -37,22 +56,20 @@ export default function ProfileCourse() {
 
     const TabCourse = () => {
         return (
-            <Row justify="space-around" align="middle" className={style.marginTop20}>
-               {
-                    course !== null &&
+            <Row  className={style.marginTop20} justify={!screens.xl && "space-around"}>
+                {
+
+                    course.course ?
                         (
-                            course.course.tutor.length !== 0 ?
-                                (
-                                    course.course.course.map((item, index) => (
-                                        <Col xs={24} sm={20} md={24} lg={20} xl={12} className={style.padding} key={index} >
-                                            <CardCourseLearner data={item} />
-                                        </Col>
-                                    ))
-                                )
-                                :
-                                (
-                                    <Title level={4}>ยังไม่เคยเรียนพิเศษ</Title>
-                                )
+                            course.course.map((item, index) => (
+                                <Col xs={24} sm={20} md={24} lg={20} xl={12} className={style.padding} key={index} >
+                                    <CardCourseLearner data={item} />
+                                </Col>
+                            ))
+                        )
+                        :
+                        (
+                            <span className={style.titleH5}>ยังไม่เคยเรียนพิเศษ</span>
                         )
                 }
             </Row>
@@ -79,10 +96,10 @@ export default function ProfileCourse() {
 
     return (
         <div className={screens.md ? null : style.subProfile}>
-            <Title level={screens.md ? 3 : 5}>คอร์สที่เคยเรียน</Title>
-            <Row justify="space-around" align="middle" className={style.marginTop20}>
+            <span className={style.titleH4}>คอร์สที่เคยเรียน</span>
+            <div className={style.marginTop20}>
                 <TabHorizontal type="tab" tabStart={tabStart} tabDetail={tabDetail} />
-            </Row>
+            </div>
         </div>
     )
 }

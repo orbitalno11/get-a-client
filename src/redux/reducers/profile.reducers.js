@@ -6,7 +6,8 @@ const initialState = {
     profileHandle: null,
     error: null,
     address: {},
-    getAddress : false
+    getAddress : false,
+    identity: null
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -58,6 +59,38 @@ const profileReducer = (state = initialState, action) => {
                 error: null
             }
         case profileConstants.SET_ADDRESS_FAILURE:
+            return {
+                ...state,
+                error : action.payload
+            }
+        case profileConstants.CREATE_IDENTIFY_TUTOR_SUCCESS:
+            return {
+                ...state,
+                error: null
+            }
+        case profileConstants.CREATE_IDENTIFY_TUTOR_FAILURE:
+            return {
+                ...state,
+                error: action.payload
+            }
+        case profileConstants.GET_IDENTIFY_TUTOR_SUCCESS:
+            return {
+                ...state,
+                identity: action.payload,
+                error: null
+            }
+        case profileConstants.GET_IDENTIFY_TUTOR_FAILURE:
+            return {
+                ...state,
+                identity: null,
+                error: action.payload
+            }
+        case profileConstants.UPDATE_IDENTIFY_TUTOR_SUCCESS:
+            return {
+                ...state,
+                error: null
+            }
+        case profileConstants.UPDATE_IDENTIFY_TUTOR_FAILURE:
             return {
                 ...state,
                 error: action.payload

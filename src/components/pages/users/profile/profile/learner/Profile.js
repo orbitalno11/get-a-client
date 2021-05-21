@@ -43,7 +43,7 @@ export default function ProfileLearner() {
                     )
                 }
                 <Col xs={24} sm={24} md={12} lg={14} xl={14} >
-                    <ProfileCourse mainPage={false}/>
+                    <ProfileCourse mainPage={true}/>
                 </Col>
             </Row>
         </Fragment>

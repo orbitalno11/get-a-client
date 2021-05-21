@@ -8,7 +8,7 @@ import { faBook, faLocationArrow } from "@fortawesome/free-solid-svg-icons"
 export default function CardLearnerCourse() {
     const styleCard = {
         padding: "0.5rem",
-        height: "9.8rem"
+        // height: "9.8rem"
     }
 
     return (

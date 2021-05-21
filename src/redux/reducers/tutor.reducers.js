@@ -6,7 +6,12 @@ const initialState = {
     listEducation: null,
     education: null,
     testing: null,
-    error: null
+    error: null,
+    offlineCourse: {
+        success : false , 
+        data : null
+    },
+    tutorHandle : null
 }
 
 const tutorReducer = (state = initialState, action) => {
@@ -120,6 +125,47 @@ const tutorReducer = (state = initialState, action) => {
                 ...state,
                 error: action.payload
             }
+        case tutorConstants.GET_LIST_OFFLINE_COURSE_SUCCESS:
+            return {
+                ...state,
+                offlineCourse: {
+                    success : true ,
+                    data :  action.payload
+                },
+                error: null
+            }
+        case tutorConstants.GET_LIST_OFFLINE_COURSE_FAILURE:
+            return {
+                ...state,
+                offlineCourse: {
+                    success : true ,
+                    data : null
+                },
+                error: action.payload
+            }
+        case tutorConstants.GET_TUTOR_PROFILE_SUCCESS:
+            return {
+                ...state,
+                tutorHandle: action.payload,
+                error: null
+            }
+        case tutorConstants.GET_TUTOR_PROFILE_FAILURE:
+            return {
+                ...state,
+                tutorHandle: null,
+                error: action.payload
+            }
+        case tutorConstants.CLEAR_LIST_OFFLINE_COURSE:
+            return {
+                ...state,
+                tutorHandle : null,
+                offlineCourse: {
+                    success : false , 
+                    data : null
+                },
+                error: null
+            }
+
         default: {
             return state
         }

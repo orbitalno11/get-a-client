@@ -1,53 +1,86 @@
-import { Col, Row, Grid, Typography, Button } from "antd";
+import { Col, Row } from "antd";
 import React from "react";
 import CardCourse from "../../../../card/CardCourse";
 import ListCourseTutor from "../../../../card/ListCourseTutor";
-import { courseOffline } from "../../../../card/Constants";
 import style from "../styles.module.scss";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import isMobile from "../../../../isMobile/isMobile"
-const { useBreakpoint } = Grid;
-const { Link } = Typography;
+import { useDispatch } from "react-redux";
+import { tutorAction } from "../../../../../redux/actions";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Fragment } from "react";
+import Loading from "../../../../loading/Loading";
+import EmptyImage from "../../../../loading/EmptyImage";
 
 export default function ManageCourseDetail() {
-  const screens = useBreakpoint();
+  const dispatch = useDispatch()
+  const { tutor, auth, loading } = useSelector(state => state)
+  const [offlineCourse, setOfflineCourse] = useState(null)
+
+  useEffect(() => {
+    dispatch(tutorAction.getListOfflineCourse(auth.profile))
+    return () => {
+      dispatch(tutorAction.clearListOfflineCourse())
+    }
+  }, [])
+
+  useEffect(() => {
+    if (tutor.offlineCourse) {
+      setOfflineCourse(tutor.offlineCourse.data)
+    }
+  }, [tutor.offlineCourse])
+
 
   return (
-    <div>
+    <Fragment>
+      {
+        loading.loading && (
+          <Loading />
+        )
+      }
+
       {isMobile() ? (
         <div>
-          {courseOffline &&
-            courseOffline.map((item, index) => (
-              <div key={index}>
-                <ListCourseTutor data={item} />
+          {tutor.offlineCourse.success && (
+            offlineCourse ? (
+              offlineCourse.map((item, index) => (
+                <div key={index}>
+                  <Link to={`/tutor/course/${item.id}`}>
+                    <ListCourseTutor data={item} />
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <div align="center">
+                <EmptyImage size="default" />
               </div>
-            ))}
-          <div className={style.marginRigth}>
-            <Link href="/tutor/course/create">
-              <Button
-                className="backgroundBlue buttonColor"
-                shape="circle"
-                icon={
-                  <FontAwesomeIcon icon={faPlus} style={{ color: "white" }} />
-                }
-              />
-            </Link>
-          </div>
+            )
+          )}
+
+
         </div>
       ) : (
-        <Row className={!screens.lg ? style.alignCenter : style.pagecard}>
-          {courseOffline &&
-            courseOffline.map((item, index) => (
-              <Col
-                className={!screens.lg ? style.paddindMd : style.paddingmange}
-                key={index}
-              >
-                <CardCourse data={item} />
-              </Col>
-            ))}
+        <Row>
+          {tutor.offlineCourse.success && (
+            offlineCourse ? (
+              offlineCourse.map((item, index) => (
+                <Col className={style.paddingmange} key={index} xl={8} lg={12} md={12} sm={24} align="center">
+                  <Link to={`/tutor/course/${item.id}`}>
+                    <CardCourse data={item} />
+                  </Link>
+                </Col>
+              ))
+            ) : (
+              <div align="center">
+                <EmptyImage size="default" />
+              </div>
+            )
+          )}
         </Row>
       )}
-    </div>
+
+    </Fragment>
   );
 }

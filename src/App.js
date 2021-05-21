@@ -29,7 +29,6 @@ import EditProfileMap from "./components/pages/users/profile/editProfile/learner
 import PubilcProfile from "./components/pages/users/profile/profile/tutor/pubileProfile/PubilcProfile";
 import NavMenu from "./components/NavMenu";
 import ProfileDetail from "./components/pages/users/profile/profile/tutor/pubileProfile/ProfileDetail";
-import ReviewPage from "./components/pages/users/review/ReviewPage";
 import Coins from "./components/pages/users/coins/learner/Coin"
 import Payment from "./components/pages/users/coins/learner/Payment"
 import HistoryCoin from "./components/pages/users/coins/learner/HistoryCoin"
@@ -43,6 +42,9 @@ import OnlineCourseList from "./components/pages/users/onlineCourseList/OnlineCo
 import { setAuthToken } from "./utils/setAxios";
 import jwtDecode from "jwt-decode";
 import { userActions } from "./redux/actions";
+import OfflineCourse from "./components/pages/users/managecourse/offlineCourse/OfflineCourse";
+import Ranking from "./components/pages/users/home/learner/Ranking";
+import ProfileCourse from "./components/pages/users/profile/profile/learner/ProfileCourse";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
@@ -60,7 +62,7 @@ if (localStorage.token) {
 function App() {
   const admin = store.getState().auth.role === 0
   return (
-      <Provider store={store}>
+    <Provider store={store}>
       <Router>
         {
            !admin && <NavMenu />
@@ -73,6 +75,7 @@ function App() {
           <PrivateRoute exact path="/learner/:id" component={ProfileLearner} />
           <PrivateRoute exact path="/learner/:id/edit" component={EditProfile} />
           <PrivateRoute exact path="/learner/:id/edit/map" component={EditProfileMap} />
+          <PrivateRoute exact path="/course" component={ProfileCourse} />
           <PrivateRoute exact path="/coin" component={Coins} />
           <PrivateRoute exact path="/coinshop/payment" component={Payment} />
           <PrivateRoute exact path="/historycoin" component={HistoryCoin}/>
@@ -84,12 +87,13 @@ function App() {
 
           {/* Public Route */}
           <Route exact path="/" component={Home} />
+          <Route exact path="/rank/:type" component={Ranking} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register/:type" component={RegisterForm} />
           <Route exact path="/profile/:id/course" component={PubilcProfile} />
           <Route exact path="/profile/:id" component={ProfileDetail} />
-          <Route exact path="/course/:id" component={ReviewPage} />
+          <Route exact path="/course/:id" component={OfflineCourse} />
           <Route exact path="/search" component={Search} />
           <Route exact path="/search/:search" component={ResultSearch} />
           <Route exact path="/course/online/:id" component={OnlineCourseList} />

@@ -7,21 +7,29 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../../../styles.module.scss"
 import ProfileIntroduce from "./ProfileIntroduce";
 import Header from "../../../../../../headerMobile/Header";
-import { useDispatch, useSelector } from "react-redux";
-import { profileAction } from "../../../../../../../redux/actions";
+import { useDispatch } from "react-redux";
 import isMobile from "../../../../../../isMobile/isMobile";
-import {trackImpressTutorProfile} from "../../../../../../../analytic/Analytic";
-import {useParams} from "react-router-dom";
+import { tutorAction } from "../../../../../../../redux/actions";
+import { useParams } from "react-router";
+import { useSelector } from "react-redux";
+import { SkeletonComponent } from "../../../../../../loading/SkeletonComponent";
+import { trackImpressTutorProfile } from "../../../../../../../analytic/Analytic";
+import EmptyImage from "../../../../../../loading/EmptyImage";
+import EducationTutor from "../../../editProfile/tutor/EducationTutor";
 
 export default function ProfileDetail({ mainPage }) {
     const dispatch = useDispatch()
-    const data = useSelector(state => state.profile)
-    const [profile, setProfile] = useState(null)
+    const { tutorHandle } = useSelector(state => state.tutor)
+    const loading = useSelector(state => state.loading)
+    const [profile] = useState(null)
     const params = useParams()
     const userId = params.id
+    const address = tutorHandle && (tutorHandle.address && tutorHandle.address.district.title)
 
     const fetchProfile = useCallback(() => {
-        dispatch(profileAction.getHandleProfile())
+        if (!mainPage) {
+            dispatch(tutorAction.getProfileTutor(userId))
+        }
     }, [dispatch])
 
     const trackImpress = () => {
@@ -35,14 +43,11 @@ export default function ProfileDetail({ mainPage }) {
         trackImpress()
     }, [fetchProfile])
 
-    useEffect(() => {
-        setProfile(data.profileHandle)
-    }, [data])
 
     return (
         <Fragment>
             {!mainPage && isMobile() && <Header pageBack="goback" />}
-            <div className={isMobile() ? style.bodymobileprofile : !mainPage ? style.bodyEdit : null}>
+            <div className={(isMobile() && !mainPage) ? style.paddingBottomBody : (!mainPage && style.bodyEdit)} >
                 {
                     !mainPage &&
                     (
@@ -51,37 +56,59 @@ export default function ProfileDetail({ mainPage }) {
                         </div>
                     )
                 }
-                <div className={mainPage && isMobile() ? style.marginTop20 : style.contrainnerProfilePubile}>
+                <div className={style.contrainnerProfilePubile}>
                     <div className={style.TitleCoin}>
                         <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
-                        <span>{profile && profile.place}</span>
+                        {
+                            tutorHandle ? (
+                                <span>{address ? address : "ยังไม่ได้กำหนด"}</span>
+                            ) : (
+                                <SkeletonComponent.SkeletonText />
+                            )
+                        }
+
                     </div>
                     <div className={style.TitleCoin}>
                         <FontAwesomeIcon icon={faUser} className={style.iconmarker} />
-                        <span>{profile && profile.coin } คน.</span>
+                        {
+                            tutorHandle ? (
+                                <span>{tutorHandle && tutorHandle.numberOfLearner} คน.</span>
+                            ) : (
+                                <SkeletonComponent.SkeletonText />
+                            )
+                        }
                     </div>
                 </div>
-                {/* wait for connect api in public profile */}
-                {/* {
-                    ((mainPage && !isMobile()) ||  !mainPage )&&
-                    
-                        (
-                            <div className={style.marginTop}>
-                                <div className={style.contrainnerProfilePubile} >
-                                    <Title level={4}>ประวัติการศึกษา</Title>
-                                    {
-                                        profile && profile.history.map((item, index) => {
-                                            return (
-                                                <div key={index}>
-                                                    <EducationTutor data={item} size="small" />
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div>
+                {
+                    ((mainPage && !isMobile()) || !mainPage) &&
+
+                    (
+                        <div className={style.marginTop}>
+                            <div className={style.contrainnerProfilePubile} >
+                                <span className={style.titleH3}>ประวัติการศึกษา</span>
+                                {
+                                    profile ? profile.history.map((item, index) => {
+                                        return (
+                                            <div key={index}>
+                                                <EducationTutor data={item} size="small" />
+                                            </div>
+                                        )
+                                    }) : (
+                                        (!loading.loading && !mainPage) ? (
+                                            <div >
+                                                <EmptyImage size="default" />
+                                                <span >ยังไม่มีประวัติการศึกษา</span>
+                                            </div>
+                                        ) : (
+                                            <p>ยังไม่มีประวัติการศึกษา</p>
+                                        )
+
+                                    )
+                                }
                             </div>
-                        )
-                } */}
+                        </div>
+                    )
+                }
             </div>
         </Fragment>
     )

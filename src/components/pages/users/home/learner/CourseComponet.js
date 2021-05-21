@@ -1,53 +1,30 @@
-import { Grid, Typography } from "antd";
 import React from "react"
+import { Link } from "react-router-dom";
 import CardCourseLearner from "../../../../card/CardCourseLearner";
-import { chunksArray, SliderComponent } from "../../../../slider/SliderComponent";
+import { color } from "../../../../defaultValue";
 import style from "../styles.module.scss"
-const { useBreakpoint } = Grid;
-const { Title } = Typography;
 
 export default function CourseComponet({ title, array }) {
 
-    const screens = useBreakpoint();
-  
-    const componentListTutor = () => {
-        let size = 2
-        if (screens.lg) {
-            size = 3
-        } else {
-            if (!screens.md) {
-                size = 1
-            } else {
-                size = 2
-            }
-        }
+    return (
+        <div style={{ overflow: "hidden" }}>
+            <div className={style.flexRow}>
+                <span className={style.titleH3}>{title}</span>
+                <Link to={`/rank/online`}>
+                    <span className={style.paddingLeft} style={{color : color.black}}>ดูเพิ่มเติม</span>
+                </Link>
 
-
-        const chunksArrays = chunksArray(array, size)
-        return (
-            chunksArrays && chunksArrays.map((item, index) => (
-                <div key={index} className={style.row}>
+            </div>
+            <div className={`${style.scroll} ${style.paddingTop}`}>
+                <div className={style.row}>
                     {
-                        item && item.map((item1, index) => (
-                            <div className={!screens.md ? !screens.sm ? (style.paddingCoruseCardXS) : (style.paddingCoruseCardSM) : (style.paddingCoruseCard)} key={index}>
-                                <CardCourseLearner data={item1} />
+                        array && array.map((item) => (
+                            <div key={item.id} style={{ padding: "0.5rem" }}>
+                                <CardCourseLearner data={item} />
                             </div>
                         ))
                     }
                 </div>
-            )
-            )
-        )
-    }
-
-    return (
-        <div>
-            <div className={style.flexRow}>
-                <Title level={3}>{title}</Title>
-                <span className={style.paddingLeft}>ดูเพิ่มเติม</span>
-            </div>
-            <div className={style.paddingTop}>
-                <SliderComponent dot={false} item={componentListTutor()} />
             </div>
         </div>
     )

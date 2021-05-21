@@ -15,9 +15,9 @@ export default function DeletePromotion() {
   function ComponentSample() {
     return (
       <div style={{ paddingLeft: "1rem" }}>
-        <span className={style.titleH5}>ยืนยันลบโปรโมชั่น</span>
+        <span className={style.titleH4}>ยืนยันลบโปรโมชั่น</span>
         <Row style={{marginTop:"2rem",marginBottom:"2rem"}} className={style.container}> 
-          <Col>โปรโมชั่น12.12</Col>
+          <Col className={style.textNormal}>โปรโมชั่น12.12</Col>
         </Row>
         <Row className={style.btnRequest}>
           <Col span={6}>
@@ -29,7 +29,7 @@ export default function DeletePromotion() {
               htmlType="submit"
               onClick={() => alert()}
             >
-              ยอมรับ
+             <span className={style.textNormal}>ยอมรับ</span>
             </Button>
           </Col>
           <Col span={6}>
@@ -40,7 +40,7 @@ export default function DeletePromotion() {
               style={{ width: "100px" }}
               onClick={() => dispatch(modalAction.closeModal())}
             >
-              ปฏิเสธ
+              <span className={style.textNormal}>ปฏิเสธ</span>
             </Button>
           </Col>
         </Row>
@@ -78,7 +78,7 @@ export default function DeletePromotion() {
         style={{ width: "100px" }}
         icon={<FontAwesomeIcon icon={faTrashAlt} style={{ color: "white" }} />}
       >
-        <span style={{ paddingLeft: "0.5rem" }}>ลบ</span>
+        <span style={{ paddingLeft: "0.5rem" }} className={style.textNormal}>ลบ</span>
       </Button>
     </Fragment>
   );

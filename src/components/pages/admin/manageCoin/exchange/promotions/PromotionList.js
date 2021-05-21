@@ -23,7 +23,7 @@ export default function PromotionList() {
     <Space direction="vertical" style={{ width: "100%" }}>
       {list &&
         list
-          .filter((data) => data.type === "promo")
+          .filter((data) => data.type === "std")
           .map((data, index) => (
             <Collapse key={index}>
               <Panel header={data && data.title}>
@@ -31,33 +31,33 @@ export default function PromotionList() {
                   <AddList />
                 </Col>
                 <Row style={{ marginLeft: "3rem" }}>
-                  <Col span={2}>วันที่เริ่มต้น </Col>
+                  <Col span={2} className={style.textNormal}>วันที่เริ่มต้น </Col>
                   <Col span={8}>
-                    <p className={style.datetime}>
+                    <p className={`${style.datetime} ${style.textNormal}`}>
                       {moment(data.startDate).format("DD/MM/YYYY")}
                     </p>
                   </Col>
-                  <Col span={2} style={{ marginLeft: "2rem" }}>
+                  <Col span={2} style={{ marginLeft: "2rem" }} className={style.textNormal}>
                     วันที่สิ้นสุด
                   </Col>
                   <Col span={8}>
-                    <p className={style.datetime}>
+                    <p className={`${style.datetime} ${style.textNormal}`}>
                       {moment(data.endDate).format("DD/MM/YYYY")}
                     </p>
                   </Col>
                 </Row>
                 <Row style={{ marginLeft: "3rem", marginTop: "1rem" }}>
-                  <Col span={2}>เวลาเริ่มต้น </Col>
-                  <Col span={8}>
-                    <p className={style.datetime}>
+                  <Col span={2} className={style.textNormal}>เวลาเริ่มต้น </Col>
+                  <Col span={8} className={style.textNormal}>
+                    <p className={`${style.datetime} ${style.textNormal}`}>
                       {moment(data.startDate).format("HH:mm")}
                     </p>
                   </Col>
-                  <Col span={2} style={{ marginLeft: "2rem" }}>
+                  <Col span={2} style={{ marginLeft: "2rem" }} className={style.textNormal}>
                     เวลาสิ้นสุด
                   </Col>
-                  <Col span={8}>
-                    <p className={style.datetime}>
+                  <Col span={8} className={style.textNormal}>
+                    <p className={`${style.datetime} ${style.textNormal}`}>
                       {moment(data.endDate).format("HH:mm")}
                     </p>
                   </Col>

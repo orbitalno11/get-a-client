@@ -16,13 +16,13 @@ export default function Delete() {
   function ComponentSample() {
     return (
       <div style={{ paddingLeft: "1rem" }}>
-        <p className={style.titleH5}>ยืนยันลบการซื้อเหรียญ</p>
+        <p className={style.titleH4}>ยืนยันลบอัตราการซื้อเหรียญ</p>
         <Row style={{marginTop:"2rem",marginBottom:"2rem",textAlign:"center"}}> 
-          <Col span={11}>ซื้อ 100 บาท </Col>
+          <Col span={11} className={style.textNormal}>ซื้อ 100 บาท </Col>
           <Col span={2}>
             <FontAwesomeIcon icon={faArrowAltCircleRight} className={style.coins} />
           </Col>
-          <Col span={10}>500 coin</Col>
+          <Col span={10} className={style.textNormal}>500 coin</Col>
         </Row>
         <Row className={style.btnRequest}>
           <Col span={6}>
@@ -34,7 +34,7 @@ export default function Delete() {
               htmlType="submit"
               onClick={() => alert()}
             >
-              ยอมรับ
+              <span className={style.textNormal}>ยอมรับ</span>
             </Button>
           </Col>
           <Col span={6}>
@@ -45,7 +45,7 @@ export default function Delete() {
               style={{ width: "100px" }}
               onClick={() => dispatch(modalAction.closeModal())}
             >
-              ปฏิเสธ
+             <span className={style.textNormal}>ปฏิเสธ</span>
             </Button>
           </Col>
         </Row>
@@ -83,7 +83,7 @@ export default function Delete() {
         style={{ width: "100px" }}
         icon={<FontAwesomeIcon icon={faTrashAlt} style={{ color: "white" }} />}
       >
-        <span style={{ paddingLeft: "0.5rem" }}>ลบ</span>
+        <span style={{ paddingLeft: "0.5rem" }} className={style.textNormal}>ลบ</span>
       </Button>
     </Fragment>
   );

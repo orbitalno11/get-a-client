@@ -28,36 +28,35 @@ export default function EditList() {
     return (
       <div style={{ paddingLeft: "1rem" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <p className={style.titleH5}>แก้ไขการซื้อเหรียญ</p>
+          <p className={style.titleH4}>แก้ไขอัตราการซื้อเหรียญ</p>
           <Row style={{ paddingTop: "1rem", marginBottom: "1.8rem" }}>
-            <Col span={9}>
+            <Col span={6} className={style.columRate}>
               <Input
                 type="baht"
                 name="baht"
                 ref={register}
-                placeholder="ใส่ค่าเงิน"
-                bordered={false}
-                style={{ textAlign: "center", paddingTop: "-0.3rem" }}
+                placeholder="บาท"
+                className={`${style.inputRate} ${style.textNormal}`}
               />
               {errors.baht && (
                 <p className="error-input">{errors.baht.message}</p>
               )}
             </Col>
-            <Col span={2}>บาท</Col>
-            <Col span={9}>
+            <Col span={3} className={style.textNormal}>บาท</Col>
+            <Col span={1} className={style.textNormal}>=</Col>
+            <Col span={6} className={style.columRate}>
               <Input
                 type="coin"
                 name="coin"
                 ref={register}
-                placeholder="coins"
-                bordered={false}
-                style={{ textAlign: "center", paddingTop: "-0.3rem" }}
+                placeholder="เหรียญ"
+                className={`${style.inputRate} ${style.textNormal}`}
               />
               {errors.baht && (
                 <p className="error-input">{errors.coin.message}</p>
               )}
             </Col>
-            <Col span={2}>coins</Col>
+            <Col span={3} className={style.textNormal}>เหรียญ</Col>
           </Row>
         </form>
         <Row className={style.btnRequest}>
@@ -70,7 +69,7 @@ export default function EditList() {
               htmlType="submit"
               onClick={() => alert()}
             >
-              ยอมรับ
+              <span className={style.textNormal}>ยอมรับ</span>
             </Button>
           </Col>
           <Col span={6}>
@@ -81,7 +80,7 @@ export default function EditList() {
               style={{ width: "100px" }}
               onClick={() => dispatch(modalAction.closeModal())}
             >
-              ปฏิเสธ
+             <span className={style.textNormal}>ปฏิเสธ</span>
             </Button>
           </Col>
         </Row>
@@ -119,7 +118,7 @@ export default function EditList() {
         style={{ width: "100px" }}
         icon={<FontAwesomeIcon icon={faPen} style={{ color: "white" }} />}
       >
-        <span style={{ paddingLeft: "0.5rem" }}>แก้ไข</span>
+        <span style={{ paddingLeft: "0.5rem" }} className={style.textNormal}>แก้ไข</span>
       </Button>
     </Fragment>
   );

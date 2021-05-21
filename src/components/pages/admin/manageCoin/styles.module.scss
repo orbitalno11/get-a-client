@@ -28,7 +28,7 @@
   background: #f5732e;
   font-size: 2.3rem;
   border-radius: 1.25rem;
-  width: 10rem;
+  width: 14rem;
   height: 5rem;
   color: white;
   border-color: #f5732e;
@@ -69,8 +69,13 @@
 }
 
 .inputRate{
-  text-align: "center";
-  padding-top:"-0.3rem" !important;
+  text-align: center;
+  border-radius:2rem;
+}
+
+.columRate{
+  margin-left: 1.5rem;
+  margin-right: 1rem;
 }
 
 .tablecoins {
@@ -106,11 +111,18 @@
 
 .datetime{
   border: 0.1rem solid #d9d9d9;
+  border-radius:2rem;
+  text-align: center;
 }
 
 .promotion{
   margin-top: 2rem;
   display: flex;
   justify-content: flex-end;
+}
+
+.aglieCenter{
+  display: flex;
+  justify-content:center !important;
 }
 

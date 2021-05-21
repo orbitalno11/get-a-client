@@ -5,4 +5,4 @@ export * from "./offlineCourse.constants"
 export * from "./loading.constants"
 export * from "./coin.constants"
 export * from "./verify.constants"
-
+export * from "./tutor.constants"

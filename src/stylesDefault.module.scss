@@ -111,3 +111,26 @@ $silver : #a39b9b;
   width: 320px !important;
   height: 180px !important;
 }
+
+.buttonCircle{
+    border-style: none  !important;
+    border-radius: 50%;
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 0.75rem !important;
+    color: $white;
+    cursor: pointer;
+}
+
+.borderImage{
+    border: 0.15rem solid  !important;
+    border-color : $orange !important;
+    border-radius: 0.75rem;
+    padding : 0.5rem;
+    background-color: rgba($color: $gray, $alpha: 0.22);
+}
+
+.a4Image {
+  width: 13rem !important;
+  height: 16rem !important;
+}

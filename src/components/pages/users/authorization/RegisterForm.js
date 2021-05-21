@@ -51,7 +51,6 @@ export default function RegisterForm() {
 
     const onSubmit = data => {
         if (data && image) {
-            console.log(data)
             const formatted_date = (data.dateOfBirth.getFullYear()) + "/" + data.dateOfBirth.getMonth() + "/" + data.dateOfBirth.getDate()
             let formdata = new FormData()
             formdata.append("firstname", data.firstname)
@@ -64,8 +63,7 @@ export default function RegisterForm() {
             formdata.append("confirmPassword", data.confirmPassword)
             formdata.append("image", image.file)
             if (type === "learner") {
-                console.log(image.file)
-                formdata.append("grade", defaultValue.grade[data.grade])
+                formdata.append("grade",defaultValue.grade[data.grade])
                 dispatch(userActions.signUpLearner(formdata))
 
             } else if (type === "tutor") {

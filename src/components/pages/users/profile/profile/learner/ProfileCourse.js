@@ -44,7 +44,7 @@ export default function ProfileCourse() {
             :
             (
                 <Row className={style.marginTop20} justify="space-around">
-                    <span className={style.textNormal}>ยังไม่เคยเรียนพิเศษ</span>
+                    <span className={style.textNormal}>คุณยังไม่ได้เรียนพิเศษกับใคร? ค้นหาครูสอนพิเศษ</span>
                 </Row>
             )
     )
@@ -67,7 +67,7 @@ export default function ProfileCourse() {
                 :
                 (
                     <Row className={style.marginTop20} justify="space-around">
-                        <span className={style.textNormal}>ยังไม่เคยเรียนพิเศษ</span>
+                        <span className={style.textNormal}>คุณยังไม่ได้เรียนพิเศษกับใคร? ค้นหาครูสอนพิเศษ</span>
                     </Row>
                 )
         )

@@ -56,7 +56,6 @@ function getTesting(id) {
                         data.verifiedData.documentUrl3
                     ]
                 }
-                console.log(data)
             }
             dispatch(success({
                 success : true ,
@@ -79,7 +78,6 @@ function getEducation(id) {
             const data = res.data.data
             let dataEducation = {}
             if(data){
-                console.log(data)
                 dataEducation = {
                     grade :"ม.6",
                     branch : data.educationData.branchText,
@@ -228,7 +226,7 @@ function updateEducation(data, id, profile) {
 }
 
 
-function deleteTesting(id,auth) {
+function deleteTesting(id, auth) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.delete(`/tutor/testing/${id}`).then(() => {

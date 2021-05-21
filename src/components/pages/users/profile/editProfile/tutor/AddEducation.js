@@ -1,7 +1,7 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react"
 import style from "../../styles.module.scss"
 import { Controller, useForm } from "react-hook-form";
-import { Alert, Button, Col, DatePicker, Image, Row, Select } from "antd";
+import { Button, Col, DatePicker, Image, Row, Select } from "antd";
 import { profileTestSchema, profileEducationSchema } from "../../../../../../validation/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Header from "../../../../../headerMobile/Header";
@@ -39,7 +39,7 @@ export default function AddEducation() {
     }
 
     const { register, handleSubmit, errors, control, reset } = useForm({
-        resolver: yupResolver(checkTypeTesting() ? profileTestSchema(edit) : profileEducationSchema(edit)),
+        resolver: yupResolver(checkTypeTesting() ? profileTestSchema() : profileEducationSchema()),
     });
 
     const fetchProfile = useCallback(() => {
@@ -181,7 +181,6 @@ export default function AddEducation() {
     }, [imageName])
 
     const onSubmit = (data) => {
-        console.log(data)
 
         if (data) {
             let formData = new FormData()
@@ -194,9 +193,7 @@ export default function AddEducation() {
                 imageName.forEach((item, index) =>
                     formData.append(`document${index + 1}`, item.file)
                 )
-                for (let [key, value] of formData.entries()) {
-                    console.log(`${key}: ${value}`);
-                  }
+
                 if (!edit) {
                     dispatch(tutorAction.createTesting(formData, auth.profile))
                 } else {
@@ -210,12 +207,10 @@ export default function AddEducation() {
                 formData.append("institute", "1")
                 formData.append("status", defaultValue.educationStatus[data.status])
                 formData.append("gpax", data.gpax)
-                imageName.filter((item => item.file !== undefined)).forEach((item, index) => 
+                imageName.forEach((item, index) =>
                     formData.append(`document${index + 1}`, item.file)
                 )
-                for (let [key, value] of formData.entries()) {
-                    console.log(`${key}: ${value}`);
-                  }
+
                 if (!edit) {
                     dispatch(tutorAction.createEducation(formData, auth.profile))
                 } else {
@@ -240,7 +235,7 @@ export default function AddEducation() {
 
     return (
         <Fragment>
-            {isMobile() && <Header title="เพิ่มข้อมูล" pageBack="/tutor/1" />}
+            {isMobile() && <Header title="เพิ่มข้อมูล" pageBack={`/tutor/${auth.profile}`} />}
             <ModalComponent />
             {
                 loading.loading && (
@@ -252,14 +247,7 @@ export default function AddEducation() {
                     <Row justify="center" >
                         <h3 className={style.titleH2}>{edit && "แก้ไข"}ประวัติการศึกษา</h3>
                     </Row>
-                    {
-                        edit && (
-                            <Row justify="center" >
-                                <Alert message="คำเตือน : หากทำการแก้ไขประวัติการศึกษา ผู้ดูระบบจะต้องตรวจสอบข้อมูลอีกครั้ง" type="warning" />
-                            </Row>
-                        )
-                    }
-                    <Row className={style.paddingbody} justify="space-around" align="top">
+                    <Row justify="space-around" align="top">
                         <Col xl={10} lg={10} md={20} sm={20} xs={24} className={style.marginTop20}>
                             <p className={style.textNormal}>ประเภท</p>
                             <Select name="type" onChange={onChangeType} defaultValue={type} disabled={edit ? true : false}>
@@ -364,7 +352,7 @@ export default function AddEducation() {
                                             placeholder="ปีที่ได้รับผลสอบ"
                                         />
                                     ) : (
-                                        <input className="input" step=".01" type="number" name={"gpax"} ref={register} placeholder={"เกรดเฉลี่ย"} />
+                                        <input className="input" step=".01" type="number" max="4" name={"gpax"} ref={register} placeholder={"เกรดเฉลี่ย"} />
                                     )
                                 }
 

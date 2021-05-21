@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react"
-import { Image, Button, Badge, Typography } from "antd";
+import { Image, Button, Badge } from "antd";
 import {
-    // faCoins,
     faMapMarkerAlt,
     faEdit,
     faBook
@@ -12,19 +11,16 @@ import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileSample from "../../../../../../images/profile.webp"
 import { SkeletonComponent } from "../../../../../../loading/SkeletonComponent";
-const { Title } = Typography;
 
 export default function ProfileDetail() {
     const { profile, auth } = useSelector(state => state)
     const [profileDetail, setProfileDetail] = useState(null)
     const [address, setAddress] = useState(null)
 
-    console.log(profileDetail)
-
     useEffect(() => {
         if (profile.profile) {
             setProfileDetail(profile.profile)
-            if(profile.profile.address){
+            if (profile.profile.address) {
                 setAddress(profile.profile.address)
             }
         }
@@ -50,8 +46,8 @@ export default function ProfileDetail() {
                 <NavLink to={`/tutor/` + auth.profile + `/edit`}>
                     {
                         profileDetail ? (
-                            <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[18, 0]}>
-                                <Title level={3} className={style.marginLeft}>{profileDetail.firstname && profileDetail.firstname}  {profileDetail.lastname && profileDetail.lastname}</Title>
+                            <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[10, 0]}>
+                                <h2 className={`${style.marginLeft} ${style.titleH2}`}>{profileDetail.firstname && profileDetail.firstname} <br /> {profileDetail.lastname && profileDetail.lastname}</h2>
                             </Badge>
                         ) : (
                             <div className={style.marginLeft}>
@@ -77,7 +73,7 @@ export default function ProfileDetail() {
                 </div>
             </div> */}
             <div className={style.subProfile}>
-                <Title level={5}>สถานที่สะดวกเรียน</Title>
+                <span className={style.titleH4}>สถานที่สะดวกเรียน</span>
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
                     {
@@ -93,7 +89,7 @@ export default function ProfileDetail() {
                 </div>
             </div>
             <div className={style.subProfile}>
-                <Title level={5}>วิชาที่สอน</Title>
+                <span className={style.titleH4}>วิชาที่สอน</span>
                 {
                     profileDetail ? (
                         profileDetail.subject.map((item) => {

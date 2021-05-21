@@ -60,12 +60,17 @@ export default function EditProfileDetail() {
     const fetchProfile = useCallback(() => {
         if (profile.profile) {
             setimage(profile.profile.profileUrl)
+            let arraySubject = []
+            detailProfile.subject && detailProfile.subject.forEach((item, index) => {
+                arraySubject[index] = item.title
+            })
+
             reset({
                 firstname: detailProfile.firstname,
                 lastname: detailProfile.lastname,
                 gender: findKeyObject(defaultValue.gender, detailProfile.gender),
                 dateOfBirth: moment(detailProfile.dateOfBirth, defaultValue.dateFormat),
-                subject: ['คณิตศาสตร์'],
+                subject: arraySubject && arraySubject,
                 email: detailProfile.email,
                 facebook: detailProfile.contact.facebookUrl,
                 line: detailProfile.contact.lineId,
@@ -104,94 +109,98 @@ export default function EditProfileDetail() {
                 )
             }
             <div>
-                <div className={screens.md ? style.bodyEdit : null}>
+                <div className={style.container}>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className={!screens.md ? style.mobilecenter : style.bannerEditProfile}>
-                            <div className="imageUpload" >
-                                <label htmlFor="file-input" >
-                                    <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[2, 0]}>
-                                        <Image
-                                            className={style.imageProfile}
-                                            src={image.imageURL ? image.imageURL : image}
-                                            preview={false}
+                        <Row justify="space-between" align="middle">
+                            <Col span={24} align="center">
+                                <h2 className={style.titleH2}>แก้ไขโปรไฟล์</h2>
+                            </Col>
+                            <Col lg={5} md={6} sm={24} xs={24} align="center">
+                                <div className="imageUpload" >
+                                    <label htmlFor="file-input" >
+                                        <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[2, 0]}>
+                                            <Image
+                                                className={style.imageProfile}
+                                                src={image.imageURL ? image.imageURL : image}
+                                                preview={false}
+                                            />
+                                        </Badge>
+                                    </label>
+                                    <input id="file-input" name="image" type="file" ref={register} onChange={onChange} />
+                                </div>
+                                {
+                                    errors.image && <p className="error-input">{errors.image.message}</p>
+                                }
+                            </Col>
+                            <Col lg={17} md={17} sm={24} xs={24}>
+                                <Row justify="space-around">
+                                    <Col className={screens.md ? style.marginTop20 : null} lg={11} sm={24} md={10} xs={24}>
+                                        <InputComponents
+                                            title="ชื่อ"
+                                            type="text"
+                                            name="firstname"
+                                            register={register}
+                                            error={errors.firstname}
+                                            placeholder="ชื่อ"
                                         />
-                                    </Badge>
-                                </label>
-                                <input id="file-input" name="image" type="file" ref={register} onChange={onChange} />
-                            </div>
-                        </div>
-                        {
-                            screens.md && (
-                                <Row className={style.horizontalCenter}>
-                                    <h2 className={`${style.marginTop} ${style.titleH2}`}>แก้ไขโปรไฟล์</h2>
-                                </Row>
-                            )
-                        }
-                        <Row className={style.paddingEdit} justify="space-between">
-                            <Col className={screens.md ? style.marginTop20 : null} lg={7} sm={24} md={10} xs={24}>
-                                <InputComponents
-                                    title="ชื่อ"
-                                    type="text"
-                                    name="firstname"
-                                    register={register}
-                                    error={errors.firstname}
-                                    placeholder="ชื่อ"
-                                />
-                            </Col>
-                            <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
-                                <InputComponents
-                                    title="นามสกุล"
-                                    type="text"
-                                    name="lastname"
-                                    register={register}
-                                    error={errors.lastname}
-                                    placeholder="นามสกุล"
-                                />
-                            </Col>
-                            <input name="gender" type="string" ref={register} hidden />
-                            <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
-                                <p>วันเดือนปีเกิด</p>
-                                <Controller
-                                    as={
-                                        <DatePicker placeholder="" disabled />
-                                    }
-                                    name="dateOfBirth"
-                                    control={control}
-                                    defaultValue={moment()}
-                                    placeholder="วันเดือนปีเกิด"
-                                />
-                                {
-                                    errors.dateOfBirth && <p className="error-input">{errors.dateOfBirth.message}</p>
-                                }
-                            </Col>
-
-                            <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
-                                <p>วิชาที่สอน (สอนได้มากสุด 3 วิชา)</p>
-                                <Controller
-                                    as={
-                                        <Select name="subject" optionLabelProp="label" mode="multiple" >
-                                            {
-                                                Object.entries(defaultValue.subject).map(([key]) => (
-                                                    <Select.Option key={key} value={key}>{key}</Select.Option>
-                                                ))
+                                    </Col>
+                                    <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
+                                        <InputComponents
+                                            title="นามสกุล"
+                                            type="text"
+                                            name="lastname"
+                                            register={register}
+                                            error={errors.lastname}
+                                            placeholder="นามสกุล"
+                                        />
+                                    </Col>
+                                    <input name="gender" type="string" ref={register} hidden />
+                                    <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
+                                        <p className={style.textNormal}>วันเดือนปีเกิด</p>
+                                        <Controller
+                                            as={
+                                                <DatePicker placeholder="" disabled />
                                             }
-                                        </Select>
-                                    }
-                                    name="subject"
-                                    control={control}
-                                    placeholder="วิชาที่สอน"
-                                    defaultValue={[]}
-                                />
-                                {
-                                    errors.subject && <p className="error-input">{errors.subject.message}</p>
-                                }
+                                            name="dateOfBirth"
+                                            control={control}
+                                            defaultValue={moment()}
+                                            placeholder="วันเดือนปีเกิด"
+                                        />
+                                        {
+                                            errors.dateOfBirth && <p className="error-input">{errors.dateOfBirth.message}</p>
+                                        }
+                                    </Col>
+
+                                    <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
+                                        <p className={style.textNormal}>วิชาที่สอน (สอนได้มากสุด 3 วิชา)</p>
+                                        <Controller
+                                            as={
+                                                <Select name="subject" optionLabelProp="label" mode="multiple" >
+                                                    {
+                                                        Object.entries(defaultValue.subject).map(([key]) => (
+                                                            <Select.Option key={key} value={key}>{key}</Select.Option>
+                                                        ))
+                                                    }
+                                                </Select>
+                                            }
+                                            name="subject"
+                                            control={control}
+                                            placeholder="วิชาที่สอน"
+                                            defaultValue={[]}
+                                        />
+                                        {
+                                            errors.subject && <p className="error-input">{errors.subject.message}</p>
+                                        }
+                                    </Col>
+                                </Row>
                             </Col>
                         </Row>
-                        <Row className={style.paddingEdit}>
-                            <span className={`${style.marginTop} ${style.titleH4}`}>ช่องทางในการติดต่อ</span>
-                        </Row>
-                        <Row className={style.paddingEdit} justify="space-between">
-                            <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
+
+                        <Row justify="space-between" className={style.marginTop} style={{ paddingTop: !isMobile() ? "1.5rem" : "0rem" }}>
+                            <Col span={24}>
+                                <span className={`${style.marginTop} ${style.titleH3}`}>ช่องทางในการติดต่อ</span>
+                            </Col>
+                            <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
                                 <InputComponents
                                     title="อีเมล"
                                     type="email"
@@ -201,7 +210,7 @@ export default function EditProfileDetail() {
                                     placeholder="อีเมล"
                                 />
                             </Col>
-                            <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
+                            <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
                                 <InputComponents
                                     title="Facebook"
                                     type="text"
@@ -211,7 +220,7 @@ export default function EditProfileDetail() {
                                     placeholder="facebook"
                                 />
                             </Col>
-                            <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
+                            <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
                                 <InputComponents
                                     title="Line ID"
                                     type="text"
@@ -221,7 +230,7 @@ export default function EditProfileDetail() {
                                     placeholder="line"
                                 />
                             </Col>
-                            <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
+                            <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
                                 <InputComponents
                                     title="หมายเลขโทรศัพท์"
                                     type="text"
@@ -231,10 +240,8 @@ export default function EditProfileDetail() {
                                     placeholder="เบอร์โทรศัพท์"
                                 />
                             </Col>
-                        </Row>
-                        <Row className={style.paddingEdit} justify="space-between">
-                            <Col className={style.marginTop20} lg={24} sm={24} md={24} xs={24}>
-                                <p>ข้อความแนะนำตัว</p>
+                            <Col className={style.marginTop20} xl={24} lg={24} sm={24} md={24} xs={24}>
+                                <p className={style.textNormal}>ข้อความแนะนำตัว</p>
                                 <Controller
                                     as={
                                         <TextArea className="input" name="introduce" size="large" />

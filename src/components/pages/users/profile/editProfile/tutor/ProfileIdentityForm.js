@@ -126,7 +126,7 @@ export default function ProfileIdentityForm() {
                         )
                     }
             <ModalComponent />
-            <div className={style.body}>
+            <div className={style.container}>
                 {
                     !isMobile() && (
                         <Row justify="center" >
@@ -136,13 +136,13 @@ export default function ProfileIdentityForm() {
                 }
 
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Row justify={isMobile() ? "center" : "space-between"}>
+                    <Row justify={isMobile() ? "center" : "space-around"}>
                         {
                             listInput && listInput.map((item) => (
-                                <Col lg={7} md={24} sm={22} xs={22} className={style.marginTop20} key={item.name} >
+                                <Col lg={6} md={24} sm={22} xs={22} className={style.marginTop20} key={item.name} >
                                     <div className={style.alignPageIdentity}>
                                         <div className="imageUpload" >
-                                            <p>{item.title}</p>
+                                            <p className={style.textNormal}>{item.title}</p>
                                             <label htmlFor={`file-input-${item.name}`} className="icon-addimage">
                                                 <Image
                                                     className={`${style.borderImage} ${style.HDImage}`}

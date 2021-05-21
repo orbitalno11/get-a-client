@@ -1,4 +1,5 @@
 import React,{ Fragment } from "react";
+import style  from "../../stylesDefault.module.scss"
 
 const InputComponents = ({ title, type, name, register, error, value, placeholder, required, min }) => {
     const _title = title && title;
@@ -14,7 +15,7 @@ const InputComponents = ({ title, type, name, register, error, value, placeholde
         <Fragment>
             {
                 <div>
-                    <p>{_title}</p>
+                    <p className={style.textNormal}>{_title}</p>
                     <input
                         className="input"
                         type={_type}

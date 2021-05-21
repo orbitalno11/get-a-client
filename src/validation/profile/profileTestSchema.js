@@ -1,22 +1,11 @@
 import * as yup from "yup";
-import isEmpty from "../../components/defaultFunction/checkEmptyObject";
 import { defaultValue } from "../../components/defaultValue";
 
-export const profileTestSchema = (edit) => {
+export const profileTestSchema = () => {
     const schema = yup.object().shape({
         image1: yup
         .string()
-        .test(
-            "is_upload",
-            "กรุณาเพิ่มเอกสารยืนยันคะแนนการสอบ อย่างน้อย 1 รูป",
-            (value) => {
-                if (edit) {
-                    return true
-                } else {
-                    return !isEmpty(value) 
-                }
-            }
-        ),
+        .required("กรุณาเพิ่มเอกสารยืนยันคะแนนการสอบ อย่างน้อย 1 รูป"),
         test: yup
             .string()
             .nullable()

@@ -18,10 +18,11 @@ import { profileUpdateIdentitySchema } from "../../../../../../validation/profil
 import resizeImage from  "../../../../../defaultFunction/resizeImage"
 import { sizeModal } from "../../../../../modal/SizeModal"
 import { typeModal } from "../../../../../modal/TypeModal"
+import Loading from "../../../../../loading/Loading"
 
 export default function ProfileIdentityForm() {
     const dispatch = useDispatch()
-    const { profile } = useSelector(state => state)
+    const { profile, loading } = useSelector(state => state)
     const [image, setImage] = useState({
         "idCard": {},
         "face": {},
@@ -119,6 +120,11 @@ export default function ProfileIdentityForm() {
     return (
         <Fragment>
             {isMobile() && <Header title="ยืนยันตัวตน" pageBack="goback" />}
+            {
+                        loading.loading && (
+                            <Loading />
+                        )
+                    }
             <ModalComponent />
             <div className={style.body}>
                 {

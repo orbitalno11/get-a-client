@@ -22,7 +22,7 @@ import Loading from "../../../../../loading/Loading";
 
 export default function EditProfileMap() {
     const dispatch = useDispatch()
-    const { profile, loading, auth } = useSelector(state => state)
+    const { profile, loading } = useSelector(state => state)
     const [address, setAddress] = useState(null)
     const [initalLocation, setInitalLocation] = useState(null)
     const [stageCurrentLocation, setStageCurrentLocation] = useState({
@@ -182,7 +182,7 @@ export default function EditProfileMap() {
 
     return (
         <Fragment>
-            {isMobile() && <Header title="แก้ไขสถานที่" pageBack={"/learner/" + auth.profile} />}
+            {isMobile() && <Header title="แก้ไขสถานที่"  pageBack={"goback"} />}
             <ModalComponent />
             {
                 loading.loading && (

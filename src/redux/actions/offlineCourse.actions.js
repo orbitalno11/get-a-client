@@ -45,22 +45,23 @@ function createOfflineCourse(data){
             dispatch(modalAction.openModal({
                 text: "สร้างคอร์สเรียนสำเร็จ",
                 size: sizeModal.small,
-                alert: typeModal.corrent
+                alert: typeModal.corrent,
+                afterClose: "/tutor/course"
             }))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
             dispatch(failure(err.response.data))
-            console.log(err.response.data)
             dispatch(modalAction.openModal({
                 text: "สร้างคอร์สเรียนไม่สำเร็จ",
                 size: sizeModal.small,
-                alert: typeModal.wrong
+                alert: typeModal.wrong,
+                afterClose: "/tutor/course"
             }))
         })
     }
 
-    function success() { return { type: offlineCourseConstants.CREATE_OFFLINE_COURSE } }
-    function failure(err) { return { type: offlineCourseConstants.CREATE_OFFLINE_FAILURE, payload: err } }
+    function success() { return { type: offlineCourseConstants.CREATE_OFFLINE_COURSE_SUCCESS } }
+    function failure(err) { return { type: offlineCourseConstants.CREATE_OFFLINE_COURSE_FAILURE, payload: err } }
 }
 
 function getOfflineCourse(id) {

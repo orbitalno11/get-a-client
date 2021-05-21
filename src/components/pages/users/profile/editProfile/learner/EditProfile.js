@@ -74,7 +74,7 @@ export default function EditProfile() {
 
     return (
         <Fragment>
-            {isMobile() && <Header title="แก้ไข" pageBack={"/tutor/" + auth.profile} />}
+            {isMobile() && <Header title="แก้ไข" pageBack={"goback"} />}
             <ModalComponent />
             {
                 loader && (

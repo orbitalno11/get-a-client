@@ -7,6 +7,7 @@ import { useHistory } from "react-router";
 import { color } from "../defaultValue";
 import { Fragment } from "react";
 import ProfileSample from "../images/profile.webp"
+
 export default function CardCourseLearner({ data, verizontal }) {
     const history = useHistory();
 

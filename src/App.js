@@ -32,6 +32,7 @@ import ProfileDetail from "./components/pages/users/profile/profile/tutor/pubile
 import ReviewPage from "./components/pages/users/review/ReviewPage";
 import Coins from "./components/pages/users/coins/learner/Coin"
 import Payment from "./components/pages/users/coins/learner/Payment"
+import QRCode from "./components/pages/users/coins/learner/QRCode"
 import HistoryCoin from "./components/pages/users/coins/learner/HistoryCoin"
 import Redeem from "./components/pages/users/coins/tutor/Redeem"
 import Notification from "./components/pages/users/notifications/Notification"
@@ -72,6 +73,7 @@ function App() {
           <PrivateRoute exact path="/learner/:id/edit/map" component={EditProfileMap} />
           <PrivateRoute exact path="/coin" component={Coins} />
           <PrivateRoute exact path="/coinshop/payment" component={Payment} />
+          <PrivateRoute exact path="/coinshop/payment/qrcode" component={QRCode} />
           <PrivateRoute exact path="/historycoin" component={HistoryCoin}/>
           <PrivateRoute exact path="/tutor/coin" component={Redeem} />
           <PrivateRoute exact path="/notification" component={Notification} />

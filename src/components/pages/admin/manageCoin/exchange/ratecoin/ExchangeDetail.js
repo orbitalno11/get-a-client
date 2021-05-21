@@ -25,7 +25,7 @@ export default function ExchangeDetail() {
     // value
   };
 
-  const list = useSelector((state) => state.coin.data);
+  const list = useSelector((state) => state.coin.rateCoin);
 
   useEffect(() => {
     dispatch(coinAction.getCoinRatesAdmin());

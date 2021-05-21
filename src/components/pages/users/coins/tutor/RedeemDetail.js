@@ -11,7 +11,7 @@ import { coinAction } from "../../../../../redux/actions";
 export default function RedeemDetail() {
   const dispatch = useDispatch();
 
-  const list = useSelector((state) => state.coin.data);
+  const list = useSelector((state) => state.coin.rateCoin);
 
   useEffect(() => {
     dispatch(coinAction.getCoinRatesTutor());

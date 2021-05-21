@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { modalAction, coinAction } from "../../../../../../redux/actions";
 import ModalComponent from "../../../../../modal/ModalComponent";
 import { sizeModal } from "../../../../../modal/SizeModal";
-import { typeModal } from "../../../../../modal/TypeModal";
 import Edit from "./Edit";
 import Delete from "./Delete";
 
@@ -21,11 +20,18 @@ export default function Price() {
 
   const dispatch = useDispatch();
 
-  const onSubmit = () => {
-    // valu
-  };
+  const onSubmit = (data) => {
+    if(data){
+      const data ={
+        "baht": data.baht,
+        "coin": data.coin,
+        "type": "std",
+      }
+    }
+    dispatch(coinAction.CreateCost(data))
+  }
 
-  const list = useSelector((state) => state.coin.data);
+  const list = useSelector((state) => state.coin.rateCoin);
 
   useEffect(() => {
     dispatch(coinAction.getCoinRatesAdmin());
@@ -34,7 +40,7 @@ export default function Price() {
   function ComponentSample() {
     return (
       <div style={{ paddingLeft: "1rem" }}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit()}>
           <p className={style.titleH5}>เพิ่มอัตราการซื้อเหรียญ</p>
           <Row style={{ paddingTop: "1rem", marginBottom: "1.8rem" }}>
             <Col span={9}>
@@ -64,7 +70,7 @@ export default function Price() {
                 <p className="error-input">{errors.coin.message}</p>
               )}
             </Col>
-            <Col span={2}>coins</Col>
+            <Col span={2}>coin</Col>
           </Row>
         </form>
         <Row className={style.btnRequest}>
@@ -75,7 +81,7 @@ export default function Price() {
               size="middle"
               style={{ width: "100px" }}
               htmlType="submit"
-              onClick={() => alert()}
+              onClick={() => onSubmit()}
             >
               ยอมรับ
             </Button>
@@ -95,16 +101,6 @@ export default function Price() {
       </div>
     );
   }
-
-  const alert = () => {
-    dispatch(
-      modalAction.openModal({
-        text: "ดำเนินการสำเร็จ",
-        size: sizeModal.small,
-        alert: typeModal.corrent,
-      })
-    );
-  };
 
   const component = () => {
     dispatch(

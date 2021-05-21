@@ -1,46 +1,75 @@
-import React, { Fragment } from "react";
-import { Grid, Table, Col} from "antd";
+import React, { Fragment, useEffect } from "react";
+import { Grid, Table, Col } from "antd";
 import style from "../styles.module.scss";
+import { coinAction } from "../../../../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
 const { useBreakpoint } = Grid;
-const { Column } = Table;
-
-const data = [
-  {
-    key: "1",
-    date: "31 ธันวาคม 2563",
-    status: "เติมเหรียญ",
-    coin: "169",
-  },
-  {
-    key: "2",
-    date: "1 มกราคม 2564",
-    status: "จ่ายเหรียญ",
-    coin: "30",
-  },
-  {
-    key: "3",
-    date: "30 มกราคม 2564",
-    status: "จ่ายเหรียญ",
-    coin: "40",
-  },
-];
 
 export default function TableHistory() {
   const screens = useBreakpoint();
+  const dispatch = useDispatch();
+
+  const list = useSelector((state) => state.coin.coinUser);
+
+  useEffect(() => {
+    dispatch(coinAction.getCoinTransaction());
+  }, []);
+
+  useEffect(() => {
+    console.log(list);
+  }, [list]);
+
+  const data =
+    list && list
+    .map((data, index) => ({
+      Id: index + 1,
+      date: moment(data.startDate).format("MM/DD/YYYY"),
+      coin: data.numberOfCoin,
+    }));
+
+  const columns = [
+    {
+      title: "ลำดับ",
+      dataIndex: "Id",
+      key: "Id",
+      align: "center",
+    },
+    {
+      title: "วันที่และเวลา",
+      dataIndex: "date",
+      key: "date",
+      align: "center",
+    },
+    {
+      title: "การดำเนินการ",
+      dataIndex: "",
+      key: "status",
+      align: "center",
+    },
+    {
+      title: "จำนวนเหรียญ",
+      dataIndex: "coin",
+      key: "coin",
+      align: "center",
+    },
+  ];
+
   return (
     <Fragment>
-      <div className={style.coinbody}>
+      <div className={style.paddingbody} >
         {screens.md && (
-          <Col lg={24} xl={24} md={24} style={{marginBottom:"1rem"}}>
+          <Col lg={24} xl={24} md={24}>
             <span className={style.titleH2}>ประวัติการซื้อเหรียญ</span>
           </Col>
         )}
-        <Table dataSource={data} className={style.tablecoin} >
-          <Column title="ลำดับ" dataIndex="key" key="key" align="center"/>
-          <Column title="วันที่" dataIndex="date" key="date" align="center"/>
-          <Column title="การดำเนินการ" dataIndex="status" key="status" align="center" />
-          <Column title="จำนวนเหรียญ" dataIndex="coin" key="coin" align="center" />
-        </Table>
+      </div>
+      <div className={style.coinbody}>
+        <Table
+          columns={columns}
+          dataSource={data}
+          className={style.tablecoin}
+        />
       </div>
     </Fragment>
   );

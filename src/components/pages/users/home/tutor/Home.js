@@ -9,6 +9,7 @@ import { tutorAction } from "../../../../../redux/actions/tutor.actions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { coinAction } from "../../../../../redux/actions";
+import { Link } from "react-router-dom";
 const { useBreakpoint } = Grid;
 
 export default function Home() {
@@ -101,7 +102,9 @@ export default function Home() {
                                     </Space>
                                 </div>
                                 <div className={style.marginSection}>
-                                <Button className={`${style.buttonColor} ${style.textOne25}`} style={styleComponent.buttonFull(color.yellow)}>จัดการเหรียญ</Button>
+                                <Link to="/redeem">
+                                    <Button className={`${style.buttonColor} ${style.textOne25}`} style={styleComponent.buttonFull(color.yellow)}>จัดการเหรียญ</Button>
+                                </Link>
                                 </div>
                             </div>
                         </Col>

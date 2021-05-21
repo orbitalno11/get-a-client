@@ -1,15 +1,12 @@
 import React, { Fragment } from "react"
 import { Menu, Button, Row, Col } from "antd";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {
     faHome,
     faChalkboardTeacher,
-    faSearch,
-    faHeart,
     faUserCircle,
     faTachometerAlt,
     faGraduationCap,
-    faBell
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -37,7 +34,7 @@ const NavMenu = () => {
                     <NavLink to="/tutor">
                         ติวเตอร์
                 </NavLink></Menu.Item>
-                <Menu.Item key="/course" >
+                {/* <Menu.Item key="/course" >
                     <NavLink to="/course">
                         คอร์สเรียน
                 </NavLink>
@@ -46,7 +43,7 @@ const NavMenu = () => {
                     <NavLink to="/search">
                         ค้นหา
                 </NavLink>
-                </Menu.Item>
+                </Menu.Item> */}
                 {
                     status ? (
                         <Menu.Item key={profileLearnerURL} >
@@ -82,11 +79,11 @@ const NavMenu = () => {
                         จัดการคอร์สเรียน
                 </NavLink>
                 </Menu.Item>
-                <Menu.Item key="/notification"  >
+                {/* <Menu.Item key="/notification"  >
                     <NavLink to="/notification">
                         แจ้งเตือน
                 </NavLink>
-                </Menu.Item>
+                </Menu.Item> */}
                 {
                     status ? (
                         <Menu.Item key={profileTutorURL} >
@@ -123,7 +120,7 @@ const NavMenu = () => {
                         <FontAwesomeIcon icon={faChalkboardTeacher} className="icon" />
                     </NavLink>
                 </Col>
-                <Col span={4} className="iconMenu">
+                {/* <Col span={4} className="iconMenu">
                     <NavLink to="/">
                         <FontAwesomeIcon icon={faSearch} className="icon" />
                     </NavLink>
@@ -132,7 +129,7 @@ const NavMenu = () => {
                     <NavLink to="/favorite">
                         <FontAwesomeIcon icon={faHeart} className="icon" />
                     </NavLink>
-                </Col>
+                </Col> */}
                 <Col span={4} className="iconMenu">
                     <NavLink to={profileLearnerURL}>
                         <FontAwesomeIcon icon={faUserCircle} className="icon" />
@@ -148,6 +145,11 @@ const NavMenu = () => {
     const ToturMenuMobile = () => {
         return (
             <Row justify="space-around">
+                 <Col span={4} className="iconMenu">
+                    <NavLink to="/">
+                        <FontAwesomeIcon icon={faHome} className="icon" />
+                    </NavLink>
+                </Col>
                 <Col span={6.5} className="iconMenu">
                     <NavLink to="/tutor">
                         <FontAwesomeIcon icon={faTachometerAlt} className="icon" />
@@ -159,16 +161,16 @@ const NavMenu = () => {
                         <FontAwesomeIcon icon={faGraduationCap} className="icon" />
                     </NavLink>
                 </Col>
-                <Col span={6.5} className="iconMenu">
+                {/* <Col span={6.5} className="iconMenu">
                     <NavLink to="/">
                         <FontAwesomeIcon icon={faChalkboardTeacher} className="icon" />
                     </NavLink>
-                </Col>
-                <Col span={6.5} className="iconMenu">
+                </Col> */}
+                {/* <Col span={6.5} className="iconMenu">
                     <NavLink to="/">
                         <FontAwesomeIcon icon={faBell} className="icon" />
                     </NavLink>
-                </Col>
+                </Col> */}
                 <Col span={4} className="iconMenu">
                     <NavLink to={ profileTutorURL }>
                         <FontAwesomeIcon icon={faUserCircle} className="icon" />
@@ -181,9 +183,9 @@ const NavMenu = () => {
     const MenuDesktop = () => {
         return (
             <nav className="menuBar">
-                <div  >
+                <Link to="/">
                     <span className="logo">GET-A</span>
-                </div>
+                </Link>
                 <div className="floatRight">
                     <Row>
                         <Col >

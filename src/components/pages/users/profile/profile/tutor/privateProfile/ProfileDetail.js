@@ -87,7 +87,7 @@ export default function ProfileDetail() {
                             <SkeletonComponent.SkeletonText size="default" />
                         )
                     }
-                    <Link className={style.floatLeft} to={`/learner/${auth.profile}/edit/map`}>
+                    <Link className={style.floatLeft} to={`/tutor/${auth.profile}/edit/map`}>
                         <Button className="buttonColor backgroundBlue" style={{ width: "100px" }} shape="round" size="middle">แก้ไข</Button>
                     </Link>
                 </div>

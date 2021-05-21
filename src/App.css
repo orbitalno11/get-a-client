@@ -131,14 +131,9 @@ input :focus{
 }
 
 .logo {
-  float: left;
   color: var(--white-color) ;
-  font-weight: 700;
-  width: 100%;
-  height: 3.125rem;
-  display: flex;
-  align-items: center;
-  font-size: 18pt;
+  font-weight: 800;
+  font-size: 2.5rem;
 }
 
 .ant-menu-horizontal > .ant-menu-item:hover,

@@ -43,8 +43,8 @@ export default function PaymentDetail() {
           <div style={{marginTop:"1rem"}}>
             <Radio.Group onChange={onChange} value={value}>
               <Space direction="vertical">
-                <Radio value={1}>SCB Easy App</Radio>
-                <Radio value={2}>QR CODE</Radio>
+                <Radio value={1}>SCB Easy App &ensp; <span className={style.textSmall} style={{color:"red"}}>*เหมาะสมหรับใช้งานบนมือถือ</span> </Radio>
+                <Radio value={2}>QR CODE </Radio> 
               </Space>
             </Radio.Group>
           </div>

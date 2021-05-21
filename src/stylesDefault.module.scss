@@ -83,11 +83,6 @@ $silver : #a39b9b;
     @extend .paddingBottomBody;
 }
 
-.borderOrange{
-    border: 0.2rem solid $orange;
-    border-radius: 6%;
-    padding: 1.25rem;
-}
 
 .horizontalCenter {
     display: flex !important;
@@ -103,4 +98,16 @@ $silver : #a39b9b;
     display: flex;
     align-items: center;
     justify-content: center
+}
+.borderImage{
+    border: 0.15rem solid  !important;
+    border-color : $orange !important;
+    border-radius: 0.75rem;
+    padding : 0.5rem;
+    background-color: rgba($color: $gray, $alpha: 0.22);
+}
+
+.HDImage {
+  width: 320px !important;
+  height: 180px !important;
 }

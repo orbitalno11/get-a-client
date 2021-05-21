@@ -81,7 +81,7 @@ function getHandleProfile() {
 }
 
 function updateProfileLearner(data, profileId) {
-    
+
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.post(`/me`,data, {
@@ -109,7 +109,98 @@ function updateProfileLearner(data, profileId) {
     }
 
     function success() { return { type: profileConstants.UPDATE_PROFILE_SUCCESS } }
-    function failure(err) { return { type: profileConstants.UPDATE_PROFILE_SUCCESS, payload : err} }
+    function failure(err) { return { type: profileConstants.UPDATE_PROFILE_SUCCESS, payload: err } }
+}
+
+function getIdentifyTutor() {
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiURL.apiGetA.get("/me/identity").then((res) => {
+            const data = res.data.data
+            if(data){
+                dispatch(loadingActions.stopLoading())
+                dispatch(success(data.verifiedData))
+            }
+           
+        }).catch((err) => {
+            dispatch(loadingActions.stopLoading())
+            console.log(err.response.data)
+            dispatch(failure(err.response.data))
+        })
+
+    }
+    function success(data) { return { type: profileConstants.GET_IDENTIFY_TUTOR_SUCCESS, payload : data} }
+    function failure(err) { return { type: profileConstants.GET_IDENTIFY_TUTOR_FAILURE, payload: err } }
+}
+
+
+function updateIdentifyTutor(data) {
+    return async dispatch => {
+     
+        dispatch(loadingActions.startLoading())
+        await apiURL.apiGetA.post("/me/identity/update", data, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            }
+        }).then(() => {
+            dispatch(loadingActions.stopLoading())
+            dispatch(success())
+            dispatch(getIdentifyTutor())
+            dispatch(modalAction.openModal({
+                text: "แก้ไขข้อมูลสำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.corrent
+            }))
+
+        }).catch((err) => {
+            dispatch(loadingActions.stopLoading())
+            console.log(err.response.data)
+            dispatch(failure(err.response.data))
+            dispatch(modalAction.openModal({
+                text: "แก้ไขข้อมูลไม่สำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.wrong
+            }))
+        })
+
+    }
+    function success() { return { type: profileConstants.UPDATE_IDENTIFY_TUTOR_SUCCESS} }
+    function failure(err) { return { type: profileConstants.UPDATE_IDENTIFY_TUTOR_FAILURE, payload: err } }
+}
+
+
+function createIdentifyTutor(data) {
+    return async dispatch => {
+     
+        dispatch(loadingActions.startLoading())
+        await apiURL.apiGetA.post("/me/identity", data, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            }
+        }).then(() => {
+            dispatch(loadingActions.stopLoading())
+            dispatch(success())
+            dispatch(getIdentifyTutor())
+            dispatch(modalAction.openModal({
+                text: "แก้ไขข้อมูลสำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.corrent,
+            }))
+
+        }).catch((err) => {
+            dispatch(loadingActions.stopLoading())
+            console.log(err.response.data)
+            dispatch(failure(err.response.data))
+            dispatch(modalAction.openModal({
+                text: "แก้ไขข้อมูลไม่สำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.wrong
+            }))
+        })
+
+    }
+    function success() { return { type: profileConstants.CREATE_IDENTIFY_TUTOR_SUCCESS} }
+    function failure(err) { return { type: profileConstants.CREATE_IDENTIFY_TUTOR_FAILURE, payload: err } }
 }
 
 function setAddress(address) {
@@ -178,5 +269,8 @@ export const profileAction = {
     getHandleProfile,
     updateProfileLearner,
     setAddress,
-    getAddress
+    getAddress,
+    getIdentifyTutor,
+    createIdentifyTutor,
+    updateIdentifyTutor
 }

@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import style from '../../styles.module.scss'
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { faFacebook, faLine } from "@fortawesome/free-brands-svg-icons";
 import ProfileSample from "../../../../../images/profile.webp"
@@ -39,7 +39,7 @@ export default function ProfileDetail() {
                     src={profileDetail ? profileDetail.profileUrl : ProfileSample}
                     preview={false}
                 />
-                <NavLink to={`/learner/${auth.profile}/edit`}>
+                <Link to={`/learner/${auth.profile}/edit`}>
 
                     <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[12, 0]}>
                         <h2 className={`${style.marginLeft} ${style.titleH3}`}>
@@ -52,9 +52,7 @@ export default function ProfileDetail() {
                             }
                         </h2>
                     </Badge>
-
-
-                </NavLink>
+                </Link>
             </div>
             {/* hide coin section */}
             {/* <div className={style.subProfile}> */}
@@ -91,9 +89,9 @@ export default function ProfileDetail() {
                     }
 
                     <div className={style.floatLeft}>
-                        <NavLink to={`/learner/${auth.profile}/edit/map`}>
+                        <Link to={`/learner/${auth.profile}/edit/map`}>
                             <Button className="backgroundBlue buttonColor" shape="round" size="middle" style={{ width: "100px" }}>แก้ไข</Button>
-                        </NavLink>
+                        </Link>
                     </div>
                 </div>
             </div>

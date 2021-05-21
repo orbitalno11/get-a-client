@@ -14,7 +14,7 @@ import { useEffect } from "react";
 
 export default function Login() {
     const dispatch = useDispatch()
-    const auth = useSelector(state => state.auth)
+    const loading = useSelector(state => state.loading)
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(loginSchema),
     });

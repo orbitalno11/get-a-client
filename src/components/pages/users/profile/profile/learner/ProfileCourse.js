@@ -24,55 +24,52 @@ export default function ProfileCourse() {
                     date: "1 มกราคม 2563"
                 }
             ],
-        course: [{
-            name: "พิคาชู หนูเทพซาโตชิ",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
-        }]
+        course: null
     })
 
     const TabTutor = () => {
         return (
-            <Row className={style.marginTop20} justify={!screens.xl && "space-around"}>
-                {
-
-                    course.tutor ?
-                        (
-                            course.tutor.map((item, index) => (
-                                <Col xs={24} sm={20} md={24} lg={20} xl={12} className={style.padding} key={index} >
-                                    <CardCourseLearner data={item} />
-                                </Col>
-                            ))
-                        )
-                        :
-                        (
-                            <span className={style.titleH5}>ยังไม่เคยเรียนพิเศษ</span>
-                        )
-                }
-            </Row>
-        )
+            course.tutor ?
+            (
+                <Row className={style.marginTop20} justify={!screens.xl && "space-around"} >
+                    {
+                        course.tutor.map((item, index) => (
+                            <Col xs={24} sm={20} md={24} lg={20} xl={12} className={style.padding} key={index} >
+                                <CardCourseLearner data={item} />
+                            </Col>
+                        ))
+                    }
+                </Row>
+            )
+            :
+            (
+                <Row className={style.marginTop20} justify="space-around">
+                    <span className={style.textNormal}>คุณยังไม่ได้เรียนพิเศษกับใคร? ค้นหาครูสอนพิเศษ</span>
+                </Row>
+            )
+    )
     }
 
     const TabCourse = () => {
         return (
-            <Row  className={style.marginTop20} justify={!screens.xl && "space-around"}>
-                {
-
-                    course.course ?
-                        (
+            course.course ?
+                (
+                    <Row className={style.marginTop20} justify={!screens.xl && "space-around"} >
+                        {
                             course.course.map((item, index) => (
                                 <Col xs={24} sm={20} md={24} lg={20} xl={12} className={style.padding} key={index} >
                                     <CardCourseLearner data={item} />
                                 </Col>
                             ))
-                        )
-                        :
-                        (
-                            <span className={style.titleH5}>ยังไม่เคยเรียนพิเศษ</span>
-                        )
-                }
-            </Row>
+                        }
+                    </Row>
+                )
+                :
+                (
+                    <Row className={style.marginTop20} justify="space-around">
+                        <span className={style.textNormal}>คุณยังไม่ได้เรียนพิเศษกับใคร? ค้นหาครูสอนพิเศษ</span>
+                    </Row>
+                )
         )
     }
 

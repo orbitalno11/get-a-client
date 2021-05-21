@@ -1,0 +1,4 @@
+  export const homeConstants = {
+    GET_RANK_HOME_SUCCESS   : "GET_RANK_HOME_SUCCESS",
+    GET_RANK_HOME_FAILURE   : "GET_RANK_HOME_FAILURE",
+}

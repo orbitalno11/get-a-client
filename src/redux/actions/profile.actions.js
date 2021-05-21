@@ -81,7 +81,6 @@ function getHandleProfile() {
 }
 
 function updateProfileLearner(data, profileId) {
-
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.post(`/me`,data, {

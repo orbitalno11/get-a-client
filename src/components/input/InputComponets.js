@@ -1,6 +1,6 @@
 import React,{ Fragment } from "react";
 
-const InputComponents = ({ title, type, name, register, error, value, placeholder, required }) => {
+const InputComponents = ({ title, type, name, register, error, value, placeholder, required, min }) => {
     const _title = title && title;
     const _type = type && type;
     const _name = name ? name : "name"
@@ -23,6 +23,7 @@ const InputComponents = ({ title, type, name, register, error, value, placeholde
                         value={value}
                         placeholder={_placeholder}
                         required = {_required}
+                        min = {min && min}
                     />
                     {
                         _error && <p className="error-input">{_errorMessage}</p>

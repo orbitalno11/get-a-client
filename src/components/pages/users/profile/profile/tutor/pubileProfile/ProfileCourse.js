@@ -1,32 +1,41 @@
 import { Col, Row } from "antd"
-import Title from "antd/lib/typography/Title"
 import React, { Fragment } from "react"
+import { useSelector } from "react-redux"
 import CardCourseTutor from "../../../../../../card/CardCourseTutor"
-import isMobile from "../../../../../../isMobile/isMobile"
+import isEmpty from "../../../../../../defaultFunction/checkEmptyObject"
+import EmptyImage from "../../../../../../loading/EmptyImage"
 import style from "../../../styles.module.scss"
 
 export default function ProfileCourse() {
-    // When the profile use?
-    // const data = useSelector(state => state.profile)
-    // const [profile, setProfile] = useState(null)
-    //
-    // useEffect(() => {
-    //     setProfile(data.profileHandle)
-    // }, [data])
+    const { offlineCourse } = useSelector(state => state.tutor)
+    const loading = useSelector(state => state.loading)
 
     return (
         <Fragment>
             <div className={style.marginTop}>
-                <Row justify="space-around" align="middle" className={isMobile() ? style.paddingbody : style.contrainnerProfilePubile}>
+                <Row className={style.paddingbody}>
                     <Col span={24}>
-                        <Title level={4}>วิชาที่สอน</Title>
+                        <span className={style.titleH3}>วิชาที่สอน</span>
                     </Col>
-                    <Col xs={24} sm={20} md={23} lg={20} xl={12} className={style.padding}>
-                        <CardCourseTutor />
-                    </Col>
-                    <Col xs={24} sm={20} md={23} lg={20} xl={12} className={style.padding}>
-                        <CardCourseTutor />
-                    </Col>
+                    {
+                        offlineCourse.success && (
+                            !isEmpty(offlineCourse.data) ? (
+                                offlineCourse.data.map((item) => (
+                                    <Col xs={24} sm={24} md={24} lg={20} xl={12} className={style.padding} key={item.id}>
+                                        <CardCourseTutor data={item} />
+                                    </Col>
+                                ))) : (
+                                !loading.loading && (
+                                    <div align="center">
+                                        <EmptyImage size="small" />
+                                        <span className={style.marginTop20}>ยังไม่มีคอร์สเรียน</span>
+                                    </div>
+                                )
+
+                            )
+                        )
+
+                    }
                 </Row>
             </div>
         </Fragment>

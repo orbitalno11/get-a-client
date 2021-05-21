@@ -1,9 +1,14 @@
 @import "../../stylesDefault.module.scss";
 
+.card{
+  border: 0.15rem solid $orange;
+  border-radius: 1.5rem;
+  cursor: pointer;
+}
+
 .cardRound{
-    border: 0.2rem solid $orange;
-    border-radius: 1.5rem;
-    cursor: pointer;
+   @extend .card;
+    width : 50%
 }
 
 .alignCenter {
@@ -13,8 +18,14 @@
 
 .image {
   border-radius: 50% !important;
-  height: 5.25rem;
-  width: 5.25rem;
+  height: 5rem;
+  width: 5rem;
+}
+
+.imageLarge {
+  border-radius: 50% !important;
+  height: 5.5rem;
+  width: 5.5rem;
 }
 
 .borderGrid {
@@ -29,18 +40,6 @@
 .gridImage {
   @extend .borderGrid;
   width: 30% !important;
-}
-
-.gridText {
-  @extend .borderGrid;
-  width: 70% !important;
-  height: 6.25rem;
-  padding-left: 2rem !important;
-}
-
-.gridButton {
-  @extend .borderGrid;
-  width: 20% !important;
 }
 
 .gridhalf {
@@ -69,13 +68,6 @@
     align-items: center;
 }
 
-.gridhalfSmall {
-  @extend .gridhalf;
-  height: auto !important;
-  padding-left: 1.25rem !important;
-
-}
-
 .icon {
   @extend .iconSmall;
   color: $gray;
@@ -87,18 +79,6 @@
     flex-flow: column;
     align-items: flex-start;
     padding-left: 2.5rem!important;
-}
-
-.gridText{
-    @extend .borderGrid ;
-    width: 70%!important;
-    height: 6.25rem;
-    padding-left: 2rem !important;
-}
-
-.textIconSmall {
-  @extend .textSmall;
-  margin-left: 0.6rem;
 }
 
 .textIcon {
@@ -131,17 +111,10 @@
 
 .floatBell{
   margin-left: auto;
-  color: $yellow !important;
-  @extend .iconNormal;
+  @extend .iconLarge;
 }
 
 .icon{
-    @extend .iconSmall;
-    color:$gray;
-    margin-right: 0.5rem
-}
-
-.iconSmall{
     @extend .iconSmall;
     color:$gray;
     margin-right: 0.5rem
@@ -182,3 +155,15 @@
   background-color: $orange;
 }
 
+.CardCourseTutor{
+  @extend .cardRound;
+   padding: 1rem;
+   width: 100%;
+   height: 10rem
+}
+
+.buttonCircleLearner{
+  @extend .buttonCircle;
+  width: 3.5rem;
+  height: 3.5rem;
+}

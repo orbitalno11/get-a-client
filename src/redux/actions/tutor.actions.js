@@ -9,7 +9,7 @@ import { modalAction } from "./modal.actions"
 function getTestings(id) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        apiURL.apiGetA.get(`/tutor/${id}/testings`).then((res) => {
+        await apiURL.apiGetA.get(`/tutor/${id}/testings`).then((res) => {
             const data = res.data.data
             dispatch(success(data))
             dispatch(loadingActions.stopLoading())
@@ -25,7 +25,7 @@ function getTestings(id) {
 function getEducations(id) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        apiURL.apiGetA.get(`/tutor/${id}/educations`).then((res) => {
+        await apiURL.apiGetA.get(`/tutor/${id}/educations`).then((res) => {
             const data = res.data.data
             dispatch(success(data))
             dispatch(loadingActions.stopLoading())
@@ -41,7 +41,7 @@ function getEducations(id) {
 function getTesting(id) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        apiURL.apiGetA.get(`/tutor/testing/${id}`).then((res) => {
+        await apiURL.apiGetA.get(`/tutor/testing/${id}`).then((res) => {
             const data = res.data.data
             let dataTesting = {}
             if(data){
@@ -70,7 +70,7 @@ function getTesting(id) {
 function getEducation(id) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        apiURL.apiGetA.get(`/tutor/education/${id}`).then((res) => {
+        await apiURL.apiGetA.get(`/tutor/education/${id}`).then((res) => {
             const data = res.data.data
             let dataEducation = {}
             if(data){
@@ -100,7 +100,7 @@ function getEducation(id) {
 function createTesting(data, profile) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        apiURL.apiGetA.post("/tutor/testing/verify", data, {
+        await apiURL.apiGetA.post("/tutor/testing/verify", data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -130,7 +130,7 @@ function createTesting(data, profile) {
 function createEducation(data, profile) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        apiURL.apiGetA.post("/tutor/education/verify", data, {
+        await apiURL.apiGetA.post("/tutor/education/verify", data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -160,7 +160,7 @@ function createEducation(data, profile) {
 function updateTesting(data, id, profile) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        apiURL.apiGetA.put(`/tutor/testing/${id}`, data, {
+        await apiURL.apiGetA.put(`/tutor/testing/${id}`, data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -190,7 +190,7 @@ function updateTesting(data, id, profile) {
 function updateEducation(data, id, profile) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        apiURL.apiGetA.put(`/tutor/education/${id}`, data, {
+        await apiURL.apiGetA.put(`/tutor/education/${id}`, data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -221,7 +221,7 @@ function updateEducation(data, id, profile) {
 function deleteTesting(id,auth) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        apiURL.apiGetA.delete(`/tutor/testing/${id}`).then(() => {
+        await apiURL.apiGetA.delete(`/tutor/testing/${id}`).then(() => {
             dispatch(success())
             dispatch(loadingActions.stopLoading())
             dispatch(getTestings(auth))
@@ -247,7 +247,7 @@ function deleteTesting(id,auth) {
 function deleteEducation(id,auth) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        apiURL.apiGetA.delete(`/tutor/education/${id}`).then(() => {
+        await apiURL.apiGetA.delete(`/tutor/education/${id}`).then(() => {
             dispatch(success())
             dispatch(loadingActions.stopLoading())
             dispatch(getEducations(auth))
@@ -271,6 +271,52 @@ function deleteEducation(id,auth) {
 }
 
 
+
+function getListOfflineCourse(id) {
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiURL.apiGetA.get(`/tutor/${id}/offline-course`)
+            .then(res => {
+                if (res.data.success) {
+                    const data = res.data.data
+                    dispatch(success(data))
+                    dispatch(loadingActions.stopLoading())
+                }
+            })
+            .catch(err => {
+                dispatch(failure(err.response.data))
+                dispatch(loadingActions.stopLoading())
+            })
+    }
+
+    function success(course) { return { type: tutorConstants.GET_LIST_OFFLINE_COURSE_SUCCESS, payload: course } }
+    function failure(err) { return { type: tutorConstants.GET_LIST_OFFLINE_COURSE_FAILURE, payload: err } }
+}
+
+function getProfileTutor(id) {
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiURL.apiGetA.get(`/tutor/${id}`)
+            .then((res) => {
+                if (res.data.success) {
+                    const data = res.data.data
+                    dispatch(success(data))
+                    dispatch(loadingActions.stopLoading())
+                }
+            }).catch(err => {
+                dispatch(failure(err.response.data))
+                dispatch(loadingActions.stopLoading())
+            })
+    }
+
+    function success(data) { return { type: tutorConstants.GET_TUTOR_PROFILE_SUCCESS, payload: data } }
+    function failure(err) { return { type: tutorConstants.GET_TUTOR_PROFILE_FAILURE, payload: err } }
+}
+
+function clearListOfflineCourse() {
+    return dispatch => { dispatch({ type: tutorConstants.CLEAR_LIST_OFFLINE_COURSE }) }
+}
+
 export const tutorAction = {
     getTestings,
     getEducations,
@@ -281,5 +327,8 @@ export const tutorAction = {
     createEducation,
     createTesting,
     deleteTesting,
-    deleteEducation
+    deleteEducation,
+    getListOfflineCourse,
+    clearListOfflineCourse,
+    getProfileTutor
 }

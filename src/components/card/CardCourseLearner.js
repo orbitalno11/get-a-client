@@ -1,47 +1,90 @@
 import React from "react"
-import { Card, Typography, Image } from "antd";
+import { Col, Image, Row } from "antd";
 import styles from "./styles.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faLocationArrow, faStar } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router";
-const { Title } = Typography;
+import { color } from "../defaultValue";
+import { Fragment } from "react";
+import ProfileSample from "../images/profile.webp"
 
-export default function CardCourseLearner({ data, profile }) {
+export default function CardCourseLearner({ data, verizontal }) {
     const history = useHistory();
-    const id ="MTH-1-12-d0a54622-bb89-49f5-a71b-93f70f469034"
-    const redirectToCoursePage = () =>{
-        history.push(`/course/${id}`)
+
+    const redirectToCoursePage = () => {
+        history.push(`/profile/${data.id}/course`)
     }
 
-    return (
-        <Card className={styles.cardRound} onClick={()=>{redirectToCoursePage()}}>
-            <Card.Grid hoverable={false} className={styles.gridImage} >
-                <Image
-                    src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-                    className={styles.image}
-                    preview={false}
-                />
-            </Card.Grid>
-            <Card.Grid hoverable={false} className={styles.gridText}>
-                <Title level={4}>{data && data.name}<br/> {data && data.name}</Title>
-            </Card.Grid>
-            <Card.Grid hoverable={false} className={styles.gridhalfSmall}>
-                <FontAwesomeIcon icon={faCoins} className={styles.iconSmall} />
-                <span className={styles.textIconSmall}>{data && data.place} </span>
-            </Card.Grid>
-            <Card.Grid hoverable={false} className={styles.gridhalfSmall}>
-                <FontAwesomeIcon icon={faCoins} className={styles.iconSmall} />
-                <span className={styles.textIconSmall}>{data && data.subject} </span>
-            </Card.Grid>
-            {
-                profile &&
-                (
-                    <Card.Grid hoverable={false} className={styles.gridfull}>
-                        <span className={styles.textIconSmall}>เริ่มเรียน  วันที่ {data && data.date} </span>
-                    </Card.Grid>
-                )
-            }
+    const styleCard = {
+        padding: "1rem",
+        width: "16rem",
+        height: "12.5rem"
+    }
 
-        </Card>
+    const styleCardVerizontal = {
+        padding: '0.5rem',
+        height: "9rem"
+    }
+    // 
+
+    return (
+        <div className={styles.card} style={verizontal ? styleCardVerizontal : styleCard} onClick={() => redirectToCoursePage()} >
+            {
+                verizontal ? (
+                    <Fragment>
+                        <Row align="middle" justify={"space-between"}>
+                            <Col span={8} >
+                                <Image
+                                    src={data ? data.pictureUrl : ProfileSample}
+                                    className={styles.imageLarge}
+                                    preview={false}
+                                />
+                            </Col>
+                            <Col span={16} align="start" style={{paddingLeft:'1rem'}}>
+                                <span className={styles.titleH5}>{data && data.fullNameText}</span>
+                                <br />
+                                <span className={styles.textSmall}>
+                                    <FontAwesomeIcon icon={faStar} className={styles.icon} style={{ color: color.yellow }} />
+                                    {data && data.rating}
+                                </span>
+                                <br />
+                                <span className={styles.textSmall}> <FontAwesomeIcon icon={faLocationArrow} className={styles.icon} /> {data.address ? data.address.district.title : "ยังไม่ได้กำหนด"}</span>
+                                <br />
+                                <span > <FontAwesomeIcon icon={faBook} className={styles.icon} /> {data && data.subject.title}</span>
+                            </Col>
+                        </Row>
+                    </Fragment>
+                )
+                    : (<Fragment>
+                        <Row align="center" >
+                            <Image
+                                src={data ? data.pictureUrl : ProfileSample}
+                                className={styles.image}
+                                preview={false}
+                            />
+                            <Col span={24} align="center">
+                                <span className={styles.titleH5}>{data && data.fullNameText}</span>
+                            </Col>
+
+                            <Col span={24} align="center">
+                                <span className={styles.textSmall}>
+                                    <FontAwesomeIcon icon={faStar} className={styles.icon} style={{ color: color.yellow }} />
+                                    {data && data.rating}
+                                </span>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col span={12} align="center">
+
+                                <span className={styles.textSmall}> <FontAwesomeIcon icon={faLocationArrow} className={styles.icon} /> {data.address ? data.address.district.title : "ยังไม่ได้กำหนด"}</span>
+                            </Col>
+                            <Col span={12} align="center">
+                                <span > <FontAwesomeIcon icon={faBook} className={styles.icon} /> {data && data.subject.title}</span>
+                            </Col>
+                        </Row>
+                    </Fragment>)
+            }
+        </div>
+
     )
 }

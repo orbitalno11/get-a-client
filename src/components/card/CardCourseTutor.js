@@ -1,42 +1,38 @@
 import React from "react"
-import { Card, Typography } from "antd";
+import { Row, Col } from "antd";
 import styles from "./styles.module.scss"
+import findKeyObject from "../defaultFunction/findKeyObject";
+import { defaultValue } from "../defaultValue";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faBookReader,
     faClock,
-    faCoins,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory } from "react-router";
-const { Title } = Typography;
 
-export default function CardCourseTutor() {
+export default function CardCourseTutor({ data }) {
     const history = useHistory();
 
-    const redirectToCoursePage = () =>{
-        history.push("/course/1")
+    const redirectToCoursePage = () => {
+        history.push(`/course/${data.id}`)
     }
 
     return (
-        <Card className={styles.cardRound} onClick={()=>{redirectToCoursePage()}}>
-            <Card.Grid hoverable={false} className={styles.gridhalf}>
-                <Title level={3}>คณิตศาสตร์</Title>
-            </Card.Grid>
-            <Card.Grid hoverable={false} className={styles.gridhalf}>
-               <span className={styles.floatRight}>5 ดาว</span> 
-            </Card.Grid>
-            <Card.Grid hoverable={false} className={styles.gridhalf}>
-                <FontAwesomeIcon icon={faBookReader} className={styles.icon}/>
-                <span className={styles.textIcon}>ม.6, Admission</span>
-            </Card.Grid>
-            <Card.Grid hoverable={false} className={styles.gridhalf}>
-            <FontAwesomeIcon icon={faCoins} className={styles.icon}/>
-                <span className={styles.textIcon}>300 บาท/ชั่วโมง</span>
-            </Card.Grid>
-            <Card.Grid hoverable={false} className={styles.gridfull}>
-            <FontAwesomeIcon icon={faClock} className={styles.icon}/>
-                <span className={styles.textIcon}>จันทร์, อังคาร 13.30น. - 16.00น.</span>
-            </Card.Grid>
-        </Card>
+        <Row className={styles.CardCourseTutor} onClick={()=>redirectToCoursePage()}>
+            <Col span={24}>
+                <span className={styles.titleH4}>{data.name}</span>
+                <span style={{ float: "right" }}> 5 ดาว</span>
+            </Col>
+
+            <Col span={12}>
+                <FontAwesomeIcon icon={faBookReader} className={styles.icon} />
+                {findKeyObject(defaultValue.grade, data.grade.grade)}, {data.subject.title}
+            </Col>
+            <Col >{data.costText}</Col>
+            <Col span={24}>
+                <FontAwesomeIcon icon={faClock} className={styles.icon} />
+                {data.timeText}
+            </Col>
+        </Row>
     )
 }

@@ -1,34 +1,35 @@
 import React, { Fragment } from "react";
-import { Row, Grid, Col, Button, Divider,Typography } from "antd";
+import { Row, Col, Button, Divider } from "antd";
 import style from "../styles.module.scss";
 import Header from "../../../../headerMobile/Header";
 import ManageCourseDetail from "./ManageCourseDetail";
 import isMobile from "../../../../isMobile/isMobile"
-const { useBreakpoint } = Grid;
-const { Link } = Typography;
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 export default function ManageClip() {
-  const screens = useBreakpoint();
-
   const floatRight = {
     marginLeft: "auto",
     display: "flex",
-    marginTop:"0.3rem"
+    marginTop: "0.3rem"
   };
+
   return (
     <Fragment>
       {isMobile() && (
-        <Header title="จัดการคลิป" />
+        <Header title="จัดการคอร์ส" />
       )}
-      <Row className={style.body}>
-        <Col md={24} lg={24} xl={24}>
-          {screens.md && (
+      <div className={style.body}>
+        <div >
+
+          {!isMobile() ? (
             <Row>
               <Col md={18} lg={19} xl={19}>
                 <span className={style.titleH2}>จัดการคอร์สเรียน</span>
               </Col>
               <Col md={6} lg={5} xl={5}>
-                <Link href="/tutor/course/create">
+                <Link to="/tutor/course/create">
                   <Button
                     className="buttonColor backgroundBlue"
                     shape="round"
@@ -37,16 +38,24 @@ export default function ManageClip() {
                   >
                     เพิ่มบทเรียน
                   </Button>
+
                 </Link>
               </Col>
               <Divider type="horizontal" className={style.dividerCourse} />
             </Row>
+          ) : (
+            <Link to={"/tutor/course/create"}>
+              <button className={style.buttonfixbottom} >
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </Link>
+
           )}
-        </Col>
-        <Col span={24}>
-          <ManageCourseDetail />
-        </Col>
-      </Row>
+        </div>
+        <ManageCourseDetail />
+      </div>
     </Fragment>
   );
 }
+
+

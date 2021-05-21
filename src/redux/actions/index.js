@@ -5,3 +5,5 @@ export * from "./offlineCourse.actions"
 export * from "./loading.actions"
 export * from "./coin.actions"
 export * from "./verify.actions"
+export * from "./tutor.actions"
+

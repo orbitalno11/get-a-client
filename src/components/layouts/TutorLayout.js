@@ -31,7 +31,7 @@ export default function UserLayout() {
                 <Route exact path="/tutor/online/{courseId}/video/{videoId}/edit" component={EditClip} />
                 <Route exact path="/tutor/:id" component={ProfileTutor} />
                 <Route exact path="/tutor/:id/edit" component={EditProfileDetail} />
-                <Route exact path="/tutor/:id/add/education" component={AddEducation} />
+                <Route exact path="/tutor/:id/add/:type/:idEducation" component={AddEducation} />
                 <Route exact path="/tutor/edit/identity" component={ProfileIdentityForm} />
 
             </Switch>

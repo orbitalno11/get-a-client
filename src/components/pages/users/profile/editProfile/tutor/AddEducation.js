@@ -1,167 +1,433 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react"
 import style from "../../styles.module.scss"
 import { Controller, useForm } from "react-hook-form";
-import { Button, Col, Row, Select, Typography } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faCloudUploadAlt
-} from "@fortawesome/free-solid-svg-icons";
+import { Alert, Button, Col, DatePicker, Image, Row, Select } from "antd";
 import { profileTestSchema, profileEducationSchema } from "../../../../../../validation/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Header from "../../../../../headerMobile/Header";
 import { useDispatch } from "react-redux";
-import { profileAction } from "../../../../../../redux/actions/profile.actions";
 import isMobile from "../../../../../isMobile/isMobile";
-const { Title } = Typography;
+import { color, defaultValue } from "../../../../../defaultValue";
+import { tutorAction } from "../../../../../../redux/actions/tutor.actions";
+import ModalComponent from "../../../../../modal/ModalComponent";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router";
+import isEmpty from "../../../../../defaultFunction/checkEmptyObject";
+import ducumentA4Sample from "../../../../../images/ducumentA4Sample.webp"
+import moment from "moment";
+import { modalAction } from "../../../../../../redux/actions";
+import { typeModal } from "../../../../../modal/TypeModal";
+import { sizeModal } from "../../../../../modal/SizeModal";
+import resizeImage from "../../../../../defaultFunction/resizeImage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function AddEducation() {
-    const [type, setType] = useState("test");
-    const [imageName, setimageName] = useState(null);
+    const params = useParams()
+    const [type, setType] = useState(String(defaultValue.typeIdentity[params.type]));
+    const { tutor, loading, auth } = useSelector(state => state)
+    const [dataDetail, setDataDetail] = useState(null)
     const dispatch = useDispatch()
+    const edit = params.idEducation !== "created"
 
-    const fetchProfile = useCallback(()=>{
-        dispatch(profileAction.getProfile())
-    },[dispatch])
+    const [imageName, setimageName] = useState([]);
+
+    const checkTypeTesting = () => {
+        return type === String(defaultValue.typeIdentity["testing"])
+    }
+
+    const { register, handleSubmit, errors, control, reset } = useForm({
+        resolver: yupResolver(checkTypeTesting() ? profileTestSchema(edit) : profileEducationSchema(edit)),
+    });
+
+    const fetchProfile = useCallback(() => {
+        if (params.idEducation && !isEmpty(type)) {
+            if (checkTypeTesting()) {
+                dispatch(tutorAction.getTesting(params.idEducation))
+            } else {
+                dispatch(tutorAction.getEducation(params.idEducation))
+            }
+        }
+    }, [type])
 
     useEffect(() => {
-        fetchProfile()
+        if (!isEmpty(defaultValue.typeIdentity[params.type])) {
+            if (edit) {
+                fetchProfile()
+            } else {
+                reset({
+                    test: "O-NET",
+                    subject: "คณิตศาสตร์",
+                })
+            }
+        } else {
+            dispatch(modalAction.openModal({
+                text: "พบปัญหาในการโหลดหน้า",
+                size: sizeModal.small,
+                alert: typeModal.wrong,
+                afterClose: "/tutor/" + auth.profile
+            }))
+        }
     }, [fetchProfile])
 
 
-    const { register, handleSubmit, errors, control } = useForm({
-        resolver: yupResolver(type === "test" ? profileTestSchema : profileEducationSchema),
-    });
+    useEffect(() => {
+        if (edit) {
+            if (checkTypeTesting()) {
+                setDataDetail(tutor.testing)
+            } else {
+                setDataDetail(tutor.education)
+            }
+        }
+
+    }, [tutor])
+
+    useEffect(() => {
+        if (edit && !isEmpty(dataDetail)) {
+            if (dataDetail.success && isEmpty(dataDetail.data)) {
+                dispatch(modalAction.openModal({
+                    text: "พบปัญหาในการโหลดข้อมูล",
+                    size: sizeModal.small,
+                    alert: typeModal.wrong,
+                    afterClose: "/tutor/" + auth.profile
+                }))
+            } else {
+                if (checkTypeTesting()) {
+                    reset({
+                        test: dataDetail.data.exam,
+                        subject: dataDetail.data.subject,
+                        score: dataDetail.data.score,
+                        year: moment(dataDetail.data.year),
+                    })
+                } else {
+                    reset({
+                        grade: dataDetail.data.grade,
+                        branch: dataDetail.data.branch,
+                        institute: dataDetail.data.institute,
+                        gpax: dataDetail.data.gpax,
+                        status: dataDetail.data.status,
+                    })
+                }
+
+                setimageName([{
+                    name: dataDetail.data.image
+                }
+                ])
+            }
+        }
+    }, [dataDetail])
+
+    useEffect(() => {
+        if (params.idEducation === "created") {
+            if (checkTypeTesting()) {
+                reset({
+                    test: "O-NET",
+                    subject: "คณิตศาสตร์",
+                })
+            } else {
+                reset({
+                    grade: "ม.4",
+                    status: "กำลังศึกษา",
+                    branch: "1",
+                    institute: "1"
+                })
+            }
+        }
+    }, [type])
 
     const onChangeType = (value) => {
-        setType(value)
-        setimageName(null)
+        setType(String(value))
+        setimageName({
+            file: "",
+            name: ""
+        })
         document.getElementById("myform").reset()
     }
 
-    const onHandleChangeImage = (value) => {
-        setimageName(value.target.files[0].name)
+    const onHandleChangeImage = async (value) => {
+        const fileInput = value.target.files[0]
+        if (fileInput) {
+            try {
+                const newImageFile = await resizeImage(fileInput, "file", 720, 1280)
+                const imageURL = URL.createObjectURL(newImageFile)
+                setimageName([...imageName, {
+                    name: imageURL,
+                    file: newImageFile
+                }])
+            } catch {
+                dispatch(modalAction.openModal({
+                    text: "เพื่มรูปไม่สำเร็จ",
+                    size: sizeModal.small,
+                    alert: typeModal.wrong,
+                }))
+            }
+        }
     }
 
-    const onSubmit = () => {
-        // for submit
+    const onSubmit = (data) => {
+        if (data) {
+            let formData = new FormData()
+            if (checkTypeTesting()) {
+                let mydate = new Date(data.year);
+                formData.append("examId", defaultValue.examType[data.test])
+                formData.append("subjectCode", defaultValue.subject[data.subject])
+                formData.append("score", data.score)
+                formData.append("year", mydate.getYear())
+                imageName.forEach((item, index) =>
+                    formData.append(`document${index + 1}`, item.file)
+                )
+
+                if (!edit) {
+                    dispatch(tutorAction.createTesting(formData, auth.profile))
+                } else {
+                    dispatch(tutorAction.updateTesting(formData, params.idEducation, auth.profile))
+                }
+
+            } else {
+                formData.append("grade", defaultValue.grade[data.grade])
+                formData.append("branch", "1")
+                formData.append("institute", "1")
+                formData.append("status", edit ? data.status : defaultValue.educationStatus[data.status])
+                formData.append("gpax", data.gpax)
+                imageName.filter((item => item.file !== undefined)).forEach((item, index) =>
+                    formData.append(`document${index + 1}`, item.file)
+                )
+
+                if (!edit) {
+                    dispatch(tutorAction.createEducation(formData, auth.profile))
+                } else {
+                    dispatch(tutorAction.updateEducation(formData, params.idEducation, auth.profile))
+                }
+            }
+        }
+    }
+
+
+    const removeImage = (index) => {
+        imageName.splice(index, 1)
+    }
+
+    const removeButton = {
+        position: "absolute",
+        transform: "translateX(-50%)",
+        marginTop: '-9.5rem',
+        backgroundColor: color.red
     }
 
     return (
         <Fragment>
-            {isMobile() && <Header title="เพิ่มข้อมูล" pageBack="/tutor/1"/> }
-            <div className={style.body}>
-                <form id="myform" onSubmit={handleSubmit(onSubmit)}>
-                    <Row justify="center" >
-                        <Title level={3}>ประวัติการศึกษา </Title>
-                    </Row>
-                    <Row className={style.paddingbody} justify="space-around" align="middle">
-                        <Col xl={10} md={20} sm={20} xs={24} className={style.marginTop}>
-                            <p>ประเภท</p>
-                            <Select name="type" onChange={onChangeType} defaultValue={type}>
-                                <Select.Option value="test" >คะแนนสอบ</Select.Option>
-                                <Select.Option value="education" >ประวัติการศึกษา</Select.Option>
-                            </Select>
-                            <Controller
-                                name="type"
-                                control={control}
-                                defaultValue={type}
-                            />
-                            { errors.type && <p className="error-input">{errors.type.message}</p>}
-                        </Col>
-                        <Col xl={10} md={20} sm={20} xs={24} className={style.marginTop} >
-                            <p>{type === "test" ? "การสอบ" : "ระดับชั้น"}</p>
-                            <Controller
-                                as={
-                                    <Select ref={register}>
-                                        <Select.Option value="onet" >O-NET</Select.Option>
+            {isMobile() && <Header title="เพิ่มข้อมูล" pageBack="/tutor/1" />}
+            <ModalComponent />
+            {
+                loading.loading ? (
+                    <div className={style.loader}></div>
+                ) : (
+                    <div className={style.body}>
+                        <form id="myform" onSubmit={handleSubmit(onSubmit)}>
+                            <Row justify="center" >
+                                <h3 className={style.titleH2}>{edit && "แก้ไข"}ประวัติการศึกษา</h3>
+                            </Row>
+                            {
+                                edit && (
+                                    <Row justify="center" >
+                                        <Alert message="คำเตือน : หากทำการแก้ไขประวัติการศึกษา ผู้ดูระบบจะต้องตรวจสอบข้อมูลอีกครั้ง" type="warning" />
+                                    </Row>
+                                )
+                            }
+                            <Row className={style.paddingbody} justify="space-around" align="top">
+                                <Col xl={10} lg={10} md={12} sm={20} xs={24} className={style.marginTop20}>
+                                    <p>ประเภท</p>
+                                    <Select name="type" onChange={onChangeType} defaultValue={type} disabled={edit ? true : false}>
+                                        <Select.Option value="1" >คะแนนสอบ</Select.Option>
+                                        <Select.Option value="0" >ประวัติการศึกษา</Select.Option>
                                     </Select>
-                                }
-                                name={type === "test" ? "test" : "grade"}
-                                control={control}
-                                defaultValue={""}
-                            />
-                            {
-                                type === "test" ?
-                                    errors.test && <p className="error-input">{errors.test.message}</p>
-                                    :
-                                    errors.grade && <p className="error-input">{errors.grade.message}</p>
-                            }
-                        </Col>
-                        <Col xl={10} md={20} sm={20} xs={24} className={style.marginTop}>
-                            <p>{type === "test" ? "วิชา" : "สาขา"}</p>
-                            <Controller
-                                as={
-                                    <Select  >
-                                        <Select.Option value="mth" >คณิตศาสตร์</Select.Option>
-                                    </Select>
-                                }
-                                name={type === "test" ? "subject" : "brance"}
-                                control={control}
-                                defaultValue={""}
-                            />
-                            {
-                                type === "test" ?
-                                    errors.subject && <p className="error-input">{errors.subject.message}</p>
-                                    :
-                                    errors.brance && <p className="error-input">{errors.brance.message}</p>
-                            }
-                        </Col>
-                        <Col xl={10} md={20} sm={20} xs={24} className={style.marginTop}>
-                            <p>{type === "test" ? "คะแนนที่ได้" : "สถาบัน"}</p>
-                            <input className="input" type={type === "test" ? "number" : "text"} name={type === "test" ? "score" : "university"} ref={register} />
-                            {
-                                type === "test" ?
-                                    errors.score && <p className="error-input">{errors.score.message}</p>
-                                    :
-                                    errors.university && <p className="error-input">{errors.university.message}</p>
-                            }
-                        </Col>
-                        <Col xl={10} md={20} sm={20} xs={24} className={style.marginTop}>
-                            <p>{type === "test" ? "ปี" : "เกรดเฉลี่ย"}</p>
-                            <input className="input" type={type === "test" ? "number" : "number"} name={type === "test" ? "year" : "gradeScore"} ref={register} />
-                            {
-                                type === "test" ?
-                                    errors.year && <p className="error-input">{errors.year.message}</p>
-                                    :
-                                    errors.gradeScore && <p className="error-input">{errors.gradeScore.message}</p>
-                            }
-                        </Col>
-                        {
-                            type === "test" ? null :
-                                <Col xl={10} md={20} sm={20} xs={24} className={style.marginTop}>
-                                    <p>สถานะ</p>
-                                    <Controller
-                                        as={
-                                            <Select  >
-                                                <Select.Option value="mth" >กำลังศึกษาอยู่</Select.Option>
-                                            </Select>
+                                    <div className={style.marginTop20}>
+                                        <p>{checkTypeTesting() ? "การสอบ" : "ระดับชั้น"}</p>
+                                        <Controller
+                                            as={
+                                                <Select ref={register}>
+                                                    {
+                                                        checkTypeTesting() ? (
+                                                            defaultValue.examType && Object.entries(defaultValue.examType).map(([key]) => (
+                                                                <Select.Option key={key} value={key}>{key}</Select.Option>
+                                                            ))
+                                                        ) : (
+                                                            defaultValue.grade && Object.entries(defaultValue.grade).map(([value, key]) => (
+                                                                <Select.Option key={key} value={key}>{value}</Select.Option>
+                                                            ))
+                                                        )
+                                                    }
+                                                </Select>
+                                            }
+                                            name={checkTypeTesting() ? "test" : "grade"}
+                                            control={control}
+                                            defaultValue={""}
+                                        />
+                                        {
+                                            checkTypeTesting() ?
+                                                errors.test && <p className="error-input">{errors.test.message}</p>
+                                                :
+                                                errors.grade && <p className="error-input">{errors.grade.message}</p>
                                         }
-                                        name="status"
-                                        control={control}
-                                        defaultValue={""}
-                                    />
-                                    { errors.status && <p className="error-input">{errors.status.message}</p>}
+                                    </div>
+
+                                    <div className={style.marginTop20}>
+                                        <p>{checkTypeTesting() ? "วิชา" : "สาขา"}</p>
+                                        <Controller
+                                            as={
+                                                <Select  >
+                                                    {
+                                                        checkTypeTesting() ? (
+                                                            defaultValue.subject && Object.entries(defaultValue.subject).map(([key]) => (
+                                                                <Select.Option key={key} value={key}>{key}</Select.Option>
+                                                            ))
+                                                        ) : (
+                                                            <Select.Option value="1" >สาขา 1</Select.Option>
+                                                        )
+                                                    }
+                                                </Select>
+                                            }
+                                            name={checkTypeTesting() ? "subject" : "branch"}
+                                            control={control}
+                                            defaultValue={""}
+                                        />
+                                        {
+                                            checkTypeTesting() ?
+                                                errors.subject && <p className="error-input">{errors.subject.message}</p>
+                                                :
+                                                errors.branch && <p className="error-input">{errors.branch.message}</p>
+                                        }
+                                    </div>
+                                    <div className={style.marginTop20}>
+
+                                        <p>{checkTypeTesting() ? "คะแนนที่ได้" : "สถาบัน"}</p>
+                                        {
+                                            checkTypeTesting() ? (
+                                                <input className="input" type="number" step=".01" name="score" min="0" ref={register} placeholder="คะแนนที่ได้" />
+                                            ) : (
+                                                <Controller
+                                                    as={
+                                                        <Select  >
+                                                            <Select.Option value="1" >สาขา 1</Select.Option>
+                                                        </Select>
+                                                    }
+                                                    name="institute"
+                                                    control={control}
+                                                    defaultValue={""}
+                                                />
+                                            )
+                                        }
+                                        {
+                                            checkTypeTesting() ?
+                                                errors.score && <p className="error-input">{errors.score.message}</p>
+                                                :
+                                                errors.institute && <p className="error-input">{errors.institute.message}</p>
+                                        }
+                                    </div>
+                                    <div className={style.marginTop20}>
+
+                                        <p>{checkTypeTesting() ? "ปี" : "เกรดเฉลี่ย"}</p>
+                                        {
+                                            checkTypeTesting() ? (
+                                                <Controller
+                                                    as={
+                                                        <DatePicker picker="year" />
+                                                    }
+                                                    name="year"
+                                                    control={control}
+                                                    defaultValue={""}
+                                                    placeholder="ปีที่ได้รับผลสอบ"
+                                                />
+                                            ) : (
+                                                <input className="input" step=".01" type="number" name={"gpax"} ref={register} placeholder={"เกรดเฉลี่ย"} />
+                                            )
+                                        }
+
+                                        {
+                                            checkTypeTesting() ?
+                                                errors.year && <p className="error-input">{errors.year.message}</p>
+                                                :
+                                                errors.gpax && <p className="error-input">{errors.gpax.message}</p>
+                                        }
+                                    </div>
+
+                                    <div className={style.marginTop20}>
+                                        {
+                                            !checkTypeTesting() && (
+                                                <div>
+                                                    <p>สถานะ</p>
+                                                    <Controller
+                                                        as={
+                                                            <Select  >
+                                                                {
+                                                                    defaultValue.educationStatus && Object.entries(defaultValue.educationStatus).map(([key, value]) => (
+                                                                        <Select.Option key={value} value={value}>{key}</Select.Option>
+                                                                    ))
+                                                                }
+                                                            </Select>
+                                                        }
+                                                        name="status"
+                                                        control={control}
+                                                        defaultValue={""}
+                                                    />
+                                                    {errors.status && <p className="error-input">{errors.status.message}</p>}
+                                                </div>
+                                            )
+                                        }
+                                    </div>
                                 </Col>
-                        }
-                        <Col xl={10} md={20} sm={20} xs={24} className={style.marginTop}>
-                            <p>เอกสารยืนยัน</p>
-                            <div>
-                                <div className="imageUpload ">
-                                    <label htmlFor="file-input">
-                                        <FontAwesomeIcon icon={faCloudUploadAlt} className={style.icon} style={{ fontSize: "30pt", marginTop: "5px" }} />
-                                    </label>
-                                    <input id="file-input" type="file" name="image" onChange={onHandleChangeImage} ref={register} />
-                                    <span>{imageName}</span>
-                                </div>
-                            </div>
-                            {errors.image && <p className="error-input">{errors.image.message}</p>}
-                        </Col>
-                        <Col xl={type === "test" ? 24 : 10} md={type === "test" ? 24 : 20} sm={20} xs={24} className={style.marginTop + " " + style.horizontalCenter}>
-                            <Button className="buttonColor backgroundOrange" size="large" shape="round" style={{ width: "120px", marginTop: "40px" }} htmlType="submit">บันทึก</Button>
-                        </Col>
-                    </Row>
-                </form>
-            </div>
+                                <Col xl={10} lg={10} md={12} sm={20} xs={24} className={style.marginTop20} align="center">
+                                    <p>เอกสารยืนยัน </p>
+                                    {
+                                        !isEmpty(imageName) && (
+                                            imageName.map((item, index) => {
+                                                return (
+                                                    <div key={index} >
+                                                        <div className={style.marginTop20}>
+                                                            <Image
+                                                                className={`${style.a4Image} ${style.borderImage}`}
+                                                                src={item.name ? item.name : ducumentA4Sample}
+                                                                preview={false}
+                                                            />
+                                                        </div>
+                                                        <div align="center" >
+                                                            <button className={style.editButton} style={removeButton} onClick={() => removeImage(index)}>
+                                                                <FontAwesomeIcon icon={faTrash} />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                        )
+                                    }
+                                    {
+                                        imageName.length < 3 && (
+                                            <div className={style.marginTop20} align="center">
+                                                <div className="imageUpload ">
+                                                    <label htmlFor={`file-input-document1`}>
+                                                        <Image
+                                                            className={`${style.a4Image} ${style.borderImage}`}
+                                                            src={ducumentA4Sample}
+                                                            preview={false}
+                                                        />
+                                                    </label>
+                                                    <input id={`file-input-document1`} type="file" name={`image1`} onChange={onHandleChangeImage} ref={register} />
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                    {errors[`image1`] && <p className="error-input">{errors[`image1`].message}</p>}
+
+                                </Col>
+                                <Col xl={checkTypeTesting() ? 24 : 10} md={checkTypeTesting() ? 24 : 20} sm={20} xs={24} className={style.marginTop20 + " " + style.alignCenter}>
+                                    <Button className="buttonColor backgroundOrange" size="large" shape="round" style={{ width: "120px", marginTop20: "40px" }} htmlType="submit">บันทึก</Button>
+                                </Col>
+                            </Row>
+
+                        </form>
+                    </div>
+                )
+            }
         </Fragment>
     )
 }

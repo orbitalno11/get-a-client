@@ -12,6 +12,7 @@ import ModalComponent from "../../../../../modal/ModalComponent";
 import { sizeModal } from "../../../../../modal/SizeModal";
 import Edit from "./Edit";
 import Delete from "./Delete";
+import moment from "moment";
 
 export default function Price() {
   const { register, handleSubmit, errors } = useForm({
@@ -19,13 +20,17 @@ export default function Price() {
   });
 
   const dispatch = useDispatch();
-
+  const today = moment().format("MM/DD/YYYY")
   const onSubmit = (data) => {
     if(data){
       const data ={
+        "title": "STD",
         "baht": data.baht,
         "coin": data.coin,
         "type": "std",
+        "startDate": Date(today),
+        "endDate": Date(today),
+        "updtaeDate":Date(today),
       }
     }
     dispatch(coinAction.CreateCost(data))
@@ -41,36 +46,35 @@ export default function Price() {
     return (
       <div style={{ paddingLeft: "1rem" }}>
         <form onSubmit={handleSubmit()}>
-          <p className={style.titleH5}>เพิ่มอัตราการซื้อเหรียญ</p>
+          <p className={style.titleH4}>เพิ่มอัตราการซื้อเหรียญ</p>
           <Row style={{ paddingTop: "1rem", marginBottom: "1.8rem" }}>
-            <Col span={9}>
+            <Col span={6} className={style.columRate}>
               <Input
                 type="baht"
                 name="baht"
                 ref={register}
-                placeholder="ใส่ค่าเงิน"
-                bordered={false}
-                style={{ textAlign: "center", paddingTop: "-0.3rem" }}
+                placeholder="บาท"
+                className={`${style.inputRate} ${style.textNormal}`}
               />
               {errors.baht && (
                 <p className="error-input">{errors.baht.message}</p>
               )}
             </Col>
-            <Col span={2}>บาท</Col>
-            <Col span={9}>
+            <Col span={3} className={style.textNormal}>บาท</Col>
+            <Col span={1} className={style.textNormal}>=</Col>
+            <Col span={6} className={style.columRate}>
               <Input
                 type="coin"
                 name="coin"
                 ref={register}
-                placeholder="coins"
-                bordered={false}
-                style={{ textAlign: "center", paddingTop: "-0.3rem" }}
+                placeholder="เหรียญ"
+                className={`${style.inputRate} ${style.textNormal}`}
               />
               {errors.baht && (
                 <p className="error-input">{errors.coin.message}</p>
               )}
             </Col>
-            <Col span={2}>coin</Col>
+            <Col span={3} className={style.textNormal}>เหรียญ</Col>
           </Row>
         </form>
         <Row className={style.btnRequest}>
@@ -83,7 +87,7 @@ export default function Price() {
               htmlType="submit"
               onClick={() => onSubmit()}
             >
-              ยอมรับ
+              <span className={style.textNormal}>ยอมรับ</span>
             </Button>
           </Col>
           <Col span={6}>
@@ -94,7 +98,7 @@ export default function Price() {
               style={{ width: "100px" }}
               onClick={() => dispatch(modalAction.closeModal())}
             >
-              ปฏิเสธ
+             <span className={style.textNormal}>ปฏิเสธ</span>
             </Button>
           </Col>
         </Row>
@@ -118,7 +122,7 @@ export default function Price() {
           <FontAwesomeIcon icon={faCoins} className={style.coins} />
         </Col>
         <Col xs={21} sm={21} md={20} lg={22} xl={23}>
-          <span className={style.titleH5}>ราคาขายปัจจุบัน</span>
+          <span className={style.titleH4}>ราคาขายปัจจุบัน</span>
         </Col>
         <ModalComponent />
         <Row className={style.pagepaddingleft}>
@@ -128,7 +132,7 @@ export default function Price() {
               style={{ color: "#F5732E" }}
               onClick={() => component()}
             >
-              เพิ่มการซื้อเหรียญ
+              <span className={style.textNormal}> เพิ่มอัตราการซื้อเหรียญ</span>            
             </Button>
           </Col>
         </Row>
@@ -137,9 +141,9 @@ export default function Price() {
         <table className={style.tablecoins}>
           <thead>
             <tr>
-              <th span={8}>จำนวนเงิน (บาท)</th>
-              <th span={8}>จำนวน coin</th>
-              <th span={8}>การจัดการ</th>
+              <th span={8} className={style.textNormal}>จำนวนเงิน (บาท)</th>
+              <th span={8} className={style.textNormal}>จำนวน coin</th>
+              <th span={8} className={style.textNormal}>การจัดการ</th>
             </tr>
           </thead>
           <tbody>
@@ -148,8 +152,8 @@ export default function Price() {
               .filter((data) => data.type === "std")
               .map((data, index) => (
                 <tr style={{ width: "1rem" }} key={index}>
-                  <td>{data && data.baht} </td>
-                  <td>{data && data.coin}</td>
+                  <td className={style.textNormal}>{data && data.baht} </td>
+                  <td className={style.textNormal}>{data && data.coin}</td>
                   <td>
                     <Edit />
                     &emsp;

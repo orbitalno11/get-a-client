@@ -2,7 +2,6 @@ import React from 'react';
 import { Layout, Menu } from 'antd';
 import { NavLink } from 'react-router-dom';
 import {
-  DashboardOutlined,
   PartitionOutlined,
   TeamOutlined,
 } from '@ant-design/icons';
@@ -27,10 +26,23 @@ export default function SiderMenu({ handleOnCollapse, collapsed }) {
         <div className="menu-logo">
           <p className="logo-text">GETA</p>
         </div>
-        <Menu mode="inline" theme="dark" defaultSelectedKeys={["/admin/home"]}>
-          <Menu.Item key="/admin">
-            <NavLink to="/admin"><DashboardOutlined /><span className="nav-text">หน้าแรก</span></NavLink>
-          </Menu.Item>
+        <Menu mode="inline" theme="dark" defaultSelectedKeys={["/admin/requestcoin"]}>
+          <SubMenu
+            key="coin"
+            title={
+              <span>
+                <PartitionOutlined />
+                <span>จัดการเหรียญ</span>
+              </span>
+            }
+          >
+            <Menu.Item key="/admin/requestcoin">
+              <NavLink to="/admin/requstcoin"><span className="nav-text">จัดการคำขอเหรียญ</span></NavLink>
+            </Menu.Item>
+            <Menu.Item key="/admin/exchagecoin">
+              <NavLink to="/admin/exchagecoin"><span className="nav-text">จัดการอัตราการแลกเปลี่ยน</span></NavLink>
+            </Menu.Item>
+          </SubMenu>
           <SubMenu
             key="manage"
             title={
@@ -48,22 +60,6 @@ export default function SiderMenu({ handleOnCollapse, collapsed }) {
             </Menu.Item>
             <Menu.Item key="/admin/verify/education">
               <NavLink to="/admin/verify/education"><span className="nav-text">เอกสารยืนยันประวัติการศึกษา</span></NavLink>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu
-            key="coin"
-            title={
-              <span>
-                <PartitionOutlined />
-                <span>จัดการเหรียญ</span>
-              </span>
-            }
-          >
-            <Menu.Item key="/admin/requestcoin">
-              <NavLink to="/admin/requstcoin"><span className="nav-text">จัดการคำขอเหรียญ</span></NavLink>
-            </Menu.Item>
-            <Menu.Item key="/admin/exchagecoin">
-              <NavLink to="/admin/exchagecoin"><span className="nav-text">จัดการอัตราการแลกเปลี่ยน</span></NavLink>
             </Menu.Item>
           </SubMenu>
         </Menu>

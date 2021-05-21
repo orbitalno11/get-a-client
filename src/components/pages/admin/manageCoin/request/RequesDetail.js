@@ -73,7 +73,7 @@ export default  function RequesDetail({data}) {
               span={14}
               style={{ marginTop: "-0.5rem", paddingLeft: "0.625rem" }}
             >
-              <span>{data && data.fullNameTaxt}</span>
+              <span className={style.textNormal}>{data && data.fullNameTaxt}</span>
             </Col>
             <Col
               span={10}
@@ -90,7 +90,7 @@ export default  function RequesDetail({data}) {
             span={24}
             style={{ justifyContent: "center", marginTop: "0.625rem" }}
           >
-            <span>{data && data.amount} บาท</span>
+            <span className={style.textNormal}>{data && data.amount} บาท</span>
           </Row>
           <ModalComponent />
           <Row
@@ -104,7 +104,7 @@ export default  function RequesDetail({data}) {
               size="middle"
               onClick={() => component()}
             >
-              รายละเอียด
+              <span className={style.textNormal}>รายละเอียด</span>
             </Button>
           </Row>
         </Card>

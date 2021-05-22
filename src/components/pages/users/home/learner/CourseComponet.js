@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import CardCourseLearner from "../../../../card/CardCourseLearner";
 import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 import { color } from "../../../../defaultValue";
+import isMobile from "../../../../isMobile/isMobile";
 import style from "../styles.module.scss"
 
 export default function CourseComponet({ title, array }) {
@@ -10,10 +11,12 @@ export default function CourseComponet({ title, array }) {
     return (
         <div style={{ overflow: "hidden" }}>
             <div className={style.flexRow}>
-                <span className={style.titleH3}>{title}</span>
-                <Link to={`/rank/online`}>
-                    <span className={style.paddingLeft} style={{color : color.black}}>ดูเพิ่มเติม</span>
-                </Link>
+                <div className={isMobile() ? style.paddingbody : null}>
+                    <span className={style.titleH2}>{title}</span>
+                    <Link to={`/rank/online`} >
+                        <u className={style.paddingLeft} style={{ color: color.black }}>ดูเพิ่มเติม</u>
+                    </Link>
+                </div>
 
             </div>
             <div className={`${style.scroll} ${style.paddingTop}`}>

@@ -30,7 +30,7 @@ export default function Ranking() {
             {
                 isMobile() && <Header title="ติวเตอร์ยอดนิยม" />
             }
-            <div className={style.body}>
+            <div className={style.container}>
                 {
                     !isMobile() && <h1 className={style.titleH2}>ติวเตอร์ยอดนิยม</h1>
                 }

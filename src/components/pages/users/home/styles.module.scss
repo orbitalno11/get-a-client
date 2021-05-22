@@ -26,8 +26,9 @@
     color: $white;
 
     @media only screen and (max-width: 768px){
+        height: 18rem;
         text-align: center;
-        font-size: 1.5rem;
+        font-size: 1.7rem;
     }
 }
 

@@ -29,7 +29,7 @@ const authReducer = (state = initialState, action) => {
             profile : action.payload.id,
             email :  action.payload.email,
             loading: false,
-            error : false,
+            error : false
         }
     case authConstants.LOGIN_FAILURE:
         return {
@@ -48,8 +48,7 @@ const authReducer = (state = initialState, action) => {
             role : 4,
             profile : null,
             email:null,
-            loading: false,
-            error : false
+            loading: false
         }
     default:
         return state

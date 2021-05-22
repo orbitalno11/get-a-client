@@ -19,6 +19,8 @@ export default function PubilcProfile() {
     useEffect(() => {
         dispatch(tutorAction.getProfileTutor(id))
         dispatch(tutorAction.getListOfflineCourse(id))
+        dispatch(tutorAction.getEducations(id))
+        dispatch(tutorAction.getTestings(id))
         return () => {
             dispatch(tutorAction.clearListOfflineCourse())
         }
@@ -31,12 +33,12 @@ export default function PubilcProfile() {
                 <div className={isMobile() ? style.paddingTopBody : style.banner}  >
                     <ProfileIntroduce mainPage={true} />
                 </div>
-                <Row  >
-                    <Col className={!isMobile() && style.paddingbody} xl={8} lg={8} md={10} sm={24} xs={24} >
+                <Row justify="space-between" className={style.containerSection}>
+                    <Col  xl={8} lg={8} md={10} sm={24} xs={24} >
                         <ProfileDetail mainPage={true} />
                     </Col>
-                    <Col xl={14} lg={14} md={12} sm={24} xs={24} >
-                        <ProfileCourse />
+                    <Col xl={15} lg={14} md={12} sm={24} xs={24} >
+                        <ProfileCourse mainPage={true}/>
                     </Col>
                 </Row>
             </div>

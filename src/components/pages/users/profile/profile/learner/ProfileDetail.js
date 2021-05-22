@@ -16,7 +16,7 @@ import { SkeletonComponent } from "../../../../../loading/SkeletonComponent"
 const { Title } = Typography;
 
 export default function ProfileDetail() {
-    const { auth, profile } = useSelector(state => state)
+    const { auth, profile, loading } = useSelector(state => state)
     const [profileDetail, setProfileDetail] = useState(null)
     const [addressDetail, setAddressDetail] = useState("ยังไม่ได้กำหนด")
 
@@ -80,7 +80,7 @@ export default function ProfileDetail() {
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
                     {
-                        addressDetail ? (
+                        !loading.loading  ? (
                             <span>{addressDetail ? addressDetail : "ยังไม่ได้กำหนด"}</span>
                         ) : (
                             <SkeletonComponent.SkeletonText />

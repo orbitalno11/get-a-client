@@ -41,7 +41,7 @@ export default function CardCourseLearner({ data, verizontal }) {
                                 />
                             </Col>
                             <Col span={16} align="start" style={{paddingLeft:'1rem'}}>
-                                <span className={styles.titleH5}>{data && data.fullNameText}</span>
+                                <span className={`${styles.titleH5} ${styles.cutText1Line}`}>{data && data.fullNameText}</span>
                                 <br />
                                 <span className={styles.textSmall}>
                                     <FontAwesomeIcon icon={faStar} className={styles.icon} style={{ color: color.yellow }} />
@@ -63,7 +63,7 @@ export default function CardCourseLearner({ data, verizontal }) {
                                 preview={false}
                             />
                             <Col span={24} align="center">
-                                <span className={styles.titleH5}>{data && data.fullNameText}</span>
+                                <span className={`${styles.titleH4} ${styles.cutText1Line}`}>{data && data.fullNameText}</span>
                             </Col>
 
                             <Col span={24} align="center">

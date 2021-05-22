@@ -16,7 +16,7 @@ export default function CardCourse({ data }) {
         <Card className={styles.cardCourse} style={{width:"100%"}}>
             <Card.Grid hoverable={false} className={styles.gridfull}>
             <Badge count={data ? data.requestNumber : 0} offset={[10, 10]} >
-                <span className={styles.titleH4}>{data && data.name}</span>
+                <span className={`${styles.titleH5} ${styles.cutText1Line}`}>{data && data.name}</span>
                 </Badge>
             </Card.Grid>
             <Card.Grid hoverable={false} className={styles.gridfull} align="start">

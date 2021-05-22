@@ -103,7 +103,7 @@ export default function ProfileDetail({ mainPage }) {
                         <div className={style.marginTop}>
                             <div className={style.contrainnerProfilePubile} >
                                 {
-                                    (testing ||  education) && (
+                                    (!isEmpty(testing) || !isEmpty(education)) && (
                                         <Fragment>
                                             <span className={style.titleH2}>ประวัติการศึกษา</span>
                                             {

@@ -70,6 +70,9 @@ export default function AddEducation() {
                 afterClose: "/tutor/" + auth.profile
             }))
         }
+        return () => {
+            dispatch(tutorAction.clearListOfflineCourse())
+        }
     }, [fetchProfile])
 
 

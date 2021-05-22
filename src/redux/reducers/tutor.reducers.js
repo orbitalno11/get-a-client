@@ -163,6 +163,10 @@ const tutorReducer = (state = initialState, action) => {
                     success : false , 
                     data : null
                 },
+                listTesting: null,
+                listEducation: null,
+                education: null,
+                testing: null,
                 error: null
             }
 

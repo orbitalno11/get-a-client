@@ -20,9 +20,8 @@ export default function ManageClip() {
       {isMobile() && (
         <Header title="จัดการคอร์ส" />
       )}
-      <div className={style.body}>
+      <div className={style.container}>
         <div >
-
           {!isMobile() ? (
             <Row>
               <Col md={18} lg={19} xl={19}>
@@ -38,7 +37,6 @@ export default function ManageClip() {
                   >
                     เพิ่มบทเรียน
                   </Button>
-
                 </Link>
               </Col>
               <Divider type="horizontal" className={style.dividerCourse} />
@@ -49,7 +47,6 @@ export default function ManageClip() {
                 <FontAwesomeIcon icon={faPlus} />
               </button>
             </Link>
-
           )}
         </div>
         <ManageCourseDetail />
@@ -57,5 +54,3 @@ export default function ManageClip() {
     </Fragment>
   );
 }
-
-

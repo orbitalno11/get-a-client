@@ -36,7 +36,7 @@ export default function EnrollRequest() {
           <Loading />
         )
       }
-      <div className={style.body}>
+      <div className={style.container}>
         <ModalComponent />
 
         {!isMobile() && (

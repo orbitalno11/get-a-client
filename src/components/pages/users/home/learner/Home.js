@@ -99,7 +99,7 @@ export default function Home() {
 
     return (
         <Fragment >
-            {isMobile() && <Header title="โปรไฟล์" />}
+            {isMobile() && <Header title="หน้าหลัก" />}
             {
                 loading.loading && (
                     <Loading />

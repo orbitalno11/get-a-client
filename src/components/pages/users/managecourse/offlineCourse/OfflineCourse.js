@@ -1,4 +1,4 @@
-import { Row, Col, Grid, Divider } from "antd"
+import { Row, Col, Grid, Divider, Button } from "antd"
 import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import style from "../styles.module.scss";
@@ -16,7 +16,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import FormEnroll from "./FormEnroll";
-import { color } from "../../../../defaultValue";
 import { SkeletonComponent } from "../../../../loading/SkeletonComponent";
 import { trackImpressCourseDetail } from "../../../../../analytic/Analytic";
 const { useBreakpoint } = Grid;
@@ -33,7 +32,6 @@ export default function OfflineCourse() {
     const type = "course"
     const idCourse = params.id
 
-
     useEffect(() => {
         dispatch(offlineCourseAction.getOfflineCourse(idCourse))
         trackImpress()
@@ -43,7 +41,7 @@ export default function OfflineCourse() {
     }, [])
 
     const trackImpress = () => {
-        const courseType = 1 // set course type
+        const courseType = 1
         if (idCourse?.isSafeNotBlank()) {
             trackImpressCourseDetail(idCourse, courseType)
         }
@@ -68,26 +66,32 @@ export default function OfflineCourse() {
                 </div>
                 {
                     course && (
-                        <Link to={`/profile/${course.owner.id}/course`}>
-                            <span className={style.TitleCoin} style={{ color: color.black }}>. . .  ดูข้อมูลเพิ่มเติม</span>
-                        </Link>
+                        <div className={style.marginTop20}>
+                            <Link to={`/profile/${course.owner.id}/course`}>
+                                <Button
+                                    className="buttonColor backgroundBlue"
+                                    shape="round"
+                                    size="middle"
+                                    style={{ width: "100%" }}>
+                                    ดูข้อมูลครูสอนพิเศษเพิ่มเติม
+                                </Button>
+                            </Link>
+                        </div>
                     )
                 }
             </div>
         )
     }
 
-    const switchComponent = (status) =>{
+    const switchComponent = (status) => {
         document.getElementById("switchComponent").scrollIntoView({ behavior: "smooth" })
         setShowReview(status)
     }
 
     const switchShow = () => {
         if (!isMobile() || showReview) {
-            // document.getElementById('componentSelector').scrollIntoView({ behavior: "smooth" })
             return <AllReview />
         } else {
-            // document.getElementById('componentSelector').scrollIntoView({ behavior: "smooth" })
             return <ContactTutor />
         }
 
@@ -126,7 +130,7 @@ export default function OfflineCourse() {
             {isMobile() && <Header pageBack="goback" />}
             <div>
                 <ModalComponent />
-                <Row className={style.body} justify="space-between" style={{ paddingBottom: "7.5rem" }}>
+                <Row className={style.container} justify="space-between" style={{ paddingBottom: "7.5rem" }}>
                     <Col xl={24} lg={24} md={24} sm={24} xs={24} >
                         <DetailCourse />
                     </Col>

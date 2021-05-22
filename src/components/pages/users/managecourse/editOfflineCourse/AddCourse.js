@@ -65,7 +65,6 @@ export default function AddCourse() {
     }
   }, [dataDetaill])
 
-  console.log(dataDetaill)
 
   const onSubmit = (data) => {
     if (data) {
@@ -95,7 +94,7 @@ export default function AddCourse() {
     <Fragment>
       <ModalComponent />
       {isMobile() && (
-        <Header title="สร้างคอร์ส" pageBack="/tutor/course" />
+        <Header title={(id ? "แก้ไข" : "สร้าง") + "คอร์ส"} pageBack="/tutor/course" />
       )}
       {
         loading.loading && (
@@ -106,7 +105,7 @@ export default function AddCourse() {
         <form id="addCourse" onSubmit={handleSubmit(onSubmit)}>
           {screens.md && (
             <Row justify="center">
-              <span className={style.titleH2}>สร้างคอร์สเรียน </span>
+              <span className={style.titleH2}>{id ? "แก้ไข" : "สร้าง"}คอร์สเรียน </span>
             </Row>
           )}
           <Row
@@ -124,7 +123,7 @@ export default function AddCourse() {
               />
             </Col>
             <Col xl={10} md={20} sm={20} xs={24} className={style.subProfile}>
-              <p>วิชา</p>
+              <p className={style.textNormal}>วิชา</p>
               <Controller
                 as={
                   <Select name="subject" disabled={id?true:false}>
@@ -147,7 +146,7 @@ export default function AddCourse() {
               )}
             </Col>
             <Col xl={10} md={20} sm={20} xs={24} className={style.subProfile}>
-              <p>ระดับชั้น</p>
+              <p className={style.textNormal}>ระดับชั้น</p>
               <Controller
                 as={
                   <Select name="grade">
@@ -168,7 +167,7 @@ export default function AddCourse() {
               )}
             </Col>
             <Col xl={10} md={20} sm={20} xs={24} className={style.subProfile}>
-              <p>ประเภท</p>
+              <p className={style.textNormal}>ประเภท</p>
               <Controller
                 as={
                   <Select name="type">
@@ -189,7 +188,7 @@ export default function AddCourse() {
               )}
             </Col>
             <Col xl={10} md={20} sm={20} xs={24} className={style.subProfile}>
-              <p>วันที่สอน</p>
+              <p className={style.textNormal}>วันที่สอน</p>
               <Controller
                 as={
                   <Select name="dateOfWeek">
@@ -212,7 +211,7 @@ export default function AddCourse() {
               )}
             </Col>
             <Col xl={4} md={20} sm={20} xs={24} className={style.subProfile}>
-              <p>เวลา(เริ่ม)</p>
+              <p className={style.textNormal}>เวลา(เริ่ม)</p>
               <Controller
                 as={
                   <TimeField className="input" style={{ width: "100%" }} />
@@ -226,7 +225,7 @@ export default function AddCourse() {
               )}
             </Col>
             <Col xl={4} md={20} sm={20} xs={24} className={style.subProfile}>
-              <p>เวลา(จบ)</p>
+              <p className={style.textNormal}>เวลา(จบ)</p>
               <Controller
                 as={
                   <TimeField className="input" style={{ width: "100%" }} />
@@ -251,7 +250,7 @@ export default function AddCourse() {
               />
             </Col>
             <Col xl={10} md={20} sm={20} xs={24} className={style.subProfile}>
-              <p>แนะนำคอร์ส</p>
+              <p className={style.textNormal}>แนะนำคอร์ส</p>
               <Controller
                 as={
                   <TextArea className="input" name="description" size="large" />
@@ -266,17 +265,15 @@ export default function AddCourse() {
                 <p className="error-input">{errors.description.message}</p>
               )}
             </Col>
-          </Row>
-
-          <Row align="center">
+            <Col span={24} align="center">
             <Button
               className="buttonColor backgroundOrange"
               size="large"
               shape="round"
-              style={{ width: "7.5rem", marginTop: "3.7rem" }}
+              style={{ width: "7.5rem", marginTop: "2.5rem" }}
               htmlType="submit" >
               บันทึก
-              </Button>
+              </Button></Col>
           </Row>
         </form>
       </div>

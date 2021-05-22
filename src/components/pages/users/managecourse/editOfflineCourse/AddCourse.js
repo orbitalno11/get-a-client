@@ -65,7 +65,6 @@ export default function AddCourse() {
     }
   }, [dataDetaill])
 
-
   const onSubmit = (data) => {
     if (data) {
 

@@ -1,6 +1,7 @@
-import React, { Fragment, useCallback, useEffect, useState } from "react"
+import React, { Fragment, useCallback, useEffect } from "react"
 import {
     faMapMarkerAlt,
+    faStar,
     faUser
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,17 +15,18 @@ import { useParams } from "react-router";
 import { useSelector } from "react-redux";
 import { SkeletonComponent } from "../../../../../../loading/SkeletonComponent";
 import { trackImpressTutorProfile } from "../../../../../../../analytic/Analytic";
-import EmptyImage from "../../../../../../loading/EmptyImage";
 import EducationTutor from "../../../editProfile/tutor/EducationTutor";
+import { color, defaultValue } from "../../../../../../defaultValue";
+import isEmpty from "../../../../../../defaultFunction/checkEmptyObject";
 
 export default function ProfileDetail({ mainPage }) {
     const dispatch = useDispatch()
-    const { tutorHandle } = useSelector(state => state.tutor)
-    const loading = useSelector(state => state.loading)
-    const [profile] = useState(null)
+    const { tutorHandle, listTesting, listEducation } = useSelector(state => state.tutor)
     const params = useParams()
     const userId = params.id
     const address = tutorHandle && (tutorHandle.address && tutorHandle.address.district.title)
+    const testing = listTesting && (listTesting.filter(item => item.verified === 1))
+    const education = listEducation && (listEducation.filter(item => item.verified === 1))
 
     const fetchProfile = useCallback(() => {
         if (!mainPage) {
@@ -47,7 +49,7 @@ export default function ProfileDetail({ mainPage }) {
     return (
         <Fragment>
             {!mainPage && isMobile() && <Header pageBack="goback" />}
-            <div className={(isMobile() && !mainPage) ? style.paddingBottomBody : (!mainPage && style.bodyEdit)} >
+            <div className={(isMobile() && !mainPage) ? style.paddingBottomBody : (!mainPage ? style.bodyEdit : null)} >
                 {
                     !mainPage &&
                     (
@@ -56,23 +58,38 @@ export default function ProfileDetail({ mainPage }) {
                         </div>
                     )
                 }
-                <div className={style.contrainnerProfilePubile}>
-                    <div className={style.TitleCoin}>
-                        <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
-                        {
-                            tutorHandle ? (
-                                <span>{address ? address : "ยังไม่ได้กำหนด"}</span>
-                            ) : (
-                                <SkeletonComponent.SkeletonText />
-                            )
-                        }
 
-                    </div>
+                <div className={style.contrainnerProfilePubile}>
+                    {address && (
+                        <div className={style.TitleCoin}>
+                            <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
+                            {
+                                tutorHandle ? (
+                                    <span className={style.textNormal}>{address}</span>
+                                ) : (
+                                    <SkeletonComponent.SkeletonText />
+                                )
+                            }
+
+                        </div>
+                    )
+                    }
                     <div className={style.TitleCoin}>
                         <FontAwesomeIcon icon={faUser} className={style.iconmarker} />
                         {
                             tutorHandle ? (
-                                <span>{tutorHandle && tutorHandle.numberOfLearner} คน.</span>
+                                <span className={style.textNormal}>{tutorHandle && tutorHandle.numberOfLearner} คน</span>
+                            ) : (
+                                <SkeletonComponent.SkeletonText />
+                            )
+                        }
+                    </div>
+
+                    <div className={style.TitleCoin}>
+                        <FontAwesomeIcon icon={faStar} className={style.iconmarker} style={{color:color.yellow}}/>
+                        {
+                            tutorHandle ? (
+                                <span className={style.textNormal}>{tutorHandle && tutorHandle.rating} </span>
                             ) : (
                                 <SkeletonComponent.SkeletonText />
                             )
@@ -85,24 +102,17 @@ export default function ProfileDetail({ mainPage }) {
                     (
                         <div className={style.marginTop}>
                             <div className={style.contrainnerProfilePubile} >
-                                <span className={style.titleH3}>ประวัติการศึกษา</span>
                                 {
-                                    profile ? profile.history.map((item, index) => {
-                                        return (
-                                            <div key={index}>
-                                                <EducationTutor data={item} size="small" />
-                                            </div>
-                                        )
-                                    }) : (
-                                        (!loading.loading && !mainPage) ? (
-                                            <div >
-                                                <EmptyImage size="default" />
-                                                <span >ยังไม่มีประวัติการศึกษา</span>
-                                            </div>
-                                        ) : (
-                                            <p>ยังไม่มีประวัติการศึกษา</p>
-                                        )
-
+                                    (testing ||  education) && (
+                                        <Fragment>
+                                            <span className={style.titleH2}>ประวัติการศึกษา</span>
+                                            {
+                                                !isEmpty(testing) && <EducationTutor data={testing} type={defaultValue.typeIdentity["testing"]} status="learner" />
+                                            }
+                                            {
+                                                !isEmpty(education) && <EducationTutor data={education} type={defaultValue.typeIdentity["education"]} status="learner" />
+                                            }
+                                        </Fragment>
                                     )
                                 }
                             </div>

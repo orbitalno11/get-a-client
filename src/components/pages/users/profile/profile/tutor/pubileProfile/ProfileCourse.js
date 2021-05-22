@@ -6,16 +6,16 @@ import isEmpty from "../../../../../../defaultFunction/checkEmptyObject"
 import EmptyImage from "../../../../../../loading/EmptyImage"
 import style from "../../../styles.module.scss"
 
-export default function ProfileCourse() {
+export default function ProfileCourse({mainPage}) {
     const { offlineCourse } = useSelector(state => state.tutor)
     const loading = useSelector(state => state.loading)
 
     return (
         <Fragment>
             <div className={style.marginTop}>
-                <Row className={style.paddingbody}>
+                <Row className={!mainPage ? style.paddingbody : null}>
                     <Col span={24}>
-                        <span className={style.titleH3}>วิชาที่สอน</span>
+                        <span className={style.titleH2}>วิชาที่สอน</span>
                     </Col>
                     {
                         offlineCourse.success && (

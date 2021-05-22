@@ -13,10 +13,10 @@ const buttonFull = (buttonColor, size) =>{
     })
 }
 
-const iconCoin = () =>{
+const iconCoin = (size) =>{
     const coinStyle ={
-        width : "21px",
-        height : "21px"
+        width  : size ? size+"px" : "21px",
+        height : size ? size+"px" : "21px"
     }
     return (
         <Image src={coin} preview={false} style={coinStyle}/>

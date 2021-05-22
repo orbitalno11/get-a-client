@@ -114,6 +114,26 @@ function getOnlineCourse(id) {
     function failure(err) { return { type: onlineCourseConstants.GET_ONLINE_COURSE_FAILURE, payload: err } }
 }
 
+function getOnlineCourseNew(redirectPath) {
+    return dispatch => {
+        dispatch(loadingActions.startLoading())
+        apiURL.apiGetA.get(redirectPath)
+        .then(res => {
+                if (res.data.success) {
+                    dispatch(loadingActions.stopLoading())
+                    const data = res.data.data
+                    dispatch(success(data))
+                }
+            })
+            .catch((err) => {
+                dispatch(loadingActions.stopLoading())
+                dispatch(failure(err?.response?.data))
+            })
+    }
+
+    function success(data) { return { type: onlineCourseConstants.GET_ONLINE_COURSE_NEW_SUCCESS, payload: data } }
+    function failure(err) { return { type: onlineCourseConstants.GET_ONLINE_COURSE_NEW_FAILURE, payload: err } }
+}
 
 // start clip-online course
 function createClipOnlineCourse(data, id) {
@@ -286,10 +306,10 @@ function clearListOnlineCourse() {
     return dispatch => { dispatch({ type: onlineCourseConstants.CLEAR_LIST_ONLINE_COURSE }) }
 }
 
-
 export const onlineCourseActions = {
     createOnlineCourse,
     getTutorOnlineCourse,
+    getOnlineCourseNew,
     clearListOnlineCourse,
     getOnlineCourse,
     createClipOnlineCourse,

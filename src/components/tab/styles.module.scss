@@ -2,10 +2,11 @@
 
 .tab{
     @extend .textOne;
+    display: table-cell;
     height: 2.5rem;
     width: 8rem;
     text-align: center;
-    line-height: 2rem !important;
+    vertical-align: middle;
 }
 
 .radio{

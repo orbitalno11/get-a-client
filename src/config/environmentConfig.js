@@ -1,8 +1,9 @@
 const DEFAULT_API_VERSION = process.env.REACT_APP_DEFAULT_API_VERSION
+export const API_ENDPOINT = process.env.REACT_APP_API_URL
+export const BASE_API_URL = `${API_ENDPOINT}/${DEFAULT_API_VERSION}`
 
 export const LONGDO_MAP_KEY = process.env.REACT_APP_LONGDO_MAP_KEY
 export const LONGDO_MAP_URL = process.env.REACT_APP_MAP_URL
-export const BASE_API_URL = `${process.env.REACT_APP_API_URL}/${DEFAULT_API_VERSION}`
 export const FIREBASE_CLIENT_CONFIG = {
     apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
     authDomain: process.env.REACT_APP_GOOGLE_AUTH_DOMAIN,

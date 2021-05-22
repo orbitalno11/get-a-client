@@ -5,7 +5,8 @@
   border: 0.15rem solid $orange;
   border-radius: 0.5rem;
   cursor: pointer;
-  color : $black
+  color : $black;
+  background-color: $white;
 }
 
 .paddingCard {
@@ -14,10 +15,6 @@
 
 .paddingTop{
   padding-top: 0.5rem
-}
-
-.paddingCard {
-  padding: 1.25rem !important;
 }
 
 .cardRound{
@@ -72,8 +69,8 @@
     padding : 0.5rem;
 
     @media screen and (max-width: 400px) {
-      height: 6.25rem;
-      width: 5.5rem;
+      height: 6rem;
+      width: 5rem;
     }
 }
 

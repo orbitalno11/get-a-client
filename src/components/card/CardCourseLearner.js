@@ -42,7 +42,6 @@ export default function CardCourseLearner({ data, verizontal }) {
                             </Col>
                             <Col span={16} align="start" style={{paddingLeft:'1rem'}}>
                                 <span className={`${styles.titleH5} ${styles.cutText1Line}`}>{data && data.fullNameText}</span>
-                                <br />
                                 <span className={styles.textSmall}>
                                     <FontAwesomeIcon icon={faStar} className={styles.icon} style={{ color: color.yellow }} />
                                     {data && data.rating}

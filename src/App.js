@@ -96,6 +96,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/rank/:type" component={Ranking} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/tutor/ranking" component={Ranking} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register/:type" component={RegisterForm} />
           <Route exact path="/profile/:id/course" component={PubilcProfile} />

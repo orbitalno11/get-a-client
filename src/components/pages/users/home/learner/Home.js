@@ -135,7 +135,7 @@ export default function Home() {
                             )
                     } */}
                 </div>
-                <div className={style.paddingBody}>
+                <div className={isMobile() ? null : style.paddingBody}>
                     <CourseComponet title="คอร์สเรียนยอดนิยม" link="/" array={offlineCourseRank} />
                 </div>
 

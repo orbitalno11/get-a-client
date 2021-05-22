@@ -81,94 +81,99 @@ export default function EditProfile() {
                     <Loading />
                 )}
             <div>
-                <div className={screens.md ? style.bodyEdit : null}>
+                <div className={style.container}>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className={!screens.md ? style.mobilecenter : style.bannerEditProfile}>
-                            <div className="imageUpload" >
-                                <label htmlFor="file-input" >
-                                    <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[2, 0]}>
-                                        <Image
-                                            className={style.imageProfile}
-                                            src={image.imageURL ? image.imageURL : image}
-                                            preview={false}
+                        <Row justify="space-between" align="middle">
+                            <Col span={24} align="center">
+                                <h2 className={style.titleH2}>แก้ไขโปรไฟล์</h2>
+                            </Col>
+                            <Col lg={5} md={6} sm={24} xs={24} align="center">
+                                <div className="imageUpload" >
+                                    <label htmlFor="file-input" >
+                                        <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[2, 0]}>
+                                            <Image
+                                                className={style.imageProfile}
+                                                src={image.imageURL ? image.imageURL : image}
+                                                preview={false}
+                                            />
+                                        </Badge>
+                                    </label>
+                                    <input id="file-input" name="image" type="file" ref={register} onChange={onChange} />
+                                </div>
+                                {
+                                    errors.image && <p className="error-input">{errors.image.message}</p>
+                                }
+                            </Col>
+                            <Col lg={17} md={17} sm={24} xs={24}>
+                                <Row justify="space-around">
+                                    <Col className={screens.md ? style.marginTop20 : null} lg={11} sm={24} md={10} xs={24}>
+                                        <InputComponents
+                                            title="ชื่อ"
+                                            type="text"
+                                            name="firstname"
+                                            register={register}
+                                            error={errors.firstname}
+                                            placeholder="ชื่อ"
                                         />
-                                    </Badge>
-                                </label>
-                                <input id="file-input" name="image" type="file" ref={register} onChange={onChange} />
-                            </div>
-                        </div>
-                        {
-                            screens.md && (
-                                <Row align="center">
-                                    <h2 className={`${style.marginTop} ${style.titleH2}`}>แก้ไขโปรไฟล์</h2>
-                                </Row>
-                            )
-                        }
-                        <Row className={style.paddingbody} justify="space-between">
-                            <Col className={screens.md ? style.marginTop20 : null} lg={7} sm={24} md={10} xs={24}>
-                                <InputComponents
-                                    title="ชื่อ"
-                                    type="text"
-                                    name="firstname"
-                                    register={register}
-                                    error={errors.firstname}
-                                    placeholder="ชื่อ"
-                                />
-                            </Col>
-                            <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
-                                <InputComponents
-                                    title="นามสกุล"
-                                    type="text"
-                                    name="lastname"
-                                    register={register}
-                                    error={errors.lastname}
-                                    placeholder="นามสกุล"
-                                />
-                            </Col>
-                            <input name="gender" type="string" ref={register} hidden />
-                            <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
-                                <p>วันเดือนปีเกิด</p>
-                                <Controller
-                                    as={
-                                        <DatePicker placeholder="" disabled />
-                                    }
-                                    name="dateOfBirth"
-                                    control={control}
-                                    defaultValue={moment()}
-                                    placeholder="วันเดือนปีเกิด"
-                                />
-                                {
-                                    errors.dateOfBirth && <p className="error-input">{errors.dateOfBirth.message}</p>
-                                }
-                            </Col>
-
-                            <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
-                                <p>ระดับชั้น</p>
-                                <Controller
-                                    as={
-                                        <Select name="grade"  >
-                                            {
-                                                defaultValue.grade && Object.entries(defaultValue.grade).map(([key, value]) => (
-                                                    <Select.Option key={value} value={value}>{key}</Select.Option>
-                                                ))
+                                    </Col>
+                                    <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
+                                        <InputComponents
+                                            title="นามสกุล"
+                                            type="text"
+                                            name="lastname"
+                                            register={register}
+                                            error={errors.lastname}
+                                            placeholder="นามสกุล"
+                                        />
+                                    </Col>
+                                    <input name="gender" type="string" ref={register} hidden />
+                                    <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
+                                        <p className={style.textNormal}>วันเดือนปีเกิด</p>
+                                        <Controller
+                                            as={
+                                                <DatePicker placeholder="" disabled />
                                             }
-                                        </Select>
-                                    }
-                                    name="grade"
-                                    placeholder="ระดับชั้น"
-                                    control={control}
-                                    defaultValue={1}
-                                />
-                                {
-                                    errors && errors.grade && <p className="error-input">{errors.grade.message}</p>
-                                }
+                                            name="dateOfBirth"
+                                            control={control}
+                                            defaultValue={moment()}
+                                            placeholder="วันเดือนปีเกิด"
+                                        />
+                                        {
+                                            errors.dateOfBirth && <p className="error-input">{errors.dateOfBirth.message}</p>
+                                        }
+                                    </Col>
+
+                                    <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
+                                        <p className={style.textNormal}>ระดับชั้น</p>
+                                        <Controller
+                                            as={
+                                                <Select name="grade"  >
+                                                    {
+                                                        defaultValue.grade && Object.entries(defaultValue.grade).map(([key, value]) => (
+                                                            <Select.Option key={value} value={value}>{key}</Select.Option>
+                                                        ))
+                                                    }
+                                                </Select>
+                                            }
+                                            name="grade"
+                                            placeholder="ระดับชั้น"
+                                            control={control}
+                                            defaultValue={1}
+                                        />
+                                        {
+                                            errors && errors.grade && <p className="error-input">{errors.grade.message}</p>
+                                        }
+
+                                    </Col>
+                                </Row>
                             </Col>
                         </Row>
-                        <Row className={style.paddingbody}>
-                            <span className={`${style.marginTop} ${style.titleH4}`}>ช่องทางในการติดต่อ</span>
-                        </Row>
-                        <Row className={style.paddingbody} justify="space-between">
-                            <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
+
+                        <Row justify="space-between" className={style.marginTop} style={{ paddingTop: !isMobile() ? "1.5rem" : "0rem" }}>
+                            <Col span={24}>
+                                <span className={`${style.marginTop} ${style.titleH3}`}>ช่องทางในการติดต่อ</span>
+                            </Col>
+                            <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
                                 <InputComponents
                                     title="อีเมล"
                                     type="email"
@@ -178,7 +183,7 @@ export default function EditProfile() {
                                     placeholder="อีเมล"
                                 />
                             </Col>
-                            <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
+                            <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
                                 <InputComponents
                                     title="Facebook"
                                     type="text"
@@ -188,7 +193,7 @@ export default function EditProfile() {
                                     placeholder="facebook"
                                 />
                             </Col>
-                            <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
+                            <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
                                 <InputComponents
                                     title="Line ID"
                                     type="text"
@@ -198,7 +203,7 @@ export default function EditProfile() {
                                     placeholder="line"
                                 />
                             </Col>
-                            <Col className={style.marginTop20} lg={7} sm={24} md={10} xs={24}>
+                            <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
                                 <InputComponents
                                     title="หมายเลขโทรศัพท์"
                                     type="text"
@@ -215,7 +220,7 @@ export default function EditProfile() {
                     </form>
                 </div>
             </div>
-            
+
         </Fragment>
     )
 }

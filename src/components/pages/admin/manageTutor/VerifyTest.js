@@ -65,7 +65,7 @@ export default function VerifyTest() {
         ) : (
           <div align="center">
             <EmptyImage size="default" />
-            <p className={style.textNormal}>ยังไม่มีเอกสารยืนยันตัวตน&nbsp;</p>
+            <p className={style.textNormal}>ยังไม่มีเอกสารยืนยันการสอบ&nbsp;</p>
           </div>
         )}
       </table>

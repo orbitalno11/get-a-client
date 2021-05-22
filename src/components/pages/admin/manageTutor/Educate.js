@@ -23,114 +23,115 @@ export default function Educate() {
   }, [fetchEducation]);
 
   const handleCancel = () => {
-    dispatch(verifyAction.geteManageEducation(idEducation, false))
+    dispatch(verifyAction.geteManageEducation(idEducation, false));
   };
 
   const handleSubmit = () => {
-    dispatch(verifyAction.geteManageEducation(idEducation, true))
-  }
+    dispatch(verifyAction.geteManageEducation(idEducation, true));
+  };
 
   return (
     <Fragment>
       {loading.loading && <Loading />}
-          {list && (
-            <table className="profile">
-              <tbody>
-                <tr>
-                  <td style={{ paddingLeft: "2.3rem" }}>
-                  <Row className={style.approve}>
-                      <Col md={5} lg={10} xl={3}>
-                        <Button
-                          className="buttonColor backgroundRed"
-                          style={{ width: "6rem" }}
-                          shape="round"
-                          size="middle"
-                          onClick={() => handleCancel()}
-                        >
-                          <span className={style.textNormal}>ปฏิเสธ</span>
-                        </Button>
-                      </Col>
-                      <Col>
-                        <Button
-                          className="buttonColor backgroundGreen"
-                          style={{ width: "6rem" }}
-                          shape="round"
-                          size="middle"
-                          onClick={() => handleSubmit()}
-                        >
-                          <span className={style.textNormal}>ยอมรับ</span>
-                        </Button>
-                      </Col>
-                    </Row>
-                    <Row
-                      style={{
-                        paddingTop: "1.25rem",
-                        paddingBottom: "0.25rem",
-                      }}
+      {list && (
+        <table className="profile">
+          <tbody>
+            <tr>
+              <td style={{ paddingLeft: "2.3rem" }}>
+                <Row className={style.approve}>
+                  <Col>
+                    <Button
+                      className="buttonColor backgroundGreen"
+                      style={{ width: "6rem" }}
+                      shape="round"
+                      size="middle"
+                      onClick={() => handleSubmit()}
                     >
-                      <Col span={24} className={style.textNormal}>
-                        {" "}
-                        {moment(list.created).format("DD/MM/YY")} &ensp;{" "}
-                        {moment(list.created).format("HH:mm")} น.
-                      </Col>
-                    </Row>
-                    <Row className={style.detailProfile}>
-                      <Col span={7} className={style.textNormal}>
-                        <b className={style.textNormal}>ชื่อ :</b> {list.firstname}
-                      </Col>
-                      <Col span={16} className={style.textNormal}>
-                        <b className={style.textNormal}>นามสกุล :</b> {list.lastname}
-                      </Col>
-                    </Row>
-                    <Row className={style.detailProfile}>
-                      <Col span={7} className={style.textNormal}>
-                        <b className={style.textNormal}>สาขาวิชา :</b> {list.educationData.branchText}
-                      </Col>
-                      <Col span={16} className={style.textNormal}>
-                        <b className={style.textNormal}>GPAX :</b> {list.educationData.gpax}
-                      </Col>
-                    </Row>
-                    <Row className={style.detailProfile}>
-                      <Col span={7} className={style.textNormal}>
-                        <b className={style.textNormal}>สถานะการศึกษาปัจจุบัน :</b> {list.educationData.status}
-                      </Col>
-                      <Col span={16} className={style.textNormal}>
-                        <b className={style.textNormal}>สถาบันการศึกษา :</b> {list.educationData.instituteText}
-                      </Col>
-                    </Row>
-                    <Row className={style.detailProfile}>
-                      <Col span={24}><b className={style.textNormal}>รูปเอกสารยืนยัน</b></Col>
-                      <Col span={5} style={{ paddingTop: "0.7rem" }}>
-                        <Image
-                          width={200}
-                          src={
-                            list.verifiedData && list.verifiedData.documentUrl1
-                          }
-                        />
-                      </Col>
-                      <Col span={5} style={{ paddingTop: "0.7rem" }}>
-                        <Image
-                          width={200}
-                          src={
-                            list.verifiedData && list.verifiedData.documentUrl2
-                          }
-                        />
-                      </Col>
-                      <Col span={7} style={{ paddingTop: "0.7rem" }}>
-                        <Image
-                          width={200}
-                          src={
-                            list.verifiedData && list.verifiedData.documentUrl3
-                          }
-                        />
-                      </Col>
-                    </Row>
-                    <ModalComponent />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          )}
+                      <span className={style.textNormal}>ยอมรับ</span>
+                    </Button>
+                  </Col>
+                  <Col>
+                    <Button
+                      className="buttonColor backgroundRed"
+                      style={{ width: "6rem" }}
+                      shape="round"
+                      size="middle"
+                      onClick={() => handleCancel()}
+                    >
+                      <span className={style.textNormal}>ปฏิเสธ</span>
+                    </Button>
+                  </Col>
+                </Row>
+                <Row
+                  style={{
+                    paddingTop: "1.25rem",
+                    paddingBottom: "0.25rem",
+                  }}
+                >
+                  <Col span={24} className={style.textNormal}>
+                    {" "}
+                    {moment(list.created).format("DD/MM/YY")} &ensp;{" "}
+                    {moment(list.created).format("HH:mm")} น.
+                  </Col>
+                </Row>
+                <Row className={style.detailProfile}>
+                  <Col span={7} className={style.textNormal}>
+                    <b className={style.textNormal}>ชื่อ :</b> {list.firstname}
+                  </Col>
+                  <Col span={16} className={style.textNormal}>
+                    <b className={style.textNormal}>นามสกุล :</b>{" "}
+                    {list.lastname}
+                  </Col>
+                </Row>
+                <Row className={style.detailProfile}>
+                  <Col span={7} className={style.textNormal}>
+                    <b className={style.textNormal}>สาขาวิชา :</b>{" "}
+                    {list.educationData.branchText}
+                  </Col>
+                  <Col span={16} className={style.textNormal}>
+                    <b className={style.textNormal}>GPAX :</b>{" "}
+                    {list.educationData.gpax}
+                  </Col>
+                </Row>
+                <Row className={style.detailProfile}>
+                  <Col span={7} className={style.textNormal}>
+                    <b className={style.textNormal}>สถานะการศึกษาปัจจุบัน :</b>{" "}
+                    {list.educationData.status}
+                  </Col>
+                  <Col span={16} className={style.textNormal}>
+                    <b className={style.textNormal}>สถาบันการศึกษา :</b>{" "}
+                    {list.educationData.instituteText}
+                  </Col>
+                </Row>
+                <Row className={style.detailProfile}>
+                  <Col span={24}>
+                    <b className={style.textNormal}>รูปเอกสารยืนยัน</b>
+                  </Col>
+                  <Col span={5} style={{ paddingTop: "0.7rem" }}>
+                    <Image
+                      width={200}
+                      src={list.verifiedData && list.verifiedData.documentUrl1}
+                    />
+                  </Col>
+                  <Col span={5} style={{ paddingTop: "0.7rem" }}>
+                    <Image
+                      width={200}
+                      src={list.verifiedData && list.verifiedData.documentUrl2}
+                    />
+                  </Col>
+                  <Col span={7} style={{ paddingTop: "0.7rem" }}>
+                    <Image
+                      width={200}
+                      src={list.verifiedData && list.verifiedData.documentUrl3}
+                    />
+                  </Col>
+                </Row>
+                <ModalComponent />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      )}
     </Fragment>
   );
 }

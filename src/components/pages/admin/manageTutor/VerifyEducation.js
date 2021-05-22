@@ -65,7 +65,7 @@ export default function VerifyEducation() {
         ) : (
           <div align="center">
             <EmptyImage size="default" />
-            <p className={style.textNormal}>ยังไม่มีเอกสารยืนยันตัวตน&nbsp;</p>
+            <p className={style.textNormal}>ยังไม่มีเอกสารยืนยันประวัติการศึกษา&nbsp;</p>
           </div>
         )}
       </table>

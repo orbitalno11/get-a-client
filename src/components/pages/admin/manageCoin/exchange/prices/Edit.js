@@ -30,7 +30,7 @@ export default function Edit() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <p className={style.titleH4}>แก้ไขอัตราการซื้อเหรียญ</p>
           <Row style={{ paddingTop: "1rem", marginBottom: "1.8rem" }}>
-            <Col span={6} className={style.columRate}>
+            <Col span={6} className={style.columnRate}>
               <Input
                 type="baht"
                 name="baht"
@@ -44,7 +44,7 @@ export default function Edit() {
             </Col>
             <Col span={3} className={style.textNormal}>บาท</Col>
             <Col span={1} className={style.textNormal}>=</Col>
-            <Col span={6} className={style.columRate}>
+            <Col span={6} className={style.columnRate}>
               <Input
                 type="coin"
                 name="coin"

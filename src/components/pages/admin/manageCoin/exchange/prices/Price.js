@@ -24,7 +24,7 @@ export default function Price() {
   const onSubmit = (data) => {
     if(data){
       const data ={
-        "title": "STD",
+        "title": "std",
         "baht": data.baht,
         "coin": data.coin,
         "type": "std",
@@ -48,7 +48,7 @@ export default function Price() {
         <form onSubmit={handleSubmit()}>
           <p className={style.titleH4}>เพิ่มอัตราการซื้อเหรียญ</p>
           <Row style={{ paddingTop: "1rem", marginBottom: "1.8rem" }}>
-            <Col span={6} className={style.columRate}>
+            <Col span={6} className={style.columnRate}>
               <Input
                 type="baht"
                 name="baht"
@@ -62,7 +62,7 @@ export default function Price() {
             </Col>
             <Col span={3} className={style.textNormal}>บาท</Col>
             <Col span={1} className={style.textNormal}>=</Col>
-            <Col span={6} className={style.columRate}>
+            <Col span={6} className={style.columnRate}>
               <Input
                 type="coin"
                 name="coin"
@@ -142,7 +142,7 @@ export default function Price() {
           <thead>
             <tr>
               <th span={8} className={style.textNormal}>จำนวนเงิน (บาท)</th>
-              <th span={8} className={style.textNormal}>จำนวน coin</th>
+              <th span={8} className={style.textNormal}>จำนวนเหรียญ</th>
               <th span={8} className={style.textNormal}>การจัดการ</th>
             </tr>
           </thead>

@@ -9,16 +9,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../../../redux/actions";
 import ModalComponent from "../../../modal/ModalComponent";
 import Loading from "../../../loading/Loading";
-import isMobile from "../../../isMobile/isMobile"
+import { useEffect } from "react";
+import { color } from "../../../defaultValue";
 
 export default function Login() {
     const dispatch = useDispatch()
-    const heightMobile = { height: "92.5vh" }
-    const heightDesktop = { height: "100vh" }
     const { loading } = useSelector(state => state)
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(loginSchema),
     });
+
+    useEffect(() => {
+        document.body.style.backgroundColor = color.orange
+        return () => {
+            document.body.style.backgroundColor = ""
+        }
+    }, [])
 
     const onSubmit = (data) => {
         dispatch(userActions.loginUser(data))
@@ -32,8 +38,8 @@ export default function Login() {
     return (
         <Fragment>
             <ModalComponent />
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className={isMobile() ? `${style.loginPage}` : `${style.loginPage} ${style.alignCenterPageDestop} `} style={!isMobile() ? heightDesktop : heightMobile}>
+            <div className={style.loginPage}>
+                <form onSubmit={handleSubmit(onSubmit)} className={style.loginform} >
                     {
                         loading.loading && (
                             <Loading />
@@ -62,8 +68,8 @@ export default function Login() {
                             </Link>
                         </div>
                     </Fragment>
-                </div>
-            </form>
+                  </form>
+            </div>
         </Fragment>
     )
 }

@@ -27,8 +27,16 @@
 
 .loginPage{
   @extend .alignCenterPage;
+  @extend .paddingBottomBody;
   justify-content: center;
-  background-color: $orange;
+  padding-top: 3.75rem;
+  height: 100%;
+}
+
+.loginform{
+  display: contents;
+  align-items: center;
+  width: 100%;
 }
 
 .buttonText{

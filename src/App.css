@@ -173,11 +173,11 @@ input :focus{
 }
 
 .iconMenu{
-  padding: 0.625rem;
+  padding: 0.5rem;
 }
 
 .icon{
-  font-size: 25px;
+  font-size: 1.35rem;
   color : var(--gray-color) !important;
 }
 

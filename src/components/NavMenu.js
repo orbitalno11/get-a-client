@@ -145,7 +145,7 @@ const NavMenu = () => {
     const ToturMenuMobile = () => {
         return (
             <Row justify="space-around">
-                 <Col span={4} className="iconMenu">
+                 <Col span={6.5} className="iconMenu">
                     <NavLink to="/">
                         <FontAwesomeIcon icon={faHome} className="icon" />
                     </NavLink>
@@ -171,7 +171,7 @@ const NavMenu = () => {
                         <FontAwesomeIcon icon={faBell} className="icon" />
                     </NavLink>
                 </Col> */}
-                <Col span={4} className="iconMenu">
+                <Col span={6.5} className="iconMenu">
                     <NavLink to={ profileTutorURL }>
                         <FontAwesomeIcon icon={faUserCircle} className="icon" />
                     </NavLink>

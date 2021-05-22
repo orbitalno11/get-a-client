@@ -1,9 +1,23 @@
+import isEmpty from "../../components/defaultFunction/checkEmptyObject"
+import { offlineCourseErrorMessage } from "../../components/defaultValue/errorMessage/offlineCourse"
 import { sizeModal } from "../../components/modal/SizeModal"
 import { typeModal } from "../../components/modal/TypeModal"
 import { apiURL } from "../../utils/setAxios"
 import { offlineCourseConstants } from "../constants"
 import { loadingActions } from "./loading.actions"
 import { modalAction } from "./modal.actions"
+
+function checkErrorMessage(errorMessage, type) {
+    let message = !isEmpty(errorMessage) && offlineCourseErrorMessage[Object.values(errorMessage)[0].toString()]
+    if (!message) {
+       if(type === "edit"){
+        message = offlineCourseErrorMessage["default_edit"]
+       }else[
+        message = offlineCourseErrorMessage["default_create"]
+       ]
+    }
+    return message
+}
 
 
 function updatefflineCourse(id, data) {
@@ -20,12 +34,13 @@ function updatefflineCourse(id, data) {
                     afterClose: `/course/${id}`
                 }))
             }).catch(err => {
+                const message = checkErrorMessage(err?.response?.data?.data, "edit")
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err?.response?.data))
+                dispatch(failure(message))
                 dispatch(modalAction.openModal({
-                    text: "แก้ไขคอร์สเรียนไม่สำเร็จ",
+                    text: message,
                     size: sizeModal.small,
-                    alert: typeModal.wrong
+                    alert: typeModal.wrong,
                 }))
             })
     }
@@ -48,10 +63,11 @@ function createOfflineCourse(data) {
                     afterClose: "/tutor/course"
                 }))
             }).catch(err => {
+                const message = checkErrorMessage(err?.response?.data?.data, "create")
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err?.response?.data))
+                dispatch(failure(message))
                 dispatch(modalAction.openModal({
-                    text: "สร้างคอร์สเรียนไม่สำเร็จ",
+                    text: message,
                     size: sizeModal.small,
                     alert: typeModal.wrong,
                 }))

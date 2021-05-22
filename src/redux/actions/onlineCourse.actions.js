@@ -1,9 +1,25 @@
+import isEmpty from "../../components/defaultFunction/checkEmptyObject"
+import { clipErrorMessage } from "../../components/defaultValue/errorMessage/clip"
+import { onlineCourseErrorMessage } from "../../components/defaultValue/errorMessage/onlineCouse"
 import { sizeModal } from "../../components/modal/SizeModal"
 import { typeModal } from "../../components/modal/TypeModal"
 import { apiURL } from "../../utils/setAxios"
 import { onlineCourseConstants } from "../constants"
 import { loadingActions } from "./loading.actions"
 import { modalAction } from "./modal.actions"
+
+function checkErrorMessage(errorMessage, type, action) {
+    const errorFocus = type === "clip" ? clipErrorMessage : onlineCourseErrorMessage
+    let message = !isEmpty(errorMessage) && errorFocus[Object.values(errorMessage)[0].toString()]
+    if (!message) {
+        if(action === "edit"){
+            message = errorFocus["default_edit"]
+        }else{
+            message = errorFocus["default_create"]
+        }
+    }
+    return message
+}
 
 // start online course
 function createOnlineCourse(data) {
@@ -24,10 +40,11 @@ function createOnlineCourse(data) {
                     afterClose: "/tutor/online"
                 }))
             }).catch(err => {
+                const message = checkErrorMessage(err.response?.data?.data,"course","create")
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err?.response?.data))
+                dispatch(failure(message))
                 dispatch(modalAction.openModal({
-                    text: "สร้างคอร์สเรียนไม่สำเร็จ",
+                    text: message,
                     size: sizeModal.small,
                     alert: typeModal.wrong,
                 }))
@@ -56,10 +73,11 @@ function updateOnlineCourse(data, id) {
                     afterClose: `/online/${id}`
                 }))
             }).catch(err => {
+                const message = checkErrorMessage(err.response?.data?.data,"course","edit")
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err?.response?.data))
+                dispatch(failure(message))
                 dispatch(modalAction.openModal({
-                    text: "แก้ไขคอร์สเรียนไม่สำเร็จ",
+                    text: message,
                     size: sizeModal.small,
                     alert: typeModal.wrong,
                 }))
@@ -153,10 +171,11 @@ function createClipOnlineCourse(data, id) {
                 afterClose: `/course/online/${id}/video`
             }))
         }).catch(err => {
+            const message = checkErrorMessage(err.response?.data?.data, "clip", "create")
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err?.response?.data))
+            dispatch(failure(message))
             dispatch(modalAction.openModal({
-                text: "เพิ่มคลิปการสอนไม่สำเร็จ",
+                text: message,
                 size: sizeModal.small,
                 alert: typeModal.wrong,
             }))
@@ -184,10 +203,11 @@ function updateClipOnlineCourse(data, courseId, videoId) {
                 afterClose: `/tutor/online/${courseId}/video/${videoId}`
             }))
         }).catch(err => {
+            const message = checkErrorMessage(err.response?.data?.data,"clip", "edit")
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err?.response?.data))
+            dispatch(failure(message))
             dispatch(modalAction.openModal({
-                text: "แก้ไขคลิปการสอนไม่สำเร็จ",
+                text: message,
                 size: sizeModal.small,
                 alert: typeModal.wrong,
             }))

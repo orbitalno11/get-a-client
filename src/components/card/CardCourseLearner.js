@@ -1,5 +1,5 @@
 import React from "react"
-import { Col, Image, Row } from "antd";
+import { Col, Image, Row} from "antd";
 import styles from "./styles.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faLocationArrow, faMapMarkerAlt, faStar, faUserAlt } from "@fortawesome/free-solid-svg-icons";

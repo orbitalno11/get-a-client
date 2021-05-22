@@ -2,7 +2,6 @@ import { Col, Row } from "antd";
 import React from "react";
 import CardCourse from "../../../../card/CardCourse";
 import ListCourseTutor from "../../../../card/ListCourseTutor";
-import style from "../styles.module.scss";
 import isMobile from "../../../../isMobile/isMobile"
 import { useDispatch } from "react-redux";
 import { tutorAction } from "../../../../../redux/actions";
@@ -32,7 +31,6 @@ export default function ManageCourseDetail() {
     }
   }, [tutor.offlineCourse])
 
-
   return (
     <Fragment>
       {
@@ -58,19 +56,17 @@ export default function ManageCourseDetail() {
               </div>
             )
           )}
-
-
         </div>
       ) : (
-        <Row>
+        <Row >
           {tutor.offlineCourse.success && (
             offlineCourse ? (
               offlineCourse.map((item, index) => (
-                <Col className={style.paddingmange} key={index} xl={8} lg={12} md={12} sm={24} align="center">
-                  <Link to={`/tutor/course/${item.id}`}>
+                  <Col align="center" xl={8} lg={8} md={12} sm={24}  key={index} style={{padding:"0.5rem"}}>
+                     <Link to={`/tutor/course/${item.id}`} >
                     <CardCourse data={item} />
-                  </Link>
-                </Col>
+                    </Link>
+                  </Col>
               ))
             ) : (
               <div align="center">
@@ -79,8 +75,8 @@ export default function ManageCourseDetail() {
             )
           )}
         </Row>
-      )}
-
-    </Fragment>
+      )
+      }
+    </Fragment >
   );
 }

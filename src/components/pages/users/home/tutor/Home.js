@@ -168,7 +168,7 @@ export default function Home() {
 
     return (
         <Fragment>
-            {isMobile() && <Header title="โปรไฟล์" /> }
+            {isMobile() && <Header title="หน้าหลัก" />}
             <div className={style.paddingCenter}>
                 <Title level={2} >ยินดีต้อนรับ XXX</Title>
                 <Title level={4}>คุณมีผู้เรียน 20,000 คนในเดือนนี้ </Title>

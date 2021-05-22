@@ -8,7 +8,7 @@ import isMobile from "../../../../isMobile/isMobile";
 import { useDispatch } from "react-redux";
 import { offlineCourseAction } from "../../../../../redux/actions";
 
-export default function Request({ id,data }) {
+export default function Request({ id, data }) {
 
   const dispatch = useDispatch()
 
@@ -22,19 +22,19 @@ export default function Request({ id,data }) {
   }
 
   const buttonEnroll = {
-    width:"5rem",
-    margin:"0.1rem 0.1rem 0.1rem 0.2rem",
+    width: "5rem",
+    margin: "0.1rem 0.1rem 0.1rem 0.2rem",
   }
 
-  const enrollCourse = (status) =>{
-    dispatch(offlineCourseAction.acceptEnrollOfflineCourse(id,data.userId,status))
+  const enrollCourse = (status) => {
+    dispatch(offlineCourseAction.acceptEnrollOfflineCourse(id, data.userId, status))
   }
 
   const ButtonEnrool = () => {
     return (
       <div className={styles.floatLeft}>
-        <Button className="buttonColor backgroundOrange" size="medium" shape="round" style={buttonEnroll} onClick={()=>enrollCourse(defaultValue.enrollStatus["APPROVE"])}>อนุมัติ</Button>
-        <Button className="buttonColor backgroundGray" size="medium" shape="round" style={buttonEnroll} onClick={()=>enrollCourse(defaultValue.enrollStatus["DENIED"])}>ลบคำขอ</Button>
+        <Button className="buttonColor backgroundOrange" size="medium" shape="round" style={buttonEnroll} onClick={() => enrollCourse(defaultValue.enrollStatus["APPROVE"])}>อนุมัติ</Button>
+        <Button className="buttonColor backgroundGray" size="medium" shape="round" style={buttonEnroll} onClick={() => enrollCourse(defaultValue.enrollStatus["DENIED"])}>ลบคำขอ</Button>
       </div>
     )
   }
@@ -53,10 +53,12 @@ export default function Request({ id,data }) {
           <div style={marginLeft}>
             <span className={styles.titleH5}>{data && data.fullNameText}</span>
             <br />
-            <span >
-              <FontAwesomeIcon icon={faMapMarkerAlt} style={iconMarker} />
-              {data.address ? data.address.district.title : "ยังไม่ได้กำหนด"}
-            </span>
+            {data.address &&
+              <span >
+                <FontAwesomeIcon icon={faMapMarkerAlt} style={iconMarker} />
+                {data.address.district.title}
+              </span>
+            }
           </div>
           {
             isMobile() && (<ButtonEnrool />)

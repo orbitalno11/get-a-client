@@ -346,3 +346,7 @@ span{
   word-wrap: break-word !important;
   white-space : normal;
 }
+
+textarea{
+  font-size: 1.1rem !important;
+}

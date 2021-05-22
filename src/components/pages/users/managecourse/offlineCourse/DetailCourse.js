@@ -1,5 +1,5 @@
 import React, { Fragment } from "react"
-import { Col, Grid, Image, Row } from "antd"
+import { Col, Image, Row } from "antd"
 import {
     faBook,
     faBookReader,
@@ -14,18 +14,16 @@ import { useSelector } from "react-redux";
 import { SkeletonComponent } from "../../../../loading/SkeletonComponent";
 import profileSample from "../../../../images/profile.webp"
 import { color } from "../../../../defaultValue";
-const { useBreakpoint } = Grid;
 
 export default function DetailCourse() {
     const course = useSelector(state => state.offlineCourse.data)
     const owner = course && course.owner
-    const screens = useBreakpoint();
 
     return (
         <Fragment>
             {
                 <Fragment>
-                    <Row align={!screens.md && "center"}>
+                    <Row >
                         {
                             course ? (
                                 <span className={style.titleH2}>{course.name}</span>
@@ -35,9 +33,18 @@ export default function DetailCourse() {
                         }
                     </Row>
                     <Row >
+                        {
+                            course ? (
+                                <span className={style.textNormal}>{course.description} </span>
+                            ) : (
+                                <SkeletonComponent.SkeletonText />
+                            )
+                        }
+                    </Row>
+                    <Row >
                         <Col xs={24} md={12} xl={6} className={style.TitleCoin}>
                             <Image
-                                src= {owner ? owner.picture :profileSample}
+                                src={owner ? owner.picture : profileSample}
                                 className={style.imageIcon}
                                 preview={false}
                             />
@@ -100,7 +107,7 @@ export default function DetailCourse() {
                             }
                         </Col>
                         <Col xs={24} md={12} xl={6} className={style.TitleCoin}>
-                            <FontAwesomeIcon icon={faStar} className={style.iconmarker} style={{color:color.yellow}}/>
+                            <FontAwesomeIcon icon={faStar} className={style.iconmarker} style={{ color: color.yellow }} />
                             {
                                 course ? (
                                     <span className={style.textNormal}>{course.rating}</span>

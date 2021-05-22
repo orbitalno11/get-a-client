@@ -62,8 +62,8 @@ if (localStorage.token) {
 
 function App() {
   
-  const admin = store.getState().auth.role === defaultValue.statusUser["admin"]
-  const tutor = store.getState().auth.role === defaultValue.statusUser["tutor"]
+  const admin = store.getState().auth.role === defaultValue.userRole["admin"]
+  const tutor = store.getState().auth.role === defaultValue.userRole["tutor"]
 
   return (
     <Provider store={store}>

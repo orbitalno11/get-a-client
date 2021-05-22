@@ -1,22 +1,11 @@
 import * as yup from "yup";
 import { defaultValue } from "../../components/defaultValue";
 
-export const profileTestSchema = (edit) => {
+export const profileTestSchema = () => {
     const schema = yup.object().shape({
         image1: yup
-            .mixed()
-            .nullable()
-            .test(
-                "is_upload",
-                "กรุณาเพิ่มเอกสารยืนยันคะแนนการสอบ อย่างน้อย 1 รูป",
-                (value) => {
-                    if (edit) {
-                        return true
-                    } else {
-                        return value[0] !== undefined
-                    }
-                }
-            ),
+        .string()
+        .required("กรุณาเพิ่มเอกสารยืนยันคะแนนการสอบ อย่างน้อย 1 รูป"),
         test: yup
             .string()
             .nullable()

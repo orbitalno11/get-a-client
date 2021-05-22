@@ -20,8 +20,9 @@ const checkTypeTesting = (value) => {
     return value === defaultValue.typeIdentity["testing"]
 }
 
-const RomoveModal = ({ type, data, profile }) => {
+const ModalEducation = ({ type, data, profile, action }) => {
     const dispatch = useDispatch()
+    const history = useHistory();
     const widthButton = {
         width: "6rem",
         marginLeft: "0.5rem",
@@ -32,10 +33,12 @@ const RomoveModal = ({ type, data, profile }) => {
         textAlign: "center"
     }
 
+    const textAction = action === "remove" ? "ลบ" : "แก้ไข"
+
     const fullText = checkTypeTesting(type) && data ? (
-        "ยืนยันการลบผลสอบ " + (data.exam.title + " วิชา" + data.subject.title + " " + data.score) + " คะแนน"
+        "ยืนยันการ"+textAction+"ผลสอบ " + (data.exam.title + " วิชา" + data.subject.title + " " + data.score) + " คะแนน"
     ) : (
-        "ยืนยันการลบประวัติการศึกษา " + (data.instituteText + " สาขา" + data.branchText) + " เกรดเฉลี่ย " + data.gpax
+        "ยืนยันการ"+textAction+"ประวัติการศึกษา " + (data.instituteText + " สาขา" + data.branchText) + " เกรดเฉลี่ย " + data.gpax
     )
 
     const closeModal = () =>{
@@ -51,13 +54,27 @@ const RomoveModal = ({ type, data, profile }) => {
         }
     }
 
+    const editEducation = () => {
+        const typeIdentity = findKeyObject(defaultValue.typeIdentity, type)
+        closeModal()
+        history.push(`/tutor/${profile}/add/${typeIdentity}/${data.id}`)
+    }
+
     return (
         <div className={style.centerPage}>
             <p className={style.titleH5} style={textCenter}>{fullText}</p>
             <p>สถานะการตรวจสอบ : {findKeyObject(defaultValue.requestStatus, data.verified)} </p>
-            <p className={`${style.textSmall} ${style.marginTop20}`}>หมายเหตุ : หากทำการลบแล้ว ไม่สามารถกู้คืนได้</p>
+            <p className={`${style.textSmall} ${style.marginTop20}`}>
+                {
+                    action === "remove" ? ( 
+                        "หมายเหตุ : หากทำการลบแล้ว ไม่สามารถกู้คืนได้"
+                    ) : (
+                        "หมายเหตุ : หากทำการแก้ไขข้อมูล จะต้องมีการตรวจสอบข้อมูลจากผู้ดูแลระบบอีกครั้ง"
+                    )
+                }
+                </p>
             <Row >
-                <Button className="buttonColor backgroundRed" shape="round" size="middle" style={widthButton} onClick={()=>removeVerify()}>ลบ</Button>
+                <Button className="buttonColor backgroundRed" shape="round" size="middle" style={widthButton} onClick={()=>action === "remove" ? removeVerify() : editEducation()}>{textAction}</Button>
                 <Button className="buttonColor backgroundBlue" shape="round" size="middle" style={widthButton} onClick={()=>closeModal()}>ยกเลิก</Button>
             </Row>
         </div>
@@ -66,26 +83,31 @@ const RomoveModal = ({ type, data, profile }) => {
 
 export default function EducationTutor({ data, type }) {
     const dispatch = useDispatch()
-    const history = useHistory();
     const { profile } = useSelector(state => state.auth)
 
 
     const remove = (type, data) => {
         dispatch(modalAction.openModal({
-            body: <RomoveModal type={type} data={data} profile={profile}/>,
+            body: <ModalEducation type={type} data={data} profile={profile} action="remove"/>,
             size: sizeModal.default
         }))
     }
 
-    const edit = (type, id) => {
-        const typeIdentity = findKeyObject(defaultValue.typeIdentity, type)
-        history.push(`/tutor/${profile}/add/${typeIdentity}/${id}`)
+    const edit = (data) => {
+        dispatch(modalAction.openModal({
+            body: <ModalEducation type={type} data={data} profile={profile} action="edit"/>,
+            size: sizeModal.default
+        }))
     }
 
     const widthIcon = (widthSize) => {
         return ({
             width: `${widthSize}rem`
         })
+    }
+    
+    const marginTop = {
+        marginTop : "1rem"
     }
 
     const colorVerify = (status) => {
@@ -124,12 +146,12 @@ export default function EducationTutor({ data, type }) {
                 data && data.map((item) => {
                     return (
                         <Row key={item.id}>
-                            <Col span={24} className={style.educationRow}>
+                            <Col span={24} className={style.profileSet}>
                                 {
                                     !isMobile() && (
                                         <Fragment>
                                             <Tooltip placement="topLeft" title="แก้ไขเกียรติประวัตินี้">
-                                                <button className={style.editButton} onClick={() => edit(type, item.id)} >
+                                                <button className={style.editButton} onClick={() => edit(item)} >
                                                     <FontAwesomeIcon icon={faEdit} />
                                                 </button>
                                             </Tooltip>
@@ -145,7 +167,7 @@ export default function EducationTutor({ data, type }) {
                                 <div style={isMobile() ? widthIcon(4) : widthIcon(5.5)}>
                                     <FontAwesomeIcon className={isMobile() ? style.smallSizeIcon : style.largeSizeIcon} icon={checkTypeTesting(type) ? faListAlt : faGraduationCap} />
                                 </div>
-                                <div className={style.subProfile}>
+                                <div style={marginTop}>
                                     <span>{checkTypeTesting(type) ? "ผลสอบ" : item.instituteText}</span>
                                     <br />
                                     <span>{checkTypeTesting(type) ? (item.exam.title + " : " + item.subject.title) : ("สาขา : " + item.branchText)}</span>
@@ -156,7 +178,7 @@ export default function EducationTutor({ data, type }) {
                                         isMobile() && (
                                             <Fragment>
                                                 <Button className="buttonColor" style={verifyButton(item.verified)} shape="round" size="small">{findKeyObject(defaultValue.requestStatus, item.verified)}</Button>
-                                                <Button className="buttonColor" style={buttonAction("blue")} shape="round" size="small" onClick={() => edit(type, item.id)} >แก้ไข</Button>
+                                                <Button className="buttonColor" style={buttonAction("blue")} shape="round" size="small" onClick={() => edit(item)} >แก้ไข</Button>
                                                 <Button className="buttonColor" style={buttonAction("gray")} shape="round" size="small" onClick={() => remove(type, item)} >ลบ</Button>
                                             </Fragment>
                                         )

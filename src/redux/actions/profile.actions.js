@@ -123,7 +123,6 @@ function getIdentifyTutor() {
            
         }).catch((err) => {
             dispatch(loadingActions.stopLoading())
-            console.log(err.response.data)
             dispatch(failure(err.response.data))
         })
 
@@ -153,7 +152,6 @@ function updateIdentifyTutor(data) {
 
         }).catch((err) => {
             dispatch(loadingActions.stopLoading())
-            console.log(err.response.data)
             dispatch(failure(err.response.data))
             dispatch(modalAction.openModal({
                 text: "แก้ไขข้อมูลไม่สำเร็จ",
@@ -188,7 +186,6 @@ function createIdentifyTutor(data) {
 
         }).catch((err) => {
             dispatch(loadingActions.stopLoading())
-            console.log(err.response.data)
             dispatch(failure(err.response.data))
             dispatch(modalAction.openModal({
                 text: "แก้ไขข้อมูลไม่สำเร็จ",

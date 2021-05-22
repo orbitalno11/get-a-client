@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom";
 import CardCourseLearner from "../../../../card/CardCourseLearner";
+import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 import { color } from "../../../../defaultValue";
 import style from "../styles.module.scss"
 
@@ -18,7 +19,7 @@ export default function CourseComponet({ title, array }) {
             <div className={`${style.scroll} ${style.paddingTop}`}>
                 <div className={style.row}>
                     {
-                        array && array.map((item) => (
+                        !isEmpty(array) && array.map((item) => (
                             <div key={item.id} style={{ padding: "0.5rem" }}>
                                 <CardCourseLearner data={item} />
                             </div>

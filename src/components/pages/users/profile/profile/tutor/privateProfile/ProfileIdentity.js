@@ -5,7 +5,7 @@ import {
     faPlus
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import isMobile from "../../../../../../isMobile/isMobile"
 import { useSelector } from "react-redux";
 import EducationTutor from "../../../editProfile/tutor/EducationTutor"
@@ -15,6 +15,7 @@ import ModalComponent from "../../../../../../modal/ModalComponent";
 
 export default function ProfileIdentity() {
     const tutorData = useSelector(state => state.tutor)
+    const { profile } = useSelector(state => state.auth)
     const { listTesting, listEducation } = tutorData
 
     // Classify startus verify
@@ -32,9 +33,9 @@ export default function ProfileIdentity() {
                 <div className={style.TitleCoin}>
                     <h2 className={style.titleH4}>ยืนยันตัวตน</h2>
                     <Col className={style.floatLeft}>
-                        <NavLink to={"/tutor/edit/identity"}>
-                            <Button className="buttonColor backgroundGreen" shape="round" size="middle" style={{ width: "6.25rem" }}>ยืนยัน</Button>
-                        </NavLink>
+                        <Link to={"/tutor/edit/identity"}>
+                            <Button className="buttonColor backgroundGreen" shape="round" size="middle" style={{ width: "5.25rem" }}>ยืนยัน</Button>
+                        </Link>
                     </Col>
                 </div>
             </div>
@@ -44,13 +45,13 @@ export default function ProfileIdentity() {
                         <h2 className={style.titleH4}>เกียรติประวัติ</h2>
                     </Col>
                     <Col className={style.marginLeft}>
-                        <NavLink to="/tutor/1/add/testing/created">
+                        <Link to={`/tutor/${profile}/add/testing/created`}>
                         <Tooltip placement="topLeft" title="เพิ่มเกียรติประวัติ">
                             <button className={style.editButton}  >
                                 <FontAwesomeIcon icon={faPlus} />
                             </button>
                             </Tooltip>
-                        </NavLink>
+                        </Link>
                     </Col>
                 </Row>
             </div>

@@ -4,6 +4,7 @@ const initialState = {
     data: null,
     enrollList: null,
     error: null,
+    enrollSuccess : false,
     learnerCourse : null
 }
 
@@ -56,11 +57,13 @@ const offlineCourseReducer = (state = initialState, action) => {
         case offlineCourseConstants.ENROLL_OFFLINE_COURSE_SUCCESS:
             return {
                 ...state,
+                enrollSuccess : true,
                 error: null
             }
         case offlineCourseConstants.ENROLL_OFFLINE_COURSE_FAILURE:
             return {
                 ...state,
+                enrollSuccess : false,
                 error: action.payload
             }
         case offlineCourseConstants.GET_ENROLL_OFFLINE_COURSE_SUCCESS:
@@ -90,7 +93,8 @@ const offlineCourseReducer = (state = initialState, action) => {
                 ...state,
                 data: null,
                 enrollList: null,
-                error: null
+                error: null,
+                enrollSuccess : false,
             }
         default:
             return state

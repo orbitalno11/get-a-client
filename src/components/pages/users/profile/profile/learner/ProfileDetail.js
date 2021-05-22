@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import { Typography, Image, Badge, Button } from 'antd';
+import { Image, Badge, Button } from 'antd';
 import {
     faMapMarkerAlt,
     faEdit,
@@ -13,7 +13,6 @@ import { faFacebook, faLine } from "@fortawesome/free-brands-svg-icons";
 import ProfileSample from "../../../../../images/profile.webp"
 import { color } from "../../../../../defaultValue";
 import { SkeletonComponent } from "../../../../../loading/SkeletonComponent"
-const { Title } = Typography;
 
 export default function ProfileDetail() {
     const { auth, profile, loading } = useSelector(state => state)
@@ -40,17 +39,17 @@ export default function ProfileDetail() {
                     preview={false}
                 />
                 <Link to={`/learner/${auth.profile}/edit`}>
-                    <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[12, 0]}>
-                        <h2 className={`${style.marginLeft} ${style.titleH3}`}>
-                            {
-                                profileDetail ? (
-                                    <Fragment>{profileDetail.firstname} < br /> { profileDetail.lastname}</Fragment>
-                                ) : (
-                                    <SkeletonComponent.SkeletonText />
-                                )
-                            }
-                        </h2>
-                    </Badge>
+                {
+                        profileDetail ? (
+                            <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[0, 0]}>
+                                <h2 className={`${style.marginLeft} ${style.titleH2}`}>{profileDetail.firstname && profileDetail.firstname} <br /> {profileDetail.lastname && profileDetail.lastname}</h2>
+                            </Badge>
+                        ) : (
+                            <div className={style.marginLeft}>
+                                <SkeletonComponent.SkeletonText size="default" />
+                            </div>
+                        )
+                    }
                 </Link>
             </div>
             {/* hide coin section */}
@@ -76,7 +75,7 @@ export default function ProfileDetail() {
                 </div>
             </div> */}
             <div className={style.subProfile}>
-                <Title level={5}>สถานที่สะดวกเรียน</Title>
+                <span className={style.titleH4}>สถานที่สะดวกเรียน</span>
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
                     {
@@ -95,7 +94,7 @@ export default function ProfileDetail() {
                 </div>
             </div>
             <div className={style.subProfile}>
-                <Title level={5}>ช่องทางติดต่อ</Title>
+            <span className={style.titleH4}>ช่องทางติดต่อ</span>
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faFacebook} className={style.iconcoin} style={{ color: color.blue }} />
                     {

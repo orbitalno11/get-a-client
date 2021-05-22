@@ -7,6 +7,7 @@ import {
     faUserCircle,
     faTachometerAlt,
     faGraduationCap,
+    faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -39,11 +40,12 @@ const NavMenu = () => {
                         คอร์สเรียน
                 </NavLink>
                 </Menu.Item>
+                */}
                 <Menu.Item key="/search" >
                     <NavLink to="/search">
                         ค้นหา
                 </NavLink>
-                </Menu.Item> */}
+                </Menu.Item> 
                 {
                     status ? (
                         <Menu.Item key={profileLearnerURL} >
@@ -120,12 +122,12 @@ const NavMenu = () => {
                         <FontAwesomeIcon icon={faChalkboardTeacher} className="icon" />
                     </NavLink>
                 </Col>
-                {/* <Col span={4} className="iconMenu">
-                    <NavLink to="/">
+               <Col span={4} className="iconMenu">
+                    <NavLink to="/search">
                         <FontAwesomeIcon icon={faSearch} className="icon" />
                     </NavLink>
                 </Col>
-                <Col span={4} className="iconMenu">
+                 {/* <Col span={4} className="iconMenu">
                     <NavLink to="/favorite">
                         <FontAwesomeIcon icon={faHeart} className="icon" />
                     </NavLink>

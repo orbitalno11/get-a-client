@@ -34,19 +34,18 @@
   padding-left: 1.25rem;
   width: 100%;
   outline:none;
+  font-size: 1.25rem;
 }
 
-.imageUpload >input{
+.imageUpload >input,
+.ant-select-arrow{
   display: none !important;
 }
 
 .ant-picker,
 .ant-select{
   width: 100% !important; 
-}
-
-.ant-select-arrow{
-  display: none;
+  font-size: 1.25rem;
 }
 
 .ant-picker,
@@ -66,12 +65,9 @@
   padding-right: 1.25rem !important;
 }
 
-.ant-picker-input > input{
-  font-size: 1.1rem;
-}
-
-.ant-select-arrow{
-  display: none;
+.ant-picker-input > input,
+.ant-select-item-option-content{
+  font-size: 1.25rem;
 }
 
 input :focus{
@@ -348,7 +344,7 @@ span{
 }
 
 textarea{
-  font-size: 1.1rem !important;
+  font-size: 1.25rem;
 }
 
 #reviewForm .ant-spin-dot-item {

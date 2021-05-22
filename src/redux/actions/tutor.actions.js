@@ -50,7 +50,11 @@ function getTesting(id) {
                     subject : data.exam.subjectText,
                     score : data.exam.score,
                     year : "2000",
-                    image : data.verifiedData.documentUrl1
+                    image : [
+                        data.verifiedData.documentUrl1 ,
+                        data.verifiedData.documentUrl2 ,
+                        data.verifiedData.documentUrl3
+                    ]
                 }
             }
             dispatch(success({
@@ -80,7 +84,11 @@ function getEducation(id) {
                     institute : data.educationData.instituteText,
                     gpax : data.educationData.gpax,
                     status : data.educationData.status,
-                    image : data.verifiedData.documentUrl1
+                    image : [
+                        data.verifiedData.documentUrl1 ,
+                        data.verifiedData.documentUrl2 ,
+                        data.verifiedData.documentUrl3
+                    ]
                 }
             }
             dispatch(success({
@@ -218,7 +226,7 @@ function updateEducation(data, id, profile) {
 }
 
 
-function deleteTesting(id,auth) {
+function deleteTesting(id, auth) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.delete(`/tutor/testing/${id}`).then(() => {

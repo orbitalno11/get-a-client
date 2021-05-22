@@ -54,36 +54,41 @@ if (localStorage.token) {
   const currentTime = Date.now() / 1000
 
   if (user.exp < currentTime) {
-      store.dispatch(userActions.logout())
-      window.location.href = "/login"
+    store.dispatch(userActions.logout())
+    window.location.href = "/login"
   }
 }
 
 function App() {
   const admin = store.getState().auth.role === 0
+  const tutor = store.getState().auth.role === 2
+
   return (
     <Provider store={store}>
       <Router>
         {
-           !admin && <NavMenu />
+          !admin && <NavMenu />
         }
         <Switch>
           {/* Public Route */}
           <AdminRoute path="/admin" component={AdminLayout} />
 
           {/* Public Route */}
+
           <PrivateRoute exact path="/learner/:id" component={ProfileLearner} />
           <PrivateRoute exact path="/learner/:id/edit" component={EditProfile} />
           <PrivateRoute exact path="/learner/:id/edit/map" component={EditProfileMap} />
           <PrivateRoute exact path="/course" component={ProfileCourse} />
           <PrivateRoute exact path="/coin" component={Coins} />
           <PrivateRoute exact path="/coinshop/payment" component={Payment} />
-          <PrivateRoute exact path="/historycoin" component={HistoryCoin}/>
+          <PrivateRoute exact path="/historycoin" component={HistoryCoin} />
           <PrivateRoute exact path="/tutor/coin" component={Redeem} />
           <PrivateRoute exact path="/notification" component={Notification} />
           <PrivateRoute exact path="/notification/:id" component={NotificationDetail} />
           <PrivateRoute exact path="/favorite" component={Favorite} />
-          <PrivateRoute path="/tutor" component={TutorLayout}/>
+          {
+            tutor && <PrivateRoute path="/tutor" component={TutorLayout} />
+          }
 
           {/* Public Route */}
           <Route exact path="/" component={Home} />
@@ -98,7 +103,7 @@ function App() {
           <Route exact path="/search/:search" component={ResultSearch} />
           <Route exact path="/course/online/:id" component={OnlineCourseList} />
           <Route path="*">
-            <Redirect path="/login" />
+            <Redirect path="/" />
           </Route>
         </Switch>
       </Router>

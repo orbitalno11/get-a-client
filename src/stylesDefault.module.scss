@@ -16,7 +16,7 @@ $silver : #a39b9b;
 }
 
 .titleH2{
-    font-size: 1.75rem;
+    font-size: 2rem;
     font-weight: 600;
 }
   
@@ -40,7 +40,7 @@ $silver : #a39b9b;
 }
     
 .textNormal{
-    font-size: 1.25rem;
+    font-size: 1.35rem;
 }
 
 .iconLargeRegister{
@@ -134,4 +134,12 @@ $silver : #a39b9b;
 .a4Image {
   width: 13rem !important;
   height: 16rem !important;
+}
+
+.container {
+    padding: 6rem 7.5rem 3.75rem 7.5rem;
+
+    @media only screen and (max-width: 768px){
+        padding:  6.25rem 1.5rem 4rem 1.5rem;
+    }
 }

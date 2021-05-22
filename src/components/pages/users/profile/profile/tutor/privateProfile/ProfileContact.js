@@ -10,7 +10,7 @@ export default function ProfileContact({ profileDetail }) {
     return (
         <Fragment>
             <div className={style.subProfile}>
-                <h3 className={style.titleH4}>ช่องทางติดต่อ</h3>
+            <span className={style.titleH4}>ช่องทางติดต่อ</span>
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faFacebook} className={style.iconcoin} style={{ color: color.blue }} />
                     {

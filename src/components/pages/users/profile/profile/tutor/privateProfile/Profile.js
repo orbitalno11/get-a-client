@@ -33,7 +33,7 @@ export default function ProfileTutor() {
         <Fragment>
             {isMobile() && <Header title="โปรไฟล์" />}
             <ModalComponent />
-            <Row className={style.body}>
+            <Row className={style.container}>
                 <Col xs={24} sm={24} md={11} lg={9} xl={8} >
                     <ProfileDetail />
                     {

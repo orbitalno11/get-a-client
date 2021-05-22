@@ -73,7 +73,6 @@
 
 .floatLeft{
     margin-left: auto;
-    margin-right: 0.6rem;
 }
 
 .fontBlue{
@@ -155,12 +154,6 @@
   flex-flow: column;
 }
 
-.educationRow{
-    @extend .VerizontalPage;
-    padding-top: 1.25rem;
-    flex-flow: row;
-}
-
 .smallSizeIcon {
     font-size: 1.5rem;
     margin-left: 1.25rem;
@@ -172,12 +165,6 @@
     margin-left: 1.5rem;
     font-size: 2.2rem;
 }
-
-.floatLeft{
-    margin-left: auto;
-    margin-right: 0.6rem;
-}
-
 
 .editButton {
     @extend .buttonCircle;

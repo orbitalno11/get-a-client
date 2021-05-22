@@ -89,13 +89,14 @@ export default function Search() {
                 type: !isEmpty(params.get("type")) && Number(params.get("type")),
                 location: !isEmpty(params.get("location")) && Number(params.get("location")),
             }
+
             reset({
-                grade: findKeyObject(defaultValue.grade, formData.grade) ? findKeyObject(defaultValue.grade, formData.grade) : "ไม่ระบุ",
-                subject: findKeyObject(defaultValue.subject, formData.subject) ? findKeyObject(defaultValue.subject, formData.subject) : "ไม่ระบุ",
+                grade: findKeyObject(defaultValue.grade, formData.grade) ? formData.grade : "N/A",
+                subject: findKeyObject(defaultValue.subject, formData.subject) ? formData.subject : "N/A",
                 gender: findKeyObject(defaultValue.gender, formData.gender) ? findKeyObject(defaultValue.gender, formData.gender) : "ไม่ระบุ",
                 courseType: findKeyObject(defaultValue.typeCourse, formData.type) ? findKeyObject(defaultValue.typeCourse, formData.type) : "ไม่ระบุ",
             })
-
+            
             dispatch(searchActions.getSearch({
                 data: formData,
                 redirectPath: "/search",
@@ -113,8 +114,8 @@ export default function Search() {
 
             reset({
                 grade: "ไม่ระบุ",
-                subject: "ไม่ระบุ",
-                gender: "ไม่ระบุ",
+                subject: "N/A",
+                gender: "N/A",
                 courseType: "ไม่ระบุ",
             })
 
@@ -134,8 +135,8 @@ export default function Search() {
         if ((currentLocation.permission && geolocation.success) || !currentLocation.permission) {
             const dataVariable = ["grade", "subject", "gender", "type", "location"]
             const formData = {
-                grade: defaultValue.grade[data.grade],
-                subject: defaultValue.subject[data.subject],
+                grade: data.grade,
+                subject: data.subject,
                 gender: defaultValue.gender[data.gender],
                 type: defaultValue.typeCourse[data.courseType],
                 location: (currentLocation.permission && geolocation.success) ? geolocation.data : null
@@ -178,14 +179,14 @@ export default function Search() {
                                                                 <Select.Option value="N/A">ไม่ระบุ</Select.Option>
                                                                 {
                                                                     defaultValue.grade && Object.entries(defaultValue.grade).map(([key, value]) => (
-                                                                        <Select.Option key={value} value={key}>{key}</Select.Option>
+                                                                        <Select.Option key={value} value={value}>{key}</Select.Option>
                                                                     ))
                                                                 }
                                                             </Select>
                                                         }
                                                         name="grade"
                                                         control={control}
-                                                        defaultValue={"ไม่ระบุ"}
+                                                        defaultValue={"N/A"}
                                                     />
                                                 </div>
                                             </Col>
@@ -198,15 +199,15 @@ export default function Search() {
                                                         <Select name="subject"  >
                                                             <Select.Option value="N/A">ไม่ระบุ</Select.Option>
                                                             {
-                                                                defaultValue.subject && Object.entries(defaultValue.subject).map(([key, value]) => (
-                                                                    <Select.Option key={value} value={key}>{key}</Select.Option>
+                                                                 defaultValue.subject && Object.entries(defaultValue.subject).map(([key, value]) => (
+                                                                    <Select.Option key={value} value={value}>{key}</Select.Option>
                                                                 ))
                                                             }
                                                         </Select>
                                                     }
                                                     name="subject"
                                                     control={control}
-                                                    defaultValue={"ไม่ระบุ"}
+                                                    defaultValue={"N/A"}
                                                 />
                                             </Col>
                                         </Row>

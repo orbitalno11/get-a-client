@@ -15,7 +15,7 @@ import { useParams } from "react-router";
 import isEmpty from "../../../../../defaultFunction/checkEmptyObject";
 import ducumentA4Sample from "../../../../../images/ducumentA4Sample.webp"
 import moment from "moment";
-import { modalAction } from "../../../../../../redux/actions";
+import { generalActions, modalAction } from "../../../../../../redux/actions";
 import { typeModal } from "../../../../../modal/TypeModal";
 import { sizeModal } from "../../../../../modal/SizeModal";
 import resizeImage from "../../../../../defaultFunction/resizeImage";
@@ -29,6 +29,7 @@ export default function AddEducation() {
     const params = useParams()
     const [type, setType] = useState(String(defaultValue.typeIdentity[params.type]));
     const { tutor, loading, auth } = useSelector(state => state)
+    const { branch, institute } = useSelector(state => state.general)
     const [dataDetail, setDataDetail] = useState(null)
     const dispatch = useDispatch()
     const edit = params.idEducation !== "created"
@@ -42,6 +43,11 @@ export default function AddEducation() {
     const { register, handleSubmit, errors, control, reset } = useForm({
         resolver: yupResolver(checkTypeTesting() ? profileTestSchema() : profileEducationSchema()),
     });
+
+    useEffect(() => {
+        dispatch(generalActions.getInstitute())
+        dispatch(generalActions.getBranch())
+    }, [])
 
     const fetchProfile = useCallback(() => {
         if (params.idEducation && !isEmpty(type)) {
@@ -57,11 +63,6 @@ export default function AddEducation() {
         if (!isEmpty(defaultValue.typeIdentity[params.type])) {
             if (edit) {
                 fetchProfile()
-            } else {
-                reset({
-                    test: "O-NET",
-                    subject: "คณิตศาสตร์",
-                })
             }
         } else {
             dispatch(modalAction.openModal({
@@ -132,25 +133,6 @@ export default function AddEducation() {
         }
     }, [dataDetail])
 
-    useEffect(() => {
-        if (params.idEducation === "created") {
-            if (checkTypeTesting()) {
-                reset({
-                    test: "O-NET",
-                    subject: "คณิตศาสตร์",
-                })
-            } else {
-                reset({
-                    grade: "ม.4",
-                    status: "กำลังศึกษา",
-                    branch: "1",
-                    institute: "1"
-                })
-            }
-        }
-    }, [type])
-
-
     const onChangeType = (value) => {
         setType(String(value))
         setImageName([])
@@ -190,30 +172,27 @@ export default function AddEducation() {
             let formData = new FormData()
             if (checkTypeTesting()) {
                 let mydate = new Date(data.year);
-                formData.append("examId", defaultValue.examType[data.test])
-                formData.append("subjectCode", defaultValue.subject[data.subject])
+                formData.append("examId", data.test)
+                formData.append("subjectCode", data.subject)
                 formData.append("score", data.score)
                 formData.append("year", mydate.getYear())
                 imageName.forEach((item, index) =>
                     formData.append(`document${index + 1}`, item.file)
                 )
-
                 if (!edit) {
                     dispatch(tutorAction.createTesting(formData, auth.profile))
                 } else {
                     dispatch(tutorAction.updateTesting(formData, params.idEducation, auth.profile))
                 }
-
             } else {
-                formData.append("grade", defaultValue.grade[data.grade])
+                formData.append("grade", data.grade)
                 formData.append("branch", "1")
                 formData.append("institute", "1")
-                formData.append("status", defaultValue.educationStatus[data.status])
+                formData.append("status", data.status)
                 formData.append("gpax", data.gpax)
                 imageName.forEach((item, index) =>
                     formData.append(`document${index + 1}`, item.file)
                 )
-
                 if (!edit) {
                     dispatch(tutorAction.createEducation(formData, auth.profile))
                 } else {
@@ -270,12 +249,12 @@ export default function AddEducation() {
                                             <Select ref={register}>
                                                 {
                                                     checkTypeTesting() ? (
-                                                        defaultValue.examType && Object.entries(defaultValue.examType).map(([key]) => (
-                                                            <Select.Option key={key} value={key}>{key}</Select.Option>
+                                                        defaultValue.examType && Object.entries(defaultValue.examType).map(([key, value]) => (
+                                                            <Select.Option key={value} value={key}>{key}</Select.Option>
                                                         ))
                                                     ) : (
-                                                        defaultValue.grade && Object.entries(defaultValue.grade).map(([value]) => (
-                                                            <Select.Option key={value} value={value}>{value}</Select.Option>
+                                                        defaultValue.grade && Object.entries(defaultValue.grade).map(([key, value]) => (
+                                                            <Select.Option key={value} value={value}>{key}</Select.Option>
                                                         ))
                                                     )
                                                 }
@@ -283,7 +262,8 @@ export default function AddEducation() {
                                         }
                                         name={checkTypeTesting() ? "test" : "grade"}
                                         control={control}
-                                        defaultValue={""}
+                                        defaultValue={null}
+                                        placeholder={checkTypeTesting() ? "ประเภทการสอบ" : "ระดับชั้น"}
                                     />
                                     {
                                         checkTypeTesting() ?
@@ -300,18 +280,21 @@ export default function AddEducation() {
                                             <Select  >
                                                 {
                                                     checkTypeTesting() ? (
-                                                        defaultValue.subject && Object.entries(defaultValue.subject).map(([key]) => (
-                                                            <Select.Option key={key} value={key}>{key}</Select.Option>
+                                                        defaultValue.subject && Object.entries(defaultValue.subject).map(([key, value]) => (
+                                                            <Select.Option key={value} value={value}>{key}</Select.Option>
                                                         ))
                                                     ) : (
-                                                        <Select.Option value="1" >สาขา 1</Select.Option>
+                                                        !isEmpty(branch) && branch.map((value) => (
+                                                            <Select.Option key={value.id} value={value.id}>{value.title}</Select.Option>
+                                                        ))
                                                     )
                                                 }
                                             </Select>
                                         }
                                         name={checkTypeTesting() ? "subject" : "branch"}
                                         control={control}
-                                        defaultValue={""}
+                                        defaultValue={null}
+                                        placeholder={checkTypeTesting() ? "วิชาที่สอบ" : "สาขา"}
                                     />
                                     {
                                         checkTypeTesting() ?
@@ -330,12 +313,17 @@ export default function AddEducation() {
                                             <Controller
                                                 as={
                                                     <Select  >
-                                                        <Select.Option value="1" >สาขา 1</Select.Option>
+                                                        {
+                                                            !isEmpty(institute) && institute.map((value) => (
+                                                                <Select.Option key={value.id} value={value.id}>{value.name}</Select.Option>
+                                                            ))
+                                                        }
                                                     </Select>
                                                 }
                                                 name="institute"
                                                 control={control}
-                                                defaultValue={""}
+                                                defaultValue={null}
+                                                placeholder={checkTypeTesting() ? "คะแนนที่ได้" : "สถาบัน"}
                                             />
                                         )
                                     }
@@ -364,7 +352,6 @@ export default function AddEducation() {
                                             <input className="input" step=".01" type="number" max="4" name={"gpax"} ref={register} placeholder={"เกรดเฉลี่ย"} />
                                         )
                                     }
-
                                     {
                                         checkTypeTesting() ?
                                             errors.year && <p className="error-input">{errors.year.message}</p>
@@ -383,14 +370,15 @@ export default function AddEducation() {
                                                         <Select  >
                                                             {
                                                                 defaultValue.educationStatus && Object.entries(defaultValue.educationStatus).map(([key, value]) => (
-                                                                    <Select.Option key={value} value={key}>{key}</Select.Option>
+                                                                    <Select.Option key={value} value={value}>{key}</Select.Option>
                                                                 ))
                                                             }
                                                         </Select>
                                                     }
                                                     name="status"
                                                     control={control}
-                                                    defaultValue={""}
+                                                    defaultValue={null}
+                                                    placeholder="สถานะการศึกษาปัจจุบัน"
                                                 />
                                                 {errors.status && <p className="error-input">{errors.status.message}</p>}
                                             </div>

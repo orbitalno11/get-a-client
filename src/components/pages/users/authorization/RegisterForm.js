@@ -12,7 +12,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import style from "./styles.module.scss"
 import InputComponents from "../../../input/InputComponets";
 import { useDispatch } from "react-redux";
-import { userActions } from "../../../../redux/actions/auth.actions";
 import profile from "../../../images/profile.webp"
 import ModalComponent from "../../../modal/ModalComponent";
 import Header from "../../../headerMobile/Header";
@@ -23,6 +22,8 @@ import Loading from "../../../loading/Loading";
 import { useEffect } from "react";
 import isEmpty from "../../../defaultFunction/checkEmptyObject";
 import { styleComponent } from "../../../defaultFunction/style";
+import { userActions } from "../../../../redux/actions";
+import moment from "moment";
 
 export default function RegisterForm() {
     const { loading } = useSelector(state => state)
@@ -77,6 +78,7 @@ export default function RegisterForm() {
             formdata.append("password", data.password)
             formdata.append("confirmPassword", data.confirmPassword)
             formdata.append("image", image.file)
+
             if (type === "learner") {
                 formdata.append("grade", defaultValue.grade[data.grade])
                 dispatch(userActions.signUpLearner(formdata))
@@ -168,7 +170,7 @@ export default function RegisterForm() {
                                     <p className={style.textOne5}>วันเดือนปีเกิด</p>
                                     <Controller
                                         as={
-                                            <DatePicker placeholder="" />
+                                            <DatePicker placeholder="" disabledDate={value => value && value > moment()} />
                                         }
                                         name="dateOfBirth"
                                         control={control}
@@ -187,13 +189,12 @@ export default function RegisterForm() {
                                                 {
                                                     type === "tutor" ?
                                                         (
-                                                            Object.entries(defaultValue.subject).map(([key]) => (
-                                                                <Select.Option key={key} value={key}>{key}</Select.Option>
+                                                            defaultValue.subject && Object.entries(defaultValue.subject).map(([key, value]) => (
+                                                                <Select.Option key={value} value={key}>{key}</Select.Option>
                                                             ))
-                                                        ) :
-                                                        (
-                                                            Object.entries(defaultValue.grade).map(([key]) => (
-                                                                <Select.Option key={key} value={key}>{key}</Select.Option>
+                                                        ):(
+                                                            defaultValue.grade && Object.entries(defaultValue.grade).map(([key, value]) => (
+                                                                <Select.Option key={value} value={key}>{key}</Select.Option>
                                                             ))
                                                         )
                                                 }

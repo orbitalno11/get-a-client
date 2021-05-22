@@ -13,7 +13,7 @@ export const formUpdateProfile = (type, data) => {
     if (data.image.length !== 0) {
         formData.append("image", data.image[0])
     }
-    if (data.facebook?.isSafeNotBlank()){
+    if (data.facebook?.isSafeNotBlank()) {
         formData.append("facebookUrl", data.facebook)
     }
     if (data.line?.isSafeNotBlank()) {
@@ -22,7 +22,6 @@ export const formUpdateProfile = (type, data) => {
 
     if (type === "learner") {
         formData.append("grade", data.grade)
-        
     } else if (type === "tutor") {
         data.subject.forEach((item, index) =>
             formData.append(`subject${index + 1}`, defaultValue.subject[item])

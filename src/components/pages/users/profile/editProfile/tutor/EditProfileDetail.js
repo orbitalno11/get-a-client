@@ -32,7 +32,6 @@ export default function EditProfileDetail() {
     const { register, handleSubmit, errors, control, reset, watch } = useForm({
         resolver: yupResolver(profileTutorSchema)
     });
-
     const watchInput = watch()
 
     useEffect(() => {
@@ -70,7 +69,7 @@ export default function EditProfileDetail() {
                 firstname: detailProfile.firstname,
                 lastname: detailProfile.lastname,
                 gender: findKeyObject(defaultValue.gender, detailProfile.gender),
-                dateOfBirth: (moment(new Date(detailProfile.dateOfBirth),defaultValue.dateFormat)),
+                dateOfBirth: (moment(new Date(detailProfile.dateOfBirth), defaultValue.dateFormat)),
                 subject: arraySubject && arraySubject,
                 email: detailProfile.email,
                 facebook: detailProfile.contact.facebookUrl,
@@ -184,8 +183,8 @@ export default function EditProfileDetail() {
                                             as={
                                                 <Select name="subject" optionLabelProp="label" mode="multiple" >
                                                     {
-                                                        Object.entries(defaultValue.subject).map(([key]) => (
-                                                            <Select.Option key={key} value={key}>{key}</Select.Option>
+                                                        defaultValue.subject && Object.entries(defaultValue.subject).map(([key, value]) => (
+                                                            <Select.Option key={value} value={key}>{key}</Select.Option>
                                                         ))
                                                     }
                                                 </Select>

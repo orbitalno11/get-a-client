@@ -1,41 +1,24 @@
 import * as yup from "yup";
 import moment from "moment";
-import { defaultValue } from "../../components/defaultValue";
 
 export const courseSchema = yup.object().shape({
   namecourse: yup.string().required("กรุณาใส่ชื่อคอร์ส"),
   subject: yup
     .string()
     .nullable()
-    .test(
-      "valueSelector",
-      "กรุณาเลือกระดับชั้น",
-      value => value !== null && defaultValue.subject[value] !== null
-    ),
+    .required("กรุณาเลือกวิชา"),
   grade: yup
     .string()
     .nullable()
-    .test(
-      "valueSelector",
-      "กรุณาเลือกระดับชั้น",
-      value => value !== null && defaultValue.grade[value] !== null
-    ),
+    .required("กรุณาเลือกระดับชั้น"),
   type: yup
     .string()
     .nullable()
-    .test(
-      "valueSelector",
-      "กรุณาเลือกประเภทการสอน",
-      value => value !== null && defaultValue.type[value] !== null
-    ),
+    .required("กรุณาเลือกประเภทการสอน"),
   dateOfWeek: yup
     .string()
     .nullable()
-    .test(
-      "valueSelector",
-      "กรุณาระบุวันที่สอน",
-      value => value !== null && defaultValue.dateOfWeek[value] !== null
-    ),
+    .required("กรุณาระบุวันที่สอน"),
   start: yup
     .string()
     .required("กรุณาระบุเวลาที่เริ่มเรียน"),

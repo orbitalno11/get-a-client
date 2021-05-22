@@ -6,10 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import vdoSample from "../images/vdoSample.webp"
 import profileSample from "../images/profile.webp"
 import isMobile from "../isMobile/isMobile";
-import { defaultValue } from "../defaultValue";
-import findKeyObject from "../defaultFunction/findKeyObject";
 import { Fragment } from "react";
 import { useHistory } from "react-router";
+import findKeyObject from "../defaultFunction/findKeyObject";
+import { defaultValue } from "../defaultValue";
 const { useBreakpoint } = Grid;
 
 export default function CardLesson({ data, isCourse, search, course }) {
@@ -32,7 +32,7 @@ export default function CardLesson({ data, isCourse, search, course }) {
             <Col lg={15} md={15} sm={15} xs={15} align="start" className={styles.marginLeftThree}>
                 <Row align="middle">
                     <Col span={13} >
-                        <span className={`${styles.textOne75} ${styles.textOneLine}`}>{data.name}</span>
+                        <span className={`${styles.textOne75} ${styles.textTwoLine}`}>{data.name}</span>
                     </Col>
                     {
                         !course && (
@@ -50,7 +50,7 @@ export default function CardLesson({ data, isCourse, search, course }) {
                         (screens.lg && !search && !course) && (
                             <Col span={12} className={`${styles.paddingTopHalf} ${styles.textOneLine}`}  >
                                 <FontAwesomeIcon icon={faBookReader} className={styles.grayIcon} />
-                                <span className={`${styles.text18} ${styles.marginLeftOneHalf}`}> {findKeyObject(defaultValue.grade, data?.grade?.grade)} </span>
+                                <span className={`${styles.text18} ${styles.marginLeftOneHalf}`}> {data?.grade && findKeyObject(defaultValue.shortGrade,data?.grade?.grade)}</span>
                             </Col>
                         )
                     }

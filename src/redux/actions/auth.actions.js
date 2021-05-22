@@ -17,7 +17,7 @@ function checkErrorMessage(errorMessage) {
     return message
 }
 
-function loginUser(loginData) {
+function loginUser(loginData, path) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         auth.signInWithEmailAndPassword(loginData.email, loginData.password).then(user => {
@@ -38,7 +38,11 @@ function loginUser(loginData) {
                             trackTutorLogin()
                             window.location.href = "/tutor"
                         } else if (user.role === 1) {
-                            window.location.href = "/"
+                            if(path){
+                                window.location.href =  decodeURIComponent(path)
+                            }else{
+                                window.location.href = "/"
+                            }
                         } else if (user.role === 0) {
                             window.location.href = "/admin"
                         }

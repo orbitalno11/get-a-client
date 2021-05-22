@@ -18,7 +18,7 @@
 }
 
 .error-input{
-  font-size: 0.9rem;
+  font-size: 1rem;
   color:var(--error-color);
   padding-left: 0.625rem;
   margin-top: 0.3rem;
@@ -192,7 +192,7 @@ input :focus{
 
 .big-button{
   height : 10rem ;
-  width : 80%;
+  width : 10rem;
   font-size: 15px;
   font-weight: 600;
   margin-top: 1.25rem;

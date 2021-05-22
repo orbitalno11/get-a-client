@@ -5,7 +5,7 @@ import style from "../../styles.module.scss"
 import idCardSample from "../../../../../images/idCardSample.webp"
 import faceSample from "../../../../../images/faceSample.webp"
 import idCardWithFaceSample from "../../../../../images/idCardWithFaceSample.webp"
-import {  Button, Col, Image, Row } from "antd"
+import { Col, Image, Row } from "antd"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form"
 import { profileIdentitySchema } from "../../../../../../validation/profile/profileIdentitySchema"
@@ -15,10 +15,12 @@ import ModalComponent from "../../../../../modal/ModalComponent"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import { profileUpdateIdentitySchema } from "../../../../../../validation/profile/profileUpdateIdentitySchema"
-import resizeImage from  "../../../../../defaultFunction/resizeImage"
+import resizeImage from "../../../../../defaultFunction/resizeImage"
 import { sizeModal } from "../../../../../modal/SizeModal"
 import { typeModal } from "../../../../../modal/TypeModal"
 import Loading from "../../../../../loading/Loading"
+import { styleComponent } from "../../../../../defaultFunction/style"
+import { color } from "../../../../../defaultValue"
 
 export default function ProfileIdentityForm() {
     const dispatch = useDispatch()
@@ -43,13 +45,13 @@ export default function ProfileIdentityForm() {
         if (profile.identity) {
             setImage({
                 "idCard": {
-                    imageURL : profile.identity.documentUrl1
+                    imageURL: profile.identity.documentUrl1
                 },
                 "face": {
-                    imageURL : profile.identity.documentUrl2
+                    imageURL: profile.identity.documentUrl2
                 },
                 "idCardWithFace": {
-                    imageURL : profile.identity.documentUrl3
+                    imageURL: profile.identity.documentUrl3
                 }
             })
             setCreate(false)
@@ -60,15 +62,15 @@ export default function ProfileIdentityForm() {
         {
             name: "idCard",
             title: "รูปบัตรประชาชน (ด้านหน้า)",
-            image : idCardSample
+            image: idCardSample
         }, {
             name: "face",
             title: "รูปหน้าตรง",
-            image : faceSample
+            image: faceSample
         }, {
             name: "idCardWithFace",
             title: "รูปหน้าตรงคู่กับบัตรประชาชน (ด้านหน้า)",
-            image : idCardWithFaceSample
+            image: idCardWithFaceSample
         }
     ]
 
@@ -97,19 +99,19 @@ export default function ProfileIdentityForm() {
     const onSubmit = (data) => {
         if (data) {
             let formdata = new FormData()
-            if(create){
+            if (create) {
                 formdata.append("idCard", image.idCard.file)
                 formdata.append("face", image.face.file)
                 formdata.append("idCardWithFace", image.idCardWithFace.file)
                 dispatch(profileAction.createIdentifyTutor(formdata))
-            }else{
-                if(data.idCard.lenght !== 0){
+            } else {
+                if (data.idCard.lenght !== 0) {
                     formdata.append("idCard", image.idCard.file)
                 }
-                if(data.face.lenght !== 0){
+                if (data.face.lenght !== 0) {
                     formdata.append("face", image.face.file)
                 }
-                if(data.idCardWithFace.lenght !== 0){
+                if (data.idCardWithFace.lenght !== 0) {
                     formdata.append("idCardWithFace", image.idCardWithFace.file)
                 }
                 dispatch(profileAction.updateIdentifyTutor(formdata))
@@ -121,51 +123,51 @@ export default function ProfileIdentityForm() {
         <Fragment>
             {isMobile() && <Header title="ยืนยันตัวตน" pageBack="goback" />}
             {
-                        loading.loading && (
-                            <Loading />
-                        )
-                    }
+                loading.loading && (
+                    <Loading />
+                )
+            }
             <ModalComponent />
-            <div className={style.container}>
-                {
-                    !isMobile() && (
-                        <Row justify="center" >
-                            <h2 className={style.titleH2} >ยืนยันตัวตน</h2>
-                        </Row>
-                    )
-                }
-
+            <div className="container">
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Row justify={isMobile() ? "center" : "space-around"}>
+                    <div className={style.bodyPaddingTopBottom} >
                         {
-                            listInput && listInput.map((item) => (
-                                <Col lg={6} md={24} sm={22} xs={22} className={style.marginTop20} key={item.name} >
-                                    <div className={style.alignPageIdentity}>
-                                        <div className="imageUpload" >
-                                            <p className={style.textNormal}>{item.title}</p>
-                                            <label htmlFor={`file-input-${item.name}`} className="icon-addimage">
-                                                <Image
-                                                    className={`${style.borderImage} ${style.HDImage}`}
-                                                    src={image[item.name].imageURL ? image[item.name].imageURL : item.image}
-                                                    preview={false}
-
-                                                />
-                                            </label>
-                                            <input id={`file-input-${item.name}`} name={item.name} type="file" onChange={onChange} ref={register} />
-                                            {
-                                                errors[item.name] && <p className="error-input">*{errors[item.name].message}</p>
-                                            }
-                                        </div>
-                                    </div>
-
-                                </Col>
-                            ))
+                            !isMobile() && (
+                                <div className={style.section} span={24} align="center" >
+                                    <span className={style.headerThree} >ยืนยันตัวตน</span>
+                                </div>
+                            )
                         }
+                        <Row className={`${!isMobile() && style.marginTop20} ${style.section} ${!isMobile() && style.marginSection}`} justify={isMobile() ? "center" : "space-around"}>
+                            {
+                                listInput && listInput.map((item) => (
+                                    <Col lg={6} md={24} sm={22} xs={22} key={item.name} >
+                                        <div className={style.alignPageIdentity}>
+                                            <div className="imageUpload" >
+                                                <p className={style.textOne5}>{item.title}</p>
+                                                <label htmlFor={`file-input-${item.name}`} className="icon-addimage">
+                                                    <Image
+                                                        className={`${style.borderImage} ${style.HDImage}`}
+                                                        src={image[item.name].imageURL ? image[item.name].imageURL : item.image}
+                                                        preview={false}
 
-                    </Row>
-                    <Row justify="center" className={style.marginTop}>
-                        <Button className="buttonColor backgroundOrange" shape="round" size="large" htmlType="submit">ส่งข้อมูล</Button>
-                    </Row>
+                                                    />
+                                                </label>
+                                                <input id={`file-input-${item.name}`} name={item.name} type="file" onChange={onChange} ref={register} />
+                                                {
+                                                    errors[item.name] && <p className="error-input">*{errors[item.name].message}</p>
+                                                }
+                                            </div>
+                                        </div>
+                                    </Col>
+                                ))
+                            }
+                            <Col span={24} align="center" className={style.marginTop}>
+                                <button className={style.buttonColor} style={styleComponent.buttonFull(color.orange, "7rem")} type="submit">บันทึกข้อมูล</button>
+                            </Col>
+                        </Row>
+
+                    </div>
                 </form>
 
 

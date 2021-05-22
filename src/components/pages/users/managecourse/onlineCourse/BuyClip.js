@@ -1,4 +1,3 @@
-import { Spin } from "antd";
 import React from "react"
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
@@ -26,7 +25,7 @@ export default function BuyClip({ title, coin }) {
                 {
                     loading.loading && (
                         <Fragment>
-                            <Spin style={{ marginRight: "0.5rem" }} />
+                              <styleComponent.spinLoading/>
                             <span> กำลัง</span>
                         </Fragment>
                     )

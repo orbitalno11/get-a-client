@@ -3,9 +3,9 @@ import { myCourseConstants } from "../constants"
 import { loadingActions } from "./loading.actions"
 
 function getMyOfflineCourse() {
-    return  dispatch => {
+    return async dispatch => {
         dispatch(loadingActions.startLoading())
-         apiURL.apiGetA.get("/learner/offline-course")
+        await apiURL.apiGetA.get("/learner/offline-course")
             .then(res => {
                 if (res.data.success) {
                     const data = res.data.data
@@ -19,14 +19,14 @@ function getMyOfflineCourse() {
             })
     }
 
-    function success(mycourse) { return { type: myCourseConstants.GET_OFFLINE_COURSE_SUCCESS, payload: mycourse } }
-    function failure(err) { return { type: myCourseConstants.GET_OFFLINE_COURSE_FAILURE, payload: err } }
+    function success(mycourse) { return { type: myCourseConstants.MY_OFFLINE_COURSE_SUCCESS, payload: mycourse } }
+    function failure(err) { return { type: myCourseConstants.MY_OFFLINE_COURSE_FAILURE, payload: err } }
 }
 
 function getMyOnlineCourse() {
-    return  dispatch => {
+    return async dispatch => {
         dispatch(loadingActions.startLoading())
-         apiURL.apiGetA.get("/learner/online-course")
+         await apiURL.apiGetA.get("/learner/online-course")
             .then(res => {
                 if (res.data.success) {
                     const data = res.data.data
@@ -40,8 +40,8 @@ function getMyOnlineCourse() {
             })
     }
 
-    function success(mycourse) { return { type: myCourseConstants.GET_ONLINE_COURSE_SUCCESS, payload: mycourse } }
-    function failure(err) { return { type: myCourseConstants.GET_ONLINE_COURSE_FAILURE, payload: err } }
+    function success(mycourse) { return { type: myCourseConstants.MY_ONLINE_COURSE_SUCCESS, payload: mycourse } }
+    function failure(err) { return { type: myCourseConstants.MY_ONLINE_COURSE_FAILURE, payload: err } }
 }
 
 export const myCourseAction = {

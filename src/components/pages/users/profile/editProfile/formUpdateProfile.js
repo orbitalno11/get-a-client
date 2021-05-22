@@ -13,10 +13,10 @@ export const formUpdateProfile = (type, data) => {
     if (data.image.length !== 0) {
         formData.append("image", data.image[0])
     }
-    if (data.facebook) {
+    if (data.facebook?.isSafeNotBlank()){
         formData.append("facebookUrl", data.facebook)
     }
-    if (data.lineId) {
+    if (data.line?.isSafeNotBlank()) {
         formData.append("lineId", data.line)
     }
 

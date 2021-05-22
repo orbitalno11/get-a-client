@@ -13,7 +13,7 @@ export default function CardReview({ data, myReview, handleEdit }) {
     }
 
     return (
-        <Row className={`${styles.card} ${styles.paddingCard}`} >
+        <Row className={`${styles.card} ${styles.paddingOne}`} >
             <Col lg={15} md={15} sm={15} xs={24}>
                 <span className={`${styles.titleH5} ${styles.textOneLine}`}>
                     {data.reviewer.fullName}
@@ -22,7 +22,7 @@ export default function CardReview({ data, myReview, handleEdit }) {
             <Col lg={9} md={9} sm={9} xs={24} align={isMobile() ? "start" : "end"}>
                 <span className={styles.floatRight}>วันที่ {new Date(data.reviewDate).toLocaleDateString()}</span>
             </Col>
-            <Col lg={24} md={24} sm={24} xs={24} className={styles.marginTop1}>
+            <Col lg={24} md={24} sm={24} xs={24} className={styles.marginTopHalf}>
                 <Rate disabled value={data.rating} className={styles.rate} />
             </Col>
 

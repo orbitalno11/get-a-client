@@ -26,7 +26,8 @@ export default function TabHorizontal({ type, tabStart, tabDetail, name, style, 
     }
 
     const onHandleChangeTab = (value) => {
-        if(setTab(value)){
+        if(handleSetSelectTab){
+            setTab(value)
             handleSetSelectTab(value)
         }
     }

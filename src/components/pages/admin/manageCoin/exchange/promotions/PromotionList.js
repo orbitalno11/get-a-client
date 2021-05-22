@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Collapse, Space, Row, Col } from "antd";
 import style from "../../styles.module.scss";
-import AddList from "./detailList/AddList";
 import TableList from "./detailList/TableList";
 import DeletePromotion from "./DeletePromotion";
 import EditPromotion from "./EditPromotion";
@@ -23,13 +22,10 @@ export default function PromotionList() {
     <Space direction="vertical" style={{ width: "100%" }}>
       {list &&
         list
-          .filter((data) => data.type === "std")
+          .filter((data) => data.type === "promo")
           .map((data, index) => (
             <Collapse key={index}>
               <Panel header={data && data.title}>
-                <Col span={24} style={{ marginBottom: "1rem" }}>
-                  <AddList />
-                </Col>
                 <Row style={{ marginLeft: "3rem" }}>
                   <Col span={2} className={style.textNormal}>วันที่เริ่มต้น </Col>
                   <Col span={8}>

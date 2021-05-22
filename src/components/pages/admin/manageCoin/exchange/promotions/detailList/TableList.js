@@ -11,7 +11,7 @@ export default function TableList({ data }) {
           <thead>
             <tr>
               <th span={8} className={style.textNormal}>จำนวนเงิน (บาท)</th>
-              <th span={8} className={style.textNormal}>จำนวน coins</th>
+              <th span={8} className={style.textNormal}>จำนวนเหรียญ</th>
               <th span={8} className={style.textNormal}>การจัดการ</th>
             </tr>
           </thead>

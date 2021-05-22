@@ -36,11 +36,11 @@ export default function ExchangeDetail() {
         <Form onSubmit={handleSubmit(onSubmit)}>
           <p className={style.titleH4}>แก้ไขอัตราการแลกเปลี่ยนเหรียญ</p>
           <Row style={{ paddingTop: "1rem", marginBottom: "1.8rem",paddingLeft:"1.3rem" }}>
-            <Col span={7} className={`${style.aglieCenter} ${style.textNormal}`}>1 เหรียญ </Col>
+            <Col span={7} className={`${style.horizontalCenter} ${style.textNormal}`}>1 เหรียญ </Col>
             <Col span={4}>
               <span style={{ float: "right" }}>=</span>
             </Col>
-            <Col span={8} className={style.columRate}>
+            <Col span={8} className={style.columnRate}>
               <Input
                 type="baht"
                 name="baht"

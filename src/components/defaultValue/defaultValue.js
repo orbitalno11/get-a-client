@@ -89,9 +89,8 @@ const userRole = {
 }
 
 const typeCourse = {
-    "ออนไลน์" : 0,
+    "ออนไลน์" : 3,
     "นัดเจอ" : 1,
-    "ไม่ระบุ" : 2
 }
 
 export const defaultValue = {

@@ -76,6 +76,10 @@ $silver : #a39b9b;
     padding-bottom: 3.75rem;
 }
 
+.padding1{
+    padding : 2rem
+}
+
 .body {
     @extend .paddingbody;
     @extend .paddingTopBody;

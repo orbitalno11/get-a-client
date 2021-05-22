@@ -30,6 +30,12 @@
   width: 100%;
 }
 
+.loginform{
+  display: contents;
+  align-items: center;
+  width: 100%;
+}
+
 .buttonText{
   @extend .textOne25;
   @extend .paddingBottomBody;

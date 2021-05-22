@@ -22,12 +22,8 @@ export default function Testing() {
     fetchTest();
   }, [fetchTest]);
 
-  const handleCancel = () => {
-    dispatch(verifyAction.geteManageTesting(idTest, false));
-  };
-
-  const handleSubmit = () => {
-    dispatch(verifyAction.geteManageTesting(idTest, true));
+  const takeAction = (action) => {
+    dispatch(verifyAction.geteManageTesting(idTest, action));
   };
 
   return (
@@ -38,14 +34,14 @@ export default function Testing() {
           <tbody>
             <tr>
               <td style={{ paddingLeft: "2.3rem" }}>
-                <Row className={style.approve}>
+              <Row className={style.approve}>
                   <Col>
                     <Button
                       className="buttonColor backgroundGreen"
                       style={{ width: "6rem" }}
                       shape="round"
                       size="middle"
-                      onClick={() => handleSubmit()}
+                      onClick={() => takeAction(true)}
                     >
                       <span className={style.textNormal}>ยอมรับ</span>
                     </Button>
@@ -56,7 +52,7 @@ export default function Testing() {
                       style={{ width: "6rem" }}
                       shape="round"
                       size="middle"
-                      onClick={() => handleCancel()}
+                      onClick={() => takeAction(false)}
                     >
                       <span className={style.textNormal}>ปฏิเสธ</span>
                     </Button>

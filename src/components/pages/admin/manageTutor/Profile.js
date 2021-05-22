@@ -22,7 +22,7 @@ export default function Profile() {
     fetchProfile();
   }, [fetchProfile]);
 
-  const takeAction = (action: boolean) => {
+  const takeAction = (action) => {
     dispatch(verifyAction.geteManageIdentity(idProfile, action));
   };
 

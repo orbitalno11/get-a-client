@@ -45,6 +45,7 @@ import { userActions } from "./redux/actions";
 import OfflineCourse from "./components/pages/users/managecourse/offlineCourse/OfflineCourse";
 import Ranking from "./components/pages/users/home/learner/Ranking";
 import ProfileCourse from "./components/pages/users/profile/profile/learner/ProfileCourse";
+import { defaultValue } from "./components/defaultValue";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
@@ -60,8 +61,9 @@ if (localStorage.token) {
 }
 
 function App() {
-  const admin = store.getState().auth.role === 0
-  const tutor = store.getState().auth.role === 2
+  
+  const admin = store.getState().auth.role === defaultValue.statusUser["admin"]
+  const tutor = store.getState().auth.role === defaultValue.statusUser["tutor"]
 
   return (
     <Provider store={store}>

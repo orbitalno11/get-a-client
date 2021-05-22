@@ -81,7 +81,7 @@ const ModalEducation = ({ type, data, profile, action }) => {
     )
 }
 
-export default function EducationTutor({ data, type }) {
+export default function EducationTutor({ data, type, status}) {
     const dispatch = useDispatch()
     const { profile } = useSelector(state => state.auth)
 
@@ -104,10 +104,6 @@ export default function EducationTutor({ data, type }) {
         return ({
             width: `${widthSize}rem`
         })
-    }
-    
-    const marginTop = {
-        marginTop : "1rem"
     }
 
     const colorVerify = (status) => {
@@ -148,7 +144,7 @@ export default function EducationTutor({ data, type }) {
                         <Row key={item.id}>
                             <Col span={24} className={style.profileSet}>
                                 {
-                                    !isMobile() && (
+                                    (!isMobile() && status !== "learner") && (
                                         <Fragment>
                                             <Tooltip placement="topLeft" title="แก้ไขเกียรติประวัตินี้">
                                                 <button className={style.editButton} onClick={() => edit(item)} >
@@ -167,7 +163,7 @@ export default function EducationTutor({ data, type }) {
                                 <div style={isMobile() ? widthIcon(4) : widthIcon(5.5)}>
                                     <FontAwesomeIcon className={isMobile() ? style.smallSizeIcon : style.largeSizeIcon} icon={checkTypeTesting(type) ? faListAlt : faGraduationCap} />
                                 </div>
-                                <div style={marginTop}>
+                                <div className={status !== "learner" ?  style.subProfile : null}>
                                     <span>{checkTypeTesting(type) ? "ผลสอบ" : item.instituteText}</span>
                                     <br />
                                     <span>{checkTypeTesting(type) ? (item.exam.title + " : " + item.subject.title) : ("สาขา : " + item.branchText)}</span>
@@ -175,7 +171,7 @@ export default function EducationTutor({ data, type }) {
                                     <span>{checkTypeTesting(type) ? ("คะแนน : " + item.score) : ("เกรดเฉลี่ย : " + item.gpax)}</span>
                                     <br />
                                     {
-                                        isMobile() && (
+                                        (isMobile()  && status !== "learner")  && (
                                             <Fragment>
                                                 <Button className="buttonColor" style={verifyButton(item.verified)} shape="round" size="small">{findKeyObject(defaultValue.requestStatus, item.verified)}</Button>
                                                 <Button className="buttonColor" style={buttonAction("blue")} shape="round" size="small" onClick={() => edit(item)} >แก้ไข</Button>
@@ -185,7 +181,7 @@ export default function EducationTutor({ data, type }) {
                                     }
                                 </div>
                                 {
-                                    !isMobile() ?
+                                    (!isMobile() && status !== "learner") ?
                                         <div className={`${style.floatLeft} ${style.bodderBottom}`}>
                                             <span style={{ color: colorVerify(item.verified) }}>{findKeyObject(defaultValue.requestStatus, item.verified)}</span>
                                         </div> : null

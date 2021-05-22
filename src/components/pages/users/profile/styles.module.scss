@@ -97,7 +97,7 @@
     height: 16rem;
     padding-top: 3rem;
     width: 100%;
-    background-image: url(../../../images/bannerProfile.webp);
+    // background-color: $blue
 }
 
 .bannerEditProfile{
@@ -199,3 +199,9 @@
     right: 0;
 }
   
+.backgroundProfile{
+    @extend .textNormal;
+    background-color: rgba($color: $white, $alpha: 0.8);
+    padding: 1rem;
+    border-radius: 0.5rem;
+}

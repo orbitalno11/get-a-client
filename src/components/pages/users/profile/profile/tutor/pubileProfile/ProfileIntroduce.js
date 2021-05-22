@@ -8,8 +8,11 @@ import { SkeletonComponent } from "../../../../../../loading/SkeletonComponent"
 import profileSample from "../../../../../../images/profile.webp"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faInfo } from "@fortawesome/free-solid-svg-icons";
+import { color } from "../../../../../../defaultValue";
+import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
 
 export default function ProfileIntroduce({ mainPage }) {
+    const screens = useBreakpoint();
     const { tutorHandle } = useSelector(state => state.tutor)
     const { id } = useParams()
 
@@ -45,15 +48,21 @@ export default function ProfileIntroduce({ mainPage }) {
                         tutorHandle ?
                             (
                                 <Fragment>
-                                    <h2 style={{ fontSize: "2rem", fontWeight: "800" }}>
+                                    <span style={{ fontSize: screens.md ? "3.5rem" : "2.5rem", fontWeight: "800", color: !screens.md ? color.black : color.white }}>
                                         {tutorHandle.fullNameText}
-                                    </h2>
-                                    <span className={style.textNormal}>
-                                        {tutorHandle.introduction}
                                     </span>
+                                    <p className={style.backgroundProfile}>
+                                        {tutorHandle.introduction}
+                                    </p>
                                 </Fragment>
                             ) : (
-                                <SkeletonComponent.SkeletonText size="default" />
+                                <Fragment>
+                                    <SkeletonComponent.SkeletonText size="default" />
+                                    <br/>
+                                    <br/>
+                                    <SkeletonComponent.SkeletonText size="default" />
+                                </Fragment>
+
                             )
                     }
                 </Col>

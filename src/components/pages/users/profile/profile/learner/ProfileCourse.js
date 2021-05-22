@@ -12,27 +12,7 @@ const { useBreakpoint } = Grid;
 export default function ProfileCourse({ mainPage }) {
     const screens = useBreakpoint();
     const [course] = useState({
-        tutor:
-            [
-                {
-                    name: "หนูเทพซาโตชิ",
-                    place: "บางมด, ทุ่งครุ",
-                    subject: "ชีววิทยา",
-                    date: "1 มกราคม 2563"
-                },
-                {
-                    name: "พิคาชู หนูเทพซาโตชิ",
-                    place: "บางมด, ทุ่งครุ",
-                    subject: "ชีววิทยา",
-                    date: "1 มกราคม 2563"
-                },
-                {
-                    name: "พิคาชู หนูเทพซาโตชิ",
-                    place: "บางมด, ทุ่งครุ",
-                    subject: "ชีววิทยา",
-                    date: "1 มกราคม 2563"
-                }
-            ],
+        tutor: null,
         course: null
     })
 

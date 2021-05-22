@@ -82,6 +82,12 @@ const constantLocation = {
     defaultDetailAddress : "แขวง บางมด เขตทุ่งครุ กรุงเทพมหานคร 10140"
 }
 
+const statusUser = {
+    "admin" : 0,
+    "learner" : 1,
+    "tutor" : 2
+}
+
 export const defaultValue = {
     gender,
     grade,
@@ -97,4 +103,5 @@ export const defaultValue = {
     typeAcion,
     timeFormat,
     enrollStatus,
+    statusUser
 }

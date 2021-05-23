@@ -349,3 +349,7 @@ span{
 textarea{
   font-size: 1.1rem !important;
 }
+
+#reviewForm .ant-spin-dot-item {
+  background-color: var(--white-color) !important;
+}

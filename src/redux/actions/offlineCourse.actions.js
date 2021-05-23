@@ -92,20 +92,10 @@ function enRollOfflineCourse(id) {
             .then(() => {
                 dispatch(success())
                 dispatch(loadingActions.stopLoading())
-                dispatch(modalAction.openModal({
-                    text: "สมัครเรียนสำเร็จ รออนุมัติจากครูสอนพิเศษ",
-                    size: sizeModal.small,
-                    alert: typeModal.corrent
-                }))
             })
             .catch(err => {
                 dispatch(failure(err.response.data))
                 dispatch(loadingActions.stopLoading())
-                dispatch(modalAction.openModal({
-                    text: "สมัครเรียนไม่สำเร็จ",
-                    size: sizeModal.small,
-                    alert: typeModal.wrong
-                }))
             })
     }
 

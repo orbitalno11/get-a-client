@@ -20,6 +20,9 @@ export default function Testing() {
 
   useEffect(() => {
     fetchTest();
+    return () => {
+      dispatch(verifyAction.clearListVerify())
+    }
   }, [fetchTest]);
 
   const takeAction = (action) => {

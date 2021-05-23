@@ -20,6 +20,9 @@ export default function Profile() {
 
   useEffect(() => {
     fetchProfile();
+    return () => {
+      dispatch(verifyAction.clearListVerify())
+    }
   }, [fetchProfile]);
 
   const takeAction = (action) => {

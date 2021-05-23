@@ -20,6 +20,9 @@ export default function Educate() {
 
   useEffect(() => {
     fetchEducation();
+    return () => {
+      dispatch(verifyAction.clearListVerify())
+    }
   }, [fetchEducation]);
 
   const takeAction = (action) => {

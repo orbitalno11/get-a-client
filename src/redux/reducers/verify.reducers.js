@@ -148,6 +148,20 @@ const verifyReducer = (state = initialState , action)=>{
             }
 
         }
+        
+        case verifyConstants.CLEAR_LIST_VERIFY:{
+            return {
+                ...state,
+                identitydDetail:null,
+                testDetail:null,
+                educateDetail:null,
+                manageIdentity:null,
+                manageEducate:null,
+                manageTest:null,
+                error: null              
+            }
+
+        }
         default: return state    
     }
 } 

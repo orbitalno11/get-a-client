@@ -13,15 +13,15 @@ export default  function RequesDetail({data}) {
     function ComponentSample (){
       return (
             <div style={{ paddingLeft: "1rem" }}>
-              <p  className={style.titleH5}>
+              <p  className={style.titleH4}>
                 คำขอการถอนเหรียญ
               </p>
-              <p>ชื่อ : {data && data.firstname}</p>
-              <p>นามสกุล : {data && data.lastname}</p>
-              <p>วันที่ส่งคำขอ : {data && data.date} </p>
-              <p>จำนวนยอด : {data && data.amount} บาท</p>
-              <p>ธนาคาร :{data && data.bank}</p>
-              <p>เลขบัญชี : {data && data.accountNumber}</p>
+              <p className={style.textNormal}>ชื่อ : {data && data.firstname}</p>
+              <p className={style.textNormal}>นามสกุล : {data && data.lastname}</p>
+              <p className={style.textNormal}>วันที่ส่งคำขอ : {data && data.date} </p>
+              <p className={style.textNormal}>จำนวนยอด : {data && data.amount} บาท</p>
+              <p className={style.textNormal}>ธนาคาร :{data && data.bank}</p>
+              <p className={style.textNormal}>เลขบัญชี : {data && data.accountNumber}</p>
               <Row className={style.btnRequest}>
                 <Col span={6}> 
                   <Button
@@ -31,7 +31,7 @@ export default  function RequesDetail({data}) {
                       style={{ width: "100px" }}
                       onClick={() => alert()}
                     >
-                      ยอมรับ
+                      <span className={style.textNormal}>ยอมรับ</span>
                     </Button>
                 </Col>
                 <Col span={6}>
@@ -42,7 +42,7 @@ export default  function RequesDetail({data}) {
                     style={{ width: "100px" }}
                     onClick={() => dispatch(modalAction.closeModal())}
                   >
-                    ปฏิเสธ
+                   <span className={style.textNormal}>ปฏิเสธ</span>
                   </Button>
                 </Col>
               </Row>
@@ -66,7 +66,7 @@ export default  function RequesDetail({data}) {
 
   return (
     <Fragment>
-      <Row className={style.container}>
+      <Row className={style.horizontalCenter}>
         <Card className={style.cardContainer}>
           <Row>
             <Col
@@ -90,7 +90,7 @@ export default  function RequesDetail({data}) {
             span={24}
             style={{ justifyContent: "center", marginTop: "0.625rem" }}
           >
-            <span>{data && data.amount} บาท</span>
+            <span className={style.textNormal}>{data && data.amount} บาท</span>
           </Row>
           <ModalComponent />
           <Row
@@ -104,7 +104,7 @@ export default  function RequesDetail({data}) {
               size="middle"
               onClick={() => component()}
             >
-              รายละเอียด
+              <span className={style.textNormal}>รายละเอียด</span>
             </Button>
           </Row>
         </Card>

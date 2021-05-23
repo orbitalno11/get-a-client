@@ -10,16 +10,16 @@ export default function TableList({ data }) {
         <table className={style.tablecoins}>
           <thead>
             <tr>
-              <th span={8}>จำนวนเงิน (บาท)</th>
-              <th span={8}>จำนวน coins</th>
-              <th span={8}>การจัดการ</th>
+              <th span={8} className={style.textNormal}>จำนวนเงิน (บาท)</th>
+              <th span={8} className={style.textNormal}>จำนวนเหรียญ</th>
+              <th span={8} className={style.textNormal}>การจัดการ</th>
             </tr>
           </thead>
           <tbody>
             <tr style={{ width: "1rem" }}>
-              <td>{data && data.baht} </td>
-              <td>{data && data.coin}</td>
-              <td>
+              <td className={style.textNormal}>{data && data.baht} </td>
+              <td className={style.textNormal}>{data && data.coin}</td>
+              <td className={style.textNormal}>
                 <EditList />
                 &emsp;
                 <DeleteList />

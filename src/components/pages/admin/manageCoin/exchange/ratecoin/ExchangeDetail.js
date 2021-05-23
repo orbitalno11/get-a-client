@@ -1,4 +1,4 @@
-import { Row, Col, Button, Input, Typography, Form } from "antd";
+import { Row, Col, Button, Input,Form } from "antd";
 import React, { Fragment, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { exchangeSchema } from "../../../../../../validation/admin/exchangeSchema";
@@ -11,7 +11,6 @@ import { modalAction, coinAction } from "../../../../../../redux/actions";
 import ModalComponent from "../../../../../modal/ModalComponent";
 import { sizeModal } from "../../../../../modal/SizeModal";
 import { typeModal } from "../../../../../modal/TypeModal";
-const { Link } = Typography;
 
 export default function ExchangeDetail() {
   const { register, handleSubmit, errors } = useForm({
@@ -35,38 +34,37 @@ export default function ExchangeDetail() {
     return (
       <div style={{ paddingLeft: "1rem" }}>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <p className={style.titleH5}>แก้ไขอัตราการแลกเปลี่ยนเหรียญ</p>
-          <Row style={{ paddingTop: "1rem", marginBottom: "1.8rem" }}>
-            <Col span={11}>1 coins </Col>
-            <Col span={1}>
+          <p className={style.titleH4}>แก้ไขอัตราการแลกเปลี่ยนเหรียญ</p>
+          <Row style={{ paddingTop: "1rem", marginBottom: "1.8rem",paddingLeft:"1.3rem" }}>
+            <Col span={7} className={`${style.horizontalCenter} ${style.textNormal}`}>1 เหรียญ </Col>
+            <Col span={4}>
               <span style={{ float: "right" }}>=</span>
             </Col>
-            <Col span={10}>
+            <Col span={8} className={style.columnRate}>
               <Input
                 type="baht"
                 name="baht"
                 ref={register}
-                placeholder="ใส่ค่าเงิน"
-                bordered={false}
-                style={{ textAlign: "center", paddingTop: "-0.3rem" }}
+                placeholder="บาท"
+                className={`${style.inputRate} ${style.textNormal}`}
               />
               {errors.baht && (
                 <p className="error-input">{errors.baht.message}</p>
               )}
             </Col>
-            <Col span={2}>บาท</Col>
+            <Col span={2} className={style.textNormal}>บาท</Col>
           </Row>
           <Row className={style.btnRequest}>
             <Col span={6}>
               <Button
-                className="backgroundGreenAdmin buttonColor"
+                className="backgroundGreen buttonColor"
                 shape="round"
                 size="middle"
                 style={{ width: "100px" }}
                 htmlType="submit"
                 onClick={() => alert()}
               >
-                ยอมรับ
+                 <span className={style.textNormal}>ยอมรับ</span>
               </Button>
             </Col>
             <Col span={6}>
@@ -77,7 +75,7 @@ export default function ExchangeDetail() {
                 style={{ width: "100px" }}
                 onClick={() => dispatch(modalAction.closeModal())}
               >
-                ปฏิเสธ
+                <span className={style.textNormal}>ปฏิเสธ</span>
               </Button>
             </Col>
           </Row>
@@ -112,7 +110,7 @@ export default function ExchangeDetail() {
           <FontAwesomeIcon icon={faCoins} className={style.coins} />
         </Col>
         <Col xs={21} sm={21} md={20} lg={22} xl={23}>
-          <span className={style.titleH5}>อัตราการแลกเปลี่ยนปัจจุบัน</span>
+          <span className={style.titleH4}>อัตราการแลกเปลี่ยนปัจจุบัน</span>
         </Col>
         <ModalComponent />
         <Row className={style.pagepaddingleft}>
@@ -122,28 +120,18 @@ export default function ExchangeDetail() {
               style={{ color: "#F5732E", textDecorationLine: "underline" }}
               onClick={() => component()}
             >
-              แก้ไข
+              <span className={style.textNormal}>แก้ไข</span>
             </Button>
           </Col>
-
           <Col span={24} className={style.rateCoin}>
             {list &&
               list
               .filter((data) => data.type === "transfer")
               .map((data, index) => (
-                <span className={style.textLarge} key={index}>
-                  {data && data.coin} coin = {data && data.baht} บาท
+                <span className={style.textLarge} key={index} >                
+                  {data && data.coin} เหรียญ &nbsp;= &nbsp; {data && data.baht}  บาท
                 </span>
               ))}
-          </Col>
-
-          <Col span={24}>
-            <Link
-              href="/admin/exchagecoin/history"
-              className={style.hisexchange}
-            >
-              ประวัติอัตราการแลกเปลี่ยน
-            </Link>
           </Col>
         </Row>
       </Row>

@@ -51,15 +51,15 @@ export default function Request() {
             คำขอการถอนเหรียญที่ยังไม่ได้รับการอนุมัติ
           </span>
         </Col>
-        <Row style={{ paddingTop: "1rem", paddingLeft: "2rem" }}>
+      </Row>
+      <Row style={{ paddingTop: "1rem", paddingLeft: "2rem" }}>
           {request &&
             request.map((item, index) => (
-              <div key={index}>
+              <Col key={index}>
                 <RequesDetail data={item} />
-              </div>
+              </Col>
             ))}
         </Row>
-      </Row>
     </Fragment>
   );
 }

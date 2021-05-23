@@ -123,14 +123,13 @@ export default function ExchangeDetail() {
               <span className={style.textNormal}>แก้ไข</span>
             </Button>
           </Col>
-
           <Col span={24} className={style.rateCoin}>
             {list &&
               list
               .filter((data) => data.type === "transfer")
               .map((data, index) => (
                 <span className={style.textLarge} key={index} >                
-                  {data && data.coin} เหรียญ &nbsp;= &nbsp; {data && data.baht} 5 บาท
+                  {data && data.coin} เหรียญ &nbsp;= &nbsp; {data && data.baht}  บาท
                 </span>
               ))}
           </Col>

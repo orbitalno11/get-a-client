@@ -66,14 +66,14 @@ export default  function RequesDetail({data}) {
 
   return (
     <Fragment>
-      <Row className={style.container}>
+      <Row className={style.horizontalCenter}>
         <Card className={style.cardContainer}>
           <Row>
             <Col
               span={14}
               style={{ marginTop: "-0.5rem", paddingLeft: "0.625rem" }}
             >
-              <span className={style.textNormal}>{data && data.fullNameTaxt}</span>
+              <span>{data && data.fullNameTaxt}</span>
             </Col>
             <Col
               span={10}

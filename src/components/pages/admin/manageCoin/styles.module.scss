@@ -1,10 +1,5 @@
 @import "../../../../stylesDefault.module.scss";
 
-.container {
-  display: flex;
-  justify-content: center;
-}
-
 .cardContainer {
   width: 15.625rem;
   margin: 0.625rem 1.25rem 0.625rem 0.625rem;
@@ -25,17 +20,17 @@
 }
 
 .rateCoin {
-  background: #f5732e;
-  font-size: 2.3rem;
-  border-radius: 1.25rem;
-  width: 14rem;
-  height: 5rem;
-  color: white;
-  border-color: #f5732e;
-  margin-top: 0.4rem;
-  @extend .container;
-  align-items: center;
-  margin-left: 1rem;
+  background: #f5732e !important;
+  font-size: 2.3rem !important;
+  border-radius: 1.25rem !important;
+  width: 14rem !important;
+  height: 5rem !important;
+  color: white !important;
+  border-color: #f5732e !important;
+  margin-top: 0.4rem !important;
+  @extend .horizontalCenter;
+  align-items: center !important;
+  margin-left: 1rem !important;
 }
 
 .hisexchange{

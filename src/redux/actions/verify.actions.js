@@ -188,6 +188,10 @@ function geteManageTesting(requestId,approved){
     
 }
 
+function clearListVerify() {
+    return dispatch => { dispatch({ type: verifyConstants.CLEAR_LIST_VERIFY }) }
+}
+
 export const verifyAction = {
     getIdentityVerifyList,
     geteEducationVerifyList,
@@ -197,5 +201,6 @@ export const verifyAction = {
     geteTestingDetail,
     geteManageIdentity,
     geteManageEducation,
-    geteManageTesting
+    geteManageTesting,
+    clearListVerify
 }

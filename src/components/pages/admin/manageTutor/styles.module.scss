@@ -2,6 +2,7 @@
 
 .iconCloseemail{
   color:$orange;
+  @extend .iconSmall;
 }
 
 .iconOpenemail{
@@ -9,13 +10,13 @@
 }
 
 .textVerify{
-  font-size: 0.875rem;
+  font-size: 1rem;
   padding-top: 0.3rem;
   color: $silver;
 }
 
 .timeVerify{
-  font-size: 0.8rem;
+  font-size: 1rem;
   padding-top: 0.3rem;
   color:$silver;
   display: flex;
@@ -29,5 +30,6 @@
 }
 
 .approve{
-  margin-top: 2.5rem;
+  display: flex;
+  justify-content: flex-end;
 }

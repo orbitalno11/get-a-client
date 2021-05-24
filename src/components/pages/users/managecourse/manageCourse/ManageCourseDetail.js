@@ -19,12 +19,13 @@ import { courseOnline, lesson } from "../../../../card/Constants";
 export default function ManageCourseDetail() {
   const dispatch = useDispatch()
   const location = useLocation()
+  const { courseId } = useParams()
   const { tutor, auth, loading } = useSelector(state => state)
   const [courseList, setCourseList] = useState(null)
-  const { courseId } = useParams()
-  const isOnline = location.pathname === "/tutor/online" || !isEmpty(courseId) 
+  const [isOnline, setIsOnline1] = useState(location.pathname === "/tutor/online" || !isEmpty(courseId))
 
   useEffect(() => {
+    setIsOnline1(location.pathname === "/tutor/online" || !isEmpty(courseId))
     if (!isOnline) {
       // get offline course
       dispatch(tutorAction.getListOfflineCourse(auth.profile))
@@ -40,8 +41,9 @@ export default function ManageCourseDetail() {
     }
     return () => {
       dispatch(tutorAction.clearListOfflineCourse())
+      setCourseList(null)
     }
-  }, [])
+  }, [location.pathname])
 
   useEffect(() => {
     let courseDetail = null
@@ -55,7 +57,11 @@ export default function ManageCourseDetail() {
       }
     }
     setCourseList(courseDetail)
-  }, [tutor])
+
+    return () => {
+      setCourseList(null)
+    }
+  }, [tutor, location.pathname])
 
   return (
     <Fragment>
@@ -71,9 +77,9 @@ export default function ManageCourseDetail() {
             courseList ? (
               courseList.map((item, index) => (
                 <div key={index}>
-                  <Link to={courseId ? `/tutor/online/1/video/create` :`/course/${item.id}`} >
+                  <Link to={courseId ? `/tutor/online/1/video/create` : `/course/${item.id}`} >
                     {
-                      isOnline ?  (courseId ? <CardLesson data={item} /> :  <ListCourseTutor data={item} isClip={true}/>): <ListCourseTutor data={item} isClip={false}/>
+                      isOnline ? (courseId ? <CardLesson data={item} /> :  <ListCourseTutor data={item} isClip={true} />) : <ListCourseTutor data={item} isClip={false} />
                     }
                   </Link>
                 </div>
@@ -91,14 +97,14 @@ export default function ManageCourseDetail() {
             courseList ? (
               <Fragment>
                 {
-                 courseList && courseList.map((item, index) => (
-                    <Col align="center" xl={8} lg={courseId ? 12 : 8} md={courseId ? 24 :12} sm={24} key={index} style={{ padding: "0.5rem" }}>
-                      <Link to={courseId ? `/tutor/online/1/video/create` :`/course/${item.id}`} >
+                  courseList && courseList.map((item, index) => (
+                    <Col align="center" xl={8} lg={courseId ? 12 : 8} md={courseId ? 24 : 12} sm={24} key={index} style={{ padding: "0.5rem" }}>
+                      <Link to={courseId ? `/tutor/online/1/video/create` : `/course/${item.id}`} >
                         {
-                          !isOnline ?  <CardCourse data={item} isClip={false}/>  : 
-                          (
-                            courseId ? <CardLesson data={item} /> : <CardCourse data={item} isClip={true}/>
-                          )
+                          !isOnline ? <CardCourse data={item} isClip={false} /> :
+                            (
+                              courseId ? <CardLesson data={item} /> :  <CardCourse data={item} isClip={true} />
+                            )
                         }
                       </Link>
                     </Col>

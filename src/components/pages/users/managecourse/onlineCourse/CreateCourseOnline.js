@@ -1,40 +1,62 @@
 import React, { Fragment } from "react";
 import { Col, Row, Button, Select, Image } from "antd";
-import style from "../../styles.module.scss";
-import Header from "../../../../../headerMobile/Header";
-import isMobile from "../../../../../isMobile/isMobile"
+import style from "../styles.module.scss";
+import isMobile from "../../../../isMobile/isMobile"
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { defaultValue } from "../../../../../defaultValue/defaultValue";
-import { courseClipSchema } from "../../../../../../validation/course/courseClipSchema";
-import titleOnlineCourse from "../../../../../images/titleOnlineCourse.webp"
-import InputComponents from "../../../../../input/InputComponets";
+import { courseClipSchema } from "../../../../../validation/course/courseClipSchema";
+import titleOnlineCourse from "../../../../images/titleOnlineCourse.webp"
+import InputComponents from "../../../../input/InputComponets";
 import { useEffect } from "react";
 import { useState } from "react";
-import resizeImage from "../../../../../defaultFunction/resizeImage";
 import { useDispatch } from "react-redux";
-import { modalAction, onlineCourseActions } from "../../../../../../redux/actions";
-import { sizeModal } from "../../../../../modal/SizeModal";
-import { typeModal } from "../../../../../modal/TypeModal";
-import ModalComponent from "../../../../../modal/ModalComponent";
-import Loading from "../../../../../loading/Loading";
+import { modalAction, onlineCourseActions } from "../../../../../redux/actions";
+import { sizeModal } from "../../../../modal/SizeModal";
+import { typeModal } from "../../../../modal/TypeModal";
+import ModalComponent from "../../../../modal/ModalComponent";
+import Loading from "../../../../loading/Loading";
 import { useSelector } from "react-redux";
+import resizeImage from "../../../../defaultFunction/resizeImage";
+import { defaultValue } from "../../../../defaultValue";
+import Header from "../../../../headerMobile/Header";
+import { useParams } from "react-router";
+import isEmpty from "../../../../defaultFunction/checkEmptyObject";
+import findKeyObject from "../../../../defaultFunction/findKeyObject";
 
-export default function CreateClip() {
+export default function CreateCourseOnline() {
   const dispatch = useDispatch()
   const { loading } = useSelector(state => state.loading)
+  const dataCourse = useSelector(state => state.onlineCourse)
   const [image, setimage] = useState(titleOnlineCourse)
+  const { id } = useParams()
 
   const { register, handleSubmit, errors, control, reset } = useForm({
-    resolver: yupResolver(courseClipSchema),
+    resolver: yupResolver(courseClipSchema(id ? true : false)),
   });
 
   useEffect(() => {
-    reset({
-      name: "",
-      grade: "ม.4",
-      subject: "คณิตศาสตร์"
-    })
+    dispatch(onlineCourseActions.getOnlineCourse(id))
+    return () => {
+      dispatch(onlineCourseActions.clearListOnlineCourse())
+    }
+  }, [])
+
+  useEffect(() => {
+    if(id && dataCourse.data){
+      reset({
+        name: dataCourse.data.name,
+        grade: findKeyObject(defaultValue.grade,dataCourse.data.grade.grade),
+        subject: findKeyObject(defaultValue.subject,dataCourse.data.subject.id),
+      })
+      setimage({imageURL : dataCourse.data.coverUrl})
+    }else{
+      reset({
+        name: "",
+        grade: "ม.4",
+        subject: "คณิตศาสตร์"
+      })
+    }
+ 
   }, [])
 
   const onChange = async data => {
@@ -60,15 +82,21 @@ export default function CreateClip() {
       formdata.append("name", data.name)
       formdata.append("grade", defaultValue.grade[data.grade])
       formdata.append("subject", defaultValue.subject[data.subject])
-      formdata.append("image", image.file)
-      dispatch(onlineCourseActions.createOnlineCourse(formdata))
+      if (!isEmpty(image?.file)) {
+        formdata.append("image", image.file)
+      }
+
+      if (!id) {
+        dispatch(onlineCourseActions.createOnlineCourse(formdata))
+      } else {
+        dispatch(onlineCourseActions.updateOnlineCourse(formdata, id))
+      }
+
     }
   }
-
-
   return (
     <Fragment>
-      {isMobile() && (<Header title="สร้างคอร์สเรียน" pageBack="/tutor/online" />)}
+      {isMobile() && (<Header title={(id?"แก้ไข":"สร้าง")+"คอร์สเรียน"} pageBack="/tutor/online" />)}
       <ModalComponent />
       {
         loading && (
@@ -79,7 +107,7 @@ export default function CreateClip() {
         <Row className={style.container} justify="center">
           <Col span={24} align="center">
             {!isMobile() && (
-              <span className={style.titleH2}>สร้างคอร์สเรียน </span>
+              <span className={style.titleH2}>{id ? "แก้ไข" : "สร้าง"}คอร์สเรียน </span>
             )}
           </Col>
           <Col xs={24} sm={24} md={10} lg={10} xl={10}>
@@ -119,7 +147,7 @@ export default function CreateClip() {
                 <p className={style.textNormal}>วิชา</p>
                 <Controller
                   as={
-                    <Select name="subject">
+                    <Select name="subject" disabled={id?true:false}>
                       {defaultValue.subject &&
                         Object.entries(defaultValue.subject).map(([key, value]) => (
                           <Select.Option key={value} value={key}>{key}
@@ -152,7 +180,7 @@ export default function CreateClip() {
             </div>
             {errors.image && <p className="error-input">{errors.image.message}</p>}
           </Col>
-          
+
           <Col span={24} align="center" className={style.subProfile}>
             <Button
               className="buttonColor backgroundOrange"

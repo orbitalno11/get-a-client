@@ -7,43 +7,59 @@ import { Link } from "react-router-dom";
 import Header from "../../../../headerMobile/Header";
 import ModalComponent from "../../../../modal/ModalComponent";
 import AllReview from "../../review/AllReview";
-import DetailCourse from "../offlineCourse/DetailCourse";
-import { modalAction, offlineCourseAction } from "../../../../../redux/actions";
+import DetailCourse from "./DetailCourse";
+import { modalAction, offlineCourseAction, onlineCourseActions } from "../../../../../redux/actions";
 import ReviewForm from "../../review/ReviewForm";
 import { sizeModal } from "../../../../modal/SizeModal";
 import isMobile from "../../../../isMobile/isMobile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import FormEnroll from "../offlineCourse/FormEnroll";
+import FormEnroll from "./FormEnroll";
 import { SkeletonComponent } from "../../../../loading/SkeletonComponent";
 import { trackImpressCourseDetail } from "../../../../../analytic/Analytic";
 import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 const { useBreakpoint } = Grid;
 
 export default function OfflineCourse() {
-    const { offlineCourse, auth } = useSelector(state => state)
+    const { onlineCourse, offlineCourse, auth } = useSelector(state => state)
     const { reviews } = useSelector(state => state.review)
-    const course = offlineCourse.data && offlineCourse.data
+    const [course, setCourse] = useState(null)
     const owner = (course && auth) && (auth.profile === course.owner.id)
     const [showReview, setShowReview] = useState(true)
     const dispatch = useDispatch()
     const screens = useBreakpoint();
     const params = useParams();
-    const learn_status = (auth.role === 1 && course) ? course.enrolled : false
-    const type = "course"
+    const isOfflineCourse = params.type === "course"
+    const learn_status = (auth.role === 1 && course && isOfflineCourse) ? course.enrolled : false
     const idCourse = params.id
     const myReview = !isEmpty(reviews) ? reviews.filter(value => value.reviewer.id === auth.profile)[0] : []
 
     useEffect(() => {
-        dispatch(offlineCourseAction.getOfflineCourse(idCourse))
-        if(!owner){
+        if (isOfflineCourse) {
+            dispatch(offlineCourseAction.getOfflineCourse(idCourse))
+        } else {
+            dispatch(onlineCourseActions.getOnlineCourse(idCourse))
+        }
+
+        if (!owner) {
             trackImpress()
         }
+
         return () => {
             dispatch(offlineCourseAction.clearOfflineCourse())
+            dispatch(onlineCourseActions.clearListOnlineCourse())
         }
     }, [])
+
+    useEffect(() => {
+        if (isOfflineCourse) {
+            setCourse(offlineCourse.data && offlineCourse.data)
+        } else {
+            setCourse(onlineCourse.data && onlineCourse.data)
+        }
+    }, [onlineCourse, offlineCourse])
+
 
     const trackImpress = () => {
         const courseType = 1
@@ -52,38 +68,66 @@ export default function OfflineCourse() {
         }
     }
 
-
     const ContactTutor = () => {
         return (
-            <div className={isMobile() ? style.subProfile : style.backgroungContact} >
-                <div className={style.marginTop20}>
-                    <span className={style.titleH3}>ช่องทางสอบถามข้อมูล</span>
-                </div>
-                <div className={style.TitleCoin}>
-                    <FontAwesomeIcon icon={faPhoneAlt} className={style.iconmarker} />
-                    {
-                        course ? (
-                            <span className={style.textNormal}>{course && course.owner.contact.phoneNumber}</span>
-                        ) : (
-                            <SkeletonComponent.SkeletonText width="100px"/>
-                        )
-                    }
-                </div>
+            <div className={!screens.lg ? style.subProfile : null}>
                 {
-                    course && (
-                        <div className={style.marginTop20}>
-                            <Link to={`/profile/${course.owner.id}/course`}>
+                    (screens.lg && !isOfflineCourse) && (
+                        <Fragment>
+                            <Link to={`/tutor/online/${idCourse}`}>
                                 <Button
-                                    className="buttonColor backgroundBlue"
+                                    className="buttonColor backgroundOrange"
                                     shape="round"
                                     size="middle"
                                     style={{ width: "100%" }}>
-                                    ดูข้อมูลครูสอนพิเศษเพิ่มเติม
-                                </Button>
+                                    ดูบทเรียน
+                                    </Button>
                             </Link>
-                        </div>
+                            <Link to={`/tutor/online/${idCourse}/edit`} >
+                                <div style={{ marginTop: "0.5rem" }}>
+                                    <Button
+                                        className="buttonColor backgroundGray"
+                                        shape="round"
+                                        size="middle"
+                                        style={{ width: "100%" }}>
+                                        แก้ไขคอร์สเรียน
+                                </Button>
+                                </div>
+                            </Link>
+                        </Fragment>
                     )
                 }
+                <div className={isMobile() ? style.subProfile : style.backgroungContact} >
+                    <div className={style.marginTop20}>
+                        <span className={style.titleH3}>ช่องทางสอบถามข้อมูล</span>
+                    </div>
+                    <div className={style.TitleCoin}>
+                        <FontAwesomeIcon icon={faPhoneAlt} className={style.iconmarker} />
+                        {
+                            course ? (
+                                // <span className={style.textNormal}>{course && course.owner.contact.phoneNumber}</span>
+                                <span>xxx-xxxx-xxxx</span>
+                            ) : (
+                                <SkeletonComponent.SkeletonText />
+                            )
+                        }
+                    </div>
+                    {
+                        course && (
+                            <div className={style.marginTop20}>
+                                <Link to={`/profile/${course.owner.id}/course`}>
+                                    <Button
+                                        className="buttonColor backgroundBlue"
+                                        shape="round"
+                                        size="middle"
+                                        style={{ width: "100%" }}>
+                                        ดูข้อมูลครูสอนพิเศษเพิ่มเติม
+                                </Button>
+                                </Link>
+                            </div>
+                        )
+                    }
+                </div>
             </div>
         )
     }
@@ -107,12 +151,12 @@ export default function OfflineCourse() {
             window.location.href = "/login"
         } else {
 
-            const dataEnroll = course && {
+            const dataEnroll = !isEmpty(course) && {
                 id: course.id,
                 name: course.name,
                 subject: course.subject.title,
                 grade: course.grade.title,
-                owner: course.owner.fullNameText
+                owner: "Xxxx"
             }
 
             dispatch(modalAction.openModal({
@@ -189,12 +233,15 @@ export default function OfflineCourse() {
                 {
                     (owner && !screens.lg) && (
                         <div className={!screens.md ? style.navbarBottom : style.navbarBottomMD}>
-                            { type === "course" ? (
+                            {isOfflineCourse ? (
                                 <Link to={`/tutor/course/${course.id}/enroll`}>
                                     <button className={style.leftbuttom} >อนุมัติคำขอ</button>
                                 </Link>
                             ) : (
-                                <button className={style.leftbuttom} >จัดการบทเรียน</button>
+                                <Link to={`/tutor/online/${idCourse}`}>
+                                    <button className={style.leftbuttom} >จัดการบทเรียน</button>
+                                </Link>
+
                             )
                             }
                             <Link to={`/tutor/course/${idCourse}/edit`}>

@@ -3,7 +3,6 @@ import React from "react";
 import CardCourse from "../../../../card/CardCourse";
 import CardLesson from "../../../../card/CardLesson";
 import ListCourseTutor from "../../../../card/ListCourseTutor";
-import ListClip from "../../../../card/ListClip";
 import isMobile from "../../../../isMobile/isMobile"
 import { useDispatch } from "react-redux";
 import { tutorAction } from "../../../../../redux/actions";
@@ -74,7 +73,7 @@ export default function ManageCourseDetail() {
                 <div key={index}>
                   <Link to={courseId ? `/tutor/online/1/video/create` :`/course/${item.id}`} >
                     {
-                      isOnline ?  (courseId ? <CardLesson data={item} /> : <ListClip data={item} />): <ListCourseTutor data={item} />
+                      isOnline ?  (courseId ? <CardLesson data={item} /> :  <ListCourseTutor data={item} isClip={true}/>): <ListCourseTutor data={item} isClip={false}/>
                     }
                   </Link>
                 </div>

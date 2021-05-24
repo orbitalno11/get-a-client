@@ -36,7 +36,7 @@ const createReview = (data) => {
             .then(() => {
                 dispatch(loadingActions.stopLoading())
                 dispatch(success())
-                dispatch(getReviewByCourse(data.courseId))
+                dispatch(getReviewByCourse(data.courseId,1))
                 dispatch(modalAction.closeModal())
                 dispatch(modalAction.openModal({
                     text: "แสดงความคิดเห็นสำเร็จ",
@@ -64,12 +64,11 @@ const createReview = (data) => {
 const updateReview = (data) => {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        console.log(data)
         await apiURL.apiGetA.put("/review", data)
             .then(() => {
                 dispatch(loadingActions.stopLoading())
                 dispatch(success())
-                dispatch(getReviewByCourse(data.courseId))
+                dispatch(getReviewByCourse(data.courseId,1))
                 dispatch(modalAction.closeModal())
                 dispatch(modalAction.openModal({
                     text: "แก้ไขความเห็นสำเร็จ",
@@ -80,7 +79,6 @@ const updateReview = (data) => {
             .catch((err) => {
                 dispatch(loadingActions.stopLoading())
                 dispatch(failure(err.response.data))
-                console.log(err.response.data)
                 dispatch(modalAction.closeModal())
                 dispatch(modalAction.openModal({
                     text: "แก้ไขความคิดเห็นไม่สำเร็จ",
@@ -105,7 +103,7 @@ const deleteReviewByCourse = (Reviewid, courseType, idCourse) => {
         }) .then(() => {
             dispatch(loadingActions.stopLoading())
             dispatch(success())
-            dispatch(getReviewByCourse(idCourse))
+            dispatch(getReviewByCourse(idCourse,1))
             dispatch(modalAction.closeModal())
             dispatch(modalAction.openModal({
                 text: "ลบความเห็นสำเร็จ",
@@ -130,9 +128,15 @@ const deleteReviewByCourse = (Reviewid, courseType, idCourse) => {
     }
 }
 
+function clearReview() {
+    return dispatch => { dispatch({ type: reviewConstants.CLEAR_REVIEW }) }
+}
+
+
 export const reviewActions = {
     createReview,
     getReviewByCourse,
     updateReview, 
-    deleteReviewByCourse
+    deleteReviewByCourse,
+    clearReview
 }

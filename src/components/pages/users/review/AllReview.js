@@ -26,9 +26,12 @@ export default function AllReview() {
 
     const reviewList = !isEmpty(review.reviews) ? review.reviews.filter(value => value.reviewer.id !== auth.profile) : []
     const myReview = !isEmpty(review.reviews) ? review.reviews.filter(value => value.reviewer.id === auth.profile)[0] : []
-    console.log(myReview)
+
     useEffect(() => {
         dispatch(reviewActions.getReviewByCourse(id, 1))
+        return()=>{
+            dispatch(reviewActions.clearReview())
+        }
     }, [])
 
     const handleOpenReviewForm = (id, action) => {
@@ -76,7 +79,7 @@ export default function AllReview() {
                     <span className={style.titleH3}>ความเห็นจากผู้เรียนจริง</span>
                     <div style={{ marginLeft: 'auto' }}>
                         {
-                            learn_status && isEmpty() && screens.lg && (
+                            learn_status && isEmpty(myReview) && screens.lg && (
                                 <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => { handleOpenReviewForm() }}>ให้คะแนน</Button>
                             )
                         }

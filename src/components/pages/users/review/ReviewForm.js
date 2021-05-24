@@ -39,7 +39,8 @@ export function DeleteForm({ idReview }) {
                 {
                     loading && (
                         <Fragment>
-                            <Spin style={{ marginRight: "0.5rem" }} /> กำลัง
+                            <Spin style={{ marginRight: "0.5rem" }} /> 
+                            <span>กำลัง</span>
                         </Fragment>
                     )
                 }
@@ -52,7 +53,6 @@ export function DeleteForm({ idReview }) {
 export default function ReviewForm({ idReview }) {
     const { id } = useParams()
     const dispatch = useDispatch()
-    const { profile } = useSelector(state => state.auth)
     const { loading } = useSelector(state => state.loading)
     const { review, modal } = useSelector(state => state)
     const myReview = review.reviews && review.reviews.filter((item) => item.id === idReview)[0]
@@ -61,9 +61,8 @@ export default function ReviewForm({ idReview }) {
     });
 
     useEffect(() => {
-        console.log(!isEmpty(idReview) && !isEmpty(myReview))
         reset({
-            "rate": (!isEmpty(idReview) && !isEmpty(myReview)) ? myReview.rating : "5",
+            "rate": (!isEmpty(idReview) && !isEmpty(myReview)) ? myReview.rating : "0",
             "comment": (!isEmpty(idReview) && !isEmpty(myReview)) ? myReview.review : ""
         })
     }, [idReview, modal.status])
@@ -72,24 +71,36 @@ export default function ReviewForm({ idReview }) {
         resize: "none",
         marginTop: "1rem",
         marginBottom: "1rem",
-        border: `0.15rem solid ${color.orange}`
+        border: `0.15rem solid ${color.orange}`,
+        paddingTop : "0.75rem"
     }
-    console.log(isEmpty(idReview) ? "created " : "update")
+
+    const buttonReview = {
+        width : "100%"
+    }
+    
     const onSubmit = (data) => {
         if (data) {
-            const formData = {
-                "courseId": id,
-                "reviewId": profile,
-                "rating": data.rate,
-                "comment": data.comment,
-                "isClip": false,
-                courseType: 1
-            }
-           
 
             if (isEmpty(idReview)) {
+                const formData = {
+                    "courseId": id,
+                    "rating": data.rate,
+                    "comment": data.comment,
+                    "isClip": false,
+                    "courseType": 1
+                }
                 dispatch(reviewActions.createReview(formData))
-            } {
+            } else{
+                const formData = {
+                    "courseId": id,
+                    "reviewId": idReview,
+                    "rating": data.rate,
+                    "comment": data.comment,
+                    "isClip": false,
+                    "courseType": 1
+                }
+                console.log(formData)
                 dispatch(reviewActions.updateReview(formData))
             }
 
@@ -103,7 +114,7 @@ export default function ReviewForm({ idReview }) {
                 <br />
                 <Controller
                     as={
-                        <Rate allowHalf name="rate" className={style.rate} />
+                        <Rate name="rate" className={style.rate} />
                     }
                     name="rate"
                     control={control}
@@ -116,16 +127,17 @@ export default function ReviewForm({ idReview }) {
                 {
                     errors.comment && <p className="error-input">{errors.comment.message}</p>
                 }
-                <button id="reviewForm" className={style.reviewbottom} type="submit">
+                <Button id="reviewForm" className="buttonColor backgroundOrange" shape="round" style={buttonReview} htmlType="submit" disabled={loading ? true : false}>
                     {
                         loading && (
                             <Fragment>
-                                <Spin style={{ marginRight: "0.5rem" }} /> กำลัง
+                                <Spin style={{ marginRight: "0.5rem" }} /> 
+                                <span>กำลัง</span>
                             </Fragment>
                         )
                     }
-                    ส่งคำขอ
-                </button>
+                    ส่งความคิดเห็น
+                </Button>
             </form>
         </div>
     )

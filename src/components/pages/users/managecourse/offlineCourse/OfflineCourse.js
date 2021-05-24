@@ -18,10 +18,12 @@ import { useState } from "react";
 import FormEnroll from "./FormEnroll";
 import { SkeletonComponent } from "../../../../loading/SkeletonComponent";
 import { trackImpressCourseDetail } from "../../../../../analytic/Analytic";
+import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 const { useBreakpoint } = Grid;
 
 export default function OfflineCourse() {
     const { offlineCourse, auth } = useSelector(state => state)
+    const { reviews } = useSelector(state => state.review)
     const course = offlineCourse.data && offlineCourse.data
     const owner = (course && auth) && (auth.profile === course.owner.id)
     const [showReview, setShowReview] = useState(true)
@@ -31,10 +33,13 @@ export default function OfflineCourse() {
     const learn_status = (auth.role === 1 && course) ? course.enrolled : false
     const type = "course"
     const idCourse = params.id
+    const myReview = !isEmpty(reviews) ? reviews.filter(value => value.reviewer.id === auth.profile)[0] : []
 
     useEffect(() => {
         dispatch(offlineCourseAction.getOfflineCourse(idCourse))
-        trackImpress()
+        if(!owner){
+            trackImpress()
+        }
         return () => {
             dispatch(offlineCourseAction.clearOfflineCourse())
         }
@@ -60,7 +65,7 @@ export default function OfflineCourse() {
                         course ? (
                             <span className={style.textNormal}>{course && course.owner.contact.phoneNumber}</span>
                         ) : (
-                            <SkeletonComponent.SkeletonText />
+                            <SkeletonComponent.SkeletonText width="100px"/>
                         )
                     }
                 </div>
@@ -174,8 +179,8 @@ export default function OfflineCourse() {
                     )
                 }
                 {
-                    (learn_status && !screens.lg) && (
-                        <div className={style.navbarBottom} >
+                    (learn_status && isEmpty(myReview)  && !screens.lg ) && (
+                        <div className={screens.md ? style.navbarBottomMD : style.navbarBottom } >
                             <button className={style.reviewbottom} onClick={() => handleOpenReviewForm()} >ให้คะแนนการสอนนี้</button>
                         </div>
                     )

@@ -49,6 +49,12 @@ const reviewReducer = (state = initialState, action) => {
                 ...state,
                 error: action.payload
             }
+        case reviewConstants.CLEAR_REVIEW : 
+            return {
+                ...state,
+                reviews: null,
+                error: null
+            }
         default: {
             return state
         }

@@ -15,7 +15,7 @@ import isMobile from "../../../../isMobile/isMobile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import FormEnroll from "./FormEnroll";
+import FormEnroll from "../offlineCourse/FormEnroll";
 import { SkeletonComponent } from "../../../../loading/SkeletonComponent";
 import { trackImpressCourseDetail } from "../../../../../analytic/Analytic";
 import isEmpty from "../../../../defaultFunction/checkEmptyObject";

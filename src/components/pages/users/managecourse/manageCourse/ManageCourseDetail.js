@@ -2,7 +2,6 @@ import { Col, Row } from "antd";
 import React from "react";
 import CardCourse from "../../../../card/CardCourse";
 import CardLesson from "../../../../card/CardLesson";
-import CardClip from "../../../../card/CardClip";
 import ListCourseTutor from "../../../../card/ListCourseTutor";
 import ListClip from "../../../../card/ListClip";
 import isMobile from "../../../../isMobile/isMobile"
@@ -94,12 +93,12 @@ export default function ManageCourseDetail() {
               <Fragment>
                 {
                  courseList && courseList.map((item, index) => (
-                    <Col align="center" xl={8} lg={8} md={12} sm={24} key={index} style={{ padding: "0.5rem" }}>
+                    <Col align="center" xl={8} lg={courseId ? 12 : 8} md={courseId ? 24 :12} sm={24} key={index} style={{ padding: "0.5rem" }}>
                       <Link to={courseId ? `/tutor/online/1/video/create` :`/course/${item.id}`} >
                         {
-                          !isOnline ?  <CardCourse data={item} />  : 
+                          !isOnline ?  <CardCourse data={item} isClip={false}/>  : 
                           (
-                            courseId ? <CardLesson data={item} /> : <CardClip data={item} />
+                            courseId ? <CardLesson data={item} /> : <CardCourse data={item} isClip={true}/>
                           )
                         }
                       </Link>

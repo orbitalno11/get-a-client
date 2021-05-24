@@ -6,6 +6,11 @@
   cursor: pointer;
 }
 
+.paddingCard {
+  padding: 1.25rem !important;
+}
+
+
 .cardRound{
    @extend .card;
     width : 50%
@@ -55,8 +60,13 @@
 }
 
 .imageClip{
-    height: 6rem;
+    height: 8rem;
     width: auto;
+    padding : 0.5rem;
+
+    @media screen and (max-width: 400px) {
+      height: 6.25rem;
+    }
 }
 
 .borderGrid{
@@ -127,11 +137,6 @@
 
 .marginLeft{
     margin-left: 0.6rem;
-}
-
-.imageClip {
-  height: 9rem;
-  width: 7rem;
 }
 
 .rate {

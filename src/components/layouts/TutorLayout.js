@@ -8,7 +8,6 @@ import ManageCourse from "../pages/users/managecourse/manageCourse/ManageCourse"
 import AddCourse from "../pages/users/managecourse/offlineCourse/AddCourse"
 import EnrollRequest from "../pages/users/managecourse/request/EnrollRequest"
 import CreateClip from "../pages/users/managecourse/editOnlineCourse/create/CreateClip"
-import MangeLesson from "../pages/users/managecourse/onlineCourse/lesson/MangeLesson"
 import AddClip from "../pages/users/managecourse/editOnlineCourse/edit/AddClip"
 import EditClip from "../pages/users/managecourse/editOnlineCourse/edit/EditClip"
 import VDO from "../pages/users/managecourse/onlineCourse/player/VDO"
@@ -25,7 +24,7 @@ export default function TutorLayout() {
             <Route exact path="/tutor/course/:id/enroll" component={EnrollRequest} />
             <Route exact path="/tutor/online" component={ManageCourse} />
             <Route exact path="/tutor/online/create" component={CreateClip} />
-            <Route exact path="/tutor/online/:courseId" component={MangeLesson} />
+            <Route exact path="/tutor/online/:courseId" component={ManageCourse} />
             <Route exact path="/tutor/online/:courseId/video/create" component={AddClip} />
             <Route exact path="/tutor/online/:courseId/video/{videoId}" component={VDO} />
             <Route exact path="/tutor/online/:courseId/video/{videoId}/edit" component={EditClip} />

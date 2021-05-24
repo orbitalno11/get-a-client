@@ -7,7 +7,7 @@ import { modalAction } from "../../../../redux/actions";
 import { sizeModal } from "../../../modal/SizeModal";
 import ReviewForm from "./ReviewForm";
 import { Link } from "react-router-dom";
-import FormEnroll from "../managecourse/offlineCourse/FormEnroll";
+import FormEnroll from "../managecourse/manageCourse/FormEnroll";
 import EmptyImage from "../../../loading/EmptyImage";
 const { useBreakpoint } = Grid;
 

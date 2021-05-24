@@ -1,31 +1,44 @@
 import { Col, Row } from "antd";
 import React from "react";
 import CardCourse from "../../../../card/CardCourse";
+import CardLesson from "../../../../card/CardLesson";
+import CardClip from "../../../../card/CardClip";
 import ListCourseTutor from "../../../../card/ListCourseTutor";
+import ListClip from "../../../../card/ListClip";
 import isMobile from "../../../../isMobile/isMobile"
 import { useDispatch } from "react-redux";
 import { tutorAction } from "../../../../../redux/actions";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { Fragment } from "react";
 import Loading from "../../../../loading/Loading";
 import EmptyImage from "../../../../loading/EmptyImage";
+import isEmpty from "../../../../defaultFunction/checkEmptyObject";
+import { courseOnline, lesson } from "../../../../card/Constants";
 
 export default function ManageCourseDetail() {
   const dispatch = useDispatch()
   const location = useLocation()
   const { tutor, auth, loading } = useSelector(state => state)
-  const [offlineCourse, setOfflineCourse] = useState(null)
-  const [onlineCourse, setOnlineCourse] = useState(null)
-  const isOnline = location.pathname === "/tutor/online"
+  const [courseList, setCourseList] = useState(null)
+  const { courseId } = useParams()
+  const isOnline = location.pathname === "/tutor/online" || !isEmpty(courseId) 
 
   useEffect(() => {
     if (!isOnline) {
+      // get offline course
       dispatch(tutorAction.getListOfflineCourse(auth.profile))
-    }else {
-      dispatch(tutorAction.getListOfflineCourse(auth.profile))
+    } else if (isOnline) {
+      // get online course
+      if (courseId) {
+        // lesson page
+        dispatch(tutorAction.getListOfflineCourse(auth.profile))
+      } else {
+        // get online course
+        dispatch(tutorAction.getListOfflineCourse(auth.profile))
+      }
     }
     return () => {
       dispatch(tutorAction.clearListOfflineCourse())
@@ -33,16 +46,17 @@ export default function ManageCourseDetail() {
   }, [])
 
   useEffect(() => {
+    let courseDetail = null
     if (!isOnline) {
-      if (tutor.offlineCourse) {
-        setOfflineCourse(tutor.offlineCourse.data)
-      }
-    } else {
-      // setOnlineCourse(null)
-      if (tutor.offlineCourse) {
-        setOnlineCourse(tutor.offlineCourse.data)
+      courseDetail = !isEmpty(tutor.offlineCourse) && tutor.offlineCourse.data
+    } else if (isOnline) {
+      if (courseId) {
+        courseDetail = lesson
+      } else {
+        courseDetail = courseOnline
       }
     }
+    setCourseList(courseDetail)
   }, [tutor])
 
   return (
@@ -55,12 +69,14 @@ export default function ManageCourseDetail() {
 
       {isMobile() ? (
         <div>
-          {(tutor.offlineCourse.success && !isOnline) && (
-            offlineCourse ? (
-              offlineCourse.map((item, index) => (
+          {(!loading.loading) && (
+            courseList ? (
+              courseList.map((item, index) => (
                 <div key={index}>
-                  <Link to={`/course/${item.id}`}>
-                    <ListCourseTutor data={item} />
+                  <Link to={courseId ? `/tutor/online/1/video/create` :`/course/${item.id}`} >
+                    {
+                      isOnline ?  (courseId ? <CardLesson data={item} /> : <ListClip data={item} />): <ListCourseTutor data={item} />
+                    }
                   </Link>
                 </div>
               ))
@@ -74,28 +90,18 @@ export default function ManageCourseDetail() {
       ) : (
         <Row >
           {(!loading.loading) && (
-
-            (offlineCourse || onlineCourse) ? (
+            courseList ? (
               <Fragment>
-
-                {/* for offline course */}
                 {
-                  (!isOnline && offlineCourse) && offlineCourse.map((item, index) => (
+                 courseList && courseList.map((item, index) => (
                     <Col align="center" xl={8} lg={8} md={12} sm={24} key={index} style={{ padding: "0.5rem" }}>
-                      <Link to={`/course/${item.id}`} >
-                        <CardCourse data={item} />
-                      </Link>
-                    </Col>
-                  ))
-                }
-                {/* for online course */}
-                {
-                  (isOnline && onlineCourse) && onlineCourse.map((item, index) => (
-                    <Col align="center" xl={8} lg={8} md={12} sm={24} key={index} style={{ padding: "0.5rem" }}>
-                      <Link to={`/online/${item.id}`} >
-                        <CardCourse data={item} />
-                       
-                        {/* <CardLesson data={item} /> */}
+                      <Link to={courseId ? `/tutor/online/1/video/create` :`/course/${item.id}`} >
+                        {
+                          !isOnline ?  <CardCourse data={item} />  : 
+                          (
+                            courseId ? <CardLesson data={item} /> : <CardClip data={item} />
+                          )
+                        }
                       </Link>
                     </Col>
                   ))

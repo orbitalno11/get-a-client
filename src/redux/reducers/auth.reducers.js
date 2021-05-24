@@ -4,6 +4,7 @@ const initialState = {
     isAuthenticated: false ,
     role : 4 , 
     loading : false ,
+    error : null,
     profile : null,
     email : null
 }
@@ -38,7 +39,7 @@ const authReducer = (state = initialState, action) => {
             profile : null,
             email:null,
             loading: false,
-            error : true
+            error : action.payload
         }
     case authConstants.LOGOUT:
         return {

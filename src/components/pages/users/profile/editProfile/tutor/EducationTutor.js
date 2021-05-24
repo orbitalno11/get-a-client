@@ -181,7 +181,7 @@ export default function EducationTutor({ data, type, status}) {
                                     }
                                 </div>
                                 {
-                                    (!screens.md && status !== "learner") ?
+                                    (screens.md && status !== "learner") ?
                                         <div className={`${style.floatLeft} ${style.bodderBottom}`}>
                                             <span style={{ color: colorVerify(item.verified) }}>{findKeyObject(defaultValue.requestStatus, item.verified)}</span>
                                         </div> : null

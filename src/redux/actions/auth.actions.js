@@ -46,9 +46,9 @@ function loginUser(loginData) {
                 })
             }
 
-        }).catch(() => {
+        }).catch(err => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure())
+            dispatch(failure(err.response?.data))
             dispatch(modalAction.openModal({
                 text: "ข้อมูลผู้ใช้งานไม่ถูกต้อง",
                 size: sizeModal.small,
@@ -58,7 +58,7 @@ function loginUser(loginData) {
     }
 
     function success(user) { return { type: authConstants.LOGIN_SUCCESS, payload: user } }
-    function failure() { return { type: authConstants.LOGIN_FAILURE } }
+    function failure(error) { return { type: authConstants.LOGIN_FAILURE, payload: error } }
 }
 
 function signUpLearner(signUpData) {
@@ -80,8 +80,8 @@ function signUpLearner(signUpData) {
             }))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
-            const message = checkErrorMessage(err.response.data.message.message)
-            dispatch(failure())
+            const message = checkErrorMessage(err.response?.data?.message?.message)
+            dispatch(failure(message))
             dispatch(modalAction.openModal({
                 text: message,
                 size: sizeModal.small,
@@ -90,7 +90,7 @@ function signUpLearner(signUpData) {
         })
     }
     function success(user) { return { type: authConstants.SIGN_UP_SUCCESS, payload: user } }
-    function failure() { return { type: authConstants.SIGN_UP_FAILURE } }
+    function failure(error) { return { type: authConstants.SIGN_UP_FAILURE, payload: error } }
 }
 
 function signUpTutor(signUpData) {
@@ -111,9 +111,9 @@ function signUpTutor(signUpData) {
                 afterClose: "/login"
             }))
         }).catch(err => {
-            const message = checkErrorMessage(err.response.data.message.message)
+            const message = checkErrorMessage(err.response?.data?.message?.message)
             dispatch(loadingActions.stopLoading())
-            dispatch(failure())
+            dispatch(failure(message))
             dispatch(modalAction.openModal({
                 text: message,
                 size: sizeModal.small,
@@ -122,7 +122,7 @@ function signUpTutor(signUpData) {
         })
     }
     function success(user) { return { type: authConstants.SIGN_UP_SUCCESS, payload: user } }
-    function failure() { return { type: authConstants.SIGN_UP_FAILURE } }
+    function failure(error) { return { type: authConstants.SIGN_UP_FAILURE, payload: error } }
 }
 
 function setUser(token) {

@@ -15,13 +15,13 @@ function getRank(number){
                 dispatch(success(data))
                 dispatch(loadingActions.stopLoading())
             }
-        }) .catch(() => {
-            dispatch(failure())
+        }) .catch(err => {
+            dispatch(failure(err.response?.data))
             dispatch(loadingActions.stopLoading())
         })
     }
     function success(data) { return { type: homeConstants.GET_RANK_HOME_SUCCESS, payload: data } }
-    function failure() { return { type: homeConstants.GET_RANK_HOME_FAILURE, payload: true} }
+    function failure(error) { return { type: homeConstants.GET_RANK_HOME_FAILURE, payload: error } }
 }
 
 export const homeActions = {

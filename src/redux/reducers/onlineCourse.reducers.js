@@ -1,11 +1,13 @@
-
 import { onlineCourseConstants } from "../constants"
 
 const initialState = {
     listOnlineTutor: null,
+    listClip: null,
+    clip: null,
     data: null,
     error: null,
 }
+
 
 const onlineCourseReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -54,8 +56,7 @@ const onlineCourseReducer = (state = initialState, action) => {
                 listOnlineTutor: null,
                 error: action.payload
             }
-
-        // clip-online-course
+        // clip-online-course 
         case onlineCourseConstants.CREATE_CLIP_COURSE_SUCCESS:
             return {
                 ...state,
@@ -89,11 +90,34 @@ const onlineCourseReducer = (state = initialState, action) => {
                 listClip: null,
                 error: action.payload
             }
-
+        case onlineCourseConstants.GET_CLIP_SUCCESS:
+            return {
+                ...state,
+                clip: action.payload,
+                error: null
+            }
+        case onlineCourseConstants.GET_CLIP_FAILURE:
+            return {
+                ...state,
+                clip: null,
+                error: action.payload
+            }
+        case onlineCourseConstants.DELETE_CLIP_SUCCESS:
+            return {
+                ...state,
+                error: null
+            }
+        case onlineCourseConstants.DELETE_CLIP_FAILURE:
+            return {
+                ...state,
+                error: action.payload
+            }
         case onlineCourseConstants.CLEAR_LIST_ONLINE_COURSE:
             return {
                 ...state,
                 listOnlineTutor: null,
+                listClip: null,
+                clip: null,
                 data: null,
                 error: null,
             }

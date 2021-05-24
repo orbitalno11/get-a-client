@@ -93,9 +93,10 @@ export default function CreateCourseOnline() {
       }
     }
   }
+
   return (
     <Fragment>
-      {isMobile() && (<Header title={(id?"แก้ไข":"สร้าง")+"คอร์สเรียน"} pageBack="/tutor/online" />)}
+      {isMobile() && (<Header title={(id?"แก้ไข":"สร้าง")+"คอร์สเรียน"} pageBack="goback" />)}
       <ModalComponent />
       {
         loading && (

@@ -46,6 +46,7 @@ import OfflineCourse from "./components/pages/users/managecourse/manageCourse/Of
 import Ranking from "./components/pages/users/home/learner/Ranking";
 import ProfileCourse from "./components/pages/users/profile/profile/learner/ProfileCourse";
 import { defaultValue } from "./components/defaultValue";
+import ManageCourse from "./components/pages/users/managecourse/manageCourse/ManageCourse";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
@@ -105,6 +106,7 @@ function App() {
           <Route exact path="/search" component={Search} />
           <Route exact path="/search/:search" component={ResultSearch} />
           <Route exact path="/course/online/:id" component={OnlineCourseList} />
+          <Route exact path="/course/online/:courseId/video" component={ManageCourse} />
           <Route path="*">
             <Redirect path="/" />
           </Route>

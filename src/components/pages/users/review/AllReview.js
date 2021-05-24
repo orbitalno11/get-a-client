@@ -42,7 +42,7 @@ export default function AllReview() {
             }))
         }else{
             dispatch(modalAction.openModal({
-                body : <DeleteForm idReview={id}/>,
+                body : <DeleteForm idReview={id} type="review"/>,
                 size: sizeModal.default
             }))
         }
@@ -99,7 +99,7 @@ export default function AllReview() {
                                             <Button className="buttonColor backgroundOrange" shape="round" size="large" style={paddingButton}>อนุมัติคำขอ</Button>
                                         </Link>
                                     ) : (
-                                        <Link to={`/tutor/online/${id}`}>
+                                        <Link to={`/course/online/${id}/video`}>
                                             <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>จัดการบทเรียน</Button>
                                         </Link>     
                                     )

@@ -133,7 +133,7 @@ input :focus{
 .logo {
   color: var(--white-color) ;
   font-weight: 800;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 .ant-menu-horizontal > .ant-menu-item:hover,

@@ -81,7 +81,7 @@ const NavMenu = () => {
                 </Menu.Item>
                 <Menu.Item key="/tutor/online"  >
                     <NavLink to="/tutor/online">
-                        จัดการคอร์สเรียนออนไลน์
+                        จัดการคอร์สออนไลน์
                 </NavLink>
                 </Menu.Item>
                 {/* <Menu.Item key="/notification"  >

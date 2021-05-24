@@ -6,7 +6,6 @@ import { clipSchema } from "../../../../../validation/course/clipSchema";
 import isMobile from "../../../../isMobile/isMobile"
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import vdoSample from "../../../../images/vdoSample.webp"
 import { useState } from "react";
 import InputComponents from "../../../../input/InputComponets";
 import TextArea from "antd/lib/input/TextArea";
@@ -40,14 +39,14 @@ export default function AddClip() {
   }, [])
 
   useEffect(() => {
-    if(videoId){
+    if (videoId) {
       reset({
-        name : clip && clip.name,
-        description : clip && clip.description,
-        cost : clip && clip.cost,
+        name: clip && clip.name,
+        description: clip && clip.description,
+        cost: clip && clip.cost,
       })
-      if(clip){
-        setVdo({VDOURL : clip.clipUrl})
+      if (clip) {
+        setVdo({ VDOURL :clip.clipUrl,  name: clip.clipUrl })
       }
     }
   }, [clip])
@@ -56,7 +55,7 @@ export default function AddClip() {
     const fileInput = data.target.files[0]
     if (fileInput) {
       const vdoURL = URL.createObjectURL(fileInput)
-      setVdo({ file: fileInput, VDOURL: vdoURL })
+      setVdo({ file: fileInput, VDOURL: vdoURL, name: fileInput.name })
     }
   }
 
@@ -64,20 +63,17 @@ export default function AddClip() {
     if (data) {
       const formData = new FormData()
       formData.append("name", data.name)
-      formData.append("courseId",courseId)
+      formData.append("courseId", courseId)
       formData.append("description", data.description)
       formData.append("cost", data.cost)
       if (vdo?.file) {
         formData.append("video", vdo.file)
       }
-
       if (!videoId) {
         dispatch(onlineCourseActions.createClipOnlineCourse(formData, courseId))
-      }else {
+      } else {
         dispatch(onlineCourseActions.updateClipOnlineCourse(formData, courseId, videoId))
       }
-
-
     }
   }
 
@@ -85,10 +81,10 @@ export default function AddClip() {
     <Fragment>
 
       {isMobile() && (
-        <Header title={(videoId ? "แก้ไข" : "เพิ่ม")+"บทเรียน"} pageBack="/tutor/online" />
+        <Header title={(videoId ? "แก้ไข" : "เพิ่ม") + "บทเรียน"} pageBack="goback" />
       )}
       {loading && <Loading />}
-      <ModalComponent/>
+      <ModalComponent />
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={style.container}>
@@ -100,7 +96,7 @@ export default function AddClip() {
           )}
           <Row >
 
-            <Col xs={24} sm={24} md={12} lg={13} xl={11}>
+            <Col xs={24} sm={24} md={24} lg={13} xl={11}>
 
               <Row justify="space-between" align="middle">
                 <Col span={24} className={style.subProfile}>
@@ -130,7 +126,7 @@ export default function AddClip() {
                 </Col>
                 <Col span={24} className={style.subProfile}>
                   <InputComponents
-                    title="ราคาคลิปการสอน"
+                    title="ราคาคลิปการสอน (เหรียญ)"
                     type="number"
                     name="cost"
                     min={0}
@@ -138,6 +134,18 @@ export default function AddClip() {
                     error={errors.cost}
                     placeholder="ราคาของผู้เข้าชม"
                   />
+                </Col>
+
+                <Col span={24} className={style.subProfile} >
+                  <p className={style.textNormal}>คลิปการสอน</p>
+                  <div className="imageUpload" >
+                    <label htmlFor="file-input">
+                      <span className={style.buttonInputFile}>{vdo ? "เพิ่มคลิปการสอน" : "แก้ไขคลิปการสอน"}</span>
+                      <span className={style.textNormal}>{vdo && vdo.name}</span>
+                    </label>
+                    <input id="file-input" type="file" name="video" accept="video/mp4" ref={register} onChange={(data) => onChangeVDO(data)} />
+                  </div>
+                  {errors.video && <p className="error-input">{errors.video.message}</p>}
                 </Col>
               </Row>
             </Col>
@@ -149,27 +157,16 @@ export default function AddClip() {
                 />
               </Col>
             )}
-            <Col xs={24} sm={24} md={9} lg={8} xl={10} className={style.subProfile} align="center">
-              <p className={style.textNormal}>คลิปการสอน</p>
-              {
-                vdo && (
-                  <video width="320" height="280" poster={vdoSample} controls>
-                    <source src={vdo.imageURL} type="video/mp4"></source>
-                  </video>
-                )
-              }
-              <div className="imageUpload" >
-                <label htmlFor="file-input">
-                  {
-                    vdo ? ("แก้ไขวิดีโอการสอน") : (
-                      <img src={vdoSample} width="320" height="280" />
-                    )
-                  }
-                </label>
-                <input id="file-input" type="file" name="video" accept="video/mp4,video/x-m4v,video/*" ref={register} onChange={(data) => onChangeVDO(data)} />
-              </div>
-              {errors.video && <p className="error-input">{errors.video.message}</p>}
-            </Col>
+            {
+              vdo?.VDOURL && (
+                <Col xs={24} sm={24} md={24} lg={8} xl={10} className={!screens.lg ? style.subProfile : null} align={!screens.lg ? "start" : "center"}>
+                  <p className={style.textNormal}>ตัวอย่างคลิป</p>
+                  <div className={style.scaleVideo}>
+                    <video className={style.video}  src={(!vdo.file ? "https://" : "")+vdo.VDOURL}  width={"100%"} height="396" controls controlsList="nodownload" type="video/mp4" ></video>
+                  </div>
+                </Col>
+              )
+            }
             <Col xl={24} md={24} sm={24} xs={24} align="center" className={style.subProfile}>
               <Button
                 className="buttonColor backgroundOrange"

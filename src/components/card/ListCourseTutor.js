@@ -6,6 +6,7 @@ import {
   faBookReader,
   faClock,
   faUsers,
+  faVideo,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import findKeyObject from "../defaultFunction/findKeyObject";
@@ -24,16 +25,16 @@ export default function ListCorseTutor({ data, isClip }) {
       <Row className={styles.paddingleftcourse} >
         <Col span={20} >
           <div >
-            <h4 className={styles.titleH3}>{ data.name }</h4>
+            <h4 className={styles.titleH3}>{data.name}</h4>
           </div>
           <div className={styles.gridfull}>
             <FontAwesomeIcon icon={faBookReader} className={styles.icon} />
             <span style={colorBlack} className={`${styles.marginLeft}`}>{data && data.grade?.title} , {data && data.subject?.title}</span>
           </div>
           <div className={styles.gridfull}>
-            <FontAwesomeIcon icon={faClock} className={styles.icon} />
+            <FontAwesomeIcon icon={!isClip ? faClock : faVideo} className={styles.icon} />
             <span style={colorBlack} className={`${styles.marginLeft}`}>
-              {data && data.timeText}
+              {!isClip ? data.timeText : data.numberOfVideo}
             </span>
           </div>
           {

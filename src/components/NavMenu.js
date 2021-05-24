@@ -166,11 +166,11 @@ const NavMenu = () => {
                         <FontAwesomeIcon icon={faGraduationCap} className="icon" />
                     </NavLink>
                 </Col>
-                {/* <Col span={6.5} className="iconMenu">
-                    <NavLink to="/">
+                <Col span={6.5} className="iconMenu">
+                    <NavLink to="/tutor/online">
                         <FontAwesomeIcon icon={faChalkboardTeacher} className="icon" />
                     </NavLink>
-                </Col> */}
+                </Col>
                 {/* <Col span={6.5} className="iconMenu">
                     <NavLink to="/">
                         <FontAwesomeIcon icon={faBell} className="icon" />

@@ -1,11 +1,10 @@
-import { Col, Row } from "antd";
+import { Col, Row, Grid } from "antd";
 import React from "react";
 import CardCourse from "../../../../card/CardCourse";
 import CardLesson from "../../../../card/CardLesson";
 import ListCourseTutor from "../../../../card/ListCourseTutor";
-import isMobile from "../../../../isMobile/isMobile"
 import { useDispatch } from "react-redux";
-import { tutorAction } from "../../../../../redux/actions";
+import { onlineCourseActions, tutorAction } from "../../../../../redux/actions";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -14,15 +13,18 @@ import { Fragment } from "react";
 import Loading from "../../../../loading/Loading";
 import EmptyImage from "../../../../loading/EmptyImage";
 import isEmpty from "../../../../defaultFunction/checkEmptyObject";
-import { courseOnline, lesson } from "../../../../card/Constants";
+
+const { useBreakpoint } = Grid;
 
 export default function ManageCourseDetail() {
   const dispatch = useDispatch()
   const location = useLocation()
   const { courseId } = useParams()
-  const { tutor, auth, loading } = useSelector(state => state)
-  const [courseList, setCourseList] = useState(null)
+  const { tutor, auth, loading, onlineCourse } = useSelector(state => state)
+  const [courseList, setCourseList] = useState([])
+  const [clipList, setClipList] = useState([])
   const [isOnline, setIsOnline1] = useState(location.pathname === "/tutor/online" || !isEmpty(courseId))
+  const screens = useBreakpoint();
 
   useEffect(() => {
     setIsOnline1(location.pathname === "/tutor/online" || !isEmpty(courseId))
@@ -30,38 +32,39 @@ export default function ManageCourseDetail() {
       // get offline course
       dispatch(tutorAction.getListOfflineCourse(auth.profile))
     } else if (isOnline) {
-      // get online course
       if (courseId) {
         // lesson page
-        dispatch(tutorAction.getListOfflineCourse(auth.profile))
+        dispatch(onlineCourseActions.getClipOnlineCourse(courseId))
       } else {
         // get online course
-        dispatch(tutorAction.getListOfflineCourse(auth.profile))
+        dispatch(onlineCourseActions.getTutorOnlineCourse(auth.profile))
       }
     }
+
     return () => {
       dispatch(tutorAction.clearListOfflineCourse())
-      setCourseList(null)
+      dispatch(onlineCourseActions.clearListOnlineCourse())
+      setCourseList([])
+      setClipList([])
     }
-  }, [location.pathname])
+  }, [location.pathname, isOnline, courseId])
 
   useEffect(() => {
     let courseDetail = null
     if (!isOnline) {
-      courseDetail = !isEmpty(tutor.offlineCourse) && tutor.offlineCourse.data
+      courseDetail = !isEmpty(tutor.offlineCourse.data) ? tutor.offlineCourse.data : null
     } else if (isOnline) {
       if (courseId) {
-        courseDetail = lesson
+        setClipList(!isEmpty(onlineCourse.listClip) ? onlineCourse.listClip : null)
       } else {
-        courseDetail = courseOnline
+        courseDetail = !isEmpty(onlineCourse.listOnlineTutor) ? onlineCourse.listOnlineTutor : null
       }
     }
-    setCourseList(courseDetail)
 
-    return () => {
-      setCourseList(null)
+    if (courseDetail && !courseId) {
+      setCourseList(courseDetail)
     }
-  }, [tutor, location.pathname])
+  }, [tutor, onlineCourse, isOnline, courseId])
 
   return (
     <Fragment>
@@ -70,55 +73,58 @@ export default function ManageCourseDetail() {
           <Loading />
         )
       }
-
-      {isMobile() ? (
-        <div>
-          {(!loading.loading) && (
-            courseList ? (
-              courseList.map((item, index) => (
-                <div key={index}>
-                  <Link to={courseId ? `/tutor/online/1/video/create` : `/course/${item.id}`} >
+      {
+        !courseId ? (
+          !screens.md ? (
+            <div>
+              {(!loading.loading && !isEmpty(courseList)) && (
+                courseList.map((item, index) => (
+                  <div key={index} style={{ padding: isOnline ? "0.5rem" : "0rem" }} >
+                    <Link to={isOnline ? `/online/${item.id}` : `/course/${item.id}`} >
+                      {
+                        <ListCourseTutor data={item} isClip={isOnline ? true : false} />
+                      }
+                    </Link>
+                  </div>
+                ))
+              )}
+            </div>
+          ) : (
+            <Row align={"start"}>
+              {(!loading.loading && !isEmpty(courseList)) && (
+                courseList.map((item, index) => (
+                  <Col align="center" xl={8} lg={12} md={isOnline ? 24 : 12} sm={24} key={index} style={{ padding: "0.5rem" }} >
+                    <Link to={isOnline ? `/online/${item.id}` : `/course/${item.id}`} >
+                      {
+                        !isOnline ? <CardCourse data={item} /> : <CardLesson data={item} isCourse={true} />
+                      }
+                    </Link>
+                  </Col>
+                ))
+              )}
+            </Row>
+          )
+        ) : (
+          <Row align={"start"}>
+            {(!loading.loading && !isEmpty(clipList)) && (
+              clipList.map((item, index) => (
+                <Col align="center" xl={8} lg={12} md={24} sm={24} xs={24} key={index} style={{ padding: "0.5rem" }} >
+                  <Link to={`/tutor/online/${courseId}/video/${item.id}`}>
                     {
-                      isOnline ? (courseId ? <CardLesson data={item} /> :  <ListCourseTutor data={item} isClip={true} />) : <ListCourseTutor data={item} isClip={false} />
+                      <CardLesson data={item} />
                     }
                   </Link>
-                </div>
+                </Col>
               ))
-            ) : (
-              <div align="center">
-                <EmptyImage size="default" />
-              </div>
-            )
-          )}
-        </div>
-      ) : (
-        <Row >
-          {(!loading.loading) && (
-            courseList ? (
-              <Fragment>
-                {
-                  courseList && courseList.map((item, index) => (
-                    <Col align="center" xl={8} lg={courseId ? 12 : 8} md={courseId ? 24 : 12} sm={24} key={index} style={{ padding: "0.5rem" }}>
-                      <Link to={courseId ? `/tutor/online/1/video/create` : `/course/${item.id}`} >
-                        {
-                          !isOnline ? <CardCourse data={item} isClip={false} /> :
-                            (
-                              courseId ? <CardLesson data={item} /> :  <CardCourse data={item} isClip={true} />
-                            )
-                        }
-                      </Link>
-                    </Col>
-                  ))
-                }
-              </Fragment>
-            ) : (
-              <div align="center">
-                <EmptyImage size="default" />
-              </div>
-            )
-          )}
-        </Row>
-      )
+            )}
+          </Row>
+        )
+      }
+
+      {
+        (!loading.loading && (isEmpty(clipList) && isEmpty(courseList))) && (
+          <div align="center"><EmptyImage  size="default"/></div>
+        )
       }
     </Fragment >
   );

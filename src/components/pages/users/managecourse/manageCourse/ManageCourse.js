@@ -30,7 +30,7 @@ export default function ManageCourse() {
                 <span className={style.titleH2}>จัดการคอร์สเรียน</span>
               </Col>
               <Col md={6} lg={5} xl={5}>
-              <Link to={courseId ? `/tutor/online/1/video/create` : `${location.pathname}/create`}>
+              <Link to={courseId ? `/tutor/online/${courseId}/video/create` : `${location.pathname}/create`}>
                   <Button
                     className="buttonColor backgroundBlue"
                     shape="round"
@@ -44,7 +44,7 @@ export default function ManageCourse() {
               <Divider type="horizontal" className={style.dividerCourse} />
             </Row>
           ) : (
-            <Link to={courseId ? `/tutor/online/1/video/create` : `${location.pathname}/create`}>
+            <Link to={courseId ? `/tutor/online/${courseId}/video/create` : `${location.pathname}/create`}>
               <button className={style.buttonfixbottom} >
                 <FontAwesomeIcon icon={faPlus} />
               </button>

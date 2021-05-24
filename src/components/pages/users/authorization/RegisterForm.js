@@ -20,6 +20,8 @@ import { defaultValue } from "../../../defaultValue"
 import isMobile from "../../../isMobile/isMobile";
 import { useSelector } from "react-redux";
 import Loading from "../../../loading/Loading";
+import { useEffect } from "react";
+import isEmpty from "../../../defaultFunction/checkEmptyObject";
 
 export default function RegisterForm() {
     const { loading } = useSelector(state => state)
@@ -32,7 +34,7 @@ export default function RegisterForm() {
     const screens = useBreakpoint();
     const params = useParams();
     const type = params.type
-    
+
     const inputForm = {
         width: ((screens.sm && !screens.lg) || (!screens.sm && screens.xs)) ? "70%" : "35%",
     }
@@ -49,9 +51,23 @@ export default function RegisterForm() {
         }
     }
 
+    useEffect(() => {
+        if (!isEmpty(errors) && Object.keys(errors)[0] === "image") {
+            let element = document.getElementById("imageUpload");
+            let headerOffset = 45;
+            let elementPosition = element.getBoundingClientRect().top;
+            let offsetPosition = elementPosition - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
+    }, [errors])
+
     const onSubmit = data => {
         if (data && image) {
-            const formatted_date = (data.dateOfBirth.getFullYear()) + "/" + data.dateOfBirth.getMonth() + "/" + data.dateOfBirth.getDate()
+            const formatted_date = Number(data.dateOfBirth.getFullYear()) + "/" + Number(data.dateOfBirth.getMonth()+1) + "/" +Number(data.dateOfBirth.getDate())
             let formdata = new FormData()
             formdata.append("firstname", data.firstname)
             formdata.append("lastname", data.lastname)
@@ -63,7 +79,8 @@ export default function RegisterForm() {
             formdata.append("confirmPassword", data.confirmPassword)
             formdata.append("image", image.file)
             if (type === "learner") {
-                formdata.append("grade",defaultValue.grade[data.grade])
+                formdata.append("grade", defaultValue.grade[data.grade])
+                
                 dispatch(userActions.signUpLearner(formdata))
 
             } else if (type === "tutor") {
@@ -92,7 +109,7 @@ export default function RegisterForm() {
                         <div className={style.marginbottom20}>
                             <span className={style.titleH2}>ลงทะเบียน{type === "tutor" ? "ครูสอนพิเศษ" : "นักเรียน"}</span>
                         </div>
-                        <div className="imageUpload" >
+                        <div className="imageUpload" id="imageUpload">
                             <label htmlFor="file-input" >
                                 <Badge className="icon-addimage" count={<FontAwesomeIcon icon={faEdit} />} offset={[2, 0]}>
                                     <Image
@@ -115,6 +132,7 @@ export default function RegisterForm() {
                                     name="firstname"
                                     register={register}
                                     error={errors.firstname}
+                                    placeholder="ชื่อจริง"
                                 />
                             </Col>
                             <Col className={style.margintop10} xs={24} sm={24} md={24} >
@@ -124,6 +142,7 @@ export default function RegisterForm() {
                                     name="lastname"
                                     register={register}
                                     error={errors.lastname}
+                                    placeholder="นามสกุล"
                                 />
                             </Col>
                             <Col className={style.margintop10} xs={24} sm={24} md={24} >
@@ -140,7 +159,7 @@ export default function RegisterForm() {
                                     }
                                     name="gender"
                                     control={control}
-                                    defaultValue={null}
+                                    defaultValue={"ชาย"}
                                 />
                                 {
                                     errors.gender && <p className="error-input">{errors.gender.message}</p>
@@ -155,6 +174,7 @@ export default function RegisterForm() {
                                     name="dateOfBirth"
                                     control={control}
                                     defaultValue={null}
+                                    placeholder="วันเดือนปีเกิด"
                                 />
                                 {
                                     errors.dateOfBirth && <p className="error-input">{errors.dateOfBirth.message}</p>
@@ -183,6 +203,7 @@ export default function RegisterForm() {
                                     name={type === "tutor" ? "subject" : "grade"}
                                     control={control}
                                     defaultValue={type === "tutor" ? [] : null}
+                                    placeholder={type === "tutor" ? "วิชาที่ต้องการสอน" : "ระดับชั้น"}
                                 />
                                 {
                                     type === "tutor" ?
@@ -198,6 +219,7 @@ export default function RegisterForm() {
                                     name="email"
                                     register={register}
                                     error={errors.email}
+                                    placeholder="อีเมล"
                                 />
                             </Col>
                             <Col className={style.margintop10} xs={24} sm={24} md={24} >
@@ -207,6 +229,7 @@ export default function RegisterForm() {
                                     name="phoneNumber"
                                     register={register}
                                     error={errors.phoneNumber}
+                                    placeholder="เบอร์โทรศัพท์"
                                 />
                             </Col>
                             <Col className={style.margintop10} xs={24} sm={24} md={24} >
@@ -216,6 +239,7 @@ export default function RegisterForm() {
                                     name="password"
                                     register={register}
                                     error={errors.password}
+                                    placeholder="รหัสผ่าน"
                                 />
                             </Col>
                             <Col className={style.margintop10} xs={24} sm={24} md={24} >
@@ -225,6 +249,7 @@ export default function RegisterForm() {
                                     name="confirmPassword"
                                     register={register}
                                     error={errors.confirmPassword}
+                                    placeholder="ยืนยันรหัสผ่าน"
                                 />
                             </Col>
                         </Row>

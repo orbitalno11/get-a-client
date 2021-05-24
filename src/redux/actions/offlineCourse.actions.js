@@ -17,7 +17,7 @@ function updatefflineCourse(id, data) {
                     text: "แก้ไขคอร์สเรียนสำเร็จ",
                     size: sizeModal.small,
                     alert: typeModal.corrent,
-                    afterClose: `/tutor/course/${id}`
+                    afterClose: `/course/${id}`
                 }))
             }).catch(err => {
                 dispatch(loadingActions.stopLoading())

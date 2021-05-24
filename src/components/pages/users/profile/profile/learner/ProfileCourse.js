@@ -1,16 +1,27 @@
 import { Col, Row, Grid } from "antd";
-import React, { useState } from "react"
+import React, { useState,useEffect } from "react"
 import TabHorizontal from "../../../../../tab/TabHorizontal"
-import CardCourseLearner from "../../../../../card/CardCourseLearner"
+import CardLearnerCourse from "../../../../../card/CardLearnerCourse"
 import style from "../../styles.module.scss"
 import { Fragment } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { myCourseAction } from "../../../../../../redux/actions";
 import isMobile from "../../../../../isMobile/isMobile";
 import Header from "../../../../../headerMobile/Header";
+import Loading from "../../../../../loading/Loading";
+
 
 const { useBreakpoint } = Grid;
 
 export default function ProfileCourse({ mainPage }) {
     const screens = useBreakpoint();
+    const dispatch = useDispatch();
+    const { loading } = useSelector((state) => state);
+    const list = useSelector((state) => state.myCourse.tutorCourselist);
+  
+    useEffect(() => {
+      dispatch(myCourseAction.getmyTutorCourse());
+    }, []);
     const [course] = useState({
         tutor: null,
         course: null
@@ -18,13 +29,13 @@ export default function ProfileCourse({ mainPage }) {
 
     const TabTutor = () => {
         return (
-            course.tutor ?
+            list && list.length ?
                 (
                     <Row className={style.marginTop20} justify={!screens.xl && "space-around"} >
                         {
-                            course.tutor.map((item, index) => (
+                            list && list.map((item, index) => (
                                 <Col xs={24} sm={20} md={!mainPage ? 12 : 20} lg={!mainPage ? 8 : 12} xl={!mainPage ? 8 : 12} className={style.padding} key={index} >
-                                    <CardCourseLearner data={item} verizontal />
+                                    <CardLearnerCourse data={item} verizontal />
                                 </Col>
                             ))
                         }
@@ -47,7 +58,7 @@ export default function ProfileCourse({ mainPage }) {
                         {
                             course.course.map((item, index) => (
                                 <Col xs={24} sm={20} md={!mainPage ? 12 : 20} lg={!mainPage ? 8 : 12} xl={!mainPage ? 8 : 12} className={style.padding} key={index} >
-                                    <CardCourseLearner data={item} />
+                                    <CardLearnerCourse data={item} />
                                 </Col>
                             ))
                         }
@@ -82,6 +93,7 @@ export default function ProfileCourse({ mainPage }) {
 
     return (
         <Fragment>
+            {loading.loading && <Loading />}
             {(isMobile() && !mainPage) && <Header title="คอร์สเรียนของฉัน" pageBack="goback" />}
             <div className={!mainPage ? style.body : screens.md ? null : style.subProfile}>
                 {

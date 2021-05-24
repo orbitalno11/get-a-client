@@ -1,0 +1,109 @@
+
+@import "../profile/styles.module.scss";
+
+@mixin paddingSide($top,$right,$bottom,$left) {
+    padding :$top $right $bottom $left
+}
+
+.paddingCenter{
+    @extend .body;
+    @extend .centerPage;
+    flex-flow: column
+}
+
+.banner{
+    @extend .centerPage;
+    height: 22rem;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-image: url(../../../images/banner2.webp);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $white;
+
+    @media only screen and (max-width: 768px){
+        height: 18rem;
+        text-align: center;
+        font-size: 1.7rem;
+    }
+}
+
+.paddingBody{
+    @include paddingSide(2% ,10% ,0 ,10% )
+}
+
+.subjectMenu {
+    @extend .horizontalCenter;
+    flex-flow: row  ;
+    height: 6.25rem;
+    margin-top: 1.25rem;
+}
+
+.button{
+    height: auto;
+    width: auto;
+    border-color: transparent !important;
+    background-color: white;
+}
+
+.iconSubject{
+    padding: 0.75rem;
+    border-radius: 50%;
+    color: white;
+}
+
+
+.iconlarge{
+    @extend .iconSubject;
+    height: 3.75rem !important;
+    width: 3.75rem !important;
+}
+
+.iconSmall{
+    @extend .iconSubject;
+    height: 3rem !important;
+    width: 3rem !important;
+}
+
+.flexRow{
+    @extend .VerizontalPage;
+    flex-flow: row;
+}
+
+.paddingLeft{
+    padding-left: 1.25rem;
+}
+
+.Slide {
+    text-align: center;
+    width:100%;
+    padding: 2rem;
+}
+
+.paddingTop{
+    padding-top: 2rem;
+}
+
+.paddingTop60{
+    padding-top: 3.75rem;
+}
+
+.scroll {
+    margin: 4px, 4px;
+    padding: 4px;
+    width: 100%;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.row{
+    display: flex !important;
+    flex-flow: row;
+}

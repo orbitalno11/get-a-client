@@ -1,0 +1,149 @@
+@import "../../../../stylesDefault.module.scss";
+
+.coins {
+  font-size: 1.7rem;
+  margin-right: 1.25rem;
+  color: $yellow;
+}
+
+.Big {
+  @extend .iconLarge;
+  margin-right: 1.5rem;
+  color: $yellow;
+}
+
+.coinlist {
+  padding-top: 3rem;
+  margin-left: 3%;
+}
+
+.coinshop {
+  margin-left: 30%;
+  padding-top: 1rem;
+}
+
+.subcoin {
+  padding-top: 1rem;
+  padding-left: 3rem;
+}
+
+.payment {
+  padding-top: 3rem;
+}
+
+.paymentPage {
+  margin-left: 3rem;
+  padding-top: 1.5rem;
+}
+
+.buttonpayment {
+  border: 0.15rem solid #f26419 !important;
+  color: black !important;
+  padding: 4px 16px !important;
+  height: auto!important;
+}
+
+.buttonpayment:hover {
+  background-color: #fff !important;
+  color: #f26419 !important;
+  border-color: #f26419 !important;
+}
+
+้.hiscoin {
+  margin-left: 10rem;
+  padding-top: 5rem;
+}
+
+.coinbody{
+  @extend .paddingbody;
+  padding-top: 2rem;
+  width: 100%;
+}
+
+.tablecoin{
+  width: 95%;
+}
+
+.alignCenter {
+  display: flex;
+  justify-content: center;
+}
+
+.alignCenterBtn {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.subProfile {
+  margin-top: 1.56rem;
+}
+
+.pageredeem {
+  @extend .paddingTopBody;
+  padding-bottom: 3.75rem;
+}
+
+.pageredeemsm {
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+.subredeem {
+  font-size: 1.4rem;
+  padding-left: 1rem;
+  padding-top: 0.8rem;
+}
+
+.subredeem2 {
+  font-size: 1.5rem;
+  padding-left: 1rem;
+  padding-top: 0.8rem;
+}
+
+.redeem {
+  @extend .iconNormal;
+  margin-right: 1.5rem;
+  color: $yellow;
+}
+
+.Small {
+  @extend .iconSmall;
+  margin-right: 1.5rem;
+  color: $yellow;
+}
+
+.Xs {
+  font-size: 1.3rem;
+  margin-right: 1.5rem;
+  color: $yellow;
+  margin-top: 0.27rem;
+}
+
+.flexredeem {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.columredeem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.8rem;
+}
+
+.allow{
+  margin-top: -5.5rem;
+  margin-left: auto;
+}
+
+.list{
+ @extend .paddingbody;
+ width: 100%;
+}
+
+.marginright{
+  display: flex;
+  justify-content: flex-end;
+}

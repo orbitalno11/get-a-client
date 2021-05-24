@@ -1,0 +1,35 @@
+@import "../../stylesDefault.module.scss";
+
+.header{
+    position: fixed;
+    height: 4.55rem;
+    width: 100%;
+    background-color:$orange;
+    z-index: 10;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+.leftHeader {
+    padding-left: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.rightHeader{
+    margin-left: auto;
+    padding-right: 2rem;
+}
+
+.h1 {
+    font-size: 2rem ;
+    font-weight: 600;
+    padding-left: 0.6rem;
+    color:$white 
+}
+
+.icon{
+    font-size: 35pt ;
+    color:$white 
+}

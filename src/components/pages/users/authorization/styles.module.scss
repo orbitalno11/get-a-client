@@ -1,0 +1,83 @@
+@import "../../../../stylesDefault.module.scss";
+
+.white{
+    color:$white !important
+}
+
+.h1{
+  @extend .white;
+  @extend .titleH1;
+  font-weight: 700;
+  padding-bottom: 0.5rem;
+}
+
+.alignCenterPage {
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  margin-top: 0;
+}
+
+.alignCenterPageDestop{
+  @extend .paddingTopBody;
+  @extend .alignCenterPage;
+  padding-bottom: 1.25rem !important;
+}
+
+.loginPage{
+  @extend .alignCenterPage;
+  @extend .paddingBottomBody;
+  justify-content: center;
+  padding-top: 3.75rem;
+  height: 100%;
+}
+
+.loginform{
+  display: contents;
+  align-items: center;
+  width: 100%;
+}
+
+.buttonText{
+  @extend .paddingBottomBody;
+  color:$white  !important;
+}
+
+.loginPage .buttonText :hover{
+  border-bottom: 0.12rem solid  var(--white-color) !important;
+}
+
+.title {
+  @extend .textNormal;
+  margin-right: auto;
+  color:$white
+}
+
+.iconStyle{
+  @extend .iconLargeRegister;
+  margin-bottom : 0.6rem
+}
+
+.rowWidth {
+  width: 40% !important;
+}
+
+
+.imagepPerson {
+  border-radius: 50% !important;
+  height: 7.5rem;
+  width: 7.5rem;
+}
+
+.margintop10{
+  margin-top: 0.6rem;
+}
+
+.margintop20{
+  margin-top: 1.25rem;
+}
+
+.marginbottom20{
+  margin-bottom: 1.25rem;
+}

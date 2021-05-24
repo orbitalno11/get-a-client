@@ -1,0 +1,164 @@
+$orange:#F26419;
+$blue: #33658A;
+$yellow: #F6AE2D;
+$white: #FFFFFF;
+$gray : #C4C4C4;
+$side : #303A53;
+$red : #840c0c;
+$green : #00B900;
+$black : #000000;
+$silver : #a39b9b;
+
+// for register page 
+.titleH1{
+    font-size: 3.75rem;
+    font-weight: 600;
+}
+
+.titleH2{
+    font-size: 2rem;
+    font-weight: 600;
+}
+  
+.titleH3{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.titleH4{
+    font-size: 1.35rem;
+    font-weight: 600;
+}
+
+.titleH5{
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.textSmall{
+    font-size: 1rem;
+}
+    
+.textNormal{
+    font-size: 1.35rem;
+}
+
+.textLarge{
+    font-size: 1.35rem;
+}
+
+.iconLargeRegister{
+    font-size: 3.125rem;
+}
+
+.iconLarge{
+    font-size: 2rem;
+}
+
+.iconNormal{
+    font-size: 1.35rem;
+}
+
+.iconSmall{
+    font-size: 1.15rem;
+}
+
+.paddingbody{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.paddingTopBody{
+    padding-top: 6rem;
+}
+
+.paddingBottomBody {
+    padding-bottom: 3.75rem;
+}
+
+.body {
+    @extend .paddingbody;
+    @extend .paddingTopBody;
+    @extend .paddingBottomBody;
+}
+
+.bodymobileprofile{
+    @extend .paddingbody;
+    @extend .paddingBottomBody;
+}
+
+
+.horizontalCenter {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.VerizontalPage {
+    display: flex;
+    align-items: center;
+}
+
+.centerPage{
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.borderImage{
+    border: 0.15rem solid  !important;
+    border-color : $orange !important;
+    border-radius: 0.75rem;
+    padding : 0.5rem;
+    background-color: rgba($color: $gray, $alpha: 0.22);
+}
+
+.HDImage {
+  width: 320px !important;
+  height: 180px !important;
+}
+
+.buttonCircle{
+    border-style: none  !important;
+    border-radius: 50%;
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 0.75rem !important;
+    color: $white;
+    cursor: pointer;
+}
+
+.borderImage{
+    border: 0.15rem solid  !important;
+    border-color : $orange !important;
+    border-radius: 0.75rem;
+    padding : 0.5rem;
+    background-color: rgba($color: $gray, $alpha: 0.22);
+}
+
+.a4Image {
+  width: 13rem !important;
+  height: 16rem !important;
+}
+
+.container {
+    padding: 6rem 7.5rem 3.75rem 7.5rem;
+
+    @media only screen and (max-width: 768px){
+        padding:  6.25rem 1.5rem 4rem 1.5rem;
+    }
+}
+
+.containerSection {
+    padding: 0 7.5rem 0 7.5rem;
+    @media only screen and (max-width: 768px){
+        padding:  0 1.5rem 0 1.5rem;
+    }
+}
+
+@mixin cutText($line) {
+    overflow:hidden; 
+    text-overflow: ellipsis; 
+    display: -webkit-box; 
+    -webkit-line-clamp: $line; 
+    -webkit-box-orient: vertical;
+}

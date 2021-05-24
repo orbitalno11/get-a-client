@@ -1,0 +1,355 @@
+:root {
+  --orange-color: #f26419;
+  --blue-color: #33658a;
+  --yellow-color: #f6ae2d;
+  --white-color: #ffffff;
+  --gray-color: #c4c4c4;
+  --side-menu-color: #303a53;
+  --error-color: #840c0c;
+  --green-color: #00b900;
+  --red-color : #ab330f;
+}
+
+/* General */
+
+.white{
+  color:var(--white-color) !important
+}
+
+.error-input{
+  font-size: 0.9rem;
+  color:var(--error-color);
+  padding-left: 0.625rem;
+  margin-top: 0.3rem;
+}
+
+.input{
+  margin: 0 auto;
+  border: none; /* <-- This thing here */
+  border:solid 1px #ccc;
+  border-radius: 1.25rem;
+  min-height: 2.5rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  width: 100%;
+  outline:none;
+}
+
+.imageUpload >input{
+  display: none !important;
+}
+
+.ant-picker,
+.ant-select{
+  width: 100% !important; 
+}
+
+.ant-select-arrow{
+  display: none;
+}
+
+.ant-picker,
+.ant-select-selector {
+  border: none !important; 
+  border:solid 1px #ccc !important;
+  border-radius: 1.25rem !important;
+  min-height: 2.5rem !important;
+  padding: 4.5px !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+}
+
+.ant-picker{
+  padding: 8px !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+}
+
+.ant-picker-input > input{
+  font-size: 1.1rem;
+}
+
+.ant-select-arrow{
+  display: none;
+}
+
+input :focus{
+  outline: none !important
+}
+
+.buttonColor{
+  border-style: none  !important;
+  color:var(--white-color)  !important;
+  height: auto;
+}
+
+.backgroundYellow{
+  background-color: var(--yellow-color) !important;
+}
+
+.backgroundGreen{
+  background-color: var(--green-color) !important;
+}
+
+.backgroundOrange{
+  background-color: var(--orange-color) !important;
+}
+
+.backgroundBlue{
+  background-color: var(--blue-color) !important;
+}
+
+.backgroundGray{
+  background-color: var(--gray-color) !important;
+}
+
+.backgroundRed{
+  background-color: var(--red-color) !important;
+}
+
+/* General */
+
+/* Nav Menu */
+.fixMenu{
+  position:fixed;
+  width:100%;
+  z-index:999;
+}
+
+.menuBar {
+  background-color: var(--orange-color) !important;
+  height: 3.75rem;
+  display: flex;
+  align-items: center;
+  padding: 0 1.25rem;
+  border-bottom: solid 0px transparent;
+}
+
+.menuBar .floatRight{
+  margin-left: auto ;
+}
+
+.logo {
+  color: var(--white-color) ;
+  font-weight: 800;
+  font-size: 2.5rem;
+}
+
+.ant-menu-horizontal > .ant-menu-item:hover,
+.ant-menu-horizontal > .ant-menu-item-active,
+.ant-menu-horizontal > .ant-menu-submenu-open
+{
+  color:  var(--white-color)  !important;
+  border-bottom: 0.125rem solid  var(--white-color) !important;
+}
+
+.ant-menu-horizontal > .ant-menu-item-selected
+{
+  border-bottom: 0.125rem solid  transparent !important;
+}
+
+.ant-menu-horizontal a{
+  color:  var(--white-color)  !important;
+}
+
+.buttonText{
+  color:var(--white-color)  !important;
+}
+
+.buttonText :hover{
+  font-weight: 600;
+}
+
+.navbarBottom {
+  overflow: hidden;
+  background-color: var(--white-color) ;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  border-top-style: solid;
+  border-top-color: var(--orange-color);
+}
+
+.iconMenu{
+  padding: 0.5rem;
+}
+
+.icon{
+  font-size: 1.35rem;
+  color : var(--gray-color) !important;
+}
+
+.icon :active{
+  color : var(--orange-color) !important;
+}
+
+/* Nav Menu */
+
+/* Body */
+.input-form{
+  width: 30%;
+  /* margin-top: 30px; */
+}
+
+.big-button{
+  height : 10rem ;
+  width : 80%;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 1.25rem;
+}
+
+.icon-addimage{
+  font-size: 15px;
+  color: var(--side-menu-color);
+  cursor: pointer;
+}
+
+.ant-badge-count, 
+.ant-badge-dot, 
+.ant-badge 
+.ant-scroll-number-custom-component {
+  position :absolute ;
+  bottom: 0 ;
+  top:auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .big-button{
+    width : 100%;
+    height : 10rem ;
+    margin-top: 1.25rem;
+  }
+
+  .icon-addimage{
+    font-size: 13px;
+  }
+
+  .image-person {
+    height: 7.5rem;
+    width: 7.5rem;
+  }
+
+  .input-form{
+    width: 60%;
+  }
+}
+
+.ant-card-body{
+  padding-left: 0.6rem !important;
+  padding-right: 0.6rem !important;
+  padding-top: 1.25rem !important;
+  padding-bottom: 1.25rem !important;
+}
+
+.ant-radio-button-wrapper-checked ,
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover::before , 
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before{
+  background-color: #FFFFFF;
+  outline: none!important;
+  box-shadow: none  !important;
+}
+
+[ant-click-animating-without-extra-node]:after {
+  animation: 0s !important;
+  border-color: transparent !important;
+}
+
+.ant-table-thead > tr > th {
+  color: rgba(0, 0, 0, 0.85) !important;
+  font-weight: 500 !important;
+  text-align: center !important;
+  background: #ffb58d !important;
+  border-bottom: 1px solid #f26419 !important;
+}
+
+.ant-image-img {
+  display:initial !important; 
+  width: 100%;
+  height: auto;
+}
+
+.tablecoins {
+  border-collapse: collapse !important;
+  width: 100% !important;
+  margin-top: 15px !important;
+  text-align: center !important;
+  border-collapse: collapse !important;
+}
+.tablecoins td, .tablecoins th {
+  padding: 8px!important;
+  text-align: center!important;
+  border-bottom: 2px solid #ddd!important;  
+}
+.tablecoins tr:nth-child(even){background-color: #f2f2f2 !important;}
+.tablecoins tr:hover {background-color: #ddd!important;}
+.tablecoins th {
+  padding-top: 12px!important;
+  padding-bottom: 12px!important;
+  text-align: center !important;
+  background-color: #303A53 !important;
+  color: white!important;
+}
+
+.verify {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 15px;
+  border-collapse: collapse;
+  padding-left: 2em;
+}
+.verify td, .verify th {
+  padding: 8px;
+  border-bottom: 2px solid #ddd;  
+  padding-left: 2em;
+}
+.verify tr:hover {background-color: #ddd;}
+.verify th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #33658A;
+  color: white;
+  padding-left: 2em;
+}
+
+.profile {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 15px;
+  border-collapse: collapse;
+  padding-left: 2em;
+}
+
+.profiletd, .profile th {
+  padding: 8px;
+  border-bottom: 2px solid white;  
+  padding-left: 2em;
+}
+
+.profile tr {background-color: white;}
+
+.profile th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #33658A;
+  color: white;
+  padding-left: 2em;
+}
+
+::placeholder{
+  color:  var(--gray-color) !important
+}
+
+span{
+  word-wrap: break-word !important;
+  white-space : normal;
+}
+
+textarea{
+  font-size: 1.1rem !important;
+}
+
+#reviewForm .ant-spin-dot-item {
+  background-color: var(--white-color) !important;
+}

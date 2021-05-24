@@ -1,0 +1,175 @@
+@import "../../users/profile/styles.module.scss";
+
+.paddingmange {
+  padding: 1rem;
+}
+
+.floatleft {
+  @extend .marginTop;
+  float: left;
+}
+
+.marginAccept {
+  margin-top: 1rem;
+}
+
+.imageProfilesmall {
+  border-radius: 50% !important;
+  height: 6.12rem;
+  width: 6.12rem;
+}
+
+.paddingpage{
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.icon {
+  @extend .iconSmall;
+  color: $gray;
+}
+
+.request{
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+  margin-left:5% ; 
+}
+
+.marginpage{
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+.pagecard{
+  display: flex;
+  justify-content:space-between;
+  margin-top: 1rem;
+}
+
+.paddingCardLessonSM{
+  @extend .paddingbody;
+  padding-top: 6rem;
+  padding-bottom: 3.75rem;
+}
+
+.paddingCardLessonXS{
+  padding-top: 6rem;
+  padding-bottom: 3.75rem;
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
+.VDO{
+  border: 0.1rem solid rgb(211, 211, 211);
+  border-radius: 1rem;
+  width: auto;
+  height: 10rem;
+ @extend .centerPage;
+}
+
+.Cover{
+  @extend .VDO;
+  height: 20rem;
+}
+
+.paddingVDO{
+padding-top: 1rem;
+}
+
+.marginRigth{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.paddindMd{
+  @extend .horizontalCenter;
+  @extend .paddingmange;
+}
+
+.dividerCourse{
+  height: 0.2rem;
+  width: 100%;
+  background-color: $orange;
+  margin-Top:0.175rem;
+}
+
+.dividerDetail{
+ @extend .dividerCourse;
+ background-color: $gray;
+ height: 0.1rem;
+}
+
+.buttonfixbottom{
+  @extend .buttonCircle;
+  background-color: $blue;
+  font-size: 1.25rem !important;
+  overflow: hidden;
+  position: fixed;
+  right : 3rem;
+  bottom: 4rem;
+  z-index: 1000;
+  width: 3rem;
+  height: 3rem;
+}
+
+.profile{
+  height: 13.75rem;
+  padding-top: 3rem;
+  width: 100%;
+}
+
+.navbarBottom {
+  overflow: hidden;
+  position: fixed;
+  bottom: 3rem;
+  width: 100%;
+  height: auto;
+}
+
+.navbarBottomMD {
+  @extend .navbarBottom;
+  bottom: 0rem;
+}
+
+.buttom50pct{
+  @extend .textNormal;
+  width: 50%;
+  height: 3rem;
+  border-style: none !important;
+  cursor: pointer;
+  outline: none;
+}
+
+.leftbuttom{
+  @extend .buttom50pct;
+  background-color: $orange;
+  color : $white;
+}
+
+.rightbottom{
+  @extend .buttom50pct;
+  background-color: $blue;
+  color : $white;
+}
+
+.reviewbottom{
+  @extend .buttom50pct;
+  width: 100%;
+  background-color: $orange;
+  color : $white;
+}
+
+.backgroungContact {
+  @extend .subProfile;
+  background-color: rgba($color: $gray, $alpha: 0.2);
+  border-radius: 1rem;
+  padding : 0.5rem 1rem 2rem 1.5rem
+}
+
+.imageIcon {
+  border-radius: 50% !important;
+  height: 2rem;
+  width: 2rem;
+  margin-right: 1.25rem;
+}

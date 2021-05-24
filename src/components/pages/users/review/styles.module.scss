@@ -1,0 +1,22 @@
+@import "../profile/styles.module.scss";
+
+
+.buttom50pct{
+    @extend .textNormal;
+    width: 50%;
+    height: 3rem;
+    border-style: none !important;
+    cursor: pointer;
+    outline: none;
+}
+
+.reviewbottom{
+    @extend .buttom50pct;
+    width: 100%;
+    background-color: $orange;
+    color : $white;
+}
+
+.textCenter {
+    text-align: center;
+}

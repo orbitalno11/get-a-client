@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "get-a-project"
+  },
+  "targets": {
+    "get-a-project": {
+      "hosting": {
+        "get-a-prod": [
+          "get-a-project"
+        ],
+        "get-a-dev": [
+          "dev-get-a"
+        ]
+      }
+    }
+  }
+}

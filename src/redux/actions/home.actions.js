@@ -16,7 +16,7 @@ function getRank(number){
                 dispatch(loadingActions.stopLoading())
             }
         }) .catch(err => {
-            dispatch(failure(err.response.data))
+            dispatch(failure(err.response?.data))
             dispatch(loadingActions.stopLoading())
         })
     }

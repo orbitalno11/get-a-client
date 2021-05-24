@@ -6,12 +6,12 @@ const initialState = {
     listEducation: null,
     education: null,
     testing: null,
-    error: null,
+    error: false,
     offlineCourse: {
-        success : false , 
-        data : null
+        success: false,
+        data: null
     },
-    tutorHandle : null
+    tutorHandle: null
 }
 
 const tutorReducer = (state = initialState, action) => {
@@ -20,7 +20,7 @@ const tutorReducer = (state = initialState, action) => {
             return {
                 ...state,
                 listTesting: action.payload,
-                error: null
+                error: false
             }
         case tutorConstants.GET_LIST_TESTING_FAILURE:
             return {
@@ -33,7 +33,7 @@ const tutorReducer = (state = initialState, action) => {
             return {
                 ...state,
                 listEducation: action.payload,
-                error: null
+                error: false
             }
         case tutorConstants.GET_LIST_EDUCATION_FAILURE:
             return {
@@ -45,7 +45,7 @@ const tutorReducer = (state = initialState, action) => {
             return {
                 ...state,
                 testing: action.payload,
-                error: null
+                error: false
             }
         case tutorConstants.GET_TESTING_FAILURE:
             return {
@@ -57,7 +57,7 @@ const tutorReducer = (state = initialState, action) => {
             return {
                 ...state,
                 education: action.payload,
-                error: null
+                error: false
             }
         case tutorConstants.GET_EDUCATION_FAILURE:
             return {
@@ -68,7 +68,7 @@ const tutorReducer = (state = initialState, action) => {
         case tutorConstants.CREATE_TESTING_SUCCESS:
             return {
                 ...state,
-                error: null
+                error: false
             }
         case tutorConstants.CREATE_TESTING_FAILURE:
             return {
@@ -78,7 +78,7 @@ const tutorReducer = (state = initialState, action) => {
         case tutorConstants.CREATE_EDUCATION_SUCCESS:
             return {
                 ...state,
-                error: null
+                error: false
             }
         case tutorConstants.CREATE_EDUCATION_FAILURE:
             return {
@@ -88,7 +88,7 @@ const tutorReducer = (state = initialState, action) => {
         case tutorConstants.DELETE_TESTING_SUCCESS:
             return {
                 ...state,
-                error: null
+                error: false
             }
         case tutorConstants.DELETE_TESTING_FAILURE:
             return {
@@ -98,7 +98,7 @@ const tutorReducer = (state = initialState, action) => {
         case tutorConstants.DELETE_EDUCATION_SUCCESS:
             return {
                 ...state,
-                error: null
+                error: false
             }
         case tutorConstants.DELETE_EDUCATION_FAILURE:
             return {
@@ -108,7 +108,7 @@ const tutorReducer = (state = initialState, action) => {
         case tutorConstants.UPDATE_TESTING_SUCCESS:
             return {
                 ...state,
-                error: null
+                error: false
             }
         case tutorConstants.UPDATE_TESTING_FAILURE:
             return {
@@ -118,7 +118,7 @@ const tutorReducer = (state = initialState, action) => {
         case tutorConstants.UPDATE_EDUCATION_SUCCESS:
             return {
                 ...state,
-                error: null
+                error: false
             }
         case tutorConstants.UPDATE_EDUCATION_FAILURE:
             return {
@@ -129,17 +129,17 @@ const tutorReducer = (state = initialState, action) => {
             return {
                 ...state,
                 offlineCourse: {
-                    success : true ,
-                    data :  action.payload
+                    success: true,
+                    data: action.payload
                 },
-                error: null
+                error: false
             }
         case tutorConstants.GET_LIST_OFFLINE_COURSE_FAILURE:
             return {
                 ...state,
                 offlineCourse: {
-                    success : true ,
-                    data : null
+                    success: true,
+                    data: null
                 },
                 error: action.payload
             }
@@ -147,7 +147,7 @@ const tutorReducer = (state = initialState, action) => {
             return {
                 ...state,
                 tutorHandle: action.payload,
-                error: null
+                error: false
             }
         case tutorConstants.GET_TUTOR_PROFILE_FAILURE:
             return {
@@ -158,16 +158,16 @@ const tutorReducer = (state = initialState, action) => {
         case tutorConstants.CLEAR_LIST_OFFLINE_COURSE:
             return {
                 ...state,
-                tutorHandle : null,
+                tutorHandle: null,
                 offlineCourse: {
-                    success : false , 
-                    data : null
+                    success: false,
+                    data: null
                 },
                 listTesting: null,
                 listEducation: null,
                 education: null,
                 testing: null,
-                error: null
+                error: false
             }
 
         default: {

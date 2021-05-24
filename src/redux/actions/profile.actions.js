@@ -66,7 +66,7 @@ function getProfile() {
             dispatch(success(profileDetail))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response.data.message.message))
+            dispatch(failure(err.response?.data))
         })
     }
     function success(data) { return { type: profileConstants.GET_PROFILE_SUCCESS, payload: data } }
@@ -98,7 +98,7 @@ function updateProfileLearner(data, profileId) {
 
         }).catch((err) => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response.data.message.message))
+            dispatch(failure(err.response?.data))
             dispatch(modalAction.openModal({
                 text: "แก้ไขข้อมูลไม่สำเร็จ",
                 size: sizeModal.small,
@@ -123,7 +123,7 @@ function getIdentifyTutor() {
            
         }).catch((err) => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response.data))
+            dispatch(failure(err.response?.data))
         })
 
     }
@@ -152,7 +152,7 @@ function updateIdentifyTutor(data) {
 
         }).catch((err) => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response.data))
+            dispatch(failure(err.response?.data))
             dispatch(modalAction.openModal({
                 text: "แก้ไขข้อมูลไม่สำเร็จ",
                 size: sizeModal.small,
@@ -186,7 +186,7 @@ function createIdentifyTutor(data) {
 
         }).catch((err) => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response.data))
+            dispatch(failure(err.response?.data))
             dispatch(modalAction.openModal({
                 text: "แก้ไขข้อมูลไม่สำเร็จ",
                 size: sizeModal.small,
@@ -215,7 +215,7 @@ function setAddress(address) {
 
             .catch(err => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response.data.message.message))
+                dispatch(failure(err.response?.data))
             })
     }
     function success() { return { type: profileConstants.SET_ADDRESS_SUCCESS } }
@@ -252,7 +252,7 @@ function getAddress() {
             })
             .catch(err => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response.data.message))
+                dispatch(failure(err.response?.data))
             })
     }
     function success(data) {  return { type: profileConstants.GET_ADDRESS_SUCCESS, payload: data } }

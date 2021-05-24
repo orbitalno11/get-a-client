@@ -2,7 +2,7 @@ import { homeConstants } from "../constants"
 
 const initialState = {
     offlineCourseRank : null ,
-    error : null  
+    error : false  
 }
 
 const homeReducer = (state = initialState, action) => {
@@ -11,7 +11,7 @@ const homeReducer = (state = initialState, action) => {
         return {
             ...state,
             offlineCourseRank: action.payload,
-            error : null
+            error : false
         }
     case homeConstants.GET_RANK_HOME_FAILURE:
         return {

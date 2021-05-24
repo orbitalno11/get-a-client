@@ -4,9 +4,9 @@ import { profileConstants } from "../constants"
 const initialState = {
     profile: null,
     profileHandle: null,
-    error: null,
+    error: false,
     address: {},
-    getAddress : false,
+    getAddress: false,
     identity: null
 }
 
@@ -16,7 +16,7 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 profile: action.payload,
-                error: null
+                error: false,
             }
         case profileConstants.GET_PROFILE_FAILURE:
             return {
@@ -32,7 +32,7 @@ const profileReducer = (state = initialState, action) => {
         case profileConstants.UPDATE_PROFILE_SUCCESS:
             return {
                 ...state,
-                error: null
+                error: false,
             }
         case profileConstants.UPDATE_PROFILE_FAILURE:
             return {
@@ -43,30 +43,30 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 address: action.payload,
-                getAddress : true,
-                error: null
+                getAddress: true,
+                error: false,
             }
         case profileConstants.GET_ADDRESS_FAILURE:
             return {
                 ...state,
                 address: {},
-                getAddress : false,
+                getAddress: false,
                 error: action.payload
             }
         case profileConstants.SET_ADDRESS_SUCCESS:
             return {
                 ...state,
-                error: null
+                error: false,
             }
         case profileConstants.SET_ADDRESS_FAILURE:
             return {
                 ...state,
-                error : action.payload
+                error: action.payload
             }
         case profileConstants.CREATE_IDENTIFY_TUTOR_SUCCESS:
             return {
                 ...state,
-                error: null
+                error: false,
             }
         case profileConstants.CREATE_IDENTIFY_TUTOR_FAILURE:
             return {
@@ -77,7 +77,7 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 identity: action.payload,
-                error: null
+                error: false,
             }
         case profileConstants.GET_IDENTIFY_TUTOR_FAILURE:
             return {
@@ -88,7 +88,7 @@ const profileReducer = (state = initialState, action) => {
         case profileConstants.UPDATE_IDENTIFY_TUTOR_SUCCESS:
             return {
                 ...state,
-                error: null
+                error: false,
             }
         case profileConstants.UPDATE_IDENTIFY_TUTOR_FAILURE:
             return {

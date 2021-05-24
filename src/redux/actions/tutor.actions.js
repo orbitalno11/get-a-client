@@ -14,7 +14,7 @@ function getTestings(id) {
             dispatch(success(data))
             dispatch(loadingActions.stopLoading())
         }).catch(err => {
-            dispatch(failure(err.response.data))
+            dispatch(failure(err.response?.data))
             dispatch(loadingActions.stopLoading())
         })
     }
@@ -30,7 +30,7 @@ function getEducations(id) {
             dispatch(success(data))
             dispatch(loadingActions.stopLoading())
         }).catch(err => {
-            dispatch(failure(err.response.data))
+            dispatch(failure(err.response?.data))
             dispatch(loadingActions.stopLoading())
         })
     }
@@ -63,7 +63,7 @@ function getTesting(id) {
             }))
             dispatch(loadingActions.stopLoading())
         }).catch(err => {
-            dispatch(failure(err.response.data))
+            dispatch(failure(err.response?.data))
             dispatch(loadingActions.stopLoading())
         })
     }
@@ -97,7 +97,7 @@ function getEducation(id) {
             }))
             dispatch(loadingActions.stopLoading())
         }).catch(err => {
-            dispatch(failure(err.response.data))
+            dispatch(failure(err.response?.data))
             dispatch(loadingActions.stopLoading())
         })
     }
@@ -122,7 +122,7 @@ function createTesting(data, profile) {
                 afterClose : `/tutor/${profile}`
             }))
         }).catch(err => {
-            dispatch(failure(err.response.data))
+            dispatch(failure(err.response?.data))
             dispatch(loadingActions.stopLoading())
             dispatch(modalAction.openModal({
                 text: "เพ่ิมข้อมูลการสอบไม่สำเร็จ",
@@ -182,7 +182,7 @@ function updateTesting(data, id, profile) {
                 afterClose : `/tutor/${profile}`
             }))
         }).catch(err => {
-            dispatch(failure(err.response.data))
+            dispatch(failure(err.response?.data))
             dispatch(loadingActions.stopLoading())
             dispatch(modalAction.openModal({
                 text: "แก้ไขข้อมูลการสอบไม่สำเร็จ",
@@ -212,7 +212,7 @@ function updateEducation(data, id, profile) {
                 afterClose : `/tutor/${profile}`
             }))
         }).catch(err => {
-            dispatch(failure(err.response.data))
+            dispatch(failure(err.response?.data))
             dispatch(loadingActions.stopLoading())
             dispatch(modalAction.openModal({
                 text: "เพิ่มข้อมูลการศึกษาไม่สำเร็จ",
@@ -239,7 +239,7 @@ function deleteTesting(id, auth) {
                 alert: typeModal.corrent
             }))
         }).catch(err => {
-            dispatch(failure(err.response))
+            dispatch(failure(err.response?.data))
             dispatch(modalAction.openModal({
                 text: "ลบข้อมูลการสอบไม่สำเร็จ",
                 size: sizeModal.small,
@@ -265,7 +265,7 @@ function deleteEducation(id,auth) {
                 alert: typeModal.corrent
             }))
         }).catch(err => {
-            dispatch(failure(err.response))
+            dispatch(failure(err.response?.data))
             dispatch(modalAction.openModal({
                 text: "ลบข้อมูลการศึกษาไม่สำเร็จ",
                 size: sizeModal.small,
@@ -292,7 +292,7 @@ function getListOfflineCourse(id) {
                 }
             })
             .catch(err => {
-                dispatch(failure(err.response.data))
+                dispatch(failure(err.response?.data))
                 dispatch(loadingActions.stopLoading())
             })
     }
@@ -312,7 +312,7 @@ function getProfileTutor(id) {
                     dispatch(loadingActions.stopLoading())
                 }
             }).catch(err => {
-                dispatch(failure(err.response.data))
+                dispatch(failure(err.response?.data))
                 dispatch(loadingActions.stopLoading())
             })
     }

@@ -48,7 +48,7 @@ function loginUser(loginData) {
 
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err))
+            dispatch(failure(err.response.data))
             dispatch(modalAction.openModal({
                 text: "ข้อมูลผู้ใช้งานไม่ถูกต้อง",
                 size: sizeModal.small,

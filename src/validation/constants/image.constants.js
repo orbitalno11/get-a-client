@@ -1,4 +1,4 @@
-const FILE_IMAGE =300 * 300;
+const FILE_IMAGE = 1024 * 1024;
 
 const FILE_IMAGE_IDENTITY = 1280 * 720
 

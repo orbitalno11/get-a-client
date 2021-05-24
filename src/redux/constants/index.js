@@ -10,3 +10,5 @@ export * from "./home.constants"
 export * from "./review.constants"
 export * from "./onlineCourse.constants"
 export * from "./search.constants"
+export * from "./favorite.constants"
+

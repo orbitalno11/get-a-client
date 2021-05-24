@@ -1,5 +1,5 @@
 import React from "react"
-import { Col, Image, Row } from "antd";
+import { Col, Image, Row} from "antd";
 import styles from "./styles.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faLocationArrow, faStar, faUserAlt } from "@fortawesome/free-solid-svg-icons";
@@ -25,6 +25,7 @@ export default function CardCourseLearner({ data, verizontal, type, ranking }) {
     }
 
     const styleCardVerizontal = {
+        alignItems: "center",
         padding: '0.5rem',
         height: "9rem",
         border : ranking ? "none" : ""
@@ -48,7 +49,7 @@ export default function CardCourseLearner({ data, verizontal, type, ranking }) {
                                     preview={false}
                                 />
                             </Col>
-                            <Col span={16} align="start" style={{ paddingLeft: '1rem' }}>
+                            <Col span={16} align="start" style={{ paddingLeft: "1rem" }}>
                                 <span className={`${styles.titleH5} ${styles.textOneLine}`}>{data && (isOffline ? data.fullNameText : data.name)}</span>
                                 <span className={styles.textSmall}>
                                     <FontAwesomeIcon icon={faStar} className={styles.icon} style={{ color: color.yellow }} />
@@ -85,7 +86,7 @@ export default function CardCourseLearner({ data, verizontal, type, ranking }) {
                             </Col>
 
                             <Col span={24} align="center">
-                                <span className={styles.textSmall}>
+                                <span className={styles.textOne}>
                                     <FontAwesomeIcon icon={faStar} className={styles.icon} style={{ color: color.yellow }} />
                                     {data && data.rating}
                                 </span>

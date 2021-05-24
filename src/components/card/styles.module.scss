@@ -2,11 +2,13 @@
 @import "../../stylesDefault.module.scss";
 
 .card{
-  border: 0.15rem solid $orange;
   border-radius: 0.5rem;
   cursor: pointer;
   color : $black;
-  background-color: $white;
+  background-color: white;
+  @media only screen and (max-width: 576px){
+    border: 0.2rem solid $orange;
+  }
 }
 
 .paddingCard {
@@ -37,6 +39,12 @@
   border-radius: 50% !important;
   height: 5.5rem;
   width: 5.5rem;
+}
+
+.imageSmall {
+  border-radius: 50% !important;
+  height: 3.5rem;
+  width: 3.5rem;
 }
 
 .borderGrid {
@@ -173,4 +181,16 @@
 
 .textThreeLine {
   @include cutText(3)
+}
+
+.marginRight1{
+   margin-right: 0.5rem;
+}
+
+.marginTop1{
+   margin-right: 1rem;
+}
+
+.marginBottom05{
+  margin-bottom: 0.3rem;
 }

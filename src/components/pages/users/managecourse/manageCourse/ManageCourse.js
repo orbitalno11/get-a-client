@@ -4,11 +4,12 @@ import style from "../styles.module.scss";
 import Header from "../../../../headerMobile/Header";
 import ManageCourseDetail from "./ManageCourseDetail";
 import isMobile from "../../../../isMobile/isMobile"
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-export default function ManageClip() {
+export default function ManageCourse() {
+  const location = useLocation()
   const floatRight = {
     marginLeft: "auto",
     display: "flex",
@@ -28,7 +29,7 @@ export default function ManageClip() {
                 <span className={style.titleH2}>จัดการคอร์สเรียน</span>
               </Col>
               <Col md={6} lg={5} xl={5}>
-                <Link to="/tutor/course/create">
+                <Link to={`${location.pathname}/create`}>
                   <Button
                     className="buttonColor backgroundBlue"
                     shape="round"
@@ -42,7 +43,7 @@ export default function ManageClip() {
               <Divider type="horizontal" className={style.dividerCourse} />
             </Row>
           ) : (
-            <Link to={"/tutor/course/create"}>
+            <Link to={`${location.pathname}/create`}>
               <button className={style.buttonfixbottom} >
                 <FontAwesomeIcon icon={faPlus} />
               </button>

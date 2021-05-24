@@ -19,6 +19,7 @@ import FormEnroll from "./FormEnroll";
 import { SkeletonComponent } from "../../../../loading/SkeletonComponent";
 import { trackImpressCourseDetail } from "../../../../../analytic/Analytic";
 import isEmpty from "../../../../defaultFunction/checkEmptyObject"
+import ButtonReview from "./ButtonReview";
 const { useBreakpoint } = Grid;
 
 export default function OfflineCourse() {
@@ -68,40 +69,50 @@ export default function OfflineCourse() {
         }
     }
 
+    const enrollCourse = () => {
+        if (!auth.isAuthenticated) {
+            window.location.href = "/login"
+        } else {
+            const dataEnroll = course && {
+                id: course.id,
+                name: course.name,
+                subject: course.subject.title,
+                grade: course.grade.title,
+                owner: "Xxxx"
+            }
+
+            dispatch(modalAction.openModal({
+                body: <FormEnroll data={dataEnroll} />,
+                size: sizeModal.default,
+            }))
+        }
+    }
+
+    const handleOpenReviewForm = () => {
+        dispatch(modalAction.openModal({
+            body: <ReviewForm />,
+            size: sizeModal.default,
+        }))
+    }
+
+
     const ContactTutor = () => {
         return (
             <div className={!screens.lg ? style.subProfile : null}>
+                {/* online */}
                 {
-                    (screens.lg && !isOfflineCourse) && (
-                        <Fragment>
-                            <Link to={`/course/online/${idCourse}/video`}>
-                                <Button
-                                    className="buttonColor backgroundOrange"
-                                    shape="round"
-                                    size="middle"
-                                    style={{ width: "100%" }}>
-                                    ดูบทเรียน
-                                    </Button>
-                            </Link>
-                            {
-                                owner && (
-                                    <Link to={`/tutor/online/${idCourse}/edit`} >
-                                        <div style={{ marginTop: "0.5rem" }}>
-                                            <Button
-                                                className="buttonColor backgroundGray"
-                                                shape="round"
-                                                size="middle"
-                                                style={{ width: "100%" }}>
-                                                แก้ไขคอร์สเรียน
-                                    </Button>
-                                        </div>
-                                    </Link>
-                                )
-                            }
-                        </Fragment>
+                    screens.lg && (
+                        <ButtonReview
+                            owner={owner}
+                            isOfflineCourse={isOfflineCourse}
+                            handleOpenReviewForm={handleOpenReviewForm}
+                            enrollCourse={enrollCourse}
+                            learn_status={learn_status}
+                            typeShow="desktop"
+                        />
                     )
                 }
-                <div className={isMobile() ? style.subProfile : style.backgroungContact} >
+                <div className={!screens.lg ? style.subProfile : style.backgroungContact} >
                     <div className={style.marginTop20}>
                         <span className={style.titleH3}>ช่องทางสอบถามข้อมูล</span>
                     </div>
@@ -125,7 +136,7 @@ export default function OfflineCourse() {
                                         size="middle"
                                         style={{ width: "100%" }}>
                                         ดูข้อมูลครูสอนพิเศษเพิ่มเติม
-                                </Button>
+                                    </Button>
                                 </Link>
                             </div>
                         )
@@ -149,43 +160,12 @@ export default function OfflineCourse() {
                         <div style={{ marginLeft: 'auto' }}>
                         </div>
                     </div>
-                    <div  className={style.marginSection} >
                     < AllReview />
-                    </div>
-                   
                 </Fragment>
             )
         } else {
             return <ContactTutor />
         }
-
-    }
-
-    const enrollCourse = () => {
-        if (!auth.isAuthenticated) {
-            window.location.href = "/login"
-        } else {
-
-            const dataEnroll = !isEmpty(course) && {
-                id: course.id,
-                name: course.name,
-                subject: course.subject.title,
-                grade: course.grade.title,
-                owner: "Xxxx"
-            }
-
-            dispatch(modalAction.openModal({
-                body: <FormEnroll data={dataEnroll} />,
-                size: sizeModal.default,
-            }))
-        }
-    }
-
-    const handleOpenReviewForm = () => {
-        dispatch(modalAction.openModal({
-            body: <ReviewForm />,
-            size: sizeModal.default,
-        }))
     }
 
     return (
@@ -204,81 +184,33 @@ export default function OfflineCourse() {
                             </Col>
                         )
                     }
-                    <Col xl={13} lg={13} md={14} sm={24} xs={24} id="switchComponent" >
+                    <Col xl={13} lg={13} md={24} sm={24} xs={24} id="switchComponent" >
                         {
                             switchShow()
                         }
                     </Col>
                     {
-                        !isMobile() && (
+                        screens.lg && (
                             <Col xl={8} lg={8} md={8} sm={24} xs={24} >
                                 <ContactTutor />
                             </Col>
                         )
                     }
                 </Row>
+                {/* mobile and ipad screen */}
                 {
-                    (!learn_status && !screens.lg && screens.md && !owner) && (
-                        isOfflineCourse ? (
-                            <div className={style.navbarBottomMD}>
-                                <button className={style.reviewbottom} onClick={() => enrollCourse()}>สมัครเรียน</button>
-                            </div>
-                        ) : (
-                            <div className={style.navbarBottomMD}>
-                                <Link to={`/course/online/${idCourse}/video`}>
-                                    <button className={style.reviewbottom} >ดูบทเรียน</button>
-                                </Link>
-                            </div>
-                        )
-
-                    )
-                }
-                {
-                    (!learn_status && !screens.md) && (
-                        <div className={style.navbarBottom}>
-                            {isOfflineCourse ? (
-                                <button className={style.leftbuttom} onClick={() => enrollCourse()}>สมัครเรียน</button>
-                            ) : (
-                                <Link to={`/course/online/${idCourse}/video`}>
-                                    <button className={style.leftbuttom} >ดูบทเรียน</button>
-                                </Link>
-                            )
-                            }
-
-                            <button className={style.rightbottom} onClick={() => switchComponent(!showReview)}>
-                                {
-                                    showReview ? "ถามข้อมูล" : "ความคิดเห็น"
-                                }
-                            </button>
-                        </div>
-                    )
-                }
-                {
-                    (learn_status && isEmpty(myReview) && !screens.lg) && (
-                        <div className={screens.md ? style.navbarBottomMD : style.navbarBottom} >
-                            <button className={style.reviewbottom} onClick={() => handleOpenReviewForm()} >ให้คะแนนการสอนนี้</button>
-                        </div>
-                    )
-                }
-
-                {
-                    (owner && !screens.lg) && (
-                        <div className={!screens.md ? style.navbarBottom : style.navbarBottomMD}>
-                            {isOfflineCourse ? (
-                                <Link to={`/tutor/course/${course.id}/enroll`}>
-                                    <button className={style.leftbuttom} >อนุมัติคำขอ</button>
-                                </Link>
-                            ) : (
-                                <Link to={`/course/online/${idCourse}/video`}>
-                                    <button className={style.leftbuttom} >จัดการบทเรียน</button>
-                                </Link>
-
-                            )
-                            }
-                            <Link to={`/tutor/${params.type}/${idCourse}/edit`}>
-                                <button className={style.rightbottom} >แก้ไข</button>
-                            </Link>
-                        </div>
+                    !screens.lg && (
+                        <ButtonReview
+                            owner={owner}
+                            isOfflineCourse={isOfflineCourse}
+                            handleOpenReviewForm={handleOpenReviewForm}
+                            enrollCourse={enrollCourse}
+                            learn_status={learn_status}
+                            showReview={showReview}
+                            switchComponent={switchComponent}
+                            myReview={myReview}
+                            typeShow="mobile"
+                        />
                     )
                 }
             </div>

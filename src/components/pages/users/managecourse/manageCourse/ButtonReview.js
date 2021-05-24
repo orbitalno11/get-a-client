@@ -5,7 +5,7 @@ import { Fragment } from "react"
 import { useParams } from "react-router"
 import { Link } from "react-router-dom"
 import { color } from "../../../../defaultValue"
-import styleComponent from "../../../../defaultValue/style"
+import { styleComponent } from "../../../../defaultFunction/style"
 import style from "../styles.module.scss";
 
 export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewForm, enrollCourse, learn_status, showReview, switchComponent, typeShow }) {

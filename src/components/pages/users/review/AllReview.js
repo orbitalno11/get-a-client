@@ -34,7 +34,7 @@ export default function AllReview() {
     }, [])
 
     const handleOpenReviewForm = (id, action) => {
-        if(action !== "delete"){
+        if (action !== "delete") {
             dispatch(modalAction.openModal({
                 body: <ReviewForm idReview={id} />,
                 size: sizeModal.default,

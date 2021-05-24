@@ -22,7 +22,7 @@ export default function BuyClip({ title, coin }) {
         <div align="center">
             <span>คุณต้องการซื้อคลิปการสอน {title && title} </span>
             <p>ในราคา {coin && coin} เหรียญ</p>
-            <button id="reviewForm" className={style.buttonColor} style={styleComponent(color.orange)} onClick={() => onHandleBuyCourse()}>
+            <button id="reviewForm" className={style.buttonColor} style={styleComponent.buttonFull(color.orange)} onClick={() => onHandleBuyCourse()}>
                 {
                     loading.loading && (
                         <Fragment>

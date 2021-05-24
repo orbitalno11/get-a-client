@@ -64,13 +64,13 @@ function getProfile() {
             dispatch(loadingActions.stopLoading())
             const profileDetail = res.data.data
             dispatch(success(profileDetail))
-        }).catch(err => {
+        }).catch(() => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response.data.message.message))
+            dispatch(failure())
         })
     }
     function success(data) { return { type: profileConstants.GET_PROFILE_SUCCESS, payload: data } }
-    function failure(err) { return { type: profileConstants.GET_PROFILE_FAILURE, payload: err } }
+    function failure() { return { type: profileConstants.GET_PROFILE_FAILURE, payload: true } }
 }
 
 function getHandleProfile() {
@@ -96,9 +96,9 @@ function updateProfileLearner(data, profileId) {
                 alert: typeModal.corrent
             }))
 
-        }).catch((err) => {
+        }).catch(() => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response.data.message.message))
+            dispatch(failure())
             dispatch(modalAction.openModal({
                 text: "แก้ไขข้อมูลไม่สำเร็จ",
                 size: sizeModal.small,
@@ -108,7 +108,7 @@ function updateProfileLearner(data, profileId) {
     }
 
     function success() { return { type: profileConstants.UPDATE_PROFILE_SUCCESS } }
-    function failure(err) { return { type: profileConstants.UPDATE_PROFILE_SUCCESS, payload: err } }
+    function failure() { return { type: profileConstants.UPDATE_PROFILE_SUCCESS, payload: true } }
 }
 
 function getIdentifyTutor() {
@@ -121,14 +121,14 @@ function getIdentifyTutor() {
                 dispatch(success(data.verifiedData))
             }
            
-        }).catch((err) => {
+        }).catch(() => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response.data))
+            dispatch(failure())
         })
 
     }
     function success(data) { return { type: profileConstants.GET_IDENTIFY_TUTOR_SUCCESS, payload : data} }
-    function failure(err) { return { type: profileConstants.GET_IDENTIFY_TUTOR_FAILURE, payload: err } }
+    function failure() { return { type: profileConstants.GET_IDENTIFY_TUTOR_FAILURE, payload: true } }
 }
 
 
@@ -150,9 +150,9 @@ function updateIdentifyTutor(data) {
                 alert: typeModal.corrent
             }))
 
-        }).catch((err) => {
+        }).catch(() => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response.data))
+            dispatch(failure())
             dispatch(modalAction.openModal({
                 text: "แก้ไขข้อมูลไม่สำเร็จ",
                 size: sizeModal.small,
@@ -162,7 +162,7 @@ function updateIdentifyTutor(data) {
 
     }
     function success() { return { type: profileConstants.UPDATE_IDENTIFY_TUTOR_SUCCESS} }
-    function failure(err) { return { type: profileConstants.UPDATE_IDENTIFY_TUTOR_FAILURE, payload: err } }
+    function failure() { return { type: profileConstants.UPDATE_IDENTIFY_TUTOR_FAILURE, payload: true } }
 }
 
 
@@ -184,9 +184,9 @@ function createIdentifyTutor(data) {
                 alert: typeModal.corrent,
             }))
 
-        }).catch((err) => {
+        }).catch(() => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response.data))
+            dispatch(failure())
             dispatch(modalAction.openModal({
                 text: "แก้ไขข้อมูลไม่สำเร็จ",
                 size: sizeModal.small,
@@ -196,7 +196,7 @@ function createIdentifyTutor(data) {
 
     }
     function success() { return { type: profileConstants.CREATE_IDENTIFY_TUTOR_SUCCESS} }
-    function failure(err) { return { type: profileConstants.CREATE_IDENTIFY_TUTOR_FAILURE, payload: err } }
+    function failure() { return { type: profileConstants.CREATE_IDENTIFY_TUTOR_FAILURE, payload: true } }
 }
 
 function setAddress(address) {
@@ -213,13 +213,13 @@ function setAddress(address) {
                 dispatch(getAddress())
             })
 
-            .catch(err => {
+            .catch(() => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response.data.message.message))
+                dispatch(failure())
             })
     }
     function success() { return { type: profileConstants.SET_ADDRESS_SUCCESS } }
-    function failure(err) { return { type: profileConstants.SET_ADDRESS_FAILURE, payload: err } }
+    function failure() { return { type: profileConstants.SET_ADDRESS_FAILURE, payload: true } }
 }
 
 function getAddress() {
@@ -250,13 +250,13 @@ function getAddress() {
                 }
                 dispatch(success(address))
             })
-            .catch(err => {
+            .catch(() => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response.data.message))
+                dispatch(failure())
             })
     }
     function success(data) {  return { type: profileConstants.GET_ADDRESS_SUCCESS, payload: data } }
-    function failure(err) { return { type: profileConstants.GET_ADDRESS_FAILURE, payload: err } }
+    function failure() { return { type: profileConstants.GET_ADDRESS_FAILURE, payload: true } }
 }
 
 

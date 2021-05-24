@@ -4,7 +4,6 @@ const initialState = {
     isAuthenticated: false ,
     role : 4 , 
     loading : false ,
-    error : false,
     profile : null,
     email : null
 }

@@ -19,9 +19,9 @@ function updatefflineCourse(id, data) {
                     alert: typeModal.corrent,
                     afterClose: `/tutor/course/${id}`
                 }))
-            }).catch(err => {
+            }).catch(() => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response.data))
+                dispatch(failure())
                 dispatch(modalAction.openModal({
                     text: "แก้ไขคอร์สเรียนไม่สำเร็จ",
                     size: sizeModal.small,
@@ -31,7 +31,7 @@ function updatefflineCourse(id, data) {
     }
 
     function success() { return { type: offlineCourseConstants.UPDATE_OFFLINE_COURSE_SUCCESS } }
-    function failure(err) { return { type: offlineCourseConstants.UPDATE_OFFLINE_COURSE_FAILURE, payload: err } }
+    function failure() { return { type: offlineCourseConstants.UPDATE_OFFLINE_COURSE_FAILURE, payload: true } }
 }
 
 
@@ -48,9 +48,9 @@ function createOfflineCourse(data){
                 alert: typeModal.corrent,
                 afterClose: "/tutor/course"
             }))
-        }).catch(err => {
+        }).catch(() => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response.data))
+            dispatch(failure())
             dispatch(modalAction.openModal({
                 text: "สร้างคอร์สเรียนไม่สำเร็จ",
                 size: sizeModal.small,
@@ -61,7 +61,7 @@ function createOfflineCourse(data){
     }
 
     function success() { return { type: offlineCourseConstants.CREATE_OFFLINE_COURSE_SUCCESS } }
-    function failure(err) { return { type: offlineCourseConstants.CREATE_OFFLINE_COURSE_FAILURE, payload: err } }
+    function failure() { return { type: offlineCourseConstants.CREATE_OFFLINE_COURSE_FAILURE, payload: true } }
 }
 
 function getOfflineCourse(id) {
@@ -75,14 +75,14 @@ function getOfflineCourse(id) {
                     dispatch(loadingActions.stopLoading())
                 }
             })
-            .catch((err) => {
+            .catch(() => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response.data))
+                dispatch(failure())
             })
     }
 
     function success(course) { return { type: offlineCourseConstants.GET_OFFLINE_COURSE_SUCCESS, payload: course } }
-    function failure(err) { return { type: offlineCourseConstants.GET_OFFLINE_COURSE_FAILURE, payload: err } }
+    function failure() { return { type: offlineCourseConstants.GET_OFFLINE_COURSE_FAILURE, payload: true } }
 }
 
 function enRollOfflineCourse(id) {
@@ -93,14 +93,14 @@ function enRollOfflineCourse(id) {
                 dispatch(success())
                 dispatch(loadingActions.stopLoading())
             })
-            .catch(err => {
-                dispatch(failure(err.response.data))
+            .catch(() => {
+                dispatch(failure())
                 dispatch(loadingActions.stopLoading())
             })
     }
 
     function success(course) { return { type: offlineCourseConstants.ENROLL_OFFLINE_COURSE_SUCCESS, payload: course } }
-    function failure(err) { return { type: offlineCourseConstants.ENROLL_OFFLINE_COURSE_FAILURE, payload: err } }
+    function failure() { return { type: offlineCourseConstants.ENROLL_OFFLINE_COURSE_FAILURE, payload: true } }
 }
 
 
@@ -115,15 +115,15 @@ function getEnrollOfflineCourse(id) {
                     dispatch(loadingActions.stopLoading())
                 }
             })
-            .catch(err => {
-                dispatch(failure(err.response.data))
+            .catch(() => {
+                dispatch(failure())
                 dispatch(loadingActions.stopLoading())
 
             })
     }
 
     function success(data) { return { type: offlineCourseConstants.GET_ENROLL_OFFLINE_COURSE_SUCCESS, payload: data } }
-    function failure(err) { return { type: offlineCourseConstants.GET_ENROLL_OFFLINE_COURSE_FAILURE, payload: err } }
+    function failure() { return { type: offlineCourseConstants.GET_ENROLL_OFFLINE_COURSE_FAILURE, payload: true } }
 }
 
 function acceptEnrollOfflineCourse(idCourse, learnerid, status) {
@@ -144,8 +144,8 @@ function acceptEnrollOfflineCourse(idCourse, learnerid, status) {
                 alert: typeModal.corrent
             }))
         })
-            .catch(err => {
-                dispatch(failure(err.response.data))
+            .catch(() => {
+                dispatch(failure())
                 dispatch(loadingActions.stopLoading())
                 dispatch(modalAction.openModal({
                     text: "จัดการการอนุมัติเข้าเรียนไม่สำเร็จ",
@@ -156,7 +156,7 @@ function acceptEnrollOfflineCourse(idCourse, learnerid, status) {
     }
 
     function success() { return { type: offlineCourseConstants.ACCEPT_ENROLL_OFFLINE_COURSE_SUCCESS } }
-    function failure(err) { return { type: offlineCourseConstants.ACCEPT_ENROLL_OFFLINE_COURSE_FAILURE, payload: err } }
+    function failure() { return { type: offlineCourseConstants.ACCEPT_ENROLL_OFFLINE_COURSE_FAILURE, payload: true } }
 }
 
 
@@ -171,14 +171,14 @@ function getLearnerOfflineCourse() {
                     dispatch(loadingActions.stopLoading())
                 }
             })
-            .catch((err) => {
+            .catch(() => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response.data))
+                dispatch(failure())
             })
     }
 
     function success(data) { return { type: offlineCourseConstants.GET_LEARNER_OFFLINE_COURSE_SUCCESS, payload: data } }
-    function failure(err) { return { type: offlineCourseConstants.GET_LEARNER_OFFLINE_COURSE_FAILURE, payload: err } }
+    function failure() { return { type: offlineCourseConstants.GET_LEARNER_OFFLINE_COURSE_FAILURE, payload: true } }
 }
 
 

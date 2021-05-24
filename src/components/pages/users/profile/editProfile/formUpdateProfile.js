@@ -29,10 +29,5 @@ export const formUpdateProfile = (type, data) => {
         )
         formData.append("introduction", data.introduce)
     }
-
-    for (let [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
-    }
-
     return formData
 }

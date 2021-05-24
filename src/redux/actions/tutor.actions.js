@@ -10,32 +10,36 @@ function getTestings(id) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.get(`/tutor/${id}/testings`).then((res) => {
-            const data = res.data.data
-            dispatch(success(data))
+            if (res.data.success) {
+                const data = res.data.data
+                dispatch(success(data))
+            }
             dispatch(loadingActions.stopLoading())
-        }).catch(err => {
-            dispatch(failure(err.response.data))
+        }).catch(() => {
+            dispatch(failure())
             dispatch(loadingActions.stopLoading())
         })
     }
     function success(data) { return { type: tutorConstants.GET_LIST_TESTING_SUCCESS, payload: data } }
-    function failure(err) { return { type: tutorConstants.GET_LIST_TESTING_FAILURE, payload: err } }
+    function failure() { return { type: tutorConstants.GET_LIST_TESTING_FAILURE, payload: true } }
 }
 
 function getEducations(id) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.get(`/tutor/${id}/educations`).then((res) => {
-            const data = res.data.data
-            dispatch(success(data))
+            if (res.data.success) {
+                const data = res.data.data
+                dispatch(success(data))
+            }
             dispatch(loadingActions.stopLoading())
-        }).catch(err => {
-            dispatch(failure(err.response.data))
+        }).catch(() => {
+            dispatch(failure())
             dispatch(loadingActions.stopLoading())
         })
     }
     function success(data) { return { type: tutorConstants.GET_LIST_EDUCATION_SUCCESS, payload: data } }
-    function failure(err) { return { type: tutorConstants.GET_LIST_EDUCATION_FAILURE, payload: err } }
+    function failure() { return { type: tutorConstants.GET_LIST_EDUCATION_FAILURE, payload: true } }
 }
 
 function getTesting(id) {
@@ -44,31 +48,31 @@ function getTesting(id) {
         await apiURL.apiGetA.get(`/tutor/testing/${id}`).then((res) => {
             const data = res.data.data
             let dataTesting = {}
-            if(data){
+            if (data) {
                 dataTesting = {
-                    exam : data.exam.examText,
-                    subject : data.exam.subjectText,
-                    score : data.exam.score,
-                    year : "2000",
-                    image : [
-                        data.verifiedData.documentUrl1 ,
-                        data.verifiedData.documentUrl2 ,
+                    exam: data.exam.examText,
+                    subject: data.exam.subjectText,
+                    score: data.exam.score,
+                    year: "2000",
+                    image: [
+                        data.verifiedData.documentUrl1,
+                        data.verifiedData.documentUrl2,
                         data.verifiedData.documentUrl3
                     ]
                 }
             }
             dispatch(success({
-                success : true ,
-                data : dataTesting
+                success: true,
+                data: dataTesting
             }))
             dispatch(loadingActions.stopLoading())
-        }).catch(err => {
-            dispatch(failure(err.response.data))
+        }).catch(() => {
+            dispatch(failure())
             dispatch(loadingActions.stopLoading())
         })
     }
     function success(data) { return { type: tutorConstants.GET_TESTING_SUCCESS, payload: data } }
-    function failure(err) { return { type: tutorConstants.GET_TESTING_FAILURE, payload: err } }
+    function failure() { return { type: tutorConstants.GET_TESTING_FAILURE, payload: true } }
 }
 
 function getEducation(id) {
@@ -77,32 +81,32 @@ function getEducation(id) {
         await apiURL.apiGetA.get(`/tutor/education/${id}`).then((res) => {
             const data = res.data.data
             let dataEducation = {}
-            if(data){
+            if (data) {
                 dataEducation = {
-                    grade :"ม.6",
-                    branch : data.educationData.branchText,
-                    institute : data.educationData.instituteText,
-                    gpax : data.educationData.gpax,
-                    status : data.educationData.status,
-                    image : [
-                        data.verifiedData.documentUrl1 ,
-                        data.verifiedData.documentUrl2 ,
+                    grade: "ม.6",
+                    branch: data.educationData.branchText,
+                    institute: data.educationData.instituteText,
+                    gpax: data.educationData.gpax,
+                    status: data.educationData.status,
+                    image: [
+                        data.verifiedData.documentUrl1,
+                        data.verifiedData.documentUrl2,
                         data.verifiedData.documentUrl3
                     ]
                 }
             }
             dispatch(success({
-                success : true ,
-                data : dataEducation
+                success: true,
+                data: dataEducation
             }))
             dispatch(loadingActions.stopLoading())
-        }).catch(err => {
-            dispatch(failure(err.response.data))
+        }).catch(() => {
+            dispatch(failure())
             dispatch(loadingActions.stopLoading())
         })
     }
     function success(data) { return { type: tutorConstants.GET_EDUCATION_SUCCESS, payload: data } }
-    function failure(err) { return { type: tutorConstants.GET_EDUCATION_FAILURE, payload: err } }
+    function failure() { return { type: tutorConstants.GET_EDUCATION_FAILURE, payload: true } }
 }
 
 function createTesting(data, profile) {
@@ -119,10 +123,10 @@ function createTesting(data, profile) {
                 text: "เพ่ิมข้อมูลการสอบสำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose : `/tutor/${profile}`
+                afterClose: `/tutor/${profile}`
             }))
-        }).catch(err => {
-            dispatch(failure(err.response.data))
+        }).catch(() => {
+            dispatch(failure())
             dispatch(loadingActions.stopLoading())
             dispatch(modalAction.openModal({
                 text: "เพ่ิมข้อมูลการสอบไม่สำเร็จ",
@@ -132,7 +136,7 @@ function createTesting(data, profile) {
         })
     }
     function success() { return { type: tutorConstants.CREATE_TESTING_SUCCESS } }
-    function failure(err) { return { type: tutorConstants.CREATE_TESTING_FAILURE, payload: err } }
+    function failure() { return { type: tutorConstants.CREATE_TESTING_FAILURE, payload: true } }
 }
 
 function createEducation(data, profile) {
@@ -149,10 +153,10 @@ function createEducation(data, profile) {
                 text: "เพิ่มข้อมูลการศึกษาสำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose : `/tutor/${profile}`
+                afterClose: `/tutor/${profile}`
             }))
-        }).catch(err => {
-            dispatch(failure(err.response.data))
+        }).catch(() => {
+            dispatch(failure())
             dispatch(loadingActions.stopLoading())
             dispatch(modalAction.openModal({
                 text: "เพิ่มข้อมูลการศึกษาไม่สำเร็จ",
@@ -162,7 +166,7 @@ function createEducation(data, profile) {
         })
     }
     function success() { return { type: tutorConstants.CREATE_EDUCATION_SUCCESS } }
-    function failure(err) { return { type: tutorConstants.CREATE_EDUCATION_FAILURE, payload: err } }
+    function failure() { return { type: tutorConstants.CREATE_EDUCATION_FAILURE, payload: true } }
 }
 
 function updateTesting(data, id, profile) {
@@ -179,10 +183,10 @@ function updateTesting(data, id, profile) {
                 text: "แก้ไขข้อมูลการสอบสำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose : `/tutor/${profile}`
+                afterClose: `/tutor/${profile}`
             }))
-        }).catch(err => {
-            dispatch(failure(err.response.data))
+        }).catch(() => {
+            dispatch(failure())
             dispatch(loadingActions.stopLoading())
             dispatch(modalAction.openModal({
                 text: "แก้ไขข้อมูลการสอบไม่สำเร็จ",
@@ -192,7 +196,7 @@ function updateTesting(data, id, profile) {
         })
     }
     function success() { return { type: tutorConstants.UPDATE_TESTING_SUCCESS } }
-    function failure(err) { return { type: tutorConstants.UPDATE_TESTING_FAILURE, payload: err } }
+    function failure() { return { type: tutorConstants.UPDATE_TESTING_FAILURE, payload: true } }
 }
 
 function updateEducation(data, id, profile) {
@@ -209,10 +213,10 @@ function updateEducation(data, id, profile) {
                 text: "เพิ่มข้อมูลการศึกษาสำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose : `/tutor/${profile}`
+                afterClose: `/tutor/${profile}`
             }))
-        }).catch(err => {
-            dispatch(failure(err.response.data))
+        }).catch(() => {
+            dispatch(failure())
             dispatch(loadingActions.stopLoading())
             dispatch(modalAction.openModal({
                 text: "เพิ่มข้อมูลการศึกษาไม่สำเร็จ",
@@ -222,7 +226,7 @@ function updateEducation(data, id, profile) {
         })
     }
     function success() { return { type: tutorConstants.UPDATE_EDUCATION_SUCCESS } }
-    function failure(err) { return { type: tutorConstants.UPDATE_EDUCATION_FAILURE, payload: err } }
+    function failure() { return { type: tutorConstants.UPDATE_EDUCATION_FAILURE, payload: true } }
 }
 
 
@@ -238,8 +242,8 @@ function deleteTesting(id, auth) {
                 size: sizeModal.small,
                 alert: typeModal.corrent
             }))
-        }).catch(err => {
-            dispatch(failure(err.response))
+        }).catch(() => {
+            dispatch(failure())
             dispatch(modalAction.openModal({
                 text: "ลบข้อมูลการสอบไม่สำเร็จ",
                 size: sizeModal.small,
@@ -249,10 +253,10 @@ function deleteTesting(id, auth) {
         })
     }
     function success() { return { type: tutorConstants.DELETE_TESTING_SUCCESS } }
-    function failure(err) { return { type: tutorConstants.DELETE_TESTING_FAILURE, payload: err } }
+    function failure() { return { type: tutorConstants.DELETE_TESTING_FAILURE, payload: true } }
 }
 
-function deleteEducation(id,auth) {
+function deleteEducation(id, auth) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.delete(`/tutor/education/${id}`).then(() => {
@@ -264,8 +268,8 @@ function deleteEducation(id,auth) {
                 size: sizeModal.small,
                 alert: typeModal.corrent
             }))
-        }).catch(err => {
-            dispatch(failure(err.response))
+        }).catch(() => {
+            dispatch(failure())
             dispatch(modalAction.openModal({
                 text: "ลบข้อมูลการศึกษาไม่สำเร็จ",
                 size: sizeModal.small,
@@ -275,7 +279,7 @@ function deleteEducation(id,auth) {
         })
     }
     function success() { return { type: tutorConstants.DELETE_EDUCATION_SUCCESS } }
-    function failure(err) { return { type: tutorConstants.DELETE_EDUCATION_FAILURE, payload: err } }
+    function failure() { return { type: tutorConstants.DELETE_EDUCATION_FAILURE, payload: true } }
 }
 
 
@@ -291,14 +295,14 @@ function getListOfflineCourse(id) {
                     dispatch(loadingActions.stopLoading())
                 }
             })
-            .catch(err => {
-                dispatch(failure(err.response.data))
+            .catch(() => {
+                dispatch(failure())
                 dispatch(loadingActions.stopLoading())
             })
     }
 
     function success(course) { return { type: tutorConstants.GET_LIST_OFFLINE_COURSE_SUCCESS, payload: course } }
-    function failure(err) { return { type: tutorConstants.GET_LIST_OFFLINE_COURSE_FAILURE, payload: err } }
+    function failure() { return { type: tutorConstants.GET_LIST_OFFLINE_COURSE_FAILURE, payload: true } }
 }
 
 function getProfileTutor(id) {
@@ -311,14 +315,14 @@ function getProfileTutor(id) {
                     dispatch(success(data))
                     dispatch(loadingActions.stopLoading())
                 }
-            }).catch(err => {
-                dispatch(failure(err.response.data))
+            }).catch(() => {
+                dispatch(failure())
                 dispatch(loadingActions.stopLoading())
             })
     }
 
     function success(data) { return { type: tutorConstants.GET_TUTOR_PROFILE_SUCCESS, payload: data } }
-    function failure(err) { return { type: tutorConstants.GET_TUTOR_PROFILE_FAILURE, payload: err } }
+    function failure() { return { type: tutorConstants.GET_TUTOR_PROFILE_FAILURE, payload: true } }
 }
 
 function clearListOfflineCourse() {

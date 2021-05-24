@@ -20,7 +20,6 @@ import resizeImage from "../../../../defaultFunction/resizeImage";
 import { defaultValue } from "../../../../defaultValue";
 import Header from "../../../../headerMobile/Header";
 import { useParams } from "react-router";
-import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 import findKeyObject from "../../../../defaultFunction/findKeyObject";
 
 export default function CreateCourseOnline() {
@@ -82,7 +81,8 @@ export default function CreateCourseOnline() {
       formdata.append("name", data.name)
       formdata.append("grade", defaultValue.grade[data.grade])
       formdata.append("subject", defaultValue.subject[data.subject])
-      if (!isEmpty(image?.file)) {
+
+      if (image.file) {
         formdata.append("image", image.file)
       }
 
@@ -91,7 +91,6 @@ export default function CreateCourseOnline() {
       } else {
         dispatch(onlineCourseActions.updateOnlineCourse(formdata, id))
       }
-
     }
   }
   return (

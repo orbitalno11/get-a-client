@@ -15,17 +15,17 @@ import isMobile from "../../../../isMobile/isMobile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import FormEnroll from "../offlineCourse/FormEnroll";
+import FormEnroll from "./FormEnroll";
 import { SkeletonComponent } from "../../../../loading/SkeletonComponent";
 import { trackImpressCourseDetail } from "../../../../../analytic/Analytic";
-import isEmpty from "../../../../defaultFunction/checkEmptyObject";
+import isEmpty from "../../../../defaultFunction/checkEmptyObject"
 const { useBreakpoint } = Grid;
 
 export default function OfflineCourse() {
-    const { onlineCourse, offlineCourse, auth } = useSelector(state => state)
+    const { offlineCourse, onlineCourse, auth } = useSelector(state => state)
     const { reviews } = useSelector(state => state.review)
     const [course, setCourse] = useState(null)
-    const owner = (course && auth) && (auth.profile === course.owner.id)
+    const owner = (!isEmpty(course) && auth) && (auth.profile === course.owner.id)
     const [showReview, setShowReview] = useState(true)
     const dispatch = useDispatch()
     const screens = useBreakpoint();
@@ -244,7 +244,7 @@ export default function OfflineCourse() {
 
                             )
                             }
-                            <Link to={`/tutor/course/${idCourse}/edit`}>
+                            <Link to={`/tutor/${params.type}/${idCourse}/edit`}>
                                 <button className={style.rightbottom} >แก้ไข</button>
                             </Link>
                         </div>

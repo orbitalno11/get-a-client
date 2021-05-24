@@ -92,14 +92,16 @@ export default function AllReview() {
                         }
 
                         {
-                            (owner && screens.lg) && (
+                            (owner && screens.md) && (
                                 <Fragment>
                                     { type === "course" ? (
                                         <Link to={`/tutor/course/${course.id}/enroll`}>
                                             <Button className="buttonColor backgroundOrange" shape="round" size="large" style={paddingButton}>อนุมัติคำขอ</Button>
                                         </Link>
                                     ) : (
-                                        <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>จัดการบทเรียน</Button>
+                                        <Link to={`/tutor/online/${id}`}>
+                                            <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>จัดการบทเรียน</Button>
+                                        </Link>     
                                     )
                                     }
                                     <Link to={`/tutor/course/${course.id}/edit`}>

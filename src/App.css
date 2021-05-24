@@ -105,6 +105,10 @@ input :focus{
   background-color: var(--red-color) !important;
 }
 
+.backgroundFavorite{
+  background-color: var(--favorite--color) !important;
+}
+
 /* General */
 
 /* Nav Menu */

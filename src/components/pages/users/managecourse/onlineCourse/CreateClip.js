@@ -174,6 +174,7 @@ export default function AddClip() {
                 </Col>
               )
             }
+            
             <Col xl={24} md={24} sm={24} xs={24} align="center" className={style.subProfile}>
               <Button
                 className="buttonColor backgroundOrange"

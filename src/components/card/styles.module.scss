@@ -170,3 +170,19 @@
 .cutText1Line {
   @include cutText(1)
 }
+
+.textLink{
+  @extend .textIcon;
+  cursor: pointer;
+  color : $blue
+}
+
+.textReview{
+  @extend .textNormal;
+  margin-left: 0.6rem;
+}
+
+.textLinkDelete{
+  @extend .textLink;
+  color : $red
+}

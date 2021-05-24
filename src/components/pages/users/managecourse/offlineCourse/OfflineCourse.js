@@ -28,7 +28,7 @@ export default function OfflineCourse() {
     const dispatch = useDispatch()
     const screens = useBreakpoint();
     const params = useParams();
-    const learn_status = false
+    const learn_status = (auth.role === 1 && course) ? course.enrolled : false
     const type = "course"
     const idCourse = params.id
 

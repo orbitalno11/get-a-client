@@ -82,7 +82,7 @@ export default function ManageCourseDetail() {
                   <div key={index} style={{ padding: isOnline ? "0.5rem" : "0rem" }} >
                     <Link to={isOnline ? `/online/${item.id}` : `/course/${item.id}`} >
                       {
-                        <ListCourseTutor data={item} isClip={isOnline ? true : false} />
+                        !isOnline ?  <ListCourseTutor data={item} />  :  <CardLesson data={item} isCourse={true} />
                       }
                     </Link>
                   </div>

@@ -5,7 +5,7 @@ import { onlineCourseConstants } from "../constants"
 import { loadingActions } from "./loading.actions"
 import { modalAction } from "./modal.actions"
 
-// online course
+// start online course
 function createOnlineCourse(data) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
@@ -59,7 +59,7 @@ function updateOnlineCourse(data, id) {
                 dispatch(loadingActions.stopLoading())
                 dispatch(failure(err.response.data))
                 dispatch(modalAction.openModal({
-                    text: "แก้ไขคอร์สเรียนไม่สำเร็จ",
+                    text: "แก้ไขงคอร์สเรียนไม่สำเร็จ",
                     size: sizeModal.small,
                     alert: typeModal.wrong,
                 }))
@@ -84,6 +84,7 @@ function getTutorOnlineCourse(id) {
             .catch((err) => {
                 dispatch(loadingActions.stopLoading())
                 dispatch(failure(err.response.data))
+
             })
     }
 
@@ -114,7 +115,7 @@ function getOnlineCourse(id) {
 }
 
 
-// clip-online course
+// start clip-online course
 function createClipOnlineCourse(data, id) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
@@ -123,33 +124,33 @@ function createClipOnlineCourse(data, id) {
                 "Content-Type": "multipart/form-data",
             }
         }).then(() => {
-                dispatch(loadingActions.stopLoading())
-                dispatch(success())
-                dispatch(modalAction.openModal({
-                    text: "เพิ่มคลิปการสอนสำเร็จ",
-                    size: sizeModal.small,
-                    alert: typeModal.corrent,
-                    afterClose: `/tutor/online/${id}`
-                }))
-            }).catch(err => {
-                dispatch(loadingActions.stopLoading())
-                dispatch(failure(err?.response?.data))
-                dispatch(modalAction.openModal({
-                    text: "เพิ่มคลิปการสอนไม่สำเร็จ",
-                    size: sizeModal.small,
-                    alert: typeModal.wrong,
-                }))
-            })
+            dispatch(loadingActions.stopLoading())
+            dispatch(success())
+            dispatch(modalAction.openModal({
+                text: "เพิ่มคลิปการสอนสำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.corrent,
+                afterClose: `/course/online/${id}/video`
+            }))
+        }).catch(err => {
+            dispatch(loadingActions.stopLoading())
+            dispatch(failure(err?.response?.data))
+            dispatch(modalAction.openModal({
+                text: "เพิ่มคลิปการสอนไม่สำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.wrong,
+            }))
+        })
     }
     function success() { return { type: onlineCourseConstants.CREATE_CLIP_COURSE_SUCCESS } }
     function failure(err) { return { type: onlineCourseConstants.CREATE_CLIP_COURSE_FAILURE, payload: err } }
 }
 
 
-function updateClipOnlineCourse(data, id) {
+function updateClipOnlineCourse(data, courseId, videoId) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post(`/clip/${id}`, data, {
+        await apiURL.apiGetA.put(`/clip/${videoId}`, data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -160,7 +161,7 @@ function updateClipOnlineCourse(data, id) {
                 text: "แก้ไขคลิปการสอนสำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose: `/tutor/online/${id}`
+                afterClose: `/tutor/online/${courseId}/video/${videoId}`
             }))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
@@ -191,12 +192,66 @@ function getClipOnlineCourse(id) {
             .catch((err) => {
                 dispatch(loadingActions.stopLoading())
                 dispatch(failure(err.response.data))
+
             })
     }
 
     function success(data) { return { type: onlineCourseConstants.GET_LIST_CLIP_SUCCESS, payload: data } }
     function failure(err) { return { type: onlineCourseConstants.GET_LIST_CLIP_FAILURE, payload: err } }
 }
+
+function getClip(id) {
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiURL.apiGetA.get(`/clip/${id}`)
+            .then(res => {
+                if (res.data.success) {
+                    const data = res.data.data
+                    dispatch(success(data))
+                    dispatch(loadingActions.stopLoading())
+                }
+            })
+            .catch((err) => {
+                dispatch(loadingActions.stopLoading())
+                dispatch(failure(err.response.data))
+
+            })
+    }
+
+    function success(data) { return { type: onlineCourseConstants.GET_CLIP_SUCCESS, payload: data } }
+    function failure(err) { return { type: onlineCourseConstants.GET_CLIP_FAILURE, payload: err } }
+}
+
+function deleteClip(courseId, videoId) {
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiURL.apiGetA.delete(`/clip/${videoId}`)
+            .then(() => {
+                dispatch(success())
+                dispatch(loadingActions.stopLoading())
+                dispatch(getClipOnlineCourse(courseId))
+                dispatch(modalAction.openModal({
+                    text: "ลบคลิปการสอนสำเร็จ",
+                    size: sizeModal.small,
+                    alert: typeModal.corrent,
+                    afterClose: `/course/online/${courseId}/video`
+                }))
+            })
+            .catch((err) => {
+                dispatch(loadingActions.stopLoading())
+                dispatch(failure(err.response.data))
+                dispatch(modalAction.openModal({
+                    text: "ลบคลิปการสอนไม่สำเร็จ",
+                    size: sizeModal.small,
+                    alert: typeModal.wrong,
+                }))
+            })
+    }
+
+    function success(data) { return { type: onlineCourseConstants.DELETE_CLIP_SUCCESS, payload: data } }
+    function failure(err) { return { type: onlineCourseConstants.DELETE_CLIP_FAILURE, payload: err } }
+}
+
 
 
 function clearListOnlineCourse() {
@@ -212,5 +267,7 @@ export const onlineCourseActions = {
     createClipOnlineCourse,
     updateOnlineCourse,
     updateClipOnlineCourse,
-    getClipOnlineCourse
+    getClipOnlineCourse,
+    getClip,
+    deleteClip
 }

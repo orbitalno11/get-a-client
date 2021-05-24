@@ -1,17 +1,16 @@
 import React from "react"
 import { Image, Row, Col } from "antd";
 import styles from "./styles.module.scss"
-import { faBookReader, faCoins, faClock } from "@fortawesome/free-solid-svg-icons";
+import { faBookReader, faCoins, faVideo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ProfileSample from "../images/profile.webp"
+import vdoSample  from "../images/vdoSample.webp"
 
 export default function CardLesson({ data, isCourse }) {
-
     return (
         <Row className={`${styles.card} ${styles.paddingCard}`} align="middle">
             <Col xs={9} sm={8} md={8} lg={9} xl={9}>
                 <Image
-                    src={data.coverUrl ? data.coverUrl : ProfileSample}
+                    src={data.coverUrl ? data.coverUrl : vdoSample}
                     className={styles.imageClip}
                     preview={false}
                 />
@@ -30,7 +29,7 @@ export default function CardLesson({ data, isCourse }) {
                     } </Col>
                 <Col className={styles.paddingTop} span={24} >
                     
-                    <span><FontAwesomeIcon icon={!isCourse ? faCoins : faClock} className={styles.icon} /> ฟรี</span>
+                    <span><FontAwesomeIcon icon={!isCourse ? faCoins : faVideo} className={styles.icon} /> {!isCourse ? data.cost : data.numberOfVideo}</span>
                 </Col>
             </Col>
         </Row>

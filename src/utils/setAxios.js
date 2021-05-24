@@ -2,8 +2,7 @@ import axios from 'axios';
 import { BASE_API_URL, LONGDO_MAP_URL } from "../config/environmentConfig";
 
 let apiGetA = axios.create({
-    baseURL: BASE_API_URL,
-    timeout: 10000,
+    baseURL: BASE_API_URL
   });
 
 let apiMap = axios.create({

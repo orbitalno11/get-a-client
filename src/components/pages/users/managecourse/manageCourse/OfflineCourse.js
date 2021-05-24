@@ -15,7 +15,7 @@ import isMobile from "../../../../isMobile/isMobile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import FormEnroll from "../offlineCourse/FormEnroll";
+import FormEnroll from "./FormEnroll";
 import { SkeletonComponent } from "../../../../loading/SkeletonComponent";
 import { trackImpressCourseDetail } from "../../../../../analytic/Analytic";
 import isEmpty from "../../../../defaultFunction/checkEmptyObject"
@@ -74,7 +74,7 @@ export default function OfflineCourse() {
                 {
                     (screens.lg && !isOfflineCourse) && (
                         <Fragment>
-                            <Link to={`/tutor/online/${idCourse}`}>
+                            <Link to={`/course/online/${idCourse}/video`}>
                                 <Button
                                     className="buttonColor backgroundOrange"
                                     shape="round"
@@ -83,17 +83,21 @@ export default function OfflineCourse() {
                                     ดูบทเรียน
                                     </Button>
                             </Link>
-                            <Link to={`/tutor/online/${idCourse}/edit`} >
-                                <div style={{ marginTop: "0.5rem" }}>
-                                    <Button
-                                        className="buttonColor backgroundGray"
-                                        shape="round"
-                                        size="middle"
-                                        style={{ width: "100%" }}>
-                                        แก้ไขคอร์สเรียน
-                                </Button>
-                                </div>
-                            </Link>
+                            {
+                                owner && (
+                                    <Link to={`/tutor/online/${idCourse}/edit`} >
+                                        <div style={{ marginTop: "0.5rem" }}>
+                                            <Button
+                                                className="buttonColor backgroundGray"
+                                                shape="round"
+                                                size="middle"
+                                                style={{ width: "100%" }}>
+                                                แก้ไขคอร์สเรียน
+                                    </Button>
+                                        </div>
+                                    </Link>
+                                )
+                            }
                         </Fragment>
                     )
                 }
@@ -104,9 +108,8 @@ export default function OfflineCourse() {
                     <div className={style.TitleCoin}>
                         <FontAwesomeIcon icon={faPhoneAlt} className={style.iconmarker} />
                         {
-                            course ? (
-                                // <span className={style.textNormal}>{course && course.owner.contact.phoneNumber}</span>
-                                <span>xxx-xxxx-xxxx</span>
+                            course?.owner.contact ? (
+                                <span className={style.textNormal}>{course && course.owner.contact.phoneNumber}</span>
                             ) : (
                                 <SkeletonComponent.SkeletonText />
                             )
@@ -203,16 +206,33 @@ export default function OfflineCourse() {
                     }
                 </Row>
                 {
-                    (!learn_status && !screens.lg && screens.md) && (
-                        <div className={style.navbarBottomMD}>
-                            <button className={style.reviewbottom} onClick={() => enrollCourse()}>สมัครเรียน</button>
-                        </div>
+                    (!learn_status && !screens.lg && screens.md && !owner) && (
+                        isOfflineCourse ? (
+                            <div className={style.navbarBottomMD}>
+                                <button className={style.reviewbottom} onClick={() => enrollCourse()}>สมัครเรียน</button>
+                            </div>
+                        ) : (
+                            <div className={style.navbarBottomMD}>
+                                <Link to={`/course/online/${idCourse}/video`}>
+                                    <button className={style.reviewbottom} >ดูบทเรียน</button>
+                                </Link>
+                            </div>
+                        )
+
                     )
                 }
                 {
                     (!learn_status && !screens.md) && (
                         <div className={style.navbarBottom}>
-                            <button className={style.leftbuttom} onClick={() => enrollCourse()}>สมัครเรียน</button>
+                            {isOfflineCourse ? (
+                                <button className={style.leftbuttom} onClick={() => enrollCourse()}>สมัครเรียน</button>
+                            ) : (
+                                <Link to={`/course/online/${idCourse}/video`}>
+                                    <button className={style.leftbuttom} >ดูบทเรียน</button>
+                                </Link>
+                            )
+                            }
+
                             <button className={style.rightbottom} onClick={() => switchComponent(!showReview)}>
                                 {
                                     showReview ? "ถามข้อมูล" : "ความคิดเห็น"
@@ -222,8 +242,8 @@ export default function OfflineCourse() {
                     )
                 }
                 {
-                    (learn_status && isEmpty(myReview)  && !screens.lg ) && (
-                        <div className={screens.md ? style.navbarBottomMD : style.navbarBottom } >
+                    (learn_status && isEmpty(myReview) && !screens.lg) && (
+                        <div className={screens.md ? style.navbarBottomMD : style.navbarBottom} >
                             <button className={style.reviewbottom} onClick={() => handleOpenReviewForm()} >ให้คะแนนการสอนนี้</button>
                         </div>
                     )
@@ -237,7 +257,7 @@ export default function OfflineCourse() {
                                     <button className={style.leftbuttom} >อนุมัติคำขอ</button>
                                 </Link>
                             ) : (
-                                <Link to={`/tutor/online/${idCourse}`}>
+                                <Link to={`/course/online/${idCourse}/video`}>
                                     <button className={style.leftbuttom} >จัดการบทเรียน</button>
                                 </Link>
 

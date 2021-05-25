@@ -1,131 +1,99 @@
 import React, { Fragment } from "react";
-import { Row, Col,Button,Divider } from "antd";
-import { faCoins, faCheck,faTimes } from "@fortawesome/free-solid-svg-icons";
+import { Row, Col, Divider } from "antd";
+import { faTimes, faHourglass, faCheck, faBan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TableList from "./TableList";
+import { useSelector } from "react-redux";
 import style from "../styles.module.scss";
-import isMobile from "../../../../isMobile/isMobile";
+import isEmpty from "../../../../defaultFunction/checkEmptyObject";
+import { color } from "../../../../defaultValue";
+import EmptyImage from "../../../../loading/EmptyImage";
+import { styleComponent } from "../../../../defaultFunction/style";
+import moment from "moment";
 
-export default function RedeemList() {
+export default function RedeemList({ onHandleChange}) {
+
+  const detailRequest = useSelector((state) => state.coin.redeem);
+
+  const statusRedeem = {
+    0: {
+      icon: faHourglass,
+      color: color.yellow
+    },
+    1: {
+      icon: faCheck,
+      color: color.green
+    },
+    3: {
+      icon: faTimes,
+      color: color.red
+    },
+    4: {
+      icon: faBan,
+      color: color.red
+    }
+  }
+
   return (
     <Fragment>
-      {isMobile() ? (
         <div className={style.pageredeemsm}>
-          <div style={{ paddingTop: "1rem" }}>
-            <Row>
-              <Col xs={4} sm={8}>
-                <FontAwesomeIcon icon={faCoins} className={style.Xs} />
-              </Col>
-              <Col xs={16} sm={16}>
-                10,000 เหรียญ
-              </Col>
-            </Row>
-            <Row style={{ paddingTop: "0.3rem" }}>
-              <Col xs={4} sm={8}>
-                <span className={style.titleH5}>THB</span>
-              </Col>
-              <Col xs={16} sm={16}>
-                10,000 เหรียญ
-              </Col>
-            </Row>
-            <Row style={{ paddingTop: "0.2rem", marginTop: "-0.5rem" }}>
-              <Col xs={5} sm={8}>
-                วันที่ขอ
-              </Col>
-              <Col xs={16} sm={16}>
-                30/12/2563
-              </Col>
-            </Row>
-            <Row style={{ paddingTop: "0.2rem" }}>
-              <Col xs={9} sm={8}>
-                วันที่พิจารณา
-              </Col>
-              <Col xs={15} sm={16}>
-               04/01/2564
-              </Col>
-            </Row>
-            <Row style={{ paddingTop: "0.2rem" }}>
-              <Col xs={7} sm={8}>
-                วันที่อนุมัติ
-              </Col>
-              <Col xs={16} sm={16}>
-              04/01/2564
-              </Col>
-            </Row>
-          </div>
+          <Row span={24} style={{marginBottom:"1rem"}}>
+              <span className={style.headerOne75}>รายการแลกเหรียญ</span>
+          </Row>
+          {detailRequest && detailRequest.length ? (
           <div>
-            <Row>
-              <Col className={style.allow}>
-                <Button
-                  className="backgroundRed buttonColor"
-                  shape="circle"
-                  icon={
-                    <FontAwesomeIcon icon={faTimes} style={{ color: "white" }} />
-                  }
-                />
-              </Col>
-            </Row>
-          </div>
-          <Divider/>
-          <div style={{ paddingTop: "1rem" }}>
-            <Row>
-              <Col xs={4} sm={8}>
-                <FontAwesomeIcon icon={faCoins} className={style.Xs} />
-              </Col>
-              <Col xs={16} sm={16}>
-                10,000 เหรียญ
-              </Col>
-            </Row>
-            <Row style={{ paddingTop: "0.3rem" }}>
-              <Col xs={4} sm={8}>
-                <span className={style.titleH5}>THB</span>
-              </Col>
-              <Col xs={16} sm={16}>
-                10,000 เหรียญ
-              </Col>
-            </Row>
-            <Row style={{ paddingTop: "0.2rem", marginTop: "-0.5rem" }}>
-              <Col xs={5} sm={8}>
-                วันที่ขอ
-              </Col>
-              <Col xs={16} sm={16}>
-                30/12/2563
-              </Col>
-            </Row>
-            <Row style={{ paddingTop: "0.2rem" }}>
-              <Col xs={9} sm={8}>
-                วันที่พิจารณา
-              </Col>
-              <Col xs={15} sm={16}>
-                04/01/2564
-              </Col>
-            </Row>
-            <Row style={{ paddingTop: "0.2rem" }}>
-              <Col xs={7} sm={8}>
-                วันที่อนุมัติ
-              </Col>
-              <Col xs={16} sm={16}>
-              04/01/2564
-              </Col>
-            </Row>
-          </div>
-          <div>
-            <Row>
-              <Col className={style.allow}>
-                <Button
-                  className="backgroundGreen buttonColor"
-                  shape="circle"
-                  icon={
-                    <FontAwesomeIcon icon={faCheck} style={{ color: "white" }} />
-                  }
-                />
-              </Col>
-            </Row>
-          </div>
+            {!isEmpty(detailRequest) &&
+            detailRequest.sort((a, b) => (b.requestDate > a.requestDate) ? 1 : -1).map((data, index) => (
+              <div style={{ paddingTop: "0.5rem" }} key={index}  onClick={() => onHandleChange(true,data.id,data.status)}>
+                <Row>
+                  <Col xs={3} sm={2} style={{paddingTop:"0.4rem"}}>
+                      <styleComponent.iconCoin/>
+                  </Col>
+                  <Col xs={16} sm={15}>
+                  <span className={style.textOne5}>{data && data.amountCoin}&nbsp; เหรียญ</span>
+                  </Col>
+                  <Col align="end" xs={3} sm={2} >
+                    <button 
+                        className={style.buttonCircle} 
+                        style={styleComponent.buttonFull((!isEmpty(data.status) ) ? statusRedeem[data.status].color : color.blue)}>
+                            <FontAwesomeIcon icon={statusRedeem[data.status].icon} className={style.iconSmall} />
+                    </button> 
+                  </Col>
+                </Row>
+                <Row style={{ paddingTop: "0.3rem" }}>
+                  <Col xs={4} sm={8}>
+                    <span className={style.headerOne5}>THB</span>
+                  </Col>
+                  <Col xs={16} sm={16}>
+                  <span className={style.textOne5}>{data && data.amount}</span>
+                  </Col>
+                </Row>
+                <Row style={{ marginTop: "0.2rem" }}>
+                  <Col xs={24} sm={8}>
+                    <span className={style.textOne5}>วันที่ขอ : {moment(data.requestDate).format("DD/MM/YYYY")}</span>
+                  </Col>
+                </Row>
+                <Row style={{ paddingTop: "0.2rem" }}>
+                  <Col xs={24} sm={8}>
+                  {data.approveDate ? (
+                    <span className={style.textOne5}>วันที่พิจารณา : {moment(data.approveDate).format("DD/MM/YYYY")}</span>               
+                  ) : (  
+                    <span className={style.textOne5}>วันที่พิจารณา : - </span>
+                  )}
+                  </Col>
+                </Row>
+                <Divider/>
+              </div>
+              ))}
+            </div>
+            ) : (
+              <div align="center">
+                <EmptyImage size="default" />
+                  <p className={style.textNormal}>
+                       ยังไม่มีข้อมูลการแลกเหรียญ&nbsp;
+                  </p>
+              </div>
+            )}
         </div>
-      ) : (
-        <TableList />
-      )}
     </Fragment>
   );
 }

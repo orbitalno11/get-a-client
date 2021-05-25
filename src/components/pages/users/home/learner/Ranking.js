@@ -99,7 +99,7 @@ export default function Ranking() {
             backgroundColor: color,
         })
     }
-
+    
     return (
         <Fragment>
             {

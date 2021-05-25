@@ -1,118 +1,162 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment} from "react";
 import { Row, Col, Button } from "antd";
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TableHistory from "./TableHistory";
 import style from "../styles.module.scss";
 import isMobile from "../../../../isMobile/isMobile";
-import { useDispatch,useSelector  } from "react-redux";
-import { coinAction } from "../../../../../redux/actions";
+import { useSelector } from "react-redux";
+import Loading from "../../../../loading/Loading";
+import { styleComponent } from "../../../../defaultFunction/style";
+import { SkeletonComponent } from "../../../../loading/SkeletonComponent"
+import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 
-export default function RedeemDetail() {
-  const dispatch = useDispatch();
+export default function RedeemDetail({onHandleChange}) {
+  const { loading } = useSelector((state) => state);
 
-  const list = useSelector((state) => state.coin.rateCoin);
+  const rateRedeem = useSelector((state) => state.coin.rateCoin);
+  const balanceCoin = useSelector((state) => state.coin.balance);
 
-  useEffect(() => {
-    dispatch(coinAction.getCoinRatesTutor());
-  }, []);
+  const bahtStd = !isEmpty(rateRedeem) && rateRedeem[0].baht
+  const coinStd = !isEmpty(rateRedeem) && rateRedeem[0].coin
+
+
+  const amount = balanceCoin&& balanceCoin.amount
+
+  const bahtTranfer = ((Number(amount) * Number(bahtStd))/Number(coinStd)).toFixed(2)
+
+  const bahtShow = bahtTranfer && bahtTranfer.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  const amountShow = Number(amount).toLocaleString()
+
 
   return (
     <Fragment>
-      {isMobile() ? (
-        <div className={style.pageredeemsm}>
-          <div style={{ paddingTop: "1.5rem" }}>
-            <span className={style.titleH5}>คุณมี</span>
-            <Row className={style.subredeem2}>
-              <Col xs={4} sm={3}>
-                <FontAwesomeIcon icon={faCoins} className={style.redeem} />
-              </Col>
-              <Col xs={19} sm={19}>
-                100,000 เหรียญ
-              </Col>
-            </Row>
-            <span className={style.titleH5} style={{ paddingTop: "1.8rem" }}>
-              สามารถแลกเป็นเงิน
-            </span>
-            <Row className={style.subredeem}>
-              <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                THB 50,000
-              </Col>
-            </Row>
-            <Row style={{ paddingTop: "1.8rem" }}>
-              <Col xs={8} sm={6}>
-                <span className={style.titleH5}>อัตราแลก</span>
-              </Col>
-              <Col xs={4} sm={3}>
-                <FontAwesomeIcon icon={faCoins} className={style.Xs} />
-              </Col>
-              {list &&list
-                  .map((data, index) => (
-                    <Col xs={10} sm={9} key={index}>
-                       {data && data.coin} : {data && data.baht} THB
+          {loading.loading && <Loading />}
+          {isMobile() ? (
+            <div className={style.paddingbody} style={{width:"100%"}}>
+                <Row className={style.marginTop01}>
+                  <Col span={24}>
+                    <span className={style.headerOne5}>คุณมี</span>
+                  </Col>
+                </Row>
+                <Row className={style.centerPage}>
+                  <Col xs={3} sm={3}>
+                      <styleComponent.iconCoin size="medium" />
+                  </Col> 
+                  { balanceCoin ? (                
+                  <Col>
+                    <span className={style.headerTwo}>{balanceCoin.amount}</span>
+                  </Col>
+                  ):(
+                    <SkeletonComponent.SkeletonText size="default"/>
+                  )}                
+                </Row>
+                <Row className={style.marginTop01}>
+                  <Col span={24}>
+                    <span className={style.headerOne5}>สามารถแลกเป็นเงิน</span>
+                  </Col>                 
+                </Row>
+                <Row className={style.marginTop01}>
+                { (balanceCoin&&rateRedeem) ? (
+                  <Col span={24} align="center">
+                    <span className={style.headerTwo}>THB {bahtShow}</span>
+                  </Col>
+                  ):(
+                    <Col xs={6} sm={6} align="center">
+                        <SkeletonComponent.SkeletonText/>
                     </Col>
-                  ))}
-            </Row>
-            <Row className={style.alignCenterBtn}>
-              <Button
-                className="backgroundGreen buttonColor"
-                shape="round"
-                size="middle"
-                style={{ width: "100px" }}
-              >
-                แลกเหรียญ
-              </Button>
-            </Row>
-          </div>
-        </div>
-      ) : (
-        <div className={style.flexredeem}>
-          <div style={{ paddingTop: "1rem", paddingLeft: "20%" }}>
-            <span className={style.titleH5}>คุณมี</span>
-            <Row className={style.subredeem}>
-              <Col xs={5} sm={5} md={5} lg={5} xl={5}>
-                <FontAwesomeIcon icon={faCoins} className={style.redeem} />
-              </Col>
-              <Col xs={19} sm={19} md={19} lg={19} xl={19}>
-                100,000 เหรียญ
-              </Col>
-            </Row>
-            <Row style={{ paddingTop: "1.5rem" }}>
-              <Col xs={10} sm={10} md={10} lg={10} xl={9}>
-                <span className={style.titleH5}>อัตราแลก</span>
-              </Col>
-              <Col xs={4} sm={4} md={4} lg={4} xl={4}>
-                <FontAwesomeIcon icon={faCoins} className={style.Small} />
-              </Col>
-              {list &&list
-                  .map((data, index) => (
-                    <Col md={10} lg={10} xl={11} key={index}>
-                       {data && data.coin} : {data && data.baht} THB
+                  )}  
+                </Row>
+                <Row style={{ marginTop:"1rem" }}>
+                  <Col xs={6} sm={4}>
+                    <span className={style.headerOne5}>อัตราแลก</span>
+                  </Col>
+                  <Col xs={4} sm={3} className={style.centerPage}>
+                      <styleComponent.iconCoin/>
+                  </Col>
+                  { rateRedeem? (
+                    <Col xs={10} sm={9}>
+                      <span className={style.textOne5}>{coinStd} : {bahtStd} THB</span>
                     </Col>
-                  ))}
-            </Row>
-          </div>
-          <div style={{ paddingTop: "1rem", paddingLeft: "17%" }}>
-            <span className={style.titleH5}>สามารถแลกเป็นเงิน</span>
-            <Row className={style.subredeem}>
-              <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                THB 50,000
-              </Col>
-            </Row>
-            <Row style={{ paddingTop: "1rem", paddingLeft: "14%" }}>
-              <Button
-                className="backgroundGreen buttonColor"
-                shape="round"
-                size="middle"
-                style={{ width: "100px" }}
-              >
-                แลกเหรียญ
-              </Button>
-            </Row>
-          </div>
-          <TableHistory />
-        </div>
-      )}
+                  ):(
+                    <Col xs={6} sm={6}>
+                      <SkeletonComponent.SkeletonText/>
+                    </Col>
+                  )}
+                </Row>
+
+                <Row className={style.centerPage} style={{marginTop:"3rem"}}>
+                  <Button
+                    className="backgroundOrange buttonColor"
+                    shape="round"
+                    size="middle"
+                    onClick={()=>onHandleChange(false)}
+                  >
+                    <span className={style.textOne5}>แลกเหรียญ</span>
+                  </Button>
+                </Row>
+            </div>
+          ) : (
+            <div className={`${style.marginSection} ${style.contentRequest}`}>
+              <Row className={style.paddingTopHead2}>
+                 <Col md={8} lg={11} xl={11}>
+                    <span className={style.textTwo25}>คุณมี</span>
+                 </Col>
+                 <Col md={9} lg={6} xl={6}>
+                    <span className={style.textTwo25}>สามารถแลกเป็นเงิน</span>
+                 </Col>
+                 <Col md={5} lg={4} xl={3} className={`${style.centerPage} ${style.marginRight01}`}>
+                    <Button
+                        className="backgroundOrange buttonColor"
+                        shape="round"
+                        size="middle"
+                        onClick={()=>onHandleChange(false)}
+                      >
+                         <span className={style.headerOne5}>แลกเหรียญ</span>
+                      </Button>
+                 </Col>
+              </Row>
+              <Row className={style.paddingTopHead2}>
+                  <Col md={3} lg={2} xl={2} className={style.paddingCoin}>
+                      <styleComponent.iconCoin size="large" />
+                  </Col>
+                  { balanceCoin ? ( 
+                    <Col md={6} lg={10} xl={10}>
+                        <span className={style.headerThree}>{amountShow}</span>
+                    </Col>
+                  ):(
+                    <Col md={6} lg={10} xl={9} style={{paddingTop:"1.5rem"}}>
+                        <SkeletonComponent.SkeletonText/>
+                    </Col>
+                  )}
+
+                  { (balanceCoin&&rateRedeem) ? (
+                    <Col md={10} lg={10} xl={9}>
+                        <span className={style.headerThree}> THB {bahtShow}</span>
+                    </Col>
+                    ):(
+                    <Col md={10} lg={10} xl={9} style={{paddingTop:"1.5rem"}}>
+                        <SkeletonComponent.SkeletonText/>
+                    </Col>
+                  )}
+              </Row>
+              <Row className={style.paddingTopHead2} style={{paddingBottom:"3rem"}}>
+                  <Col md={7} lg={5} xl={4}>
+                      <span className={style.textTwo25}>อัตราแลกปัจุบัน</span>
+                  </Col>
+                  <Col md={2} lg={2} xl={2} className={style.centerPage} >
+                      <styleComponent.iconCoin size="medium" />
+                  </Col>
+                  { rateRedeem ? (
+                  <Col span={12}>
+                      <span className={style.textTwo25}>{coinStd} : {bahtStd} &nbsp;THB</span>  
+                  </Col>
+                  ):(
+                    <Col span={12} style={{paddingTop:"0.5rem"}}>
+                      <SkeletonComponent.SkeletonText/>
+                    </Col>
+                  )}
+              </Row>
+            </div>
+          )}
     </Fragment>
   );
 }
+

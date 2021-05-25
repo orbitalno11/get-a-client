@@ -206,6 +206,11 @@ $gray3 : "#828282";
     margin-left: 0.5rem;
 }
 
+.a4ImageSm {
+    width: 9rem !important;
+    height: 13rem !important;
+  }
+
 // new font 
 
 .headerFour{
@@ -233,6 +238,11 @@ $gray3 : "#828282";
     font-weight: 700;
 }
 
+.headerTwo{
+    font-size: 2rem;
+    font-weight: 700;
+}
+
 .headerOne75{
     font-size: 1.75rem;
     font-weight: 700;
@@ -240,6 +250,11 @@ $gray3 : "#828282";
 
 .headerOne5{
     font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.headerOne35{
+    font-size: 1.35rem;
     font-weight: 700;
 }
 
@@ -261,6 +276,14 @@ $gray3 : "#828282";
 
 .textOne5{
     font-size: 1.5rem;
+}
+
+.textOne4{
+    font-size: 1.4rem;
+}
+
+.textOne35{
+    font-size: 1.35rem;
 }
 
 .textOne25{
@@ -335,3 +358,20 @@ $gray3 : "#828282";
     line-height: 90%;
 }
   
+// new icon
+
+.iconFour{
+    font-size: 4rem;
+}
+
+.iconOne75{
+    font-size: 1.75rem;
+}
+
+.iconTwo{
+    font-size: 2rem;
+}
+
+.iconTwo5{
+    font-size: 2.5rem;
+}

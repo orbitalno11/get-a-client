@@ -1,27 +1,47 @@
-import { Card, Row, Col, Button} from "antd";
+import { Card, Row, Col, Button,Image } from "antd";
 import React, { Fragment } from "react";
 import style from "../styles.module.scss";
 import { useDispatch } from "react-redux";
-import { modalAction } from "../../../../../redux/actions";
-import ModalComponent from "../../../../modal/ModalComponent"
+import { modalAction,coinAction} from "../../../../../redux/actions";
+import ModalComponent from "../../../../modal/ModalComponent";
 import { sizeModal } from "../../../../modal/SizeModal";
-import { typeModal } from "../../../../modal/TypeModal";
+import moment from "moment"
 
 export default  function RequesDetail({data}) {
+
     const dispatch = useDispatch()
 
-    function ComponentSample (){
+    const handOnApprove = (idRedeem) => {
+      dispatch(coinAction.ApproveRequestsRedeem(idRedeem));
+    };
+
+    const handOnDenied = (idRedeem,user) => {
+      dispatch(coinAction.DeniedRequestsRedeem(idRedeem,user));
+    };
+
+    const ModalDetailRedeem =()=>{
       return (
             <div style={{ paddingLeft: "1rem" }}>
-              <p  className={style.titleH4}>
-                คำขอการถอนเหรียญ
-              </p>
-              <p className={style.textNormal}>ชื่อ : {data && data.firstname}</p>
-              <p className={style.textNormal}>นามสกุล : {data && data.lastname}</p>
-              <p className={style.textNormal}>วันที่ส่งคำขอ : {data && data.date} </p>
-              <p className={style.textNormal}>จำนวนยอด : {data && data.amount} บาท</p>
-              <p className={style.textNormal}>ธนาคาร :{data && data.bank}</p>
-              <p className={style.textNormal}>เลขบัญชี : {data && data.accountNumber}</p>
+              <Row>
+              <Col span={12}>
+                <p  className={style.headerOne5}>
+                  คำขอการถอนเหรียญ
+                </p>
+                <p className={style.textOne35}>ชื่อ : {data && data.owner.firstname}</p>
+                <p className={style.textOne35}>นามสกุล : {data && data.owner.lastname}</p>
+                <p className={style.textOne35}>วันที่ส่งคำขอ : {moment(data && data.requestDate).format("DD/MM/YYYY")} </p>
+                <p className={style.textOne35}>จำนวนยอด : {data && data.amount} บาท</p>
+                <p className={style.textOne35}>ธนาคาร : {data && data.bank.title}</p>
+                <p className={style.textOne35}>เลขบัญชี : {data && data.accountNo}</p>
+                <p className={style.textOne35}>ชื่อบัญชี : {data && data.accountName}</p>
+              </Col>
+              <Col span={7} className={style.imageRedeem}>
+                <Image
+                  width={200}
+                  src={data && data.accountPic}
+                />
+              </Col>
+              </Row>
               <Row className={style.btnRequest}>
                 <Col span={6}> 
                   <Button
@@ -29,9 +49,9 @@ export default  function RequesDetail({data}) {
                       shape="round"
                       size="middle"
                       style={{ width: "100px" }}
-                      onClick={() => alert()}
+                      onClick={() => handOnApprove(data.id)}
                     >
-                      <span className={style.textNormal}>ยอมรับ</span>
+                      <span className={style.textOne25}>ยอมรับ</span>
                     </Button>
                 </Col>
                 <Col span={6}>
@@ -40,26 +60,19 @@ export default  function RequesDetail({data}) {
                     shape="round"
                     size="middle"
                     style={{ width: "100px" }}
-                    onClick={() => dispatch(modalAction.closeModal())}
+                    onClick={() => handOnDenied(data.id,data.owner.id)}
                   >
-                   <span className={style.textNormal}>ปฏิเสธ</span>
+                   <span className={style.textOne25}>ปฏิเสธ</span>
                   </Button>
                 </Col>
               </Row>
           </div>
       )
     }
-    const alert = () => {
-      dispatch(modalAction.openModal({
-          text: "ดำเนินการสำเร็จ",
-          size: sizeModal.small,
-          alert: typeModal.corrent
-      }))
-    }
 
-    const component = () => {
+    const DetailRedeem = () => {
       dispatch(modalAction.openModal({
-          body: <ComponentSample />,
+          body: <ModalDetailRedeem />,
           size: sizeModal.default,
       }))
     }
@@ -73,7 +86,7 @@ export default  function RequesDetail({data}) {
               span={14}
               style={{ marginTop: "-0.5rem", paddingLeft: "0.625rem" }}
             >
-              <span>{data && data.fullNameTaxt}</span>
+              <span className={style.textOne25}>{data && data.owner.fullNameText}</span>
             </Col>
             <Col
               span={10}
@@ -83,14 +96,14 @@ export default  function RequesDetail({data}) {
                 color: "gray",
               }}
             >
-              <span className={style.textSmall}>{data && data.date}</span>
+              <span className={style.textOne}>{moment(data && data.requestDate).format("DD/MM/YYYY")}</span>
             </Col>
           </Row>
           <Row
             span={24}
             style={{ justifyContent: "center", marginTop: "0.625rem" }}
           >
-            <span className={style.textNormal}>{data && data.amount} บาท</span>
+            <span className={style.textOne5}>{data && data.amount} บาท</span>
           </Row>
           <ModalComponent />
           <Row
@@ -102,9 +115,9 @@ export default  function RequesDetail({data}) {
               style={{ width: "11rem" }}
               shape="round"
               size="middle"
-              onClick={() => component()}
+              onClick={() => DetailRedeem()}
             >
-              <span className={style.textNormal}>รายละเอียด</span>
+              <span className={style.textOne35}>รายละเอียด</span>
             </Button>
           </Row>
         </Card>

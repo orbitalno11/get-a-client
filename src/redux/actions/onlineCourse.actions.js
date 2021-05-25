@@ -24,7 +24,6 @@ function createOnlineCourse(data){
             }))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
-            console.log(err.response.data)
             dispatch(failure(err.response.data))
             dispatch(modalAction.openModal({
                 text: "สร้างคอร์สเรียนไม่สำเร็จ",

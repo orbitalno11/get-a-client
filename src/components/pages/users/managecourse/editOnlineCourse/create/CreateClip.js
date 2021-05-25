@@ -61,11 +61,6 @@ export default function CreateClip() {
       formdata.append("grade", defaultValue.grade[data.grade])
       formdata.append("subject", defaultValue.subject[data.subject])
       formdata.append("image", image.file)
-
-      for (let [key, value] of formdata.entries()) {
-        console.log(`${key}: ${value}`);
-      }
-
       dispatch(onlineCourseActions.createOnlineCourse(formdata))
     }
   }

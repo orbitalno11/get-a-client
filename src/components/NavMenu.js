@@ -129,7 +129,7 @@ const NavMenu = () => {
                     </NavLink>
                 </Col>
                 <Col span={4} className="iconMenu">
-                    <NavLink to="/tutor">
+                    <NavLink to="/course">
                         <FontAwesomeIcon icon={faChalkboardTeacher} className="icon" />
                     </NavLink>
                 </Col>

@@ -9,10 +9,6 @@
   float: left;
 }
 
-.marginAccept {
-  margin-top: 1rem;
-}
-
 .imageProfilesmall {
   border-radius: 50% !important;
   height: 6.12rem;
@@ -36,41 +32,12 @@
   margin-left:5% ; 
 }
 
-.marginpage{
-  padding-left: 15%;
-  padding-right: 15%;
-}
-
-.pagecard{
-  display: flex;
-  justify-content:space-between;
-  margin-top: 1rem;
-}
-
-.paddingCardLessonSM{
-  @extend .paddingbody;
-  padding-top: 6rem;
-  padding-bottom: 3.75rem;
-}
-
-.paddingCardLessonXS{
-  padding-top: 6rem;
-  padding-bottom: 3.75rem;
-  padding-left: 3%;
-  padding-right: 3%;
-}
-
 .VDO{
   border: 0.1rem solid rgb(211, 211, 211);
   border-radius: 1rem;
   width: auto;
   height: 10rem;
  @extend .centerPage;
-}
-
-.Cover{
-  @extend .VDO;
-  height: 20rem;
 }
 
 .paddingVDO{
@@ -82,10 +49,6 @@ padding-top: 1rem;
   justify-content: flex-end;
 }
 
-.paddindMd{
-  @extend .horizontalCenter;
-  @extend .paddingmange;
-}
 
 .dividerCourse{
   height: 0.2rem;

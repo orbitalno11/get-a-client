@@ -54,10 +54,10 @@ export default function CardLearnerCourse({data}) {
                 </Col>
             </Row>
             <Row>
-                <Col xs={15} sm={15} md={15} lg={17} xl={17}>
+                <Col span={15}>
                     <span className={styles.textSmall}>{data.timeText}</span>
                 </Col>
-                <Col xs={9} sm={9} md={9} lg={7} xl={7}  align="end">
+                <Col span={9}  align="end">
                     <Button
                         className="buttonColor backgroundBlue"
                         shape="round"

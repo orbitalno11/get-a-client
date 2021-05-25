@@ -27,7 +27,7 @@ function getCoinRatesTutor(){
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.get("/coin/rates?user=2").then(res => {
             dispatch(loadingActions.stopLoading())
-            const coin = res.data.data.filter((item) => item.type === "std")
+            const coin = res.data.data.filter((item) => item.type === "transfer")
             dispatch(success(coin))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())

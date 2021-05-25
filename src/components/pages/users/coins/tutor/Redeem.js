@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Row, Tabs } from "antd";
+import {Tabs } from "antd";
 import style from "../styles.module.scss";
 import RedeemDetail from "./RedeemDetail";
 import RedeemList from "./RedeemList";
@@ -15,15 +15,9 @@ export default function Redeem() {
       {isMobile() && (
         <Header title="จัดการเหรียญ" pageBack="/tutor/1" />
       )}
-      <Tabs defaultActiveKey="1" centered className={style.pageredeem}>
+      <Tabs defaultActiveKey="1" centered className={style.container}>
         <TabPane tab="แลกเหรียญ" key="1">
-          {isMobile() ? (
-            <RedeemDetail />
-          ) : (
-            <Row className={style.horizontalCenter}>
-              <RedeemDetail />
-            </Row>
-          )}
+          <RedeemDetail />
         </TabPane>
         <TabPane tab="รายการเหรียญ" key="2">
           <RedeemList/>

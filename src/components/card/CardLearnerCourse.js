@@ -1,14 +1,13 @@
 import {  Col, Image, Row, Button} from "antd"
 import React from 'react'
 import styles from "./styles.module.scss"
-// import ProfileSample from "../images/profile.webp"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBook,faHourglass,faCheck,faTimes } from "@fortawesome/free-solid-svg-icons"
+import { Link } from 'react-router-dom';
 
 export default function CardLearnerCourse({data}) {
     const styleCard = {
         padding: "0.5rem",
-        // height: "9.8rem"
     }
 
     return (
@@ -22,9 +21,9 @@ export default function CardLearnerCourse({data}) {
                     />
                 </Col>
                 <Col span={16} align="start" style={{ paddingLeft: "2rem" }}>
-                    <span className={styles.titleH5}>{data.name}</span>
-                    <br/>
-                    <span className={styles.textSmall}>
+                    <span className={`${styles.titleH5} ${styles.cutText1Line}`}>{data.name}</span>
+                
+                    <span className={`${styles.textSmall} ${styles.cutText1Line}`}>
                         {data.owner.fullNameText}
                      </span>
                     <br />
@@ -58,13 +57,15 @@ export default function CardLearnerCourse({data}) {
                     <span className={styles.textSmall}>{data.timeText}</span>
                 </Col>
                 <Col span={9}  align="end">
-                    <Button
-                        className="buttonColor backgroundBlue"
-                        shape="round"
-                        size="middle"
-                    >
-                        ให้คะแนน
-                    </Button>
+                    <Link to={`/course/${data.id}`}>
+                        <Button
+                            className="buttonColor backgroundBlue"
+                            shape="round"
+                            size="middle"
+                        >
+                            ให้คะแนน
+                        </Button>
+                    </Link>
                 </Col>
             </Row>
         </div >

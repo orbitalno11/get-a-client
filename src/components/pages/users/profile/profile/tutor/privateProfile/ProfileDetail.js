@@ -3,7 +3,8 @@ import { Image, Button, Badge } from "antd";
 import {
     faMapMarkerAlt,
     faEdit,
-    faBook
+    faBook,
+    faCoins
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../../../styles.module.scss"
@@ -57,21 +58,20 @@ export default function ProfileDetail() {
                     }
                 </NavLink>
             </div>
-            {/* hide the section coin */}
-            {/* <div className={style.subProfile} hidden>
+            <div className={style.subProfile}>
                 <div className={style.TitleCoin}>
-                    <Title level={5}>เหรียญของคุณ</Title>
+                    <span className={style.titleH5}>เหรียญของคุณ</span>
                 </div>
                 <div className={style.subTitle}>
                     <FontAwesomeIcon icon={faCoins} className={style.iconcoin} />
                     <span>{profileDetail && profileDetail.coin} เหรียญ</span>
                     <div className={style.floatLeft}>
                         <NavLink to="/tutor/coin">
-                            <Button className="buttonColor backgroundYellow" style={{ width: "100px" }} shape="round" size="middle">แลกเหรียญ</Button>
+                            <Button className="buttonColor backgroundYellow" shape="round" size="middle">แลกเหรียญ</Button>
                         </NavLink>
                     </div>
                 </div>
-            </div> */}
+            </div>
             <div className={style.subProfile}>
                 <span className={style.titleH4}>สถานที่สะดวกเรียน</span>
                 <div className={style.subTitle}>

@@ -3,13 +3,14 @@ import { Image, Badge, Button } from 'antd';
 import {
     faMapMarkerAlt,
     faEdit,
-    faPhoneAlt
+    faPhoneAlt,
+    faCoins
 } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import style from '../../styles.module.scss'
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { faFacebook, faLine } from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faLine} from "@fortawesome/free-brands-svg-icons";
 import ProfileSample from "../../../../../images/profile.webp"
 import { color } from "../../../../../defaultValue";
 import { SkeletonComponent } from "../../../../../loading/SkeletonComponent"
@@ -52,13 +53,12 @@ export default function ProfileDetail() {
                     }
                 </Link>
             </div>
-            {/* hide coin section */}
-            {/* <div className={style.subProfile}> */}
-            {/* <div className={style.TitleCoin}>
-                    <Title level={5}>เหรียญของคุณ</Title>
+            <div className={style.subProfile}>
+            <div className={style.TitleCoin}>
+                    <span className={style.titleH5}>เหรียญของคุณ</span>
                     <div className={style.floatLeft}>
-                        <Link href="/historycoin">
-                            <Button type="link" style={{ width: "100px", color: "GrayText" }}>ดูประวัติเหรียญ</Button>
+                        <Link to="/historycoin">
+                            <span style={{ color: "GrayText" }}>ดูประวัติเหรียญ</span>
                         </Link>
                     </div>
 
@@ -67,13 +67,13 @@ export default function ProfileDetail() {
                     <FontAwesomeIcon icon={faCoins} className={style.iconcoin} />
                     <span>{profileDetail && profileDetail.coin}</span>
                     <div className={style.floatLeft}>
-                        <Link href="/coin">
+                        <Link to="/coin">
                             <Button className="backgroundGreen buttonColor" shape="round" size="middle" style={{ width: "100px" }}>ซื้อเหรียญ</Button>
                         </Link>
                     </div>
 
                 </div>
-            </div> */}
+            </div>
             <div className={style.subProfile}>
                 <span className={style.titleH4}>สถานที่สะดวกเรียน</span>
                 <div className={style.subTitle}>

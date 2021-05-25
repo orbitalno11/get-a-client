@@ -30,7 +30,7 @@ export default function ListCorseTutor({ data, isClip }) {
           </div>
           <div className={styles.gridfull}>
             <FontAwesomeIcon icon={faBookReader} className={styles.icon} />
-            <span style={colorBlack} className={`${styles.marginLeft}`}>{data && data.grade.title} , {data && data.subject.title}</span>
+            <span style={colorBlack} className={`${styles.marginLeft}`}>{data && data.grade?.title} , {data && data.subject?.title}</span>
           </div>
           <div className={styles.gridfull}>
             <FontAwesomeIcon icon={faClock} className={styles.icon} />

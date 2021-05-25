@@ -76,7 +76,7 @@ export default function ManageCourseDetail() {
           {(!loading.loading) && (
             courseList ? (
               courseList.map((item, index) => (
-                <div key={index}>
+                <div key={index} style={{ padding: isOnline ? "0.5rem" : "0rem" }} >
                   <Link to={courseId ? `/tutor/online/1/video/create` : `/course/${item.id}`} >
                     {
                       isOnline ? (courseId ? <CardLesson data={item} /> : <ListCourseTutor data={item} isClip={true} />) : <ListCourseTutor data={item} isClip={false} />
@@ -92,13 +92,13 @@ export default function ManageCourseDetail() {
           )}
         </div>
       ) : (
-        <Row align={isOnline ? "center" : "start"}>
+        <Row align={"start"}>
           {(!loading.loading) && (
             courseList ? (
               <Fragment>
                 {
                   courseList.map((item, index) => (
-                    <Col align="center" xl={8} lg={isOnline ? 12 : 8} md={isOnline ? 20 : 12} sm={24} key={index} style={{ padding: "0.5rem" }} >
+                    <Col align="center" xl={8} lg={12} md={isOnline ? 24 : 12} sm={24} key={index} style={{ padding: "0.5rem" }} >
                       <Link to={courseId ? `/tutor/online/1/video/create` : `/course/${item.id}`} >
                         {
                           !isOnline ? <CardCourse data={item} /> :

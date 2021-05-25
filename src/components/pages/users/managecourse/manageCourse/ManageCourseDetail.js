@@ -79,7 +79,7 @@ export default function ManageCourseDetail() {
                 <div key={index}>
                   <Link to={courseId ? `/tutor/online/1/video/create` : `/course/${item.id}`} >
                     {
-                      isOnline ? (courseId ? <CardLesson data={item} /> :  <ListCourseTutor data={item} isClip={true} />) : <ListCourseTutor data={item} isClip={false} />
+                      isOnline ? (courseId ? <CardLesson data={item} /> : <ListCourseTutor data={item} isClip={true} />) : <ListCourseTutor data={item} isClip={false} />
                     }
                   </Link>
                 </div>
@@ -92,18 +92,18 @@ export default function ManageCourseDetail() {
           )}
         </div>
       ) : (
-        <Row >
+        <Row align={isOnline ? "center" : "start"}>
           {(!loading.loading) && (
             courseList ? (
               <Fragment>
                 {
-                  courseList && courseList.map((item, index) => (
-                    <Col align="center" xl={8} lg={courseId ? 12 : 8} md={courseId ? 24 : 12} sm={24} key={index} style={{ padding: "0.5rem" }}>
+                  courseList.map((item, index) => (
+                    <Col align="center" xl={8} lg={isOnline ? 12 : 8} md={isOnline ? 20 : 12} sm={24} key={index} style={{ padding: "0.5rem" }} >
                       <Link to={courseId ? `/tutor/online/1/video/create` : `/course/${item.id}`} >
                         {
-                          !isOnline ? <CardCourse data={item} isClip={false} /> :
+                          !isOnline ? <CardCourse data={item} /> :
                             (
-                              courseId ? <CardLesson data={item} /> :  <CardCourse data={item} isClip={true} />
+                              <CardLesson data={item} isCourse={courseId ? false : true} />
                             )
                         }
                       </Link>

@@ -1,15 +1,20 @@
+
 @import "../../stylesDefault.module.scss";
 
 .card{
   border: 0.15rem solid $orange;
   border-radius: 1.5rem;
   cursor: pointer;
+  color : $black
 }
 
 .paddingCard {
-  padding: 1.25rem !important;
+  padding: 1rem !important;
 }
 
+.paddingTop{
+  padding-top: 0.5rem
+}
 
 .cardRound{
    @extend .card;
@@ -61,11 +66,12 @@
 
 .imageClip{
     height: 8rem;
-    width: auto;
+    width: 7rem;
     padding : 0.5rem;
 
     @media screen and (max-width: 400px) {
       height: 6.25rem;
+      width: 5.5rem;
     }
 }
 

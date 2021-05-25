@@ -14,7 +14,7 @@ import { color, defaultValue } from "../../../../../defaultValue"
 import { modalAction, tutorAction } from "../../../../../../redux/actions"
 import findKeyObject from "../../../../../defaultFunction/findKeyObject"
 import { sizeModal } from "../../../../../modal/SizeModal"
-import isMobile from "../../../../../isMobile/isMobile"
+import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
 
 const checkTypeTesting = (value) => {
     return value === defaultValue.typeIdentity["testing"]
@@ -83,8 +83,8 @@ const ModalEducation = ({ type, data, profile, action }) => {
 
 export default function EducationTutor({ data, type, status}) {
     const dispatch = useDispatch()
+    const screens = useBreakpoint();
     const { profile } = useSelector(state => state.auth)
-
 
     const remove = (type, data) => {
         dispatch(modalAction.openModal({
@@ -144,7 +144,7 @@ export default function EducationTutor({ data, type, status}) {
                         <Row key={item.id}>
                             <Col span={24} className={style.profileSet}>
                                 {
-                                    (!isMobile() && status !== "learner") && (
+                                    (screens.md && status !== "learner") && (
                                         <Fragment>
                                             <Tooltip placement="topLeft" title="แก้ไขเกียรติประวัตินี้">
                                                 <button className={style.editButton} onClick={() => edit(item)} >
@@ -160,8 +160,8 @@ export default function EducationTutor({ data, type, status}) {
                                     )
                                 }
 
-                                <div style={isMobile() ? widthIcon(4) : widthIcon(5.5)}>
-                                    <FontAwesomeIcon className={isMobile() ? style.smallSizeIcon : style.largeSizeIcon} icon={checkTypeTesting(type) ? faListAlt : faGraduationCap} />
+                                <div style={!screens.md ? widthIcon(4) : widthIcon(5.5)}>
+                                    <FontAwesomeIcon className={!screens.md ? style.smallSizeIcon : style.largeSizeIcon} icon={checkTypeTesting(type) ? faListAlt : faGraduationCap} />
                                 </div>
                                 <div className={status !== "learner" ?  style.subProfile : null}>
                                     <span>{checkTypeTesting(type) ? "ผลสอบ" : item.instituteText}</span>
@@ -171,7 +171,7 @@ export default function EducationTutor({ data, type, status}) {
                                     <span>{checkTypeTesting(type) ? ("คะแนน : " + item.score) : ("เกรดเฉลี่ย : " + item.gpax)}</span>
                                     <br />
                                     {
-                                        (isMobile()  && status !== "learner")  && (
+                                        (!screens.md  && status !== "learner")  && (
                                             <Fragment>
                                                 <Button className="buttonColor" style={verifyButton(item.verified)} shape="round" size="small">{findKeyObject(defaultValue.requestStatus, item.verified)}</Button>
                                                 <Button className="buttonColor" style={buttonAction("blue")} shape="round" size="small" onClick={() => edit(item)} >แก้ไข</Button>
@@ -181,7 +181,7 @@ export default function EducationTutor({ data, type, status}) {
                                     }
                                 </div>
                                 {
-                                    (!isMobile() && status !== "learner") ?
+                                    (screens.md && status !== "learner") ?
                                         <div className={`${style.floatLeft} ${style.bodderBottom}`}>
                                             <span style={{ color: colorVerify(item.verified) }}>{findKeyObject(defaultValue.requestStatus, item.verified)}</span>
                                         </div> : null

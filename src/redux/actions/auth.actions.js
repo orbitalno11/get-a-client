@@ -48,7 +48,7 @@ function loginUser(loginData) {
 
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response.data))
+            dispatch(failure(err.response?.data))
             dispatch(modalAction.openModal({
                 text: "ข้อมูลผู้ใช้งานไม่ถูกต้อง",
                 size: sizeModal.small,
@@ -80,7 +80,7 @@ function signUpLearner(signUpData) {
             }))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
-            const message = checkErrorMessage(err.response.data.message.message)
+            const message = checkErrorMessage(err.response?.data?.message?.message)
             dispatch(failure(message))
             dispatch(modalAction.openModal({
                 text: message,
@@ -111,7 +111,7 @@ function signUpTutor(signUpData) {
                 afterClose: "/login"
             }))
         }).catch(err => {
-            const message = checkErrorMessage(err.response.data.message.message)
+            const message = checkErrorMessage(err.response?.data?.message?.message)
             dispatch(loadingActions.stopLoading())
             dispatch(failure(message))
             dispatch(modalAction.openModal({

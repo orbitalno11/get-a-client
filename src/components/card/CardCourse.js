@@ -10,13 +10,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import findKeyObject from "../defaultFunction/findKeyObject";
 import { defaultValue } from "../defaultValue";
 
-export default function CardCourse({ data, isClip }) {
+export default function CardCourse({ data }) {
 
     return (
         <Row className={`${styles.card} ${styles.paddingCard}`} style={{ width: "100%" }}>
             <Col span={24} className={styles.paddingTop} align="start">
                 <Badge count={data ? data.requestNumber : 0} offset={[10, 10]} >
-                    <span className={`${styles.titleH5s} ${styles.cutText1Line}`}>{data.name}</span>
+                    <span className={`${styles.titleH5s} ${styles.textOneLine}`}>{data.name}</span>
                 </Badge>
             </Col>
             <Col className={styles.paddingTop} span={24} align="start">

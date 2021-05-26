@@ -85,7 +85,7 @@ export default function CreateCourseOnline() {
       if (image.file) {
         formdata.append("image", image.file)
       }
-
+      
       if (!id) {
         dispatch(onlineCourseActions.createOnlineCourse(formdata))
       } else {

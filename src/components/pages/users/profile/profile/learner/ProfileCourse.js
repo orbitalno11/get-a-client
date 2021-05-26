@@ -9,7 +9,7 @@ import { myCourseAction } from "../../../../../../redux/actions";
 import isMobile from "../../../../../isMobile/isMobile";
 import Header from "../../../../../headerMobile/Header";
 import Loading from "../../../../../loading/Loading";
-
+import { Link } from "react-router-dom";
 
 const { useBreakpoint } = Grid;
 
@@ -32,7 +32,9 @@ export default function ProfileCourse({ mainPage }) {
                         {
                             list && list.map((item, index) => (
                                 <Col xs={24} sm={20} md={!mainPage ? 12 : 20} lg={!mainPage ? 8 : 20} xl={!mainPage ? 8 : 12} className={style.padding} key={index} >
-                                    <CardLearnerCourse data={item} verizontal />
+                                    <Link to={`/course/${item.id}`}>
+                                        <CardLearnerCourse data={item} verizontal />
+                                    </Link>
                                 </Col>
                             ))
                         }
@@ -53,9 +55,9 @@ export default function ProfileCourse({ mainPage }) {
                 (
                     <Row className={style.marginTop20} justify={!screens.xl && "space-around"} >
                         {
-                            item && item.map((item, index) => (
+                            item && item.map((data, index) => (
                                 <Col xs={24} sm={20} md={!mainPage ? 12 : 20} lg={!mainPage ? 8 : 20} xl={!mainPage ? 8 : 12} className={style.padding} key={index} >
-                                    <CardLearnerCourse data={item} verizontal/>
+                                    <CardLearnerCourse data={data} verizontal/>  
                                 </Col>
                             ))
                         }

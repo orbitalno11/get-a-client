@@ -21,8 +21,8 @@ export default function AllReview() {
     const course = offlineCourse.data && offlineCourse.data
     const owner = (course && auth) && (auth.profile === course.owner.id)
     const learn_status = (auth.role === 1 && course) ? course.enrolled : false
-    const { id } = useParams()
-    const type = "course"
+    const { id, type } = useParams()
+    const isOfflineCourse = type === "course"
 
     const reviewList = !isEmpty(review.reviews) ? review.reviews.filter(value => value.reviewer.id !== auth.profile) : []
     const myReview = !isEmpty(review.reviews) ? review.reviews.filter(value => value.reviewer.id === auth.profile)[0] : []
@@ -84,7 +84,7 @@ export default function AllReview() {
                             )
                         }
                         {
-                            (!learn_status && !owner && screens.lg) && (
+                            (isOfflineCourse && !learn_status && !owner && screens.lg) && (
                                 <Fragment>
                                     <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => enrollCourse()} style={paddingButton}>สมัครเรียน</Button>
                                 </Fragment>
@@ -94,7 +94,7 @@ export default function AllReview() {
                         {
                             (owner && screens.md) && (
                                 <Fragment>
-                                    { type === "course" ? (
+                                    { isOfflineCourse ? (
                                         <Link to={`/tutor/course/${course.id}/enroll`}>
                                             <Button className="buttonColor backgroundOrange" shape="round" size="large" style={paddingButton}>อนุมัติคำขอ</Button>
                                         </Link>

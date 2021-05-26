@@ -59,8 +59,8 @@ export default function ProfileDetail({ mainPage }) {
         checkFavorite()
     }, [fetchProfile])
 
-    const fevorite = (action) => {
-        dispatch(fevoriteAction.getFevorite(userId, action));
+    const favorite = (action) => {
+        dispatch(favoriteAction.getFavorite(userId, action));
     };
 
 

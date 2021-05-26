@@ -100,7 +100,6 @@ export default function ReviewForm({ idReview }) {
                     "isClip": false,
                     "courseType": 1
                 }
-                console.log(formData)
                 dispatch(reviewActions.updateReview(formData))
             }
 

@@ -8,6 +8,7 @@ import coinReducer from "./coin.reducers";
 import verifyReducer from "./verify.reducers"
 import tutorReducer from "./tutor.reducers"
 import homeReducer from "./home.reducers"
+import reviewReducer from "./review.reducers"
 
 const rootReducer = combineReducers({
     profile:profileReducers,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
     verify:verifyReducer,
     tutor : tutorReducer,
     home : homeReducer,
+    review : reviewReducer
 });
 
 export default rootReducer;

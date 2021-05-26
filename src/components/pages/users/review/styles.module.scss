@@ -10,13 +10,10 @@
     outline: none;
 }
 
-.reviewbottom{
-    @extend .buttom50pct;
-    width: 100%;
-    background-color: $orange;
-    color : $white;
+.rate{
+    color:$orange;
 }
 
-.textCenter {
-    text-align: center;
+.paddingTop{
+    padding-top:1rem
 }

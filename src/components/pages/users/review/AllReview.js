@@ -1,30 +1,52 @@
 import React, { Fragment } from 'react'
 import CardReview from "../../../card/CardReview"
-import { Button, Grid } from "antd"
+import { Button, Col, Grid, Row } from "antd"
 import style from "./styles.module.scss"
 import { useDispatch, useSelector } from "react-redux";
-import { modalAction } from "../../../../redux/actions";
+import { modalAction, reviewActions } from "../../../../redux/actions";
 import { sizeModal } from "../../../modal/SizeModal";
-import ReviewForm from "./ReviewForm";
-import { Link } from "react-router-dom";
+import ReviewForm, { DeleteForm } from "./ReviewForm";
+import { Link, useParams } from "react-router-dom";
 import FormEnroll from "../managecourse/offlineCourse/FormEnroll";
 import EmptyImage from "../../../loading/EmptyImage";
+import { useEffect } from "react";
+import isEmpty from "../../../defaultFunction/checkEmptyObject";
+
 const { useBreakpoint } = Grid;
 
 export default function AllReview() {
     const screens = useBreakpoint();
     const dispatch = useDispatch()
-    const { offlineCourse, auth } = useSelector(state => state)
-    const owner = (offlineCourse.data && auth) && (auth.profile === offlineCourse.data.owner.id)
+    const { offlineCourse, auth, review } = useSelector(state => state)
+    const course = offlineCourse.data && offlineCourse.data
+    const owner = (course && auth) && (auth.profile === course.owner.id)
+    const learn_status = (auth.role === 1 && course) ? course.enrolled : false
+    const { id } = useParams()
     const type = "course"
-    const learn_status = false
-    const review = null
 
-    const handleOpenReviewForm = () => {
-        dispatch(modalAction.openModal({
-            body: <ReviewForm />,
-            size: sizeModal.default,
-        }))
+    const reviewList = !isEmpty(review.reviews) ? review.reviews.filter(value => value.reviewer.id !== auth.profile) : []
+    const myReview = !isEmpty(review.reviews) ? review.reviews.filter(value => value.reviewer.id === auth.profile)[0] : []
+
+    useEffect(() => {
+        dispatch(reviewActions.getReviewByCourse(id, 1))
+        return()=>{
+            dispatch(reviewActions.clearReview())
+        }
+    }, [])
+
+    const handleOpenReviewForm = (id, action) => {
+        if(action !== "delete"){
+            dispatch(modalAction.openModal({
+                body: <ReviewForm idReview={id} />,
+                size: sizeModal.default,
+            }))
+        }else{
+            dispatch(modalAction.openModal({
+                body : <DeleteForm idReview={id}/>,
+                size: sizeModal.default
+            }))
+        }
+       
     }
 
     const paddingButton = {
@@ -35,12 +57,12 @@ export default function AllReview() {
         if (!auth.isAuthenticated) {
             window.location.href = "/login"
         } else {
-            const dataEnroll = offlineCourse.data && {
-                id: offlineCourse.data.id,
-                name: offlineCourse.data.name,
-                subject: offlineCourse.data.subject.title,
-                grade: offlineCourse.data.grade.title,
-                owner: offlineCourse.data.owner.fullNameText
+            const dataEnroll = course && {
+                id: course.id,
+                name: course.name,
+                subject: course.subject.title,
+                grade: course.grade.title,
+                owner: course.owner.fullNameText
             }
 
             dispatch(modalAction.openModal({
@@ -50,7 +72,6 @@ export default function AllReview() {
         }
     }
 
-
     return (
         <Fragment>
             <div className={style.marginTop20}>
@@ -58,14 +79,13 @@ export default function AllReview() {
                     <span className={style.titleH3}>ความเห็นจากผู้เรียนจริง</span>
                     <div style={{ marginLeft: 'auto' }}>
                         {
-                            learn_status && screens.lg && (
+                            learn_status && isEmpty(myReview) && screens.lg && (
                                 <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => { handleOpenReviewForm() }}>ให้คะแนน</Button>
                             )
                         }
                         {
-                            (!status && !owner && screens.lg) && (
+                            (!learn_status && !owner && screens.lg) && (
                                 <Fragment>
-
                                     <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => enrollCourse()} style={paddingButton}>สมัครเรียน</Button>
                                 </Fragment>
                             )
@@ -75,14 +95,14 @@ export default function AllReview() {
                             (owner && screens.lg) && (
                                 <Fragment>
                                     { type === "course" ? (
-                                        <Link to={`/tutor/course/${offlineCourse.data.id}/enroll`}>
+                                        <Link to={`/tutor/course/${course.id}/enroll`}>
                                             <Button className="buttonColor backgroundOrange" shape="round" size="large" style={paddingButton}>อนุมัติคำขอ</Button>
                                         </Link>
                                     ) : (
                                         <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>จัดการบทเรียน</Button>
                                     )
                                     }
-                                    <Link to={`/tutor/course/${offlineCourse.data.id}/edit`}>
+                                    <Link to={`/tutor/course/${course.id}/edit`}>
                                         <Button className="buttonColor backgroundBlue" shape="round" size="large" style={paddingButton}>แก้ไข</Button>
                                     </Link>
                                 </Fragment>
@@ -93,8 +113,19 @@ export default function AllReview() {
 
                 <div className={style.marginTop20}>
                     {
-                        review && review.length ? (
-                            <CardReview data={review} />
+                        !isEmpty(review.reviews) ? (
+                            <Row>
+                                {!isEmpty(myReview) &&
+                                    <Col span={24} >
+                                        <CardReview data={myReview} myReview={true} handleEdit={handleOpenReviewForm} />
+                                    </Col>
+                                }
+                                {!isEmpty(reviewList) && reviewList.map((item, index) => (
+                                    <Col span={24} key={index} className={style.paddingTop} >
+                                        <CardReview data={item} myReview={false} />
+                                    </Col>
+                                ))}
+                            </Row>
                         ) : (
                             <div align="center">
                                 <EmptyImage size="default" />

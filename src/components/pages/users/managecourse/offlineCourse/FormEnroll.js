@@ -30,13 +30,14 @@ export default function FormEnroll({ data }) {
                 {
                     loading.loading && (
                         <Fragment>
-                            <Spin style={{ marginRight: "0.5rem" }} /> กำลังส่งคำขอ
+                            <Spin style={{ marginRight: "0.5rem" }} />
+                            <span> กำลังส่งคำขอ</span>
                         </Fragment>
                     )
                 }
                 {
                     !loading.loading && (
-                        enrollSuccess ? "ส่งคำขอเรียบร้อย รอการอนุมัติจากครูสอนพิเศษ" : "สำคำขอเรียน"
+                        enrollSuccess ? "ส่งคำขอเรียบร้อย รอการอนุมัติจากครูสอนพิเศษ" : "ส่งคำขอเรียน"
                     )
                 }
             ส่งคำขอเรียน

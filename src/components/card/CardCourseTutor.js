@@ -22,7 +22,7 @@ export default function CardCourseTutor({ data }) {
     return (
         <Row className={styles.CardCourseTutor} onClick={() => redirectToCoursePage()}>
             <Col span={19}>
-                <span className={`${styles.titleH4} ${styles.cutText1Line}`}>{data.name}</span>
+                <span className={`${styles.titleH4} ${styles.textOneLine}`}>{data.name}</span>
             </Col>
             <Col span={5}>
                 <span className={styles.textNormal} style={{ float: "right" }}>

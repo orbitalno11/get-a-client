@@ -1,9 +1,9 @@
 import { Skeleton } from "antd"
 import React from 'react'
 
-const SkeletonText = ({ size }) => {
+const SkeletonText = ({ size, width }) => {
     return (
-        <Skeleton.Input style={{ width: 200 }} active={true} size={size} />
+        <Skeleton.Input style={{ width : width ? width : "200px" }} active={true} size={size} />
     )
 }
 

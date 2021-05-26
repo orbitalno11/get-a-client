@@ -18,9 +18,7 @@ export default function ListCorseTutor({ data, isClip }) {
   const colorBlack = {
     color: color.black
   }
-
-  console.log(isClip)
-
+  
   return (
     <Fragment>
       <Row className={styles.paddingleftcourse} >

@@ -59,21 +59,22 @@ export default function ProfileDetail({ mainPage }) {
                     )
                 }
 
-                <div className={style.contrainnerProfilePubile}>
-                    {address && (
-                        <div className={style.TitleCoin}>
-                            <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
-                            {
-                                tutorHandle ? (
-                                    <span className={style.textNormal}>{address}</span>
-                                ) : (
-                                    <SkeletonComponent.SkeletonText />
-                                )
-                            }
-
-                        </div>
-                    )
-                    }
+                <div className={!isMobile() ? `${style.paddingbody} ${style.marginTop20}` : style.paddingbody}>
+                    <div className={!isMobile() ? style.TitleCoin : style.profileSet}>
+                        {address && (
+                            <Fragment>
+                                <FontAwesomeIcon icon={faMapMarkerAlt} className={style.iconmarker} />
+                                {
+                                    tutorHandle ? (
+                                        <span className={style.textNormal}>{address}</span>
+                                    ) : (
+                                        <SkeletonComponent.SkeletonText />
+                                    )
+                                }
+                            </Fragment>
+                        )
+                        }
+                    </div>
                     <div className={style.TitleCoin}>
                         <FontAwesomeIcon icon={faUser} className={style.iconmarker} />
                         {
@@ -86,7 +87,7 @@ export default function ProfileDetail({ mainPage }) {
                     </div>
 
                     <div className={style.TitleCoin}>
-                        <FontAwesomeIcon icon={faStar} className={style.iconmarker} style={{color:color.yellow}}/>
+                        <FontAwesomeIcon icon={faStar} className={style.iconmarker} style={{ color: color.yellow }} />
                         {
                             tutorHandle ? (
                                 <span className={style.textNormal}>{tutorHandle && tutorHandle.rating} </span>
@@ -101,7 +102,7 @@ export default function ProfileDetail({ mainPage }) {
 
                     (
                         <div className={style.marginTop}>
-                            <div className={style.contrainnerProfilePubile} >
+                            <div className={`${style.paddingbody} ${style.marginTop20}`} >
                                 {
                                     (!isEmpty(testing) || !isEmpty(education)) && (
                                         <Fragment>

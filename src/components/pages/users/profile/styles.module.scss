@@ -111,20 +111,10 @@
     flex-flow: column;
 }
 
-.mobilecenter{
-    @extend .body;
-    @extend .horizontalCenter;
-}
-
 .colorGray{
     color:$gray !important;
     border-style: none  !important;
     margin-top: 0.6rem
-}
-
-.contrainnerProfilePubile{
-    @extend .paddingbody;
-    @extend .marginTop20;
 }
 
 .alignPageIdentity {
@@ -148,12 +138,6 @@
     z-index: 5;
 }
 
-.alignPageIdentity {
-  display: flex;
-  align-items: center;
-  flex-flow: column;
-}
-
 .smallSizeIcon {
     font-size: 1.5rem;
     margin-left: 1.25rem;
@@ -170,13 +154,6 @@
     @extend .buttonCircle;
     background-color: $blue;
 }
-
-
-.removeRedButton {
-    @extend .buttonCircle;
-    background-color: $red;
-}
-
 
 .removeButton {
     @extend .buttonCircle;

@@ -25,7 +25,7 @@ export default function CardCourseTutor({ data }) {
                 <span className={`${styles.titleH4} ${styles.textOneLine}`}>{data.name}</span>
             </Col>
             <Col span={8}>
-                <span  className={`${styles.cutText1Line}`} style={{ float: "right" }}>
+                <span  className={`${styles.textOneLine}`} style={{ float: "right" }}>
                     <FontAwesomeIcon icon={faStar} className={styles.icon} style={{ color: color.yellow }} />
                     {data.rating} </span></Col>
 
@@ -34,14 +34,14 @@ export default function CardCourseTutor({ data }) {
                 {findKeyObject(defaultValue.grade, data.grade.grade)}, {data.subject.title}
             </Col>
             <Col xl={12} lg={12} md={12} sm={12} xs={24} >
-                <span className={`${styles.cutText1Line}`}>
+                <span className={`${styles.textOneLine}`}>
                     <FontAwesomeIcon icon={faCoins} className={styles.icon} />
                     {data.costText}
                 </span>
 
             </Col>
             <Col span={24}>
-                <span className={`${styles.cutText1Line}`}>
+                <span className={`${styles.textOneLine}`}>
                     <FontAwesomeIcon icon={faClock} className={styles.icon} />
                     {data.timeText}
                 </span>

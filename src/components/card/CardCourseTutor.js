@@ -21,28 +21,30 @@ export default function CardCourseTutor({ data }) {
 
     return (
         <Row className={styles.CardCourseTutor} onClick={() => redirectToCoursePage()}>
-            <Col span={19}>
+            <Col span={16}>
                 <span className={`${styles.titleH4} ${styles.textOneLine}`}>{data.name}</span>
             </Col>
-            <Col span={5}>
-                <span className={styles.textNormal} style={{ float: "right" }}>
+            <Col span={8}>
+                <span  className={`${styles.cutText1Line}`} style={{ float: "right" }}>
                     <FontAwesomeIcon icon={faStar} className={styles.icon} style={{ color: color.yellow }} />
                     {data.rating} </span></Col>
 
-            <Col span={12}>
+            <Col xl={12} lg={12} md={12} sm={12} xs={24} >
                 <FontAwesomeIcon icon={faBookReader} className={styles.icon} />
                 {findKeyObject(defaultValue.grade, data.grade.grade)}, {data.subject.title}
             </Col>
-            <Col >
-                <span>
+            <Col xl={12} lg={12} md={12} sm={12} xs={24} >
+                <span className={`${styles.cutText1Line}`}>
                     <FontAwesomeIcon icon={faCoins} className={styles.icon} />
                     {data.costText}
                 </span>
 
             </Col>
             <Col span={24}>
-                <FontAwesomeIcon icon={faClock} className={styles.icon} />
-                {data.timeText}
+                <span className={`${styles.cutText1Line}`}>
+                    <FontAwesomeIcon icon={faClock} className={styles.icon} />
+                    {data.timeText}
+                </span>
             </Col>
         </Row>
     )

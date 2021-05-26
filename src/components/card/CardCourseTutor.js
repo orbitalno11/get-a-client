@@ -21,7 +21,7 @@ export default function CardCourseTutor({ data }) {
 
     return (
         <Row className={styles.CardCourseTutor} onClick={() => redirectToCoursePage()}>
-            <Col span={19}>
+            <Col span={16}>
                 <span className={`${styles.titleH4} ${styles.textOneLine}`}>{data.name}</span>
             </Col>
             <Col span={8}>

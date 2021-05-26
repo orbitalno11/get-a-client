@@ -7,7 +7,7 @@ import { modalAction, reviewActions } from "../../../../redux/actions";
 import { sizeModal } from "../../../modal/SizeModal";
 import ReviewForm, { DeleteForm } from "./ReviewForm";
 import { Link, useParams } from "react-router-dom";
-import FormEnroll from "../managecourse/offlineCourse/FormEnroll";
+import FormEnroll from "../managecourse/manageCourse/FormEnroll";
 import EmptyImage from "../../../loading/EmptyImage";
 import { useEffect } from "react";
 import isEmpty from "../../../defaultFunction/checkEmptyObject";

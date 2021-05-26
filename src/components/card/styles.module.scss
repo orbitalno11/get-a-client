@@ -1,9 +1,19 @@
+
 @import "../../stylesDefault.module.scss";
 
 .card{
   border: 0.15rem solid $orange;
   border-radius: 1.5rem;
   cursor: pointer;
+  color : $black
+}
+
+.paddingCard {
+  padding: 1rem !important;
+}
+
+.paddingTop{
+  padding-top: 0.5rem
 }
 
 .paddingCard {
@@ -57,8 +67,14 @@
 }
 
 .imageClip{
-    height: 6rem;
-    width: auto;
+    height: 8rem;
+    width: 7rem;
+    padding : 0.5rem;
+
+    @media screen and (max-width: 400px) {
+      height: 6.25rem;
+      width: 5.5rem;
+    }
 }
 
 .icon {
@@ -111,11 +127,6 @@
 
 .marginLeft{
     margin-left: 0.6rem;
-}
-
-.imageClip {
-  height: 9rem;
-  width: 7rem;
 }
 
 .rate {

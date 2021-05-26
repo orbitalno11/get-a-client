@@ -12,8 +12,8 @@ export default function CardLearnerCourse({data}) {
 
     return (
         <div className={styles.card} style={styleCard} >
-            <Row align="middle">
-                <Col span={5}>
+            <Row align="center">
+                <Col xs={5} sm={5} md={5} lg={5} xl={5} align="center">
                     <Image
                         src={data.owner.picture}
                         className={styles.image}
@@ -26,7 +26,6 @@ export default function CardLearnerCourse({data}) {
                     <span className={`${styles.textSmall} ${styles.cutText1Line}`}>
                         {data.owner.fullNameText}
                      </span>
-                    <br />
                     <span className={styles.textSmall}>
                         <FontAwesomeIcon icon={faBook} className={styles.icon} />{data.subject.title}
                     </span>

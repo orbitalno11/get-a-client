@@ -13,14 +13,14 @@ export default function CardLearnerCourse({data}) {
     return (
         <div className={styles.card} style={styleCard} >
             <Row align="center">
-                <Col xs={5} sm={5} md={5} lg={5} xl={5} align="center">
+                <Col xs={5} sm={5} md={6} lg={5} xl={5} align="center">
                     <Image
                         src={data.owner.picture}
                         className={styles.image}
                         preview={false}
                     />
                 </Col>
-                <Col span={16} align="start" style={{ paddingLeft: "2rem" }}>
+                <Col xs={16} sm={16} md={14} lg={16} xl={16} align="start" style={{ paddingLeft: "2rem" }}>
                     <span className={`${styles.titleH5} ${styles.cutText1Line}`}>{data.name}</span>
                 
                     <span className={`${styles.textSmall} ${styles.cutText1Line}`}>
@@ -52,10 +52,12 @@ export default function CardLearnerCourse({data}) {
                 </Col>
             </Row>
             <Row>
-                <Col span={15}>
-                    <span className={styles.textSmall}>{data.timeText}</span>
+                <Col xs={5} sm={5} md={6} lg={5} xl={5}>   
                 </Col>
-                <Col span={9}  align="end">
+                <Col xs={11} sm={12} md={9} lg={12} xl={12} style={{ paddingLeft: "2.4rem" }}>
+                    <span className={`${styles.textSmall} ${styles.cutText1Line}`}>{data.timeText}</span>
+                </Col>
+                <Col xs={8} sm={7} md={9} lg={7} xl={7}  align="end">
                     <Link to={`/course/${data.id}`}>
                         <Button
                             className="buttonColor backgroundBlue"

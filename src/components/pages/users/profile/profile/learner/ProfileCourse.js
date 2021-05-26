@@ -1,5 +1,5 @@
 import { Col, Row, Grid } from "antd";
-import React, { useState,useEffect } from "react"
+import React, { useEffect } from "react"
 import TabHorizontal from "../../../../../tab/TabHorizontal"
 import CardLearnerCourse from "../../../../../card/CardLearnerCourse"
 import style from "../../styles.module.scss"
@@ -18,14 +18,11 @@ export default function ProfileCourse({ mainPage }) {
     const dispatch = useDispatch();
     const { loading } = useSelector((state) => state);
     const list = useSelector((state) => state.myCourse.tutorCourselist);
+    const item = useSelector((state) => state.myCourse.courseList);
   
     useEffect(() => {
       dispatch(myCourseAction.getmyTutorCourse());
     }, []);
-    const [course] = useState({
-        tutor: null,
-        course: null
-    })
 
     const TabTutor = () => {
         return (
@@ -34,7 +31,7 @@ export default function ProfileCourse({ mainPage }) {
                     <Row className={style.marginTop20} justify={!screens.xl && "space-around"} >
                         {
                             list && list.map((item, index) => (
-                                <Col xs={24} sm={20} md={!mainPage ? 12 : 20} lg={!mainPage ? 8 : 12} xl={!mainPage ? 8 : 12} className={style.padding} key={index} >
+                                <Col xs={24} sm={20} md={!mainPage ? 12 : 20} lg={!mainPage ? 8 : 20} xl={!mainPage ? 8 : 12} className={style.padding} key={index} >
                                     <CardLearnerCourse data={item} verizontal />
                                 </Col>
                             ))
@@ -52,13 +49,13 @@ export default function ProfileCourse({ mainPage }) {
 
     const TabCourse = () => {
         return (
-            course.course ?
+            item && item.length ?
                 (
                     <Row className={style.marginTop20} justify={!screens.xl && "space-around"} >
                         {
-                            course.course.map((item, index) => (
-                                <Col xs={24} sm={20} md={!mainPage ? 12 : 20} lg={!mainPage ? 8 : 12} xl={!mainPage ? 8 : 12} className={style.padding} key={index} >
-                                    <CardLearnerCourse data={item} />
+                            item && item.map((item, index) => (
+                                <Col xs={24} sm={20} md={!mainPage ? 12 : 20} lg={!mainPage ? 8 : 20} xl={!mainPage ? 8 : 12} className={style.padding} key={index} >
+                                    <CardLearnerCourse data={item} verizontal/>
                                 </Col>
                             ))
                         }

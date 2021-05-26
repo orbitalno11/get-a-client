@@ -2,6 +2,7 @@ import { myCourseConstants } from "../constants"
 
 const initialState = {
     tutorCourselist: null,
+    courseList : null,
     error: null,
 }
 
@@ -19,6 +20,18 @@ const myCourseReducer = (state = initialState, action) => {
                 tutorCourselist: null,
                 error: action.payload
             }
+        case myCourseConstants.GET_COURSE_MYCOURSE_SUCCESS:
+            return {
+                ...state,
+                courseList: action.payload,
+                error: false,
+                }
+        case myCourseConstants.GET_COURSE_MYCOURSE_FAILURE:
+            return {
+                ...state,
+                courseList: null,
+                error: action.payload
+                }
         default:
             return state
     }

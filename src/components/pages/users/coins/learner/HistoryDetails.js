@@ -55,7 +55,7 @@ export default function HistoryDetails() {
         </Fragment>
       ) : (
         <div align="center">
-          <EmptyImage size="default" />
+          <EmptyImage size="default" className={style.centerPage} />
           <p className={style.textNormal}>ยังไม่มีประวัติการซื้อเหรียญ&nbsp;</p>
         </div>
       )}

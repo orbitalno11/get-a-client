@@ -17,8 +17,8 @@ export default function ProfileCourse({ mainPage }) {
     const screens = useBreakpoint();
     const dispatch = useDispatch();
     const { loading } = useSelector((state) => state);
-    const list = useSelector((state) => state.myCourse.tutorCourselist);
-    const item = useSelector((state) => state.myCourse.courseList);
+    const offlineCourse = useSelector((state) => state.myCourse.tutorCourselist);
+    const onlineCourse= useSelector((state) => state.myCourse.courseList);
   
     useEffect(() => {
       dispatch(myCourseAction.getmyTutorCourse());
@@ -26,11 +26,11 @@ export default function ProfileCourse({ mainPage }) {
 
     const TabTutor = () => {
         return (
-            list && list.length ?
+            offlineCourse && offlineCourse.length ?
                 (
                     <Row className={style.marginTop20} justify={!screens.xl && "space-around"} >
                         {
-                            list && list.map((item, index) => (
+                            offlineCourse && offlineCourse.map((item, index) => (
                                 <Col xs={24} sm={20} md={!mainPage ? 12 : 20} lg={!mainPage ? 8 : 20} xl={!mainPage ? 8 : 12} className={style.padding} key={index} >
                                     <Link to={`/course/${item.id}`}>
                                         <CardLearnerCourse data={item} verizontal />
@@ -51,11 +51,11 @@ export default function ProfileCourse({ mainPage }) {
 
     const TabCourse = () => {
         return (
-            item && item.length ?
+            onlineCourse && onlineCourse.length ?
                 (
                     <Row className={style.marginTop20} justify={!screens.xl && "space-around"} >
                         {
-                            item && item.map((data, index) => (
+                            onlineCourse && onlineCourse.map((data, index) => (
                                 <Col xs={24} sm={20} md={!mainPage ? 12 : 20} lg={!mainPage ? 8 : 20} xl={!mainPage ? 8 : 12} className={style.padding} key={index} >
                                     <CardLearnerCourse data={data} verizontal/>  
                                 </Col>

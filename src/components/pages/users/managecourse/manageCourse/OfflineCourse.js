@@ -173,10 +173,9 @@ export default function OfflineCourse() {
         }))
     }
 
-
     return (
         <Fragment>
-            {isMobile() && <Header pageBack="goback" />}
+            {isMobile() && <Header pageBack={!owner ? "goback" : `/tutor/${params.type}`} />}
             <div>
                 <ModalComponent />
                 <Row className={style.container} justify="space-between" style={{ paddingBottom: "7.5rem" }}>

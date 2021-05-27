@@ -56,7 +56,7 @@ export default function CreateCourseOnline() {
       })
     }
  
-  }, [])
+  }, [dataCourse])
 
   const onChange = async data => {
     const fileInput = data.target.files[0]

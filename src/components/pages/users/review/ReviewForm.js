@@ -57,8 +57,8 @@ export function DeleteForm({ idReview, type }) {
     )
 }
 
-export default function ReviewForm({ idReview }) {
-    const { id } = useParams()
+export default function ReviewForm({ idReview, courseId }) {
+    const { id, videoId } = useParams()
     const dispatch = useDispatch()
     const { loading } = useSelector(state => state.loading)
     const { review, modal } = useSelector(state => state)
@@ -87,25 +87,28 @@ export default function ReviewForm({ idReview }) {
     }
     
     const onSubmit = (data) => {
+        console.log( data)
         if (data) {
 
             if (isEmpty(idReview)) {
                 const formData = {
-                    "courseId": id,
+                    "courseId": videoId ? courseId : id,
                     "rating": data.rate,
                     "comment": data.comment,
-                    "isClip": false,
-                    "courseType": 1
+                    "isClip": videoId ? true : false,
+                    "clipId" : videoId && videoId,
+                    "courseType": videoId ? 3 : 1
                 }
                 dispatch(reviewActions.createReview(formData))
             } else{
                 const formData = {
-                    "courseId": id,
+                    "courseId": videoId ? courseId : id,
                     "reviewId": idReview,
                     "rating": data.rate,
                     "comment": data.comment,
-                    "isClip": false,
-                    "courseType": 1
+                    "isClip": videoId ? true : false,
+                    "clipId" : videoId && videoId,
+                    "courseType": videoId ? 3 : 1
                 }
                 dispatch(reviewActions.updateReview(formData))
             }

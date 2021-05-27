@@ -2,7 +2,7 @@ import { apiURL } from "../../utils/setAxios"
 import { myCourseConstants } from "../constants"
 import { loadingActions } from "./loading.actions"
 
-function getmyTutorCourse() {
+function getMyOfflineCourse() {
     return  dispatch => {
         dispatch(loadingActions.startLoading())
          apiURL.apiGetA.get("/learner/offline-course")
@@ -23,7 +23,7 @@ function getmyTutorCourse() {
     function failure(err) { return { type: myCourseConstants.GET_OFFLINE_COURSE_FAILURE, payload: err } }
 }
 
-function getmyCourse() {
+function getMyOnlineCourse() {
     return  dispatch => {
         dispatch(loadingActions.startLoading())
          apiURL.apiGetA.get("/learner/online-course")
@@ -45,6 +45,6 @@ function getmyCourse() {
 }
 
 export const myCourseAction = {
-    getmyTutorCourse,
-    getmyCourse
+    getMyOfflineCourse,
+    getMyOnlineCourse
 }

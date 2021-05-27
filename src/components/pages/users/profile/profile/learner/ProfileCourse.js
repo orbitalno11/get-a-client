@@ -21,7 +21,8 @@ export default function ProfileCourse({ mainPage }) {
     const onlineCourse= useSelector((state) => state.myCourse.courseList);
   
     useEffect(() => {
-      dispatch(myCourseAction.getmyTutorCourse());
+      dispatch(myCourseAction.getMyOfflineCourse());
+      dispatch(myCourseAction.getMyOnlineCourse());
     }, []);
 
     const TabTutor = () => {
@@ -33,7 +34,7 @@ export default function ProfileCourse({ mainPage }) {
                             offlineCourse && offlineCourse.map((item, index) => (
                                 <Col xs={24} sm={20} md={!mainPage ? 12 : 20} lg={!mainPage ? 8 : 20} xl={!mainPage ? 8 : 12} className={style.padding} key={index} >
                                     <Link to={`/course/${item.id}`}>
-                                        <CardLearnerCourse data={item} verizontal />
+                                        <CardLearnerCourse data={item} type={"offline"} verizontal />
                                     </Link>
                                 </Col>
                             ))
@@ -57,7 +58,7 @@ export default function ProfileCourse({ mainPage }) {
                         {
                             onlineCourse && onlineCourse.map((data, index) => (
                                 <Col xs={24} sm={20} md={!mainPage ? 12 : 20} lg={!mainPage ? 8 : 20} xl={!mainPage ? 8 : 12} className={style.padding} key={index} >
-                                    <CardLearnerCourse data={data} verizontal/>  
+                                    <CardLearnerCourse data={data} type={"online"} verizontal/>  
                                 </Col>
                             ))
                         }

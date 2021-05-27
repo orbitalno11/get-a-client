@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-export default function CardLearnerCourse({ data }) {
+export default function CardLearnerCourse({ data,type }) {
   const styleCard = {
     padding: "0.5rem",
     color:"black"
@@ -19,13 +19,53 @@ export default function CardLearnerCourse({ data }) {
   return (
     <div className={styles.card} style={styleCard}>
       <div style={styleCard}> 
+      {
+        type === "online"? (
+
+          <Row>
+          <Col xs={6} sm={5} md={6} lg={6} xl={5} className={styles.VerizontalPage}>
+                <Image
+                src={data.coverUrl}
+                className={styles.image}
+                preview={false}
+              />
+          </Col>
+          <Col xs={18} sm={19}md={18}lg={18}xl={19} align="start"style={{ paddingLeft: "2rem" }}>
+             <span className={`${styles.titleH5} ${styles.cutText1Line}`}>
+               {data.name}
+             </span>              
+            <span className={`${styles.textSmall} ${styles.cutText1Line}`}>
+              {data.grade.title}
+            </span>
+            <Row>
+              <Col xs={11} sm={16} md={8} lg={10} xl={13}>
+                  <span className={`${styles.textSmall} ${styles.cutText1Line}`}>
+                    <FontAwesomeIcon icon={faBook} className={styles.icon} />
+                    {data.subject.title}
+                  </span>
+              </Col>
+              <Col align="end" xs={13} sm={8} md={16} lg={14} xl={11}>
+                  <Link to={`/course/${data.id}`}>
+                      <Button
+                          className="buttonColor backgroundBlue"
+                          shape="round"
+                          size="middle"
+                      >
+                          ให้คะแนน
+                      </Button>
+                  </Link>   
+              </Col>
+            </Row>  
+          </Col>
+        </Row>
+        ):(        
         <Row>
           <Col xs={6} sm={5} md={6} lg={6} xl={5} className={styles.VerizontalPage}>
-            <Image
-              src={data.owner.picture}
-              className={styles.image}
-              preview={false}
-            />
+                <Image
+                src={data.owner.picture}
+                className={styles.image}
+                preview={false}
+              />
           </Col>
           <Col xs={18} sm={19}md={18}lg={18}xl={19} align="start"style={{ paddingLeft: "2rem" }}>
             <Row span={24}>
@@ -65,12 +105,12 @@ export default function CardLearnerCourse({ data }) {
               {data.subject.title}
             </span>
             <Row span={24}>
-                <Col xs={12} sm={16} md={8} lg={10} xl={13}>
+                <Col xs={11} sm={16} md={8} lg={10} xl={13}>
                     <span className={`${styles.textSmall} ${styles.cutText1Line}`}>
                         {data.timeText}
                     </span>
                 </Col>
-                <Col align="end" xs={12} sm={8} md={16} lg={14} xl={11}>
+                <Col align="end" xs={13} sm={8} md={16} lg={14} xl={11}>
                     <Link to={`/course/${data.id}`}>
                     <Button
                         className="buttonColor backgroundBlue"
@@ -84,6 +124,9 @@ export default function CardLearnerCourse({ data }) {
             </Row>
           </Col>
         </Row>
+        )
+      }
+
       </div>
     </div>
   );

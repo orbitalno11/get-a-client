@@ -25,6 +25,7 @@ export default function ManageCourseDetail() {
   const [clipList, setClipList] = useState([])
   const [isOnline, setIsOnline1] = useState(location.pathname === "/tutor/online" || !isEmpty(courseId))
   const screens = useBreakpoint();
+  const partRedireact = location.pathname === "/tutor/online" ? "/tutor"  : ""
 
   useEffect(() => {
     setIsOnline1(location.pathname === "/tutor/online" || !isEmpty(courseId))
@@ -109,7 +110,7 @@ export default function ManageCourseDetail() {
             {(!loading.loading && !isEmpty(clipList)) && (
               clipList.map((item, index) => (
                 <Col align="center" xl={8} lg={12} md={24} sm={24} xs={24} key={index} style={{ padding: "0.5rem" }} >
-                  <Link to={`/tutor/online/${courseId}/video/${item.id}`}>
+                  <Link to={`${partRedireact}/online/${courseId}/video/${item.id}`}>
                     {
                       <CardLesson data={item} />
                     }

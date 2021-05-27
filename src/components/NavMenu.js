@@ -30,8 +30,8 @@ const NavMenu = () => {
                         หน้าแรก
                 </NavLink>
                 </Menu.Item>
-                <Menu.Item key="/tutor/ranking" >
-                    <NavLink to="/tutor/ranking">
+                <Menu.Item key="/rank/course" >
+                    <NavLink to="/rank/course">
                         ติวเตอร์
                 </NavLink></Menu.Item>
                 {/* <Menu.Item key="/course" >

@@ -87,6 +87,10 @@ $silver : #a39b9b;
     @extend .paddingBottomBody;
 }
 
+.bodyPaddingTopBottom{
+    @extend .paddingTopBody;
+    @extend .paddingBottomBody;
+}
 
 .horizontalCenter {
     display: flex !important;
@@ -161,4 +165,92 @@ $silver : #a39b9b;
     display: -webkit-box; 
     -webkit-line-clamp: $line; 
     -webkit-box-orient: vertical;
+}
+
+.section {
+    background-color: $white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.marginSection {
+    margin-top:1rem
+}
+
+.buttonColor{
+    border-style: none  !important;
+    color:var(--white-color)  !important;
+    height: auto;
+    border-radius: 0.5rem;
+    outline:none !important;
+}
+
+.marginleftIcon {
+    margin-left : 0.5rem
+}
+
+// new font 
+
+.headerFour{
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+.headerThree{
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+.headerTwo5{
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.headerTwo25{
+    font-size: 2.25rem;
+    font-weight: 700;
+}
+
+.headerOne75{
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.headerOne75{
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.headerOne5{
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.textTwo5{
+    font-size: 2.5rem;
+}
+
+.textTwo25{
+    font-size: 2.25rem;
+}
+
+.textTwo{
+    font-size: 2rem !important; 
+}
+
+.textOne75{
+    font-size: 1.75rem;
+}
+
+
+.textOne5{
+    font-size: 1.5rem;
+}
+
+.textOneo25{
+    font-size: 1.25rem;
+}
+
+.textOne{
+    font-size: 1rem;
 }

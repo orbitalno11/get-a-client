@@ -54,8 +54,8 @@ export default function HistoryDetails() {
           )}
         </Fragment>
       ) : (
-        <div align="center">
-          <EmptyImage size="default" className={style.centerPage} />
+        <div align="center" style={{width:"100%"}}>
+          <EmptyImage size="default" />
           <p className={style.textNormal}>ยังไม่มีประวัติการซื้อเหรียญ&nbsp;</p>
         </div>
       )}

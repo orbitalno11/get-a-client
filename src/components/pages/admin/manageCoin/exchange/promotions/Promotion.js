@@ -1,7 +1,8 @@
 import { Row, Col, Button, Input, DatePicker, TimePicker, Form } from "antd";
 import React, { Fragment } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { promotionSchema } from "../../../../../../validation/admin/promotionSchema";
+// import { defaultValue } from "../../../../../defaultValue/defaultValue";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { faBullhorn} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,9 +14,10 @@ import { sizeModal } from "../../../../../modal/SizeModal";
 import { typeModal } from "../../../../../modal/TypeModal";
 import PromotionList from "./PromotionList";
 import moment from "moment";
+import TimeField from 'react-simple-timefield';
 
 export default function Promotion() {
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors,control } = useForm({
     resolver: yupResolver(promotionSchema),
   });
 
@@ -25,7 +27,7 @@ export default function Promotion() {
 
   const onSubmit = () => {
     // todo onSubmit
-    // value
+    // value//
   };
 
   function ComponentSample() {
@@ -51,12 +53,15 @@ export default function Promotion() {
             </Col>
           </Row>
           <Row style={{ marginTop: "1rem" }}>
-            <Col span={3} className={style.textNormal}>
-              วันที่เริ่มต้น{" "}
-            </Col>
-            <Col span={8}>
-              <DatePicker />
-            </Col>
+            <p className={style.textNormal}>เวลา(เริ่ม)</p>
+              <Controller
+                as={
+                  <TimeField className="input" style={{ width: "100%" }} />
+                }
+                name="start"
+                control={control}
+                defaultValue={""}
+              />
             <Col
               span={4}
               style={{ textAlign: "center" }}

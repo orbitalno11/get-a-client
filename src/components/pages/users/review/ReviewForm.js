@@ -91,6 +91,7 @@ export default function ReviewForm({ idReview }) {
     }
 
     const onSubmit = (data) => {
+        console.log( data)
         if (data) {
             if (isEmpty(idReview)) {
                 const formData = {

@@ -60,7 +60,7 @@ export default function ProfileDetail({ mainPage }) {
     }, [fetchProfile])
 
     const favorite = () => {
-        dispatch(favoriteAction.getFavorite(userId));
+        dispatch(favoriteAction.getFavorite(userId,favData.check));
     };
 
 

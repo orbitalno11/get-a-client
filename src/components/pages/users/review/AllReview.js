@@ -45,7 +45,6 @@ export default function AllReview() {
                 size: sizeModal.default
             }))
         }
-
     }
 
     return (

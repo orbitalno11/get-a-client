@@ -81,6 +81,7 @@ input :focus{
   border-style: none  !important;
   color:var(--white-color)  !important;
   height: auto;
+  border-radius: 0.5rem;
 }
 
 .backgroundYellow{

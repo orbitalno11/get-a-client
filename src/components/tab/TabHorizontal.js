@@ -5,9 +5,9 @@ import { color } from "../defaultValue";
 import styles from "./styles.module.scss"
 const { TabPane } = Tabs;
 
-export default function TabHorizontal({ type, tabStart, tabDetail, name, style }) {
+export default function TabHorizontal({ type, tabStart, tabDetail, name, style, handleSetSelectTab }) {
     const screens = useBreakpoint();
-    const [tab, setTab] = useState(tabStart.key)
+    const [ tab, setTab ] = useState(tabStart.key)
     const colorSelect = {
         backgroundColor: color.orange,
         borderColor: color.orange,
@@ -25,18 +25,22 @@ export default function TabHorizontal({ type, tabStart, tabDetail, name, style }
         color: color.white
     }
 
-    const onHandleChangeTab = value => {
-        setTab(value.target.value)
+    const onHandleChangeTab = (value) => {
+        setTab(value)
+        handleSetSelectTab(value)
     }
 
     return (
         <Fragment>
             {
                 style === "TabPane" ? (
-                    <Tabs defaultActiveKey={tabStart.key} className={style.tabs} centered={screens.md ? false : true}>
+                    <Tabs defaultActiveKey={tabStart.key} className="tabStyle" centered={screens.md ? false : true} onChange={(value)=>onHandleChangeTab(value)}>
                         {
                             tabDetail !== null && tabDetail.map((item) =>
-                                <TabPane className={style.tabPane} key={item.key} tab={item.name && item.name}>{item.tab}</TabPane>
+                                <TabPane
+                                className={style.tabPane}
+                                key={item.key} 
+                                tab={item.name && item.name}>{item.tab}</TabPane>
                             )
                         }
                     </Tabs>
@@ -44,7 +48,8 @@ export default function TabHorizontal({ type, tabStart, tabDetail, name, style }
                 ) : (
                     <Fragment>
                         <Row justify="center">
-                            <Radio.Group onChange={onHandleChangeTab} value={tab} defaultValue={tabStart.key} name={name && name} >
+                            <Radio.Group  onChange={(value)=>onHandleChangeTab(value.target.value)} value={tab} name={name && name} >
+      
                                 {
                                     tabDetail !== null && tabDetail.map((item, index) =>
                                     (

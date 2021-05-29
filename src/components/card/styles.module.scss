@@ -1,9 +1,23 @@
+
 @import "../../stylesDefault.module.scss";
 
 .card{
   border: 0.15rem solid $orange;
   border-radius: 1.5rem;
   cursor: pointer;
+  color : $black
+}
+
+.paddingCard {
+  padding: 1rem !important;
+}
+
+.paddingTop{
+  padding-top: 0.5rem
+}
+
+.paddingCard {
+  padding: 1.25rem !important;
 }
 
 .cardRound{
@@ -29,10 +43,8 @@
 }
 
 .borderGrid {
+  @extend .paddingCard;
   -webkit-box-shadow: none;
-  padding: 0.25rem !important;
-  padding-left: 0.6rem !important;
-  padding-right: 0.6rem !important;
   display: flex;
   align-items: center;
 }
@@ -55,17 +67,14 @@
 }
 
 .imageClip{
-    height: 6rem;
-    width: auto;
-}
+    height: 8rem;
+    width: 7rem;
+    padding : 0.5rem;
 
-.borderGrid{
-    -webkit-box-shadow :none;
-    padding: 0px !important;
-    padding-left: 0.6rem!important;
-    padding-right: 0.6rem!important;
-    display: flex;
-    align-items: center;
+    @media screen and (max-width: 400px) {
+      height: 6.25rem;
+      width: 5.5rem;
+    }
 }
 
 .icon {
@@ -86,21 +95,12 @@
   margin-left: 0.6rem;
 }
 
-.floatRight {
-  margin-left: auto;
-}
-
 .paddingleftcourse {
     padding-left: 1rem;
   }
   
 .paddingmanage {
   padding: 0.4rem;
-}
-
-.update {
-  margin-top: -11.7rem;
-  margin-left: 85%;
 }
 
 .cardCourse{
@@ -127,11 +127,6 @@
 
 .marginLeft{
     margin-left: 0.6rem;
-}
-
-.imageClip {
-  height: 9rem;
-  width: 7rem;
 }
 
 .rate {
@@ -161,12 +156,24 @@
    height: 10rem
 }
 
-.buttonCircleLearner{
-  @extend .buttonCircle;
-  width: 3.5rem;
-  height: 3.5rem;
+.textOneLine {
+  @include cutText(1)
 }
 
-.cutText1Line {
-  @include cutText(1)
+.textLink{
+  cursor: pointer;
+  color : $blue
+}
+
+.textLinkDelete{
+  @extend .textLink;
+  color : $red
+}
+
+.marginTop1{
+  margin-top: 0.5rem;
+}
+
+.textThreeLine {
+  @include cutText(3)
 }

@@ -6,12 +6,11 @@ import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import isMobile from "../../../../../isMobile/isMobile"
 import { useHistory, useParams } from "react-router";
-import { modalAction, onlineCourseActions } from "../../../../../../redux/actions";
+import { modalAction, onlineCourseActions, reviewActions } from "../../../../../../redux/actions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { SkeletonComponent } from "../../../../../loading/SkeletonComponent";
-// import EmptyImage from "../../../../../loading/EmptyImage";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import isEmpty from "../../../../../defaultFunction/checkEmptyObject";
@@ -23,24 +22,30 @@ import Loading from "../../../../../loading/Loading";
 import buttonFull from "../../../../../defaultFunction/style";
 import { faBitcoin } from "@fortawesome/free-brands-svg-icons";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
+import BuyClip from "../BuyClip";
+import AllReview from "../../../review/AllReview";
 
 export default function ManageClip() {
-  const { clip } = useSelector(state => state.onlineCourse)
+  const { clip, buy } = useSelector(state => state.onlineCourse)
   const { profile, isAuthenticated } = useSelector(state => state.auth)
+  // const { reviews } = useSelector(state => state.review)
   const { loading } = useSelector(state => state.loading)
   const [showMessage, setShowMessage] = useState(false)
   const { videoId, courseId } = useParams()
   const owner = (!isEmpty(clip) && profile) && (profile === clip.owner.id)
-  const isBuyClip = !isEmpty(clip) && clip.cost === 0
+  const isBuyClip = buy && buy
   const dispatch = useDispatch()
   const history = useHistory()
   const screens = useBreakpoint();
+  // const myReview = reviews ? reviews.filter(value => value.owner === true)[0] : null
+  // const review = reviews ? reviews.filter(value => value.owner !== true)[0] : null
   const showtext = {
     display: showMessage ? "block" : "-webkit-box"
   }
 
   useEffect(() => {
     dispatch(onlineCourseActions.getClip(videoId))
+    dispatch(reviewActions.getReviewClip(videoId))
     return () => {
       dispatch(onlineCourseActions.clearListOnlineCourse())
     }
@@ -61,12 +66,21 @@ export default function ManageClip() {
   const handleActionClip = () => {
     if (!isAuthenticated) {
       history.push("/login")
+    }else{
+      handleBuyCourse()
     }
   }
 
   const handleReview = () => {
     dispatch(modalAction.openModal({
-      body: <ReviewForm courseId={courseId} />,
+      body: <ReviewForm />,
+      size: sizeModal.default,
+    }))
+  }
+
+  const handleBuyCourse = () =>{
+    dispatch(modalAction.openModal({
+      body: <BuyClip title={clip && clip.name} coin={clip && clip.cost}/>,
       size: sizeModal.default,
     }))
   }
@@ -147,7 +161,9 @@ export default function ManageClip() {
                 </Col>
               )
             }
+             <AllReview/>
           </Col>
+         
         </Row>
         {
           owner && (
@@ -179,7 +195,7 @@ export default function ManageClip() {
               isBuyClip ? (
                 <button className={style.reviewbottom} onClick={() => handleReview()}>ให้คะแนน</button>
               ) : (
-                <button className={style.reviewbottom} >ซื้อบทเรียนนี้</button>
+                <button className={style.reviewbottom} onClick={()=>handleActionClip()}>ซื้อบทเรียนนี้</button>
               )
             }
           </div>

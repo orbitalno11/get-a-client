@@ -1,34 +1,33 @@
 import React, { Fragment } from 'react'
 import CardReview from "../../../card/CardReview"
-import { Button, Col, Grid, Row } from "antd"
+import { Col, Row } from "antd"
 import style from "./styles.module.scss"
 import { useDispatch, useSelector } from "react-redux";
 import { modalAction, reviewActions } from "../../../../redux/actions";
 import { sizeModal } from "../../../modal/SizeModal";
 import ReviewForm, { DeleteForm } from "./ReviewForm";
-import { Link, useParams } from "react-router-dom";
-import FormEnroll from "../managecourse/manageCourse/FormEnroll";
+import { useParams } from "react-router-dom";
 import EmptyImage from "../../../loading/EmptyImage";
 import { useEffect } from "react";
 import isEmpty from "../../../defaultFunction/checkEmptyObject";
 
-const { useBreakpoint } = Grid;
-
 export default function AllReview() {
-    const screens = useBreakpoint();
     const dispatch = useDispatch()
-    const { offlineCourse, auth, review } = useSelector(state => state)
-    const course = offlineCourse.data && offlineCourse.data
+    const { id, videoId } = useParams()
+    const { offlineCourse, auth, review, onlineCourse  } = useSelector(state => state)
+    const course = videoId ? (onlineCourse.clip && onlineCourse.data) : (offlineCourse.data && offlineCourse.data)
     const owner = (course && auth) && (auth.profile === course.owner.id)
-    const learn_status = (auth.role === 1 && course) ? course.enrolled : false
-    const { id, type } = useParams()
-    const isOfflineCourse = type === "course"
 
-    const reviewList = !isEmpty(review.reviews) ? review.reviews.filter(value => value.reviewer.id !== auth.profile) : []
-    const myReview = !isEmpty(review.reviews) ? review.reviews.filter(value => value.reviewer.id === auth.profile)[0] : []
+    const reviewList = !isEmpty(review.reviews) ? review.reviews.filter(value => value.owner !== true) : []
+    const myReview = !isEmpty(review.reviews) ? review.reviews.filter(value => value.owner === true)[0] : []
 
     useEffect(() => {
-        dispatch(reviewActions.getReviewByCourse(id, 1))
+        if(videoId){
+            dispatch(reviewActions.getReviewClip(videoId))
+        }else{
+            dispatch(reviewActions.getReviewByCourse(id, 1))
+        }
+       
         return()=>{
             dispatch(reviewActions.clearReview())
         }
@@ -49,70 +48,8 @@ export default function AllReview() {
        
     }
 
-    const paddingButton = {
-        margin: '0rem 0.5rem 0rem 0.5rem'
-    }
-
-    const enrollCourse = () => {
-        if (!auth.isAuthenticated) {
-            window.location.href = "/login"
-        } else {
-            const dataEnroll = course && {
-                id: course.id,
-                name: course.name,
-                subject: course.subject.title,
-                grade: course.grade.title,
-                owner: course.owner.fullNameText
-            }
-
-            dispatch(modalAction.openModal({
-                body: <FormEnroll data={dataEnroll} />,
-                size: sizeModal.default,
-            }))
-        }
-    }
-
     return (
         <Fragment>
-            <div className={style.marginTop20}>
-                <div className={style.TitleCoin}>
-                    <span className={style.titleH3}>ความเห็นจากผู้เรียนจริง</span>
-                    <div style={{ marginLeft: 'auto' }}>
-                        {
-                            learn_status && isEmpty(myReview) && screens.lg && (
-                                <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => { handleOpenReviewForm() }}>ให้คะแนน</Button>
-                            )
-                        }
-                        {
-                            (isOfflineCourse && !learn_status && !owner && screens.lg) && (
-                                <Fragment>
-                                    <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => enrollCourse()} style={paddingButton}>สมัครเรียน</Button>
-                                </Fragment>
-                            )
-                        }
-
-                        {
-                            (owner && screens.md) && (
-                                <Fragment>
-                                    { isOfflineCourse ? (
-                                        <Link to={`/tutor/course/${course.id}/enroll`}>
-                                            <Button className="buttonColor backgroundOrange" shape="round" size="large" style={paddingButton}>อนุมัติคำขอ</Button>
-                                        </Link>
-                                    ) : (
-                                        <Link to={`/course/online/${id}/video`}>
-                                            <Button className="buttonColor backgroundOrange" shape="round" size="large" onClick={() => { handleOpenReviewForm() }} style={paddingButton}>จัดการบทเรียน</Button>
-                                        </Link>     
-                                    )
-                                    }
-                                    <Link to={`/tutor/course/${course.id}/edit`}>
-                                        <Button className="buttonColor backgroundBlue" shape="round" size="large" style={paddingButton}>แก้ไข</Button>
-                                    </Link>
-                                </Fragment>
-                            )
-                        }
-                    </div>
-                </div>
-
                 <div className={style.marginTop20}>
                     {
                         !isEmpty(review.reviews) ? (
@@ -140,7 +77,6 @@ export default function AllReview() {
                         )
                     }
                 </div>
-            </div>
         </Fragment>
     )
 }

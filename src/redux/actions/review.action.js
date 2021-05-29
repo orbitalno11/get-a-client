@@ -36,7 +36,12 @@ const createReview = (data) => {
             .then(() => {
                 dispatch(loadingActions.stopLoading())
                 dispatch(success())
-                dispatch(getReviewByCourse(data.courseId,1))
+                if(data.isClip){
+                    dispatch(getReviewClip(data.clipId))
+                }else{
+                    dispatch(getReviewByCourse(data.courseId,1))
+                }
+               
                 dispatch(modalAction.closeModal())
                 dispatch(modalAction.openModal({
                     text: "แสดงความคิดเห็นสำเร็จ",
@@ -68,7 +73,11 @@ const updateReview = (data) => {
             .then(() => {
                 dispatch(loadingActions.stopLoading())
                 dispatch(success())
-                dispatch(getReviewByCourse(data.courseId,1))
+                if(data.isClip){
+                    dispatch(getReviewClip(data.clipId))
+                }else{
+                    dispatch(getReviewByCourse(data.courseId,1))
+                }
                 dispatch(modalAction.closeModal())
                 dispatch(modalAction.openModal({
                     text: "แก้ไขความเห็นสำเร็จ",
@@ -92,17 +101,24 @@ const updateReview = (data) => {
     }
 }
 
-const deleteReviewByCourse = (Reviewid, courseType, idCourse) => {
+const deleteReviewByCourse = (Reviewid, courseType, idCourse, videoId) => {
+    console.log(Reviewid, courseType, idCourse)
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.delete(`/review/${Reviewid}`, {
             params: {
                 course: idCourse,
-                type: courseType
+                type: courseType,
+                clip : videoId
             }
         }) .then(() => {
             dispatch(loadingActions.stopLoading())
             dispatch(success())
+            if(videoId){
+                dispatch(getReviewClip(videoId))
+            }else{
+                dispatch(getReviewByCourse(idCourse, 1))
+            }
             dispatch(getReviewByCourse(idCourse,1))
             dispatch(modalAction.closeModal())
             dispatch(modalAction.openModal({
@@ -128,6 +144,26 @@ const deleteReviewByCourse = (Reviewid, courseType, idCourse) => {
     }
 }
 
+const getReviewClip = (id) => {
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiURL.apiGetA.get(`/review/clip/${id}`, ).then((res) => {
+            if (res.data.data) {
+                const data = res.data.data
+                dispatch(loadingActions.stopLoading())
+                dispatch(success(data))
+            }
+        })
+            .catch((err) => {
+                dispatch(loadingActions.stopLoading())
+                dispatch(failure(err.response.data))
+            })
+
+        function success(data) { return { type: reviewConstants.GET_REVIEW_SUCCESS, payload: data } }
+        function failure(err) { return { type: reviewConstants.GET_REVIEW_FAILURE, payload: err } }
+    }
+}
+
 function clearReview() {
     return dispatch => { dispatch({ type: reviewConstants.CLEAR_REVIEW }) }
 }
@@ -138,5 +174,6 @@ export const reviewActions = {
     getReviewByCourse,
     updateReview, 
     deleteReviewByCourse,
-    clearReview
+    clearReview,
+    getReviewClip
 }

@@ -6,6 +6,7 @@ const initialState = {
     clip: null,
     data: null,
     error: null,
+    buySuccess : false
 }
 
 
@@ -94,6 +95,7 @@ const onlineCourseReducer = (state = initialState, action) => {
             return {
                 ...state,
                 clip: action.payload,
+                buy : false,
                 error: null
             }
         case onlineCourseConstants.GET_CLIP_FAILURE:
@@ -110,6 +112,19 @@ const onlineCourseReducer = (state = initialState, action) => {
         case onlineCourseConstants.DELETE_CLIP_FAILURE:
             return {
                 ...state,
+                error: action.payload
+            }
+        case onlineCourseConstants.BUY_CLIP_COURSE_SUCCESS:
+            return {
+                ...state,
+                buy : true,
+                buySuccess : true,
+                error: null
+            }
+        case onlineCourseConstants.BUY_CLIP_COURSE_FAILURE:
+            return {
+                ...state,
+                buySuccess : false,
                 error: action.payload
             }
         case onlineCourseConstants.CLEAR_LIST_ONLINE_COURSE:

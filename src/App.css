@@ -8,6 +8,7 @@
   --error-color: #840c0c;
   --green-color: #00b900;
   --red-color : #ab330f;
+  --black-color : #000000;
 }
 
 /* General */
@@ -352,4 +353,22 @@ textarea{
 
 #reviewForm .ant-spin-dot-item {
   background-color: var(--white-color) !important;
+}
+
+
+.tabStyle .ant-tabs-ink-bar {
+  height: 0.25rem !important;
+  background: var(--orange-color);
+}
+
+.tabStyle .ant-tabs-tab-btn {
+  color: var(--black-color) !important;
+  font-size: 1.5rem !important;
+  font-weight: 500;
+  height: 2.5rem;
+  padding : 0 1rem 0 1rem
+}
+
+.tabStyle .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--orange-color) !important;
 }

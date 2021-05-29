@@ -15,9 +15,6 @@
   margin-top: 0.25rem;
 }
 
-.pagepaddingleft{
-  padding-left: 2rem;
-}
 
 .rateCoin {
   background: #f5732e !important;
@@ -68,10 +65,7 @@
   border-radius:2rem;
 }
 
-.columnRate{
-  margin-left: 1.5rem;
-  margin-right: 1rem;
-}
+
 
 .tablecoins {
   border-collapse: collapse;
@@ -116,4 +110,16 @@
   justify-content: flex-end;
 }
 
+// new
+.paddingInput{
+  padding-top: 1.563rem;
+}
 
+.columnRate{
+  margin-left: 1.5rem;
+  margin-right: 1rem;
+}
+
+.pagepaddingleft{
+  padding-left: 2rem;
+}

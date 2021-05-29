@@ -94,21 +94,24 @@ function getCoinTransaction(){
     function failure(err) { return { type: coinConstants.GET_COIN_USER_LIST_FAILURE, payload: err } }
 }
 
-function CreateCost(data){
+function CreateCoinRate(data){
     return async dispatch => {
+        console.log(data)
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.post(`/coin/rate`,data).then(() => {
             console.log(data)
             dispatch(success())
+            dispatch(coinAction.getCoinRatesAdmin());
             dispatch(modalAction.openModal({
                 text: "ดำเนินการสำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose: "/login"
             }))
+            dispatch(coinAction.clearCreateRate())
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
             dispatch(failure(err.response.data))
+            console.log(err.response.data)
             dispatch(modalAction.openModal({
                 text: "ดำเนินการไม่สำเร็จ",
                 size: sizeModal.small,
@@ -120,11 +123,16 @@ function CreateCost(data){
     function failure(err) { return { type: coinConstants.GET_COIN_CREATE_LIST_FAILURE, payload: err } }
 }
 
+function clearCreateRate() {
+    return dispatch => { dispatch({ type: coinConstants.CLEAR_CERATE_COIN }) }
+}
+
 export const coinAction = {
     getCoinRatesLearner,
     getCoinRatesTutor,
     getCoinRatesAdmin,
     getCoinBalance,
     getCoinTransaction,
-    CreateCost
+    CreateCoinRate,
+    clearCreateRate
 }

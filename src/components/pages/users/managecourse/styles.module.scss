@@ -158,3 +158,18 @@ padding-top: 1rem;
   border-radius: 0.5rem;
   margin-right: 1rem;
 }
+
+
+.setVdo{
+  position: absolute;
+  background-color: rgba($color: $black, $alpha: 1);
+  height : 100%;
+  width : 100%;
+  top : 0
+}
+
+.centerInabs{
+  @extend .centerPage;
+  flex-flow: column;
+  height: 100%;
+}

@@ -36,8 +36,6 @@ export default function OfflineCourse() {
     const idCourse = params.id
     const myReview = !isEmpty(reviews) ? reviews.filter(value => value.reviewer.id === auth.profile)[0] : []
 
-    console.log(course)
-
     useEffect(() => {
         if (isOfflineCourse) {
             dispatch(offlineCourseAction.getOfflineCourse(idCourse))

@@ -65,7 +65,7 @@ function checkFavoriteTutor(tutorId){
     
 }
 
-function CheckFavorite(tutorId){ 
+function checkFavoriteTutor(tutorId){ 
     return  dispatch => {
         dispatch(loadingActions.startLoading())
          apiURL.apiGetA.get("/favorite/liked", {

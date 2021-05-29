@@ -11,7 +11,6 @@ import { faHeart, faInfo } from "@fortawesome/free-solid-svg-icons";
 import { favoriteAction } from "../../../../../../../redux/actions";
 import { color } from "../../../../../../defaultValue";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
-import isEmpty from "../../../../../../defaultFunction/checkEmptyObject";
 
 export default function ProfileIntroduce({ mainPage }) {
     const dispatch = useDispatch()
@@ -24,14 +23,6 @@ export default function ProfileIntroduce({ mainPage }) {
         dispatch(favoriteAction.likeTutor(id,favData.favorite));
     };
 
-    useEffect(() => {
-        if(!isEmpty(favData.check)){
-            setloadingFav(true)
-        }
-        return () => {
-            setloadingFav(false)
-        }
-    }, [favData.check])
     return (
         <Fragment>
             <Row className={style.paddingbody} >

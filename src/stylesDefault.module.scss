@@ -8,7 +8,6 @@ $red : #840c0c;
 $green : #00B900;
 $black : #000000;
 $silver : #a39b9b;
-
 // for register page 
 .titleH1{
     font-size: 3.75rem;
@@ -35,12 +34,25 @@ $silver : #a39b9b;
     font-weight: 600;
 }
 
+.header4rem{
+    font-size: 4rem;
+    font-weight: 600;
+}
+
+.text125{
+    font-size: 1.25rem;
+}
+
 .textSmall{
     font-size: 1rem;
 }
     
 .textNormal{
     font-size: 1.35rem;
+}
+
+.textLarge{
+    font-size: 1.5rem;
 }
 
 .iconLargeRegister{
@@ -149,6 +161,9 @@ $silver : #a39b9b;
 
     @media only screen and (max-width: 768px){
         padding:  6.25rem 1.5rem 4rem 1.5rem;
+    }
+    @media only screen and (max-width: 576px){
+        background-color: white;
     }
 }
 

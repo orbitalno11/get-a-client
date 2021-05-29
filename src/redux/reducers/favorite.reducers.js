@@ -3,7 +3,6 @@ import { favoriteConstants } from "../constants"
 const initialState = {
     favorite :  null,
     favoritelist : null,
-    check:null,
     error: null
 }
 
@@ -28,7 +27,7 @@ const favoriteReducer = (state = initialState , action)=>{
         case favoriteConstants.LIKE_TUTOR_SUCCESS:{
             return {
                 ...state,
-                check : action.payload,
+                favorite : action.payload,
                 error : false
             }
 

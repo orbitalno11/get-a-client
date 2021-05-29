@@ -140,7 +140,7 @@ export default function AddClip() {
                   <p className={style.textNormal}>คลิปการสอน</p>
                   <div className="imageUpload" >
                     <label htmlFor="file-input">
-                      <span className={style.buttonInputFile}>{vdo ? "อัปโหลดวิดิโอการสอน" : "แก้ไขวิดิโอการสอน"}</span>
+                      <span className={style.buttonInputFile}>{!vdo ? "อัปโหลดวิดิโอการสอน" : "แก้ไขวิดิโอการสอน"}</span>
                       {
                         isMobile() && (<br />)
                       }

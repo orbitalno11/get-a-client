@@ -165,7 +165,7 @@ function updateClipOnlineCourse(data, courseId, videoId) {
             }))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response.data))
+            dispatch(failure(err?.response?.data))
             dispatch(modalAction.openModal({
                 text: "แก้ไขคลิปการสอนไม่สำเร็จ",
                 size: sizeModal.small,

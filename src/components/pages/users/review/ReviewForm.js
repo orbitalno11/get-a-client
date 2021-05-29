@@ -22,43 +22,47 @@ export function DeleteForm({ idReview, type }) {
     }
 
     const buttonDelete = {
-        width : "100%",
-        marginTop : "1rem"
+        width: "100%",
+        marginTop: "1rem"
     }
 
     const handleDeleteComment = () => {
-        if( type === "review") {
-            dispatch(reviewActions.deleteReviewByCourse(idReview, 1,id))
-        }else{
+        if (type === "review") {
+            if(videoId){
+                dispatch(reviewActions.deleteReviewByCourse(idReview, 3, courseId, videoId))
+            }else{
+                dispatch(reviewActions.deleteReviewByCourse(idReview, 1, id))
+            }
+        } else {
             dispatch(modalAction.closeModal())
             dispatch(onlineCourseActions.deleteClip(courseId, videoId))
         }
-        
+
     }
 
     return (
         <div align="center">
             <h3 className={style.titleH4}>
-                ยืนยันการลบ{ text }ของบทเรียนนี้
+                ยืนยันการลบ{text}ของบทเรียนนี้
             </h3>
-            <p style={styleWarningText}>หากลบ{ text }แล้วจะไม่สามารถกู้{ text }ได้</p>
-            <Button  className="buttonColor backgroundRed" style={buttonDelete} id="reviewForm" shape="round" onClick={()=>handleDeleteComment()} disabled={loading ? true : false}>
+            <p style={styleWarningText}>หากลบ{text}แล้วจะไม่สามารถกู้{text}ได้</p>
+            <Button className="buttonColor backgroundRed" style={buttonDelete} id="reviewForm" shape="round" onClick={() => handleDeleteComment()} disabled={loading ? true : false}>
                 {
                     loading && (
                         <Fragment>
-                            <Spin style={{ marginRight: "0.5rem" }} /> 
+                            <Spin style={{ marginRight: "0.5rem" }} />
                             <span>กำลัง</span>
                         </Fragment>
                     )
                 }
-                    ลบ{ text }นี้
+                    ลบ{text}นี้
                 </Button>
         </div>
     )
 }
 
-export default function ReviewForm({ idReview, courseId }) {
-    const { id, videoId } = useParams()
+export default function ReviewForm({ idReview }) {
+    const { id, videoId, courseId } = useParams()
     const dispatch = useDispatch()
     const { loading } = useSelector(state => state.loading)
     const { review, modal } = useSelector(state => state)
@@ -79,40 +83,37 @@ export default function ReviewForm({ idReview, courseId }) {
         marginTop: "1rem",
         marginBottom: "1rem",
         border: `0.15rem solid ${color.orange}`,
-        paddingTop : "0.75rem"
+        paddingTop: "0.75rem"
     }
 
     const buttonReview = {
-        width : "100%"
+        width: "100%"
     }
-    
-    const onSubmit = (data) => {
-        console.log( data)
-        if (data) {
 
+    const onSubmit = (data) => {
+        if (data) {
             if (isEmpty(idReview)) {
                 const formData = {
                     "courseId": videoId ? courseId : id,
                     "rating": data.rate,
                     "comment": data.comment,
                     "isClip": videoId ? true : false,
-                    "clipId" : videoId && videoId,
+                    "clipId": videoId && videoId,
                     "courseType": videoId ? 3 : 1
                 }
                 dispatch(reviewActions.createReview(formData))
-            } else{
+            } else {
                 const formData = {
                     "courseId": videoId ? courseId : id,
                     "reviewId": idReview,
                     "rating": data.rate,
                     "comment": data.comment,
                     "isClip": videoId ? true : false,
-                    "clipId" : videoId && videoId,
+                    "clipId": videoId && videoId,
                     "courseType": videoId ? 3 : 1
                 }
                 dispatch(reviewActions.updateReview(formData))
             }
-
         }
     }
 
@@ -140,7 +141,7 @@ export default function ReviewForm({ idReview, courseId }) {
                     {
                         loading && (
                             <Fragment>
-                                <Spin style={{ marginRight: "0.5rem" }} /> 
+                                <Spin style={{ marginRight: "0.5rem" }} />
                                 <span>กำลัง</span>
                             </Fragment>
                         )

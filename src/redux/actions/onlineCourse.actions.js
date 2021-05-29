@@ -253,6 +253,34 @@ function deleteClip(courseId, videoId) {
 }
 
 
+function buyClip(id) {
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiURL.apiGetA.get(`/clip/${id}/buy`)
+            .then(() => {
+                dispatch(success())
+                dispatch(loadingActions.stopLoading())
+                dispatch(modalAction.openModal({
+                    text: "ซื้อคลิปเรียนสำเร็จ",
+                    size: sizeModal.small,
+                    alert: typeModal.corrent,
+                }))
+            })
+            .catch(err => {
+                dispatch(failure(err.response?.data))
+                dispatch(loadingActions.stopLoading())
+                dispatch(modalAction.openModal({
+                    text: "ซื้อคลิปเรียนไม่สำเร็จ",
+                    size: sizeModal.small,
+                    alert: typeModal.wrong,
+                }))
+            })
+    }
+
+    function success() { return { type: onlineCourseConstants.BUY_CLIP_COURSE_SUCCESS } }
+    function failure(err) { return { type: onlineCourseConstants.BUY_CLIP_COURSE_FAILURE, payload: err } }
+}
+
 
 function clearListOnlineCourse() {
     return dispatch => { dispatch({ type: onlineCourseConstants.CLEAR_LIST_ONLINE_COURSE }) }
@@ -269,5 +297,6 @@ export const onlineCourseActions = {
     updateClipOnlineCourse,
     getClipOnlineCourse,
     getClip,
-    deleteClip
+    deleteClip,
+    buyClip
 }

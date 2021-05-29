@@ -5,7 +5,7 @@ import { Fragment } from "react"
 import { useParams } from "react-router"
 import { Link } from "react-router-dom"
 import { color } from "../../../../defaultValue"
-import buttonFull from "../../../../defaultValue/style"
+import styleComponent from "../../../../defaultValue/style"
 import style from "../styles.module.scss";
 
 export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewForm, enrollCourse, learn_status, showReview, switchComponent, typeShow }) {
@@ -21,7 +21,7 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                                 <Link to={`/course/online/${id}/video`}>
                                     <Button
                                         className="buttonColor"
-                                        style={buttonFull(color.orange)}
+                                        style={styleComponent.buttonFull(color.orange)}
                                         size="middle">
                                         ดูบทเรียน
                             </Button>
@@ -29,9 +29,9 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                             ) : (
                                 !owner && (
                                     learn_status ? (
-                                        <Button className="buttonColor" size="large" style={buttonFull(color.orange)} onClick={() => { handleOpenReviewForm() }}>ให้คะแนน</Button>
+                                        <Button className="buttonColor" size="large" style={styleComponent.buttonFull(color.orange)} onClick={() => { handleOpenReviewForm() }}>ให้คะแนน</Button>
                                     ) : (
-                                        <Button className="buttonColor" size="large" style={buttonFull(color.orange)} onClick={() => enrollCourse()} >สมัครเรียน</Button>
+                                        <Button className="buttonColor" size="large" style={styleComponent.buttonFull(color.orange)} onClick={() => enrollCourse()} >สมัครเรียน</Button>
                                     )
                                 )
                             )
@@ -46,7 +46,7 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                                                     <Button
                                                         className="buttonColor"
                                                         size="large"
-                                                        style={buttonFull(color.orange)}>
+                                                        style={styleComponent.buttonFull(color.orange)}>
                                                         อนุมัติคำขอ
                                             </Button>
                                                 </Link>
@@ -58,7 +58,7 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                                             <Button
                                                 className="buttonColor"
                                                 size="large"
-                                                style={buttonFull(color.blue)}>
+                                                style={styleComponent.buttonFull(color.blue)}>
                                                 แก้ไขคอร์สเรียน
                                     </Button>
                                         </div>

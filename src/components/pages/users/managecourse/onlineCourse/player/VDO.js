@@ -1,17 +1,16 @@
 import React, { Fragment } from "react";
-import { Row, Col, Tooltip, Button } from "antd";
+import { Row, Col, Tooltip, Button, Image } from "antd";
 import style from "../../styles.module.scss";
 import Header from "../../../../../headerMobile/Header";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import isMobile from "../../../../../isMobile/isMobile"
 import { useHistory, useParams } from "react-router";
-import { modalAction, onlineCourseActions } from "../../../../../../redux/actions";
+import { modalAction, onlineCourseActions, profileAction, reviewActions } from "../../../../../../redux/actions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { SkeletonComponent } from "../../../../../loading/SkeletonComponent";
-// import EmptyImage from "../../../../../loading/EmptyImage";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import isEmpty from "../../../../../defaultFunction/checkEmptyObject";
@@ -20,18 +19,20 @@ import ReviewForm, { DeleteForm } from "../../../review/ReviewForm";
 import { sizeModal } from "../../../../../modal/SizeModal";
 import ModalComponent from "../../../../../modal/ModalComponent";
 import Loading from "../../../../../loading/Loading";
-import buttonFull from "../../../../../defaultFunction/style";
-import { faBitcoin } from "@fortawesome/free-brands-svg-icons";
+import { styleComponent } from "../../../../../defaultFunction/style";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
+import BuyClip from "../BuyClip";
+import AllReview from "../../../review/AllReview";
 
 export default function ManageClip() {
   const { clip } = useSelector(state => state.onlineCourse)
   const { profile, isAuthenticated } = useSelector(state => state.auth)
   const { loading } = useSelector(state => state.loading)
+  const profileAccount = useSelector(state => state.profile.profile)
   const [showMessage, setShowMessage] = useState(false)
   const { videoId, courseId } = useParams()
   const owner = (!isEmpty(clip) && profile) && (profile === clip.owner.id)
-  const isBuyClip = !isEmpty(clip) && clip.cost === 0
+  const isBuyClip = clip ? clip.bought : false
   const dispatch = useDispatch()
   const history = useHistory()
   const screens = useBreakpoint();
@@ -41,6 +42,8 @@ export default function ManageClip() {
 
   useEffect(() => {
     dispatch(onlineCourseActions.getClip(videoId))
+    dispatch(reviewActions.getReviewClip(videoId))
+    dispatch(profileAction.getProfile())
     return () => {
       dispatch(onlineCourseActions.clearListOnlineCourse())
     }
@@ -61,12 +64,21 @@ export default function ManageClip() {
   const handleActionClip = () => {
     if (!isAuthenticated) {
       history.push("/login")
+    } else {
+      handleBuyCourse()
     }
   }
 
   const handleReview = () => {
     dispatch(modalAction.openModal({
-      body: <ReviewForm courseId={courseId} />,
+      body: <ReviewForm />,
+      size: sizeModal.default,
+    }))
+  }
+
+  const handleBuyCourse = () => {
+    dispatch(modalAction.openModal({
+      body: <BuyClip title={clip && clip.name} coin={clip && clip.cost} />,
       size: sizeModal.default,
     }))
   }
@@ -116,13 +128,18 @@ export default function ManageClip() {
                         <span className={style.textTwo25}>{clip.name}</span>
                       </Col>
                       <Col span={4} align="end">
-                        <span className={style.textOne5}>
-                          <FontAwesomeIcon icon={faBitcoin} style={{ color: color.yellow }} />
-                        </span>
-                        <span className={`${style.marginleftIcon} ${style.textOne25}`}>{clip && clip.cost}</span>
+                        {
+                          isBuyClip ? (
+                            <span className={`${style.textOne25}`}>ซื้อแล้ว</span>
+                          ) : (
+                            <Fragment>
+                              <styleComponent.iconCoin />
+                              <span className={`${style.marginLeftOneHalf} ${style.textOne25}`}>{clip && clip.cost}</span>
+                            </Fragment>
+                          )
+                        }
                       </Col>
                     </Row>
-
                     <span className={`${style.textThreeLine} ${style.textOne}`} style={showtext}>{clip.description}</span>
                     <u className={style.textOne}>{showMessage ? "ย่อรายละเอียดของบทเรียน" : "ดูรายละเอียดบทเรียนเพิ่มเติม"}</u>
                   </Fragment>
@@ -133,8 +150,35 @@ export default function ManageClip() {
                   </Fragment>
                 )
               }
-            </Col>
 
+            </Col>
+            <Col className={`${style.section} ${style.marginSection}`} span={24}>
+              {
+                (isAuthenticated && !owner) ? (
+                  <Row align="middle">
+                    <Col>
+                      <Image src={profileAccount.profileUrl} className={style.imageProfileSmall} preview={false} />
+                    </Col>
+                    <Col className={`${style.marginLeftOneHalf} ${style.textOne25}`}>
+                      <span>{profileAccount.fullNameText}</span>
+                      <div>
+                        <styleComponent.iconCoin />
+                        <span className={`${style.marginLeftOneHalf} ${style.textOne25}`}>0</span>
+                      </div>
+                    </Col>
+                  </Row>
+                ) : (
+                  <Row align="center">
+                    <p className={style.textOne25}>เข้าสู่ระบบเพื่อซื้อวิดิโอนี้</p>
+                    <Col span={24} align="center">
+                    <Button className={style.buttonColor} style={styleComponent.buttonFull(color.orange,"auto")} onClick={()=>history.push("/login")}>เข้าสู่ระบบ</Button>
+                    <Button className={`${style.buttonColor} ${style.marginLeftOneHalf}`} style={styleComponent.buttonFull(color.blue,"auto")}  onClick={()=>history.push("/register")}>สมัครสมาชิก</Button>
+                    </Col>
+                  </Row>
+                )
+              }
+
+            </Col>
           </Col>
           <Col xl={8} lg={8} md={24} sm={24} xs={24}>
             <Col className={`${style.section} ${style.marginSection}`} span={24}>
@@ -143,11 +187,13 @@ export default function ManageClip() {
             {
               (screens.lg && isBuyClip) && (
                 <Col className={style.marginSection} span={24}>
-                  <button className={`${style.buttonColor} ${style.textTwo}`} style={buttonFull(color.orange)} onClick={() => handleReview()}>ให้คะแนน</button>
+                  <button className={`${style.buttonColor} ${style.textTwo}`} style={styleComponent.buttonFull(color.orange)} onClick={() => handleReview()}>ให้คะแนน</button>
                 </Col>
               )
             }
+            <AllReview />
           </Col>
+
         </Row>
         {
           owner && (
@@ -179,7 +225,7 @@ export default function ManageClip() {
               isBuyClip ? (
                 <button className={style.reviewbottom} onClick={() => handleReview()}>ให้คะแนน</button>
               ) : (
-                <button className={style.reviewbottom} >ซื้อบทเรียนนี้</button>
+                <button className={style.reviewbottom} onClick={() => handleActionClip()}>ซื้อบทเรียนนี้</button>
               )
             }
           </div>

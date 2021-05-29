@@ -112,6 +112,18 @@ const onlineCourseReducer = (state = initialState, action) => {
                 ...state,
                 error: action.payload
             }
+        case onlineCourseConstants.BUY_CLIP_COURSE_SUCCESS:
+            return {
+                ...state,
+                clip : {...state.clip , bought : true},
+                error: null
+            }
+        case onlineCourseConstants.BUY_CLIP_COURSE_FAILURE:
+            return {
+                ...state,
+                clip : {...state.clip , bought : false},
+                error: action.payload
+            }
         case onlineCourseConstants.CLEAR_LIST_ONLINE_COURSE:
             return {
                 ...state,

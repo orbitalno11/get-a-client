@@ -18,7 +18,6 @@ export const setAuthToken = token => {
     }
 }
 
-
 export const apiURL = {
     apiGetA,
     apiMap

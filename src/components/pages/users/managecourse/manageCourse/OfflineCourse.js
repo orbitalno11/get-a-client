@@ -142,7 +142,19 @@ export default function OfflineCourse() {
 
     const switchShow = () => {
         if (!isMobile() || showReview) {
-            return <AllReview />
+            return (
+                <Fragment>
+                    <div className={style.TitleCoin}>
+                        <span className={style.titleH3}>ความเห็นจากผู้เรียนจริง</span>
+                        <div style={{ marginLeft: 'auto' }}>
+                        </div>
+                    </div>
+                    <div  className={style.marginSection} >
+                    < AllReview />
+                    </div>
+                   
+                </Fragment>
+            )
         } else {
             return <ContactTutor />
         }

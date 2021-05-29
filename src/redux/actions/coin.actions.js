@@ -98,7 +98,6 @@ function CreateCost(data){
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.post(`/coin/rate`,data).then(() => {
-            console.log(data)
             dispatch(success())
             dispatch(modalAction.openModal({
                 text: "ดำเนินการสำเร็จ",

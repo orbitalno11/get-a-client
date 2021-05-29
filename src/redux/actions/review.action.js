@@ -102,7 +102,6 @@ const updateReview = (data) => {
 }
 
 const deleteReviewByCourse = (Reviewid, courseType, idCourse, videoId) => {
-    console.log(Reviewid, courseType, idCourse)
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.delete(`/review/${Reviewid}`, {

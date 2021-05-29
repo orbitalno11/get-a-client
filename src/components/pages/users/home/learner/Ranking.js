@@ -34,12 +34,10 @@ export default function Ranking() {
         {
             key: "course",
             name: "คอร์ส",
-            // tab: 
         },
         {
             key: "clip",
             name: "คลิปวิดิโอ",
-            // tab: <CardResults />
         },
     ]
     return (

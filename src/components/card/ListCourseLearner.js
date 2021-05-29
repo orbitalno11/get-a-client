@@ -18,16 +18,16 @@ export default function ListCourseLearner({data}) {
             />
           </Col>
           <Col span={11} align="start" style={{ paddingLeft: "0.2rem" }}>
-            <span className={`${styles.titleH5} ${styles.textOneLine}`}>
+            <span className={`${styles.textOneo25} ${styles.textOneLine}`}>
               {data && data.fullNameText}
             </span>
-            <span className={styles.textSmall}>
+            <span className={styles.textOne}>
               <FontAwesomeIcon icon={faBook} className={styles.star} />{" "}
               {data && data.subject.title}
             </span>
           </Col>
           <Col span={5} align="end">
-            <span className={styles.text125}>
+            <span className={styles.textOneo25}>
               <FontAwesomeIcon
                 icon={faStar}
                 className={styles.star}

@@ -46,7 +46,7 @@ export default function AddClip() {
         cost: clip && clip.cost,
       })
       if (clip) {
-        setVdo({ VDOURL :clip.clipUrl,  name: clip.clipUrl })
+        setVdo({ VDOURL: clip.clipUrl, name: clip.clipUrl })
       }
     }
   }, [clip])
@@ -140,8 +140,15 @@ export default function AddClip() {
                   <p className={style.textNormal}>คลิปการสอน</p>
                   <div className="imageUpload" >
                     <label htmlFor="file-input">
-                      <span className={style.buttonInputFile}>{vdo ? "เพิ่มคลิปการสอน" : "แก้ไขคลิปการสอน"}</span>
-                      <span className={style.textNormal}>{vdo && vdo.name}</span>
+                      <span className={style.buttonInputFile}>{vdo ? "อัปโหลดวิดิโอการสอน" : "แก้ไขวิดิโอการสอน"}</span>
+                      {
+                        isMobile() && (<br />)
+                      }
+                      {
+                        vdo?.file && (
+                          <span className={style.textNormal}>{vdo && vdo.name}</span>
+                        )
+                      }
                     </label>
                     <input id="file-input" type="file" name="video" accept="video/mp4" ref={register} onChange={(data) => onChangeVDO(data)} />
                   </div>
@@ -162,7 +169,7 @@ export default function AddClip() {
                 <Col xs={24} sm={24} md={24} lg={8} xl={10} className={!screens.lg ? style.subProfile : null} align={!screens.lg ? "start" : "center"}>
                   <p className={style.textNormal}>ตัวอย่างคลิป</p>
                   <div className={style.scaleVideo}>
-                    <video className={style.video}  src={(!vdo.file ? "https://" : "")+vdo.VDOURL}  width={"100%"} height="396" controls controlsList="nodownload" type="video/mp4" ></video>
+                    <video className={style.video} src={(!vdo.file ? "https://" : "") + vdo.VDOURL} width={"100%"} height="396" controls controlsList="nodownload" type="video/mp4" ></video>
                   </div>
                 </Col>
               )

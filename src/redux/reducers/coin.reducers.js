@@ -58,6 +58,14 @@ const coinReducer = (state = initialState , action)=>{
             }
 
         }
+        case coinConstants.CLEAR_CERATE_COIN:{
+            return {
+                ...state,
+                createCoin : null,
+                error: null
+            }
+
+        }
         default: return state    
     }
 } 

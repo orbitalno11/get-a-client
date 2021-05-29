@@ -1,4 +1,4 @@
-import { Row, Col, Button, Input } from "antd";
+import { Row, Col, Button} from "antd";
 import React, { Fragment, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { exchangeSchema } from "../../../../../../validation/admin/exchangeSchema";
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { modalAction, coinAction } from "../../../../../../redux/actions";
 import ModalComponent from "../../../../../modal/ModalComponent";
 import { sizeModal } from "../../../../../modal/SizeModal";
+import InputComponents from "../../../../../input/InputComponets"
 import Edit from "./Edit";
 import Delete from "./Delete";
 import moment from "moment";
@@ -21,19 +22,20 @@ export default function Price() {
 
   const dispatch = useDispatch();
   const today = moment().format("MM/DD/YYYY")
+
   const onSubmit = (data) => {
     if(data){
-      const data ={
+      const rate ={
         "title": "std",
         "baht": data.baht,
         "coin": data.coin,
         "type": "std",
-        "startDate": Date(today),
-        "endDate": Date(today),
-        "updtaeDate":Date(today),
+        "startDate": today,
+        "endDate": today,
+        "updtaeDate":today,
       }
+      dispatch(coinAction.CreateCoinRate(rate))
     }
-    dispatch(coinAction.CreateCost(data))
   }
 
   const list = useSelector((state) => state.coin.rateCoin);
@@ -45,39 +47,40 @@ export default function Price() {
   function ComponentSample() {
     return (
       <div style={{ paddingLeft: "1rem" }}>
-        <form onSubmit={handleSubmit()}>
-          <p className={style.titleH4}>เพิ่มอัตราการซื้อเหรียญ</p>
-          <Row style={{ paddingTop: "1rem", marginBottom: "1.8rem" }}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <span className={style.headerOne35}>เพิ่มอัตราการซื้อเหรียญ</span>
+          <Row style={{ marginBottom: "1rem" }}>
             <Col span={6} className={style.columnRate}>
-              <Input
-                type="baht"
-                name="baht"
-                ref={register}
-                placeholder="บาท"
-                className={`${style.inputRate} ${style.textNormal}`}
-              />
-              {errors.baht && (
+              <InputComponents
+                    type="number"
+                    name="baht"
+                    register={register}
+                    error={errors.baht}
+                    placeholder="บาท"
+                    min="0"
+                  />
+                 {errors.baht && (
                 <p className="error-input">{errors.baht.message}</p>
               )}
             </Col>
-            <Col span={3} className={style.textNormal}>บาท</Col>
-            <Col span={1} className={style.textNormal}>=</Col>
+            <Col span={3} className={`${style.textOneo25} ${style.paddingInput}`}>บาท</Col>
+            <Col span={1} className={`${style.textOneo25} ${style.paddingInput}`}>=</Col>
             <Col span={6} className={style.columnRate}>
-              <Input
-                type="coin"
-                name="coin"
-                ref={register}
-                placeholder="เหรียญ"
-                className={`${style.inputRate} ${style.textNormal}`}
-              />
-              {errors.baht && (
+              <InputComponents
+                    type="number"
+                    name="coin"
+                    register={register}
+                    error={errors.name}
+                    placeholder="เหรียญ"
+                    min="0"
+                  />
+                 {errors.baht && (
                 <p className="error-input">{errors.coin.message}</p>
               )}
             </Col>
-            <Col span={3} className={style.textNormal}>เหรียญ</Col>
+            <Col span={3} className={`${style.textOneo25} ${style.paddingInput}`}>เหรียญ</Col>
           </Row>
-        </form>
-        <Row className={style.btnRequest}>
+          <Row className={style.btnRequest}>
           <Col span={6}>
             <Button
               className="backgroundGreen buttonColor"
@@ -85,9 +88,8 @@ export default function Price() {
               size="middle"
               style={{ width: "100px" }}
               htmlType="submit"
-              onClick={() => onSubmit()}
             >
-              <span className={style.textNormal}>ยอมรับ</span>
+              <span className={style.textOneo25}>ยอมรับ</span>
             </Button>
           </Col>
           <Col span={6}>
@@ -98,10 +100,11 @@ export default function Price() {
               style={{ width: "100px" }}
               onClick={() => dispatch(modalAction.closeModal())}
             >
-             <span className={style.textNormal}>ปฏิเสธ</span>
+             <span className={style.textOneo25}>ปฏิเสธ</span>
             </Button>
           </Col>
         </Row>
+        </form>
       </div>
     );
   }
@@ -122,7 +125,7 @@ export default function Price() {
           <FontAwesomeIcon icon={faCoins} className={style.coins} />
         </Col>
         <Col xs={21} sm={21} md={20} lg={22} xl={23}>
-          <span className={style.titleH4}>ราคาขายปัจจุบัน</span>
+          <span className={style.headerOne35}>ราคาขายปัจจุบัน</span>
         </Col>
         <ModalComponent />
         <Row className={style.pagepaddingleft}>
@@ -132,7 +135,7 @@ export default function Price() {
               style={{ color: "#F5732E" }}
               onClick={() => component()}
             >
-              <span className={style.textNormal}> เพิ่มอัตราการซื้อเหรียญ</span>            
+              <span className={style.textOneo25}> เพิ่มอัตราการซื้อเหรียญ</span>            
             </Button>
           </Col>
         </Row>

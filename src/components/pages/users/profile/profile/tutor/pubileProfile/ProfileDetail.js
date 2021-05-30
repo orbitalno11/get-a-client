@@ -25,9 +25,9 @@ export default function ProfileDetail({ mainPage }) {
     const dispatch = useDispatch()
     const { loading } = useSelector(state => state.loading)
     const [loadingFav, setloadingFav] = useState(false)
-    const [statusFav, setstatusFav] = useState()
     const { tutorHandle, listTesting, listEducation } = useSelector(state => state.tutor)
     const favData = useSelector(state => state.favorite)
+    const [statusFav, setstatusFav] = useState()
     const params = useParams()
     const userId = params.id
     const address = tutorHandle && (tutorHandle.address && tutorHandle.address.district.title)
@@ -48,7 +48,7 @@ export default function ProfileDetail({ mainPage }) {
     }
 
     const checkFavorite = () =>{
-        if (userId) {
+        if (userId?.isSafeNotBlank()) {
             dispatch(favoriteAction.checkFavoriteTutor(userId))
         }
     }
@@ -59,15 +59,17 @@ export default function ProfileDetail({ mainPage }) {
         checkFavorite()
     }, [fetchProfile])
 
+
+
     const favorite = () => {
         setloadingFav(true)
         dispatch(favoriteAction.likeTutor(userId,favData.favorite));
     };
 
     useEffect(() => {
-        if(!isEmpty(favData.favorite)&& favData.favorite!== statusFav){
+        if(!isEmpty(favData.favorite)&& favData.favorite!== statusFav ){
             setloadingFav(false)
-            setstatusFav(!statusFav)
+            setstatusFav(favData.favorite)
         }
     }, [favData.favorite])
 

@@ -11,7 +11,7 @@ function getFavoriteList(){
                 dispatch(success(favorite))
             }).catch(err => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response.data))
+                dispatch(failure(err.response))
             })
         }
         function success(data) { return { type: favoriteConstants.GET_FAVORITE_LIST_SUCCESS, payload: data } }
@@ -29,10 +29,11 @@ function likeTutor(tutorId, status){
         })
         .then(() => {
             const data = !status
-            dispatch(success(data))                  
+            dispatch(success(data))    
+            dispatch(loadingActions.stopLoading())              
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response.data))
+            dispatch(failure(err.response))
         })
     }
     function success(data) { return { type: favoriteConstants.LIKE_TUTOR_SUCCESS, payload: data } }
@@ -55,7 +56,7 @@ function checkFavoriteTutor(tutorId){
             dispatch(success(favorite))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response.data))
+            dispatch(failure(err.response))
         })
     }
     function success(data) { return { type: favoriteConstants.GET_CHECK_FAVORITE_SUCCESS, payload: data } }

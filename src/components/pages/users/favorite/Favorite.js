@@ -19,7 +19,7 @@ export default function Favorite() {
 
   useEffect(() => {
     dispatch(favoriteAction.getFavoriteList());
-    dispatch(homeActions.getRank(10));
+    dispatch(homeActions.getRank(5));
   }, []);
 
   return (
@@ -49,7 +49,7 @@ export default function Favorite() {
                       className={style.padding}
                       key={index}
                     >
-                      <CardCourseLearner data={item} verizontal="true" />
+                      <CardCourseLearner data={item} verizontal="true"  type="course"/>
                     </Col>
                   ))}
               </Row>
@@ -76,7 +76,7 @@ export default function Favorite() {
                         className={style.padding}
                         key={index}
                       >
-                        <CardCourseLearner data={item} verizontal="true" />
+                        <CardCourseLearner data={item} verizontal="true" type="course" ranking={true}/>
                       </Col>
                     ))}
                 </Row>
@@ -89,7 +89,7 @@ export default function Favorite() {
               </div>
               <div
                 className={!screens.xl? style.contentRecommend: style.contentRecommendXl}>
-                <span className={style.headerTwo}>เป็นที่นิยม</span>
+                <span className={style.headerOne75}>เป็นที่นิยม</span>
                 {home.offlineCourseRank &&
                   home.offlineCourseRank.map((item) => (
                     <Row key={item.id}>

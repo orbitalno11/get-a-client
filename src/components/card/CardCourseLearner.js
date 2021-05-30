@@ -33,7 +33,8 @@ export default function CardCourseLearner({ data, verizontal, type, ranking }) {
 
     const styleRow = {
         position: "relative",
-        height: "100%"
+        height: "100%",
+        width:"100%"
     }
 
     return (

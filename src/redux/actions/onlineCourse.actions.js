@@ -43,7 +43,7 @@ function updateOnlineCourse(data, id) {
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.put(`/online-course/${id}`, data, {
             headers: {
-                "Content-Type": "multipart/form-data",
+                "Content-Type": "multipart/form-data"
             }
         })
             .then(() => {

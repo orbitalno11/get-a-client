@@ -18,7 +18,10 @@ export default function Home() {
     useEffect(() => {
         dispatch(homeActions.getRank())
         dispatch(homeActions.getRankOnline())
+
     }, [])
+
+
 
     // const subject = [
     //     {

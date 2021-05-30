@@ -2,7 +2,8 @@ import axios from 'axios';
 import { BASE_API_URL, LONGDO_MAP_URL } from "../config/environmentConfig";
 
 let apiGetA = axios.create({
-    baseURL: BASE_API_URL
+    baseURL: BASE_API_URL,
+    withCredentials: true
   });
 
 let apiMap = axios.create({

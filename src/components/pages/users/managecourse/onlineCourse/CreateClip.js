@@ -16,6 +16,7 @@ import Loading from "../../../../loading/Loading";
 import { useSelector } from "react-redux";
 import ModalComponent from "../../../../modal/ModalComponent";
 import { useEffect } from "react";
+import {serverSocket} from "../../../../../utils/socket";
 
 const { useBreakpoint } = Grid;
 
@@ -33,6 +34,9 @@ export default function AddClip() {
 
   useEffect(() => {
     dispatch(onlineCourseActions.getClip(videoId))
+    serverSocket.on("uploadProgress", () => {
+      // TODO Uploading progress or check upload status
+    })
     return () => {
       dispatch(onlineCourseActions.clearListOnlineCourse())
     }

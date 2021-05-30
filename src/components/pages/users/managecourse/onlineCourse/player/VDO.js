@@ -154,7 +154,7 @@ export default function ManageClip() {
             </Col>
             <Col className={`${style.section} ${style.marginSection}`} span={24}>
               {
-                (isAuthenticated && !owner) ? (
+                (!isEmpty(profileAccount) && isAuthenticated) ? (
                   <Row align="middle">
                     <Col>
                       <Image src={profileAccount.profileUrl} className={style.imageProfileSmall} preview={false} />

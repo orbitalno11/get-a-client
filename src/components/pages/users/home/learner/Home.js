@@ -20,63 +20,6 @@ export default function Home() {
         dispatch(homeActions.getRankOnline())
     }, [])
 
-    // const subject = [
-    //     {
-    //         subject: "คณิตศาสตร์",
-    //         link: "",
-    //         icon: faSquareRootAlt,
-    //         color: "#F7D7C2"
-    //     },
-    //     {
-    //         subject: "ภาษาไทย",
-    //         link: "",
-    //         icon: faInfinity,
-    //         color: "#F7D7C2"
-    //     },
-    //     {
-    //         subject: "วิทยาศาตร์",
-    //         link: "",
-    //         icon: faMicroscope,
-    //         color: "#F7D7C2"
-    //     },
-    //     {
-    //         subject: "ชีววิทยา",
-    //         link: "",
-    //         icon: faDna,
-    //         color: "#F7D7C2"
-    //     },
-    //     {
-    //         subject: "เคมี",
-    //         link: "faFlask",
-    //         icon: faAtom,
-    //         color: "#F7D7C2"
-    //     },
-    //     {
-    //         subject: "ฟิสิกส์",
-    //         link: "",
-    //         icon: faAtom,
-    //         color: "#F7D7C2"
-    //     },
-    //     {
-    //         subject: "อังกฤษ",
-    //         link: "",
-    //         icon: faAmilia,
-    //         color: "#F7D7C2"
-    //     },
-    //     {
-    //         subject: "สังคมศึกษา",
-    //         link: "",
-    //         icon: faGlobeAsia,
-    //         color: "#F7D7C2"
-    //     },
-    //     {
-    //         subject: "ภาษาไทย",
-    //         link: "",
-    //         icon: faBookOpen,
-    //         color: "#F7D7C2"
-    //     },
-    // ]
-
     // const renderSlides = () => {
     //     let size = !screens.xs ? screens.md ? 6 : 5 : 3
     //     const chunksSubject = chunksArray(subject, size)

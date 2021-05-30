@@ -8,7 +8,7 @@ import { color } from "../defaultValue";
 import { Fragment } from "react";
 import ProfileSample from "../images/profile.webp"
 
-export default function CardCourseLearner({ data, verizontal, type }) {
+export default function CardCourseLearner({ data, verizontal, type, ranking }) {
     const history = useHistory();
     const isOffline = type === "course"
     const redirectToCoursePage = () => {
@@ -27,6 +27,7 @@ export default function CardCourseLearner({ data, verizontal, type }) {
     const styleCardVerizontal = {
         padding: '0.5rem',
         height: "9rem",
+        border : ranking ? "none" : ""
     }
 
     const styleRow = {

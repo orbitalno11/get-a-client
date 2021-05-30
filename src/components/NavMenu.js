@@ -30,8 +30,8 @@ const NavMenu = () => {
                         หน้าแรก
                 </NavLink>
                 </Menu.Item>
-                <Menu.Item key="/rank/course" >
-                    <NavLink to="/rank/course">
+                <Menu.Item key="/rank" >
+                    <NavLink to="/rank">
                         ติวเตอร์
                 </NavLink></Menu.Item>
                 {/* <Menu.Item key="/course" >
@@ -121,7 +121,7 @@ const NavMenu = () => {
                     </NavLink>
                 </Col>
                 <Col span={4} className="iconMenu">
-                    <NavLink to="/tutor/ranking">
+                    <NavLink to="/tutor">
                         <FontAwesomeIcon icon={faChalkboardTeacher} className="icon" />
                     </NavLink>
                 </Col>

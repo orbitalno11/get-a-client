@@ -97,6 +97,7 @@ function App() {
           {/* Public Route */}
           <Route exact path="/" component={Home} />
           <Route exact path="/rank/:type" component={Ranking} />
+          <Route exact path="/rank" component={Ranking} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register/:type" component={RegisterForm} />

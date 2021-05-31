@@ -10,7 +10,6 @@ const InputComponents = ({ title, type, name, register, error, value, placeholde
     const _errorMessage = error && error.message
     const _placeholder = placeholder && placeholder
     const _required = required && required
-
     return (
         <Fragment>
             {

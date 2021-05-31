@@ -20,9 +20,9 @@ export default function TableList({ data }) {
               <td className={style.textNormal}>{data && data.baht} </td>
               <td className={style.textNormal}>{data && data.coin}</td>
               <td className={style.textNormal}>
-                <EditList />
+                <EditList ratePromotion={data}/>
                 &emsp;
-                <DeleteList />
+                <DeleteList data={data}/>
               </td>
             </tr>
           </tbody>

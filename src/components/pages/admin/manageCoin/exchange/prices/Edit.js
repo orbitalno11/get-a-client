@@ -1,5 +1,5 @@
-import { Row, Col, Button, Input } from "antd";
-import React, { Fragment } from "react";
+import { Row, Col, Button} from "antd";
+import React, { Fragment,useEffect} from "react";
 import { useForm } from "react-hook-form";
 import { exchangeSchema } from "../../../../../../validation/admin/exchangeSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,24 +7,33 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../../styles.module.scss";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router";
 import { modalAction,coinAction } from "../../../../../../redux/actions";
-import ModalComponent from "../../../../../modal/ModalComponent";
+import isEmpty from "../../../../../defaultFunction/checkEmptyObject";
+import InputComponents from "../../../../../input/InputComponets"
 import { sizeModal } from "../../../../../modal/SizeModal";
 import moment from "moment";
 
-export default function Edit() {
-  const params = useParams()
-  const idCoin = params.id
-  const { register, handleSubmit, errors } = useForm({
+export default function Edit({dataRate}) {
+
+  const { register, handleSubmit, errors,reset } = useForm({
     resolver: yupResolver(exchangeSchema),
   });
 
+  useEffect(() => {
+    reset({
+      "name": (!isEmpty(dataRate)) ? dataRate.name : "",
+      "baht": (!isEmpty(dataRate)) ? dataRate.baht : "",
+      "coin": (!isEmpty(dataRate)) ? dataRate.coin : "",
+      "startDate": (!isEmpty(dataRate)) ? dataRate.startDate : "",
+      "endDate": (!isEmpty(dataRate)) ? dataRate.endDate : "",
+    })
+  }, [dataRate])
+
   const dispatch = useDispatch();
   const today = moment().format("MM/DD/YYYY")
-
+ 
   const onSubmit = (data) => {
-    if(idCoin){
+    if(data){
       const rate ={
         "title": "std",
         "baht": data.baht,
@@ -35,46 +44,41 @@ export default function Edit() {
         "updtaeDate":today,
       }
       dispatch(modalAction.closeModal())
-      dispatch(coinAction.updateCoinRate(idCoin,rate))
+      dispatch(coinAction.updateCoinRate(dataRate.id,rate))
     }
   }
 
-  function ComponentSample() {
+  function ModalUpdatePrice() {
     return (
       <div style={{ paddingLeft: "1rem" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <p className={style.titleH4}>แก้ไขอัตราการซื้อเหรียญ</p>
-          <Row style={{ paddingTop: "1rem", marginBottom: "1.8rem" }}>
+          <span className={style.headerOne35}>เพิ่มอัตราการซื้อเหรียญ</span>
+          <Row style={{ marginBottom: "1rem" }}>
             <Col span={6} className={style.columnRate}>
-              <Input
-                type="baht"
-                name="baht"
-                ref={register}
-                placeholder="บาท"
-                className={`${style.inputRate} ${style.textNormal}`}
-              />
-              {errors.baht && (
-                <p className="error-input">{errors.baht.message}</p>
-              )}
+              <InputComponents
+                    type="number"
+                    name="baht"
+                    register={register}
+                    error={errors.baht}
+                    placeholder="บาท"
+                    min="0"
+                  />
             </Col>
-            <Col span={3} className={style.textNormal}>บาท</Col>
-            <Col span={1} className={style.textNormal}>=</Col>
+            <Col span={3} className={`${style.textOneo25} ${style.paddingInput}`}>บาท</Col>
+            <Col span={1} className={`${style.textOneo25} ${style.paddingInput}`}>=</Col>
             <Col span={6} className={style.columnRate}>
-              <Input
-                type="coin"
-                name="coin"
-                ref={register}
-                placeholder="เหรียญ"
-                className={`${style.inputRate} ${style.textNormal}`}
-              />
-              {errors.baht && (
-                <p className="error-input">{errors.coin.message}</p>
-              )}
+              <InputComponents
+                    type="number"
+                    name="coin"
+                    register={register}
+                    error={errors.coin}
+                    placeholder="เหรียญ"
+                    min="0"
+                  />
             </Col>
-            <Col span={3} className={style.textNormal}>เหรียญ</Col>
+            <Col span={3} className={`${style.textOneo25} ${style.paddingInput}`}>เหรียญ</Col>
           </Row>
-        </form>
-        <Row className={style.btnRequest}>
+          <Row className={style.btnRequest}>
           <Col span={6}>
             <Button
               className="backgroundGreen buttonColor"
@@ -83,7 +87,7 @@ export default function Edit() {
               style={{ width: "100px" }}
               htmlType="submit"
             >
-              <span className={style.textNormal}>ยอมรับ</span>
+              <span className={style.textOneo25}>ยอมรับ</span>
             </Button>
           </Col>
           <Col span={6}>
@@ -94,18 +98,19 @@ export default function Edit() {
               style={{ width: "100px" }}
               onClick={() => dispatch(modalAction.closeModal())}
             >
-             <span className={style.textNormal}>ปฏิเสธ</span>
+             <span className={style.textOneo25}>ปฏิเสธ</span>
             </Button>
           </Col>
         </Row>
+        </form>
       </div>
     );
   }
 
-  const component = () => {
+  const updatePrice = () => {
     dispatch(
       modalAction.openModal({
-        body: <ComponentSample />,
+        body: <ModalUpdatePrice />,
         size: sizeModal.default,
       })
     );
@@ -113,9 +118,8 @@ export default function Edit() {
 
   return (
     <Fragment>
-      <ModalComponent />
       <Button
-        onClick={() => component()}
+        onClick={() => updatePrice()}
         className="backgroundOrange buttonColor"
         shape="round"
         size="middle"

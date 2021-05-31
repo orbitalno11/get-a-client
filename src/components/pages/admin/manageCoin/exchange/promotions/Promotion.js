@@ -41,7 +41,7 @@ export default function Promotion() {
   function ComponentSample() {
     return (
       <div style={{ paddingLeft: "1rem", justifyContent: "center" }}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form id="addpromotion"onSubmit={handleSubmit(onSubmit)}>
           <span className={style.headerOne35}>เพิ่มโปรโมชั่น</span>
           <Row>
             <Col span={6} className={`${style.textOneo25} ${style.paddingInput}`}>
@@ -74,7 +74,14 @@ export default function Promotion() {
                   control={control}
                   defaultValue={""}
                 /> */}
-              <input type="date" name="startDate"></input>
+              <InputComponents
+                    type="date"
+                    name="startDate"
+                    register={register}
+                    error={errors.name}
+                    placeholder="กรุณาใส่ชื่อโปรโมชั่น"
+        
+                  />
               {errors.startDate && (
                 <p className="error-input">{errors.startDate.message}</p>
               )}
@@ -93,7 +100,14 @@ export default function Promotion() {
                     control={control}
                     defaultValue={""}
                   /> */}
-                <input type="date" name="endDate"></input>
+                 <InputComponents
+                    type="date"
+                    name="endDate"
+                    register={register}
+                    error={errors.name}
+                    placeholder="กรุณาใส่ชื่อโปรโมชั่น"
+        
+                  />
                 {errors.endDate && (
                 <p className="error-input">{errors.endDate.message}</p>
               )}

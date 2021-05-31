@@ -34,7 +34,8 @@ export default function Price() {
         "endDate": today,
         "updtaeDate":today,
       }
-      dispatch(coinAction.CreateCoinRate(rate))
+      dispatch(modalAction.closeModal())
+      dispatch(coinAction.createCoinRate(rate))
     }
   }
 
@@ -158,9 +159,9 @@ export default function Price() {
                   <td className={style.textNormal}>{data && data.baht} </td>
                   <td className={style.textNormal}>{data && data.coin}</td>
                   <td>
-                    <Edit />
+                    <Edit data={data} />
                     &emsp;
-                    <Delete />
+                    <Delete data={data} />
                   </td>
                 </tr>
               ))}

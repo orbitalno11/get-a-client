@@ -9,8 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../../../redux/actions";
 import ModalComponent from "../../../modal/ModalComponent";
 import Loading from "../../../loading/Loading";
-import { useEffect } from "react";
-import { color } from "../../../defaultValue";
 
 export default function Login() {
     const dispatch = useDispatch()
@@ -18,13 +16,6 @@ export default function Login() {
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(loginSchema),
     });
-
-    useEffect(() => {
-        document.body.style.backgroundColor = color.orange
-        return () => {
-            document.body.style.backgroundColor = ""
-        }
-    }, [])
 
     const onSubmit = (data) => {
         dispatch(userActions.loginUser(data))

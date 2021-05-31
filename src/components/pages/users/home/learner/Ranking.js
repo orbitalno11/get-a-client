@@ -68,18 +68,18 @@ export default function Ranking() {
 
     const CourseSection = () => {
         return (
-            (!isEmpty(course) && !loading.loading ) && (
+            (!isEmpty(course) && !loading.loading) && (
                 <Row className={`${style.marginSection}`} justify={"space-between"}>
                     {
                         course.map((item) => (
                             <Col align="center" xl={11} lg={11} md={12} sm={24} xs={24} key={item.id} style={paddingCard}>
-                                <CardCourseLearner data={item} verizontal="true" type={courseFocus} ranking />
+                                <CardCourseLearner data={item} verizontal="true" type={courseFocus} ranking={isMobile()?false:true} />
                             </Col>
 
                         ))
                     }
                 </Row>
-            ) 
+            )
         )
     }
 
@@ -112,18 +112,18 @@ export default function Ranking() {
                 isMobile() && <Header title={`${textTitle}ยอดนิยม`} />
             }
             <div className="container">
-                <Row className={style.bodyPaddingTopBottom} >
+                <div className={style.bodyPaddingTopBottom} >
                     {
                         !isMobile() &&
-                        <Col span={24} className={style.section}>
+                        <div className={style.section}>
                             <span className={style.headerFour}>{`${textTitle}ยอดนิยม`}</span>
-                        </Col>
+                        </div>
                     }
                     {
                         !type && (
-                            <Col span={24} className={`${!isMobile() && style.section} ${style.marginSection}`}>
+                            <div className={`${!isMobile() && style.section} ${style.marginSection}`}>
                                 <TabHorizontal type="tab" tabStart={tabStart} tabDetail={tabDetail} style={!isMobile() ? "TabPane" : ""} handleSetSelectTab={handleSetSelectTab} />
-                            </Col>
+                            </div>
                         )
                     }
                     <Row justify={"space-between"}>
@@ -131,24 +131,26 @@ export default function Ranking() {
                             <CourseSection />
                         </Col>
                         {
-                            (!isMobile() && !loading.loading) && (
-                                <Col xl={5} lg={5} md={5} className={`${style.section} ${style.marginSection}`}>
-                                    <b className={style.textOne25}>ค้นหาจากรายวิชา</b>
-                                    {
-                                        subjectList && subjectList.map((item, index) => (
-                                            <div key={index} >
-                                                <Row align="middle" className={style.subjectSelect}>
-                                                    <FontAwesomeIcon className={style.iconSubjectSmall} icon={item.icon} style={iconSubject(item.color)} />
-                                                    <span className={`${style.textOne} ${style.marginLeftOneHalf}`}>{item.subject}</span>
-                                                </Row>
-                                            </div>
-                                        ))
-                                    }
+                            !isMobile() && (
+                                <Col xl={5} lg={5} md={5} >
+                                    <div className={`${style.section} ${style.marginSection}`} >
+                                        <b className={style.textOne25}>ค้นหาจากรายวิชา</b>
+                                        {
+                                            subjectList && subjectList.map((item, index) => (
+                                                <div key={index} >
+                                                    <Row align="middle" className={style.subjectSelect}>
+                                                        <FontAwesomeIcon className={style.iconSubjectSmall} icon={item.icon} style={iconSubject(item.color)} />
+                                                        <span className={`${style.textOne} ${style.marginLeftOneHalf}`}>{item.subject}</span>
+                                                    </Row>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
                                 </Col>
                             )
                         }
                     </Row>
-                </Row>
+                </div>
             </div>
         </Fragment>
     )

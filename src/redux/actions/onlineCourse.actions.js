@@ -59,7 +59,7 @@ function updateOnlineCourse(data, id) {
                 dispatch(loadingActions.stopLoading())
                 dispatch(failure(err.response.data))
                 dispatch(modalAction.openModal({
-                    text: "แก้ไขงคอร์สเรียนไม่สำเร็จ",
+                    text: "แก้ไขคอร์สเรียนไม่สำเร็จ",
                     size: sizeModal.small,
                     alert: typeModal.wrong,
                 }))

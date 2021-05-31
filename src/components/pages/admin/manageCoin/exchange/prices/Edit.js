@@ -7,21 +7,36 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../../styles.module.scss";
 import { useDispatch } from "react-redux";
-import { modalAction } from "../../../../../../redux/actions";
+import { useParams } from "react-router";
+import { modalAction,coinAction } from "../../../../../../redux/actions";
 import ModalComponent from "../../../../../modal/ModalComponent";
 import { sizeModal } from "../../../../../modal/SizeModal";
-import { typeModal } from "../../../../../modal/TypeModal";
+import moment from "moment";
 
 export default function Edit() {
+  const params = useParams()
+  const idCoin = params.id
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(exchangeSchema),
   });
 
   const dispatch = useDispatch();
+  const today = moment().format("MM/DD/YYYY")
 
-  const onSubmit = () => {
-    // todo onSubmit
-    // value
+  const onSubmit = (data) => {
+    if(idCoin){
+      const rate ={
+        "title": "std",
+        "baht": data.baht,
+        "coin": data.coin,
+        "type": "std",
+        "startDate": today,
+        "endDate": today,
+        "updtaeDate":today,
+      }
+      dispatch(modalAction.closeModal())
+      dispatch(coinAction.updateCoinRate(idCoin,rate))
+    }
   }
 
   function ComponentSample() {
@@ -67,7 +82,6 @@ export default function Edit() {
               size="middle"
               style={{ width: "100px" }}
               htmlType="submit"
-              onClick={() => alert()}
             >
               <span className={style.textNormal}>ยอมรับ</span>
             </Button>
@@ -87,16 +101,6 @@ export default function Edit() {
       </div>
     );
   }
-
-  const alert = () => {
-    dispatch(
-      modalAction.openModal({
-        text: "ดำเนินการสำเร็จ",
-        size: sizeModal.small,
-        alert: typeModal.corrent,
-      })
-    );
-  };
 
   const component = () => {
     dispatch(

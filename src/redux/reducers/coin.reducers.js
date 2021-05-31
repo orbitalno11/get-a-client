@@ -3,7 +3,6 @@ import { coinConstants } from "../constants"
 const initialState = {
     rateCoin :  null,
     coinUser :  null,
-    createCoin : null,
     error: null
 
 }
@@ -42,23 +41,49 @@ const coinReducer = (state = initialState , action)=>{
             }
 
         }
-        case coinConstants.GET_COIN_CREATE_LIST_SUCCESS:{
+        case coinConstants.CREATE_COIN_RATE_SUCCESS:{
             return {
                 ...state,
-                createCoin : action.payload,
                 error : false
             }
 
         }
-        case coinConstants.GET_COIN_CREATE_LIST_FAILURE:{
+        case coinConstants.CREATE_COIN_RATE_FAILURE:{
             return {
                 ...state,
-                createCoin : null,
-                error : true
+                error : action.payload
             }
 
         }
-        case coinConstants.CLEAR_CERATE_COIN:{
+        case coinConstants.UPDATE_COIN_RATE_SUCCESS:{
+            return {
+                ...state,
+                error : false
+            }
+
+        }
+        case coinConstants.UPDATE_COIN_RATE_FAILURE:{
+            return {
+                ...state,
+                error : action.payload
+            }
+
+        }
+        case coinConstants.DELETE_COIN_RATE_SUCCESS:{
+            return {
+                ...state,
+                error : false
+            }
+
+        }
+        case coinConstants.DELETE_COIN_RATE_FAILURE:{
+            return {
+                ...state,
+                error : action.payload
+            }
+
+        }
+        case coinConstants.CLEAR_COIN_RATE:{
             return {
                 ...state,
                 createCoin : null,

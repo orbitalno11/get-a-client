@@ -94,19 +94,21 @@ function getCoinTransaction(){
     function failure(err) { return { type: coinConstants.GET_COIN_USER_LIST_FAILURE, payload: err } }
 }
 
-function CreateCoinRate(data){
+function createCoinRate(data){
     return async dispatch => {
         console.log(data)
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post(`/coin/rate`,data).then(() => {
+        await apiURL.apiGetA.post("/coin/rate",data).then(() => {
+            // console.log(data)
+            // dispatch(loadingActions.stopLoading())
             dispatch(success())
+            dispatch(loadingActions.stopLoading())
             dispatch(coinAction.getCoinRatesAdmin());
             dispatch(modalAction.openModal({
                 text: "ดำเนินการสำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
             }))
-            dispatch(coinAction.clearCreateRate())
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
             dispatch(failure(err.response.data))
@@ -118,12 +120,65 @@ function CreateCoinRate(data){
             }))
         })
     }
-    function success(data) { return { type: coinConstants.GET_COIN_CREATE_LIST_SUCCESS, payload: data } }
-    function failure(err) { return { type: coinConstants.GET_COIN_CREATE_LIST_FAILURE, payload: err } }
+    function success(data) { return { type: coinConstants.CREATE_COIN_RATE_SUCCESS, payload: data } }
+    function failure(err) { return { type: coinConstants.CREATE_COIN_RATE_FAILURE, payload: err } }
 }
 
 function clearCreateRate() {
-    return dispatch => { dispatch({ type: coinConstants.CLEAR_CERATE_COIN }) }
+    return dispatch => { dispatch({ type: coinConstants.CLEAR_COIN_RATE }) }
+}
+
+function deleteCoinRate(id) {
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiURL.apiGetA.delete(`/coin/rate/${id}`).then(() => {
+            dispatch(success())
+            dispatch(loadingActions.stopLoading())
+            dispatch(coinAction.getCoinRatesAdmin());
+            dispatch(modalAction.openModal({
+                text: "ลบข้อมูลสำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.corrent
+            }))
+        }).catch(err => {
+            dispatch(failure(err.response?.data))
+            dispatch(modalAction.openModal({
+                text: "ลบข้อมูลไม่สำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.wrong
+            }))
+            dispatch(loadingActions.stopLoading())
+        })
+    }
+    function success() { return { type: coinConstants.DELETE_COIN_RATE_SUCCESS } }
+    function failure(err) { return { type: coinConstants.DELETE_COIN_RATE_FAILURE, payload: err } }
+}
+
+function updateCoinRate(id,data) {
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiURL.apiGetA.put(`/coin/rate/${id}`,data).then(() => {
+            console.log(data)
+            dispatch(success())
+            dispatch(loadingActions.stopLoading())
+            dispatch(coinAction.getCoinRatesAdmin());
+            dispatch(modalAction.openModal({
+                text: "แก้ไขข้อมูลสำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.corrent,
+            }))
+        }).catch(err => {
+            dispatch(failure(err.response?.data))
+            dispatch(loadingActions.stopLoading())
+            dispatch(modalAction.openModal({
+                text: "แก้ไขข้อมูลไม่สำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.wrong
+            }))
+        })
+    }
+    function success() { return { type: coinConstants.UPDATE_COIN_RATE_SUCCESS } }
+    function failure(err) { return { type: coinConstants.UPDATE_COIN_RATE_FAILURE, payload: err } }
 }
 
 export const coinAction = {
@@ -132,6 +187,8 @@ export const coinAction = {
     getCoinRatesAdmin,
     getCoinBalance,
     getCoinTransaction,
-    CreateCoinRate,
-    clearCreateRate
+    createCoinRate,
+    clearCreateRate,
+    deleteCoinRate,
+    updateCoinRate
 }

@@ -119,12 +119,6 @@
   @extend .iconLarge;
 }
 
-.icon{
-    @extend .iconSmall;
-    color:$gray;
-    margin-right: 0.5rem
-}
-
 .iconyellow{
     @extend .iconSmall;
     color:$yellow;

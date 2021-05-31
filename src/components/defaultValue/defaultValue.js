@@ -20,7 +20,7 @@ const subject = {
     "ฟิสิกส์":"PHY",
     "เคมี":"CHM",
     "ชีววิทยา":"BIO",
-    "สัมคมศึกษา":"SOC",
+    "สังคมศึกษา":"SOC",
     "ภาษาอังกฤษ":"ENG"
 }
 
@@ -88,6 +88,12 @@ const userRole = {
     "tutor" : 2
 }
 
+const typeCourse = {
+    "ออนไลน์" : 0,
+    "นัดเจอ" : 1,
+    "ไม่ระบุ" : 2
+}
+
 export const defaultValue = {
     gender,
     grade,
@@ -103,5 +109,6 @@ export const defaultValue = {
     typeAcion,
     timeFormat,
     enrollStatus,
-    userRole
+    userRole,
+    typeCourse
 }

@@ -178,6 +178,7 @@ $silver : #a39b9b;
 }
 
 .buttonColor{
+    @extend .textOne5;
     border-style: none  !important;
     color:var(--white-color)  !important;
     height: auto;

@@ -25,7 +25,6 @@ export default function Login() {
         marginTop: '1rem'
     }
 
-
     return (
         <Fragment>
             <ModalComponent />

@@ -1,19 +1,15 @@
 @import "../../../../stylesDefault.module.scss";
 
-.paddingEdit{
-    padding-left: 10%;
-    padding-right: 10%;
-}
 
-.marginTop20{
+.marginTop2{
     margin-top: 2rem;
 }
 
-.paddingRight{
-    padding-right: 1.5rem;
+.flexRow{
+    @extend .VerizontalPage;
+    flex-flow: row;
 }
 
-.cardResult{
-    padding:0.5rem 1rem 0.5rem 1rem ;
-    max-width: 576px;
+.widthSearchForm {
+    width: 18rem;
 }

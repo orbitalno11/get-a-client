@@ -54,7 +54,7 @@ export default function TabHorizontal({ type, tabStart, tabDetail, name, style, 
                                     tabDetail !== null && tabDetail.map((item, index) =>
                                     (
                                         <Radio.Button
-                                            className={type !== "tab" ? styles.radio : (index === 0 ? styles.tabFirst : styles.tabLast)}
+                                            className={type !== "tab" ? styles.radio : (index === 0 ? styles.tabFirst : styles.tabLast )}
                                             style={tab === item.key ? colorSelect : (type !== "tab" ? colorNotSelectWhite : colorNotSelect)}
                                             value={item.key}
                                             key={item.key}

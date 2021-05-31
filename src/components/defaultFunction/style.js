@@ -6,5 +6,5 @@ const buttonFull = (buttonColor, size) =>{
 }
 
 export  const styleComponent = {
-    buttonFull
-} 
+    buttonFull,
+}  

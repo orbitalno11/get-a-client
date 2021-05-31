@@ -1,114 +1,100 @@
-import { Row, Col, Button} from "antd";
+import { Row, Col, Button, DatePicker } from "antd";
 import React, { Fragment } from "react";
-import { useForm } from "react-hook-form";
+import { useForm,Controller } from "react-hook-form";
 import { promotionSchema } from "../../../../../../validation/admin/promotionSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { faBullhorn} from "@fortawesome/free-solid-svg-icons";
+import { faBullhorn } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../../styles.module.scss";
 import { useDispatch } from "react-redux";
-import { modalAction,coinAction} from "../../../../../../redux/actions";
+import { modalAction, coinAction } from "../../../../../../redux/actions";
 import ModalComponent from "../../../../../modal/ModalComponent";
 import { sizeModal } from "../../../../../modal/SizeModal";
 import PromotionList from "./PromotionList";
-import InputComponents from "../../../../../input/InputComponets"
+import InputComponents from "../../../../../input/InputComponets";
 import moment from "moment";
 
 export default function Promotion() {
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors,control } = useForm({
     resolver: yupResolver(promotionSchema),
   });
 
   const dispatch = useDispatch();
-  const today = moment().format("MM/DD/YYYY")
-
+  const today = moment().format("MM/DD/YYYY");
   const onSubmit = (data) => {
-    console.log(data)
-    if(data){
-      const promotionRate ={
-        "title":data.name,
-        "baht": data.baht,
-        "coin": data.coin,
-        "type": "promo",
-        "startDate":data.startDate,
-        "endDate": data.endDate,
-        "updtaeDate":today,
-      }
-      dispatch(coinAction.CreateCoinRate(promotionRate))
+    console.log(data);
+    if (data) {
+      const promotionRate = {
+        title: data.name,
+        baht: data.baht,
+        coin: data.coin,
+        type: "promo",
+        startDate: data.startDate,
+        endDate: data.endDate,
+        updtaeDate: today,
+      };
+      dispatch(coinAction.createCoinRate(promotionRate));
     }
-  }
+  };
 
-  function ComponentSample() {
+  function ModalPromotion() {
     return (
       <div style={{ paddingLeft: "1rem", justifyContent: "center" }}>
-        <form id="addpromotion"onSubmit={handleSubmit(onSubmit)}>
+        <form id="addpromotion" onSubmit={handleSubmit(onSubmit)}>
           <span className={style.headerOne35}>เพิ่มโปรโมชั่น</span>
           <Row>
-            <Col span={6} className={`${style.textOneo25} ${style.paddingInput}`}>
+            <Col
+              span={6}
+              className={`${style.textOneo25} ${style.paddingInput}`}
+            >
               ชื่อโปรโมชั่น :
             </Col>
             <Col span={18}>
               <InputComponents
-                    type="text"
-                    name="name"
-                    register={register}
-                    error={errors.name}
-                    placeholder="กรุณาใส่ชื่อโปรโมชั่น"
-        
-                  />
-              {errors.name && (
-                <p className="error-input">{errors.name.message}</p>
-              )}
+                type="text"
+                name="name"
+                register={register}
+                error={errors.name}
+                placeholder="กรุณาใส่ชื่อโปรโมชั่น"
+              />
             </Col>
           </Row>
-          <Row style={{ marginTop: "1rem",marginBottom:"1rem"}}>
-            <Col span={6} className={style.textOneo25}>
+          <Row style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+            <Col
+              span={6}
+              className={style.textOneo25}
+            >
               วันที่เริ่มต้น :
             </Col>
             <Col span={18}>
-              {/* <Controller
-                  as={
-                    <DatePicker className="input" style={{ width: "100%" }} />
-                  }
+                <Controller
+                  as={<DatePicker placeholder="" />}
                   name="startDate"
                   control={control}
-                  defaultValue={""}
-                /> */}
-              <InputComponents
-                    type="date"
-                    name="startDate"
-                    register={register}
-                    error={errors.name}
-                    placeholder="กรุณาใส่ชื่อโปรโมชั่น"
-        
-                  />
-              {errors.startDate && (
-                <p className="error-input">{errors.startDate.message}</p>
-              )}
+                  defaultValue={null}
+                  placeholder=""
+                />
+                {errors.startDate && (
+                  <p className="error-input">{errors.startDate.message}</p>
+                )}
             </Col>
           </Row>
-          <Row  style={{ marginTop: "1rem",marginBottom:"1rem"}}>
-            <Col span={6} className={style.textOneo25}>
+          <Row style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+            <Col
+              span={6}
+              className={style.textOneo25}
+            >
               วันที่สิ้นสุด :
             </Col>
             <Col span={18}>
-              {/* <Controller
-                    as={
-                      <DatePicker className="input" style={{ width: "100%" }} />
-                    }
-                    name="endDate"
-                    control={control}
-                    defaultValue={""}
-                  /> */}
-                 <InputComponents
-                    type="date"
-                    name="endDate"
-                    register={register}
-                    error={errors.name}
-                    placeholder="กรุณาใส่ชื่อโปรโมชั่น"
-        
-                  />
-                {errors.endDate && (
+              <Controller
+                as={<DatePicker placeholder="" />}
+                name="endDate"
+                control={control}
+                defaultValue={null}
+                placeholder=""
+              />
+              {errors.endDate && (
                 <p className="error-input">{errors.endDate.message}</p>
               )}
             </Col>
@@ -117,33 +103,44 @@ export default function Promotion() {
           <Row style={{ marginBottom: "1rem" }}>
             <Col span={7} align="start">
               <InputComponents
-                    type="number"
-                    name="baht"
-                    register={register}
-                    error={errors.name}
-                    placeholder="บาท"
-                    min="0"
-                  />
-                 {errors.baht && (
-                <p className="error-input">{errors.baht.message}</p>
-              )}
+                type="number"
+                name="baht"
+                register={register}
+                error={errors.baht}
+                placeholder="บาท"
+                min="0"
+              />
             </Col>
-            <Col span={4} align="center" className={`${style.textOneo25} ${style.paddingInput}`}>บาท</Col>
-            <Col span={2}  className={`${style.textOneo25} ${style.paddingInput}`}>=</Col>
+            <Col
+              span={4}
+              align="center"
+              className={`${style.textOneo25} ${style.paddingInput}`}
+            >
+              บาท
+            </Col>
+            <Col
+              span={2}
+              className={`${style.textOneo25} ${style.paddingInput}`}
+            >
+              =
+            </Col>
             <Col span={7}>
               <InputComponents
-                    type="number"
-                    name="coin"
-                    register={register}
-                    error={errors.name}
-                    placeholder="เหรียญ"
-                    min="0"
-                  />
-                 {errors.baht && (
-                <p className="error-input">{errors.coin.message}</p>
-              )}
+                type="number"
+                name="coin"
+                register={register}
+                error={errors.coin}
+                placeholder="เหรียญ"
+                min="0"
+              />
             </Col>
-            <Col span={4} align="center" className={`${style.textOneo25} ${style.paddingInput}`}>เหรียญ</Col>
+            <Col
+              span={4}
+              align="center"
+              className={`${style.textOneo25} ${style.paddingInput}`}
+            >
+              เหรียญ
+            </Col>
           </Row>
           <Row className={style.btnRequest}>
             <Col span={6}>
@@ -174,11 +171,11 @@ export default function Promotion() {
     );
   }
 
-  const component = () => {
+  const createPromotion = () => {
     dispatch(
       modalAction.openModal({
-        body: <ComponentSample />,
-        size: sizeModal.default,
+        body: <ModalPromotion />,
+        size: sizeModal.large,
       })
     );
   };
@@ -199,7 +196,7 @@ export default function Promotion() {
           <Button
             type="link"
             style={{ color: "#F5732E", textDecorationLine: "underline" }}
-            onClick={() => component()}
+            onClick={() => createPromotion()}
           >
             <span className={style.textNormal}>เพิ่มโปรโมชั่น</span>
           </Button>

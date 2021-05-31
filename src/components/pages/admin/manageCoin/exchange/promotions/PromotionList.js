@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Collapse, Space, Row, Col } from "antd";
 import style from "../../styles.module.scss";
-import TableList from "./detailList/TableList";
+// import TableList from "./detailList/TableList";
 import DeletePromotion from "./DeletePromotion";
 import EditPromotion from "./EditPromotion";
 import moment from "moment";
@@ -26,47 +26,62 @@ export default function PromotionList() {
           .map((data, index) => (
             <Collapse key={index}>
               <Panel header={data && data.title}>
-                <Row style={{ marginLeft: "3rem" }}>
-                  <Col span={2} className={style.textNormal}>วันที่เริ่มต้น </Col>
-                  <Col span={8}>
-                    <p className={`${style.datetime} ${style.textNormal}`}>
+                <Row style={{ marginLeft: "2rem" }}>
+                  <Col md={4} lg={3} className={style.textOneo25}>วันที่เริ่มต้น </Col>
+                  <Col  md={7} lg={8}>
+                    <p className={`${style.datetime} ${style.textOneo25}`}>
                       {moment(data.startDate).format("DD/MM/YYYY")}
                     </p>
                   </Col>
-                  <Col span={2} style={{ marginLeft: "2rem" }} className={style.textNormal}>
+                  <Col md={4} lg={3} style={{ marginLeft: "2rem" }} className={style.textOneo25}>
                     วันที่สิ้นสุด
                   </Col>
-                  <Col span={8}>
-                    <p className={`${style.datetime} ${style.textNormal}`}>
+                  <Col md={7} lg={8}>
+                    <p className={`${style.datetime} ${style.textOneo25}`}>
                       {moment(data.endDate).format("DD/MM/YYYY")}
                     </p>
                   </Col>
                 </Row>
-                <Row style={{ marginLeft: "3rem", marginTop: "1rem" }}>
-                  <Col span={2} className={style.textNormal}>เวลาเริ่มต้น </Col>
-                  <Col span={8} className={style.textNormal}>
-                    <p className={`${style.datetime} ${style.textNormal}`}>
+                <Row style={{ marginLeft: "2rem", marginTop: "1rem" }}>
+                  <Col md={4} lg={3} className={style.textOneo25}>เวลาเริ่มต้น </Col>
+                  <Col md={7} lg={8} className={style.textOneo25}>
+                    <p className={`${style.datetime} ${style.textOneo25}`}>
                       {moment(data.startDate).format("HH:mm")}
                     </p>
                   </Col>
-                  <Col span={2} style={{ marginLeft: "2rem" }} className={style.textNormal}>
+                  <Col md={4} lg={3} style={{ marginLeft: "2rem" }} className={style.textOneo25}>
                     เวลาสิ้นสุด
                   </Col>
-                  <Col span={8} className={style.textNormal}>
-                    <p className={`${style.datetime} ${style.textNormal}`}>
+                  <Col md={7} lg={8} className={style.textOneo25}>
+                    <p className={`${style.datetime} ${style.textOneo25}`}>
                       {moment(data.endDate).format("HH:mm")}
                     </p>
                   </Col>
-                  <Col span={21}>
-                    <TableList data={data} />
+                </Row>
+                <span className={style.headerOne35} style={{ marginLeft: "2rem"}}>อัตราการซื้อเหรียญ</span>
+                <Row style={{ marginLeft: "2rem", marginTop: "1rem" }}>
+                  <Col md={3} lg={2} className={style.textOneo25}>ราคา </Col>
+                  <Col md={6} lg={7} className={style.textOneo25} align="center">
+                    <p className={`${style.datetime} ${style.textOneo25}`}>
+                      {data.baht}
+                    </p>
                   </Col>
+                  <Col md={4} lg={5} className={style.textOneo25} align="center">
+                    เท่ากับ
+                  </Col>
+                  <Col md={6} lg={7} className={style.textOneo25}>
+                    <p className={`${style.datetime} ${style.textOneo25}`} align="center">
+                      {data.coin}
+                    </p>
+                  </Col>
+                  <Col md={4} lg={3} className={style.textOneo25} align="center">เหรียญ </Col>
                 </Row>
                 <Row className={style.promotion}>
                   <Col md={6} lg={5} xl={3}>
-                    <EditPromotion />
+                    <EditPromotion dataPromo={data}/>
                   </Col>
                   <Col>
-                    <DeletePromotion />
+                    <DeletePromotion  data={data} />
                   </Col>
                 </Row>
               </Panel>

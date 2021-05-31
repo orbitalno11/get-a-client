@@ -5,11 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../../styles.module.scss";
 import { useDispatch } from "react-redux";
 import { modalAction,coinAction } from "../../../../../../redux/actions";
-import ModalComponent from "../../../../../modal/ModalComponent";
 import { sizeModal } from "../../../../../modal/SizeModal";
 
 const ModaldeleteRateCoin = ({data}) => {
-    // console.log(data)
+    
     const dispatch = useDispatch()
 
     const closeModal = () =>{
@@ -75,7 +74,6 @@ export default function Delete({data}) {
 
   return (
     <Fragment>
-      <ModalComponent />
       <Button
         onClick={() => remove(data)}
         className="backgroundRed buttonColor"

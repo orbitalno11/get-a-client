@@ -45,12 +45,13 @@ export default function Price() {
     dispatch(coinAction.getCoinRatesAdmin());
   }, []);
 
-  function ComponentSample() {
+  const ModalPrice=()=> {
     return (
       <div style={{ paddingLeft: "1rem" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <span className={style.headerOne35}>เพิ่มอัตราการซื้อเหรียญ</span>
           <Row style={{ marginBottom: "1rem" }}>
+            <p>{errors.baht&&errors.baht}</p>
             <Col span={6} className={style.columnRate}>
               <InputComponents
                     type="number"
@@ -60,9 +61,6 @@ export default function Price() {
                     placeholder="บาท"
                     min="0"
                   />
-                 {errors.baht && (
-                <p className="error-input">{errors.baht.message}</p>
-              )}
             </Col>
             <Col span={3} className={`${style.textOneo25} ${style.paddingInput}`}>บาท</Col>
             <Col span={1} className={`${style.textOneo25} ${style.paddingInput}`}>=</Col>
@@ -71,13 +69,10 @@ export default function Price() {
                     type="number"
                     name="coin"
                     register={register}
-                    error={errors.name}
+                    error={errors.coin}
                     placeholder="เหรียญ"
                     min="0"
                   />
-                 {errors.baht && (
-                <p className="error-input">{errors.coin.message}</p>
-              )}
             </Col>
             <Col span={3} className={`${style.textOneo25} ${style.paddingInput}`}>เหรียญ</Col>
           </Row>
@@ -110,10 +105,10 @@ export default function Price() {
     );
   }
 
-  const component = () => {
+  const createPrice = () => {
     dispatch(
       modalAction.openModal({
-        body: <ComponentSample />,
+        body: <ModalPrice/>,
         size: sizeModal.default,
       })
     );
@@ -134,7 +129,7 @@ export default function Price() {
             <Button
               type="link"
               style={{ color: "#F5732E" }}
-              onClick={() => component()}
+              onClick={() => createPrice()}
             >
               <span className={style.textOneo25}> เพิ่มอัตราการซื้อเหรียญ</span>            
             </Button>
@@ -159,7 +154,7 @@ export default function Price() {
                   <td className={style.textNormal}>{data && data.baht} </td>
                   <td className={style.textNormal}>{data && data.coin}</td>
                   <td>
-                    <Edit data={data} />
+                    <Edit dataRate={data}/>
                     &emsp;
                     <Delete data={data} />
                   </td>

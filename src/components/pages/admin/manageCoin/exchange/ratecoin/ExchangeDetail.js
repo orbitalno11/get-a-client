@@ -1,4 +1,4 @@
-import { Row, Col, Button, Input,Form } from "antd";
+import { Row, Col, Button} from "antd";
 import React, { Fragment, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { exchangeSchema } from "../../../../../../validation/admin/exchangeSchema";
@@ -11,12 +11,21 @@ import { modalAction, coinAction } from "../../../../../../redux/actions";
 import ModalComponent from "../../../../../modal/ModalComponent";
 import { sizeModal } from "../../../../../modal/SizeModal";
 import { typeModal } from "../../../../../modal/TypeModal";
-
+import InputComponents from "../../../../../input/InputComponets"
 export default function ExchangeDetail() {
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(exchangeSchema),
   });
 
+  // useEffect(() => {
+  //   reset({
+  //     "name": (!isEmpty(dataRate)) ? dataRate.name : "",
+  //     "baht": (!isEmpty(dataRate)) ? dataRate.baht : "",
+  //     "coin": (!isEmpty(dataRate)) ? dataRate.coin : "",
+  //     "startDate": (!isEmpty(dataRate)) ? dataRate.startDate : "",
+  //     "endDate": (!isEmpty(dataRate)) ? dataRate.endDate : "",
+  //   })
+  // }, [dataRate])
   const dispatch = useDispatch();
 
   const onSubmit = () => {
@@ -33,26 +42,33 @@ export default function ExchangeDetail() {
   function ComponentSample() {
     return (
       <div style={{ paddingLeft: "1rem" }}>
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <p className={style.titleH4}>แก้ไขอัตราการแลกเปลี่ยนเหรียญ</p>
-          <Row style={{ paddingTop: "1rem", marginBottom: "1.8rem",paddingLeft:"1.3rem" }}>
-            <Col span={7} className={`${style.horizontalCenter} ${style.textNormal}`}>1 เหรียญ </Col>
-            <Col span={4}>
-              <span style={{ float: "right" }}>=</span>
+          <Row style={{ marginBottom: "1rem" }}>
+            <p>{errors.baht&&errors.baht}</p>
+            <Col span={6} className={style.columnRate}>
+              <InputComponents
+                    type="number"
+                    name="baht"
+                    register={register}
+                    error={errors.baht}
+                    placeholder="บาท"
+                    min="0"
+                  />
             </Col>
-            <Col span={8} className={style.columnRate}>
-              <Input
-                type="baht"
-                name="baht"
-                ref={register}
-                placeholder="บาท"
-                className={`${style.inputRate} ${style.textNormal}`}
-              />
-              {errors.baht && (
-                <p className="error-input">{errors.baht.message}</p>
-              )}
+            <Col span={3} className={`${style.textOneo25} ${style.paddingInput}`}>บาท</Col>
+            <Col span={1} className={`${style.textOneo25} ${style.paddingInput}`}>=</Col>
+            <Col span={6} className={style.columnRate}>
+              <InputComponents
+                    type="number"
+                    name="coin"
+                    register={register}
+                    error={errors.coin}
+                    placeholder="เหรียญ"
+                    min="0"
+                  />
             </Col>
-            <Col span={2} className={style.textNormal}>บาท</Col>
+            <Col span={3} className={`${style.textOneo25} ${style.paddingInput}`}>เหรียญ</Col>
           </Row>
           <Row className={style.btnRequest}>
             <Col span={6}>
@@ -79,7 +95,7 @@ export default function ExchangeDetail() {
               </Button>
             </Col>
           </Row>
-        </Form>
+        </form>
       </div>
     );
   }
@@ -102,7 +118,7 @@ export default function ExchangeDetail() {
       })
     );
   };
-
+  console.log(list &&list.filter((data) => data.type === "transfer"))
   return (
     <Fragment>
       <Row style={{ marginLeft: "1rem" }}>

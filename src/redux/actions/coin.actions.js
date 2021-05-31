@@ -155,6 +155,7 @@ function deleteCoinRate(id) {
 }
 
 function updateCoinRate(id,data) {
+    console.log(id,data)
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.put(`/coin/rate/${id}`,data).then(() => {

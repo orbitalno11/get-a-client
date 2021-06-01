@@ -3,7 +3,8 @@ import { coinConstants } from "../constants"
 const initialState = {
     rateCoin :  null,
     coinUser :  null,
-    error: null
+    error: null,
+    activate:null
 
 }
 
@@ -83,10 +84,26 @@ const coinReducer = (state = initialState , action)=>{
             }
 
         }
+        case coinConstants.ACTIVATE_COIN_RATE_SUCCESS:{
+            return {
+                ...state,
+                activate : action.payload,
+                error : false
+            }
+
+        }
+        case coinConstants.ACTIVATE_COIN_RATE_FAILURE:{
+            return {
+                ...state,
+                activate : null,
+                error : true
+            }
+
+        }
         case coinConstants.CLEAR_COIN_RATE:{
             return {
                 ...state,
-                createCoin : null,
+                rateCoin : null,
                 error: null
             }
 

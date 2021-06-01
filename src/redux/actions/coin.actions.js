@@ -182,6 +182,25 @@ function updateCoinRate(id,data) {
     function failure(err) { return { type: coinConstants.UPDATE_COIN_RATE_FAILURE, payload: err } }
 }
 
+function activateRate(id){ 
+    return  (dispatch) => {
+        dispatch(loadingActions.startLoading())
+         apiURL.apiGetA.get(`/coin/rate/${id}/activate`)
+        .then((res) => {
+            dispatch(loadingActions.stopLoading())
+            dispatch(coinAction.getCoinRatesAdmin());
+            const favorite = res.data.data
+            dispatch(success(favorite))
+        }).catch(err => {
+            dispatch(loadingActions.stopLoading())
+            dispatch(failure(err.response.data))
+        })
+    }
+    function success(data) { return { type: coinConstants.ACTIVATE_COIN_RATE_SUCCESS, payload: data } }
+    function failure(err) { return { type: coinConstants.ACTIVATE_COIN_RATE_FAILURE, payload: err } }
+    
+}
+
 export const coinAction = {
     getCoinRatesLearner,
     getCoinRatesTutor,
@@ -191,5 +210,6 @@ export const coinAction = {
     createCoinRate,
     clearCreateRate,
     deleteCoinRate,
-    updateCoinRate
+    updateCoinRate,
+    activateRate
 }

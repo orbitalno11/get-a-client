@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { Collapse, Space, Row, Col } from "antd";
+import { Collapse, Space, Row, Col,Button } from "antd";
 import style from "../../styles.module.scss";
-// import TableList from "./detailList/TableList";
+import {faPowerOff} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DeletePromotion from "./DeletePromotion";
 import EditPromotion from "./EditPromotion";
 import moment from "moment";
@@ -18,6 +19,10 @@ export default function PromotionList() {
     dispatch(coinAction.getCoinRatesAdmin());
   }, []);
 
+  const handOnActivate = (rateId) => {
+    dispatch(coinAction.activateRate(rateId));
+}
+
   return (
     <Space direction="vertical" style={{ width: "100%" }}>
       {list &&
@@ -26,7 +31,38 @@ export default function PromotionList() {
           .map((data, index) => (
             <Collapse key={index}>
               <Panel header={data && data.title}>
-                <Row style={{ marginLeft: "2rem" }}>
+                <Row align="end">
+                    {data.active ? (
+                        <Button
+                          className="backgroundGreen buttonColor"
+                          shape="round"
+                          size="middle"
+                          style={{ width: "60px" }}
+                          icon={
+                            <FontAwesomeIcon
+                              icon={faPowerOff}
+                              style={{ color: "white" }}
+                            />
+                          }
+                          onClick={() => handOnActivate(data.id)}
+                        ></Button>
+                      ) : (
+                        <Button
+                          className="backgroundGray buttonColor"
+                          shape="round"
+                          size="middle"
+                          style={{ width: "60px" }}
+                          icon={
+                            <FontAwesomeIcon
+                              icon={faPowerOff}
+                              style={{ color: "white" }}
+                            />
+                          }
+                          onClick={() => handOnActivate(data.id)}
+                        ></Button>
+                      )}
+                </Row>
+                <Row style={{ marginLeft: "2rem",marginTop:"1rem" }}>
                   <Col md={4} lg={3} className={style.textOneo25}>วันที่เริ่มต้น </Col>
                   <Col  md={7} lg={8}>
                     <p className={`${style.datetime} ${style.textOneo25}`}>

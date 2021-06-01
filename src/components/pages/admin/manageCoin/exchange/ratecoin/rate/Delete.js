@@ -2,10 +2,10 @@ import { Row, Col, Button} from "antd";
 import React, { Fragment } from "react";
 import { faTrashAlt,faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import style from "../../styles.module.scss";
+import style from "../../../styles.module.scss";
 import { useDispatch } from "react-redux";
-import { modalAction,coinAction } from "../../../../../../redux/actions";
-import { sizeModal } from "../../../../../modal/SizeModal";
+import { modalAction,coinAction } from "../../../../../../../redux/actions";
+import { sizeModal } from "../../../../../../modal/SizeModal";
 
 const ModaldeleteRateCoin = ({data}) => {
     

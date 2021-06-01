@@ -15,7 +15,6 @@ import { defaultValue } from "../../../../../defaultValue";
 import moment from "moment";
 
 export default function EditPromotion({dataPromo}) {
-  console.log(dataPromo)
   const { register, handleSubmit, errors,reset,control} = useForm({
     resolver: yupResolver(promotionSchema),
   });

@@ -150,7 +150,7 @@ export default function Rate() {
               style={{ color: "#F5732E" }}
               onClick={() => createPrice()}
             >
-              <span className={style.textOneo25}> เพิ่มอัตราการแลกเปลี่ยน</span>
+              <span className={style.textOne35}> เพิ่มอัตราการแลกเปลี่ยน</span>
             </Button>
           </Col>
         </Row>

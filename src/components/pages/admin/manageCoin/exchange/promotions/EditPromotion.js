@@ -173,10 +173,9 @@ export default function EditPromotion({dataPromo}) {
         className="backgroundOrange buttonColor"
         shape="round"
         size="middle"
-        style={{ width: "100px" }}
+        style={{ width: "60px" }}
         icon={<FontAwesomeIcon icon={faPen} style={{ color: "white" }} />}
       >
-        <span style={{ paddingLeft: "0.5rem" }} className={style.textNormal}>แก้ไข</span>
       </Button>
     </Fragment>
   );

@@ -198,7 +198,7 @@ export default function Promotion() {
             style={{ color: "#F5732E", textDecorationLine: "underline" }}
             onClick={() => createPromotion()}
           >
-            <span className={style.textNormal}>เพิ่มโปรโมชั่น</span>
+            <span className={style.textOne35}>เพิ่มโปรโมชั่น</span>
           </Button>
         </Col>
       </Row>

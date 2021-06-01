@@ -71,12 +71,9 @@ export default function DeletePromotion({data}) {
         className="backgroundRed buttonColor"
         shape="round"
         size="middle"
-        style={{ width: "100px" }}
+        style={{ width: "60px" }}
         icon={<FontAwesomeIcon icon={faTrashAlt} style={{ color: "white" }} />}
       >
-        <span style={{ paddingLeft: "0.5rem" }} className={style.textNormal}>
-          ลบ
-        </span>
       </Button>
     </Fragment>
   );

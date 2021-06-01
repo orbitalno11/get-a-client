@@ -150,7 +150,7 @@ export default function Price() {
               style={{ color: "#F5732E" }}
               onClick={() => createPrice()}
             >
-              <span className={style.textOneo25}> เพิ่มอัตราการซื้อเหรียญ</span>
+              <span className={style.textOne35}> เพิ่มอัตราการซื้อเหรียญ</span>
             </Button>
           </Col>
         </Row>

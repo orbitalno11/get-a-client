@@ -99,8 +99,6 @@ function createCoinRate(data){
         console.log(data)
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.post("/coin/rate",data).then(() => {
-            // console.log(data)
-            // dispatch(loadingActions.stopLoading())
             dispatch(success())
             dispatch(loadingActions.stopLoading())
             dispatch(coinAction.getCoinRatesAdmin());

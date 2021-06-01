@@ -4,7 +4,10 @@ const initialState = {
     rateCoin :  null,
     coinUser :  null,
     error: null,
-    activate:null
+    activate:null,
+    redeemList:null,
+    approve:null,
+    denide:null,
 
 }
 
@@ -105,6 +108,54 @@ const coinReducer = (state = initialState , action)=>{
                 ...state,
                 rateCoin : null,
                 error: null
+            }
+
+        }
+        case coinConstants.REDEEM_LIST_SUCCESS:{
+            return {
+                ...state,
+                redeemList : action.payload,
+                error : false
+            }
+
+        }
+        case coinConstants.REDEEM_LIST_FAILURE:{
+            return {
+                ...state,
+                redeemList : null,
+                error : true
+            }
+
+        }
+        case coinConstants.APPROVE_REQUEST_REDEEM_SUCCESS:{
+            return {
+                ...state,
+                approve : action.payload,
+                error : false
+            }
+
+        }
+        case coinConstants.APPROVE_REQUEST_REDEEM_FAILURE:{
+            return {
+                ...state,
+                approve : null,
+                error : true
+            }
+
+        }
+        case coinConstants.DENIED_REQUEST_REDEEM_SUCCESS:{
+            return {
+                ...state,
+                denide : action.payload,
+                error : false
+            }
+
+        }
+        case coinConstants.DENIED_REQUEST_REDEEM_FAILURE:{
+            return {
+                ...state,
+                denide : null,
+                error : true
             }
 
         }

@@ -1,27 +1,45 @@
-import { Card, Row, Col, Button} from "antd";
+import { Card, Row, Col, Button,Image } from "antd";
 import React, { Fragment } from "react";
 import style from "../styles.module.scss";
 import { useDispatch } from "react-redux";
-import { modalAction } from "../../../../../redux/actions";
-import ModalComponent from "../../../../modal/ModalComponent"
+import { modalAction,coinAction} from "../../../../../redux/actions";
+import ModalComponent from "../../../../modal/ModalComponent";
 import { sizeModal } from "../../../../modal/SizeModal";
-import { typeModal } from "../../../../modal/TypeModal";
 
 export default  function RequesDetail({data}) {
     const dispatch = useDispatch()
 
-    function ComponentSample (){
+    const handOnApprove = (idRedeem) => {
+      dispatch(coinAction.ApproveRequestsRedeem(idRedeem));
+    };
+
+    const handOnDenied = (idRedeem) => {
+      dispatch(coinAction.DeniedRequestsRedeem(idRedeem));
+    };
+
+    const ModalDetailRedeem =()=>{
       return (
             <div style={{ paddingLeft: "1rem" }}>
-              <p  className={style.titleH4}>
-                คำขอการถอนเหรียญ
-              </p>
-              <p className={style.textNormal}>ชื่อ : {data && data.firstname}</p>
-              <p className={style.textNormal}>นามสกุล : {data && data.lastname}</p>
-              <p className={style.textNormal}>วันที่ส่งคำขอ : {data && data.date} </p>
-              <p className={style.textNormal}>จำนวนยอด : {data && data.amount} บาท</p>
-              <p className={style.textNormal}>ธนาคาร :{data && data.bank}</p>
-              <p className={style.textNormal}>เลขบัญชี : {data && data.accountNumber}</p>
+              <Row>
+              <Col span={12}>
+                <p  className={style.titleH4}>
+                  คำขอการถอนเหรียญ
+                </p>
+                <p className={style.textNormal}>ชื่อ : {data && data.owner.firstname}</p>
+                <p className={style.textNormal}>นามสกุล : {data && data.owner.lastname}</p>
+                <p className={style.textNormal}>วันที่ส่งคำขอ : {data && data.requestDate} </p>
+                <p className={style.textNormal}>จำนวนยอด : {data && data.amount} บาท</p>
+                <p className={style.textNormal}>ธนาคาร :{data && data.bank.title}</p>
+                <p className={style.textNormal}>เลขบัญชี : {data && data.accountNo}</p>
+                <p className={style.textNormal}>ชื่อบัญชี : {data && data.accountName}</p>
+              </Col>
+              <Col span={7} className={style.imageRedeem}>
+                <Image
+                  width={200}
+                  src={data && data.accountPic}
+                />
+              </Col>
+              </Row>
               <Row className={style.btnRequest}>
                 <Col span={6}> 
                   <Button
@@ -29,7 +47,7 @@ export default  function RequesDetail({data}) {
                       shape="round"
                       size="middle"
                       style={{ width: "100px" }}
-                      onClick={() => alert()}
+                      onClick={() => handOnApprove(data.id)}
                     >
                       <span className={style.textNormal}>ยอมรับ</span>
                     </Button>
@@ -40,7 +58,7 @@ export default  function RequesDetail({data}) {
                     shape="round"
                     size="middle"
                     style={{ width: "100px" }}
-                    onClick={() => dispatch(modalAction.closeModal())}
+                    onClick={() => handOnDenied(data.id)}
                   >
                    <span className={style.textNormal}>ปฏิเสธ</span>
                   </Button>
@@ -49,17 +67,10 @@ export default  function RequesDetail({data}) {
           </div>
       )
     }
-    const alert = () => {
-      dispatch(modalAction.openModal({
-          text: "ดำเนินการสำเร็จ",
-          size: sizeModal.small,
-          alert: typeModal.corrent
-      }))
-    }
 
-    const component = () => {
+    const DetailRedeem = () => {
       dispatch(modalAction.openModal({
-          body: <ComponentSample />,
+          body: <ModalDetailRedeem />,
           size: sizeModal.default,
       }))
     }
@@ -73,7 +84,7 @@ export default  function RequesDetail({data}) {
               span={14}
               style={{ marginTop: "-0.5rem", paddingLeft: "0.625rem" }}
             >
-              <span>{data && data.fullNameTaxt}</span>
+              <span>{data && data.owner.fullNameTaxt}</span>
             </Col>
             <Col
               span={10}
@@ -83,7 +94,7 @@ export default  function RequesDetail({data}) {
                 color: "gray",
               }}
             >
-              <span className={style.textSmall}>{data && data.date}</span>
+              <span className={style.textSmall}>{data && data.requestDate}</span>
             </Col>
           </Row>
           <Row
@@ -102,7 +113,7 @@ export default  function RequesDetail({data}) {
               style={{ width: "11rem" }}
               shape="round"
               size="middle"
-              onClick={() => component()}
+              onClick={() => DetailRedeem()}
             >
               <span className={style.textNormal}>รายละเอียด</span>
             </Button>

@@ -193,11 +193,10 @@ function activateRate(id){
     return  (dispatch) => {
         dispatch(loadingActions.startLoading())
          apiURL.apiGetA.get(`/coin/rate/${id}/activate`)
-        .then((res) => {
+        .then(() => {
             dispatch(loadingActions.stopLoading())
             dispatch(coinAction.getCoinRatesAdmin());
-            const favorite = res.data.data
-            dispatch(success(favorite))
+            dispatch(success())
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
             dispatch(failure(err.response.data))
@@ -206,6 +205,57 @@ function activateRate(id){
     function success(data) { return { type: coinConstants.ACTIVATE_COIN_RATE_SUCCESS, payload: data } }
     function failure(err) { return { type: coinConstants.ACTIVATE_COIN_RATE_FAILURE, payload: err } }
     
+}
+
+function getRequestsRedeem(){ 
+    return  (dispatch) => {
+        dispatch(loadingActions.startLoading())
+            apiURL.apiGetA.get("/coin/redeem").then(res => {
+            dispatch(loadingActions.stopLoading())
+            const redeemlist = res.data.data
+            dispatch(success(redeemlist))
+        }).catch(err => {
+            dispatch(loadingActions.stopLoading())
+            dispatch(failure(err.response.data))
+        })
+    }
+    function success(data) { return { type: coinConstants.REDEEM_LIST_SUCCESS, payload: data } }
+    function failure(err) { return { type: coinConstants.REDEEM_LIST_FAILURE, payload: err } }
+    
+}
+
+function ApproveRequestsRedeem(id){ 
+    return  (dispatch) => {
+        dispatch(loadingActions.startLoading())
+            apiURL.apiGetA.get(`/coin/redeem/${id}/approved`).then(() => {
+            dispatch(modalAction.openModal({
+                text: "ดำเนินการสำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.corrent,
+                }))
+        }).catch(err => {
+            dispatch(loadingActions.stopLoading())
+            dispatch(failure(err.response.data))
+        })
+    }
+    function failure(err) { return { type: coinConstants.APPROVE_REQUEST_REDEEM_FAILURE, payload: err } }   
+}
+
+function DeniedRequestsRedeem(id){ 
+    return  (dispatch) => {
+        dispatch(loadingActions.startLoading())
+            apiURL.apiGetA.get(`/coin/redeem/${id}/denied`).then(() => {
+            dispatch(modalAction.openModal({
+                text: "ดำเนินการสำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.corrent,
+                }))
+        }).catch(err => {
+            dispatch(loadingActions.stopLoading())
+            dispatch(failure(err.response.data))
+        })
+    }
+    function failure(err) { return { type: coinConstants.DENIED_REQUEST_REDEEM_FAILURE, payload: err } }   
 }
 
 export const coinAction = {
@@ -218,5 +268,8 @@ export const coinAction = {
     clearCreateRate,
     deleteCoinRate,
     updateCoinRate,
-    activateRate
+    activateRate,
+    getRequestsRedeem,
+    ApproveRequestsRedeem,
+    DeniedRequestsRedeem
 }

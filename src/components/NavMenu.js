@@ -45,8 +45,9 @@ const NavMenu = () => {
                 {/* <Menu.Item key="/course" >
                     <NavLink to="/course">
                         คอร์สเรียน
-                    </NavLink>
+                </NavLink>
                 </Menu.Item>
+                */}
                 <Menu.Item key="/search" >
                     <NavLink to="/search">
                         ค้นหา

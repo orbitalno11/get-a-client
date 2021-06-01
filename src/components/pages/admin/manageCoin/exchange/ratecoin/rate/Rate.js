@@ -1,21 +1,21 @@
 import { Row, Col, Button } from "antd";
 import React, { Fragment, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { exchangeSchema } from "../../../../../../validation/admin/exchangeSchema";
+import { exchangeSchema } from "../../../../../../../validation/admin/exchangeSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { faCoins, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import style from "../../styles.module.scss";
+import style from "../../../styles.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { modalAction, coinAction } from "../../../../../../redux/actions";
-import ModalComponent from "../../../../../modal/ModalComponent";
-import { sizeModal } from "../../../../../modal/SizeModal";
-import InputComponents from "../../../../../input/InputComponets";
+import { modalAction, coinAction } from "../../../../../../../redux/actions";
+import ModalComponent from "../../../../../../modal/ModalComponent";
+import { sizeModal } from "../../../../../../modal/SizeModal";
+import InputComponents from "../../../../../../input/InputComponets";
 import Edit from "./Edit";
 import Delete from "./Delete";
 import moment from "moment";
 
-export default function Price() {
+export default function Rate() {
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(exchangeSchema),
   });
@@ -29,7 +29,7 @@ export default function Price() {
         title: "std",
         baht: data.baht,
         coin: data.coin,
-        type: "std",
+        type: "transfer",
         startDate: today,
         endDate: today,
         updtaeDate: today,
@@ -42,9 +42,9 @@ export default function Price() {
   const list = useSelector((state) => state.coin.rateCoin);
 
   const handOnActivate = (rateId) => {
-      dispatch(coinAction.activateRate(rateId));
-  }
-  
+    dispatch(coinAction.activateRate(rateId));
+  };
+
   useEffect(() => {
     dispatch(coinAction.getCoinRatesAdmin());
   }, []);
@@ -140,7 +140,7 @@ export default function Price() {
           <FontAwesomeIcon icon={faCoins} className={style.coins} />
         </Col>
         <Col xs={21} sm={21} md={20} lg={22} xl={23}>
-          <span className={style.headerOne35}>ราคาขายปัจจุบัน</span>
+          <span className={style.headerOne35}>อัตราการแลกเปลี่ยนปัจจุบัน</span>
         </Col>
         <ModalComponent />
         <Row className={style.pagepaddingleft}>
@@ -150,7 +150,7 @@ export default function Price() {
               style={{ color: "#F5732E" }}
               onClick={() => createPrice()}
             >
-              <span className={style.textOneo25}> เพิ่มอัตราการซื้อเหรียญ</span>
+              <span className={style.textOneo25}> เพิ่มอัตราการแลกเปลี่ยน</span>
             </Button>
           </Col>
         </Row>
@@ -173,7 +173,7 @@ export default function Price() {
           <tbody>
             {list &&
               list
-                .filter((data) => data.type === "std")
+                .filter((data) => data.type === "transfer")
                 .map((data, index) => (
                   <tr style={{ width: "1rem" }} key={index}>
                     <td className={style.textNormal}>{data && data.baht} </td>

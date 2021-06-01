@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Row, Col } from "antd";
-import ExchangeDetail from "./ratecoin/ExchangeDetail";
+import Rate from "./ratecoin/rate/Rate";
 import Promotion from "./promotions/Promotion";
 import Price from "./prices/Price";
 import Loading from "../../../../loading/Loading";
@@ -13,7 +13,7 @@ export default function Exchange() {
       {loading.loading && <Loading />}
       <Row>
         <Col span={24}>
-          <ExchangeDetail />
+          <Rate />
         </Col>
         <Col span={24} style={{ paddingTop: "2rem" }}>
           <Price />

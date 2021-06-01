@@ -1,16 +1,16 @@
 import { Row, Col, Button} from "antd";
 import React, { Fragment,useEffect} from "react";
 import { useForm } from "react-hook-form";
-import { exchangeSchema } from "../../../../../../validation/admin/exchangeSchema";
+import { exchangeSchema } from "../../../../../../../validation/admin/exchangeSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import style from "../../styles.module.scss";
+import style from "../../../styles.module.scss";
 import { useDispatch } from "react-redux";
-import { modalAction,coinAction } from "../../../../../../redux/actions";
-import isEmpty from "../../../../../defaultFunction/checkEmptyObject";
-import InputComponents from "../../../../../input/InputComponets"
-import { sizeModal } from "../../../../../modal/SizeModal";
+import { modalAction,coinAction } from "../../../../../../../redux/actions";
+import isEmpty from "../../../../../../defaultFunction/checkEmptyObject";
+import InputComponents from "../../../../../../input/InputComponets"
+import { sizeModal } from "../../../../../../modal/SizeModal";
 import moment from "moment";
 
 export default function Edit({dataRate}) {
@@ -31,13 +31,14 @@ export default function Edit({dataRate}) {
 
   const dispatch = useDispatch();
   const today = moment().format("MM/DD/YYYY")
+ 
   const onSubmit = (data) => {
     if(data){
       const rate ={
         "title": "std",
         "baht": data.baht,
         "coin": data.coin,
-        "type": "std",
+        "type": "transfer",
         "startDate": today,
         "endDate": today,
         "updtaeDate":today,

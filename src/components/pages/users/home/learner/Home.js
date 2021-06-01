@@ -13,68 +13,12 @@ import Loading from "../../../../loading/Loading"
 export default function Home() {
     const dispatch = useDispatch()
     const loading = useSelector(state => state.loading)
-    const { offlineCourseRank } = useSelector(state => state.home)
+    const { offlineCourseRank, onlineCourseRank } = useSelector(state => state.home)
 
     useEffect(() => {
-        dispatch(homeActions.getRank(10))
+        dispatch(homeActions.getRank())
+        dispatch(homeActions.getRankOnline())
     }, [])
-
-    // const subject = [
-    //     {
-    //         subject: "คณิตศาสตร์",
-    //         link: "",
-    //         icon: faSquareRootAlt,
-    //         color: "#F7D7C2"
-    //     },
-    //     {
-    //         subject: "ภาษาไทย",
-    //         link: "",
-    //         icon: faInfinity,
-    //         color: "#F7D7C2"
-    //     },
-    //     {
-    //         subject: "วิทยาศาตร์",
-    //         link: "",
-    //         icon: faMicroscope,
-    //         color: "#F7D7C2"
-    //     },
-    //     {
-    //         subject: "ชีววิทยา",
-    //         link: "",
-    //         icon: faDna,
-    //         color: "#F7D7C2"
-    //     },
-    //     {
-    //         subject: "เคมี",
-    //         link: "faFlask",
-    //         icon: faAtom,
-    //         color: "#F7D7C2"
-    //     },
-    //     {
-    //         subject: "ฟิสิกส์",
-    //         link: "",
-    //         icon: faAtom,
-    //         color: "#F7D7C2"
-    //     },
-    //     {
-    //         subject: "อังกฤษ",
-    //         link: "",
-    //         icon: faAmilia,
-    //         color: "#F7D7C2"
-    //     },
-    //     {
-    //         subject: "สังคมศึกษา",
-    //         link: "",
-    //         icon: faGlobeAsia,
-    //         color: "#F7D7C2"
-    //     },
-    //     {
-    //         subject: "ภาษาไทย",
-    //         link: "",
-    //         icon: faBookOpen,
-    //         color: "#F7D7C2"
-    //     },
-    // ]
 
     // const renderSlides = () => {
     //     let size = !screens.xs ? screens.md ? 6 : 5 : 3
@@ -105,7 +49,7 @@ export default function Home() {
                     <Loading />
                 )
             }
-            <div className={style.paddingBottomBody}>
+            <div  className={style.paddingBottomBody}>
                 <div className={style.banner}>
                     ติวเตอร์ที่ใช่ สถานที่ที่ชอบ คุณภาพการสอนที่ลงตัว
                 </div>
@@ -135,14 +79,15 @@ export default function Home() {
                             )
                     } */}
                 </div>
-                <div className={isMobile() ? null : style.paddingBody}>
-                    <CourseComponet title="คอร์สเรียนยอดนิยม" link="/" array={offlineCourseRank} />
+                <div className={!isMobile() ? "container" : "" }>
+                    {/* For Offline Course */}
+                    <CourseComponet title="ครูสอนพิเศษยอดนิยม" array={offlineCourseRank} type="course" />
+                    {/* For Online Course */}
+                    <div className={style.marginSection}>
+                    <CourseComponet title="คอร์สเรียนออนไลน์ยอดนิยม" array={onlineCourseRank} type="online" />
+                    </div>
+                   
                 </div>
-
-                {/* For Online Course */}
-                {/* <div className={style.paddingBody}>
-                    <CourseComponet title="คอร์สเรียนยอดนิยม" link="/" array={courseTutor1} />
-                </div> */}
             </div>
         </Fragment>
     )

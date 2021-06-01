@@ -7,51 +7,62 @@ import { color } from "../../../defaultValue";
 import style from "./styles.module.scss"
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
-import { reviewActions } from "../../../../redux/actions";
+import { modalAction, onlineCourseActions, reviewActions } from "../../../../redux/actions";
 import { useDispatch } from "react-redux";
 import isEmpty from "../../../defaultFunction/checkEmptyObject";
 import { useEffect } from "react";
 
-export function DeleteForm({ idReview }) {
+export function DeleteForm({ idReview, type }) {
     const dispatch = useDispatch()
-    const { id } = useParams()
+    const { id, courseId, videoId } = useParams()
     const { loading } = useSelector(state => state.loading)
+    const text = type === "review" ? "ความคิกเห็น" : "คลิปการสอน"
     const styleWarningText = {
         color: color.red,
     }
 
     const buttonDelete = {
-        width : "100%",
-        marginTop : "1rem"
+        width: "100%",
+        marginTop: "1rem"
     }
 
     const handleDeleteComment = () => {
-        dispatch(reviewActions.deleteReviewByCourse(idReview, 1,id))
+        if (type === "review") {
+            if(videoId){
+                dispatch(reviewActions.deleteReviewByCourse(idReview, 3, courseId, videoId))
+            }else{
+                dispatch(reviewActions.deleteReviewByCourse(idReview, 1, id))
+            }
+        } else {
+            dispatch(modalAction.closeModal())
+            dispatch(onlineCourseActions.deleteClip(courseId, videoId))
+        }
+
     }
 
     return (
         <div align="center">
             <h3 className={style.titleH4}>
-                ยืนยันการลบความคิดเห็นของบทเรียนนี้
+                ยืนยันการลบ{text}ของบทเรียนนี้
             </h3>
-            <p style={styleWarningText}>หากลบความคิดเห็นแล้วจะไม่สามารถกู้ความมเห็นคืนได้</p>
-            <Button  className="buttonColor backgroundRed" style={buttonDelete} id="reviewForm" shape="round" onClick={()=>handleDeleteComment()} disabled={loading ? true : false}>
+            <p style={styleWarningText}>หากลบ{text}แล้วจะไม่สามารถกู้{text}ได้</p>
+            <Button className="buttonColor backgroundRed" style={buttonDelete} id="reviewForm" shape="round" onClick={() => handleDeleteComment()} disabled={loading ? true : false}>
                 {
                     loading && (
                         <Fragment>
-                            <Spin style={{ marginRight: "0.5rem" }} /> 
+                            <Spin style={{ marginRight: "0.5rem" }} />
                             <span>กำลัง</span>
                         </Fragment>
                     )
                 }
-                    ลบความคิดเห็นนี้
+                    ลบ{text}นี้
                 </Button>
         </div>
     )
 }
 
 export default function ReviewForm({ idReview }) {
-    const { id } = useParams()
+    const { id, videoId, courseId } = useParams()
     const dispatch = useDispatch()
     const { loading } = useSelector(state => state.loading)
     const { review, modal } = useSelector(state => state)
@@ -72,38 +83,37 @@ export default function ReviewForm({ idReview }) {
         marginTop: "1rem",
         marginBottom: "1rem",
         border: `0.15rem solid ${color.orange}`,
-        paddingTop : "0.75rem"
+        paddingTop: "0.75rem"
     }
 
     const buttonReview = {
-        width : "100%"
+        width: "100%"
     }
-    
+
     const onSubmit = (data) => {
         if (data) {
-
             if (isEmpty(idReview)) {
                 const formData = {
-                    "courseId": id,
+                    "courseId": videoId ? courseId : id,
                     "rating": data.rate,
                     "comment": data.comment,
-                    "isClip": false,
-                    "courseType": 1
+                    "isClip": videoId ? true : false,
+                    "clipId": videoId && videoId,
+                    "courseType": videoId ? 3 : 1
                 }
                 dispatch(reviewActions.createReview(formData))
-            } else{
+            } else {
                 const formData = {
-                    "courseId": id,
+                    "courseId": videoId ? courseId : id,
                     "reviewId": idReview,
                     "rating": data.rate,
                     "comment": data.comment,
-                    "isClip": false,
-                    "courseType": 1
+                    "isClip": videoId ? true : false,
+                    "clipId": videoId && videoId,
+                    "courseType": videoId ? 3 : 1
                 }
-                console.log(formData)
                 dispatch(reviewActions.updateReview(formData))
             }
-
         }
     }
 
@@ -131,7 +141,7 @@ export default function ReviewForm({ idReview }) {
                     {
                         loading && (
                             <Fragment>
-                                <Spin style={{ marginRight: "0.5rem" }} /> 
+                                <Spin style={{ marginRight: "0.5rem" }} />
                                 <span>กำลัง</span>
                             </Fragment>
                         )

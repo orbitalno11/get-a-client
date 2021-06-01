@@ -7,6 +7,7 @@ import {
     faCoins,
     faStar,
     faUserFriends,
+    faVideo,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../styles.module.scss";
@@ -14,10 +15,25 @@ import { useSelector } from "react-redux";
 import { SkeletonComponent } from "../../../../loading/SkeletonComponent";
 import profileSample from "../../../../images/profile.webp"
 import { color } from "../../../../defaultValue";
+import isEmpty from "../../../../defaultFunction/checkEmptyObject";
+import { useState } from "react";
+import { useEffect } from "react";
+import { useParams } from "react-router";
 
 export default function DetailCourse() {
-    const course = useSelector(state => state.offlineCourse.data)
-    const owner = course && course.owner
+    const { type } = useParams();
+    const [course, setCourse] = useState()
+    const { onlineCourse, offlineCourse } = useSelector(state => state)
+    const owner = !isEmpty(course) && course.owner
+    const isOfflineCourse = type === "course"
+
+    useEffect(() => {
+        if (isOfflineCourse) {
+            setCourse(offlineCourse.data && offlineCourse.data)
+        } else {
+            setCourse(onlineCourse.data && onlineCourse.data)
+        }
+    }, [onlineCourse, offlineCourse])
 
     return (
         <Fragment>
@@ -66,21 +82,25 @@ export default function DetailCourse() {
                                 )
                             }
                         </Col>
-                        <Col xs={24} md={12} xl={12} className={style.TitleCoin}>
-                            <FontAwesomeIcon icon={faClock} className={style.iconmarker} />
-                            {
-                                course ? (
-                                    <span className={style.textNormal}>{course.timeText}</span>
-                                ) : (
-                                    <SkeletonComponent.SkeletonText />
-                                )
-                            }
-                        </Col>
+                        {
+                            isOfflineCourse && (
+                                <Col xs={24} md={12} xl={12} className={style.TitleCoin}>
+                                    <FontAwesomeIcon icon={faClock} className={style.iconmarker} />
+                                    {
+                                        course ? (
+                                            <span className={style.textNormal}>{course.timeText}</span>
+                                        ) : (
+                                            <SkeletonComponent.SkeletonText />
+                                        )
+                                    }
+                                </Col>
+                            )
+                        }
                         <Col xs={24} md={12} xl={6} className={style.TitleCoin}>
                             <FontAwesomeIcon icon={faUserFriends} className={style.iconmarker} />
                             {
                                 course ? (
-                                    <span className={style.textNormal}>{course.studentNumber}</span>
+                                    <span className={style.textNormal}>{isOfflineCourse ? course.studentNumber : course.numberOfView}</span>
                                 ) : (
                                     <SkeletonComponent.SkeletonText />
                                 )
@@ -97,15 +117,16 @@ export default function DetailCourse() {
                             }
                         </Col>
                         <Col xs={24} md={12} xl={6} className={style.TitleCoin}>
-                            <FontAwesomeIcon icon={faCoins} className={style.iconmarker} />
+                            <FontAwesomeIcon icon={isOfflineCourse ? faCoins : faVideo} className={style.iconmarker} />
                             {
                                 course ? (
-                                    <span className={style.textNormal}>{course.costText}</span>
+                                    <span className={style.textNormal}>{isOfflineCourse ? course.costText : course.numberOfVideo}</span>
                                 ) : (
                                     <SkeletonComponent.SkeletonText />
                                 )
                             }
                         </Col>
+
                         <Col xs={24} md={12} xl={6} className={style.TitleCoin}>
                             <FontAwesomeIcon icon={faStar} className={style.iconmarker} style={{ color: color.yellow }} />
                             {

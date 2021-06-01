@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Fragment } from "react"
 import Header from "../../../../headerMobile/Header"
 import isMobile from "../../../../isMobile/isMobile"
@@ -10,36 +10,96 @@ import { homeActions } from "../../../../../redux/actions"
 import { useEffect } from "react"
 import CardCourseLearner from "../../../../card/CardCourseLearner"
 import { Col, Row } from "antd"
+import { useParams } from "react-router"
 import TabHorizontal from "../../../../tab/TabHorizontal"
-import { useState } from "react"
+import isEmpty from "../../../../defaultFunction/checkEmptyObject"
+import subjectList from "../../../../defaultValue/subjectList"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export default function Ranking() {
     const { loading, home } = useSelector(state => state)
-    const [ tabStart, setTabStart] = useState({
-        key: "course",
-        name: "คอร์ส"
-    })
+    const { type } = useParams()
     const dispatch = useDispatch()
+    const [course, setCourse] = useState(null)
+    const [tabStart, setTabStart] = useState({
+        key: "course",
+        name: "ติวเตอร์"
+    })
+    const [courseFocus, setCourseFocus] = useState(type ? type : tabStart.key)
+    const textTitle = type ? (type === "course" ? "ติวเตอร์" : "คอร์สออนไลน์") : ""
 
     useEffect(() => {
-        dispatch(homeActions.getRank(20))
+        if (type) {
+            if (type === "course") {
+                dispatch(homeActions.getRank(20))
+            } else {
+                dispatch(homeActions.getRankOnline(20))
+            }
+        } else {
+            dispatch(homeActions.getRank(20))
+            dispatch(homeActions.getRankOnline(20))
+        }
+        return () => {
+            dispatch(homeActions.clearHome())
+        }
     }, [])
 
-    const handleSetSelectTab = (key) =>{
-        const tabActive = tabDetail.filter(value=>value.key===key)[0]
+    useEffect(() => {
+        if (courseFocus === "course") {
+            setCourse(home.offlineCourseRank)
+        } else {
+            setCourse(home.onlineCourseRank)
+        }
+        return () => {
+            setCourse(null)
+        }
+    }, [courseFocus, home.offlineCourseRank, home.onlineCourseRank])
+
+    const handleSetSelectTab = (key) => {
+        const tabActive = tabDetail.filter(value => value.key === key)[0]
         setTabStart(tabActive)
+        setCourse(null)
+        setCourseFocus(key)
+    }
+
+    const paddingCard = {
+        paddingBottom: "1rem",
+    }
+
+    const CourseSection = () => {
+        return (
+            (!isEmpty(course) && !loading.loading) && (
+                <Row className={`${style.marginSection}`} justify={"space-between"}>
+                    {
+                        course.map((item) => (
+                            <Col align="center" xl={11} lg={11} md={12} sm={24} xs={24} key={item.id} style={paddingCard}>
+                                <CardCourseLearner data={item} verizontal="true" type={courseFocus} ranking={isMobile()?false:true} />
+                            </Col>
+
+                        ))
+                    }
+                </Row>
+            )
+        )
     }
 
     const tabDetail = [
         {
             key: "course",
-            name: "คอร์ส",
+            name: "ติวเตอร์",
         },
         {
-            key: "clip",
-            name: "คลิปวิดิโอ",
+            key: "online",
+            name: "ออนไลน์",
         },
     ]
+
+    const iconSubject = (color) => {
+        return ({
+            backgroundColor: color,
+        })
+    }
+
     return (
         <Fragment>
             {
@@ -49,23 +109,48 @@ export default function Ranking() {
             }
 
             {
-                isMobile() && <Header title="ติวเตอร์ยอดนิยม" />
+                isMobile() && <Header title={`${textTitle}ยอดนิยม`} />
             }
-            <div className={style.container}>
-                {
-                    !isMobile() && <h1 className={style.titleH2}>ติวเตอร์ยอดนิยม</h1>
-                }
-                <TabHorizontal type="tab" tabStart={tabStart} tabDetail={tabDetail} style={!isMobile() ? "TabPane" : ""} handleSetSelectTab={handleSetSelectTab}/>
-                <Row >
+            <div className="container">
+                <div className={style.bodyPaddingTopBottom} >
                     {
-                        home.offlineCourseRank && home.offlineCourseRank.map((item) => (
-                            <Col align="center" lg={8} md={12} sm={24} xs={24} key={item.id} style={{ padding: "0.5rem" }}>
-                                <CardCourseLearner data={item} verizontal="true" />
-                            </Col>
-
-                        ))
+                        !isMobile() &&
+                        <div className={style.section}>
+                            <span className={style.headerFour}>{`${textTitle}ยอดนิยม`}</span>
+                        </div>
                     }
-                </Row>
+                    {
+                        !type && (
+                            <div className={`${!isMobile() && style.section} ${style.marginSection}`}>
+                                <TabHorizontal type="tab" tabStart={tabStart} tabDetail={tabDetail} style={!isMobile() ? "TabPane" : ""} handleSetSelectTab={handleSetSelectTab} />
+                            </div>
+                        )
+                    }
+                    <Row justify={"space-between"}>
+                        <Col xl={18} lg={18} md={18} sm={24} xs={24}>
+                            <CourseSection />
+                        </Col>
+                        {
+                            !isMobile() && (
+                                <Col xl={5} lg={5} md={5} >
+                                    <div className={`${style.section} ${style.marginSection}`} >
+                                        <b className={style.textOne25}>ค้นหาจากรายวิชา</b>
+                                        {
+                                            subjectList && subjectList.map((item, index) => (
+                                                <div key={index} >
+                                                    <Row align="middle" className={style.subjectSelect}>
+                                                        <FontAwesomeIcon className={style.iconSubjectSmall} icon={item.icon} style={iconSubject(item.color)} />
+                                                        <span className={`${style.textOne} ${style.marginLeftOneHalf}`}>{item.subject}</span>
+                                                    </Row>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                </Col>
+                            )
+                        }
+                    </Row>
+                </div>
             </div>
         </Fragment>
     )

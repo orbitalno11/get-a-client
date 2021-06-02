@@ -44,7 +44,7 @@ const reviewReducer = (state = initialState, action) => {
                 ...state,
                 error: null
             }
-        case reviewConstants.DELETE_REVIEW__FAILURE:
+        case reviewConstants.DELETE_REVIEW_FAILURE:
             return {
                 ...state,
                 error: action.payload

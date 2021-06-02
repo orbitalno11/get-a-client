@@ -51,7 +51,7 @@
 }
 
 .iconSubject{
-    padding: 0.75rem;
+    padding: 0.5rem;
     border-radius: 50%;
     color: white;
 }
@@ -63,10 +63,11 @@
     width: 3.75rem !important;
 }
 
-.iconSmall{
+.iconSubjectSmall{
     @extend .iconSubject;
-    height: 3rem !important;
-    width: 3rem !important;
+    @extend .textOne25;
+    height: 2.25rem !important;
+    width: 2.25rem  !important;
 }
 
 .flexRow{
@@ -106,4 +107,9 @@
 .row{
     display: flex !important;
     flex-flow: row;
+}
+
+.subjectSelect{
+    @extend .marginSection;
+    cursor: pointer;
 }

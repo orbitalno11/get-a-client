@@ -6,6 +6,7 @@ import {
   faBookReader,
   faClock,
   faUsers,
+  faVideo,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import findKeyObject from "../defaultFunction/findKeyObject";
@@ -13,37 +14,40 @@ import { defaultValue } from "../defaultValue/defaultValue";
 import { Fragment } from "react";
 import { color } from "../defaultValue";
 
-export default function ListCorseTutor({ data }) {
+export default function ListCorseTutor({ data, isClip }) {
 
   const colorBlack = {
-    color : color.black
+    color: color.black
   }
-
   return (
     <Fragment>
       <Row className={styles.paddingleftcourse} >
         <Col span={20} >
           <div >
-            <h4 className={styles.titleH3}>{data && data.name}</h4>
+            <h4 className={styles.titleH3}>{data.name}</h4>
           </div>
           <div className={styles.gridfull}>
             <FontAwesomeIcon icon={faBookReader} className={styles.icon} />
-            <span style={colorBlack} className={`${styles.marginLeft}`}>{data && data.grade.title} , {data && data.subject.title}</span>
+            <span style={colorBlack} className={`${styles.marginLeft}`}>{data && data.grade?.title} , {data && data.subject?.title}</span>
           </div>
           <div className={styles.gridfull}>
-            <FontAwesomeIcon icon={faClock} className={styles.icon} />
+            <FontAwesomeIcon icon={!isClip ? faClock : faVideo} className={styles.icon} />
             <span style={colorBlack} className={`${styles.marginLeft}`}>
-              {data && data.timeText}
+              {!isClip ? data.timeText : data.numberOfVideo}
             </span>
           </div>
-          <div className={styles.gridfull}>
-            <FontAwesomeIcon icon={faUsers} className={styles.icon} />
-            <span style={colorBlack} className={`${styles.marginLeft}`}>{data && findKeyObject(defaultValue.type, data.courseType)}</span>
-          </div>
+          {
+            !isClip && (
+              <div className={styles.gridfull}>
+                <FontAwesomeIcon icon={faUsers} className={styles.icon} />
+                <span style={colorBlack} className={`${styles.marginLeft}`}>{data && findKeyObject(defaultValue.type, data.courseType)}</span>
+              </div>
+            )
+          }
         </Col>
         <Col className={styles.paddingmanage}>
-        <Badge count={data ? data.requestNumber : 0} offset={[0, 0]} >
-          <FontAwesomeIcon icon={faBell} style={{color : data.requestNumber > 0 ? color.yellow : color.gray}} className={styles.floatBell} />
+          <Badge count={data ? data.requestNumber : 0} offset={[0, 0]} >
+            <FontAwesomeIcon icon={faBell} style={{ color: data.requestNumber > 0 ? color.yellow : color.gray }} className={styles.floatBell} />
           </Badge>
         </Col>
       </Row>

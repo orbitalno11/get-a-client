@@ -31,8 +31,8 @@ const NavMenu = () => {
                         หน้าแรก
                 </NavLink>
                 </Menu.Item>
-                <Menu.Item key="/tutor/ranking" >
-                    <NavLink to="/tutor/ranking">
+                <Menu.Item key="/rank" >
+                    <NavLink to="/rank">
                         ติวเตอร์
                 </NavLink></Menu.Item>
                 {/* <Menu.Item key="/course" >
@@ -81,6 +81,11 @@ const NavMenu = () => {
                         จัดการคอร์สเรียน
                 </NavLink>
                 </Menu.Item>
+                <Menu.Item key="/tutor/online"  >
+                    <NavLink to="/tutor/online">
+                        จัดการคอร์สออนไลน์
+                </NavLink>
+                </Menu.Item>
                 {/* <Menu.Item key="/notification"  >
                     <NavLink to="/notification">
                         แจ้งเตือน
@@ -118,7 +123,7 @@ const NavMenu = () => {
                     </NavLink>
                 </Col>
                 <Col span={4} className="iconMenu">
-                    <NavLink to="/tutor/ranking">
+                    <NavLink to="/tutor">
                         <FontAwesomeIcon icon={faChalkboardTeacher} className="icon" />
                     </NavLink>
                 </Col>
@@ -163,11 +168,11 @@ const NavMenu = () => {
                         <FontAwesomeIcon icon={faGraduationCap} className="icon" />
                     </NavLink>
                 </Col>
-                {/* <Col span={6.5} className="iconMenu">
-                    <NavLink to="/">
+                <Col span={6.5} className="iconMenu">
+                    <NavLink to="/tutor/online">
                         <FontAwesomeIcon icon={faChalkboardTeacher} className="icon" />
                     </NavLink>
-                </Col> */}
+                </Col>
                 {/* <Col span={6.5} className="iconMenu">
                     <NavLink to="/">
                         <FontAwesomeIcon icon={faBell} className="icon" />

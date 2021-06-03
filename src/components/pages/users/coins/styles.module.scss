@@ -55,13 +55,13 @@
 }
 
 .coinbody{
-  @extend .paddingbody;
   padding-top: 2rem;
   width: 100%;
+  @extend .textOne5
 }
 
 .tablecoin{
-  width: 95%;
+  width: 100%;
 }
 
 .alignCenter {
@@ -102,14 +102,12 @@
 }
 
 .redeem {
-  @extend .iconNormal;
-  margin-right: 1.5rem;
+  @extend .iconOne;
   color: $yellow;
 }
 
-.Small {
-  @extend .iconSmall;
-  margin-right: 1.5rem;
+.small {
+  @extend .iconOne75;
   color: $yellow;
 }
 
@@ -146,4 +144,77 @@
 .marginright{
   display: flex;
   justify-content: flex-end;
+}
+
+// NEW
+.contentRequest{
+  width: 1137px;
+  height: auto;
+  border-radius: 8px;
+  background-color:white;
+}
+
+.contentRedemm{
+  @extend .contentRequest;
+  width: 1110px;
+}
+
+.paddingTop13{
+  padding-top: 13px;
+  padding-left: 68px;
+}
+
+.paddingTopHead{
+  padding-top: 23px;
+  padding-left: 30px;
+}
+
+.paddingTopHead2{
+  padding-top: 30px;
+  padding-left: 62px;
+}
+
+.margin20{
+  margin-top: 20px;
+}
+
+.bookBank{
+  margin-top: 1.8rem;
+  margin-left: 11rem;
+  width: 20rem;
+  height: 35.5rem;
+  border: 2px solid #F26419;
+  @extend .centerPage
+}
+
+.editButton {
+  @extend .buttonCircle;
+  background-color: $blue;
+}
+
+.marginTop01{
+  margin-top: 1.5rem;
+}
+
+.marginBottom40{
+  margin-top: 45px;
+  margin-bottom: 45px;
+}
+
+.marginleft18{
+  margin-left: 1.813rem;
+}
+
+.marginTop04{
+  margin-top: 4rem;
+}
+
+.marginRight01{
+  margin-left: auto;
+  margin-right: 2.8rem;
+}
+
+.paddingCoin{
+  padding-top: 26px;
+  padding-left: 25px;
 }

@@ -1,7 +1,7 @@
 import React,{ Fragment } from "react";
 import style  from "../../stylesDefault.module.scss"
 
-const InputComponents = ({ title, type, name, register, error, value, placeholder, required, min }) => {
+const InputComponents = ({ title, type, name, register, error, value, placeholder, required, min,disabled}) => {
     const _title = title && title;
     const _type = type && type;
     const _name = name ? name : "name"
@@ -10,6 +10,7 @@ const InputComponents = ({ title, type, name, register, error, value, placeholde
     const _errorMessage = error && error.message
     const _placeholder = placeholder && placeholder
     const _required = required && required
+    const _disabled = disabled && disabled
     return (
         <Fragment>
             {
@@ -24,6 +25,7 @@ const InputComponents = ({ title, type, name, register, error, value, placeholde
                         placeholder={_placeholder}
                         required = {_required}
                         min = {min && min}
+                        disabled = {_disabled}
                     />
                     {
                         _error && <p className="error-input">{_errorMessage}</p>

@@ -2,19 +2,19 @@ import React, { Fragment, useEffect } from "react";
 import { Row, Col, Button } from "antd";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TableHistory from "./TableHistory";
+// import TableHistory from "./TableHistory";
 import style from "../styles.module.scss";
 import isMobile from "../../../../isMobile/isMobile";
 import { useDispatch, useSelector } from "react-redux";
 import { coinAction } from "../../../../../redux/actions";
 import Loading from "../../../../loading/Loading";
-import EmptyImage from "../../../../loading/EmptyImage";
+// import EmptyImage from "../../../../loading/EmptyImage";
 
 export default function RedeemDetail() {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state);
   const list = useSelector((state) => state.coin.rateCoin);
-  const item = useSelector((state) => state.coin.coinUser);
+  // const item = useSelector((state) => state.coin.coinUser);
 
   useEffect(() => {
     dispatch(coinAction.getCoinRatesTutor());
@@ -23,8 +23,6 @@ export default function RedeemDetail() {
 
   return (
     <Fragment>
-      {list && list.length ? (
-        <Fragment>
           {loading.loading && <Loading />}
           {isMobile() ? (
             <div className={style.pageredeemsm}>
@@ -34,11 +32,11 @@ export default function RedeemDetail() {
                   <Col xs={4} sm={3}>
                     <FontAwesomeIcon icon={faCoins} className={style.redeem} />
                   </Col>
-                  {item &&
+                  
                   <Col xs={19} sm={19} md={19} lg={19} xl={19}>
-                    {item.amount}
+                   
                   </Col>
-                  }
+                
                 </Row>
                 <span
                   className={style.titleH5}
@@ -48,7 +46,7 @@ export default function RedeemDetail() {
                 </span>
                 <Row className={style.subredeem}>
                   <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                     {item.amount}
+                     
                   </Col>
                 </Row>
                 <Row style={{ paddingTop: "1.8rem" }}>
@@ -77,61 +75,48 @@ export default function RedeemDetail() {
               </div>
             </div>
           ) : (
-            <div className={style.flexredeem}>
-              <div style={{ paddingTop: "1rem", paddingLeft: "20%" }}>
-                <span className={style.titleH5}>คุณมี</span>
-                <Row className={style.subredeem}>
-                  <Col xs={5} sm={5} md={5} lg={5} xl={5}>
+            <div className={`${style.marginSection} ${style.contentRedemm}`}>
+              <Row className={style.paddingTopHead2}>
+                 <Col span={11}>
+                    <span className={style.textTwo25}>คุณมี</span>
+                 </Col>
+                 <Col span={6}>
+                    <span className={style.textTwo25}>สามารถแลกเป็นเงิน</span>
+                 </Col>
+                 <Col span={3} className={`${style.centerPage} ${style.marginRight01}`}>
+                    <Button
+                        className="backgroundGreen buttonColor"
+                        shape="round"
+                        size="middle"
+                      >
+                         <span className={style.headerOne5}>แลกเหรียญ</span>
+                      </Button>
+                 </Col>
+              </Row>
+              <Row className={style.paddingTopHead2}>
+                  <Col span={3} className={style.paddingCoin}>
                     <FontAwesomeIcon icon={faCoins} className={style.redeem} />
                   </Col>
-                  {item &&
-                  <Col xs={19} sm={19} md={19} lg={19} xl={19}>
-                    {item.amount}
+                  <Col span={9}>
+                      <span className={style.headerFour}>100,000</span>
                   </Col>
-                  }
-                </Row>
-                <Row style={{ paddingTop: "1.5rem" }}>
-                  <Col xs={10} sm={10} md={10} lg={10} xl={10}>
-                    <span className={style.titleH5}>อัตราแลก</span>
+                  <Col span={9}>
+                      <span className={style.headerFour}>THB 50,000</span>
                   </Col>
-                  <Col xs={4} sm={4} md={4} lg={4} xl={4}>
-                    <FontAwesomeIcon icon={faCoins} className={style.Small} />
+              </Row>
+              <Row className={style.paddingTopHead2} style={{paddingBottom:"3rem"}}>
+                  <Col span={4}>
+                      <span className={style.textTwo25}>อัตราแลกปัจุบัน</span>
                   </Col>
-                  {list &&
-                    list.map((data, index) => (
-                      <Col md={10} lg={10} xl={10} key={index}>
-                        {data && data.coin} : {data && data.baht} THB
-                      </Col>
-                    ))}
-                </Row>
-              </div>
-              <div style={{ paddingTop: "1rem", paddingLeft: "17%" }}>
-                <span className={style.titleH5}>สามารถแลกเป็นเงิน</span>
-                <Row className={style.subredeem}>
-                  <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                    THB 50,000
+                  <Col span={2} className={style.centerPage} >
+                    <FontAwesomeIcon icon={faCoins} className={style.small} />
                   </Col>
-                </Row>
-                <Row style={{ paddingTop: "1rem", paddingLeft: "14%" }}>
-                  <Button
-                    className="backgroundGreen buttonColor"
-                    shape="round"
-                    size="middle"
-                  >
-                    แลกเหรียญ
-                  </Button>
-                </Row>
-              </div>
-              <TableHistory />
+                  <Col span={12}>
+                      <span className={style.textTwo25}>100 : 5 THB</span>
+                  </Col>
+              </Row>
             </div>
           )}
-        </Fragment>
-      ) : (
-        <div align="center">
-          <EmptyImage size="default" />
-          <p className={style.textNormal}>ยังไม่มีข้อมูลเหรียญ&nbsp;</p>
-        </div>
-      )}
     </Fragment>
   );
 }

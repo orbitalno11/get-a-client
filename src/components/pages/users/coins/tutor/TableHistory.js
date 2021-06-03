@@ -31,7 +31,7 @@ export default function TableHistory() {
   return (
     <Fragment>
       <div className={style.coinbody}>
-        <Table dataSource={data} className={style.tablecoin} >
+        <Table dataSource={data} className={style.tablecoin}>
           <Column title="ลำดับ" dataIndex="key" key="key" align="center"/>
           <Column title="วันที่" dataIndex="date" key="date" align="center"/>
           <Column title="จำนวนเหรียญ" dataIndex="coin" key="coin" align="center" />

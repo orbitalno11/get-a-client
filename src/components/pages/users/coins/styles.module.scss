@@ -54,26 +54,16 @@
   padding-top: 5rem;
 }
 
-.coinbody{
-  padding-top: 2rem;
-  width: 100%;
-  @extend .textOne5
-}
-
-.tablecoin{
-  width: 100%;
-}
-
 .alignCenter {
   display: flex;
   justify-content: center;
 }
 
-.alignCenterBtn {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-}
+// .alignCenterBtn {
+//   display: flex;
+//   justify-content: center;
+//   margin-top: 2rem;
+// }
 
 .subProfile {
   margin-top: 1.56rem;
@@ -82,33 +72,6 @@
 .pageredeem {
   @extend .paddingTopBody;
   padding-bottom: 3.75rem;
-}
-
-.pageredeemsm {
-  padding-left: 15%;
-  padding-right: 15%;
-}
-
-.subredeem {
-  font-size: 1.4rem;
-  padding-left: 1rem;
-  padding-top: 0.8rem;
-}
-
-.subredeem2 {
-  font-size: 1.5rem;
-  padding-left: 1rem;
-  padding-top: 0.8rem;
-}
-
-.redeem {
-  @extend .iconOne;
-  color: $yellow;
-}
-
-.small {
-  @extend .iconOne75;
-  color: $yellow;
 }
 
 .Xs {
@@ -148,15 +111,9 @@
 
 // NEW
 .contentRequest{
-  width: 1137px;
-  height: auto;
+  width: 100%;
   border-radius: 8px;
   background-color:white;
-}
-
-.contentRedemm{
-  @extend .contentRequest;
-  width: 1110px;
 }
 
 .paddingTop13{
@@ -217,4 +174,34 @@
 .paddingCoin{
   padding-top: 26px;
   padding-left: 25px;
+}
+
+.redeem2{
+  @extend .iconTwo;
+  color: $yellow;
+}
+
+.subredeem2 {
+  padding-left: 1rem;
+  padding-top: 0.8rem;
+}
+
+.redeem {
+  @extend .iconFour;
+  color: $yellow;
+}
+
+.small {
+  @extend .iconOne75;
+  color: $yellow;
+}
+
+.coinbody{
+  padding-top: 2rem;
+  width: 100%;
+  @extend .textOne5
+}
+
+.tablecoin{
+  width: 100%;
 }

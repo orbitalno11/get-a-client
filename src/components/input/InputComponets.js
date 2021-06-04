@@ -1,7 +1,7 @@
 import React,{ Fragment } from "react";
 import style  from "../../stylesDefault.module.scss"
 
-const InputComponents = ({ title, type, name, register, error, value, placeholder, required, min,disabled}) => {
+const InputComponents = ({ title, type, name, register, error, value, placeholder, required, min, disabled}) => {
     const _title = title && title;
     const _type = type && type;
     const _name = name ? name : "name"

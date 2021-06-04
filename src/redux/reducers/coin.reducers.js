@@ -8,7 +8,7 @@ const initialState = {
     redeemList:null,
     approve:null,
     denide:null,
-
+    
 }
 
 const coinReducer = (state = initialState , action)=>{
@@ -156,6 +156,20 @@ const coinReducer = (state = initialState , action)=>{
                 ...state,
                 denide : null,
                 error : true
+            }
+
+        }
+        case coinConstants.CREATE_REQUEST_REDEEM_SUCCESS:{
+            return {
+                ...state,
+                error : false
+            }
+
+        }
+        case coinConstants.CREATE_REQUEST_REDEEM_FAILURE:{
+            return {
+                ...state,
+                error : action.payload
             }
 
         }

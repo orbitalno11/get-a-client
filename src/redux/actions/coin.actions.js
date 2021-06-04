@@ -73,6 +73,7 @@ function getCoinBalance(){
         }).then(res => {
             dispatch(loadingActions.stopLoading())
             const coin = res.data.data
+            console.log(coin)
             dispatch(success(coin))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
@@ -105,7 +106,6 @@ function getCoinTransaction(){
 
 function createCoinRate(data){
     return async dispatch => {
-        console.log(data)
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.post("/coin/rate",data).then(() => {
             dispatch(success())
@@ -258,6 +258,38 @@ function DeniedRequestsRedeem(id){
     function failure(err) { return { type: coinConstants.DENIED_REQUEST_REDEEM_FAILURE, payload: err } }   
 }
 
+function createRequestRedeem(data){
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiURL.apiGetA.post("/coin/redeem", data, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            }
+        }).then(() => {
+            dispatch(success())
+            dispatch(loadingActions.stopLoading())
+            // dispatch(coinAction.getCoinRatesAdmin());   //ต้องใส่ของเส้นตาราง 105
+            dispatch(modalAction.openModal({
+                text: "ดำเนินการสำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.corrent,
+                afterClose : "/tutor/coin"
+            }))
+        }).catch(err => {
+            dispatch(loadingActions.stopLoading())
+            dispatch(failure(err.response.data))
+            console.log(err.response.data)
+            dispatch(modalAction.openModal({
+                text: "ดำเนินการไม่สำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.wrong
+            }))
+        })
+    }
+    function success(data) { return { type: coinConstants.CREATE_REQUEST_REDEEM_SUCCESS, payload: data } }
+    function failure(err) { return { type: coinConstants.CREATE_REQUEST_REDEEM_FAILURE, payload: err } }
+}
+
 export const coinAction = {
     getCoinRatesLearner,
     getCoinRatesTutor,
@@ -271,5 +303,6 @@ export const coinAction = {
     activateRate,
     getRequestsRedeem,
     ApproveRequestsRedeem,
-    DeniedRequestsRedeem
+    DeniedRequestsRedeem,
+    createRequestRedeem,
 }

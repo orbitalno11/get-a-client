@@ -15,11 +15,10 @@ import ducumentA4Sample from "../../../../images/ducumentA4Sample.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import isEmpty from "../../../../defaultFunction/checkEmptyObject";
-// import { useDispatch, useSelector } from "react-redux";
-// import { favoriteAction, homeActions } from "../../../../redux/actions";
+import { coinAction } from "../../../../../redux/actions";
 const { useBreakpoint } = Grid;
 
-export default function Request() {
+export default function Request({onHandleChange,showRequest}) {
   const screens = useBreakpoint();
   const dispatch = useDispatch();
   const [imageName, setImageName] = useState([]);
@@ -30,29 +29,28 @@ export default function Request() {
   //     dispatch(favoriteAction.getFavoriteList());
   //     dispatch(homeActions.getRank(10));
   //   }, []);
-  // const { register, handleSubmit, errors, control, reset } = useForm({
-  //   resolver: yupResolver(redeemSchema()),
-  // });
+
 
   const { register, handleSubmit, errors, control } = useForm({
     resolver: yupResolver(redeemSchema),
   });
 
-  const onSubmit = () => {
-    // if (data) {
-    //   const rate = {
-    //     title: "std",
-    //     baht: data.baht,
-    //     coin: data.coin,
-    //     type: "std",
-    //     startDate: today,
-    //     endDate: today,
-    //     updtaeDate: today,
-    //   };
-    //   dispatch(modalAction.closeModal());
-    //   dispatch(coinAction.createCoinRate(rate));
-    // }
+  const onSubmit = data => {
+
+    if (data && imageName) {
+      let formdata = new FormData()
+      formdata.append("coin", data.coin)
+      formdata.append("amount", data.amount)
+      formdata.append("bank", data.bank)
+      formdata.append("accountName", data.accountName)
+      formdata.append("accountNo", data.accountNo)
+      formdata.append("image", imageName.file)
+      console.log(formdata)
+      dispatch(coinAction.createRequestRedeem(formdata))
+    }
   };
+
+  
   const onHandleChangeImage = async (value) => {
     document.getElementById("image1").value = "image";
     const fileInput = value.target.files[0];
@@ -91,192 +89,6 @@ export default function Request() {
     backgroundColor: color.red,
   };
 
-  const amount = 50*20
-
-  // const Request = () =>{
-  //   return(
-  //     <Fragment>
-  //     <div className={`${style.marginSection} ${style.contentRequest}`}>
-  //       {screens.md && (
-  //         <Row className={style.paddingTopHead}>
-  //           <Col span={12}>
-  //             <span className={style.headerTwo}>คำขอแลกเหรียญ</span>
-  //           </Col>
-  //           <Col span={12} style={{ paddingTop: "6px" }}>
-  //             <span className={style.textOne75}>
-  //               อัตราแลกเหรียญปัจจุบัน เหรียญ 100 มีมูลค่า 20 บาท
-  //             </span>
-  //           </Col>
-  //         </Row>
-  //       )}
-  //       <form onSubmit={handleSubmit(onSubmit)}>
-  //         <Row className={style.paddingTop13}>
-  //           <Col span={9}>
-  //             <div>
-  //               <span className={style.textOne5}>จำนวนเหรียญ (ที่แลก)</span>
-  //               <InputComponents
-  //                 type="text"
-  //                 name="coin"
-  //                 register={register}
-  //                 error={errors.coin}
-  //                 placeholder="จำนวนเหรียญที่จะแลก"
-  //               />
-  //             </div>
-  //             <div className={style.margin20}>
-  //               <span className={style.textOne5}>มูลค่า (บาท)</span>
-  //               <InputComponents
-  //                 placeholder={amount}
-  //                 disabled
-  //               />
-  //             </div>
-  //             <div className={style.marginTop04}>
-  //               <span className={style.textOne5}>ธนาคาร</span>
-  //               <Controller
-  //                 as={
-  //                   <Select name="bank">
-  //                     {defaultValue.subject &&
-  //                       Object.entries(defaultValue.subject).map(([value]) => (
-  //                         <Select.Option key={value} value={value}>
-  //                           {value}
-  //                         </Select.Option>
-  //                       ))}
-  //                   </Select>
-  //                 }
-  //                 name="bank"
-  //                 control={control}
-  //                 defaultValue=""
-  //               />
-  //               {errors.bank && (
-  //                 <p className="error-input">{errors.bank.message}</p>
-  //               )}
-  //             </div>
-  //             <div className={style.margin20}>
-  //               <span className={style.textOne5}>หมายเลขบัญชี</span>
-  //               <InputComponents
-  //                 type="number"
-  //                 name="accountNo"
-  //                 register={register}
-  //                 error={errors.accountNo}
-  //                 placeholder="จำนวนเหรียญที่จะแลก"
-  //               />
-  //             </div>
-  //             <div className={style.margin20}>
-  //               <span className={style.textOne5}>ชื่อบัญชี</span>
-  //               <InputComponents
-  //                 type="number"
-  //                 name="coin"
-  //                 placeholder="เหรียญ"
-  //               />
-  //             </div>
-  //           </Col>
-  //           <Col className={style.centerPage}>
-  //             <div className={style.bookBank}>
-  //             {!isEmpty(imageName) &&
-  //               imageName.map((item, index) => {
-  //                 return (
-  //                   <div key={index}>
-  //                     <div className={style.marginTop20} align="center">
-  //                       <span className={style.textOne5}>
-  //                         รูปสมุดบัญชีหน้าแรก
-  //                         <br />
-  //                         พร้อมรับรองสำเนาถูกต้อง
-  //                         <br />
-  //                         ระบุใช้สำหรับแลกเหรียญเท่านั้น
-  //                       </span>
-  //                       <Image
-  //                         className={`${style.a4Image} ${style.marginTop01}`}
-  //                         src={item.name ? item.name : ""}
-  //                         preview={false}
-  //                       />
-  //                     </div>
-  //                     <div align="center">
-  //                       <button
-  //                         type="button"
-  //                         className={style.editButton}
-  //                         style={removeButton}
-  //                         onClick={() => removeImage(index)}
-  //                       >
-  //                         <FontAwesomeIcon icon={faTrash} />
-  //                       </button>
-  //                     </div>
-  //                   </div>
-  //                 );
-  //               })}
-  //             {imageName.length < 1 && (
-  //               <div className={style.marginTop20} align="center">
-  //                 <div className="imageUpload ">
-  //                   <label htmlFor={`file-input-document1`}>
-  //                     <span className={style.headerOne5}>
-  //                       รูปสมุดบัญชีหน้าแรก
-  //                       <br />
-  //                       พร้อมรับรองสำเนาถูกต้อง
-  //                       <br />
-  //                       ระบุใช้สำหรับแลกเหรียญเท่านั้น
-  //                     </span>
-  //                     <Image
-  //                       className={`${style.a4Image} ${style.marginTop01}`}
-  //                       src={ducumentA4Sample}
-  //                       preview={false}
-  //                     />
-  //                   </label>
-  //                   <input
-  //                     id={`file-input-document1`}
-  //                     type="file"
-  //                     name="image"
-  //                     onChange={onHandleChangeImage}
-  //                     ref={register}
-  //                   />
-  //                 </div>
-  //               </div>
-  //             )}
-  //             <input
-  //               text="text"
-  //               id="image1"
-  //               name="image1"
-  //               ref={register}
-  //               hidden
-  //             />
-  //             {errors["image1"] && (
-  //               <p className="error-input">{errors["image1"].message}</p>
-  //             )}
-  //              </div>
-  //           </Col>
-  //           <Col span={24} style={{marginTop:"48px"}}>
-  //             <span className={style.headerOne5}>เอกสารที่ใช้ในการแลกเหรียญ</span><br/>
-  //             <span className={`${style.textOne25} ${style.marginleft18}`}> รูปสมุดบัญชีหน้าแรก พร้อมรับรองสำเนาถูกต้อง ระบุใช้สำหรับแลกเหรียญเท่านั้น</span>
-  //           </Col>
-  //         </Row>
-  //         <Row className={`${style.horizontalCenter} ${style.marginBottom40}`}>
-  //           <Col span={3}>
-  //             <Button
-  //               className="buttonColor backgroundOrange"
-  //               size="large"
-  //               shape="round"
-  //               style={{ width: "120px", marginTop20: "40px" }}
-  //               htmlType="submit"
-  //             >
-  //               <span className={style.textOne}>ส่งคำขอ</span>
-  //             </Button>
-  //           </Col>
-  //           <Col>
-  //             <Button
-  //               className="buttonColor backgroundBlue"
-  //               size="large"
-  //               shape="round"
-  //               style={{ width: "120px", marginTop20: "40px" }}
-
-  //             >
-  //               <span className={style.textOne}>ยกเลิกคำขอ</span>
-  //             </Button>
-  //           </Col>
-  //         </Row>
-  //       </form>
-  //     </div>
-  //   </Fragment>
-  //   )
-  // }
-
-
   return (
     <Fragment>
       <div className={`${style.marginSection} ${style.contentRequest}`}>
@@ -298,18 +110,22 @@ export default function Request() {
               <div>
                 <span className={style.textOne5}>จำนวนเหรียญ (ที่แลก)</span>
                 <InputComponents
-                  type="text"
+                  type="number"
                   name="coin"
                   register={register}
                   error={errors.coin}
                   placeholder="จำนวนเหรียญที่จะแลก"
+                  disabled={showRequest}
                 />
               </div>
               <div className={style.margin20}>
                 <span className={style.textOne5}>มูลค่า (บาท)</span>
                 <InputComponents
-                  placeholder={amount}
+                  type="number"
+                  name="amount"
+                  placeholder
                   disabled
+                  value="20"
                 />
               </div>
               <div className={style.marginTop04}>
@@ -318,7 +134,7 @@ export default function Request() {
                   as={
                     <Select name="bank">
                       {defaultValue.subject &&
-                        Object.entries(defaultValue.subject).map(([value]) => (
+                        Object.entries(defaultValue.bank).map(([value]) => (
                           <Select.Option key={value} value={value}>
                             {value}
                           </Select.Option>
@@ -327,7 +143,7 @@ export default function Request() {
                   }
                   name="bank"
                   control={control}
-                  defaultValue=""
+                  defaultValue="ไทยพานิชย์"
                 />
                 {errors.bank && (
                   <p className="error-input">{errors.bank.message}</p>
@@ -340,15 +156,15 @@ export default function Request() {
                   name="accountNo"
                   register={register}
                   error={errors.accountNo}
-                  placeholder="จำนวนเหรียญที่จะแลก"
+                  placeholder="หมายเลขบัญชี"
                 />
               </div>
               <div className={style.margin20}>
                 <span className={style.textOne5}>ชื่อบัญชี</span>
                 <InputComponents
-                  type="number"
+                  type="text"
                   name="coin"
-                  placeholder="เหรียญ"
+                  placeholder="ชื่อบัญชี"
                 />
               </div>
             </Col>
@@ -388,7 +204,7 @@ export default function Request() {
               {imageName.length < 1 && (
                 <div className={style.marginTop20} align="center">
                   <div className="imageUpload ">
-                    <label htmlFor={`file-input-document1`}>
+                    <label htmlFor={`accountPic`}>
                       <span className={style.headerOne5}>
                         รูปสมุดบัญชีหน้าแรก
                         <br />
@@ -403,7 +219,7 @@ export default function Request() {
                       />
                     </label>
                     <input
-                      id={`file-input-document1`}
+                      id={`accountPic`}
                       type="file"
                       name="image"
                       onChange={onHandleChangeImage}
@@ -447,9 +263,9 @@ export default function Request() {
                 size="large"
                 shape="round"
                 style={{ width: "120px", marginTop20: "40px" }}
-
+                onClick={()=>onHandleChange(false)}
               >
-                <span className={style.textOne}>ยกเลิกคำขอ</span>
+                <span className={style.textOne}>ยกเลิก</span>
               </Button>
             </Col>
           </Row>

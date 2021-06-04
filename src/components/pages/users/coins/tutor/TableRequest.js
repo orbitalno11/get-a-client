@@ -1,9 +1,9 @@
 import React from "react";
 import style from "../styles.module.scss";
 
-export default function TableRequest() {
+export default function TableRequest({onHandleChange}) {
   return (
-    <div style={{width:"100%"}}>
+    <div style={{width:"100%" ,paddingBottom:"3.75rem"}}>
       <table className= "TableRedeem">
         <thead>
           <tr>
@@ -19,7 +19,7 @@ export default function TableRequest() {
           </tr>
         </thead>
         <tbody>
-          <tr style={{ width: "1rem" }}>
+          <tr style={{ width: "1rem" }} onClick={()=>onHandleChange(true)}>
             <td className={style.textNormal}>ปลา</td>
             <td className={style.textNormal}>อ้อม</td>
             <td className={style.textNormal}>วี</td>

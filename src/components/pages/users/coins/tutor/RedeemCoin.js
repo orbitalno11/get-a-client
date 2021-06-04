@@ -1,5 +1,6 @@
 import React, { Fragment,useState} from "react";
 import { Row } from "antd";
+import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
 // import style from "../styles.module.scss";
 // import RedeemDetail from "./RedeemDetail";
 // import RedeemList from "./RedeemList";
@@ -11,34 +12,44 @@ import { Row } from "antd";
 // import TabHorizontal from "../../../../tab/TabHorizontal";
 // import Loading from "../../../../loading/Loading";
 // import { useSelector } from "react-redux";
-import ProfileCourse from "./ProfileCourse"
-import ProfileDetail from "./ProfileDetail"
+import TableRequest from "./TableRequest"
+import Request from "./Request"
+import RedeemDetail from "./RedeemDetail"
+// import ProfileDetail from "./ProfileDetail"
 
 
 export default function RedeemCoin() {
 
+    const screens = useBreakpoint();
+    
+    const [isShowRequest, setisShowRequest] = useState(false)
 
-    const tabStart = {
+    const startKey = {
         key: "redeem"
     }
-    const [redeem, setRedeem] = useState(tabStart.key === "redeem")
+    const [redeem, setRedeem] = useState(startKey.key === "redeem")
 
-    const onHandleChange = () => {
-        setRedeem(!redeem)
+    const onHandleChange = (show) => {     
+      setisShowRequest(show)
+      setRedeem(!redeem)
     }
-
-
-
 
   return (
     <Fragment>
-      <div className="container">
-        <Row justify={"space-between"}>
+      <div style={{paddingBottom:"3.rem"}}>
+        <Row>
         {
             redeem ? (
-                <ProfileDetail onHandleChange={onHandleChange} />
+              <Fragment>
+                <Row style={{marginBottom:"2rem" ,width:"100%"}}>
+                  <RedeemDetail onHandleChange={onHandleChange} />
+                </Row>
+                {
+                  screens.md &&(<TableRequest onHandleChange={onHandleChange}/>)
+                }
+              </Fragment>
              ) : (
-                <ProfileCourse onHandleChange={onHandleChange} />
+                <Request onHandleChange={onHandleChange} showRequest={isShowRequest}/>
             )
         }
         </Row>

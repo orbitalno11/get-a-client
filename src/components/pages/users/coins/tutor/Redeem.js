@@ -1,20 +1,21 @@
 import React, { Fragment,useState} from "react";
-import { Row } from "antd";
+// import { Row } from "antd";
 import style from "../styles.module.scss";
 // import RedeemDetail from "./RedeemDetail";
 // import RedeemList from "./RedeemList";
-import RedeemDetail from "./RedeemDetail";
+import RedeemCoin from "./RedeemCoin";
 import TableRequest from "./TableRequest";
-import Request from "./Request";
+// import Request from "./Request";
 import Header from "../../../../headerMobile/Header";
 import isMobile from "../../../../isMobile/isMobile";
 import TabHorizontal from "../../../../tab/TabHorizontal";
 import Loading from "../../../../loading/Loading";
+import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
 import { useSelector } from "react-redux";
 
 
 export default function Redeem() {
-
+  const screens = useBreakpoint();
 
   const { loading } = useSelector(state => state)
 
@@ -42,15 +43,10 @@ export default function Redeem() {
   const switchShow = () => {
     if (tabStart.key === "redeem") {
         return (
-          <Fragment>
-            <Row style={{marginBottom:"2rem"}}>
-            <RedeemDetail />
-            </Row>
-            <TableRequest />
-          </Fragment>
+         < RedeemCoin/>
         )
     }else{
-      return <Request />
+      return <TableRequest />
     }
 }
 
@@ -61,7 +57,7 @@ export default function Redeem() {
         <Header title= "จัดการเหรียญ" pageBack="/tutor/1" />
       )}
       <div className="container">
-        <div className={style.bodyPaddingTopBottom}>
+        <div className={ screens.md ?style.bodyPaddingTopBottom:style.paddingTopBody}>
           {!isMobile() && (
             <div className={style.section}>
               <span className={style.headerFour}>จัดการเหรียญ</span>
@@ -79,11 +75,11 @@ export default function Redeem() {
               />
             </div>
         </div>
-        <Row justify={"space-between"}>
+        <div>
           {
             switchShow()
           }
-        </Row>
+        </div>
       </div>
     </Fragment>
   );

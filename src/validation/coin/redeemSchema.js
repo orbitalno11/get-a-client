@@ -28,7 +28,8 @@ export const redeemSchema = yup.object().shape({
                 }
             }
         ),
-    coin: yup.string().required("กรุณาใส่จำนวนเหรียญที่ต้องการจะแลก"),
+    coin: yup.number().required("กรุณาใส่จำนวนเหรียญที่ต้องการจะแลก"),
+    amount:yup.number(),
     accountNo: yup.string().required("กรุณาใส่หมายเลขบัญชี"),
     bank: yup
         .string()

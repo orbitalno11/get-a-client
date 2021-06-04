@@ -94,6 +94,13 @@ const typeCourse = {
     "ไม่ระบุ" : 2
 }
 
+const bank = {
+    "ไทยพาณิชย์" : "SCB",
+    "กรุงไทย" : "KTB",
+    "กสิกรไทย" : "KBANK",
+    "กรุงเทพ" : "BBL"
+}
+
 export const defaultValue = {
     gender,
     grade,
@@ -110,5 +117,6 @@ export const defaultValue = {
     timeFormat,
     enrollStatus,
     userRole,
-    typeCourse
+    typeCourse,
+    bank
 }

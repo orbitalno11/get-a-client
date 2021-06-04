@@ -85,8 +85,7 @@ export default function ProfileDetail({ mainPage }) {
         padding: "5px",
         width:"100%" 
       }
-    //   && !isEmpty(statusFav)&& favData.favorite!== statusFav 
-      console.log(loading,loadingFav)
+
     return (
         <Fragment>
             {!mainPage && isMobile() && <Header pageBack="goback" />}

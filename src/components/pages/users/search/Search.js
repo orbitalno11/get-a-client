@@ -9,23 +9,150 @@ import ResultSearch from "./ResultSearch";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { searchSchema } from "../../../../validation/validation";
+import isEmpty from "../../../defaultFunction/checkEmptyObject";
+import { searchActions } from "../../../../redux/actions/search.actions";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useState } from "react";
+import { apiURL } from "../../../../utils/setAxios";
+import { LONGDO_MAP_KEY } from "../../../../config/environmentConfig";
+import { useSelector } from "react-redux";
+import Loading from "../../../loading/Loading";
+import { useHistory } from "react-router";
 import findKeyObject from "../../../defaultFunction/findKeyObject";
 
 const { useBreakpoint } = Grid;
 
 export default function Search() {
     const screens = useBreakpoint();
-    const { control, handleSubmit } = useForm({
+    const dispatch = useDispatch()
+    const { control, handleSubmit, reset } = useForm({
         resolver: yupResolver(searchSchema),
-    });
+    })
+    const [geolocation, setGeolocation] = useState({})
+    const [currentLocation, setCurrentLocation] = useState({})
+    const { loading } = useSelector(state => state.loading)
+    const history = useHistory()
+    let params = new URLSearchParams(window.location.search);
 
-    const onSubmit = () => {
-        //for connect api search
+    const getGeolocation = async () => {
+        try {
+            const dataAddress = await apiURL.apiMap.get("/services/address?", {
+                params: {
+                    key: LONGDO_MAP_KEY,
+                    locale: "th",
+                    lon: currentLocation.lon,
+                    lat: currentLocation.lat,
+                }
+            })
+            setGeolocation({
+                data: dataAddress.data.geocode.substring(0, 4),
+                success: true
+            })
+        } catch {
+            setGeolocation({
+                data: null,
+                success: true
+            })
+        }
+    }
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                setCurrentLocation({
+                    permission: true,
+                    lat: position.coords.latitude,
+                    lon: position.coords.longitude
+                })
+            },
+            () => {
+                setCurrentLocation({ permission: false })
+            },
+            { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 }
+        )
+
+    }, [])
+
+    useEffect(() => {
+        if (!isEmpty(currentLocation)) {
+            getGeolocation()
+        }
+    }, [currentLocation])
+
+    useEffect(() => {
+        if (params.has("type")) {
+            const formData = {
+                grade: !isEmpty(params.get("grade")) && Number(params.get("grade")),
+                subject: params.get("subject"),
+                gender: !isEmpty(params.get("gender")) && Number(params.get("gender")),
+                type: !isEmpty(params.get("type")) && Number(params.get("type")),
+                location: !isEmpty(params.get("location")) && Number(params.get("location")),
+            }
+            reset({
+                grade: findKeyObject(defaultValue.grade, formData.grade) ? findKeyObject(defaultValue.grade, formData.grade) : "ไม่ระบุ",
+                subject: findKeyObject(defaultValue.subject, formData.subject) ? findKeyObject(defaultValue.subject, formData.subject) : "ไม่ระบุ",
+                gender: findKeyObject(defaultValue.gender, formData.gender) ? findKeyObject(defaultValue.gender, formData.gender) : "ไม่ระบุ",
+                courseType: findKeyObject(defaultValue.typeCourse, formData.type) ? findKeyObject(defaultValue.typeCourse, formData.type) : "ไม่ระบุ",
+            })
+
+            dispatch(searchActions.getSearch({
+                data: formData,
+                redirectPath: "/search",
+                limit: 5,
+                type: formData.type
+            }))
+        }else{
+            const formData = {
+                grade: null,
+                subject: null,
+                gender: null,
+                type: null,
+                location: (currentLocation.permission && geolocation.success) ? geolocation.data : null,
+            }
+
+            reset({
+                grade: "ไม่ระบุ",
+                subject: "ไม่ระบุ",
+                gender: "ไม่ระบุ",
+                courseType: "ไม่ระบุ",
+            })
+
+            dispatch(searchActions.getSearch({
+                data: formData,
+                redirectPath: "/search",
+                limit: 5,
+                type: formData.type
+            }))
+        }
+        return () => {
+            dispatch(searchActions.clearSearch())
+        }
+    }, [params.toString()])
+
+    const onSubmit = (data) => {
+        if ((currentLocation.permission && geolocation.success) || !currentLocation.permission) {
+            const dataVariable = ["grade", "subject", "gender", "type", "location"]
+            const formData = {
+                grade: defaultValue.grade[data.grade],
+                subject: defaultValue.subject[data.subject],
+                gender: defaultValue.gender[data.gender],
+                type: defaultValue.typeCourse[data.courseType],
+                location: (currentLocation.permission && geolocation.success) ? geolocation.data : null
+            }
+            dataVariable.forEach(value => {
+                params.set(value, !isEmpty(formData[value]) ? formData[value] : "")
+            });
+            history.push("/search?" + params)
+        }
     }
 
     return (
         <Fragment>
             {isMobile() ? <Header title="ค้นหา" /> : null}
+            {
+                loading && <Loading />
+            }
             <div className="container">
                 <div className={style.bodyPaddingTopBottom}>
                     {
@@ -36,7 +163,7 @@ export default function Search() {
                         )
                     }
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <Row className={`${style.section} ${!isMobile () && style.marginSection}`} align="middle" justify={"space-between"}>
+                        <Row className={`${style.section} ${!isMobile() && style.marginSection}`} align="middle" justify={"space-between"}>
                             <Col xl={20} lg={20} md={24} sm={24} xs={24}>
                                 <Row justify="space-between">
                                     <Col xl={11} lg={11} md={24} sm={24} xs={24}>
@@ -48,16 +175,17 @@ export default function Search() {
                                                     <Controller
                                                         as={
                                                             <Select name="grade"  >
+                                                                <Select.Option value="N/A">ไม่ระบุ</Select.Option>
                                                                 {
                                                                     defaultValue.grade && Object.entries(defaultValue.grade).map(([key, value]) => (
-                                                                        <Select.Option key={value} value={value}>{key}</Select.Option>
+                                                                        <Select.Option key={value} value={key}>{key}</Select.Option>
                                                                     ))
                                                                 }
                                                             </Select>
                                                         }
                                                         name="grade"
                                                         control={control}
-                                                        defaultValue={findKeyObject(defaultValue.grade, 7)}
+                                                        defaultValue={"ไม่ระบุ"}
                                                     />
                                                 </div>
                                             </Col>
@@ -68,16 +196,17 @@ export default function Search() {
                                                 <Controller
                                                     as={
                                                         <Select name="subject"  >
+                                                            <Select.Option value="N/A">ไม่ระบุ</Select.Option>
                                                             {
                                                                 defaultValue.subject && Object.entries(defaultValue.subject).map(([key, value]) => (
-                                                                    <Select.Option key={value} value={value}>{key}</Select.Option>
+                                                                    <Select.Option key={value} value={key}>{key}</Select.Option>
                                                                 ))
                                                             }
                                                         </Select>
                                                     }
                                                     name="subject"
                                                     control={control}
-                                                    defaultValue={findKeyObject(defaultValue.subject, "MTH")}
+                                                    defaultValue={"ไม่ระบุ"}
                                                 />
                                             </Col>
                                         </Row>
@@ -94,7 +223,7 @@ export default function Search() {
                                                             <Select.Option value="N/A">ไม่ระบุ</Select.Option>
                                                             {
                                                                 defaultValue.gender && Object.entries(defaultValue.gender).map(([key, value]) => (
-                                                                    <Select.Option key={value} value={value}>{key}</Select.Option>
+                                                                    <Select.Option key={value} value={key}>{key}</Select.Option>
                                                                 ))
                                                             }
 
@@ -115,7 +244,7 @@ export default function Search() {
                                                             <Select.Option value="N/A">ไม่ระบุ</Select.Option>
                                                             {
                                                                 defaultValue.typeCourse && Object.entries(defaultValue.typeCourse).map(([key, value]) => (
-                                                                    <Select.Option key={value} value={value}>{key}</Select.Option>
+                                                                    <Select.Option key={value} value={key}>{key}</Select.Option>
                                                                 ))
                                                             }
                                                         </Select>
@@ -135,19 +264,18 @@ export default function Search() {
 
                         </Row>
                     </form>
-
-                    <Row className={`${style.section} ${style.marginSection}`}>
-                        <Col span={24}>
-                            <span className={style.textTwo}>ผลการค้นหา</span>
-                        </Col>
-                        <Col span={24} className={style.marginSection}>
+                    <div className={`${!isMobile() && style.marginSection}`} >
+                        <Row className={`${style.section}`}  >
+                            <Col  id="searchResult">
+                                <span className={style.textTwo} span={24} >ผลการค้นหา</span>
+                            </Col>
+                            <Col span={24} className={style.marginSection} >
                             <ResultSearch />
-                        </Col>
-                    </Row>
-
+                            </Col>
+                        </Row>
+                    </div>
                 </div>
             </div>
-            {/* <TabHorizontal type="input" tabStart={tabLocationStart} tabDetail={tabLocation} name="gender" /> */}
         </Fragment>
     )
 }

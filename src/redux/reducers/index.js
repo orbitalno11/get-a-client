@@ -10,6 +10,7 @@ import tutorReducer from "./tutor.reducers"
 import homeReducer from "./home.reducers"
 import reviewReducer from "./review.reducers"
 import onlineCourseReducer from "./onlineCourse.reducers"
+import searchReducer from "./search.reducers"
 
 const rootReducer = combineReducers({
     profile:profileReducers,
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
     tutor : tutorReducer,
     home : homeReducer,
     review : reviewReducer,
-    onlineCourse : onlineCourseReducer
+    onlineCourse : onlineCourseReducer,
+    search : searchReducer
 });
 
 export default rootReducer;

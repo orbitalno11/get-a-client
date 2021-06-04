@@ -1,6 +1,6 @@
 import React, { Fragment } from "react"
 import { Menu, Button, Row, Col } from "antd";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
     faHome,
     faChalkboardTeacher,
@@ -45,7 +45,7 @@ const NavMenu = () => {
                     <NavLink to="/search">
                         ค้นหา
                 </NavLink>
-                </Menu.Item> 
+                </Menu.Item>
                 {
                     status ? (
                         <Menu.Item key={profileLearnerURL} >
@@ -190,9 +190,9 @@ const NavMenu = () => {
     const MenuDesktop = () => {
         return (
             <nav className="menuBar">
-                <Link to="/">
+                <NavLink to="/">
                     <span className="logo">GET-A</span>
-                </Link>
+                </NavLink>
                 <div className="floatRight">
                     <Row>
                         <Col >

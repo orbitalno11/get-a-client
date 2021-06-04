@@ -10,6 +10,19 @@
     flex-flow: row;
 }
 
+.paddingPage {
+    padding : 0rem 1.5rem 0rem 1.5rem,
+}
+
 .widthSearchForm {
     width: 18rem;
+}
+
+.paddingCardResult{
+    padding : 0.5rem 0rem 0.5rem 0rem
+}
+
+.pageHeader {
+    @extend .textOne5;
+    color : $blue;
 }

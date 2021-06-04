@@ -1,0 +1,5 @@
+export const searchConstants = {
+    GET_SEARCH_SUCCESS : "GET_SEARCH_SUCCESS",
+    GET_SEARCH_FAILURE : "GET_SEARCH_FAILURE",
+    CLEAR_SEARCH : "CLEAR_SEARCH"
+}

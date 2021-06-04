@@ -1,6 +1,10 @@
+import { faStar } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Image } from "antd"
 import React from "react"
+import { color } from "../defaultValue"
 import coin from "../images/coin.svg"
+import style from "../../stylesDefault.module.scss";
 
 const buttonFull = (buttonColor, size) =>{
     return ({
@@ -19,7 +23,18 @@ const iconCoin = () =>{
     )
 }
 
+const iconStar = () =>{
+    const colorStart = {
+        color: color.yellow
+    }
+
+    return (
+        <FontAwesomeIcon icon={faStar} className={style.iconSmall} style={colorStart} />
+    )
+}
+
 export  const styleComponent = {
     buttonFull,
-    iconCoin
+    iconCoin,
+    iconStar
 } 

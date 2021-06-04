@@ -37,7 +37,6 @@ import Notification from "./components/pages/users/notifications/Notification"
 import NotificationDetail from "./components/pages/users/notifications/NotificationDetail"
 import Favorite from "./components/pages/users/favorite/Favorite"
 import Search from "./components/pages/users/search/Search";
-import ResultSearch from "./components/pages/users/search/ResultSearch";
 import OnlineCourseList from "./components/pages/users/onlineCourseList/OnlineCourseList"
 import { setAuthToken } from "./utils/setAxios";
 import jwtDecode from "jwt-decode";
@@ -78,7 +77,6 @@ function App() {
           <AdminRoute path="/admin" component={AdminLayout} />
 
           {/* Public Route */}
-
           <PrivateRoute exact path="/learner/:id" component={ProfileLearner} />
           <PrivateRoute exact path="/learner/:id/edit" component={EditProfile} />
           <PrivateRoute exact path="/learner/:id/edit/map" component={EditProfileMap} />
@@ -106,7 +104,6 @@ function App() {
           <Route exact path="/profile/:id" component={ProfileDetail} />
           <Route exact path="/:type/:id" component={OfflineCourse} />
           <Route exact path="/search" component={Search} />
-          <Route exact path="/search/:search" component={ResultSearch} />
           <Route exact path="/course/online/:id" component={OnlineCourseList} />
           <Route exact path="/course/online/:courseId/video" component={ManageCourse} />
           <Route exact path="/online/:courseId/video/:videoId" component={VDO} />

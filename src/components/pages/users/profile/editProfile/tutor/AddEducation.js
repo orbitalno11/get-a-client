@@ -205,6 +205,7 @@ export default function AddEducation() {
                 }
 
             } else {
+               
                 formData.append("grade", defaultValue.grade[data.grade])
                 formData.append("branch", "1")
                 formData.append("institute", "1")

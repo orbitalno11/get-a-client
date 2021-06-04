@@ -13,7 +13,7 @@ export const searchSchema = yup.object().shape({
         .test(
             "valueSelector",
             "กรุณาระบุระดับชั้นที่ต้องการค้นหา",
-            value => value !== null && defaultValue.grade[value] !== null
+            value => value !== null && (defaultValue.grade[value] !== null || nonSpecified[value] !== null )
         ),
     gender: yup
         .string()
@@ -31,7 +31,7 @@ export const searchSchema = yup.object().shape({
         .test(
             "valueSelector",
             "กรุณาระบุวิชาที่ต้องการค้นหา",
-            value => value !== null && defaultValue.subject[value] !== null
+            value => value !== null && (defaultValue.subject[value] !== null || nonSpecified[value] !== null )
         ),
     courseType: yup
         .string()

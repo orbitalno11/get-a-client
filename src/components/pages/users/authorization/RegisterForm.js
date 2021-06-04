@@ -157,7 +157,8 @@ export default function RegisterForm() {
                                         }
                                         name="gender"
                                         control={control}
-                                        defaultValue={"ชาย"}
+                                        defaultValue={null}
+                                        placeholder={"เพศ"}
                                     />
                                     {
                                         errors.gender && <p className="error-input">{errors.gender.message}</p>

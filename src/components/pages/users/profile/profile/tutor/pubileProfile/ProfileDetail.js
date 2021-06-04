@@ -25,7 +25,6 @@ export default function ProfileDetail({ mainPage }) {
     const dispatch = useDispatch()
     const { loading } = useSelector(state => state.loading)
     const [loadingFav, setloadingFav] = useState(false)
-    const [statusFav, setstatusFav] = useState()
     const { tutorHandle, listTesting, listEducation } = useSelector(state => state.tutor)
     const favData = useSelector(state => state.favorite)
     const [statusFav, setstatusFav] = useState()
@@ -60,6 +59,8 @@ export default function ProfileDetail({ mainPage }) {
         checkFavorite()
     }, [fetchProfile])
 
+
+
     const favorite = () => {
         setloadingFav(true)
         dispatch(favoriteAction.likeTutor(userId,favData.favorite));
@@ -84,7 +85,8 @@ export default function ProfileDetail({ mainPage }) {
         padding: "5px",
         width:"100%" 
       }
-
+    //   && !isEmpty(statusFav)&& favData.favorite!== statusFav 
+      console.log(loading,loadingFav)
     return (
         <Fragment>
             {!mainPage && isMobile() && <Header pageBack="goback" />}

@@ -17,6 +17,8 @@ export default function Favorite() {
   const { loading, home } = useSelector((state) => state);
   const list = useSelector((state) => state.favorite.favoritelist);
 
+  console.log(list)
+
   useEffect(() => {
     dispatch(favoriteAction.getFavoriteList());
     dispatch(homeActions.getRank(5));

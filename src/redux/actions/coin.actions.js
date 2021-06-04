@@ -73,6 +73,7 @@ function getCoinBalance(){
         }).then(res => {
             dispatch(loadingActions.stopLoading())
             const coin = res.data.data
+            console.log(coin)
             dispatch(success(coin))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())

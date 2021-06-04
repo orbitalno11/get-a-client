@@ -1,7 +1,7 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react"
 import style from "../../styles.module.scss"
 import { Controller, useForm } from "react-hook-form";
-import { Button, Col, DatePicker, Image, Row, Select } from "antd";
+import { Col, DatePicker, Image, Row, Select } from "antd";
 import { profileTestSchema, profileEducationSchema } from "../../../../../../validation/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Header from "../../../../../headerMobile/Header";
@@ -23,6 +23,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import Loading from "../../../../../loading/Loading";
 import findKeyObject from "../../../../../defaultFunction/findKeyObject";
+import { styleComponent } from "../../../../../defaultFunction/style";
 
 export default function AddEducation() {
     const params = useParams()
@@ -110,7 +111,7 @@ export default function AddEducation() {
                         branch: dataDetail.data.branch,
                         institute: dataDetail.data.institute,
                         gpax: dataDetail.data.gpax,
-                        status: findKeyObject(defaultValue.educationStatus,dataDetail.data.status),
+                        status: findKeyObject(defaultValue.educationStatus, dataDetail.data.status),
                     })
                 }
                 document.getElementById("image1").value = "image"
@@ -204,7 +205,6 @@ export default function AddEducation() {
                 }
 
             } else {
-               
                 formData.append("grade", defaultValue.grade[data.grade])
                 formData.append("branch", "1")
                 formData.append("institute", "1")
@@ -238,7 +238,7 @@ export default function AddEducation() {
 
     return (
         <Fragment>
-            {isMobile() && <Header title="เพิ่มข้อมูล" pageBack={`/tutor/${auth.profile}`} />}
+            {isMobile() && <Header title={`${edit ? "แก้ไข" : "เพ่ิม"}ข้อมูลการศึกษา`} pageBack={`/tutor/${auth.profile}`} />}
             <ModalComponent />
             {
                 loading.loading && (
@@ -247,18 +247,23 @@ export default function AddEducation() {
             }
             <div className={style.container}>
                 <form id="myform" onSubmit={handleSubmit(onSubmit)}>
-                    <Row justify="center" >
-                        <h3 className={style.titleH2}>{edit && "แก้ไข"}ประวัติการศึกษา</h3>
-                    </Row>
-                    <Row justify="space-around" align="top">
-                        <Col xl={10} lg={10} md={20} sm={20} xs={24} className={style.marginTop20}>
-                            <p className={style.textNormal}>ประเภท</p>
+                    {
+                        !isMobile() && (
+                            <Row justify="center" className={style.section}>
+                                <span className={style.headerThree}>{edit && "แก้ไข"}ประวัติการศึกษา</span>
+                            </Row>
+                        )
+
+                    }
+                    <Row justify="space-around" align="top" className={`${!isMobile() && style.marginSection} ${style.section}`}>
+                        <Col xl={9} lg={9} md={20} sm={20} xs={24} >
+                            <p className={style.textOne5}>ประเภท</p>
                             <Select name="type" onChange={onChangeType} defaultValue={type} disabled={edit ? true : false}>
                                 <Select.Option value="1" >คะแนนสอบ</Select.Option>
                                 <Select.Option value="0" >ประวัติการศึกษา</Select.Option>
                             </Select>
                             <div className={style.marginTop20}>
-                                <p className={style.textNormal}>{checkTypeTesting() ? "การสอบ" : "ระดับชั้น"}</p>
+                                <p className={style.textOne5}>{checkTypeTesting() ? "การสอบ" : "ระดับชั้น"}</p>
                                 <Controller
                                     as={
                                         <Select ref={register}>
@@ -288,7 +293,7 @@ export default function AddEducation() {
                             </div>
 
                             <div className={style.marginTop20}>
-                                <p className={style.textNormal}>{checkTypeTesting() ? "วิชา" : "สาขา"}</p>
+                                <p className={style.textOne5}>{checkTypeTesting() ? "วิชา" : "สาขา"}</p>
                                 <Controller
                                     as={
                                         <Select  >
@@ -316,7 +321,7 @@ export default function AddEducation() {
                             </div>
                             <div className={style.marginTop20}>
 
-                                <p className={style.textNormal}>{checkTypeTesting() ? "คะแนนที่ได้" : "สถาบัน"}</p>
+                                <p className={style.textOne5}>{checkTypeTesting() ? "คะแนนที่ได้" : "สถาบัน"}</p>
                                 {
                                     checkTypeTesting() ? (
                                         <input className="input" type="number" step=".01" name="score" min="0" ref={register} placeholder="คะแนนที่ได้" />
@@ -342,12 +347,12 @@ export default function AddEducation() {
                             </div>
                             <div className={style.marginTop20}>
 
-                                <p className={style.textNormal}>{checkTypeTesting() ? "ปี" : "เกรดเฉลี่ย"}</p>
+                                <p className={style.textOne5}>{checkTypeTesting() ? "ปี" : "เกรดเฉลี่ย"}</p>
                                 {
                                     checkTypeTesting() ? (
                                         <Controller
                                             as={
-                                                <DatePicker picker="year" disabledDate={value => value && value > moment()}/>
+                                                <DatePicker picker="year" disabledDate={value => value && value > moment()} />
                                             }
                                             name="year"
                                             control={control}
@@ -392,8 +397,8 @@ export default function AddEducation() {
                                 }
                             </div>
                         </Col>
-                        <Col xl={10} lg={10} md={20} sm={20} xs={24} className={style.marginTop20} align="center">
-                            <p className={style.textNormal}>เอกสารยืนยัน </p>
+                        <Col xl={9} lg={9} md={20} sm={20} xs={24} align="center">
+                            <p className={style.textOne5}>เอกสารยืนยัน </p>
                             {
                                 !isEmpty(imageName) && (
                                     imageName.map((item, index) => {
@@ -437,7 +442,7 @@ export default function AddEducation() {
 
                         </Col>
                         <Col align="center" xl={checkTypeTesting() ? 24 : 10} md={checkTypeTesting() ? 24 : 20} sm={20} xs={24} className={style.marginTop20 + " " + style.alignCenter}>
-                            <Button className="buttonColor backgroundOrange" size="large" shape="round" style={{ width: "120px", marginTop20: "40px" }} htmlType="submit">บันทึก</Button>
+                            <button className={style.buttonColor} style={styleComponent.buttonFull(color.orange, "7rem")} type="submit">บันทึกข้อมูล</button>
                         </Col>
                     </Row>
 

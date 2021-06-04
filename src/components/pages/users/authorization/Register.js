@@ -1,6 +1,5 @@
-import { Button, Col, Row } from "antd"
+import { Button, Row } from "antd"
 import React, { Fragment } from "react"
-import { NavLink } from "react-router-dom"
 import {
     faBookReader,
     faChalkboardTeacher
@@ -10,6 +9,7 @@ import style from "./styles.module.scss"
 import Header from "../../../headerMobile/Header"
 import { color } from "../../../defaultValue";
 import isMobile from "../../../isMobile/isMobile";
+import { Link } from "react-router-dom";
 
 export default function Register() {
 
@@ -27,25 +27,43 @@ export default function Register() {
             color: color.orange
         },
     ]
+
+    const fullHeight = {
+        height: "100%",
+    }
+
+    const buttonRegister = (colorIcon) => {
+        return {
+            backgroundColor: colorIcon,
+            width: !isMobile() ? "10rem" : "80%",
+        }
+    }
+
+    const listButton = {
+        display: "flex",
+        flexFlow: !isMobile() ? "row" : "column"
+    }
+
     return (
         <Fragment>
-            {isMobile() && <Header title="สมัครสมาชิก" /> }
-            <div className={style.alignCenterPageDestop}>
-                <span className={style.titleH2}>ประเภทสมาชิก</span>
-                <Row className={style.rowWidth} >
-                    {
-                        typeRegister.map((item) => (
-                            <Col justify="space-around" align="middle" key={item.type} xs={24} sm={24} md={12}>
-                                <NavLink to={`/register/${item.id}`}>
-                                    <Button className="big-button white" style={{ backgroundColor: item.color }} shape="round">
-                                        <FontAwesomeIcon icon={item.icon} className={style.iconStyle} />
-                                        <br /> {item.type}
-                                    </Button>
-                                </NavLink>
-                            </Col>
-                        ))
-                    }
-                </Row>
+            {isMobile() && <Header title="สมัครสมาชิก" pageBack="/login"/>}
+            <div className={`${style.centerPage} ${style.bodyPaddingTopBottom}`} style={fullHeight} align="center" >
+                <div className={`${!isMobile() ? style.section : null}`} >
+                    <span className={style.headerThree}>ประเภทสมาชิก</span>
+                    <Row style={listButton} justify="center" align="center">
+                        {
+                            typeRegister.map((item) => (
+
+                                <Button key={item.type} className={style.boxRegister} style={buttonRegister(item.color)}>
+                                    <Link to={`/register/${item.id}`}>
+                                        <FontAwesomeIcon className={`${style.iconLargeRegister}  ${style.white}`} icon={item.icon} />
+                                        <h2 className={`${style.headerOne75} ${style.white} ${style.marginSection}`}>{item.type}</h2>
+                                    </Link>
+                                </Button>
+                            ))
+                        }
+                    </Row>
+                </div>
             </div>
         </Fragment>
     )

@@ -15,7 +15,7 @@ const InputComponents = ({ title, type, name, register, error, value, placeholde
         <Fragment>
             {
                 <div>
-                    <p className={style.textNormal}>{_title}</p>
+                    <p className={style.textOne5}>{_title}</p>
                     <input
                         className="input"
                         type={_type}

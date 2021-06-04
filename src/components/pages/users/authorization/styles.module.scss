@@ -6,30 +6,14 @@
 
 .h1{
   @extend .white;
-  @extend .titleH1;
-  font-weight: 700;
-  padding-bottom: 0.5rem;
+  @extend .headerFour;
+  padding-bottom: 1rem;
 }
 
-.alignCenterPage {
-  height: auto;
-  display: flex;
-  align-items: center;
+.loginPage {
+  @extend .bodyPaddingTopBottom;
+  @extend .centerPage;
   flex-flow: column;
-  margin-top: 0;
-}
-
-.alignCenterPageDestop{
-  @extend .paddingTopBody;
-  @extend .alignCenterPage;
-  padding-bottom: 1.25rem !important;
-}
-
-.loginPage{
-  @extend .alignCenterPage;
-  @extend .paddingBottomBody;
-  justify-content: center;
-  padding-top: 3.75rem;
   height: 100%;
   background-color: $orange;
 }
@@ -40,7 +24,14 @@
   width: 100%;
 }
 
+.loginform{
+  display: contents;
+  align-items: center;
+  width: 100%;
+}
+
 .buttonText{
+  @extend .textOne25;
   @extend .paddingBottomBody;
   color:$white  !important;
 }
@@ -50,20 +41,10 @@
 }
 
 .title {
-  @extend .textNormal;
+  @extend .textOne5;
   margin-right: auto;
   color:$white
 }
-
-.iconStyle{
-  @extend .iconLargeRegister;
-  margin-bottom : 0.6rem
-}
-
-.rowWidth {
-  width: 40% !important;
-}
-
 
 .imagepPerson {
   border-radius: 50% !important;
@@ -71,14 +52,14 @@
   width: 7.5rem;
 }
 
-.margintop10{
-  margin-top: 0.6rem;
-}
-
 .margintop20{
   margin-top: 1.25rem;
 }
 
-.marginbottom20{
-  margin-bottom: 1.25rem;
+.boxRegister {
+  padding: 1.25rem !important;
+  margin : 1rem;
+  border-radius : 0.5rem;
+  cursor: pointer;
+  height: 100% !important;
 }

@@ -17,17 +17,17 @@ export default function Header({ title, pageBack }) {
                     (
                         pageBack === "goback" ?
                             (
-                                <FontAwesomeIcon className={style.icon} onClick={() => history.goBack()} icon={faChevronLeft} />
+                                <FontAwesomeIcon className={style.fontWhite} onClick={() => history.goBack()} icon={faChevronLeft} />
                             ) :
                             (
                                 <Link to={pageBack}>
-                                    <FontAwesomeIcon className={style.icon} icon={faChevronLeft} />
+                                    <FontAwesomeIcon className={style.fontWhite} icon={faChevronLeft} />
                                 </Link>
                             )
                     )
                 }
                 {
-                    title ? <span className={style.h1}>{title}</span> : null
+                    title ? <span className={style.textHeader}>{title}</span> : null
                 }
             </div>
             <div className={style.rightHeader}>

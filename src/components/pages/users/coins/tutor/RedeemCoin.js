@@ -1,4 +1,4 @@
-import React, { Fragment,useState} from "react";
+import React, { Fragment,useState,useEffect} from "react";
 import { Row , Divider } from "antd";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
 // import style from "../styles.module.scss";
@@ -15,11 +15,14 @@ import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
 import TableRequest from "./TableRequest"
 import Request from "./Request"
 import RedeemDetail from "./RedeemDetail"
+import { useDispatch, } from "react-redux";
+import { coinAction } from "../../../../../redux/actions";
 // import ProfileDetail from "./ProfileDetail"
 
 
 export default function RedeemCoin() {
 
+    const dispatch = useDispatch();
     const screens = useBreakpoint();
     
     const [isShowRequest, setisShowRequest] = useState(false)
@@ -33,6 +36,12 @@ export default function RedeemCoin() {
       setisShowRequest(show)
       setRedeem(!redeem)
     }
+
+    useEffect(() => {
+      dispatch(coinAction.getCoinRatesTutor());
+      dispatch(coinAction.getCoinBalance());
+    }, []);
+    
 
   return (
     <Fragment>

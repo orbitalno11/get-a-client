@@ -1,30 +1,23 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment} from "react";
 import { Row, Col, Button } from "antd";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import TableHistory from "./TableHistory";
 import style from "../styles.module.scss";
 import isMobile from "../../../../isMobile/isMobile";
-import { useDispatch, useSelector } from "react-redux";
-import { coinAction } from "../../../../../redux/actions";
+import { useSelector } from "react-redux";
 import Loading from "../../../../loading/Loading";
 // import EmptyImage from "../../../../loading/EmptyImage";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
 
 export default function RedeemDetail({onHandleChange}) {
   const screens = useBreakpoint();
-  const dispatch = useDispatch();
   const { loading } = useSelector((state) => state);
   const rateRedeem = useSelector((state) => state.coin.rateCoin);
   const balanceCoin = useSelector((state) => state.coin.coinUser);
   const money = balanceCoin&& balanceCoin.amount
   
   console.log(rateRedeem)
-  useEffect(() => {
-    dispatch(coinAction.getCoinRatesTutor());
-    dispatch(coinAction.getCoinBalance());
-  }, []);
-
 
   return (
     <Fragment>

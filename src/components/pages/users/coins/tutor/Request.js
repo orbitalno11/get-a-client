@@ -11,6 +11,7 @@ import resizeImage from "../../../../defaultFunction/resizeImage";
 import { redeemSchema } from "../../../../../validation/validation";
 import { defaultValue } from "../../../../defaultValue";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import ducumentA4Sample from "../../../../images/ducumentA4Sample.webp";
 //import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //import { faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -22,17 +23,14 @@ export default function Request({ onHandleChange, showRequest }) {
   const screens = useBreakpoint();
   const dispatch = useDispatch();
   const [image, setimage] = useState(ducumentA4Sample);
-  //   const { loading, home } = useSelector((state) => state);
-  //   const list = useSelector((state) => state.favorite.favoritelist);
-
-  //   useEffect(() => {
-  //     dispatch(favoriteAction.getFavoriteList());
-  //     dispatch(homeActions.getRank(10));
-  //   }, []);
 
   const { register, handleSubmit, errors, control } = useForm({
     resolver: yupResolver(redeemSchema),
   });
+
+  const rateRedeem = useSelector((state) => state.coin.rateCoin);
+  const balanceCoin = useSelector((state) => state.coin.coinUser);
+  const money2 = balanceCoin&& balanceCoin.amount
 
   const onChange = async (data) => {
     const fileInput = data.target.files[0];
@@ -127,7 +125,7 @@ export default function Request({ onHandleChange, showRequest }) {
                   }
                   name="bank"
                   control={control}
-                  defaultValue="ไทยพานิชย์"
+                  defaultValue=""
                 />
                 {errors.bank && (
                   <p className="error-input">{errors.bank.message}</p>

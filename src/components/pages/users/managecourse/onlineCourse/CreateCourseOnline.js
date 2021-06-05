@@ -74,7 +74,7 @@ export default function CreateCourseOnline() {
       }
     }
   }
-
+//
   const onSubmit = (data) => {
     if (data) {
       let formdata = new FormData()

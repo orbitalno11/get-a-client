@@ -73,7 +73,6 @@ function getCoinBalance(){
         }).then(res => {
             dispatch(loadingActions.stopLoading())
             const coin = res.data.data
-            console.log(coin)
             dispatch(success(coin))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
@@ -97,7 +96,7 @@ function getCoinTransaction(){
             dispatch(success(coin))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response.data))
+            dispatch(failure(err.response))
         })
     }
     function success(data) { return { type: coinConstants.GET_COIN_USER_LIST_SUCCESS, payload: data } }

@@ -9,19 +9,19 @@ import { typeModal } from "../../../../modal/TypeModal";
 import { sizeModal } from "../../../../modal/SizeModal";
 import resizeImage from "../../../../defaultFunction/resizeImage";
 import { redeemSchema } from "../../../../../validation/validation";
-import { color, defaultValue } from "../../../../defaultValue";
+import { defaultValue } from "../../../../defaultValue";
 import { useDispatch } from "react-redux";
 import ducumentA4Sample from "../../../../images/ducumentA4Sample.webp";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import isEmpty from "../../../../defaultFunction/checkEmptyObject";
+//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//import { faTrash } from "@fortawesome/free-solid-svg-icons";
+//import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 import { coinAction } from "../../../../../redux/actions";
 const { useBreakpoint } = Grid;
 
-export default function Request({onHandleChange,showRequest}) {
+export default function Request({ onHandleChange, showRequest }) {
   const screens = useBreakpoint();
   const dispatch = useDispatch();
-  const [imageName, setImageName] = useState([]);
+  const [image, setimage] = useState(ducumentA4Sample);
   //   const { loading, home } = useSelector((state) => state);
   //   const list = useSelector((state) => state.favorite.favoritelist);
 
@@ -30,41 +30,17 @@ export default function Request({onHandleChange,showRequest}) {
   //     dispatch(homeActions.getRank(10));
   //   }, []);
 
-
   const { register, handleSubmit, errors, control } = useForm({
     resolver: yupResolver(redeemSchema),
   });
 
-  const onSubmit = data => {
-
-    if (data && imageName) {
-      let formdata = new FormData()
-      formdata.append("coin", data.coin)
-      formdata.append("amount", data.amount)
-      formdata.append("bank", data.bank)
-      formdata.append("accountName", data.accountName)
-      formdata.append("accountNo", data.accountNo)
-      formdata.append("image", imageName.file)
-      console.log(formdata)
-      dispatch(coinAction.createRequestRedeem(formdata))
-    }
-  };
-
-  
-  const onHandleChangeImage = async (value) => {
-    document.getElementById("image1").value = "image";
-    const fileInput = value.target.files[0];
+  const onChange = async (data) => {
+    const fileInput = data.target.files[0];
     if (fileInput) {
       try {
-        const newImageFile = await resizeImage(fileInput, "file", 720, 1280);
+        const newImageFile = await resizeImage(fileInput, "file", 2480, 3508);
         const imageURL = URL.createObjectURL(newImageFile);
-        setImageName([
-          ...imageName,
-          {
-            name: imageURL,
-            file: newImageFile,
-          },
-        ]);
+        setimage({ file: newImageFile, imageURL: imageURL });
       } catch {
         dispatch(
           modalAction.openModal({
@@ -76,17 +52,25 @@ export default function Request({onHandleChange,showRequest}) {
       }
     }
   };
+  console.log(errors)
+  const rateId = Number(2)
+  const money = Number(4)
 
-  const removeImage = (index) => {
-    imageName.splice(index, 1);
-    setImageName([...imageName]);
-  };
-
-  const removeButton = {
-    position: "absolute",
-    transform: "translateX(-50%)",
-    marginTop: "-9.5rem",
-    backgroundColor: color.red,
+  const onSubmit = (data) => {
+    console.log(data)
+    if (data) {
+      let formdata = new FormData();
+      formdata.append("rateId",rateId);
+      formdata.append("numberOfCoin", data.coin);
+      formdata.append("amount", money);
+      formdata.append("bankId", data.bank);
+      formdata.append("accountName", data.accountName);
+      formdata.append("accountNo", data.accountNo);
+      formdata.append("image", image.file);
+      formdata.append("accountPic", image.file);
+      console.log(formdata);
+      dispatch(coinAction.createRequestRedeem(formdata));
+    }
   };
 
   return (
@@ -94,19 +78,19 @@ export default function Request({onHandleChange,showRequest}) {
       <div className={`${style.marginSection} ${style.contentRequest}`}>
         {screens.md && (
           <Row className={style.paddingTopHead}>
-            <Col span={12}>
+            <Col md={10} lg={9} xl={12}>
               <span className={style.headerTwo}>คำขอแลกเหรียญ</span>
             </Col>
-            <Col span={12} style={{ paddingTop: "6px" }}>
-              <span className={style.textOne75}>
+            <Col md={13} lg={13} xl={12} style={{ paddingTop: "6px" }}>
+              <span className={  screens.lg ?style.textOne75:style.textOne25}>
                 อัตราแลกเหรียญปัจจุบัน เหรียญ 100 มีมูลค่า 20 บาท
               </span>
             </Col>
           </Row>
         )}
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Row className={style.paddingTop13}>
-            <Col span={9}>
+          <Row className={ screens.lg ?style.paddingTop13 :style.paddingRequest}>
+            <Col xs={24} sm={24} md={22} lg={9} xl={9}>
               <div>
                 <span className={style.textOne5}>จำนวนเหรียญ (ที่แลก)</span>
                 <InputComponents
@@ -163,90 +147,59 @@ export default function Request({onHandleChange,showRequest}) {
                 <span className={style.textOne5}>ชื่อบัญชี</span>
                 <InputComponents
                   type="text"
-                  name="coin"
+                  name="accountName"
+                  register={register}
+                  error={errors.accountName}
                   placeholder="ชื่อบัญชี"
                 />
               </div>
             </Col>
-            <Col className={style.centerPage}>
-              <div className={style.bookBank}>
-              {!isEmpty(imageName) &&
-                imageName.map((item, index) => {
-                  return (
-                    <div key={index}>
-                      <div className={style.marginTop20} align="center">
-                        <span className={style.textOne5}>
-                          รูปสมุดบัญชีหน้าแรก
-                          <br />
-                          พร้อมรับรองสำเนาถูกต้อง
-                          <br />
-                          ระบุใช้สำหรับแลกเหรียญเท่านั้น
-                        </span>
-                        <Image
-                          className={`${style.a4Image} ${style.marginTop01}`}
-                          src={item.name ? item.name : ""}
-                          preview={false}
-                        />
-                      </div>
-                      <div align="center">
-                        <button
-                          type="button"
-                          className={style.editButton}
-                          style={removeButton}
-                          onClick={() => removeImage(index)}
-                        >
-                          <FontAwesomeIcon icon={faTrash} />
-                        </button>
-                      </div>
-                    </div>
-                  );
-                })}
-              {imageName.length < 1 && (
+            <Col xs={24} sm={24} md={24} lg={15}className={style.centerPage}>
+              <div className={ screens.lg ?style.bookBank : style.bookBankSm}>
                 <div className={style.marginTop20} align="center">
-                  <div className="imageUpload ">
-                    <label htmlFor={`accountPic`}>
-                      <span className={style.headerOne5}>
-                        รูปสมุดบัญชีหน้าแรก
-                        <br />
-                        พร้อมรับรองสำเนาถูกต้อง
-                        <br />
-                        ระบุใช้สำหรับแลกเหรียญเท่านั้น
-                      </span>
+                  <span className={ screens.lg?style.textOne5 : style.textOne}>
+                    รูปสมุดบัญชีหน้าแรก
+                    <br />
+                    พร้อมรับรองสำเนาถูกต้อง
+                    <br />
+                    ระบุใช้สำหรับแลกเหรียญเท่านั้น
+                  </span>
+                  <div className="imageUpload">
+                    <label htmlFor="file-input">
                       <Image
-                        className={`${style.a4Image} ${style.marginTop01}`}
-                        src={ducumentA4Sample}
+                        className={screens.lg ?style.a4Image:style.a4ImageSm}
+                        src={image.imageURL ? image.imageURL : ducumentA4Sample}
                         preview={false}
                       />
                     </label>
                     <input
-                      id={`accountPic`}
+                      id="file-input"
                       type="file"
                       name="image"
-                      onChange={onHandleChangeImage}
                       ref={register}
+                      onChange={onChange}
                     />
                   </div>
+                  {errors.image && (
+                    <p className="error-input">{errors.image.message}</p>
+                  )}
                 </div>
-              )}
-              <input
-                text="text"
-                id="image1"
-                name="image1"
-                ref={register}
-                hidden
-              />
-              {errors["image1"] && (
-                <p className="error-input">{errors["image1"].message}</p>
-              )}
-               </div>
+              </div>
             </Col>
-            <Col span={24} style={{marginTop:"48px"}}>
-              <span className={style.headerOne5}>เอกสารที่ใช้ในการแลกเหรียญ</span><br/>
-              <span className={`${style.textOne25} ${style.marginleft18}`}> รูปสมุดบัญชีหน้าแรก พร้อมรับรองสำเนาถูกต้อง ระบุใช้สำหรับแลกเหรียญเท่านั้น</span>
+            <Col span={24} style={{ marginTop: "48px" }}>
+              <span className={style.headerOne5}>
+                เอกสารที่ใช้ในการแลกเหรียญ
+              </span>
+              <br />
+              <span className={`${style.textOne25} ${style.marginleft18}`}>
+                {" "}
+                รูปสมุดบัญชีหน้าแรก พร้อมรับรองสำเนาถูกต้อง
+                ระบุใช้สำหรับแลกเหรียญเท่านั้น
+              </span>
             </Col>
           </Row>
           <Row className={`${style.horizontalCenter} ${style.marginBottom40}`}>
-            <Col span={3}>
+            <Col xs={9} sm={9} md={6} lg={3}> 
               <Button
                 className="buttonColor backgroundOrange"
                 size="large"
@@ -263,7 +216,7 @@ export default function Request({onHandleChange,showRequest}) {
                 size="large"
                 shape="round"
                 style={{ width: "120px", marginTop20: "40px" }}
-                onClick={()=>onHandleChange(false)}
+                onClick={() => onHandleChange(false)}
               >
                 <span className={style.textOne}>ยกเลิก</span>
               </Button>

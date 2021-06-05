@@ -9,25 +9,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { coinAction } from "../../../../../redux/actions";
 import Loading from "../../../../loading/Loading";
 // import EmptyImage from "../../../../loading/EmptyImage";
+import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
 
 export default function RedeemDetail({onHandleChange}) {
+  const screens = useBreakpoint();
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state);
   const rateRedeem = useSelector((state) => state.coin.rateCoin);
   const balanceCoin = useSelector((state) => state.coin.coinUser);
   const money = balanceCoin&& balanceCoin.amount
- 
-
+  
+  console.log(rateRedeem)
   useEffect(() => {
     dispatch(coinAction.getCoinRatesTutor());
     dispatch(coinAction.getCoinBalance());
   }, []);
 
+
   return (
     <Fragment>
           {loading.loading && <Loading />}
           {isMobile() ? (
-            <div className={style.bodymobileprofile} style={{width:"100%"}}>
+            <div className={style.paddingbody} style={{width:"100%"}}>
                 <Row className={style.marginTop01}>
                   <Col span={24}>
                     <span className={style.headerOne5}>คุณมี</span>
@@ -36,10 +39,12 @@ export default function RedeemDetail({onHandleChange}) {
                 <Row className={style.subredeem2}>
                   <Col xs={7} sm={7} className={style.centerPage}>
                     <FontAwesomeIcon icon={faCoins} className={style.redeem2} />
-                  </Col>                 
+                  </Col> 
+                  { balanceCoin && (                
                   <Col xs={12} sm={12}>
-                    <span className={style.headerTwo}>1000000000</span>
+                    <span className={style.headerTwo}>{balanceCoin.amount}</span>
                   </Col>
+                  )}
                 </Row>
                 <Row className={style.marginTop01}>
                   <Col span={24}>
@@ -47,9 +52,11 @@ export default function RedeemDetail({onHandleChange}) {
                   </Col>                 
                 </Row>
                 <Row className={style.marginTop01}>
-                  <Col span={24} align="center" >
-                    <span className={style.headerTwo}>THB 50,0000</span>
+                {rateRedeem&&rateRedeem.map((data, index) => (
+                  <Col span={24} align="center" key={index} >
+                    <span className={style.headerTwo}>THB {data&& (Number(money) * Number(data.baht))/Number(data.coin) }</span>
                   </Col>
+                  ))}
                 </Row>
                 <Row style={{ marginTop:"1rem" }}>
                   <Col xs={8} sm={6}>
@@ -65,26 +72,28 @@ export default function RedeemDetail({onHandleChange}) {
                         </Col>
                       ))}
                 </Row>
+
                 <Row className={style.centerPage} style={{marginTop:"3rem"}}>
                   <Button
                     className="backgroundOrange buttonColor"
                     shape="round"
                     size="middle"
+                    onClick={()=>onHandleChange(false)}
                   >
-                    แลกเหรียญ
+                    <span className={style.textOne5}>แลกเหรียญ</span>
                   </Button>
                 </Row>
             </div>
           ) : (
             <div className={`${style.marginSection} ${style.contentRequest}`}>
               <Row className={style.paddingTopHead2}>
-                 <Col span={11}>
+                 <Col md={8} lg={11} xl={11}>
                     <span className={style.textTwo25}>คุณมี</span>
                  </Col>
-                 <Col span={6}>
+                 <Col md={9} lg={6} xl={6}>
                     <span className={style.textTwo25}>สามารถแลกเป็นเงิน</span>
                  </Col>
-                 <Col span={3} className={`${style.centerPage} ${style.marginRight01}`}>
+                 <Col md={5} lg={4} xl={3} className={`${style.centerPage} ${style.marginRight01}`}>
                     <Button
                         className="backgroundOrange buttonColor"
                         shape="round"
@@ -96,25 +105,25 @@ export default function RedeemDetail({onHandleChange}) {
                  </Col>
               </Row>
               <Row className={style.paddingTopHead2}>
-                  <Col span={3} className={style.paddingCoin}>
-                    <FontAwesomeIcon icon={faCoins} className={style.redeem} />
+                  <Col md={4} lg={4} xl={3} className={screen.lg? style.paddingCoin : style.paddingCoinMd}>
+                    <FontAwesomeIcon icon={faCoins} className={ screens.lg? style.redeem : style.redeemSm } />
                   </Col>
                   { balanceCoin && (
-                    <Col span={9}>
+                    <Col md={5} lg={10} xl={9}>
                         <span className={style.headerFour}>{balanceCoin.amount}</span>
                     </Col>
                   )}
                   {rateRedeem&&rateRedeem.map((data, index) => (
-                  <Col span={9} key={index}>
+                  <Col md={10} lg={10} xl={9} key={index}>
                       <span className={style.headerFour}> THB {data&& (Number(money) * Number(data.baht))/Number(data.coin) }</span>
                   </Col>
                    ))}
               </Row>
               <Row className={style.paddingTopHead2} style={{paddingBottom:"3rem"}}>
-                  <Col span={4}>
+                  <Col md={7} lg={5} xl={4}>
                       <span className={style.textTwo25}>อัตราแลกปัจุบัน</span>
                   </Col>
-                  <Col span={2} className={style.centerPage} >
+                  <Col md={2} lg={2} xl={2} className={style.centerPage} >
                     <FontAwesomeIcon icon={faCoins} className={style.small} />
                   </Col>
                   {rateRedeem&&rateRedeem.map((data, index) => (

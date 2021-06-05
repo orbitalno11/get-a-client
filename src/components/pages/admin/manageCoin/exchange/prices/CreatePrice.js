@@ -24,6 +24,7 @@ export default function CreatePrice({type}) {
   const dispatch = useDispatch();
   const today = moment().format("MM/DD/YYYY");
 
+  console.log(errors)
   const onSubmit = (data) => {
     if (data) {
       if(type != "rate"){

@@ -101,6 +101,14 @@ const bank = {
     "กรุงเทพ" : "BBL"
 }
 
+const transactionType = {
+    0 : "เติมเหรียญ",
+    1 : "ถอนเงิน", //โอนเงินให้ติวเตอร์
+    2 : "แลกเหรียญ" , //ติวเตอร์ขอแลกเหรียญ
+    3 : "ซื้อเหรียญ",
+    4 : "ยอดเงิน" //รายได้ที่เข้ามาของติวเตอร์
+}
+
 export const defaultValue = {
     gender,
     grade,
@@ -118,5 +126,6 @@ export const defaultValue = {
     enrollStatus,
     userRole,
     typeCourse,
-    bank
+    bank,
+    transactionType
 }

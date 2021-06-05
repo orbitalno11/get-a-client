@@ -1,5 +1,5 @@
 import React, { Fragment,useState} from "react";
-import { Row } from "antd";
+import { Row , Divider } from "antd";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
 // import style from "../styles.module.scss";
 // import RedeemDetail from "./RedeemDetail";
@@ -8,7 +8,7 @@ import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
 // import TableList from "./TableList";
 // import Request from "./Request";
 // import Header from "../../../../headerMobile/Header";
-// import isMobile from "../../../../isMobile/isMobile";
+//  import isMobile from "../../../../isMobile/isMobile";
 // import TabHorizontal from "../../../../tab/TabHorizontal";
 // import Loading from "../../../../loading/Loading";
 // import { useSelector } from "react-redux";
@@ -41,12 +41,16 @@ export default function RedeemCoin() {
         {
             redeem ? (
               <Fragment>
-                <Row style={{marginBottom:"2rem" ,width:"100%"}}>
+                <Row style={{width:"100%" , marginBottom:"1rem"}}>
                   <RedeemDetail onHandleChange={onHandleChange} />
                 </Row>
-                {
-                  screens.md &&(<TableRequest onHandleChange={onHandleChange}/>)
-                }
+              {
+                !screens.md&&(
+                  <Divider/>
+                )
+              }
+                <TableRequest onHandleChange={onHandleChange}/>
+
               </Fragment>
              ) : (
                 <Request onHandleChange={onHandleChange} showRequest={isShowRequest}/>

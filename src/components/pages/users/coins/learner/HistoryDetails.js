@@ -1,13 +1,14 @@
 import React, { Fragment, useEffect } from "react";
 import { Row, Col, Divider } from "antd";
 import style from "../styles.module.scss";
-import TableHistory from "./TableHistory";
+//import TableHistory from "./TableHistory";
+import TableTransaction from "./TableTransaction";
 import isMobile from "../../../../isMobile/isMobile";
 import { useDispatch, useSelector } from "react-redux";
 import { coinAction } from "../../../../../redux/actions";
 import moment from "moment";
 import Loading from "../../../../loading/Loading";
-import EmptyImage from "../../../../loading/EmptyImage";
+// import EmptyImage from "../../../../loading/EmptyImage";
 
 export default function HistoryDetails() {
   const dispatch = useDispatch();
@@ -19,8 +20,6 @@ export default function HistoryDetails() {
   }, []);
 
   return (
-    <Fragment>
-      {list && list.length ? (
         <Fragment>
           {loading.loading && <Loading />}
           {isMobile() ? (
@@ -50,15 +49,8 @@ export default function HistoryDetails() {
                 ))}
             </div>
           ) : (
-            <TableHistory />
+            <TableTransaction />
           )}
         </Fragment>
-      ) : (
-        <div align="center" style={{width:"100%"}}>
-          <EmptyImage size="default" />
-          <p className={style.textNormal}>ยังไม่มีประวัติการซื้อเหรียญ&nbsp;</p>
-        </div>
-      )}
-    </Fragment>
   );
 }

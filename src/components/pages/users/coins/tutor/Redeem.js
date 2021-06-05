@@ -10,12 +10,12 @@ import Header from "../../../../headerMobile/Header";
 import isMobile from "../../../../isMobile/isMobile";
 import TabHorizontal from "../../../../tab/TabHorizontal";
 import Loading from "../../../../loading/Loading";
-import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
+//import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
 import { useSelector } from "react-redux";
 
 
 export default function Redeem() {
-  const screens = useBreakpoint();
+  // const screens = useBreakpoint();
 
   const { loading } = useSelector(state => state)
 
@@ -46,7 +46,7 @@ export default function Redeem() {
          < RedeemCoin/>
         )
     }else{
-      return <TableRequest />
+      return <TableRequest/>
     }
 }
 
@@ -57,7 +57,7 @@ export default function Redeem() {
         <Header title= "จัดการเหรียญ" pageBack="/tutor/1" />
       )}
       <div className="container">
-        <div className={ screens.md ?style.bodyPaddingTopBottom:style.paddingTopBody}>
+        <div className={style.paddingTopBody}>
           {!isMobile() && (
             <div className={style.section}>
               <span className={style.headerFour}>จัดการเหรียญ</span>

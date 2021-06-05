@@ -1,131 +1,57 @@
 import React, { Fragment } from "react";
 import { Row, Col,Button,Divider } from "antd";
-import { faCoins, faCheck,faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faCoins,faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TableList from "./TableList";
 import style from "../styles.module.scss";
-import isMobile from "../../../../isMobile/isMobile";
 
 export default function RedeemList() {
   return (
     <Fragment>
-      {isMobile() ? (
         <div className={style.pageredeemsm}>
-          <div style={{ paddingTop: "1rem" }}>
+          <div style={{ paddingTop: "0.5rem" }}>
             <Row>
-              <Col xs={4} sm={8}>
+              <Col xs={4} sm={8} className={style.centerPage}>
                 <FontAwesomeIcon icon={faCoins} className={style.Xs} />
               </Col>
               <Col xs={16} sm={16}>
-                10,000 เหรียญ
+              <span className={style.textOne5}>10,000 เหรียญ</span>
+              </Col>
+              <Col align="end" xs={4} sm={4} >
+                <Button
+                    className="backgroundRed buttonColor"
+                    shape="circle"
+                    icon={
+                      <FontAwesomeIcon icon={faTimes} style={{ color: "white" }} />
+                    }
+                  />              
               </Col>
             </Row>
             <Row style={{ paddingTop: "0.3rem" }}>
               <Col xs={4} sm={8}>
-                <span className={style.titleH5}>THB</span>
+                <span className={style.headerOne5}>THB</span>
               </Col>
               <Col xs={16} sm={16}>
-                10,000 เหรียญ
+              <span className={style.textOne5}>100</span>
               </Col>
             </Row>
-            <Row style={{ paddingTop: "0.2rem", marginTop: "-0.5rem" }}>
-              <Col xs={5} sm={8}>
-                วันที่ขอ
-              </Col>
-              <Col xs={16} sm={16}>
-                30/12/2563
+            <Row style={{ marginTop: "0.2rem" }}>
+              <Col xs={24} sm={8}>
+                <span className={style.textOne5}>วันที่ขอ : 30/12/2563</span>
               </Col>
             </Row>
             <Row style={{ paddingTop: "0.2rem" }}>
-              <Col xs={9} sm={8}>
-                วันที่พิจารณา
-              </Col>
-              <Col xs={15} sm={16}>
-               04/01/2564
+              <Col xs={24} sm={8}>
+              <span className={style.textOne5}>วันที่พิจารณา : 04/01/2564</span>
               </Col>
             </Row>
             <Row style={{ paddingTop: "0.2rem" }}>
-              <Col xs={7} sm={8}>
-                วันที่อนุมัติ
-              </Col>
-              <Col xs={16} sm={16}>
-              04/01/2564
-              </Col>
-            </Row>
-          </div>
-          <div>
-            <Row>
-              <Col className={style.allow}>
-                <Button
-                  className="backgroundRed buttonColor"
-                  shape="circle"
-                  icon={
-                    <FontAwesomeIcon icon={faTimes} style={{ color: "white" }} />
-                  }
-                />
+              <Col xs={24} sm={8}>
+              <span className={style.textOne5}>วันที่อนุมัติ : 04/01/2564</span>
               </Col>
             </Row>
           </div>
           <Divider/>
-          <div style={{ paddingTop: "1rem" }}>
-            <Row>
-              <Col xs={4} sm={8}>
-                <FontAwesomeIcon icon={faCoins} className={style.Xs} />
-              </Col>
-              <Col xs={16} sm={16}>
-                10,000 เหรียญ
-              </Col>
-            </Row>
-            <Row style={{ paddingTop: "0.3rem" }}>
-              <Col xs={4} sm={8}>
-                <span className={style.titleH5}>THB</span>
-              </Col>
-              <Col xs={16} sm={16}>
-                10,000 เหรียญ
-              </Col>
-            </Row>
-            <Row style={{ paddingTop: "0.2rem", marginTop: "-0.5rem" }}>
-              <Col xs={5} sm={8}>
-                วันที่ขอ
-              </Col>
-              <Col xs={16} sm={16}>
-                30/12/2563
-              </Col>
-            </Row>
-            <Row style={{ paddingTop: "0.2rem" }}>
-              <Col xs={9} sm={8}>
-                วันที่พิจารณา
-              </Col>
-              <Col xs={15} sm={16}>
-                04/01/2564
-              </Col>
-            </Row>
-            <Row style={{ paddingTop: "0.2rem" }}>
-              <Col xs={7} sm={8}>
-                วันที่อนุมัติ
-              </Col>
-              <Col xs={16} sm={16}>
-              04/01/2564
-              </Col>
-            </Row>
-          </div>
-          <div>
-            <Row>
-              <Col className={style.allow}>
-                <Button
-                  className="backgroundGreen buttonColor"
-                  shape="circle"
-                  icon={
-                    <FontAwesomeIcon icon={faCheck} style={{ color: "white" }} />
-                  }
-                />
-              </Col>
-            </Row>
-          </div>
         </div>
-      ) : (
-        <TableList />
-      )}
     </Fragment>
   );
 }

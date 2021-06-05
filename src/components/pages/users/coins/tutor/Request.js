@@ -32,6 +32,9 @@ export default function Request({ onHandleChange, showRequest }) {
   const balanceCoin = useSelector((state) => state.coin.coinUser);
   const money2 = balanceCoin&& balanceCoin.amount
 
+  console.log(rateRedeem)
+  console.log(money2)
+
   const onChange = async (data) => {
     const fileInput = data.target.files[0];
     if (fileInput) {

@@ -10,9 +10,8 @@ export default function TableTransaction() {
 
     const dispatch = useDispatch();
 
-    const list = useSelector((state) => state.coin.coinUser);
-    console.log(list)
-  
+    const transaction = useSelector((state) => state.coin.transaction);
+     
     useEffect(() => {
       dispatch(coinAction.getCoinTransaction());
     }, []);
@@ -37,7 +36,7 @@ export default function TableTransaction() {
           </tr>
         </thead>
         <tbody>
-        {!isEmpty(list) &&list.map((data, index) => (
+        {!isEmpty(transaction) &&transaction.map((data, index) => (
                     <tr style={{ width: "1rem" }} key={index}>
                         <td className={style.textNormal}>{index+1}</td>
                         <td className={style.textNormal}>{moment(data.transactionDate).format("DD/MM/YYYY")}</td>

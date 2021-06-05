@@ -2,7 +2,9 @@ import { coinConstants } from "../constants"
 
 const initialState = {
     rateCoin :  null,
-    coinUser :  null,
+    balance :  null,
+    redeem :  null,
+    transaction :  null,
     error: null,
     activate:null,
     redeemList:null,
@@ -29,18 +31,50 @@ const coinReducer = (state = initialState , action)=>{
             }
 
         }
-        case coinConstants.GET_COIN_USER_LIST_SUCCESS:{
+        case coinConstants.GET_COIN_BALANCE_SUCCESS:{
             return {
                 ...state,
-                coinUser : action.payload,
+                balance : action.payload,
                 error : false
             }
 
         }
-        case coinConstants.GET_COIN_USER_LIST_FAILURE:{
+        case coinConstants.GET_COIN_BALANCE_FAILURE:{
             return {
                 ...state,
-                coinUser : null,
+                balance : null,
+                error : true
+            }
+
+        }
+        case coinConstants.GET_COIN_TRANSACTION_SUCCESS:{
+            return {
+                ...state,
+                transaction : action.payload,
+                error : false
+            }
+
+        }
+        case coinConstants.GET_COIN_TRANSACTION_FAILURE:{
+            return {
+                ...state,
+                transaction : null,
+                error : true
+            }
+
+        }
+        case coinConstants.GET_COIN_REDEEM_SUCCESS:{
+            return {
+                ...state,
+                redeem : action.payload,
+                error : false
+            }
+
+        }
+        case coinConstants.GET_COIN_REDEEM_FAILURE:{
+            return {
+                ...state,
+                redeem : null,
                 error : true
             }
 

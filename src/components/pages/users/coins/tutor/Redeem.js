@@ -1,21 +1,14 @@
 import React, { Fragment,useState} from "react";
-// import { Row } from "antd";
 import style from "../styles.module.scss";
-// import RedeemDetail from "./RedeemDetail";
-// import RedeemList from "./RedeemList";
 import RedeemCoin from "./RedeemCoin";
-import TableRequest from "./TableRequest";
-// import Request from "./Request";
+import TableHistory from "./TableHistory";
 import Header from "../../../../headerMobile/Header";
 import isMobile from "../../../../isMobile/isMobile";
 import TabHorizontal from "../../../../tab/TabHorizontal";
 import Loading from "../../../../loading/Loading";
-//import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
 import { useSelector } from "react-redux";
 
-
 export default function Redeem() {
-  // const screens = useBreakpoint();
 
   const { loading } = useSelector(state => state)
 
@@ -46,7 +39,7 @@ export default function Redeem() {
          < RedeemCoin/>
         )
     }else{
-      return <TableRequest/>
+      return <TableHistory/>
     }
 }
 

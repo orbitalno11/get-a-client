@@ -79,8 +79,8 @@ function getCoinBalance(){
             dispatch(failure(err.response.data))
         })
     }
-    function success(data) { return { type: coinConstants.GET_COIN_USER_LIST_SUCCESS, payload: data } }
-    function failure(err) { return { type: coinConstants.GET_COIN_USER_LIST_FAILURE, payload: err } }
+    function success(data) { return { type: coinConstants.GET_COIN_BALANCE_SUCCESS, payload: data } }
+    function failure(err) { return { type: coinConstants.GET_COIN_BALANCE_FAILURE, payload: err } }
 }
 
 function getCoinTransaction(){
@@ -99,8 +99,28 @@ function getCoinTransaction(){
             dispatch(failure(err.response))
         })
     }
-    function success(data) { return { type: coinConstants.GET_COIN_USER_LIST_SUCCESS, payload: data } }
-    function failure(err) { return { type: coinConstants.GET_COIN_USER_LIST_FAILURE, payload: err } }
+    function success(data) { return { type: coinConstants.GET_COIN_TRANSACTION_SUCCESS, payload: data } }
+    function failure(err) { return { type: coinConstants.GET_COIN_TRANSACTION_FAILURE, payload: err } }
+}
+
+function getCoinRedeem(){
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiURL.apiGetA.get("/me/coin",{
+            params:{
+                type:105
+            }
+        }).then(res => {
+            dispatch(loadingActions.stopLoading())
+            const coin = res.data.data
+            dispatch(success(coin))
+        }).catch(err => {
+            dispatch(loadingActions.stopLoading())
+            dispatch(failure(err.response))
+        })
+    }
+    function success(data) { return { type: coinConstants.GET_COIN_REDEEM_SUCCESS, payload: data } }
+    function failure(err) { return { type: coinConstants.GET_COIN_REDEEM_FAILURE, payload: err } }
 }
 
 function createCoinRate(data){
@@ -304,4 +324,5 @@ export const coinAction = {
     ApproveRequestsRedeem,
     DeniedRequestsRedeem,
     createRequestRedeem,
+    getCoinRedeem
 }

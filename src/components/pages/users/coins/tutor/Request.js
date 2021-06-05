@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState ,useEffect } from "react";
 import { Grid, Col, Row, Button, Select, Image } from "antd";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,9 +13,7 @@ import { defaultValue } from "../../../../defaultValue";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import ducumentA4Sample from "../../../../images/ducumentA4Sample.webp";
-//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import { faTrash } from "@fortawesome/free-solid-svg-icons";
-//import isEmpty from "../../../../defaultFunction/checkEmptyObject";
+import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 import { coinAction } from "../../../../../redux/actions";
 const { useBreakpoint } = Grid;
 
@@ -24,16 +22,21 @@ export default function Request({ onHandleChange, showRequest }) {
   const dispatch = useDispatch();
   const [image, setimage] = useState(ducumentA4Sample);
 
-  const { register, handleSubmit, errors, control } = useForm({
+  const { register, handleSubmit, errors, control, watch} = useForm({
     resolver: yupResolver(redeemSchema),
   });
 
   const rateRedeem = useSelector((state) => state.coin.rateCoin);
-  const balanceCoin = useSelector((state) => state.coin.coinUser);
-  const money2 = balanceCoin&& balanceCoin.amount
+  const bahtStd = !isEmpty(rateRedeem) && rateRedeem[0].baht
+  const coinStd = !isEmpty(rateRedeem) && rateRedeem[0].coin
+  const rateId = !isEmpty(rateRedeem) && rateRedeem[0].id
 
-  console.log(rateRedeem)
-  console.log(money2)
+  const watchInput = watch()
+  const [amount, setAmount] = useState(0)
+
+  useEffect(() => {
+    setAmount((watchInput.coin * Number(bahtStd))/Number(coinStd))
+  }, [watchInput.coin])
 
   const onChange = async (data) => {
     const fileInput = data.target.files[0];
@@ -53,26 +56,28 @@ export default function Request({ onHandleChange, showRequest }) {
       }
     }
   };
-  console.log(errors)
-  const rateId = Number(2)
-  const money = Number(4)
+ 
 
   const onSubmit = (data) => {
-    console.log(data)
     if (data) {
-      let formdata = new FormData();
-      formdata.append("rateId",rateId);
-      formdata.append("numberOfCoin", data.coin);
-      formdata.append("amount", money);
-      formdata.append("bankId", data.bank);
-      formdata.append("accountName", data.accountName);
-      formdata.append("accountNo", data.accountNo);
-      formdata.append("image", image.file);
-      formdata.append("accountPic", image.file);
-      console.log(formdata);
-      dispatch(coinAction.createRequestRedeem(formdata));
+      if(amount != 0 && !isEmpty(rateId)){
+        let formdata = new FormData();
+        formdata.append("accountPic", image.file);
+        formdata.append("rateId",rateId);
+        formdata.append("bankId", data.bank);
+        formdata.append("accountNo", data.accountNo);
+        formdata.append("accountName", data.accountName);
+        formdata.append("numberOfCoin", data.coin);
+        formdata.append("amount", amount);
+        dispatch(coinAction.createRequestRedeem(formdata));
+        for(var pair of formdata.entries()){
+          console.log(pair[0], pair[1]);
+        }
+      }
     }
   };
+ 
+  console.log(errors)
 
   return (
     <Fragment>
@@ -110,7 +115,7 @@ export default function Request({ onHandleChange, showRequest }) {
                   name="amount"
                   placeholder
                   disabled
-                  value="20"
+                  value={amount}
                 />
               </div>
               <div className={style.marginTop04}>
@@ -118,17 +123,18 @@ export default function Request({ onHandleChange, showRequest }) {
                 <Controller
                   as={
                     <Select name="bank">
-                      {defaultValue.subject &&
-                        Object.entries(defaultValue.bank).map(([value]) => (
+                      {defaultValue.bank &&
+                        Object.entries(defaultValue.bank).map(([key,value]) => (
                           <Select.Option key={value} value={value}>
-                            {value}
+                            {key}
                           </Select.Option>
                         ))}
                     </Select>
                   }
                   name="bank"
                   control={control}
-                  defaultValue=""
+                  placeholder="เลือกธนาคาร"
+                  defaultValue={null}
                 />
                 {errors.bank && (
                   <p className="error-input">{errors.bank.message}</p>
@@ -140,8 +146,8 @@ export default function Request({ onHandleChange, showRequest }) {
                   type="number"
                   name="accountNo"
                   register={register}
-                  error={errors.accountNo}
                   placeholder="หมายเลขบัญชี"
+                  error={errors.accountNo}
                 />
               </div>
               <div className={style.margin20}>
@@ -199,8 +205,8 @@ export default function Request({ onHandleChange, showRequest }) {
               </span>
             </Col>
           </Row>
-          <Row className={`${style.horizontalCenter} ${style.marginBottom40}`}>
-            <Col xs={9} sm={9} md={6} lg={3}> 
+          <Row className={!screens.md?style.marginBottomSm : style.marginBottom40}>
+            <Col xs={9} sm={9} md={6} lg={4}> 
               <Button
                 className="buttonColor backgroundOrange"
                 size="large"
@@ -211,7 +217,7 @@ export default function Request({ onHandleChange, showRequest }) {
                 <span className={style.textOne}>ส่งคำขอ</span>
               </Button>
             </Col>
-            <Col>
+            <Col style={{marginBottom:"4rem"}}>
               <Button
                 className="buttonColor backgroundBlue"
                 size="large"

@@ -13,7 +13,7 @@ import Loading from "../../../../loading/Loading";
 export default function HistoryDetails() {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state);
-  const list = useSelector((state) => state.coin.coinUser);
+  const list = useSelector((state) => state.coin.transaction);
 
   useEffect(() => {
     dispatch(coinAction.getCoinTransaction());

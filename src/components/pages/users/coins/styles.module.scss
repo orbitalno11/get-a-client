@@ -161,8 +161,9 @@
 }
 
 .marginBottom40{
+  @extend .horizontalCenter;
   margin-top: 45px;
-  margin-bottom: 45px;
+  margin-bottom: 15px;
 }
 
 .marginleft18{
@@ -227,4 +228,12 @@
 .paddingRequest{
   @extend .paddingbody;
   padding-top: 5%;
+  padding-bottom: 5%;
 }
+
+.marginBottomSm{
+  @extend .horizontalCenter;
+  margin-top: 25px;
+  margin-bottom: 45px;
+}
+

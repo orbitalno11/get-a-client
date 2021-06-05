@@ -8,6 +8,7 @@ import {
     faTachometerAlt,
     faGraduationCap,
     faSearch,
+    faHeart
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -29,12 +30,18 @@ const NavMenu = () => {
                 <Menu.Item key="/">
                     <NavLink to="/">
                         หน้าแรก
-                </NavLink>
+                    </NavLink>
                 </Menu.Item>
                 <Menu.Item key="/rank" >
                     <NavLink to="/rank">
                         ติวเตอร์
-                </NavLink></Menu.Item>
+                    </NavLink>
+                </Menu.Item>
+                <Menu.Item key="/favorite" >
+                    <NavLink to="/favorite">
+                        รายการที่ถูกใจ
+                    </NavLink>
+                </Menu.Item>
                 {/* <Menu.Item key="/course" >
                     <NavLink to="/course">
                         คอร์สเรียน
@@ -131,12 +138,12 @@ const NavMenu = () => {
                     <NavLink to="/search">
                         <FontAwesomeIcon icon={faSearch} className="icon" />
                     </NavLink>
-                </Col>
-                 {/* <Col span={4} className="iconMenu">
+                </Col> 
+                <Col span={4} className="iconMenu">
                     <NavLink to="/favorite">
                         <FontAwesomeIcon icon={faHeart} className="icon" />
                     </NavLink>
-                </Col> */}
+                </Col>
                 <Col span={4} className="iconMenu">
                     <NavLink to={profileLearnerURL}>
                         <FontAwesomeIcon icon={faUserCircle} className="icon" />

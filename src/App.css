@@ -352,7 +352,6 @@ textarea{
   background-color: var(--white-color) !important;
 }
 
-
 .tabStyle .ant-tabs-ink-bar {
   height: 0.25rem !important;
   background: var(--orange-color);

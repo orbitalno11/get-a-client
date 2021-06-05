@@ -48,6 +48,12 @@ export default function ProfileDetail({ mainPage }) {
         }
     }
 
+    const trackImpress = () => {
+        if (userId?.isSafeNotBlank()) {
+            trackImpressTutorProfile(userId)
+        }
+    }
+    
     useEffect(() => {
         fetchProfile()
         trackImpress()

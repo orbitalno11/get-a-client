@@ -25,6 +25,7 @@ export default function RedeemDetail({onHandleChange}) {
   const bahtShow = bahtTranfer && bahtTranfer.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   const amountShow = Number(amount).toLocaleString()
 
+
   return (
     <Fragment>
           {loading.loading && <Loading />}
@@ -80,6 +81,7 @@ export default function RedeemDetail({onHandleChange}) {
                     </Col>
                   )}
                 </Row>
+
                 <Row className={style.centerPage} style={{marginTop:"3rem"}}>
                   <Button
                     className="backgroundOrange buttonColor"

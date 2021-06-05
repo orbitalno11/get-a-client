@@ -6,7 +6,7 @@ import Header from "../../../../headerMobile/Header";
 import isMobile from "../../../../isMobile/isMobile";
 import TabHorizontal from "../../../../tab/TabHorizontal";
 import Loading from "../../../../loading/Loading";
-import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
+//import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
 import { useSelector } from "react-redux";
 
 export default function Redeem() {

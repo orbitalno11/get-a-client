@@ -58,7 +58,7 @@ export default function Request({
     const fileInput = data.target.files[0];
     if (fileInput) {
       try {
-        const newImageFile = await resizeImage(fileInput, "file", 720, 1280);
+        const newImageFile = await resizeImage(fileInput, "file", 2480, 3508);
         const imageURL = URL.createObjectURL(newImageFile);
         setimage({ file: newImageFile, imageURL: imageURL });
       } catch {
@@ -72,6 +72,9 @@ export default function Request({
       }
     }
   };
+  console.log(errors)
+  const rateId = Number(2)
+  const money = Number(4)
 
   const onSubmit = (data) => {
     if (data) {

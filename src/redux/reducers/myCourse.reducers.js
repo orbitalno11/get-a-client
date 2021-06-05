@@ -1,8 +1,8 @@
 import { myCourseConstants } from "../constants"
 
 const initialState = {
-    tutorCourselist: null,
-    courseList : null,
+    offlineCourse: null,
+    onlineCourse : null,
     error: null,
 }
 
@@ -11,25 +11,25 @@ const myCourseReducer = (state = initialState, action) => {
         case myCourseConstants.GET_OFFLINE_COURSE_SUCCESS:
             return {
                 ...state,
-                tutorCourselist: action.payload,
+                offlineCourse: action.payload,
                 error: false,
             }
         case myCourseConstants.GET_OFFLINE_COURSE_FAILURE:
             return {
                 ...state,
-                tutorCourselist: null,
+                offlineCourse: null,
                 error: action.payload
             }
         case myCourseConstants.GET_ONLINE_COURSE_SUCCESS:
             return {
                 ...state,
-                courseList: action.payload,
+                onlineCourse: action.payload,
                 error: false,
                 }
         case myCourseConstants.GET_ONLINE_COURSE_FAILURE:
             return {
                 ...state,
-                courseList: null,
+                onlineCourse: null,
                 error: action.payload
                 }
         default:

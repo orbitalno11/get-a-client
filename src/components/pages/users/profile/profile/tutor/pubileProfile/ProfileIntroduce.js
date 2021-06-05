@@ -1,6 +1,6 @@
-import { Button, Col, Image, Row } from "antd";
-import React, { Fragment } from "react"
-import { useSelector } from "react-redux";
+import { Button, Col, Image, Row} from "antd";
+import React, { Fragment} from "react"
+import { useSelector,useDispatch} from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import isMobile from "../../../../../../isMobile/isMobile";
 import style from "../../../styles.module.scss"
@@ -8,13 +8,20 @@ import { SkeletonComponent } from "../../../../../../loading/SkeletonComponent"
 import profileSample from "../../../../../../images/profile.webp"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faInfo } from "@fortawesome/free-solid-svg-icons";
+import { favoriteAction } from "../../../../../../../redux/actions";
 import { color } from "../../../../../../defaultValue";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
 
 export default function ProfileIntroduce({ mainPage }) {
+    const dispatch = useDispatch()
     const screens = useBreakpoint();
     const { tutorHandle } = useSelector(state => state.tutor)
+    const favData = useSelector(state => state.favorite)
     const { id } = useParams()
+
+    const favorite = () => {
+        dispatch(favoriteAction.likeTutor(id,favData.favorite));
+    };
 
     return (
         <Fragment>
@@ -33,12 +40,20 @@ export default function ProfileIntroduce({ mainPage }) {
                                     mainPage &&
                                     (
                                         <Link to={`/profile/${id}`}>
-                                            <Button className={style.infoButton} shape="circle" icon={<FontAwesomeIcon icon={faInfo} />} />
+                                                <Button className={style.infoButton} shape="circle" icon={<FontAwesomeIcon icon={faInfo}/>} />
                                         </Link>
+                                       
                                     )
                                 }
-
-                                <Button className={style.colorGray} shape="circle" icon={<FontAwesomeIcon icon={faHeart} style={{ fontSize: "19pt" }} />} />
+                                
+                                {
+                                     favData.favorite?(
+                                        <Button className={style.colorOrange} shape="circle" icon={<FontAwesomeIcon icon={faHeart} style={{ fontSize: "19pt" }} />}  onClick={() => favorite()}/>
+                                     ):(
+                                        <Button className={style.colorGray} shape="circle" icon={<FontAwesomeIcon icon={faHeart} style={{ fontSize: "19pt" }} />}  onClick={() => favorite()}/>
+                                     )
+                                }
+                               
                             </div>
                         )
                     }

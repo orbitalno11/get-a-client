@@ -41,12 +41,7 @@ export default function ProfileDetail({ mainPage }) {
         }
     }, [dispatch])
 
-    const trackImpress = () => {
-        if (userId?.isSafeNotBlank()) {
-            trackImpressTutorProfile(userId)
-        }
-    }
-
+    
     const checkFavorite = () =>{
         if (userId?.isSafeNotBlank()) {
             dispatch(favoriteAction.checkFavoriteTutor(userId))
@@ -58,14 +53,6 @@ export default function ProfileDetail({ mainPage }) {
         trackImpress()
         checkFavorite()
     }, [fetchProfile])
-
-
-
-    const favorite = () => {
-        setloadingFav(true)
-        dispatch(favoriteAction.likeTutor(userId,favData.favorite));
-    };
-
 
     const favorite = () => {
         setloadingFav(true)

@@ -7,6 +7,11 @@ export const redeemSchema = yup.object().shape({
         .mixed()
         .nullable()
         .test(
+            "is_upload",
+            "กรุณาเพิ่มรูปภาพ",
+            value => value[0] !== undefined
+        )
+        .test(
             "fileSize",
             "รูปภาพมีขนาดใหญ่เกินไป",
             (value) => {
@@ -28,7 +33,10 @@ export const redeemSchema = yup.object().shape({
                 }
             }
         ).required("กรุณาใส่รูปภาพเอกสารตามรายละเอียด"),
-    coin: yup.number().required("กรุณาใส่จำนวนเหรียญที่ต้องการจะแลก"),
+    coin: yup.number().required("กรุณาใส่จำนวนเหรียญที่ต้องการจะแลก").test(
+        "กรุณาใส่จำนวนเหรียญให้ถูกต้อง",
+        value => value > 0
+    ),
     accountNo: yup.string().required("กรุณาใส่หมายเลขบัญชี").test(
         "accountNoformat",
         "กรุณาเพิ่มหมายเลขบัญชีที่ถูกต้อง",

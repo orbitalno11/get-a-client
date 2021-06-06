@@ -237,3 +237,6 @@
   margin-bottom: 45px;
 }
 
+.status{
+  @extend .buttonCircle;
+}

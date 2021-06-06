@@ -3,6 +3,7 @@ import { Grid, Col, Row, Button, Select, Image } from "antd";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import style from "../styles.module.scss";
+import { coinAction } from "../../../../../redux/actions";
 import InputComponents from "../../../../input/InputComponets";
 import { modalAction } from "../../../../../redux/actions";
 import { typeModal } from "../../../../modal/TypeModal";
@@ -13,8 +14,8 @@ import { defaultValue } from "../../../../defaultValue";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import ducumentA4Sample from "../../../../images/ducumentA4Sample.webp";
+import ModalComponent from "../../../../modal/ModalComponent";
 import isEmpty from "../../../../defaultFunction/checkEmptyObject";
-import { coinAction } from "../../../../../redux/actions";
 const { useBreakpoint } = Grid;
 
 export default function Request({ onHandleChange, showRequest }) {
@@ -42,7 +43,7 @@ export default function Request({ onHandleChange, showRequest }) {
     const fileInput = data.target.files[0];
     if (fileInput) {
       try {
-        const newImageFile = await resizeImage(fileInput, "file", 2480, 3508);
+        const newImageFile = await resizeImage(fileInput, "file", 720, 1280);
         const imageURL = URL.createObjectURL(newImageFile);
         setimage({ file: newImageFile, imageURL: imageURL });
       } catch {
@@ -70,17 +71,13 @@ export default function Request({ onHandleChange, showRequest }) {
         formdata.append("numberOfCoin", data.coin);
         formdata.append("amount", amount);
         dispatch(coinAction.createRequestRedeem(formdata));
-        for(var pair of formdata.entries()){
-          console.log(pair[0], pair[1]);
-        }
       }
     }
   };
  
-  console.log(errors)
-
   return (
     <Fragment>
+      <ModalComponent/>
       <div className={`${style.marginSection} ${style.contentRequest}`}>
         {screens.md && (
           <Row className={style.paddingTopHead}>
@@ -115,7 +112,7 @@ export default function Request({ onHandleChange, showRequest }) {
                   name="amount"
                   placeholder
                   disabled
-                  value={amount}
+                  value={String(amount)}
                 />
               </div>
               <div className={style.marginTop04}>

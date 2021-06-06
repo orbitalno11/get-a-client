@@ -101,19 +101,20 @@ const bank = {
     "กรุงเทพ" : "BBL"
 }
 
-// const bank = {
-//     "SCB" : "ไทยพาณิชย์",
-//     "KTB" : "กรุงไทย",
-//     "KBANK" : "กสิกรไทย",
-//     "BBL" : "กรุงเทพ"
-// }
+const redeemType = {
+    0 : "อยู่ระหว่างการพิจารณา",
+    1 : "อนุมัติ", 
+    2 : "โอนเงิน" , 
+    3 : "ปฏิเสธ",
+    4 : "ยกเลิก" 
+}
 
 const transactionType = {
     0 : "เติมเหรียญ",
-    1 : "ถอนเงิน", //โอนเงินให้ติวเตอร์
-    2 : "แลกเหรียญ" , //ติวเตอร์ขอแลกเหรียญ
+    1 : "ถอนเงิน", 
+    2 : "แลกเหรียญ" , 
     3 : "ซื้อเหรียญ",
-    4 : "ยอดเงิน" //รายได้ที่เข้ามาของติวเตอร์
+    4 : "ยอดเงิน" 
 }
 
 export const defaultValue = {
@@ -134,5 +135,6 @@ export const defaultValue = {
     userRole,
     typeCourse,
     bank,
-    transactionType
+    transactionType,
+    redeemType
 }

@@ -1,14 +1,15 @@
 import React, { Fragment } from "react";
-import { Row, Col,Button,Divider } from "antd";
-import { faCoins,faTimes } from "@fortawesome/free-solid-svg-icons";
+import { Row, Col, Divider } from "antd";
+import { faCoins, faTimes, faHourglass, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
 import style from "../styles.module.scss";
 import isEmpty from "../../../../defaultFunction/checkEmptyObject";
+import { color } from "../../../../defaultValue";
 import EmptyImage from "../../../../loading/EmptyImage";
 import moment from "moment";
 
-export default function RedeemList() {
+export default function RedeemList({ onHandleChange }) {
 
   const detailRequest = useSelector((state) => state.coin.redeem);
 
@@ -22,22 +23,43 @@ export default function RedeemList() {
           <div>
             {!isEmpty(detailRequest) &&
             detailRequest.map((data, index) => (
-              <div style={{ paddingTop: "0.5rem" }} key={index}>
+              <div style={{ paddingTop: "0.5rem" }} key={index}  onClick={() => onHandleChange(false)}>
                 <Row>
                   <Col xs={4} sm={8} className={style.centerPage}>
                     <FontAwesomeIcon icon={faCoins} className={style.Xs} />
                   </Col>
                   <Col xs={16} sm={16}>
-                  <span className={style.textOne5}>{data && data.numberOfCoin} เหรียญ</span>
+                  <span className={style.textOne5}>{data && data.amountCoin}&nbsp; เหรียญ</span>
                   </Col>
                   <Col align="end" xs={4} sm={4} >
-                    <Button
-                        className="backgroundRed buttonColor"
-                        shape="circle"
-                        icon={
-                          <FontAwesomeIcon icon={faTimes} style={{ color: "white" }} />
-                        }
-                      />              
+                    {
+                      data.status === 0 && (
+                        <button className={style.buttonCircle} style={{ backgroundColor: color.yellow }}>
+                            <FontAwesomeIcon icon={faHourglass} className={style.iconSmall} />
+                        </button> 
+                      )
+                    }
+                    {
+                      data.status === 1 && (
+                        <button className={style.buttonCircle} style={{ backgroundColor: color.green }}>
+                            <FontAwesomeIcon icon={faCheck} className={style.iconSmall} />
+                        </button> 
+                      )
+                    }
+                    {
+                      data.status === 3 && (
+                        <button className={style.buttonCircle} style={{ backgroundColor: color.red }}>
+                            <FontAwesomeIcon icon={faTimes} className={style.iconSmall} />
+                        </button> 
+                      )
+                    }
+                    {
+                      data.status === 4 && (
+                        <button className={style.buttonCircle} style={{ backgroundColor: color.blue }}>
+                            <FontAwesomeIcon icon={faTimes} className={style.iconSmall} />
+                        </button> 
+                      )
+                    }
                   </Col>
                 </Row>
                 <Row style={{ paddingTop: "0.3rem" }}>
@@ -45,7 +67,7 @@ export default function RedeemList() {
                     <span className={style.headerOne5}>THB</span>
                   </Col>
                   <Col xs={16} sm={16}>
-                  <span className={style.textOne5}>{data && data.numberOfBaht}</span>
+                  <span className={style.textOne5}>{data && data.amount}</span>
                   </Col>
                 </Row>
                 <Row style={{ marginTop: "0.2rem" }}>

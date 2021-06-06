@@ -5,16 +5,18 @@ import { useDispatch } from "react-redux";
 import { modalAction,coinAction} from "../../../../../redux/actions";
 import ModalComponent from "../../../../modal/ModalComponent";
 import { sizeModal } from "../../../../modal/SizeModal";
+import moment from "moment"
 
 export default  function RequesDetail({data}) {
+
     const dispatch = useDispatch()
 
     const handOnApprove = (idRedeem) => {
       dispatch(coinAction.ApproveRequestsRedeem(idRedeem));
     };
 
-    const handOnDenied = (idRedeem) => {
-      dispatch(coinAction.DeniedRequestsRedeem(idRedeem));
+    const handOnDenied = (idRedeem,user) => {
+      dispatch(coinAction.DeniedRequestsRedeem(idRedeem,user));
     };
 
     const ModalDetailRedeem =()=>{
@@ -27,9 +29,9 @@ export default  function RequesDetail({data}) {
                 </p>
                 <p className={style.textNormal}>ชื่อ : {data && data.owner.firstname}</p>
                 <p className={style.textNormal}>นามสกุล : {data && data.owner.lastname}</p>
-                <p className={style.textNormal}>วันที่ส่งคำขอ : {data && data.requestDate} </p>
+                <p className={style.textNormal}>วันที่ส่งคำขอ : {moment(data && data.requestDate).format("DD/MM/YYYY")} </p>
                 <p className={style.textNormal}>จำนวนยอด : {data && data.amount} บาท</p>
-                <p className={style.textNormal}>ธนาคาร :{data && data.bank.title}</p>
+                <p className={style.textNormal}>ธนาคาร : {data && data.bank.title}</p>
                 <p className={style.textNormal}>เลขบัญชี : {data && data.accountNo}</p>
                 <p className={style.textNormal}>ชื่อบัญชี : {data && data.accountName}</p>
               </Col>
@@ -58,7 +60,7 @@ export default  function RequesDetail({data}) {
                     shape="round"
                     size="middle"
                     style={{ width: "100px" }}
-                    onClick={() => handOnDenied(data.id)}
+                    onClick={() => handOnDenied(data.id,data.owner.id)}
                   >
                    <span className={style.textNormal}>ปฏิเสธ</span>
                   </Button>
@@ -84,7 +86,7 @@ export default  function RequesDetail({data}) {
               span={14}
               style={{ marginTop: "-0.5rem", paddingLeft: "0.625rem" }}
             >
-              <span>{data && data.owner.fullNameTaxt}</span>
+              <span>{data && data.owner.fullNameText}</span>
             </Col>
             <Col
               span={10}
@@ -94,7 +96,7 @@ export default  function RequesDetail({data}) {
                 color: "gray",
               }}
             >
-              <span className={style.textSmall}>{data && data.requestDate}</span>
+              <span className={style.textSmall}>{moment(data && data.requestDate).format("DD/MM/YYYY")}</span>
             </Col>
           </Row>
           <Row

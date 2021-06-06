@@ -3,6 +3,7 @@ import { Grid, Col, Row, Button, Select, Image } from "antd";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import style from "../styles.module.scss";
+import { coinAction } from "../../../../../redux/actions";
 import InputComponents from "../../../../input/InputComponets";
 import { coinAction, modalAction } from "../../../../../redux/actions";
 import { typeModal } from "../../../../modal/TypeModal";
@@ -58,7 +59,7 @@ export default function Request({
     const fileInput = data.target.files[0];
     if (fileInput) {
       try {
-        const newImageFile = await resizeImage(fileInput, "file", 2480, 3508);
+        const newImageFile = await resizeImage(fileInput, "file", 720, 1280);
         const imageURL = URL.createObjectURL(newImageFile);
         setimage({ file: newImageFile, imageURL: imageURL });
       } catch {
@@ -152,7 +153,7 @@ export default function Request({
                   name="amount"
                   placeholder
                   disabled
-                  value={amount}
+                  value={String(amount)}
                 />
               </div>
               {!isEmpty(requestDetail) ? (

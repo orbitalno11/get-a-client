@@ -209,6 +209,21 @@
   line-height: 80%;
 }
 
-.textOneTwo {
-  @include cutText(2)
+.cutText1Line {
+  @include cutText(1)
+}
+
+.wait {
+  @extend .buttonCircle;
+  background-color: $yellow;
+}
+
+.deny {
+  @extend .buttonCircle;
+  background-color: $red;
+}
+
+.approved {
+  @extend .buttonCircle;
+  background-color: $green;
 }

@@ -1,30 +1,41 @@
 import { Col, Row, Grid } from "antd";
-import React, { useState } from "react"
+import React, { useEffect } from "react"
 import TabHorizontal from "../../../../../tab/TabHorizontal"
-import CardCourseLearner from "../../../../../card/CardCourseLearner"
+import CardLearnerCourse from "../../../../../card/CardLearnerCourse"
 import style from "../../styles.module.scss"
 import { Fragment } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { myCourseAction } from "../../../../../../redux/actions";
 import isMobile from "../../../../../isMobile/isMobile";
 import Header from "../../../../../headerMobile/Header";
+import Loading from "../../../../../loading/Loading";
+import { Link } from "react-router-dom";
 
 const { useBreakpoint } = Grid;
 
 export default function ProfileCourse({ mainPage }) {
     const screens = useBreakpoint();
-    const [course] = useState({
-        tutor: null,
-        course: null
-    })
+    const dispatch = useDispatch();
+    const { loading } = useSelector((state) => state);
+    const offlineCourse = useSelector((state) => state.myCourse.offlineCourse);
+    const onlineCourse= useSelector((state) => state.myCourse.onlineCourse);
+  
+    useEffect(() => {
+      dispatch(myCourseAction.getMyOfflineCourse());
+      dispatch(myCourseAction.getMyOnlineCourse());
+    }, []);
 
     const TabTutor = () => {
         return (
-            course.tutor ?
+            offlineCourse && offlineCourse.length > 0 ?
                 (
                     <Row className={style.marginTop20} justify={!screens.xl && "space-around"} >
                         {
-                            course.tutor.map((item, index) => (
-                                <Col xs={24} sm={20} md={!mainPage ? 12 : 20} lg={!mainPage ? 8 : 12} xl={!mainPage ? 8 : 12} className={style.padding} key={index} >
-                                    <CardCourseLearner data={item} verizontal />
+                            offlineCourse && offlineCourse.map((item, index) => (
+                                <Col xs={24} sm={20} md={!mainPage ? 12 : 20} lg={!mainPage ? 8 : 20} xl={!mainPage ? 8 : 12} className={style.padding} key={index} >
+                                    <Link to={`/course/${item.id}`}>
+                                        <CardLearnerCourse data={item} type={"offline"} verizontal />
+                                    </Link>
                                 </Col>
                             ))
                         }
@@ -41,13 +52,13 @@ export default function ProfileCourse({ mainPage }) {
 
     const TabCourse = () => {
         return (
-            course.course ?
+            onlineCourse && onlineCourse.length > 0 ?
                 (
                     <Row className={style.marginTop20} justify={!screens.xl && "space-around"} >
                         {
-                            course.course.map((item, index) => (
-                                <Col xs={24} sm={20} md={!mainPage ? 12 : 20} lg={!mainPage ? 8 : 12} xl={!mainPage ? 8 : 12} className={style.padding} key={index} >
-                                    <CardCourseLearner data={item} />
+                            onlineCourse && onlineCourse.map((data, index) => (
+                                <Col xs={24} sm={20} md={!mainPage ? 12 : 20} lg={!mainPage ? 8 : 20} xl={!mainPage ? 8 : 12} className={style.padding} key={index} >
+                                    <CardLearnerCourse data={data} type={"online"} verizontal/>  
                                 </Col>
                             ))
                         }
@@ -82,6 +93,7 @@ export default function ProfileCourse({ mainPage }) {
 
     return (
         <Fragment>
+            {loading.loading && <Loading />}
             {(isMobile() && !mainPage) && <Header title="คอร์สเรียนของฉัน" pageBack="goback" />}
             <div className={!mainPage ? style.body : screens.md ? null : style.subProfile}>
                 {

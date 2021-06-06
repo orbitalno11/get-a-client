@@ -17,8 +17,8 @@ export default function ProfileCourse({ mainPage }) {
     const screens = useBreakpoint();
     const dispatch = useDispatch();
     const { loading } = useSelector((state) => state);
-    const offlineCourse = useSelector((state) => state.myCourse.tutorCourselist);
-    const onlineCourse= useSelector((state) => state.myCourse.courseList);
+    const offlineCourse = useSelector((state) => state.myCourse.offlineCourse);
+    const onlineCourse= useSelector((state) => state.myCourse.onlineCourse);
   
     useEffect(() => {
       dispatch(myCourseAction.getMyOfflineCourse());
@@ -27,7 +27,7 @@ export default function ProfileCourse({ mainPage }) {
 
     const TabTutor = () => {
         return (
-            offlineCourse && offlineCourse.length ?
+            offlineCourse && offlineCourse.length > 0 ?
                 (
                     <Row className={style.marginTop20} justify={!screens.xl && "space-around"} >
                         {
@@ -52,7 +52,7 @@ export default function ProfileCourse({ mainPage }) {
 
     const TabCourse = () => {
         return (
-            onlineCourse && onlineCourse.length ?
+            onlineCourse && onlineCourse.length > 0 ?
                 (
                     <Row className={style.marginTop20} justify={!screens.xl && "space-around"} >
                         {

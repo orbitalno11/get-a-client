@@ -78,22 +78,6 @@ export default function PromotionList() {
                     </p>
                   </Col>
                 </Row>
-                {/* <Row style={{ marginLeft: "2rem", marginTop: "1rem" }}>
-                  <Col md={4} lg={3} className={style.textOne25}>เวลาเริ่มต้น </Col>
-                  <Col md={7} lg={8} className={style.textOne25}>
-                    <p className={`${style.datetime} ${style.textOneo25}`}>
-                      {moment(data.startDate).format("HH:mm")}
-                    </p>
-                  </Col>
-                  <Col md={4} lg={3} style={{ marginLeft: "2rem" }} className={style.textOneo25}>
-                    เวลาสิ้นสุด
-                  </Col>
-                  <Col md={7} lg={8} className={style.textOne25}>
-                    <p className={`${style.datetime} ${style.textOne25}`}>
-                      {moment(data.endDate).format("HH:mm")}
-                    </p>
-                  </Col>
-                </Row> */}
                 <span className={style.headerOne35} style={{ marginLeft: "2rem"}}>อัตราการซื้อเหรียญ</span>
                 <Row style={{ marginLeft: "2rem", marginTop: "1rem" }}>
                   <Col md={3} lg={3} className={style.textOne25}>ราคา </Col>

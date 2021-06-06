@@ -4,6 +4,15 @@ import { sizeModal } from "../../components/modal/SizeModal"
 import { typeModal } from "../../components/modal/TypeModal"
 import { coinConstants } from "../constants"
 import { loadingActions } from "./loading.actions"
+import { coinErrorMessage } from "../../components/defaultValue"
+
+function checkErrorMessage(errorMessage) {
+    let message = coinErrorMessage.coinMessage[errorMessage]
+    if (!message) {
+        message = coinErrorMessage.coinMessage["default"]
+    }
+    return message
+}
 
 function getCoinRatesLearner(){ 
         return async dispatch => {
@@ -140,19 +149,12 @@ function deleteCoinRate(id) {
         }).catch(err => {
             dispatch(failure(err.response?.data))
             dispatch(loadingActions.stopLoading())
-            if(err.response?.data.message === "coin-rate-already-used"){
-                dispatch(modalAction.openModal({
-                    text:"อัตราเหรียญได้ถูกใช้งานแล้วไม่สามารถลบได้",
-                    size: sizeModal.small,
-                    alert: typeModal.wrong
-                }))
-            }else{
+            const message = checkErrorMessage(err.response?.data.message)
             dispatch(modalAction.openModal({
-                text: "แก้ไขข้อมูลไม่สำเร็จ",
+                text: message +"ไม่สามารถลบได้",
                 size: sizeModal.small,
                 alert: typeModal.wrong,
             }))
-          }
         })
     }
     function success() { return { type: coinConstants.DELETE_COIN_RATE_SUCCESS } }
@@ -174,19 +176,13 @@ function updateCoinRate(id,data) {
         }).catch(err => {
             dispatch(failure(err.response?.data))
             dispatch(loadingActions.stopLoading())
-            if(err.response?.data.message === "coin-rate-already-used"){
-                dispatch(modalAction.openModal({
-                    text:"อัตราเหรียญได้ถูกใช้งานแล้วไม่สามารถแก้ไขได้",
-                    size: sizeModal.small,
-                    alert: typeModal.wrong
-                }))
-            }else{
+            const message = checkErrorMessage(err.response?.data.message)
             dispatch(modalAction.openModal({
-                text: "แก้ไขข้อมูลไม่สำเร็จ",
+                text: message +"ไม่สามารถแก้ไขได้",
                 size: sizeModal.small,
                 alert: typeModal.wrong,
             }))
-          }
+
         })
     }
     function success() { return { type: coinConstants.UPDATE_COIN_RATE_SUCCESS } }

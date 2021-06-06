@@ -22,7 +22,6 @@ export default function Promotion() {
   const dispatch = useDispatch();
   const today = moment().format("MM/DD/YYYY");
   const onSubmit = (data) => {
-    console.log(data);
     if (data) {
       const promotionRate = {
         title: data.name,

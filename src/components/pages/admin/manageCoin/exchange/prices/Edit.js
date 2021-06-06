@@ -15,8 +15,6 @@ import moment from "moment";
 
 export default function Edit({dataRate}) {
 
- // console.log(dataRate)
-
   const { register, handleSubmit, errors,reset } = useForm({
     resolver: yupResolver(exchangeSchema),
   });
@@ -57,12 +55,10 @@ export default function Edit({dataRate}) {
           "endDate": today,
           "updtaeDate":today,
         }
-     //   console.log("rate")
         dispatch(modalAction.closeModal())
         dispatch(coinAction.updateCoinRate(dataRate.id,rate))
       }
     }
-    console.log(dataRate)
   }
 
 
@@ -70,7 +66,11 @@ export default function Edit({dataRate}) {
     return (
       <div style={{ paddingLeft: "1rem" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <span className={style.headerOne35}>เพิ่มอัตราการซื้อเหรียญ</span>
+          { dataRate.type  != "tranfer" ? (
+            <span className={style.headerOne35}>แก้ไขอัตราการซื้อเหรียญ</span>
+          ):(
+            <span className={style.headerOne35}>แก้ไขอัตราการแลกเปลี่ยน</span>
+          )}
           <Row style={{ marginBottom: "1rem" }}>
             <Col span={6} className={style.columnRate}>
               <InputComponents
@@ -105,7 +105,7 @@ export default function Edit({dataRate}) {
               style={{ width: "100px" }}
               htmlType="submit"
             >
-              <span className={style.textOneo25}>ยอมรับ</span>
+              <span className={style.textOneo25}>บันทึก</span>
             </Button>
           </Col>
           <Col span={6}>
@@ -116,7 +116,7 @@ export default function Edit({dataRate}) {
               style={{ width: "100px" }}
               onClick={() => dispatch(modalAction.closeModal())}
             >
-             <span className={style.textOneo25}>ปฏิเสธ</span>
+             <span className={style.textOneo25}>ยกเลิก</span>
             </Button>
           </Col>
         </Row>

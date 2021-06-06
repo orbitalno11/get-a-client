@@ -21,7 +21,7 @@ const ModaldeleteRateCoin = ({data}) => {
   }
   return (
     <div style={{ paddingLeft: "1rem" }}>
-      { data.type != "transfer" ?(
+      { data.type != "tranfer" ?(
         <p className={style.titleH4}>ยืนยันลบอัตราการซื้อเหรียญ</p>
         ):(
         <p className={style.titleH4}>ยืนยันลบอัตราการแลกเหรียญ</p>
@@ -43,7 +43,7 @@ const ModaldeleteRateCoin = ({data}) => {
             htmlType="submit"
             onClick={() => removeRate()}
           >
-            <span className={style.textNormal}>ยอมรับ</span>
+            <span className={style.textNormal}>ตกลง</span>
           </Button>
         </Col>
         <Col span={6}>
@@ -54,7 +54,7 @@ const ModaldeleteRateCoin = ({data}) => {
             style={{ width: "100px" }}
             onClick={() => closeModal()}
           >
-           <span className={style.textNormal}>ปฏิเสธ</span>
+           <span className={style.textNormal}>ยกเลิก</span>
           </Button>
         </Col>
       </Row>

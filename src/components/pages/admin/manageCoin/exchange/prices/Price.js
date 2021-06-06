@@ -54,9 +54,6 @@ export default function Price({type}) {
   };
 
   const list = useSelector((state) => state.coin.rateCoin);
- 
-  // const check = list?.filter(value => value.type==="transfer")
-  // console.log("check"+ check)
 
   const handOnActivate = (rateId) => {
       dispatch(coinAction.activateRate(rateId));
@@ -125,7 +122,7 @@ export default function Price({type}) {
                 style={{ width: "100px" }}
                 htmlType="submit"
               >
-                <span className={style.textOneo25}>ยอมรับ</span>
+                <span className={style.textOneo25}>บันทึก</span>
               </Button>
             </Col>
             <Col span={6}>
@@ -136,7 +133,7 @@ export default function Price({type}) {
                 style={{ width: "100px" }}
                 onClick={() => dispatch(modalAction.closeModal())}
               >
-                <span className={style.textOneo25}>ปฏิเสธ</span>
+                <span className={style.textOneo25}>ยกเลิก</span>
               </Button>
             </Col>
           </Row>
@@ -267,7 +264,6 @@ export default function Price({type}) {
                   <tr style={{ width: "1rem" }} key={index}>
                     <td className={style.textNormal}>{data && data.baht} </td>
                     <td className={style.textNormal}>{data && data.coin}</td>
-                    {/* {console.log(data)} */}
                     <td>
                       <Edit dataRate={data}/>
                       &emsp;

@@ -139,12 +139,20 @@ function deleteCoinRate(id) {
             }))
         }).catch(err => {
             dispatch(failure(err.response?.data))
-            dispatch(modalAction.openModal({
-                text: "ลบข้อมูลไม่สำเร็จ",
-                size: sizeModal.small,
-                alert: typeModal.wrong
-            }))
             dispatch(loadingActions.stopLoading())
+            if(err.response?.data.message === "coin-rate-already-used"){
+                dispatch(modalAction.openModal({
+                    text:"อัตราเหรียญได้ถูกใช้งานแล้วไม่สามารถลบได้",
+                    size: sizeModal.small,
+                    alert: typeModal.wrong
+                }))
+            }else{
+            dispatch(modalAction.openModal({
+                text: "แก้ไขข้อมูลไม่สำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.wrong,
+            }))
+          }
         })
     }
     function success() { return { type: coinConstants.DELETE_COIN_RATE_SUCCESS } }
@@ -155,7 +163,6 @@ function updateCoinRate(id,data) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.put(`/coin/rate/${id}`,data).then(() => {
-            //console.log(data)
             dispatch(success())
             dispatch(loadingActions.stopLoading())
             dispatch(coinAction.getCoinRatesAdmin());
@@ -167,11 +174,19 @@ function updateCoinRate(id,data) {
         }).catch(err => {
             dispatch(failure(err.response?.data))
             dispatch(loadingActions.stopLoading())
+            if(err.response?.data.message === "coin-rate-already-used"){
+                dispatch(modalAction.openModal({
+                    text:"อัตราเหรียญได้ถูกใช้งานแล้วไม่สามารถแก้ไขได้",
+                    size: sizeModal.small,
+                    alert: typeModal.wrong
+                }))
+            }else{
             dispatch(modalAction.openModal({
                 text: "แก้ไขข้อมูลไม่สำเร็จ",
                 size: sizeModal.small,
-                alert: typeModal.wrong
+                alert: typeModal.wrong,
             }))
+          }
         })
     }
     function success() { return { type: coinConstants.UPDATE_COIN_RATE_SUCCESS } }

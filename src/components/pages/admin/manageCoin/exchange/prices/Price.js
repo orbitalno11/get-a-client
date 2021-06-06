@@ -15,7 +15,7 @@ import Edit from "./Edit";
 import Delete from "./Delete";
 import moment from "moment";
 
-export default function Price() {
+export default function Price({type}) {
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(exchangeSchema),
   });
@@ -25,21 +25,38 @@ export default function Price() {
 
   const onSubmit = (data) => {
     if (data) {
-      const rate = {
-        title: "std",
-        baht: data.baht,
-        coin: data.coin,
-        type: "std",
-        startDate: today,
-        endDate: today,
-        updtaeDate: today,
-      };
-      dispatch(modalAction.closeModal());
-      dispatch(coinAction.createCoinRate(rate));
+      if(type != "rate"){
+        const cost = {
+          title: "std",
+          baht: data.baht,
+          coin: data.coin,
+          type: "std",
+          startDate: today,
+          endDate: today,
+          updtaeDate: today,
+        };
+        dispatch(modalAction.closeModal());
+        dispatch(coinAction.createCoinRate(cost));
+      }else{
+        const rate = {
+          title: "transfer",
+          baht: data.baht,
+          coin: data.coin,
+          type: "tranfer",
+          startDate: today,
+          endDate: today,
+          updtaeDate: today,
+        };
+        dispatch(modalAction.closeModal());
+        dispatch(coinAction.createCoinRate(rate));
+      }
     }
   };
 
   const list = useSelector((state) => state.coin.rateCoin);
+ 
+  // const check = list?.filter(value => value.type==="transfer")
+  // console.log("check"+ check)
 
   const handOnActivate = (rateId) => {
       dispatch(coinAction.activateRate(rateId));
@@ -53,7 +70,11 @@ export default function Price() {
     return (
       <div style={{ paddingLeft: "1rem" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <span className={style.headerOne35}>เพิ่มอัตราการซื้อเหรียญ</span>
+          { type === "rate" ? (
+          <span className={style.headerOne35}>เพิ่มอัตราการแลกเปลี่ยน</span>):(
+
+            <span className={style.headerOne35}>เพิ่มอัตราการซื้อเหรียญ</span>
+          )}
           <Row style={{ marginBottom: "1rem" }}>
             <p>{errors.baht && errors.baht}</p>
             <Col span={6} className={style.columnRate}>
@@ -139,10 +160,17 @@ export default function Price() {
         <Col xs={3} sm={3} md={2} lg={2} xl={1}>
           <FontAwesomeIcon icon={faCoins} className={style.coins} />
         </Col>
+        { type != "rate" ?(
         <Col xs={21} sm={21} md={20} lg={22} xl={23}>
           <span className={style.headerOne35}>ราคาขายปัจจุบัน</span>
         </Col>
+        ):(
+          <Col xs={21} sm={21} md={20} lg={22} xl={23}>
+          <span className={style.headerOne35}>อัตราการแลกเปลี่ยนปัจจุบัน</span>
+        </Col>
+        )}
         <ModalComponent />
+        { type != "rate"? (
         <Row className={style.pagepaddingleft}>
           <Col xs={24} sm={24} md={24} lg={24} xl={24}>
             <Button
@@ -154,6 +182,19 @@ export default function Price() {
             </Button>
           </Col>
         </Row>
+        ):(
+          <Row className={style.pagepaddingleft}>
+          <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+            <Button
+              type="link"
+              style={{ color: "#F5732E" }}
+              onClick={() => createPrice()}
+            >
+              <span className={style.textOne35}> เพิ่มอัตราการแลกเปลี่ยน</span>
+            </Button>
+          </Col>
+        </Row>
+        )}
       </Row>
       <div style={{ paddingLeft: "4rem" }}>
         <table className={style.tablecoins}>
@@ -170,6 +211,7 @@ export default function Price() {
               </th>
             </tr>
           </thead>
+          { type != "rate" ? (
           <tbody>
             {list &&
               list
@@ -179,7 +221,7 @@ export default function Price() {
                     <td className={style.textNormal}>{data && data.baht} </td>
                     <td className={style.textNormal}>{data && data.coin}</td>
                     <td>
-                      <Edit dataRate={data} />
+                      <Edit dataRate={data}/>
                       &emsp;
                       <Delete data={data} />
                       &emsp;
@@ -216,6 +258,55 @@ export default function Price() {
                   </tr>
                 ))}
           </tbody>
+          ):(
+          <tbody>
+            {list &&
+              list
+                .filter((data) => data.type === "tranfer")
+                .map((data, index) => (
+                  <tr style={{ width: "1rem" }} key={index}>
+                    <td className={style.textNormal}>{data && data.baht} </td>
+                    <td className={style.textNormal}>{data && data.coin}</td>
+                    {/* {console.log(data)} */}
+                    <td>
+                      <Edit dataRate={data}/>
+                      &emsp;
+                      <Delete data={data}/>
+                      &emsp;
+                      {data.active ? (
+                        <Button
+                          className="backgroundGreen buttonColor"
+                          shape="round"
+                          size="middle"
+                          style={{ width: "60px" }}
+                          icon={
+                            <FontAwesomeIcon
+                              icon={faPowerOff}
+                              style={{ color: "white" }}
+                            />
+                          }
+                          onClick={() => handOnActivate(data.id)}
+                        ></Button>
+                      ) : (
+                        <Button
+                          className="backgroundGray buttonColor"
+                          shape="round"
+                          size="middle"
+                          style={{ width: "60px" }}
+                          icon={
+                            <FontAwesomeIcon
+                              icon={faPowerOff}
+                              style={{ color: "white" }}
+                            />
+                          }
+                          onClick={() => handOnActivate(data.id)}
+                        ></Button>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+          </tbody>
+          )}
         </table>
       </div>
     </Fragment>

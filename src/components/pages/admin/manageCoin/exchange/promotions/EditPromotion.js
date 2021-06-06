@@ -51,7 +51,7 @@ export default function EditPromotion({dataPromo}) {
     return (
         <div style={{ paddingLeft: "1rem", justifyContent: "center" }}>
           <form id="addpromotion"onSubmit={handleSubmit(onSubmit)}>
-            <span className={style.headerOne35}>เพิ่มโปรโมชั่น</span>
+            <span className={style.headerOne35}>แก้ไขโปรโมชั่น</span>
             <Row>
               <Col span={6} className={`${style.textOneo25} ${style.paddingInput}`}>
                 ชื่อโปรโมชั่น :
@@ -136,7 +136,7 @@ export default function EditPromotion({dataPromo}) {
                   style={{ width: "100px" }}
                   htmlType="submit"
                 >
-                  <span className={style.textNormal}>ยอมรับ</span>
+                  <span className={style.textNormal}>บันทึก</span>
                 </Button>
               </Col>
               <Col span={6}>
@@ -147,7 +147,7 @@ export default function EditPromotion({dataPromo}) {
                   style={{ width: "100px" }}
                   onClick={() => dispatch(modalAction.closeModal())}
                 >
-                  <span className={style.textNormal}>ปฏิเสธ</span>
+                  <span className={style.textNormal}>ยกเลิก</span>
                 </Button>
               </Col>
             </Row>

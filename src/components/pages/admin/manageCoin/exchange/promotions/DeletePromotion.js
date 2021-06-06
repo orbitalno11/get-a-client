@@ -34,7 +34,7 @@ const ModaldeletePromotion = ({ data }) => {
             htmlType="submit"
             onClick={() => removePromotion()}
           >
-            <span className={style.textNormal}>ยอมรับ</span>
+            <span className={style.textNormal}>ตกลง</span>
           </Button>
         </Col>
         <Col span={6}>
@@ -45,7 +45,7 @@ const ModaldeletePromotion = ({ data }) => {
             style={{ width: "100px" }}
             onClick={() => dispatch(modalAction.closeModal())}
           >
-            <span className={style.textNormal}>ปฏิเสธ</span>
+            <span className={style.textNormal}>ยกเลิก</span>
           </Button>
         </Col>
       </Row>

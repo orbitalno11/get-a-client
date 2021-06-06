@@ -17,15 +17,6 @@ export default function ExchangeDetail() {
     resolver: yupResolver(exchangeSchema),
   });
 
-  // useEffect(() => {
-  //   reset({
-  //     "name": (!isEmpty(dataRate)) ? dataRate.name : "",
-  //     "baht": (!isEmpty(dataRate)) ? dataRate.baht : "",
-  //     "coin": (!isEmpty(dataRate)) ? dataRate.coin : "",
-  //     "startDate": (!isEmpty(dataRate)) ? dataRate.startDate : "",
-  //     "endDate": (!isEmpty(dataRate)) ? dataRate.endDate : "",
-  //   })
-  // }, [dataRate])
   const dispatch = useDispatch();
 
   const onSubmit = () => {

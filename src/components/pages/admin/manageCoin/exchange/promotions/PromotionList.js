@@ -64,21 +64,21 @@ export default function PromotionList() {
                 </Row>
                 <Row style={{ marginLeft: "2rem",marginTop:"1rem" }}>
                   <Col md={4} lg={3} className={style.textOne25}>วันที่เริ่มต้น </Col>
-                  <Col  md={7} lg={8}>
+                  <Col  md={7} lg={6} align="center">
                     <p className={`${style.datetime} ${style.textOne25}`}>
                       {moment(data.startDate).format("DD/MM/YYYY")}
                     </p>
                   </Col>
-                  <Col md={4} lg={3} style={{ marginLeft: "2rem" }} className={style.textOne25}>
+                  <Col md={4} lg={4} align="center" className={style.textOne25}>
                     วันที่สิ้นสุด
                   </Col>
-                  <Col md={7} lg={8}>
+                  <Col md={7} lg={6}>
                     <p className={`${style.datetime} ${style.textOne25}`}>
                       {moment(data.endDate).format("DD/MM/YYYY")}
                     </p>
                   </Col>
                 </Row>
-                <Row style={{ marginLeft: "2rem", marginTop: "1rem" }}>
+                {/* <Row style={{ marginLeft: "2rem", marginTop: "1rem" }}>
                   <Col md={4} lg={3} className={style.textOne25}>เวลาเริ่มต้น </Col>
                   <Col md={7} lg={8} className={style.textOne25}>
                     <p className={`${style.datetime} ${style.textOneo25}`}>
@@ -93,19 +93,19 @@ export default function PromotionList() {
                       {moment(data.endDate).format("HH:mm")}
                     </p>
                   </Col>
-                </Row>
+                </Row> */}
                 <span className={style.headerOne35} style={{ marginLeft: "2rem"}}>อัตราการซื้อเหรียญ</span>
                 <Row style={{ marginLeft: "2rem", marginTop: "1rem" }}>
-                  <Col md={3} lg={2} className={style.textOne25}>ราคา </Col>
-                  <Col md={6} lg={7} className={style.textOne25} align="center">
+                  <Col md={3} lg={3} className={style.textOne25}>ราคา </Col>
+                  <Col md={6} lg={6} className={style.textOne25} align="center">
                     <p className={`${style.datetime} ${style.textOneo25}`}>
                       {data.baht}
                     </p>
                   </Col>
-                  <Col md={4} lg={5} className={style.textOne25} align="center">
+                  <Col md={4} lg={4} className={style.textOne25} align="center">
                     เท่ากับ
                   </Col>
-                  <Col md={6} lg={7} className={style.textOne25}>
+                  <Col md={6} lg={6} className={style.textOne25}>
                     <p className={`${style.datetime} ${style.textOne25}`} align="center">
                       {data.coin}
                     </p>

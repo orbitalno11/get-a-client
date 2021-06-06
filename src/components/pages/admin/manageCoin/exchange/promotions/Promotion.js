@@ -151,7 +151,7 @@ export default function Promotion() {
                 style={{ width: "100px" }}
                 htmlType="submit"
               >
-                <span className={style.textNormal}>ยอมรับ</span>
+                <span className={style.textNormal}>บันทึก</span>
               </Button>
             </Col>
             <Col span={6}>
@@ -162,7 +162,7 @@ export default function Promotion() {
                 style={{ width: "100px" }}
                 onClick={() => dispatch(modalAction.closeModal())}
               >
-                <span className={style.textNormal}>ปฏิเสธ</span>
+                <span className={style.textNormal}>ยกเลิก</span>
               </Button>
             </Col>
           </Row>

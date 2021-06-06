@@ -8,7 +8,7 @@ import { modalAction,coinAction } from "../../../../../../redux/actions";
 import { sizeModal } from "../../../../../modal/SizeModal";
 
 const ModaldeleteRateCoin = ({data}) => {
-    
+
     const dispatch = useDispatch()
 
     const closeModal = () =>{
@@ -21,7 +21,11 @@ const ModaldeleteRateCoin = ({data}) => {
   }
   return (
     <div style={{ paddingLeft: "1rem" }}>
-      <p className={style.titleH4}>ยืนยันลบอัตราการซื้อเหรียญ</p>
+      { data.type != "transfer" ?(
+        <p className={style.titleH4}>ยืนยันลบอัตราการซื้อเหรียญ</p>
+        ):(
+        <p className={style.titleH4}>ยืนยันลบอัตราการแลกเหรียญ</p>
+      )}
       <Row style={{marginTop:"2rem",marginBottom:"2rem",textAlign:"center"}}> 
         <Col span={11} className={style.textNormal}>ซื้อ {data.baht} บาท </Col>
         <Col span={2}>

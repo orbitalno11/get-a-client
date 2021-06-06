@@ -110,7 +110,6 @@ function createCoinRate(data){
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
             dispatch(failure(err.response.data))
-            console.log(err.response.data)
             dispatch(modalAction.openModal({
                 text: "ดำเนินการไม่สำเร็จ",
                 size: sizeModal.small,
@@ -153,11 +152,10 @@ function deleteCoinRate(id) {
 }
 
 function updateCoinRate(id,data) {
-    console.log(id,data)
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.put(`/coin/rate/${id}`,data).then(() => {
-            console.log(data)
+            //console.log(data)
             dispatch(success())
             dispatch(loadingActions.stopLoading())
             dispatch(coinAction.getCoinRatesAdmin());

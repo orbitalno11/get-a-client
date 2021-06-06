@@ -15,6 +15,8 @@ import moment from "moment";
 
 export default function Edit({dataRate}) {
 
+ // console.log(dataRate)
+
   const { register, handleSubmit, errors,reset } = useForm({
     resolver: yupResolver(exchangeSchema),
   });
@@ -33,19 +35,36 @@ export default function Edit({dataRate}) {
   const today = moment().format("MM/DD/YYYY")
   const onSubmit = (data) => {
     if(data){
-      const rate ={
-        "title": "std",
-        "baht": data.baht,
-        "coin": data.coin,
-        "type": "std",
-        "startDate": today,
-        "endDate": today,
-        "updtaeDate":today,
+      if(dataRate.type != "tranfer"){
+        const cost ={
+          "title": "std",
+          "baht": data.baht,
+          "coin": data.coin,
+          "type": "std",
+          "startDate": today,
+          "endDate": today,
+          "updtaeDate":today,
+        }
+        dispatch(modalAction.closeModal())
+        dispatch(coinAction.updateCoinRate(dataRate.id,cost))
+      }else{
+        const rate ={
+          "title": "tranfer",
+          "baht": data.baht,
+          "coin": data.coin,
+          "type": "tranfer",
+          "startDate": today,
+          "endDate": today,
+          "updtaeDate":today,
+        }
+     //   console.log("rate")
+        dispatch(modalAction.closeModal())
+        dispatch(coinAction.updateCoinRate(dataRate.id,rate))
       }
-      dispatch(modalAction.closeModal())
-      dispatch(coinAction.updateCoinRate(dataRate.id,rate))
     }
+    console.log(dataRate)
   }
+
 
   function ModalUpdatePrice() {
     return (

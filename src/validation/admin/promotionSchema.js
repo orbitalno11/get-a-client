@@ -11,8 +11,6 @@ export  const promotionSchema = yup.object().shape({
     .required("กรุณาระบุวันสิ้นสุดโปรโมชั่น")
     .test("is-greater", "เวลาสิ้นสุดโปรโมชั่นควรที่จะมีเวลามากกว่าเวลาเริ่มโปรโมชั่น", function (value) {
       const { startDate } = this.parent;
-      // console.log(Date(value))
-      // console.log(Date(startDate))
       return moment(value).isSameOrAfter(moment(startDate));
     }),
     baht: yup.number().required("กรุณากำหนดค่าเงิน"),

@@ -33,7 +33,6 @@ function updatefflineCourse(id, data) {
     function success() { return { type: offlineCourseConstants.UPDATE_OFFLINE_COURSE_SUCCESS } }
     function failure(err) { return { type: offlineCourseConstants.UPDATE_OFFLINE_COURSE_FAILURE, payload: err } }
 }
-//
 
 function createOfflineCourse(data){
     return async dispatch => {

@@ -21,7 +21,7 @@ const getReviewByCourse = (id, courseType) => {
         })
             .catch((err) => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response.data))
+                dispatch(failure(err?.response?.data))
             })
 
         function success(data) { return { type: reviewConstants.GET_REVIEW_SUCCESS, payload: data } }
@@ -51,7 +51,7 @@ const createReview = (data) => {
             })
             .catch((err) => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response.data))
+                dispatch(failure(err?.response?.data))
                 dispatch(modalAction.closeModal())
                 dispatch(modalAction.openModal({
                     text: "แสดงความคิดเห็นไม่สำเร็จ",
@@ -87,7 +87,7 @@ const updateReview = (data) => {
             })
             .catch((err) => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response.data))
+                dispatch(failure(err?.response?.data))
                 dispatch(modalAction.closeModal())
                 dispatch(modalAction.openModal({
                     text: "แก้ไขความคิดเห็นไม่สำเร็จ",
@@ -128,7 +128,8 @@ const deleteReviewByCourse = (Reviewid, courseType, idCourse, videoId) => {
         })
         .catch((err) => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response.data))
+            console.log(err?.response?.data)
+            dispatch(failure(err?.response?.data))
             dispatch(modalAction.closeModal())
             dispatch(modalAction.openModal({
                 text: "ลบความคิดเห็นไม่สำเร็จ",
@@ -155,7 +156,7 @@ const getReviewClip = (id) => {
         })
             .catch((err) => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response.data))
+                dispatch(failure(err?.response?.data))
             })
 
         function success(data) { return { type: reviewConstants.GET_REVIEW_SUCCESS, payload: data } }

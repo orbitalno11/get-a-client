@@ -20,7 +20,7 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                             !isOfflineCourse ? (
                                 <Link to={`/course/online/${id}/video`}>
                                     <Button
-                                        className="buttonColor"
+                                        className={`${style.buttonColor} ${style.textOne75}`}
                                         style={styleComponent.buttonFull(color.orange)}
                                         size="middle">
                                         ดูบทเรียน
@@ -29,9 +29,9 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                             ) : (
                                 !owner && (
                                     learn_status ? (
-                                        <Button className="buttonColor" size="large" style={styleComponent.buttonFull(color.orange)} onClick={() => { handleOpenReviewForm() }}>ให้คะแนน</Button>
+                                        <Button className={`${style.buttonColor} ${style.textOne75}`} size="middle" style={styleComponent.buttonFull(color.orange)} onClick={() => { handleOpenReviewForm() }}>ให้คะแนน</Button>
                                     ) : (
-                                        <Button className="buttonColor" size="large" style={styleComponent.buttonFull(color.orange)} onClick={() => enrollCourse()} >สมัครเรียน</Button>
+                                        <Button  className={`${style.buttonColor} ${style.textOne75}`} size="middle" style={styleComponent.buttonFull(color.orange)} onClick={() => enrollCourse()} >สมัครเรียน</Button>
                                     )
                                 )
                             )
@@ -44,7 +44,7 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                                             (
                                                 <Link to={`/tutor/course/${id}/enroll`}>
                                                     <Button
-                                                        className="buttonColor"
+                                                        className={`${style.buttonColor} ${style.textOne75}`}
                                                         size="large"
                                                         style={styleComponent.buttonFull(color.orange)}>
                                                         อนุมัติคำขอ
@@ -56,7 +56,7 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                                     <Link to={`/tutor/${type}/${id}/edit`} >
                                         <div style={{ marginTop: "0.5rem" }}>
                                             <Button
-                                                className="buttonColor"
+                                                 className={`${style.buttonColor} ${style.textOne75}`}
                                                 size="large"
                                                 style={styleComponent.buttonFull(color.blue)}>
                                                 แก้ไขคอร์สเรียน
@@ -64,7 +64,6 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                                         </div>
                                     </Link>
                                 </Fragment>
-
                             )
                         }
                     </Fragment>
@@ -80,7 +79,6 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                                     <Link to={`/course/online/${id}/video`}>
                                         <button className={style.leftbuttom} >ดูบทเรียน</button>
                                     </Link>
-
                                 )
                             }
                             <Link to={`/tutor/${type}/${id}/edit`}>
@@ -102,7 +100,6 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                                     </Link>
                                 )
                             }
-
                             <button className={style.rightbottom} onClick={() => switchComponent(!showReview)}>
                                 {
                                     showReview ? "ถามข้อมูล" : "ความคิดเห็น"

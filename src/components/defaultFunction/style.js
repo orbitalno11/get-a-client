@@ -23,9 +23,10 @@ const iconCoin = () => {
     )
 }
 
-const iconStar = () => {
+const iconStar = (size) =>{
     const colorStart = {
-        color: color.yellow
+        color: color.yellow,
+        fontSize : size+"rem"
     }
 
     return (

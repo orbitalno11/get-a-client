@@ -21,7 +21,7 @@ function updatefflineCourse(id, data) {
                 }))
             }).catch(err => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response?.data))
+                dispatch(failure(err?.response?.data))
                 dispatch(modalAction.openModal({
                     text: "แก้ไขคอร์สเรียนไม่สำเร็จ",
                     size: sizeModal.small,
@@ -50,7 +50,7 @@ function createOfflineCourse(data){
             }))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response?.data))
+            dispatch(failure(err?.response?.data))
             dispatch(modalAction.openModal({
                 text: "สร้างคอร์สเรียนไม่สำเร็จ",
                 size: sizeModal.small,
@@ -77,7 +77,7 @@ function getOfflineCourse(id) {
             })
             .catch((err) => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response?.data))
+                dispatch(failure(err?.response?.data))
             })
     }
 
@@ -94,7 +94,7 @@ function enRollOfflineCourse(id) {
                 dispatch(loadingActions.stopLoading())
             })
             .catch(err => {
-                dispatch(failure(err.response?.data))
+                dispatch(failure(err?.response?.data))
                 dispatch(loadingActions.stopLoading())
             })
     }
@@ -116,7 +116,7 @@ function getEnrollOfflineCourse(id) {
                 }
             })
             .catch(err => {
-                dispatch(failure(err.response?.data))
+                dispatch(failure(err?.response?.data))
                 dispatch(loadingActions.stopLoading())
 
             })
@@ -145,7 +145,7 @@ function acceptEnrollOfflineCourse(idCourse, learnerid, status) {
             }))
         })
             .catch(err => {
-                dispatch(failure(err.response?.data))
+                dispatch(failure(err?.response?.data))
                 dispatch(loadingActions.stopLoading())
                 dispatch(modalAction.openModal({
                     text: "จัดการการอนุมัติเข้าเรียนไม่สำเร็จ",
@@ -173,7 +173,7 @@ function getLearnerOfflineCourse() {
             })
             .catch((err) => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response?.data))
+                dispatch(failure(err?.response?.data))
             })
     }
 

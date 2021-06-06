@@ -38,7 +38,7 @@ import OnlineCourseList from "./components/pages/users/onlineCourseList/OnlineCo
 import { setAuthToken } from "./utils/setAxios";
 import jwtDecode from "jwt-decode";
 import { userActions } from "./redux/actions";
-import OfflineCourse from "./components/pages/users/managecourse/manageCourse/OfflineCourse";
+import Course from "./components/pages/users/managecourse/manageCourse/Course";
 import Ranking from "./components/pages/users/home/learner/Ranking";
 import { defaultValue } from "./components/defaultValue";
 import ManageCourse from "./components/pages/users/managecourse/manageCourse/ManageCourse";
@@ -104,7 +104,7 @@ function App() {
           <Route exact path="/register/:type" component={RegisterForm} />
           <Route exact path="/profile/:id/course" component={PubilcProfileCourse} />
           <Route exact path="/profile/:id" component={PubilcProfile} />
-          <Route exact path="/:type/:id" component={OfflineCourse} />
+          <Route exact path="/:type/:id" component={Course} />
           <Route exact path="/search" component={Search} />
           <Route exact path="/course/online/:id" component={OnlineCourseList} />
           <Route exact path="/course/online/:courseId/video" component={ManageCourse} />

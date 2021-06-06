@@ -68,7 +68,7 @@ export default function AllReview() {
                         ) : (
                             <div align="center">
                                 <EmptyImage size="default" />
-                                <p className={style.textNormal}>บทเรียนนี้ยังไม่มีผู้แสดงความคิดเห็น&nbsp;
+                                <p className={style.textOne25}>บทเรียนนี้ยังไม่มีผู้แสดงความคิดเห็น&nbsp;
                                     {
                                         owner ? " อย่าลืมบอกให้นักเรียนมาแสดงคิดเห็นกันนะ" : "สมัครเรียนเพื่อแสดงความคิดเห็นสิ"
                                     }

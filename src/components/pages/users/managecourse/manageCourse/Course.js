@@ -1,4 +1,4 @@
-import { Row, Col, Grid, Divider, Button } from "antd"
+import { Row, Col, Grid, Button } from "antd"
 import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import style from "../styles.module.scss";
@@ -13,16 +13,18 @@ import ReviewForm from "../../review/ReviewForm";
 import { sizeModal } from "../../../../modal/SizeModal";
 import isMobile from "../../../../isMobile/isMobile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
+import { faMobileAlt} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import FormEnroll from "./FormEnroll";
 import { SkeletonComponent } from "../../../../loading/SkeletonComponent";
 import { trackImpressCourseDetail } from "../../../../../analytic/Analytic";
 import isEmpty from "../../../../defaultFunction/checkEmptyObject"
 import ButtonReview from "./ButtonReview";
+import { styleComponent } from "../../../../defaultFunction/style";
+import { color } from "../../../../defaultValue";
 const { useBreakpoint } = Grid;
 
-export default function OfflineCourse() {
+export default function Course() {
     const { offlineCourse, onlineCourse, auth } = useSelector(state => state)
     const { reviews } = useSelector(state => state.review)
     const [course, setCourse] = useState(null)
@@ -35,7 +37,7 @@ export default function OfflineCourse() {
     const learn_status = (auth.role === 1 && course && isOfflineCourse) ? course.enrolled : false
     const idCourse = params.id
     const myReview = !isEmpty(reviews) ? reviews.filter(value => value.reviewer.id === auth.profile)[0] : []
-
+    console.log(myReview)
     useEffect(() => {
         if (isOfflineCourse) {
             dispatch(offlineCourseAction.getOfflineCourse(idCourse))
@@ -78,7 +80,7 @@ export default function OfflineCourse() {
                 name: course.name,
                 subject: course.subject.title,
                 grade: course.grade.title,
-                owner: "Xxxx"
+                owner: course.owner.fullNameText
             }
 
             dispatch(modalAction.openModal({
@@ -98,7 +100,7 @@ export default function OfflineCourse() {
 
     const ContactTutor = () => {
         return (
-            <div className={!screens.lg ? style.subProfile : null}>
+            <div className={`${style.marginSection}`}>
                 {/* online */}
                 {
                     screens.lg && (
@@ -112,35 +114,36 @@ export default function OfflineCourse() {
                         />
                     )
                 }
-                <div className={!screens.lg ? style.subProfile : style.backgroungContact} >
-                    <div className={style.marginTop20}>
-                        <span className={style.titleH3}>ช่องทางสอบถามข้อมูล</span>
-                    </div>
-                    <div className={style.TitleCoin}>
-                        <FontAwesomeIcon icon={faPhoneAlt} className={style.iconmarker} />
+                <div className={`${style.section} ${style.marginSection}`}>
+                    <div>
+                        <div>
+                            <span className={style.headerOne75}>ช่องทางสอบถามข้อมูล</span>
+                        </div>
+                        <div className={style.TitleCoin}>
+                            <FontAwesomeIcon icon={faMobileAlt} className={style.iconmarker} />
+                            {
+                                course?.owner.contact ? (
+                                    <span className={style.textOne25}>{course && course.owner.contact.phoneNumber}</span>
+                                ) : (
+                                    <SkeletonComponent.SkeletonText />
+                                )
+                            }
+                        </div>
                         {
-                            course?.owner.contact ? (
-                                <span className={style.textNormal}>{course && course.owner.contact.phoneNumber}</span>
-                            ) : (
-                                <SkeletonComponent.SkeletonText />
+                            course && (
+                                <div className={style.marginTopOne25}>
+                                    <Link to={`/profile/${course.owner.id}/course`}>
+                                        <Button
+                                            className={`${style.buttonColor} ${style.textOne25}`}
+                                            size="middle"
+                                            style={styleComponent.buttonFull(color.blue)}>
+                                            ดูข้อมูลครูสอนพิเศษเพิ่มเติม
+                                    </Button>
+                                    </Link>
+                                </div>
                             )
                         }
                     </div>
-                    {
-                        course && (
-                            <div className={style.marginTop20}>
-                                <Link to={`/profile/${course.owner.id}/course`}>
-                                    <Button
-                                        className="buttonColor backgroundBlue"
-                                        shape="round"
-                                        size="middle"
-                                        style={{ width: "100%" }}>
-                                        ดูข้อมูลครูสอนพิเศษเพิ่มเติม
-                                    </Button>
-                                </Link>
-                            </div>
-                        )
-                    }
                 </div>
             </div>
         )
@@ -155,10 +158,8 @@ export default function OfflineCourse() {
         if (!isMobile() || showReview) {
             return (
                 <Fragment>
-                    <div className={style.TitleCoin}>
-                        <span className={style.titleH3}>ความเห็นจากผู้เรียนจริง</span>
-                        <div style={{ marginLeft: 'auto' }}>
-                        </div>
+                    <div className={`${screens.md && style.section} ${style.marginSection}`}>
+                        <span className={style.headerOne75}>ความเห็นจากผู้เรียนจริง</span>
                     </div>
                     < AllReview />
                 </Fragment>
@@ -171,20 +172,13 @@ export default function OfflineCourse() {
     return (
         <Fragment>
             {isMobile() && <Header pageBack={!owner ? "goback" : `/tutor/${params.type}`} />}
-            <div>
-                <ModalComponent />
-                <Row className={style.container} justify="space-between" style={{ paddingBottom: "7.5rem" }}>
-                    <Col xl={24} lg={24} md={24} sm={24} xs={24} >
+            <ModalComponent />
+            <div className="container">
+                <Row className={style.bodyPaddingTopBottom} justify="space-between" style={{ paddingBottom: "7.5rem" }}>
+                    <Col className={`${!isMobile() && style.section}`} xl={24} lg={24} md={24} sm={24} xs={24} >
                         <DetailCourse />
                     </Col>
-                    {
-                        !isMobile() && (
-                            <Col className={style.marginTop} span={24}>
-                                <Divider className={style.dividerDetail} />
-                            </Col>
-                        )
-                    }
-                    <Col xl={13} lg={13} md={24} sm={24} xs={24} id="switchComponent" >
+                    <Col xl={15} lg={15} md={24} sm={24} xs={24} id="switchComponent" >
                         {
                             switchShow()
                         }
@@ -197,23 +191,23 @@ export default function OfflineCourse() {
                         )
                     }
                 </Row>
-                {/* mobile and ipad screen */}
-                {
-                    !screens.lg && (
-                        <ButtonReview
-                            owner={owner}
-                            isOfflineCourse={isOfflineCourse}
-                            handleOpenReviewForm={handleOpenReviewForm}
-                            enrollCourse={enrollCourse}
-                            learn_status={learn_status}
-                            showReview={showReview}
-                            switchComponent={switchComponent}
-                            myReview={myReview}
-                            typeShow="mobile"
-                        />
-                    )
-                }
             </div>
+            {/* mobile and ipad screen */}
+            {
+                !screens.lg && (
+                    <ButtonReview
+                        owner={owner}
+                        isOfflineCourse={isOfflineCourse}
+                        handleOpenReviewForm={handleOpenReviewForm}
+                        enrollCourse={enrollCourse}
+                        learn_status={learn_status}
+                        showReview={showReview}
+                        switchComponent={switchComponent}
+                        myReview={myReview}
+                        typeShow="mobile"
+                    />
+                )
+            }
         </Fragment>
     )
 }

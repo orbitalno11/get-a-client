@@ -26,7 +26,7 @@ export default function Request() {
             <FontAwesomeIcon icon={faCoins} className={style.coins} />
           </Col>
           <Col xs={21} sm={21} md={17} lg={18} xl={20}>
-            <span className={style.titleH4}>
+            <span className={style.headerOne35}>
               คำขอการถอนเหรียญที่ยังไม่ได้รับการอนุมัติ
             </span>
           </Col>
@@ -43,7 +43,7 @@ export default function Request() {
           ) : (
           <div align="center">
             <EmptyImage size="default" />
-            <p className={style.textNormal}>ยังไม่มีคำขอแลกเหรียญ&nbsp;</p>
+            <p className={style.textOne35}>ยังไม่มีคำขอแลกเหรียญ&nbsp;</p>
           </div>
         )}
     </Fragment>

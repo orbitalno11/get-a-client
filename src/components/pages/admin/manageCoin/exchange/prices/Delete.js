@@ -27,14 +27,14 @@ const ModaldeleteRateCoin = ({data}) => {
         <p className={style.titleH4}>ยืนยันลบอัตราการแลกเหรียญ</p>
       )}
       <Row style={{marginTop:"2rem",marginBottom:"2rem",textAlign:"center"}}> 
-        <Col span={11} className={style.textNormal}>ซื้อ {data.baht} บาท </Col>
+        <Col span={11} className={style.textOne5}>ซื้อ {data.baht} บาท </Col>
         <Col span={2}>
           <FontAwesomeIcon icon={faArrowAltCircleRight} className={style.coins} />
         </Col>
-        <Col span={10} className={style.textNormal}>{data.coin} coin</Col>
+        <Col span={10} className={style.textOne5}>{data.coin} coin</Col>
       </Row>
       <Row className={style.btnRequest}>
-        <Col span={6}>
+        <Col span={7}>
           <Button
             className="backgroundGreen buttonColor"
             shape="round"

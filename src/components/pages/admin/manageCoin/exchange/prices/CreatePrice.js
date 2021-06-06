@@ -177,7 +177,7 @@ export default function CreatePrice({type}) {
               style={{ color: "#F5732E" }}
               onClick={() => createPrice()}
             >
-              <span className={style.textOne35}> เพิ่มอัตราการซื้อเหรียญ</span>
+              <span className={style.textOne5}> เพิ่มอัตราการซื้อเหรียญ</span>
             </Button>
           </Col>
         </Row>
@@ -199,13 +199,13 @@ export default function CreatePrice({type}) {
         <table className={style.tablecoins}>
           <thead>
             <tr>
-              <th span={8} className={style.textNormal}>
+              <th span={8} className={style.textOne5}>
                 จำนวนเงิน (บาท)
               </th>
-              <th span={8} className={style.textNormal}>
+              <th span={8} className={style.textOne5}>
                 จำนวนเหรียญ
               </th>
-              <th span={8} className={style.textNormal}>
+              <th span={8} className={style.textOne5}>
                 การจัดการ
               </th>
             </tr>
@@ -217,8 +217,8 @@ export default function CreatePrice({type}) {
                 .filter((data) => data.type === "std")
                 .map((data, index) => (
                   <tr style={{ width: "1rem" }} key={index}>
-                    <td className={style.textNormal}>{data && data.baht} </td>
-                    <td className={style.textNormal}>{data && data.coin}</td>
+                    <td className={style.textOne5}>{data && data.baht} </td>
+                    <td className={style.textOne5}>{data && data.coin}</td>
                     <td>
                       <Edit dataRate={data}/>
                       &emsp;

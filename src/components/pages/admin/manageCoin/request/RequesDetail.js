@@ -24,16 +24,16 @@ export default  function RequesDetail({data}) {
             <div style={{ paddingLeft: "1rem" }}>
               <Row>
               <Col span={12}>
-                <p  className={style.titleH4}>
+                <p  className={style.headerOne35}>
                   คำขอการถอนเหรียญ
                 </p>
-                <p className={style.textNormal}>ชื่อ : {data && data.owner.firstname}</p>
-                <p className={style.textNormal}>นามสกุล : {data && data.owner.lastname}</p>
-                <p className={style.textNormal}>วันที่ส่งคำขอ : {moment(data && data.requestDate).format("DD/MM/YYYY")} </p>
-                <p className={style.textNormal}>จำนวนยอด : {data && data.amount} บาท</p>
-                <p className={style.textNormal}>ธนาคาร : {data && data.bank.title}</p>
-                <p className={style.textNormal}>เลขบัญชี : {data && data.accountNo}</p>
-                <p className={style.textNormal}>ชื่อบัญชี : {data && data.accountName}</p>
+                <p className={style.textOne35}>ชื่อ : {data && data.owner.firstname}</p>
+                <p className={style.textOne35}>นามสกุล : {data && data.owner.lastname}</p>
+                <p className={style.textOne35}>วันที่ส่งคำขอ : {moment(data && data.requestDate).format("DD/MM/YYYY")} </p>
+                <p className={style.textOne35}>จำนวนยอด : {data && data.amount} บาท</p>
+                <p className={style.textOne35}>ธนาคาร : {data && data.bank.title}</p>
+                <p className={style.textOne35}>เลขบัญชี : {data && data.accountNo}</p>
+                <p className={style.textOne35}>ชื่อบัญชี : {data && data.accountName}</p>
               </Col>
               <Col span={7} className={style.imageRedeem}>
                 <Image
@@ -51,7 +51,7 @@ export default  function RequesDetail({data}) {
                       style={{ width: "100px" }}
                       onClick={() => handOnApprove(data.id)}
                     >
-                      <span className={style.textNormal}>ยอมรับ</span>
+                      <span className={style.textOne35}>ยอมรับ</span>
                     </Button>
                 </Col>
                 <Col span={6}>
@@ -62,7 +62,7 @@ export default  function RequesDetail({data}) {
                     style={{ width: "100px" }}
                     onClick={() => handOnDenied(data.id,data.owner.id)}
                   >
-                   <span className={style.textNormal}>ปฏิเสธ</span>
+                   <span className={style.textOne35}>ปฏิเสธ</span>
                   </Button>
                 </Col>
               </Row>
@@ -86,7 +86,7 @@ export default  function RequesDetail({data}) {
               span={14}
               style={{ marginTop: "-0.5rem", paddingLeft: "0.625rem" }}
             >
-              <span>{data && data.owner.fullNameText}</span>
+              <span className={style.textOne25}>{data && data.owner.fullNameText}</span>
             </Col>
             <Col
               span={10}
@@ -96,14 +96,14 @@ export default  function RequesDetail({data}) {
                 color: "gray",
               }}
             >
-              <span className={style.textSmall}>{moment(data && data.requestDate).format("DD/MM/YYYY")}</span>
+              <span className={style.textOne}>{moment(data && data.requestDate).format("DD/MM/YYYY")}</span>
             </Col>
           </Row>
           <Row
             span={24}
             style={{ justifyContent: "center", marginTop: "0.625rem" }}
           >
-            <span className={style.textNormal}>{data && data.amount} บาท</span>
+            <span className={style.textOne5}>{data && data.amount} บาท</span>
           </Row>
           <ModalComponent />
           <Row
@@ -117,7 +117,7 @@ export default  function RequesDetail({data}) {
               size="middle"
               onClick={() => DetailRedeem()}
             >
-              <span className={style.textNormal}>รายละเอียด</span>
+              <span className={style.textOne35}>รายละเอียด</span>
             </Button>
           </Row>
         </Card>

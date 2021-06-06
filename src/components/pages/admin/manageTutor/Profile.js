@@ -38,7 +38,7 @@ export default function Profile() {
             <tr>
               <td style={{ paddingLeft: "2.3rem" }}>
                 <Row className={style.approve}>
-                  <Col>
+                  <Col md={5} lg={4} xl={3}>
                     <Button
                       className="buttonColor backgroundGreen"
                       style={{ width: "6rem" }}
@@ -46,7 +46,7 @@ export default function Profile() {
                       size="middle"
                       onClick={() => takeAction(true)}
                     >
-                      <span className={style.textNormal}>ยอมรับ</span>
+                      <span className={style.textOne35}>ยอมรับ</span>
                     </Button>
                   </Col>
                   <Col>
@@ -57,7 +57,7 @@ export default function Profile() {
                       size="middle"
                       onClick={() => takeAction(false)}
                     >
-                      <span className={style.textNormal}>ปฏิเสธ</span>
+                      <span className={style.textOne35}>ปฏิเสธ</span>
                     </Button>
                   </Col>
                 </Row>
@@ -67,34 +67,34 @@ export default function Profile() {
                     paddingBottom: "0.25rem",
                   }}
                 >
-                  <Col span={24} className={style.textNormal}>
+                  <Col span={24} className={style.textOne5}>
                     {moment(list.created).format("DD/MM/YY")} &ensp;{" "}
                     {moment(list.created).format("HH:mm")} น.
                   </Col>
                 </Row>
                 <Row className={style.detailProfile}>
-                  <Col span={7} className={style.textNormal}>
-                    <b className={style.textNormal}>ชื่อ : </b> {list.firstname}
+                  <Col span={7} className={style.textOne5}>
+                    <b className={style.textOne5}>ชื่อ : </b> {list.firstname}
                   </Col>
-                  <Col span={16} className={style.textNormal}>
-                    <b className={style.textNormal}>นามสกุล :</b>{" "}
+                  <Col span={16} className={style.textOne5}>
+                    <b className={style.textOne5}>นามสกุล :</b>{" "}
                     {list.lastname}
                   </Col>
                 </Row>
                 <Row className={style.detailProfile}>
-                  <Col span={24} className={style.textNormal}>
-                    <b className={style.textNormal}>อีเมล :</b> {list.email}
+                  <Col span={24} className={style.textOne5}>
+                    <b className={style.textOne5}>อีเมล :</b> {list.email}
                   </Col>
                 </Row>
                 <Row className={style.detailProfile}>
                   <Col span={7}>
-                    <b className={style.textNormal}>รูปบัตรประชาชน</b>
+                    <b className={style.textOne5}>รูปบัตรประชาชน</b>
                   </Col>
                   <Col span={7}>
-                    <b className={style.textNormal}>รูปถ่ายหน้าตรง</b>
+                    <b className={style.textOne5}>รูปถ่ายหน้าตรง</b>
                   </Col>
                   <Col span={7}>
-                    <b className={style.textNormal}>รูปถ่ายคู่กับบัตรประชาชน</b>
+                    <b className={style.textOne5}>รูปถ่ายคู่กับบัตรประชาชน</b>
                   </Col>
                 </Row>
                 <Row>

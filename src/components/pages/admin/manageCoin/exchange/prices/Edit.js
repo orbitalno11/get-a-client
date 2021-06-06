@@ -82,8 +82,8 @@ export default function Edit({dataRate}) {
                     min="0"
                   />
             </Col>
-            <Col span={3} className={`${style.textOneo25} ${style.paddingInput}`}>บาท</Col>
-            <Col span={1} className={`${style.textOneo25} ${style.paddingInput}`}>=</Col>
+            <Col span={3} className={`${style.textOne5} ${style.paddingInput}`}>บาท</Col>
+            <Col span={1} className={`${style.textOne5} ${style.paddingInput}`}>=</Col>
             <Col span={6} className={style.columnRate}>
               <InputComponents
                     type="number"
@@ -94,7 +94,7 @@ export default function Edit({dataRate}) {
                     min="0"
                   />
             </Col>
-            <Col span={3} className={`${style.textOneo25} ${style.paddingInput}`}>เหรียญ</Col>
+            <Col span={3} className={`${style.textOne5} ${style.paddingInput}`}>เหรียญ</Col>
           </Row>
           <Row className={style.btnRequest}>
           <Col span={6}>

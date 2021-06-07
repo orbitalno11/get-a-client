@@ -14,7 +14,7 @@ export default function CardLesson({ data, isCourse, search, course }) {
     const screens = useBreakpoint();
 
     return (
-        <Row className={`${(isMobile() || search || course) ? `${styles.card} ${styles.paddingOne}` : styles.fullWidth} ${styles.blackCard}`} justify={"center"} align="middle" >
+        <Row className={`${(isMobile() || search || course) ? `${styles.card} ${styles.paddingOne}` : styles.fullWidth} ${styles.colorBlack}`} justify={"center"} align="middle" >
             <Col lg={4} md={3} sm={3} xs={3} align="center">
                 <Image
                     src={data.coverUrl ? data.coverUrl : vdoSample}

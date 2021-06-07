@@ -20,11 +20,11 @@ export default function RedeemCoin() {
     }
     const [redeem, setRedeem] = useState(startKey.key === "redeem")
 
-    //const [idRequest, setidRequest] = useState()
+    const [idRequest, setidRequest] = useState()
 
-    const onHandleChange = (show) => {     
+    const onHandleChange = (show,id) => {     
       setisShowRequest(show)
-   //   setidRequest(id)
+      setidRequest(id)
       setRedeem(!redeem)
     }
 
@@ -55,7 +55,7 @@ export default function RedeemCoin() {
 
               </Fragment>
              ) : (
-                <Request onHandleChange={onHandleChange} showRequest={isShowRequest}/>
+                <Request onHandleChange={onHandleChange} showRequest={isShowRequest} idRequest={idRequest}/>
             )
         }
         </Row>

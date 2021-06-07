@@ -3,22 +3,21 @@ import { Grid, Col, Row, Button, Select, Image } from "antd";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import style from "../styles.module.scss";
-import { coinAction } from "../../../../../redux/actions";
 import InputComponents from "../../../../input/InputComponets";
-import { modalAction } from "../../../../../redux/actions";
+import {  coinAction , modalAction } from "../../../../../redux/actions";
 import { typeModal } from "../../../../modal/TypeModal";
 import { sizeModal } from "../../../../modal/SizeModal";
 import resizeImage from "../../../../defaultFunction/resizeImage";
 import { redeemSchema } from "../../../../../validation/validation";
 import { defaultValue } from "../../../../defaultValue";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch , useSelector } from "react-redux";
 import bookBank from "../../../../images/bookBank.webp";
 import ModalComponent from "../../../../modal/ModalComponent";
 import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 const { useBreakpoint } = Grid;
 
-export default function Request({ onHandleChange, showRequest }) {
+export default function Request({ onHandleChange, showRequest ,idRequest }) {
+
   const screens = useBreakpoint();
   const dispatch = useDispatch();
   const [image, setimage] = useState(bookBank);
@@ -32,13 +31,22 @@ export default function Request({ onHandleChange, showRequest }) {
   const coinStd = !isEmpty(rateRedeem) && rateRedeem[0].coin
   const rateId = !isEmpty(rateRedeem) && rateRedeem[0].id
 
+  const requestDetail = useSelector((state) => state.coin.requestRedeem);
+  
   const watchInput = watch()
   const [amount, setAmount] = useState(0)
 
   useEffect(() => {
-    const bahtTranfer = ((watchInput.coin * Number(bahtStd))/Number(coinStd)).toFixed(2)
-    setAmount(bahtTranfer)    
+    setAmount((watchInput.coin * Number(bahtStd))/Number(coinStd))
   }, [watchInput.coin])
+
+  const onCancel = (id)=>{
+    dispatch(coinAction.CancelRequestsRedeem(id));
+  }
+
+  useEffect(() => {
+    dispatch(coinAction.getRequestsDetail(idRequest));
+  }, [])
 
   const onChange = async (data) => {
     const fileInput = data.target.files[0];
@@ -87,7 +95,7 @@ export default function Request({ onHandleChange, showRequest }) {
             </Col>
             <Col md={13} lg={13} xl={12} style={{ paddingTop: "6px" }}>
               <span className={  screens.lg ?style.textOne75:style.textOne25}>
-                อัตราแลกเหรียญปัจจุบัน เหรียญ 100 มีมูลค่า 20 บาท
+                อัตราแลกเหรียญปัจจุบัน  {coinStd} เหรียญ มีมูลค่า {bahtStd} บาท
               </span>
             </Col>
           </Row>
@@ -97,14 +105,25 @@ export default function Request({ onHandleChange, showRequest }) {
             <Col xs={24} sm={24} md={22} lg={9} xl={9}>
               <div>
                 <span className={style.textOne5}>จำนวนเหรียญ (ที่แลก)</span>
-                <InputComponents
-                  type="number"
-                  name="coin"
-                  register={register}
-                  error={errors.coin}
-                  placeholder="จำนวนเหรียญที่จะแลก"
-                  disabled={showRequest}
-                />
+                { !isEmpty(requestDetail) ?(
+                  <InputComponents
+                    type="number"
+                    name="coin"
+                    register={register}
+                    error={errors.coin}
+                    placeholder="จำนวนเหรียญที่จะแลก"
+                    disabled={showRequest}   
+                    value ={requestDetail.numberOfCoin}              
+                  />
+                ):(
+                  <InputComponents
+                    type="number"
+                    name="coin"
+                    register={register}
+                    error={errors.coin}
+                    placeholder="จำนวนเหรียญที่จะแลก"                
+                  />  
+                )}
               </div>
               <div className={style.margin20}>
                 <span className={style.textOne5}>มูลค่า (บาท)</span>
@@ -116,59 +135,107 @@ export default function Request({ onHandleChange, showRequest }) {
                   value={amount}
                 />
               </div>
-              <div className={style.marginTop04}>
-                <span className={style.textOne5}>ธนาคาร</span>
-                <Controller
-                  as={
-                    <Select name="bank">
-                      {defaultValue.bank &&
-                        Object.entries(defaultValue.bank).map(([key,value]) => (
-                          <Select.Option key={value} value={value}>
-                            {key}
-                          </Select.Option>
-                        ))}
-                    </Select>
-                  }
-                  name="bank"
-                  control={control}
-                  placeholder="เลือกธนาคาร"
-                  defaultValue={null}
-                />
-                {errors.bank && (
-                  <p className="error-input">{errors.bank.message}</p>
+              { !isEmpty(requestDetail) ?(
+                <div className={style.marginTop04}>
+                  <span className={style.textOne5}>ธนาคาร</span>
+                    <InputComponents
+                      name="bank"
+                      register={register}
+                      error={errors.bank}
+                      disabled={showRequest}   
+                      value ={requestDetail.bank.title}              
+                    />
+                </div>
+              ):(
+                <div className={style.marginTop04}>
+                  <span className={style.textOne5}>ธนาคาร</span>
+                  <Controller
+                    as={
+                      <Select name="bank" disabled={showRequest}>
+                        {defaultValue.bank &&
+                          Object.entries(defaultValue.bank).map(([key,value]) => (
+                            <Select.Option key={value} value={value}>
+                              {key}
+                            </Select.Option>
+                          ))}
+                      </Select>
+                    }
+                    name="bank"
+                    control={control}
+                    placeholder="เลือกธนาคาร"
+                    defaultValue={null}
+                  />
+                  {errors.bank && (
+                    <p className="error-input">{errors.bank.message}</p>
+                  )}
+                </div>
+              )}
+              <div className={style.margin20}>
+                <span className={style.textOne5}>หมายเลขบัญชี</span>
+                { !isEmpty(requestDetail) ?(
+                  <InputComponents
+                    type="text"
+                    name="accountNo"
+                    register={register}
+                    error={errors.accountNo}
+                    disabled={showRequest}
+                    value={requestDetail.accountNo}
+                  />
+                ):(
+                    <InputComponents
+                    type="text"
+                    name="accountNo"
+                    register={register}
+                    placeholder="หมายเลขบัญชี"
+                    error={errors.accountNo}
+                    disabled={showRequest}
+                  />
                 )}
               </div>
               <div className={style.margin20}>
-                <span className={style.textOne5}>หมายเลขบัญชี</span>
-                <InputComponents
-                  type="text"
-                  name="accountNo"
-                  register={register}
-                  placeholder="หมายเลขบัญชี"
-                  error={errors.accountNo}
-                />
-              </div>
-              <div className={style.margin20}>
                 <span className={style.textOne5}>ชื่อบัญชี</span>
-                <InputComponents
-                  type="text"
-                  name="accountName"
-                  register={register}
-                  error={errors.accountName}
-                  placeholder="ชื่อบัญชี"
-                />
+                { !isEmpty(requestDetail) ?(
+                  <InputComponents
+                    type="text"
+                    name="accountName"
+                    register={register}
+                    error={errors.accountName}
+                    disabled={showRequest}
+                    value={requestDetail.accountName}
+                  />
+                ):(
+                    <InputComponents
+                    type="text"
+                    name="accountName"
+                    register={register}
+                    error={errors.accountName}
+                    placeholder="ชื่อบัญชี"
+                    disabled={showRequest}
+                  />
+                )}
               </div>
             </Col>
             <Col xs={24} sm={24} md={24} lg={15}className={style.centerPage}>
+              { !isEmpty(requestDetail) ?(
+                <div className={style.marginTop20} align="center">
+                  <div className="imageUpload">                   
+                      <Image
+                        className={screens.lg ?style.bookBank:style.bookBankSm}
+                        src={requestDetail.accountPic}
+                        preview={false} 
+                      />                  
+                  </div>
+                </div>
+              ):(
                 <div className={style.marginTop20} align="center">
                   <div className="imageUpload">
+                    
                     <label htmlFor="file-input">
                       <Image
-                        // className={screens.lg ?style.bookBank:style.a4ImageSm}
                         className={screens.lg ?style.bookBank:style.bookBankSm}
                         src={image.imageURL ? image.imageURL : bookBank}
-                        preview={false}
-                      />
+                        preview={false} 
+                      />                  
                     </label>
                     <input
                       id="file-input"
@@ -176,12 +243,14 @@ export default function Request({ onHandleChange, showRequest }) {
                       name="image"
                       ref={register}
                       onChange={onChange}
+                      disabled={showRequest}
                     />
                   </div>
                   {errors.image && (
                     <p className="error-input">{errors.image.message}</p>
                   )}
                 </div>
+              )}
             </Col>
             <Col span={24} style={{ marginTop: "1.5rem" }}>
               <span className={style.headerOne5}>
@@ -203,7 +272,13 @@ export default function Request({ onHandleChange, showRequest }) {
                 style={{ width: "120px", marginTop20: "40px" }}
                 htmlType="submit"
               >
-                <span className={style.textOne}>ส่งคำขอ</span>
+              {
+                showRequest ? (
+                  <span className={style.textOne}  onClick={() => onCancel(requestDetail.id)}>ยกเลิกคำขอ</span>
+                ):(
+                  <span className={style.textOne}>ส่งคำขอ</span>
+                )
+              }
               </Button>
             </Col>
             <Col style={{marginBottom:"4rem"}}>

@@ -327,6 +327,48 @@ function createRequestRedeem(data){
     function failure(err) { return { type: coinConstants.CREATE_REQUEST_REDEEM_FAILURE, payload: err } }
 }
 
+function CancelRequestsRedeem(id){ 
+    return  (dispatch) => {
+        dispatch(loadingActions.startLoading())
+        apiURL.apiGetA.get(`/coin/redeem/${id}/cancel`).then(() => {
+            dispatch(loadingActions.stopLoading())
+            dispatch(coinAction.getRequestsRedeem());
+            dispatch(modalAction.openModal({
+                text: "ดำเนินการสำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.corrent,
+                afterClose : "/tutor/coin"
+                }))
+        }).catch(err => {
+            dispatch(loadingActions.stopLoading())
+            dispatch(failure(err.response.data))
+            dispatch(modalAction.openModal({
+                text: "ดำเนินการไม่สำเร็จ",
+                size: sizeModal.small,
+                alert: typeModal.wrong,
+                }))
+        })
+    }
+    function failure(err) { return { type: coinConstants.CANCEL_REQUEST_REDEEM_FAILURE, payload: err } }   
+}
+
+function getRequestsDetail(id){ 
+    return  (dispatch) => {
+        dispatch(loadingActions.startLoading())
+        apiURL.apiGetA.get(`/coin/redeem/${id}`)
+        .then((res) => {
+            dispatch(loadingActions.stopLoading())
+            const coin = res.data.data
+            dispatch(success(coin))
+        }).catch(err => {
+            dispatch(loadingActions.stopLoading())
+            dispatch(failure(err.response.data))
+        })
+    }
+    function success(data) { return { type: coinConstants.GET_REQUEST_REDEEM_SUCCESS, payload: data } }
+    function failure(err) { return { type: coinConstants.GET_REQUEST_REDEEM_FAILURE, payload: err } }
+    
+}
 export const coinAction = {
     getCoinRatesLearner,
     getCoinRatesTutor,
@@ -342,5 +384,7 @@ export const coinAction = {
     ApproveRequestsRedeem,
     DeniedRequestsRedeem,
     createRequestRedeem,
-    getCoinRedeem
+    getCoinRedeem,
+    CancelRequestsRedeem,
+    getRequestsDetail
 }

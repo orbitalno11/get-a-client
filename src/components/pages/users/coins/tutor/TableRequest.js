@@ -6,10 +6,26 @@ import { useSelector } from "react-redux";
 import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 import { color, defaultValue } from "../../../../defaultValue";
 import EmptyImage from "../../../../loading/EmptyImage";
+import { styleComponent } from "../../../../defaultFunction/style";
 import moment from "moment";
 
-export default function TableRequest({ onHandleChange }) {
+export default function TableRequest({ onHandleChange}) {
   const detailRequest = useSelector((state) => state.coin.redeem);
+
+  const statusRedeem = {
+    0: {
+      color: color.black
+    },
+    1: {
+      color: color.green
+    },
+    3: {
+      color: color.red
+    },
+    4: {
+      color: color.red
+    }
+  }
 
   return (
     <div style={{ width: "100%", paddingBottom: "3.75rem" }}>
@@ -19,22 +35,22 @@ export default function TableRequest({ onHandleChange }) {
             <table className="TableRedeem">
               <thead>
                 <tr>
-                  <th span={8} className={style.textNormal}>
+                  <th span={8} className={style.textOne35}>
                     ลำดับ
                   </th>
-                  <th span={8} className={style.textNormal}>
+                  <th span={8} className={style.textOne35}>
                     วันที่ขอ
                   </th>
-                  <th span={8} className={style.textNormal}>
+                  <th span={8} className={style.textOne35}>
                     วันที่พิจารณา
                   </th>
-                  <th span={8} className={style.textNormal}>
+                  <th span={8} className={style.textOne35}>
                     จำนวนเหรียญ
                   </th>
-                  <th span={8} className={style.textNormal}>
+                  <th span={8} className={style.textOne35}>
                     ยอดเงิน(THB)
                   </th>
-                  <th span={8} className={style.textNormal}>
+                  <th span={8} className={style.textOne35}>
                     ผลการพิจารณา
                   </th>
                 </tr>
@@ -45,51 +61,45 @@ export default function TableRequest({ onHandleChange }) {
                     <tr
                       style={{ width: "1rem" }}
                       key={index}
-                      onClick={() => onHandleChange(false)}
+                      onClick={() => onHandleChange(true,data.id)}
                     >
-                      <td className={style.textNormal}>{index + 1}</td>
-                      <td className={style.textNormal}>
+                      <td className={style.textOne35}>{index + 1}</td>
+                      <td className={style.textOne35}>
                         {moment(data.requestDate).format("DD/MM/YYYY")}
                       </td>
                       {data.approveDate ? (
-                        <td className={style.textNormal}>
+                        <td className={style.textOne35}>
                           {moment(data.approveDate).format("DD/MM/YYYY")}
                         </td>
                       ) : (
-                        <td className={style.textNormal}>
+                        <td className={style.textOne35}>
                           <span> - </span>
                         </td>
                       )}
-                      <td className={style.textNormal}>
+                      <td className={style.textOne35}>
                         {data && data.amountCoin}
                       </td>
-                      <td className={style.textNormal}>
+                      <td className={style.textOne35}>
                         {data && data.amount}
                       </td>
-                      <td className={style.textNormal}>
-                        {data.status === 0 && (
-                           <span style={{color:color.orange}}>{data&& defaultValue.redeemType[data.status]}</span>
-                        )}
-                        {data.status === 1 && (
-                           <span style={{color:color.green}}>{data&& defaultValue.redeemType[data.status]}</span>
-                        )} 
-                        {data.status === 3 && (
-                           <span style={{color:color.red}}>{data&& defaultValue.redeemType[data.status]}</span>
-                        )}   
-                        {data.status === 4 && (
-                           <span style={{color:color.blue}}>{data&& defaultValue.redeemType[data.status]}</span>
-                        )}                                                                  
+                      <td className={style.textOne35}>
+                          <span style={styleComponent.text((!isEmpty(data.status) ) ? statusRedeem[data.status].color : color.black)}>
+                             {data&& defaultValue.redeemType[data.status]}
+                          </span>                                                                
                       </td>
                     </tr>
                   ))}
               </tbody>
             </table>
           ) : (
-            <div align="center">
-              <EmptyImage size="default" />
-              <p className={style.textNormal}>
-                ยังไม่มีข้อมูลการแลกเหรียญ&nbsp;
-              </p>
+            <div className={style.section}>
+              <span className={style.headerTwo5} style={{paddingLeft:"2rem"}}>รายการแลกเหรียญ</span>
+              <div align="center">
+                <EmptyImage size="default" />
+                <p className={style.textOne5}>
+                  ยังไม่มีข้อมูลการแลกเหรียญ&nbsp;
+                </p>
+              </div>
             </div>
           )}
         </div>

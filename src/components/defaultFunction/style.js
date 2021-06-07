@@ -19,7 +19,15 @@ const iconCoin = () =>{
     )
 }
 
+
+const text = (color) =>{
+    return ({
+        color: color,
+    })
+}
+
 export  const styleComponent = {
     buttonFull,
-    iconCoin
+    iconCoin,
+    text
 } 

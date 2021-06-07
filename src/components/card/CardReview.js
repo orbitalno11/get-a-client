@@ -25,7 +25,7 @@ export default function CardReview({ data, myReview, handleEdit }) {
     }
 
     return (
-        <Row className={`${!screens.lg && styles.card} ${!screens.lg && styles.paddingOne}  ${screens.lg  && styles.section} ${styles.marginSection}`} align="middle">
+        <Row className={`${!screens.md && `${styles.paddingOne} ${styles.card}`}  ${screens.md  && styles.section} ${styles.marginSection}`} align="middle">
             <Col lg={15} md={15} sm={18} xs={18}>
                 <span className={`${styles.textOne75} ${styles.textOneLine}`}>
                     {data.reviewer.fullName}

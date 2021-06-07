@@ -15,8 +15,8 @@ const getReviewByCourse = (id, courseType) => {
         }).then((res) => {
             if (res.data.data) {
                 const data = res.data.data
-                dispatch(loadingActions.stopLoading())
                 dispatch(success(data))
+                dispatch(loadingActions.stopLoading())
             }
         })
             .catch((err) => {

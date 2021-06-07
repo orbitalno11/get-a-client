@@ -71,8 +71,8 @@ function getOfflineCourse(id) {
             .then(res => {
                 if (res.data.success) {
                     const data = res.data.data
-                    dispatch(success(data))
                     dispatch(loadingActions.stopLoading())
+                    dispatch(success(data))
                 }
             })
             .catch((err) => {

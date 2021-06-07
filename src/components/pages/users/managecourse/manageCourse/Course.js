@@ -63,7 +63,6 @@ export default function Course() {
         }
     }, [onlineCourse, offlineCourse])
 
-
     const trackImpress = () => {
         const courseType = 1
         if (idCourse?.isSafeNotBlank()) {
@@ -97,7 +96,6 @@ export default function Course() {
         }))
     }
 
-
     const ContactTutor = () => {
         return (
             <div className={`${style.marginSection}`}>
@@ -122,7 +120,7 @@ export default function Course() {
                         <div className={style.TitleCoin}>
                             <FontAwesomeIcon icon={faMobileAlt} className={style.iconmarker} />
                             {
-                                course?.owner.contact ? (
+                                course?.owner?.contact ? (
                                     <span className={style.textOne25}>{course && course.owner.contact.phoneNumber}</span>
                                 ) : (
                                     <SkeletonComponent.SkeletonText />
@@ -155,7 +153,7 @@ export default function Course() {
     }
 
     const switchShow = () => {
-        if (!isMobile() || showReview) {
+        if (screens.lg || showReview) {
             return (
                 <Fragment>
                     <div className={`${screens.md && style.section} ${style.marginSection}`}>
@@ -176,7 +174,7 @@ export default function Course() {
             <div className="container">
                 <Row className={style.bodyPaddingTopBottom} justify="space-between" style={{ paddingBottom: "7.5rem" }}>
                     <Col className={`${!isMobile() && style.section}`} xl={24} lg={24} md={24} sm={24} xs={24} >
-                        <DetailCourse />
+                     <DetailCourse />
                     </Col>
                     <Col xl={15} lg={15} md={24} sm={24} xs={24} id="switchComponent" >
                         {

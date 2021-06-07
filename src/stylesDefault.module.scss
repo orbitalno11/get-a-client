@@ -258,7 +258,6 @@ $silver : #a39b9b;
     font-size: 1.75rem;
 }
 
-
 .textOne5{
     font-size: 1.5rem;
 }
@@ -287,6 +286,10 @@ $silver : #a39b9b;
     line-height: 90%
 }
 
+.cursor{
+    cursor: pointer;
+}
+
 .paddingOne{
     padding : 1rem !important
 }
@@ -295,20 +298,20 @@ $silver : #a39b9b;
    padding-top: 0.5rem
 }
 
+.paddingTopOne{
+    padding-top: 1rem
+}
+
 .paddingTopOneHalf{
     padding-top: 1.5rem
- }
-
-.marginTopHalf{
-    margin-top: 0.5rem;
 }
 
 .marginTopOne25{
     margin-top: 1.25rem;
 }
-  
-.cursor{
-    cursor: pointer;
+
+.marginTopHalf{
+    margin-top: 0.5rem;
 }
 
 .marginRightHalf{

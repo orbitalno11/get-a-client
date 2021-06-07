@@ -99,9 +99,9 @@ function getOnlineCourse(id) {
         await apiURL.apiGetA.get(`/online-course/${id}`)
             .then(res => {
                 if (res.data.success) {
+                    dispatch(loadingActions.stopLoading())
                     const data = res.data.data
                     dispatch(success(data))
-                    dispatch(loadingActions.stopLoading())
                 }
             })
             .catch((err) => {

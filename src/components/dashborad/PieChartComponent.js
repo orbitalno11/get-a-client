@@ -1,26 +1,25 @@
-import React, { Fragment } from "react"
-import { PieChart } from "bizcharts";
+import React from "react"
+import { Pie } from 'react-chartjs-2';
 import style from "./styles.module.scss"
 
-export default function PieChartComponent({ data, radius, main, value }) {
+export default function PieChartComponent({ data }) {
+
+    const chartOptions = {
+        plugins: {
+            legend: {
+                display: false
+            },
+            tooltips: {
+                enabled: false
+            }
+        }
+    }
+
     return (
-        <Fragment>
-            <PieChart
-                className={style.chart}
-                data={data}
-                radius={radius}
-                angleField={main}
-                colorField={value}
-                label={{
-                    visible: true,
-                    type: "inner",
-                    offset: 20,
-                }}
-                legend={{
-                    visible: true,
-                    position : "bottom"
-                }}
-            />
-        </Fragment>
+        <Pie
+            className={style.maxHeight}
+            data={data}
+            options={chartOptions}
+        />
     )
 }

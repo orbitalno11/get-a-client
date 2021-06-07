@@ -112,7 +112,7 @@ export default function Request({ onHandleChange, showRequest }) {
                   name="amount"
                   placeholder
                   disabled
-                  value={String(amount)}
+                  value={amount}
                 />
               </div>
               <div className={style.marginTop04}>

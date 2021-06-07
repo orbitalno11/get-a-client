@@ -95,7 +95,7 @@ export default function TableRequest({ onHandleChange }) {
         </div>
       ) : (
         <div className={style.paddingbody}>
-          <RedeemList />
+          <RedeemList onHandleChange={onHandleChange} />
         </div>
       )}
     </div>

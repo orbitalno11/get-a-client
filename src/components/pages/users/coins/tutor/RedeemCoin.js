@@ -21,8 +21,11 @@ export default function RedeemCoin() {
     }
     const [redeem, setRedeem] = useState(startKey.key === "redeem")
 
+    //const [idRequest, setidRequest] = useState()
+
     const onHandleChange = (show) => {     
       setisShowRequest(show)
+   //   setidRequest(id)
       setRedeem(!redeem)
     }
 

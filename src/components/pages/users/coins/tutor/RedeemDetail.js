@@ -12,6 +12,7 @@ export default function RedeemDetail({onHandleChange}) {
   const screens = useBreakpoint();
   const { loading } = useSelector((state) => state);
   const rateRedeem = useSelector((state) => state.coin.rateCoin);
+  console.log(rateRedeem)
   const balanceCoin = useSelector((state) => state.coin.balance);
   const amount = balanceCoin&& balanceCoin.amount
 

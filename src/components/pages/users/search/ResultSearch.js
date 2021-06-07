@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { searchActions } from "../../../../redux/actions/search.actions"
 import CardCourseTutor from "../../../card/CardCourseTutor"
-import { Button, Col, Row } from "antd"
+import { Button, Col, Row, Grid } from "antd"
 import CardLesson from "../../../card/CardLesson"
 import style from "./styles.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -16,8 +16,10 @@ import { faArrowCircleLeft, faArrowCircleRight } from "@fortawesome/free-solid-s
 import isMobile from "../../../isMobile/isMobile"
 import EmptyImage from "../../../loading/EmptyImage"
 import { Link } from "react-router-dom"
+const { useBreakpoint } = Grid;
 
 export default function ResultSearch() {
+    const screens = useBreakpoint();
     const [tabStart, setTabStart] = useState({
         key: "all",
         name: "ทั้งหมด",
@@ -47,7 +49,6 @@ export default function ResultSearch() {
             type: course.type,
         }))
     }
-   
     const CardResult = ({ type, data }) => {
         const checkNotNull = !isEmpty(course[type])
         const prevPage = (checkNotNull && !isEmpty(course.links[type].previous)) ? false : true
@@ -56,20 +57,20 @@ export default function ResultSearch() {
         const denineLocation = (type === "nearby" && isEmpty(course[type]) && !course.location)
 
         return (
-            <Row className={(!isMobile() && course.type !== 3) ? style.padding1 : null} justify={"space-between"} >
+            <Row className={(!isMobile() && course.type !== 3) ? style.padding1 : null} justify={screens.lg ? "space-between" : "center"} >
                 {
                     checkNotNull ? data.map((item) => (
-                        <Col className={style.paddingCardResult} key={item.id} xl={11} lg={11} md={24} sm={24} xs={24} >
-                            {
-                                (type !== "onlineCourse") ? (
-                                    <CardCourseTutor data={item} search />
-                                ) : (
-                                    <Link to={`/online/${item.id}`}>
-                                        <CardLesson data={item} search />
-                                    </Link>
-                                )
-                            }
-                        </Col>
+                        (type !== "onlineCourse") ? (
+                            <Col className={style.paddingCardResult} key={item.id} xl={10} lg={10} md={20} sm={24} xs={24} >
+                                <CardCourseTutor data={item} search />
+                            </Col>
+                        ) : (
+                            <Col className={style.paddingCardResult} key={item.id} xl={10} lg={10} md={20} sm={24} xs={24} >
+                                <Link to={`/online/${item.id}`}>
+                                    <CardLesson data={item} search />
+                                </Link>
+                            </Col>
+                        )
                     )) : (
                         <Col span={24} align="center">
 

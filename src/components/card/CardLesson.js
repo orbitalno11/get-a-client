@@ -1,52 +1,90 @@
 import React from "react"
-import { Image, Row, Col } from "antd";
+import { Image, Row, Col, Grid } from "antd";
 import styles from "./styles.module.scss"
-import { faBookReader, faCoins, faVideo } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faBookReader, faCoins, faStar, faUsers, faVideo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import vdoSample from "../images/vdoSample.webp"
-import { styleComponent } from "../defaultFunction/style";
+import isMobile from "../isMobile/isMobile";
+import { defaultValue } from "../defaultValue";
+import findKeyObject from "../defaultFunction/findKeyObject";
+import { Fragment } from "react";
+import { useHistory } from "react-router";
+const { useBreakpoint } = Grid;
 
 export default function CardLesson({ data, isCourse, search }) {
+    const history = useHistory();
+    const screens = useBreakpoint();
+    const redirectToCoursePage = () => {
+        history.push(`/online/${data.id}`)
+    }
+
     return (
-        <Row className={`${styles.card} ${styles.paddingCard}`} align="middle">
-            <Col xs={8} sm={8} md={8} lg={9} xl={9}>
+        <Row className={(isMobile() || search) ? `${styles.card} ${styles.paddingOne}` : styles.fullWidth} justify={"center"} align="middle" onClick={() => redirectToCoursePage()}>
+            <Col lg={4} md={3} sm={3} xs={3} align="center">
                 <Image
                     src={data.coverUrl ? data.coverUrl : vdoSample}
                     className={styles.imageClip}
                     preview={false}
                 />
             </Col>
-            <Col xs={15} sm={15} md={15} lg={12} xl={14} align="start" className={styles.marginLeft}>
+            <Col lg={15} md={15} sm={15} xs={15} align="start" className={styles.marginLeftThree}>
                 <Row align="middle">
-                    <Col span={search ? 16 : 24} className={styles.textOneLine}>
-                        <span className={`${styles.headerOne75} `}>{data && data.name}</span>
+                    <Col span={13} >
+                        <span className={`${styles.textOne75} ${styles.textTwoLine}`}>{data.name}</span>
+                    </Col>
+                    <Col span={11} align="end" push={1}>
+                        <div className={`${styles.textTwo} ${styles.textOneLine}`} >
+                            <FontAwesomeIcon icon={faStar} className={`${styles.icon} ${styles.colorYellow} ${styles.textOne75}`} />
+                            <span className={`${styles.textTwo} ${styles.marginLeftOneHalf}`}>
+                                {data.rating}
+                            </span>
+                        </div>
                     </Col>
                     {
-                        search && (
-                            <Col span={6} >
-                                <div align="end">
-                                   <styleComponent.iconStar/>
-                                    <span className={`${styles.marginLeftOneHalf} ${styles.textOne}`} >
-                                        {data.rating} </span>
-                                </div>
+                        (screens.lg && !search) && (
+                            <Col span={12} className={`${styles.paddingTopHalf} ${styles.textOneLine}`}  >
+                                <FontAwesomeIcon icon={faBookReader} className={styles.grayIcon} />
+                                <span className={`${styles.text18} ${styles.marginLeftOneHalf}`}> {findKeyObject(defaultValue.grade, data?.grade?.grade)} </span>
                             </Col>
                         )
                     }
-                </Row>
-
-                <Col span={24} className={`${styles.paddingTop} ${styles.textNormal} ${styles.textOneLine}`}  >
                     {
-                        !isCourse ? (
-                            <span className={`${styles.textOneLine} ${styles.textOne}`}> ความยาวตอน   {data && data.time} ชั่วโมง</span>
-                        ) : (
-                            <span className={`${styles.textOneLine} ${styles.textOne}`}><FontAwesomeIcon icon={faBookReader} className={styles.icon} />   {data && data?.grade.title} , {data && data?.subject.title}</span>
+                        (screens.lg && !search) && (
+                            <Col className={`${styles.paddingTopHalf}  ${styles.textOneLine}`} span={12}>
+                                <FontAwesomeIcon icon={!isCourse ? faCoins : faUsers} className={styles.grayIcon} />
+                                <span className={`${styles.text18} ${styles.marginLeftOneHalf}`}> {!isCourse ? data.cost : data.numberOfView}</span>
+                            </Col>
                         )
                     }
-                </Col>
-                <Col className={styles.paddingTop} span={24} >
+                    {(isCourse || search )&& (
+                        <Col className={`${styles.paddingTopHalf}  ${styles.textOneLine}`} xs={24} sm={24} md={24} lg={12}>
+                            <FontAwesomeIcon icon={faBook} className={styles.grayIcon} />
+                            <span className={`${styles.text18} ${styles.marginLeftOneHalf}`}>{data.subject.title} </span>
+                        </Col>
+                    )
+                    }
+                    {(isCourse && screens.lg) &&
+                        <Fragment>
+                            <Col className={`${styles.paddingTopHalf}  ${styles.textOneLine}`} span={12}>
+                                <FontAwesomeIcon icon={faVideo} className={styles.grayIcon} />
+                                <span className={`${styles.text18} ${styles.marginLeftOneHalf}`}>{data.numberOfVideo} </span>
+                            </Col>
+                        </Fragment>
+                    }
+                    {((isCourse && !screens.lg) || search) &&
+                        <Fragment>
+                            <Col className={`${styles.paddingTopHalf}  ${styles.textOneLine}`} span={24}>
+                                <Image
+                                    src={data && data.coverUrl}
+                                    className={styles.imageIcon}
+                                    preview={false}
+                                />
+                                <span className={`${styles.text18} ${styles.marginLeftOneHalf}`}>{data && data?.owner?.fullNameText} </span>
+                            </Col>
+                        </Fragment>
+                    }
+                </Row>
 
-                    <span className={`${styles.textOneLine} ${styles.textOne}`}><FontAwesomeIcon icon={!isCourse ? faCoins : faVideo} className={styles.icon} /> {!isCourse ? data.cost : data.numberOfVideo}</span>
-                </Col>
             </Col>
         </Row>
     )

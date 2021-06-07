@@ -7,7 +7,7 @@ import {
     faMinus
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Button, Col, Divider, Row, Tooltip } from "antd"
+import { Button, Col, Row, Tooltip } from "antd"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router"
 import { color, defaultValue } from "../../../../../defaultValue"
@@ -15,6 +15,7 @@ import { modalAction, tutorAction } from "../../../../../../redux/actions"
 import findKeyObject from "../../../../../defaultFunction/findKeyObject"
 import { sizeModal } from "../../../../../modal/SizeModal"
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
+import { styleComponent } from "../../../../../defaultFunction/style"
 
 const checkTypeTesting = (value) => {
     return value === defaultValue.typeIdentity["testing"]
@@ -36,16 +37,16 @@ const ModalEducation = ({ type, data, profile, action }) => {
     const textAction = action === "remove" ? "ลบ" : "แก้ไข"
 
     const fullText = checkTypeTesting(type) && data ? (
-        "ยืนยันการ"+textAction+"ผลสอบ " + (data.exam.title + " วิชา" + data.subject.title + " " + data.score) + " คะแนน"
+        "ยืนยันการ" + textAction + "ผลสอบ " + (data.exam.title + " วิชา" + data.subject.title + " " + data.score) + " คะแนน"
     ) : (
-        "ยืนยันการ"+textAction+"ประวัติการศึกษา " + (data.instituteText + " สาขา" + data.branchText) + " เกรดเฉลี่ย " + data.gpax
+        "ยืนยันการ" + textAction + "ประวัติการศึกษา " + (data.instituteText + " สาขา" + data.branchText) + " เกรดเฉลี่ย " + data.gpax
     )
 
-    const closeModal = () =>{
+    const closeModal = () => {
         dispatch(modalAction.closeModal())
     }
 
-    const removeVerify = () =>{
+    const removeVerify = () => {
         closeModal()
         if (checkTypeTesting(type)) {
             dispatch(tutorAction.deleteTesting(data.id, profile))
@@ -66,36 +67,36 @@ const ModalEducation = ({ type, data, profile, action }) => {
             <p>สถานะการตรวจสอบ : {findKeyObject(defaultValue.requestStatus, data.verified)} </p>
             <p className={`${style.textSmall} ${style.marginTop20}`}>
                 {
-                    action === "remove" ? ( 
+                    action === "remove" ? (
                         "หมายเหตุ : หากทำการลบแล้ว ไม่สามารถกู้คืนได้"
                     ) : (
                         "หมายเหตุ : หากทำการแก้ไขข้อมูล จะต้องมีการตรวจสอบข้อมูลจากผู้ดูแลระบบอีกครั้ง"
                     )
                 }
-                </p>
+            </p>
             <Row >
-                <Button className="buttonColor backgroundRed" shape="round" size="middle" style={widthButton} onClick={()=>action === "remove" ? removeVerify() : editEducation()}>{textAction}</Button>
-                <Button className="buttonColor backgroundBlue" shape="round" size="middle" style={widthButton} onClick={()=>closeModal()}>ยกเลิก</Button>
+                <Button className="buttonColor backgroundRed" shape="round" size="middle" style={widthButton} onClick={() => action === "remove" ? removeVerify() : editEducation()}>{textAction}</Button>
+                <Button className="buttonColor backgroundBlue" shape="round" size="middle" style={widthButton} onClick={() => closeModal()}>ยกเลิก</Button>
             </Row>
         </div>
     )
 }
 
-export default function EducationTutor({ data, type, status}) {
+export default function EducationTutor({ data, type, status }) {
     const dispatch = useDispatch()
     const screens = useBreakpoint();
     const { profile } = useSelector(state => state.auth)
 
     const remove = (type, data) => {
         dispatch(modalAction.openModal({
-            body: <ModalEducation type={type} data={data} profile={profile} action="remove"/>,
+            body: <ModalEducation type={type} data={data} profile={profile} action="remove" />,
             size: sizeModal.default
         }))
     }
 
     const edit = (data) => {
         dispatch(modalAction.openModal({
-            body: <ModalEducation type={type} data={data} profile={profile} action="edit"/>,
+            body: <ModalEducation type={type} data={data} profile={profile} action="edit" />,
             size: sizeModal.default
         }))
     }
@@ -141,20 +142,20 @@ export default function EducationTutor({ data, type, status}) {
             {
                 data && data.map((item) => {
                     return (
-                        <Row key={item.id}>
-                            <Col span={24} className={style.profileSet}>
+                        <Row className={`${(screens.md && status!=="learner") && style.section} ${style.marginSection}`} key={item.id} align="middle">
+                            <Col span={24} className={style.profileSet} >
                                 {
                                     (screens.md && status !== "learner") && (
                                         <Fragment>
                                             <Tooltip placement="topLeft" title="แก้ไขเกียรติประวัตินี้">
-                                                <button className={style.editButton} onClick={() => edit(item)} >
+                                                <Button className={`${style.button} ${style.marginLeft}`} style={styleComponent.buttonFull(color.blue, "auto")} shape={"circle"} onClick={() => edit(item)} >
                                                     <FontAwesomeIcon icon={faEdit} />
-                                                </button>
+                                                </Button>
                                             </Tooltip>
                                             <Tooltip placement="topLeft" title="ลบเกียรติประวัตินี้">
-                                                <button className={style.removeButton} onClick={() => remove(type, item)} >
+                                                <Button className={`${style.button} ${style.marginLeft}`} style={styleComponent.buttonFull(color.gray, "auto")} shape={"circle"} onClick={() => remove(type, item)} >
                                                     <FontAwesomeIcon icon={faMinus} />
-                                                </button>
+                                                </Button>
                                             </Tooltip>
                                         </Fragment>
                                     )
@@ -163,15 +164,15 @@ export default function EducationTutor({ data, type, status}) {
                                 <div style={!screens.md ? widthIcon(4) : widthIcon(5.5)}>
                                     <FontAwesomeIcon className={!screens.md ? style.smallSizeIcon : style.largeSizeIcon} icon={checkTypeTesting(type) ? faListAlt : faGraduationCap} />
                                 </div>
-                                <div className={status !== "learner" ?  style.subProfile : null}>
-                                    <span>{checkTypeTesting(type) ? "ผลสอบ" : item.instituteText}</span>
+                                <div>
+                                    <span className={style.textOne25}>{checkTypeTesting(type) ? "ผลสอบ" : item.instituteText}</span>
                                     <br />
-                                    <span>{checkTypeTesting(type) ? (item.exam.title + " : " + item.subject.title) : ("สาขา : " + item.branchText)}</span>
+                                    <span className={style.textOne25}>{checkTypeTesting(type) ? (item.exam.title + " : " + item.subject.title) : ("สาขา : " + item.branchText)}</span>
                                     <br />
-                                    <span>{checkTypeTesting(type) ? ("คะแนน : " + item.score) : ("เกรดเฉลี่ย : " + item.gpax)}</span>
+                                    <span className={style.textOne25}>{checkTypeTesting(type) ? ("คะแนน : " + item.score) : ("เกรดเฉลี่ย : " + item.gpax)}</span>
                                     <br />
                                     {
-                                        (!screens.md  && status !== "learner")  && (
+                                        (!screens.md && status !== "learner") && (
                                             <Fragment>
                                                 <Button className="buttonColor" style={verifyButton(item.verified)} shape="round" size="small">{findKeyObject(defaultValue.requestStatus, item.verified)}</Button>
                                                 <Button className="buttonColor" style={buttonAction("blue")} shape="round" size="small" onClick={() => edit(item)} >แก้ไข</Button>
@@ -186,9 +187,7 @@ export default function EducationTutor({ data, type, status}) {
                                             <span style={{ color: colorVerify(item.verified) }}>{findKeyObject(defaultValue.requestStatus, item.verified)}</span>
                                         </div> : null
                                 }
-
                             </Col>
-                            <Divider />
                         </Row>
                     )
                 }

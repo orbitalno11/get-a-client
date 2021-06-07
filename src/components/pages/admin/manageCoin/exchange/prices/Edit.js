@@ -69,7 +69,7 @@ export default function Edit({dataRate}) {
           { dataRate.type  != "tranfer" ? (
             <span className={style.headerOne35}>แก้ไขอัตราการซื้อเหรียญ</span>
           ):(
-            <span className={style.headerOne35}>แก้ไขอัตราการแลกเปลี่ยน</span>
+            <span className={style.headerOne35}>แก้ไขอัตราการแลกเหรียญ</span>
           )}
           <Row style={{ marginBottom: "1rem" }}>
             <Col span={6} className={style.columnRate}>

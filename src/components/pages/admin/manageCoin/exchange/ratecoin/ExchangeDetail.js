@@ -109,7 +109,7 @@ export default function ExchangeDetail() {
       })
     );
   };
-  console.log(list &&list.filter((data) => data.type === "transfer"))
+
   return (
     <Fragment>
       <Row style={{ marginLeft: "1rem" }}>

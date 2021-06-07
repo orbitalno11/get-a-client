@@ -11,6 +11,7 @@ import { modalAction, coinAction } from "../../../../../../redux/actions";
 import ModalComponent from "../../../../../modal/ModalComponent";
 import { sizeModal } from "../../../../../modal/SizeModal";
 import InputComponents from "../../../../../input/InputComponets";
+import isEmpty from "../../../../../defaultFunction/checkEmptyObject";
 import Edit from "./Edit";
 import Delete from "./Delete";
 import moment from "moment";
@@ -68,7 +69,7 @@ export default function Price({type}) {
       <div style={{ paddingLeft: "1rem" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           { type === "rate" ? (
-          <span className={style.headerOne35}>เพิ่มอัตราการแลกเปลี่ยน</span>):(
+          <span className={style.headerOne35}>เพิ่มอัตราการแลกเหรียญ</span>):(
 
             <span className={style.headerOne35}>เพิ่มอัตราการซื้อเหรียญ</span>
           )}
@@ -163,7 +164,7 @@ export default function Price({type}) {
         </Col>
         ):(
           <Col xs={21} sm={21} md={20} lg={22} xl={23}>
-          <span className={style.headerOne35}>อัตราการแลกเปลี่ยนปัจจุบัน</span>
+          <span className={style.headerOne35}>อัตราการแลกเหรียญปัจจุบัน</span>
         </Col>
         )}
         <ModalComponent />
@@ -187,7 +188,7 @@ export default function Price({type}) {
               style={{ color: "#F5732E" }}
               onClick={() => createPrice()}
             >
-              <span className={style.textOne35}> เพิ่มอัตราการแลกเปลี่ยน</span>
+              <span className={style.textOne35}> เพิ่มอัตราการแลกเหรียญ</span>
             </Button>
           </Col>
         </Row>
@@ -210,7 +211,7 @@ export default function Price({type}) {
           </thead>
           { type != "rate" ? (
           <tbody>
-            {list &&
+            {!isEmpty(list) &&
               list
                 .filter((data) => data.type === "std")
                 .map((data, index) => (
@@ -257,7 +258,7 @@ export default function Price({type}) {
           </tbody>
           ):(
           <tbody>
-            {list &&
+            {!isEmpty(list) &&
               list
                 .filter((data) => data.type === "tranfer")
                 .map((data, index) => (

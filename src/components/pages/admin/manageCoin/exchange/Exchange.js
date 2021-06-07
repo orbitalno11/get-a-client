@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Row, Col } from "antd";
-//import Rate from "./ratecoin/rate/Rate";
 import Promotion from "./promotions/Promotion";
 import Price from "./prices/Price";
 import Loading from "../../../../loading/Loading";

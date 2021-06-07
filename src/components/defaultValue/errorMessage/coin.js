@@ -1,5 +1,5 @@
 const coinMessage = {
-    "can-not-create-exchange-rate" : "ไม่สามารถสร้างอัตราแลกเปลี่ยนได้",
+    "can-not-create-exchange-rate" : "ไม่สามารถสร้างอัตราแลกเหรียญได้",
     "can-not-edit-rate" : "ไม่สามารถแก้ไขอัตราเหรียญได้",
     "can-not-delete-rate" : "ไม่สามารถลบอัตราเหรียญได้" ,
     "can-not-create-redeem" : "ไม่สามารถส่งคำขอแลกเหรียญได้",

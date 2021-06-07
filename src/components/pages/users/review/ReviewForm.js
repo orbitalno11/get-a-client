@@ -85,7 +85,7 @@ export default function ReviewForm({ idReview }) {
 
     const onSubmit = (data) => {
         if (data) {
-            if (isEmpty(idReview)) {
+            if (isEmpty(myReview)) {
                 const formData = {
                     "courseId": videoId ? courseId : id,
                     "rating": data.rate,
@@ -98,7 +98,7 @@ export default function ReviewForm({ idReview }) {
             } else {
                 const formData = {
                     "courseId": videoId ? courseId : id,
-                    "reviewId": idReview,
+                    "reviewId": myReview.id,
                     "rating": data.rate,
                     "comment": data.comment,
                     "isClip": videoId ? true : false,

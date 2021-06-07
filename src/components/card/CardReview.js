@@ -8,11 +8,12 @@ import { color } from "../defaultValue";
 import { Fragment } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
 
 export default function CardReview({ data, myReview, handleEdit }) {
-
+    const screens = useBreakpoint();
     const [showMessage, setShowMessage] = useState(false)
-
+    
     const showtext = {
         display: showMessage ? "block" : "-webkit-box"
     }
@@ -24,7 +25,7 @@ export default function CardReview({ data, myReview, handleEdit }) {
     }
 
     return (
-        <Row className={`${isMobile() && styles.card} ${isMobile() && styles.paddingOne}  ${!isMobile() && styles.section} ${styles.marginSection}`} align="middle">
+        <Row className={`${!screens.lg && styles.card} ${!screens.lg && styles.paddingOne}  ${screens.lg  && styles.section} ${styles.marginSection}`} align="middle">
             <Col lg={15} md={15} sm={18} xs={18}>
                 <span className={`${styles.textOne75} ${styles.textOneLine}`}>
                     {data.reviewer.fullName}

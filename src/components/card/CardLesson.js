@@ -8,18 +8,13 @@ import isMobile from "../isMobile/isMobile";
 import { defaultValue } from "../defaultValue";
 import findKeyObject from "../defaultFunction/findKeyObject";
 import { Fragment } from "react";
-import { useHistory } from "react-router";
 const { useBreakpoint } = Grid;
 
-export default function CardLesson({ data, isCourse, search }) {
-    const history = useHistory();
+export default function CardLesson({ data, isCourse, search, course }) {
     const screens = useBreakpoint();
-    const redirectToCoursePage = () => {
-        history.push(`/online/${data.id}`)
-    }
 
     return (
-        <Row className={(isMobile() || search) ? `${styles.card} ${styles.paddingOne}` : styles.fullWidth} justify={"center"} align="middle" onClick={() => redirectToCoursePage()}>
+        <Row className={(isMobile() || search || course) ? `${styles.card} ${styles.paddingOne}` : styles.fullWidth} justify={"center"} align="middle" >
             <Col lg={4} md={3} sm={3} xs={3} align="center">
                 <Image
                     src={data.coverUrl ? data.coverUrl : vdoSample}
@@ -32,16 +27,20 @@ export default function CardLesson({ data, isCourse, search }) {
                     <Col span={13} >
                         <span className={`${styles.textOne75} ${styles.textTwoLine}`}>{data.name}</span>
                     </Col>
-                    <Col span={11} align="end" push={1}>
-                        <div className={`${styles.textTwo} ${styles.textOneLine}`} >
-                            <FontAwesomeIcon icon={faStar} className={`${styles.icon} ${styles.colorYellow} ${styles.textOne75}`} />
-                            <span className={`${styles.textTwo} ${styles.marginLeftOneHalf}`}>
-                                {data.rating}
-                            </span>
-                        </div>
-                    </Col>
                     {
-                        (screens.lg && !search) && (
+                        !course && (
+                            <Col span={11} align="end" push={1}>
+                                <div className={`${styles.textTwo} ${styles.textOneLine}`} >
+                                    <FontAwesomeIcon icon={faStar} className={`${styles.icon} ${styles.colorYellow} ${styles.textOne75}`} />
+                                    <span className={`${styles.textTwo} ${styles.marginLeftOneHalf}`}>
+                                        {data.rating}
+                                    </span>
+                                </div>
+                            </Col>
+                        )
+                    }
+                    {
+                        (screens.lg && !search && !course) && (
                             <Col span={12} className={`${styles.paddingTopHalf} ${styles.textOneLine}`}  >
                                 <FontAwesomeIcon icon={faBookReader} className={styles.grayIcon} />
                                 <span className={`${styles.text18} ${styles.marginLeftOneHalf}`}> {findKeyObject(defaultValue.grade, data?.grade?.grade)} </span>
@@ -56,7 +55,7 @@ export default function CardLesson({ data, isCourse, search }) {
                             </Col>
                         )
                     }
-                    {(isCourse || search )&& (
+                    {(isCourse || search) && (
                         <Col className={`${styles.paddingTopHalf}  ${styles.textOneLine}`} xs={24} sm={24} md={24} lg={12}>
                             <FontAwesomeIcon icon={faBook} className={styles.grayIcon} />
                             <span className={`${styles.text18} ${styles.marginLeftOneHalf}`}>{data.subject.title} </span>

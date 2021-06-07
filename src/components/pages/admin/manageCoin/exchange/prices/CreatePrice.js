@@ -143,7 +143,6 @@ export default function CreatePrice({type}) {
     );
   };
 
-  const arr = []
   const createPrice = () => {
     dispatch(
       modalAction.openModal({
@@ -153,7 +152,6 @@ export default function CreatePrice({type}) {
     );
   };
 
-  console.log(isEmpty(arr))
   return (
     <Fragment>
       <Row style={{ marginLeft: "1rem" }}>

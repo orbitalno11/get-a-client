@@ -8,19 +8,13 @@ import isMobile from "../isMobile/isMobile";
 import { defaultValue } from "../defaultValue";
 import findKeyObject from "../defaultFunction/findKeyObject";
 import { Fragment } from "react";
-import { useHistory } from "react-router";
 const { useBreakpoint } = Grid;
 
 export default function CardLesson({ data, isCourse, search, course }) {
-    const history = useHistory();
     const screens = useBreakpoint();
-    const redirectToCoursePage = () => {
-        history.push(`/online/${data.id}`)
-    }
-    console.log(course)
 
     return (
-        <Row className={(isMobile() || search || course) ? `${styles.card} ${styles.paddingOne}` : styles.fullWidth} justify={"center"} align="middle" onClick={() => redirectToCoursePage()}>
+        <Row className={(isMobile() || search || course) ? `${styles.card} ${styles.paddingOne}` : styles.fullWidth} justify={"center"} align="middle" >
             <Col lg={4} md={3} sm={3} xs={3} align="center">
                 <Image
                     src={data.coverUrl ? data.coverUrl : vdoSample}

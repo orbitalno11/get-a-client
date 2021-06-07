@@ -97,7 +97,7 @@ export default function ManageCourseDetail() {
                   <Col align="center" xl={8} lg={12} md={isOnline ? 24 : 12} sm={24} key={index} style={{ padding: "0.5rem" }} >
                     <Link to={isOnline ? `/online/${item.id}` : `/course/${item.id}`} >
                       {
-                        !isOnline ? <CardCourse data={item} course/> : <CardLesson data={item} isCourse={true} course/>
+                        !isOnline ? <CardCourse data={item} /> : <CardLesson data={item} isCourse={true} course/>
                       }
                     </Link>
                   </Col>

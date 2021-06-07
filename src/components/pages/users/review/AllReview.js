@@ -31,11 +31,10 @@ export default function AllReview() {
                 dispatch(reviewActions.getReviewByCourse(id, isCourse ? offlineCourse?.data?.type : 3))
             }
         }
-
         return () => {
             dispatch(reviewActions.clearReview())
         }
-    }, [offlineCourse, onlineCourse, type])
+    }, [offlineCourse.data, onlineCourse.data, type])
 
     const handleOpenReviewForm = (id, action) => {
         if (action !== "delete") {

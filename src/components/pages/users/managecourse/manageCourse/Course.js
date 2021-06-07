@@ -25,7 +25,7 @@ import { color } from "../../../../defaultValue";
 const { useBreakpoint } = Grid;
 
 export default function Course() {
-    const { offlineCourse, onlineCourse, auth } = useSelector(state => state)
+    const { offlineCourse, onlineCourse, auth, loading } = useSelector(state => state)
     const { reviews } = useSelector(state => state.review)
     const [course, setCourse] = useState(null)
     const owner = (!isEmpty(course) && auth) && (auth.profile === course.owner.id)
@@ -101,7 +101,7 @@ export default function Course() {
             <div className={`${style.marginSection}`}>
                 {/* online */}
                 {
-                    screens.lg && (
+                    (screens.lg && !loading.loading) && (
                         <ButtonReview
                             owner={owner}
                             isOfflineCourse={isOfflineCourse}
@@ -192,7 +192,7 @@ export default function Course() {
             </div>
             {/* mobile and ipad screen */}
             {
-                !screens.lg && (
+                (!screens.lg && !loading.loading )&& (
                     <ButtonReview
                         owner={owner}
                         isOfflineCourse={isOfflineCourse}

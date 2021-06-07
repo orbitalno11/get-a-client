@@ -11,6 +11,7 @@ import style from "../styles.module.scss";
 export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewForm, enrollCourse, learn_status, showReview, switchComponent, typeShow }) {
     const { type, id } = useParams()
     const screens = useBreakpoint();
+    
     return (
         <Fragment>
             {
@@ -20,18 +21,18 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                             !isOfflineCourse ? (
                                 <Link to={`/course/online/${id}/video`}>
                                     <Button
-                                        className={`${style.buttonColor} ${style.textOne75}`}
+                                        className={`${style.buttonColor} ${style.textOne5}`}
                                         style={styleComponent.buttonFull(color.orange)}
                                         size="middle">
                                         ดูบทเรียน
-                            </Button>
+                                    </Button>
                                 </Link>
                             ) : (
                                 !owner && (
                                     learn_status ? (
-                                        <Button className={`${style.buttonColor} ${style.textOne75}`} size="middle" style={styleComponent.buttonFull(color.orange)} onClick={() => { handleOpenReviewForm() }}>ให้คะแนน</Button>
+                                        <Button className={`${style.buttonColor} ${style.textOne5}`} size="middle" style={styleComponent.buttonFull(color.orange)} onClick={() => { handleOpenReviewForm() }}>ให้คะแนน</Button>
                                     ) : (
-                                        <Button  className={`${style.buttonColor} ${style.textOne75}`} size="middle" style={styleComponent.buttonFull(color.orange)} onClick={() => enrollCourse()} >สมัครเรียน</Button>
+                                        <Button className={`${style.buttonColor} ${style.textOne5}`} size="middle" style={styleComponent.buttonFull(color.orange)} onClick={() => enrollCourse()} >สมัครเรียน</Button>
                                     )
                                 )
                             )
@@ -44,7 +45,7 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                                             (
                                                 <Link to={`/tutor/course/${id}/enroll`}>
                                                     <Button
-                                                        className={`${style.buttonColor} ${style.textOne75}`}
+                                                        className={`${style.buttonColor} ${style.textOne5}`}
                                                         size="large"
                                                         style={styleComponent.buttonFull(color.orange)}>
                                                         อนุมัติคำขอ
@@ -56,7 +57,7 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                                     <Link to={`/tutor/${type}/${id}/edit`} >
                                         <div style={{ marginTop: "0.5rem" }}>
                                             <Button
-                                                 className={`${style.buttonColor} ${style.textOne75}`}
+                                                className={`${style.buttonColor} ${style.textOne5}`}
                                                 size="large"
                                                 style={styleComponent.buttonFull(color.blue)}>
                                                 แก้ไขคอร์สเรียน

@@ -29,7 +29,6 @@ export default function DetailCourse() {
     const isOfflineCourse = type === "course"
     const screens = useBreakpoint();
 
-
     useEffect(() => {
         if (isOfflineCourse) {
             setCourse(offlineCourse.data && offlineCourse.data)
@@ -142,7 +141,6 @@ export default function DetailCourse() {
                         </Col>
                     </Row>
                 </Fragment>
-
             }
         </Fragment>
     )

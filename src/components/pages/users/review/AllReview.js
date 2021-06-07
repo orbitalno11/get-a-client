@@ -13,11 +13,11 @@ import isEmpty from "../../../defaultFunction/checkEmptyObject";
 
 export default function AllReview() {
     const dispatch = useDispatch()
-    const { id, videoId } = useParams()
+    const { id, videoId, type } = useParams()
     const { offlineCourse, auth, review, onlineCourse  } = useSelector(state => state)
     const course = videoId ? (onlineCourse.clip && onlineCourse.data) : (offlineCourse.data && offlineCourse.data)
     const owner = (course && auth) && (auth.profile === course.owner.id)
-
+    const isCourse = type === "course"
     const reviewList = !isEmpty(review.reviews) ? review.reviews.filter(value => value.owner !== true) : []
     const myReview = !isEmpty(review.reviews) ? review.reviews.filter(value => value.owner === true)[0] : []
 
@@ -25,13 +25,15 @@ export default function AllReview() {
         if(videoId){
             dispatch(reviewActions.getReviewClip(videoId))
         }else{
-            dispatch(reviewActions.getReviewByCourse(id, 1))
+            if(!isEmpty(offlineCourse.data) || !isEmpty(onlineCourse.data)){
+                dispatch(reviewActions.getReviewByCourse(id, isCourse ? offlineCourse?.data?.type : 3))
+            }
         }
-       
+    
         return()=>{
             dispatch(reviewActions.clearReview())
         }
-    }, [])
+    }, [offlineCourse, onlineCourse, type])
 
     const handleOpenReviewForm = (id, action) => {
         if (action !== "delete") {
@@ -60,7 +62,7 @@ export default function AllReview() {
                                     </Col>
                                 }
                                 {!isEmpty(reviewList) && reviewList.map((item, index) => (
-                                    <Col span={24} key={index} className={style.paddingTop} >
+                                    <Col span={24} key={index} >
                                         <CardReview data={item} myReview={false} />
                                     </Col>
                                 ))}

@@ -17,9 +17,9 @@ export default function CardReview({ data, myReview, handleEdit }) {
         display: showMessage ? "block" : "-webkit-box"
     }
 
-    const colorIcon = (colorIcon) =>{
-        return({
-            color : colorIcon
+    const colorIcon = (colorIcon) => {
+        return ({
+            color: colorIcon
         })
     }
 
@@ -31,30 +31,32 @@ export default function CardReview({ data, myReview, handleEdit }) {
                 </span>
             </Col>
             <Col lg={8} md={8} sm={6} xs={6} align={"end"}>
-                {(myReview && !isMobile()) ?
-                    (
-                        <Fragment>
-                            <Button
-                                className={`${styles.buttonColor} ${styles.textOne}`}
-                                style={styleComponent.buttonFull(color.blue, "5rem")}
-                                onClick={() => handleEdit(data.id, "edit")}
-                                size={"middle"}>
-                                แก้ไข
+                {myReview && (
+                    !isMobile() ?
+                        (
+                            <Fragment>
+                                <Button
+                                    className={`${styles.buttonColor} ${styles.textOne}`}
+                                    style={styleComponent.buttonFull(color.blue, "5rem")}
+                                    onClick={() => handleEdit(data.id, "edit")}
+                                    size={"middle"}>
+                                    แก้ไข
                                 </Button>
-                            <Button
-                                className={`${styles.buttonColor} ${styles.textOne} ${styles.marginLeftOneHalf}`}
-                                style={styleComponent.buttonFull(color.gray, "5rem")}
-                                onClick={() => handleEdit(data.id, "delete")}>
-                                ลบ
-                                </Button>
-                        </Fragment>
-                    ) : (
-                        <Fragment>
-                            <FontAwesomeIcon className={`${styles.textOne5} ${styles.cursor}`} icon={faPencilAlt} onClick={() => handleEdit(data.id, "edit")} style={colorIcon(color.blue)}/>
-                            <FontAwesomeIcon className={`${styles.textOne5} ${styles.marginLeftOne} ${styles.cursor}`} icon={faMinusCircle} onClick={() => handleEdit(data.id, "delete")}style={colorIcon(color.gray)}/>
-                        </Fragment>
+                                <Button
+                                    className={`${styles.buttonColor} ${styles.textOne} ${styles.marginLeftOneHalf}`}
+                                    style={styleComponent.buttonFull(color.gray, "5rem")}
+                                    onClick={() => handleEdit(data.id, "delete")}>
+                                    ลบ
+                            </Button>
+                            </Fragment>
+                        ) : (
+                            <Fragment>
+                                <FontAwesomeIcon className={`${styles.textOne5} ${styles.cursor}`} icon={faPencilAlt} onClick={() => handleEdit(data.id, "edit")} style={colorIcon(color.blue)} />
+                                <FontAwesomeIcon className={`${styles.textOne5} ${styles.marginLeftOne} ${styles.cursor}`} icon={faMinusCircle} onClick={() => handleEdit(data.id, "delete")} style={colorIcon(color.gray)} />
+                            </Fragment>
 
-                    )
+                        )
+                )
                 }
             </Col>
             <Col lg={24} md={24} sm={24} xs={24} >
@@ -64,10 +66,10 @@ export default function CardReview({ data, myReview, handleEdit }) {
                 </Row>
             </Col>
             <Col lg={24} md={24} sm={24} xs={24} id="comment" >
-                <span className={`${styles.text18} ${styles.textThreeLine} ${styles.marginTopHalf}`} style={showtext}>
+                <span className={`${styles.textOne25} ${styles.textThreeLine} ${styles.marginTopHalf}`} style={showtext}>
                     {data.review}
                 </span>
-                <u className={`${styles.cursor} ${styles.texxtOne}`} onClick={() => setShowMessage(!showMessage)}>{showMessage ? "ย่อความคิดเห็น" : "ดูความเห็นเพิ่มเติม"}</u>
+                <u className={`${styles.cursor} ${styles.textOne}`} onClick={() => setShowMessage(!showMessage)}>{showMessage ? "ย่อความคิดเห็น" : "ดูความเห็นเพิ่มเติม"}</u>
             </Col>
         </Row>
     )

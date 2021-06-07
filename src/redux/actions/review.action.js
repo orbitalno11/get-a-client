@@ -25,7 +25,7 @@ const getReviewByCourse = (id, courseType) => {
             })
 
         function success(data) { return { type: reviewConstants.GET_REVIEW_SUCCESS, payload: data } }
-        function failure(err) { return { type: reviewConstants.GET_REVIEW__FAILURE, payload: err } }
+        function failure(err) { return { type: reviewConstants.GET_REVIEW_FAILURE, payload: err } }
     }
 }
 
@@ -39,7 +39,7 @@ const createReview = (data) => {
                 if(data.isClip){
                     dispatch(getReviewClip(data.clipId))
                 }else{
-                    dispatch(getReviewByCourse(data.courseId,1))
+                    dispatch(getReviewByCourse(data.courseId,data.courseType))
                 }
                
                 dispatch(modalAction.closeModal())
@@ -76,7 +76,7 @@ const updateReview = (data) => {
                 if(data.isClip){
                     dispatch(getReviewClip(data.clipId))
                 }else{
-                    dispatch(getReviewByCourse(data.courseId,1))
+                    dispatch(getReviewByCourse(data.courseId, data.courseType))
                 }
                 dispatch(modalAction.closeModal())
                 dispatch(modalAction.openModal({
@@ -116,9 +116,8 @@ const deleteReviewByCourse = (Reviewid, courseType, idCourse, videoId) => {
             if(videoId){
                 dispatch(getReviewClip(videoId))
             }else{
-                dispatch(getReviewByCourse(idCourse, 1))
+                dispatch(getReviewByCourse(idCourse, courseType))
             }
-            dispatch(getReviewByCourse(idCourse,1))
             dispatch(modalAction.closeModal())
             dispatch(modalAction.openModal({
                 text: "ลบความเห็นสำเร็จ",
@@ -128,7 +127,6 @@ const deleteReviewByCourse = (Reviewid, courseType, idCourse, videoId) => {
         })
         .catch((err) => {
             dispatch(loadingActions.stopLoading())
-            console.log(err?.response?.data)
             dispatch(failure(err?.response?.data))
             dispatch(modalAction.closeModal())
             dispatch(modalAction.openModal({

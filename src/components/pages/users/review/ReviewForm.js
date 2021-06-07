@@ -17,6 +17,8 @@ export function DeleteForm({ idReview, type }) {
     const dispatch = useDispatch()
     const { id, courseId, videoId } = useParams()
     const { loading } = useSelector(state => state.loading)
+    const offlineCourse = useSelector(state => state.offlineCourse)
+
     const text = type === "review" ? "ความคิดเห็น" : "คลิปการสอน"
     const styleWarningText = {
         color: color.red,
@@ -27,13 +29,12 @@ export function DeleteForm({ idReview, type }) {
             if (videoId) {
                 dispatch(reviewActions.deleteReviewByCourse(idReview, 3, courseId, videoId))
             } else {
-                dispatch(reviewActions.deleteReviewByCourse(idReview, 1, id))
+                dispatch(reviewActions.deleteReviewByCourse(idReview, offlineCourse?.data?.type, id))
             }
         } else {
             dispatch(modalAction.closeModal())
             dispatch(onlineCourseActions.deleteClip(courseId, videoId))
         }
-
     }
 
     return (
@@ -61,7 +62,7 @@ export default function ReviewForm({ idReview }) {
     const { id, videoId, courseId } = useParams()
     const dispatch = useDispatch()
     const { loading } = useSelector(state => state.loading)
-    const { review, modal } = useSelector(state => state)
+    const { review, modal, offlineCourse } = useSelector(state => state)
     const myReview = review.reviews && review.reviews.filter((item) => item.owner === true)[0]
     const { register, handleSubmit, errors, control, reset } = useForm({
         resolver: yupResolver(reviewSchema),
@@ -91,7 +92,7 @@ export default function ReviewForm({ idReview }) {
                     "comment": data.comment,
                     "isClip": videoId ? true : false,
                     "clipId": videoId && videoId,
-                    "courseType": videoId ? 3 : 1
+                    "courseType": videoId ? 3 : offlineCourse.data.type
                 }
                 dispatch(reviewActions.createReview(formData))
             } else {
@@ -102,7 +103,7 @@ export default function ReviewForm({ idReview }) {
                     "comment": data.comment,
                     "isClip": videoId ? true : false,
                     "clipId": videoId && videoId,
-                    "courseType": videoId ? 3 : 1
+                    "courseType": videoId ? 3 : offlineCourse.data.type
                 }
                 dispatch(reviewActions.updateReview(formData))
             }
@@ -115,7 +116,6 @@ export default function ReviewForm({ idReview }) {
                 <div>
                     <span className={style.headerTwo5}>ความคิดเห็น</span>
                 </div>
-
                 <Controller
                     as={
                         <Rate name="rate" className={style.rate} />

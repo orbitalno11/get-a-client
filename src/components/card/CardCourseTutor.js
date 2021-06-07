@@ -14,11 +14,11 @@ import { useHistory } from "react-router";
 import isMobile from "../isMobile/isMobile";
 import { styleComponent } from "../defaultFunction/style";
 
-export default function CardCourseTutor({ data, type, search }) {
+export default function CardCourseTutor({ data, search }) {
     const history = useHistory();
 
     const redirectToCoursePage = () => {
-        history.push(`/${type}/${data.id}`)
+        history.push(`/course/${data.id}`)
     }
 
     return (

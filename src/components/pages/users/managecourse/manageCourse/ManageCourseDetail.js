@@ -97,7 +97,7 @@ export default function ManageCourseDetail() {
                   <Col align="center" xl={8} lg={12} md={isOnline ? 24 : 12} sm={24} key={index} style={{ padding: "0.5rem" }} >
                     <Link to={isOnline ? `/online/${item.id}` : `/course/${item.id}`} >
                       {
-                        !isOnline ? <CardCourse data={item} /> : <CardLesson data={item} isCourse={true} />
+                        !isOnline ? <CardCourse data={item} /> : <CardLesson data={item} isCourse={true} course/>
                       }
                     </Link>
                   </Col>
@@ -112,7 +112,7 @@ export default function ManageCourseDetail() {
                 <Col align="center" xl={8} lg={12} md={24} sm={24} xs={24} key={index} style={{ padding: "0.5rem" }} >
                   <Link to={`${partRedireact}/online/${courseId}/video/${item.id}`}>
                     {
-                      <CardLesson data={item} />
+                      <CardLesson data={item} course/>
                     }
                   </Link>
                 </Col>

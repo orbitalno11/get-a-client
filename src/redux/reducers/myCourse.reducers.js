@@ -7,7 +7,6 @@ const initialState = {
 }
 
 const myCourseReducer = (state = initialState, action) => {
-    console.log(action)
     switch (action.type) {
         case myCourseConstants.MY_OFFLINE_COURSE_SUCCESS:
             return {

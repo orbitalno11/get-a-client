@@ -16,7 +16,7 @@ import Edit from "./Edit";
 import Delete from "./Delete";
 import moment from "moment";
 
-export default function Price({type}) {
+export default function CreatePrice({type}) {
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(exchangeSchema),
   });
@@ -213,7 +213,7 @@ export default function Price({type}) {
           </thead>
           { type != "rate" ? (
           <tbody>
-            {!isEmpty(list) &&
+            {!isEmpty(list) && list.length !== 0 &&
               list
                 .filter((data) => data.type === "std")
                 .map((data, index) => (
@@ -260,7 +260,7 @@ export default function Price({type}) {
           </tbody>
           ):(
           <tbody>
-            {!isEmpty(list) &&
+            {!isEmpty(list) && list.length !== 0 &&
               list
                 .filter((data) => data.type === "tranfer")
                 .map((data, index) => (

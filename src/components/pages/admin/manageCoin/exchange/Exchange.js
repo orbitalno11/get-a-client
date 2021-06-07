@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Row, Col } from "antd";
 import Promotion from "./promotions/Promotion";
-import Price from "./prices/Price";
+import CreatePrice from "./prices/CreatePrice";
 import Loading from "../../../../loading/Loading";
 import { useSelector } from "react-redux";
 
@@ -12,10 +12,10 @@ export default function Exchange() {
       {loading.loading && <Loading />}
       <Row>
         <Col span={24}>
-          <Price type="rate"/>
+          <CreatePrice type="rate"/>
         </Col>
         <Col span={24} style={{ paddingTop: "2rem" }}>
-          <Price />
+          <CreatePrice />
         </Col>
         <Col span={24} style={{ paddingTop: "2rem" }}>
           <Promotion />

@@ -8,6 +8,7 @@ import EditPromotion from "./EditPromotion";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { coinAction } from "../../../../../../redux/actions";
+import isEmpty from "../../../../../defaultFunction/checkEmptyObject";
 const { Panel } = Collapse;
 
 export default function PromotionList() {
@@ -25,7 +26,7 @@ export default function PromotionList() {
 
   return (
     <Space direction="vertical" style={{ width: "100%" }}>
-      {list &&
+      {!isEmpty(list) && list.length !== 0 && 
         list
           .filter((data) => data.type === "promo")
           .map((data, index) => (

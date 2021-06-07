@@ -36,7 +36,8 @@ export default function Request({ onHandleChange, showRequest }) {
   const [amount, setAmount] = useState(0)
 
   useEffect(() => {
-    setAmount((watchInput.coin * Number(bahtStd))/Number(coinStd))
+    const bahtTranfer = ((watchInput.coin * Number(bahtStd))/Number(coinStd)).toFixed(2)
+    setAmount(bahtTranfer)    
   }, [watchInput.coin])
 
   const onChange = async (data) => {
@@ -140,7 +141,7 @@ export default function Request({ onHandleChange, showRequest }) {
               <div className={style.margin20}>
                 <span className={style.textOne5}>หมายเลขบัญชี</span>
                 <InputComponents
-                  type="number"
+                  type="text"
                   name="accountNo"
                   register={register}
                   placeholder="หมายเลขบัญชี"
@@ -159,19 +160,12 @@ export default function Request({ onHandleChange, showRequest }) {
               </div>
             </Col>
             <Col xs={24} sm={24} md={24} lg={15}className={style.centerPage}>
-              <div className={ screens.lg ?style.bookBank : style.bookBankSm}>
                 <div className={style.marginTop20} align="center">
-                  <span className={ screens.lg?style.textOne5 : style.textOne}>
-                    รูปสมุดบัญชีหน้าแรก
-                    <br />
-                    พร้อมรับรองสำเนาถูกต้อง
-                    <br />
-                    ระบุใช้สำหรับแลกเหรียญเท่านั้น
-                  </span>
                   <div className="imageUpload">
                     <label htmlFor="file-input">
                       <Image
-                        className={screens.lg ?style.a4Image:style.a4ImageSm}
+                        // className={screens.lg ?style.a4Image:style.a4ImageSm}
+                        className={`${style.a4Image} ${style.borderImage}`}
                         src={image.imageURL ? image.imageURL : ducumentA4Sample}
                         preview={false}
                       />
@@ -188,7 +182,30 @@ export default function Request({ onHandleChange, showRequest }) {
                     <p className="error-input">{errors.image.message}</p>
                   )}
                 </div>
-              </div>
+              {/* <div className={ screens.lg ?style.bookBank : style.bookBankSm}>
+                <div className={style.marginTop20} align="center">
+                  <div className="imageUpload">
+                    <label htmlFor="file-input">
+                      <Image
+                        // className={screens.lg ?style.a4Image:style.a4ImageSm}
+                        className={`${style.a4Image} ${style.borderImage}`}
+                        src={image.imageURL ? image.imageURL : ducumentA4Sample}
+                        preview={false}
+                      />
+                    </label>
+                    <input
+                      id="file-input"
+                      type="file"
+                      name="image"
+                      ref={register}
+                      onChange={onChange}
+                    />
+                  </div>
+                  {errors.image && (
+                    <p className="error-input">{errors.image.message}</p>
+                  )}
+                </div>
+              </div> */}
             </Col>
             <Col span={24} style={{ marginTop: "48px" }}>
               <span className={style.headerOne5}>

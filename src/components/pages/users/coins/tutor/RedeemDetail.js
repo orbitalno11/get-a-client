@@ -7,14 +7,17 @@ import isMobile from "../../../../isMobile/isMobile";
 import { useSelector } from "react-redux";
 import Loading from "../../../../loading/Loading";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
+import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 
 export default function RedeemDetail({onHandleChange}) {
   const screens = useBreakpoint();
   const { loading } = useSelector((state) => state);
   const rateRedeem = useSelector((state) => state.coin.rateCoin);
-  console.log(rateRedeem)
   const balanceCoin = useSelector((state) => state.coin.balance);
+  const bahtStd = !isEmpty(rateRedeem) && rateRedeem[0].baht
+  const coinStd = !isEmpty(rateRedeem) && rateRedeem[0].coin
   const amount = balanceCoin&& balanceCoin.amount
+  const bahtTranfer = ((Number(amount) * Number(bahtStd))/Number(coinStd)).toFixed(2)
 
   return (
     <Fragment>
@@ -44,7 +47,7 @@ export default function RedeemDetail({onHandleChange}) {
                 <Row className={style.marginTop01}>
                 {rateRedeem&&rateRedeem.map((data, index) => (
                   <Col span={24} align="center" key={index} >
-                    <span className={style.headerTwo}>THB {data&& (Number(amount) * Number(data.baht))/Number(data.coin) }</span>
+                    <span className={style.headerTwo}>THB {bahtTranfer}</span>
                   </Col>
                   ))}
                 </Row>
@@ -104,7 +107,7 @@ export default function RedeemDetail({onHandleChange}) {
                   )}
                   {rateRedeem&&rateRedeem.map((data, index) => (
                   <Col md={10} lg={10} xl={9} key={index}>
-                      <span className={style.headerFour}> THB {data&& (Number(amount) * Number(data.baht))/Number(data.coin) }</span>
+                      <span className={style.headerFour}> THB {bahtTranfer}</span>
                   </Col>
                    ))}
               </Row>

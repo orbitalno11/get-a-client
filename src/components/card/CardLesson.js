@@ -44,7 +44,7 @@ export default function CardLesson({ data, isCourse, search }) {
                         (screens.lg && !search) && (
                             <Col span={12} className={`${styles.paddingTopHalf} ${styles.textOneLine}`}  >
                                 <FontAwesomeIcon icon={faBookReader} className={styles.grayIcon} />
-                                <span className={`${styles.text18} ${styles.marginLeftOneHalf}`}> {findKeyObject(defaultValue.grade, data.grade.grade)} </span>
+                                <span className={`${styles.text18} ${styles.marginLeftOneHalf}`}> {findKeyObject(defaultValue.grade, data?.grade?.grade)} </span>
                             </Col>
                         )
                     }

@@ -13,7 +13,7 @@ import { redeemSchema } from "../../../../../validation/validation";
 import { defaultValue } from "../../../../defaultValue";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import ducumentA4Sample from "../../../../images/ducumentA4Sample.webp";
+import bookBank from "../../../../images/bookBank.webp";
 import ModalComponent from "../../../../modal/ModalComponent";
 import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 const { useBreakpoint } = Grid;
@@ -21,7 +21,7 @@ const { useBreakpoint } = Grid;
 export default function Request({ onHandleChange, showRequest }) {
   const screens = useBreakpoint();
   const dispatch = useDispatch();
-  const [image, setimage] = useState(ducumentA4Sample);
+  const [image, setimage] = useState(bookBank);
 
   const { register, handleSubmit, errors, control, watch} = useForm({
     resolver: yupResolver(redeemSchema),
@@ -164,9 +164,9 @@ export default function Request({ onHandleChange, showRequest }) {
                   <div className="imageUpload">
                     <label htmlFor="file-input">
                       <Image
-                        // className={screens.lg ?style.a4Image:style.a4ImageSm}
-                        className={`${style.a4Image} ${style.borderImage}`}
-                        src={image.imageURL ? image.imageURL : ducumentA4Sample}
+                        // className={screens.lg ?style.bookBank:style.a4ImageSm}
+                        className={screens.lg ?style.bookBank:style.bookBankSm}
+                        src={image.imageURL ? image.imageURL : bookBank}
                         preview={false}
                       />
                     </label>
@@ -182,38 +182,13 @@ export default function Request({ onHandleChange, showRequest }) {
                     <p className="error-input">{errors.image.message}</p>
                   )}
                 </div>
-              {/* <div className={ screens.lg ?style.bookBank : style.bookBankSm}>
-                <div className={style.marginTop20} align="center">
-                  <div className="imageUpload">
-                    <label htmlFor="file-input">
-                      <Image
-                        // className={screens.lg ?style.a4Image:style.a4ImageSm}
-                        className={`${style.a4Image} ${style.borderImage}`}
-                        src={image.imageURL ? image.imageURL : ducumentA4Sample}
-                        preview={false}
-                      />
-                    </label>
-                    <input
-                      id="file-input"
-                      type="file"
-                      name="image"
-                      ref={register}
-                      onChange={onChange}
-                    />
-                  </div>
-                  {errors.image && (
-                    <p className="error-input">{errors.image.message}</p>
-                  )}
-                </div>
-              </div> */}
             </Col>
-            <Col span={24} style={{ marginTop: "48px" }}>
+            <Col span={24} style={{ marginTop: "1.5rem" }}>
               <span className={style.headerOne5}>
                 เอกสารที่ใช้ในการแลกเหรียญ
               </span>
               <br />
               <span className={`${style.textOne25} ${style.marginleft18}`}>
-                {" "}
                 รูปสมุดบัญชีหน้าแรก พร้อมรับรองสำเนาถูกต้อง
                 ระบุใช้สำหรับแลกเหรียญเท่านั้น
               </span>

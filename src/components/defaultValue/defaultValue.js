@@ -114,7 +114,7 @@ const transactionType = {
     1 : "ถอนเงิน", 
     2 : "แลกเหรียญ" , 
     3 : "ซื้อเหรียญ",
-    4 : "ยอดเงิน" 
+    4 : "รายได้จากคลิปออนไลน์" 
 }
 
 export const defaultValue = {

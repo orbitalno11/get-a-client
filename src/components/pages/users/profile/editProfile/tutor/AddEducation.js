@@ -155,7 +155,7 @@ export default function AddEducation() {
         setImageName([])
         document.getElementById("myform").reset()
     }
-//
+
     const onHandleChangeImage = async (value) => {
         document.getElementById("image1").value = "image"
         const fileInput = value.target.files[0]

@@ -15,9 +15,9 @@ function checkErrorMessage(errorMessage) {
 }
 
 function getCoinRatesLearner(){ 
-        return async dispatch => {
+        return (dispatch) => {
             dispatch(loadingActions.startLoading())
-            await apiURL.apiGetA.get("/coin/rates?user=1").then(res => {
+            apiURL.apiGetA.get("/coin/rates?user=1").then(res => {
                 dispatch(loadingActions.stopLoading())
                 const coin = res.data.data.filter((item) => item.type === "std")
                 dispatch(success(coin))
@@ -32,9 +32,9 @@ function getCoinRatesLearner(){
 }
 
 function getCoinRatesTutor(){
-    return async dispatch => {
+    return (dispatch) => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get("/coin/rates?user=2").then(res => {
+        apiURL.apiGetA.get("/coin/rates?user=2").then(res => {
             dispatch(loadingActions.stopLoading())
             const coin = res.data.data.filter((item) => item.type === "transfer")
             dispatch(success(coin))
@@ -48,9 +48,9 @@ function getCoinRatesTutor(){
 }
 
 function getCoinRatesAdmin(){
-    return async dispatch => {
+    return (dispatch) => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get("/coin/rates?user=0").then(res => {
+        apiURL.apiGetA.get("/coin/rates?user=0").then(res => {
             dispatch(loadingActions.stopLoading())
             const coin = res.data.data
             dispatch(success(coin))
@@ -64,9 +64,9 @@ function getCoinRatesAdmin(){
 }
 
 function getCoinBalance(){
-    return async dispatch => {
+    return (dispatch) => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get("/me/coin",{
+        apiURL.apiGetA.get("/me/coin",{
             params:{
                 type:101
             }
@@ -84,9 +84,9 @@ function getCoinBalance(){
 }
 
 function getCoinTransaction(){
-    return async dispatch => {
+    return (dispatch) => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get("/me/coin",{
+        apiURL.apiGetA.get("/me/coin",{
             params:{
                 type:103
             }
@@ -104,9 +104,9 @@ function getCoinTransaction(){
 }
 
 function getCoinRedeem(){
-    return async dispatch => {
+    return (dispatch) => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get("/me/coin",{
+        apiURL.apiGetA.get("/me/coin",{
             params:{
                 type:105
             }
@@ -124,9 +124,9 @@ function getCoinRedeem(){
 }
 
 function createCoinRate(data){
-    return async dispatch => {
+    return (dispatch) => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post("/coin/rate",data).then(() => {
+        apiURL.apiGetA.post("/coin/rate",data).then(() => {
             dispatch(success())
             dispatch(loadingActions.stopLoading())
             dispatch(coinAction.getCoinRatesAdmin());
@@ -150,13 +150,13 @@ function createCoinRate(data){
 }
 
 function clearCreateRate() {
-    return dispatch => { dispatch({ type: coinConstants.CLEAR_COIN_RATE }) }
+    return (dispatch) => { dispatch({ type: coinConstants.CLEAR_COIN_RATE }) }
 }
 
 function deleteCoinRate(id) {
-    return async dispatch => {
+    return (dispatch) => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.delete(`/coin/rate/${id}`).then(() => {
+        apiURL.apiGetA.delete(`/coin/rate/${id}`).then(() => {
             dispatch(success())
             dispatch(loadingActions.stopLoading())
             dispatch(coinAction.getCoinRatesAdmin());
@@ -181,9 +181,9 @@ function deleteCoinRate(id) {
 }
 
 function updateCoinRate(id,data) {
-    return async dispatch => {
+    return (dispatch) => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.put(`/coin/rate/${id}`,data).then(() => {
+        apiURL.apiGetA.put(`/coin/rate/${id}`,data).then(() => {
             dispatch(success())
             dispatch(loadingActions.stopLoading())
             dispatch(coinAction.getCoinRatesAdmin());
@@ -211,7 +211,7 @@ function updateCoinRate(id,data) {
 function activateRate(id){ 
     return  (dispatch) => {
         dispatch(loadingActions.startLoading())
-         apiURL.apiGetA.get(`/coin/rate/${id}/activate`)
+        apiURL.apiGetA.get(`/coin/rate/${id}/activate`)
         .then(() => {
             dispatch(loadingActions.stopLoading())
             dispatch(coinAction.getCoinRatesAdmin());
@@ -246,7 +246,7 @@ function getRequestsRedeem(){
 function ApproveRequestsRedeem(id){ 
     return  (dispatch) => {
         dispatch(loadingActions.startLoading())
-            apiURL.apiGetA.get(`/coin/redeem/${id}/approved`).then(() => {
+        apiURL.apiGetA.get(`/coin/redeem/${id}/approved`).then(() => {
             dispatch(loadingActions.stopLoading())
             dispatch(coinAction.getRequestsRedeem());
             dispatch(modalAction.openModal({
@@ -268,10 +268,9 @@ function ApproveRequestsRedeem(id){
 }
 
 function DeniedRequestsRedeem(id,user){ 
-
     return  (dispatch) => {
         dispatch(loadingActions.startLoading())
-            apiURL.apiGetA.get(`/coin/redeem/${id}/denied`,{
+        apiURL.apiGetA.get(`/coin/redeem/${id}/denied`,{
                 params:{
                     id:id,
                     user: user
@@ -298,9 +297,9 @@ function DeniedRequestsRedeem(id,user){
 }
 
 function createRequestRedeem(data){
-    return async dispatch => {
+    return (dispatch) => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post("/coin/redeem", data, {
+        apiURL.apiGetA.post("/coin/redeem", data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }

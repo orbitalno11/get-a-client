@@ -1,7 +1,6 @@
 import React, { Fragment,useState,useEffect} from "react";
 import { Row , Divider } from "antd";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
-// import Loading from "../../../../loading/Loading";
 import TableRequest from "./TableRequest"
 import Request from "./Request"
 import RedeemDetail from "./RedeemDetail"

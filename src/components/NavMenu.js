@@ -21,8 +21,6 @@ const NavMenu = () => {
     const dispatch = useDispatch()
     const statusTutor = auth.role === 2
     const status = auth.isAuthenticated
-    const profileLearnerURL = "/learner/" + auth.profile
-    const profileTutorURL = "/tutor/" + auth.profile
     const UserMenu = () => {
 
         return (
@@ -52,11 +50,11 @@ const NavMenu = () => {
                     <NavLink to="/search">
                         ค้นหา
                 </NavLink>
-                </Menu.Item>
+                </Menu.Item> 
                 {
                     status ? (
-                        <Menu.Item key={profileLearnerURL} >
-                            <NavLink to={profileLearnerURL}>
+                        <Menu.Item key="/me" >
+                            <NavLink to="/me">
                                 โปรไฟล์
                         </NavLink>
                         </Menu.Item>
@@ -100,8 +98,8 @@ const NavMenu = () => {
                 </Menu.Item> */}
                 {
                     status ? (
-                        <Menu.Item key={profileTutorURL} >
-                            <NavLink to={profileTutorURL}>
+                        <Menu.Item key="/me" >
+                            <NavLink to="/me">
                                 โปรไฟล์
                         </NavLink>
                         </Menu.Item>
@@ -145,7 +143,7 @@ const NavMenu = () => {
                     </NavLink>
                 </Col>
                 <Col span={4} className="iconMenu">
-                    <NavLink to={profileLearnerURL}>
+                    <NavLink to="/me">
                         <FontAwesomeIcon icon={faUserCircle} className="icon" />
                     </NavLink>
                 </Col>
@@ -186,7 +184,7 @@ const NavMenu = () => {
                     </NavLink>
                 </Col> */}
                 <Col span={6.5} className="iconMenu">
-                    <NavLink to={ profileTutorURL }>
+                    <NavLink to="/me">
                         <FontAwesomeIcon icon={faUserCircle} className="icon" />
                     </NavLink>
                 </Col>

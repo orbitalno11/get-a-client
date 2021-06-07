@@ -10,22 +10,9 @@
   background-color: $white;
 }
 
-.paddingCard {
-  padding: 1rem !important;
-}
-
-.paddingTop{
-  padding-top: 0.5rem
-}
-
 .cardRound{
    @extend .card;
     width : 50%
-}
-
-.alignCenter {
-  display: flex;
-  justify-content: center;
 }
 
 .image {
@@ -41,7 +28,7 @@
 }
 
 .borderGrid {
-  @extend .paddingCard;
+  @extend .paddingOne;
   -webkit-box-shadow: none;
   display: flex;
   align-items: center;
@@ -52,12 +39,6 @@
   width: 30% !important;
 }
 
-.gridhalf {
-  @extend .borderGrid;
-  width: 50% !important;
-  height: 2.5rem !important;
-}
-
 .gridfull {
   @extend .borderGrid;
   width: 100% !important;
@@ -65,12 +46,12 @@
 }
 
 .imageClip{
-    height: 8rem;
-    width: 7rem;
+    height: 8.5rem;
+    width: auto;
     padding : 0.5rem;
 
-    @media screen and (max-width: 400px) {
-      height: 6rem;
+    @media screen and (max-width: 992px) {
+      height: 8rem;
       width: 5rem;
     }
 }
@@ -88,11 +69,6 @@
     padding-left: 2.5rem!important;
 }
 
-.textIcon {
-  @extend .textSmall;
-  margin-left: 0.6rem;
-}
-
 .paddingleftcourse {
     padding-left: 1rem;
   }
@@ -101,20 +77,9 @@
   padding: 0.4rem;
 }
 
-.cardCourse{
-  border: 0.2rem solid #C4C4C4;
-  border-radius: 1.5rem;
-}
-
 .floatBell{
   margin-left: auto;
   @extend .iconLarge;
-}
-
-.icon{
-    @extend .iconSmall;
-    color:$gray;
-    margin-right: 0.5rem
 }
 
 .iconyellow{
@@ -132,30 +97,13 @@
   color: $yellow;
 }
 
-.cardLessonXS {
- @extend .cardRound;
- width: 18rem;
-}
-
-.cardLesson {
-  @extend .cardRound;
-  width: 23rem;
- }
-
-.dividerLine{
-  width: 100%;
-  background-color: $orange;
-}
-
-.CardCourseTutor{
-  @extend .cardRound;
-   padding: 1rem;
-   width: 100%;
-   height: 10rem
-}
-
 .textOneLine {
   @include cutText(1)
+}
+
+.textTwoLine {
+  @include cutText(2);
+  line-height: 90%;
 }
 
 .textLink{
@@ -166,10 +114,6 @@
 .textLinkDelete{
   @extend .textLink;
   color : $red
-}
-
-.marginTop1{
-  margin-top: 0.5rem;
 }
 
 .textThreeLine {
@@ -184,46 +128,24 @@
    margin-right: 1rem;
 }
 
-.marginTop05{
-  margin-Top: 0.5rem;
-}
-
-.lineHeight{
-  line-height: 80%;
-}
-
-.textOneTwo {
-  @include cutText(2)
-}
-
 .imageSmall {
   border-radius: 50% !important;
   height: 3.5rem;
   width: 3.5rem;
 }
-.marginBottom05{
-  margin-bottom: 0.3rem;
+
+.grayIcon{
+  @extend .textOne5 ;
+  @extend .fullWidth;
+  color : $gray;
 }
 
-.lineHeight{
-  line-height: 80%;
+.floatRight{
+  float:right
 }
 
-.cutText1Line {
-  @include cutText(1)
-}
-
-.wait {
-  @extend .buttonCircle;
-  background-color: $yellow;
-}
-
-.deny {
-  @extend .buttonCircle;
-  background-color: $red;
-}
-
-.approved {
-  @extend .buttonCircle;
-  background-color: $green;
+.imageIcon {
+  border-radius: 50% !important;
+  height: 1.5rem;
+  width: 1.5rem;
 }

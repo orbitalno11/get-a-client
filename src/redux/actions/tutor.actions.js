@@ -105,7 +105,7 @@ function getEducation(id) {
     function failure(err) { return { type: tutorConstants.GET_EDUCATION_FAILURE, payload: err } }
 }
 
-function createTesting(data, profile) {
+function createTesting(data) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.post("/tutor/testing/verify", data, {
@@ -119,7 +119,7 @@ function createTesting(data, profile) {
                 text: "เพ่ิมข้อมูลการสอบสำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose : `/tutor/${profile}`
+                afterClose : "/me"
             }))
         }).catch(err => {
             dispatch(failure(err.response?.data))
@@ -135,7 +135,7 @@ function createTesting(data, profile) {
     function failure(err) { return { type: tutorConstants.CREATE_TESTING_FAILURE, payload: err } }
 }
 
-function createEducation(data, profile) {
+function createEducation(data) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.post("/tutor/education/verify", data, {
@@ -149,7 +149,7 @@ function createEducation(data, profile) {
                 text: "เพิ่มข้อมูลการศึกษาสำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose : `/tutor/${profile}`
+                afterClose : "/me"
             }))
         }).catch(err => {
             dispatch(failure(err.response.data))
@@ -165,7 +165,7 @@ function createEducation(data, profile) {
     function failure(err) { return { type: tutorConstants.CREATE_EDUCATION_FAILURE, payload: err } }
 }
 
-function updateTesting(data, id, profile) {
+function updateTesting(data, id) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.put(`/tutor/testing/${id}`, data, {
@@ -179,7 +179,7 @@ function updateTesting(data, id, profile) {
                 text: "แก้ไขข้อมูลการสอบสำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose : `/tutor/${profile}`
+                afterClose : "/me"
             }))
         }).catch(err => {
             dispatch(failure(err.response?.data))
@@ -195,7 +195,7 @@ function updateTesting(data, id, profile) {
     function failure(err) { return { type: tutorConstants.UPDATE_TESTING_FAILURE, payload: err } }
 }
 
-function updateEducation(data, id, profile) {
+function updateEducation(data, id) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
         await apiURL.apiGetA.put(`/tutor/education/${id}`, data, {
@@ -209,7 +209,7 @@ function updateEducation(data, id, profile) {
                 text: "เพิ่มข้อมูลการศึกษาสำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose : `/tutor/${profile}`
+                afterClose : "/me"
             }))
         }).catch(err => {
             dispatch(failure(err.response?.data))
@@ -301,6 +301,27 @@ function getListOfflineCourse(id) {
     function failure(err) { return { type: tutorConstants.GET_LIST_OFFLINE_COURSE_FAILURE, payload: err } }
 }
 
+function getListOnlineCourse(id) {
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiURL.apiGetA.get(`/tutor/${id}/online-course`)
+            .then(res => {
+                if (res.data.success) {
+                    const data = res.data.data
+                    dispatch(success(data))
+                    dispatch(loadingActions.stopLoading())
+                }
+            })
+            .catch(err => {
+                dispatch(failure(err.response?.data))
+                dispatch(loadingActions.stopLoading())
+            })
+    }
+
+    function success(course) { return { type: tutorConstants.GET_LIST_ONLINE_COURSE_SUCCESS, payload: course } }
+    function failure(err) { return { type: tutorConstants.GET_LIST_ONLINE_COURSE_FAILURE, payload: err } }
+}
+
 function getProfileTutor(id) {
     return async dispatch => {
         dispatch(loadingActions.startLoading())
@@ -338,5 +359,6 @@ export const tutorAction = {
     deleteEducation,
     getListOfflineCourse,
     clearListOfflineCourse,
-    getProfileTutor
+    getProfileTutor,
+    getListOnlineCourse
 }

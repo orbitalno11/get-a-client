@@ -80,7 +80,7 @@ export default function EditProfileMap() {
                 lat: address.lat,
                 lon: address.lon,
                 current: false,
-                originalValue: true
+                originalValue: false
             })
             reset({
                 address: address.address,
@@ -97,7 +97,7 @@ export default function EditProfileMap() {
                 lat: defaultValue.constantLocation.defaultLat,
                 lon: defaultValue.constantLocation.defaultLng,
                 current: false,
-                originalValue: true
+                originalValue: false
             })
             reset({
                 address: defaultValue.constantLocation.defaultAddress,

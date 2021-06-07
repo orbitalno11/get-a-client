@@ -150,7 +150,6 @@ export default function ProfileIdentityForm() {
                                                         className={`${style.borderImage} ${style.HDImage}`}
                                                         src={image[item.name].imageURL ? image[item.name].imageURL : item.image}
                                                         preview={false}
-
                                                     />
                                                 </label>
                                                 <input id={`file-input-${item.name}`} name={item.name} type="file" onChange={onChange} ref={register} />
@@ -162,15 +161,12 @@ export default function ProfileIdentityForm() {
                                     </Col>
                                 ))
                             }
-                            <Col span={24} align="center" className={style.marginTop}>
+                            <Col span={24} align="center" className={style.marginTopTwo}>
                                 <button className={style.buttonColor} style={styleComponent.buttonFull(color.orange, "7rem")} type="submit">บันทึกข้อมูล</button>
                             </Col>
                         </Row>
-
                     </div>
                 </form>
-
-
             </div>
         </Fragment>
     )

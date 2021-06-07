@@ -348,7 +348,7 @@ textarea{
   font-size: 1.25rem;
 }
 
-#reviewForm .ant-spin-dot-item {
+#whiteSpin .ant-spin-dot-item {
   background-color: var(--white-color) !important;
 }
 

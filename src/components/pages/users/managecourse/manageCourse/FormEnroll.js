@@ -1,11 +1,11 @@
-import { Button, Spin } from "antd"
+import { Button } from "antd"
 import React from 'react'
 import style from "../styles.module.scss";
 import { offlineCourseAction } from "../../../../../redux/actions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Fragment } from "react";
-
+import { styleComponent } from "../../../../defaultFunction/style";
 
 export default function FormEnroll({ data }) {
     const dispatch = useDispatch()
@@ -30,7 +30,7 @@ export default function FormEnroll({ data }) {
                 {
                     loading.loading && (
                         <Fragment>
-                            <Spin style={{ marginRight: "0.5rem" }} />
+                            <styleComponent.spinLoading />
                             <span> กำลังส่งคำขอ</span>
                         </Fragment>
                     )
@@ -43,5 +43,4 @@ export default function FormEnroll({ data }) {
             ส่งคำขอเรียน
         </Button>
         </div>)
-
 }

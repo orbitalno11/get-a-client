@@ -19,7 +19,6 @@ import Loading from "../../../../../loading/Loading"
 import ProfileSample from "../../../../../images/profile.webp"
 import InputComponents from "../../../../../input/InputComponets";
 import { styleComponent } from "../../../../../defaultFunction/style";
-
 const { useBreakpoint } = Grid;
 
 export default function EditProfile() {
@@ -44,7 +43,7 @@ export default function EditProfile() {
                 firstname: detailProfile.firstname,
                 lastname: detailProfile.lastname,
                 gender: findKeyObject(defaultValue.gender, detailProfile.gender),
-                dateOfBirth: moment(detailProfile.dateOfBirth, defaultValue.dateFormat),
+                dateOfBirth: (moment(new Date(detailProfile.dateOfBirth),defaultValue.dateFormat)),
                 grade: detailProfile.grade.grade,
                 email: detailProfile.email,
                 facebook: detailProfile.contact.facebookUrl,
@@ -170,7 +169,6 @@ export default function EditProfile() {
                                         {
                                             errors && errors.grade && <p className="error-input">{errors.grade.message}</p>
                                         }
-
                                     </Col>
                                 </Row>
                             </Col>

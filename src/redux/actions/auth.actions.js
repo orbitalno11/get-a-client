@@ -31,16 +31,20 @@ function loginUser(loginData, path) {
                         const getAToken = res.data.data
                         const user = jwtDecode(getAToken);
                         localStorage.setItem('token', getAToken);
-                        setAuthToken(getAToken)                    
+                        setAuthToken(getAToken)
                         dispatch(success(user))
                         dispatch(loadingActions.stopLoading())
                         if (user.role === 2) {
                             trackTutorLogin()
-                            window.location.href = "/tutor"
+                            if (path) {
+                                window.location.href = decodeURIComponent(path)
+                            } else {
+                                window.location.href = "/tutor"
+                            }
                         } else if (user.role === 1) {
-                            if(path){
-                                window.location.href =  decodeURIComponent(path)
-                            }else{
+                            if (path) {
+                                window.location.href = decodeURIComponent(path)
+                            } else {
                                 window.location.href = "/"
                             }
                         } else if (user.role === 0) {

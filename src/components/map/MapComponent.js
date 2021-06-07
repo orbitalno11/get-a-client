@@ -75,7 +75,7 @@ export default function MapComponent({ callBackLocation, initLocation, getCurren
         if (!isEmpty(map)) {
             setMap()
             /// fisrt time marker with default location ~ current location or fixed location
-            if (initLocation.current && !initLocation.originalValue) {
+            if (!isEmpty(initLocation.current) && !initLocation.originalValue) {
                 rerverseGeocoding(true)
             }
             focusMarker()

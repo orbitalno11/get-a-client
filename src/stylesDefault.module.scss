@@ -9,12 +9,6 @@ $green : #00B900;
 $black : #000000;
 $silver : #a39b9b;
 
-// for register page 
-.titleH1{
-    font-size: 3.75rem;
-    font-weight: 600;
-}
-
 .titleH2{
     font-size: 2rem;
     font-weight: 600;
@@ -181,13 +175,30 @@ $silver : #a39b9b;
     margin-top:1rem
 }
 
-.buttonColor{
-    @extend .textOne5;
+.button {
     border-style: none  !important;
     color:var(--white-color)  !important;
+    outline:none !important;
+}
+
+.buttonColor{
+    @extend .textOne5;
+    @extend .button;
     height: auto;
     border-radius: 0.5rem;
-    outline:none !important;
+}
+
+
+.marginLeftThree {
+    margin-left: 3rem;
+}
+
+.marginLeftOne5 {
+    margin-left: 1.5rem;
+}
+
+.marginLeftOne {
+    margin-left: 1rem;
 }
 
 .marginLeftOneHalf {
@@ -203,6 +214,11 @@ $silver : #a39b9b;
 
 .headerThree{
     font-size: 3rem;
+    font-weight: 700;
+}
+
+.headerTwo75{
+    font-size: 2.75rem;
     font-weight: 700;
 }
 
@@ -253,4 +269,44 @@ $silver : #a39b9b;
 
 .textOne{
     font-size: 1rem;
+}
+
+.text18{
+    font-size: 18px;
+}
+
+.colorYellow{
+    color : $yellow !important
+}
+
+.fullWidth{
+    width: 100%;
+}
+
+.TextHeight{
+    line-height: 90%
+}
+
+.paddingOne{
+    padding : 1rem !important
+}
+
+.paddingTopHalf{
+   padding-top: 0.5rem
+}
+
+.marginTopHalf{
+    margin-top: 0.5rem;
+}
+  
+.cursor{
+    cursor: pointer;
+}
+
+.marginRightHalf{
+    margin-right: 0.5rem;
+}
+
+.fullHeight{
+    height: 100%;
 }

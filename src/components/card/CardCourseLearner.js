@@ -46,7 +46,7 @@ export default function CardCourseLearner({ data, verizontal, type, ranking }) {
                             <Col span={8} >
                                 <Image
                                     src={data ? (isOffline ? data.pictureUrl : data.coverUrl) : ProfileSample}
-                                    className={styles.imageLarge}
+                                    className={screen.md ? styles.imageLarge : styles.image}
                                     preview={false}
                                 />
                             </Col>
@@ -79,7 +79,7 @@ export default function CardCourseLearner({ data, verizontal, type, ranking }) {
                         <Row align="center" >
                             <Image
                                 src={data ? (isOffline ? data.pictureUrl : data.coverUrl) : ProfileSample}
-                                className={styles.image}
+                                className={screen.md ? styles.image : styles.image}
                                 preview={false}
                             />
                             <Col span={24} align="center">
@@ -115,6 +115,5 @@ export default function CardCourseLearner({ data, verizontal, type, ranking }) {
                     </Fragment>)
             }
         </div>
-
     )
 }

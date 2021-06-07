@@ -70,7 +70,7 @@ export default function EditProfileDetail() {
                 firstname: detailProfile.firstname,
                 lastname: detailProfile.lastname,
                 gender: findKeyObject(defaultValue.gender, detailProfile.gender),
-                dateOfBirth: moment(detailProfile.dateOfBirth, defaultValue.dateFormat),
+                dateOfBirth: (moment(new Date(detailProfile.dateOfBirth),defaultValue.dateFormat)),
                 subject: arraySubject && arraySubject,
                 email: detailProfile.email,
                 facebook: detailProfile.contact.facebookUrl,
@@ -102,7 +102,7 @@ export default function EditProfileDetail() {
 
     return (
         <Fragment>
-            {isMobile() && <Header title="แก้ไขข้อมูลส่วนตัว" pageBack={"/tutor/" + auth.profile} />}
+            {isMobile() && <Header title="แก้ไขข้อมูลส่วนตัว" pageBack={"/me"} />}
             <ModalComponent />
             {
                 (loader) && (

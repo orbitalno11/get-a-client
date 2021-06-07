@@ -1,10 +1,9 @@
 import React, { Fragment } from "react"
-import { Col, Grid, Image, Row } from "antd"
+import { Col, Grid, Image, Row, Space } from "antd"
 import {
     faBook,
     faBookReader,
     faClock,
-    faCoins,
     faStar,
     faUserFriends,
     faVideo,
@@ -19,6 +18,7 @@ import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
+import { styleComponent } from "../../../../defaultFunction/style";
 const { useBreakpoint } = Grid;
 
 export default function DetailCourse() {
@@ -131,14 +131,18 @@ export default function DetailCourse() {
                                 }
                             </Col>
                             <Col xs={24} md={12} xl={isOfflineCourse ? 6 : 8} className={style.paddingTopOneHalf}>
-                                <FontAwesomeIcon icon={isOfflineCourse ? faCoins : faVideo} className={style.iconmarker} />
-                                {
-                                    course ? (
-                                        <span className={style.textOne5}>{isOfflineCourse ? course.costText : course.numberOfVideo}</span>
-                                    ) : (
-                                        <SkeletonComponent.SkeletonText />
-                                    )
-                                }
+                                <Space align="center" direction="horizontal">
+                                    {
+                                        isOfflineCourse ? (<styleComponent.iconCoin size="35" />) : (<FontAwesomeIcon icon={faVideo} className={style.iconmarker} />)
+                                    }
+                                    {
+                                        course ? (
+                                            <span className={`${style.textOne5} ${style.marginLeftOneHalf}`}>{isOfflineCourse ? course.costText : course.numberOfVideo}</span>
+                                        ) : (
+                                            <SkeletonComponent.SkeletonText />
+                                        )
+                                    }
+                                </Space>
                             </Col>
 
                             <Col xs={24} md={12} xl={isOfflineCourse ? 6 : 8} className={style.paddingTopOneHalf} >

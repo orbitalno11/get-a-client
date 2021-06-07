@@ -119,21 +119,19 @@ export default function PublicProfileDetail({ isCourse }) {
             <ProfileContact data={tutorHandle && tutorHandle.contact} isTutorProfile />
             {
                 ((isCourse && !screens.md) || (!isCourse && screens.md)) && (
-                    <Row align="middle" justify="space-between" className={`${screens.md && style.section} ${style.marginSection} ${!screens.md && style.paddingProfileMobile}`} >
-                        {
-                            (!isEmpty(testing) || !isEmpty(education)) && (
-                                <Col span={24}>
-                                    <span className={style.textOne75}>ประวัติการศึกษา</span >
-                                </Col>
-                            )
-                        }
-                        {
-                            !isEmpty(testing) && <EducationTutor data={testing} type={defaultValue.typeIdentity["testing"]} status="learner" />
-                        }
-                        {
-                            !isEmpty(education) && <EducationTutor data={education} type={defaultValue.typeIdentity["education"]} status="learner" />
-                        }
-                    </Row>
+                    (!isEmpty(testing) || !isEmpty(education)) && (
+                        <Row align="middle" justify="space-between" className={`${screens.md && style.section} ${style.marginSection} ${!screens.md && style.paddingProfileMobile}`} >
+                            <Col span={24}>
+                                <span className={style.textOne75}>ประวัติการศึกษา</span >
+                            </Col>
+                            {
+                                !isEmpty(testing) && <EducationTutor data={testing} type={defaultValue.typeIdentity["testing"]} status="learner" />
+                            }
+                            {
+                                !isEmpty(education) && <EducationTutor data={education} type={defaultValue.typeIdentity["education"]} status="learner" />
+                            }
+                        </Row>
+                    )
                 )
             }
         </div>

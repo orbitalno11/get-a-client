@@ -16,9 +16,9 @@ import { styleComponent } from "../defaultFunction/style";
 
 export default function CardCourseTutor({ data, type, search }) {
     const history = useHistory();
-
+    console.log(type)
     const redirectToCoursePage = () => {
-        history.push(`/${type}/${data.id}`)
+        history.push(`/course/${data.id}`)
     }
 
     return (

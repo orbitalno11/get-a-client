@@ -42,7 +42,7 @@ export default function RedeemList({ onHandleChange}) {
           {detailRequest && detailRequest.length ? (
           <div>
             {!isEmpty(detailRequest) &&
-            detailRequest.map((data, index) => (
+            detailRequest.sort((a, b) => (b.requestDate > a.requestDate) ? 1 : -1).map((data, index) => (
               <div style={{ paddingTop: "0.5rem" }} key={index}  onClick={() => onHandleChange(true,data.id)}>
                 <Row>
                   <Col xs={4} sm={3} className={style.centerPage}>

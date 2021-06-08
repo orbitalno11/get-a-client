@@ -14,8 +14,9 @@ export default function RedeemDetail({onHandleChange}) {
   const { loading } = useSelector((state) => state);
   const rateRedeem = useSelector((state) => state.coin.rateCoin);
   const balanceCoin = useSelector((state) => state.coin.balance);
-  const bahtStd = !isEmpty(rateRedeem) && rateRedeem[0].baht
-  const coinStd = !isEmpty(rateRedeem) && rateRedeem[0].coin
+  const lastIndex = rateRedeem&&rateRedeem.length-1
+  const bahtStd = !isEmpty(rateRedeem) && rateRedeem[lastIndex].baht
+  const coinStd = !isEmpty(rateRedeem) && rateRedeem[lastIndex].coin
   const amount = balanceCoin&& balanceCoin.amount
   const bahtTranfer = ((Number(amount) * Number(bahtStd))/Number(coinStd)).toFixed(2)
 

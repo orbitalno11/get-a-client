@@ -28,7 +28,7 @@ export default function CardClip({ data, isOwner, all }) {
                 all && (
                     <Col span={7} align="end">
                         <Space align="center" direction="horizontal">
-                            {(!isEmpty(data?.bought) && data?.bought === false) && <styleComponent.iconCoin />}
+                            {(isEmpty(data?.bought) || data?.bought === false) && <styleComponent.iconCoin />}
                             <span className={styles.text18}>{(!isEmpty(data?.bought) && data?.bought === true) ? "ซื้อแล้ว" : data.cost}</span>
                         </Space>
                     </Col>

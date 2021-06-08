@@ -45,11 +45,9 @@ export default function RedeemDetail({onHandleChange}) {
                   </Col>                 
                 </Row>
                 <Row className={style.marginTop01}>
-                {rateRedeem&&rateRedeem.map((data, index) => (
-                  <Col span={24} align="center" key={index} >
+                  <Col span={24} align="center">
                     <span className={style.headerTwo}>THB {bahtTranfer}</span>
                   </Col>
-                  ))}
                 </Row>
                 <Row style={{ marginTop:"1rem" }}>
                   <Col xs={8} sm={6}>
@@ -58,12 +56,9 @@ export default function RedeemDetail({onHandleChange}) {
                   <Col xs={4} sm={3} className={style.centerPage}>
                     <FontAwesomeIcon icon={faCoins} className={style.Xs} />
                   </Col>
-                    {rateRedeem &&
-                      rateRedeem.map((data, index) => (
-                        <Col xs={10} sm={9} key={index}>
-                          <span className={style.textOne5}>{data && data.coin} : {data && data.baht} THB</span>
+                        <Col xs={10} sm={9}>
+                          <span className={style.textOne5}>{coinStd} : {bahtStd} THB</span>
                         </Col>
-                      ))}
                 </Row>
                 <Row className={style.centerPage} style={{marginTop:"3rem"}}>
                   <Button
@@ -105,11 +100,9 @@ export default function RedeemDetail({onHandleChange}) {
                         <span className={style.headerFour}>{balanceCoin.amount}</span>
                     </Col>
                   )}
-                  {rateRedeem&&rateRedeem.map((data, index) => (
-                  <Col md={10} lg={10} xl={9} key={index}>
+                  <Col md={10} lg={10} xl={9}>
                       <span className={style.headerFour}> THB {bahtTranfer}</span>
                   </Col>
-                   ))}
               </Row>
               <Row className={style.paddingTopHead2} style={{paddingBottom:"3rem"}}>
                   <Col md={7} lg={5} xl={4}>
@@ -118,11 +111,9 @@ export default function RedeemDetail({onHandleChange}) {
                   <Col md={2} lg={2} xl={2} className={style.centerPage} >
                     <FontAwesomeIcon icon={faCoins} className={style.small} />
                   </Col>
-                  {rateRedeem&&rateRedeem.map((data, index) => (
-                  <Col span={12} key={index}>
-                      <span className={style.textTwo25}>{data&&data.coin} : {data&&data.baht} &nbsp;THB</span>  
+                  <Col span={12}>
+                      <span className={style.textTwo25}>{coinStd} : {bahtStd} &nbsp;THB</span>  
                   </Col>
-                  ))}
               </Row>
             </div>
           )}

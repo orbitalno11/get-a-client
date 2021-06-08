@@ -57,7 +57,7 @@ export default function TableRequest({ onHandleChange}) {
               </thead>
               <tbody>
                 {!isEmpty(detailRequest) &&
-                  detailRequest.map((data, index) => (
+                  detailRequest.sort((a, b) => (b.requestDate > a.requestDate) ? 1 : -1).map((data, index) => (
                     <tr
                       style={{ width: "1rem" }}
                       key={index}

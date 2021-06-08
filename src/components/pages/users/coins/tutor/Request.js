@@ -37,7 +37,7 @@ export default function Request({ onHandleChange, showRequest ,idRequest }) {
   const [amount, setAmount] = useState(0)
 
   useEffect(() => {
-    setAmount((watchInput.coin * Number(bahtStd))/Number(coinStd))
+    setAmount(((watchInput.coin * Number(bahtStd))/Number(coinStd)).toFixed(2))
   }, [watchInput.coin])
 
   const onCancel = (id)=>{

@@ -36,8 +36,7 @@ function getCoinRatesTutor(){
         dispatch(loadingActions.startLoading())
         apiURL.apiGetA.get("/coin/rates?user=2").then(res => {
             dispatch(loadingActions.stopLoading())
-            const coin = res.data.data.filter((item) => item.type === "transfer")
-            console.log(coin)
+            const coin = res.data.data.filter((item) => item.type === "transfer" && item.active === true)
             dispatch(success(coin))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
@@ -317,7 +316,6 @@ function createRequestRedeem(data){
             dispatch(loadingActions.stopLoading())
             const message = checkErrorMessage(err.response?.data.message)
             dispatch(failure(err.response.data))
-            console.log(err.response?.data)
             dispatch(modalAction.openModal({
                 text: message,
                 size: sizeModal.small,

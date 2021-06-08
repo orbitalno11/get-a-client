@@ -10,7 +10,6 @@ import styles from "./styles.module.scss"
 export default function CardClip({ data, isOwner, all }) {
     const { courseId } = useParams()
     const history = useHistory()
-
     const redirectClipPage = () => {
         history.push(`${isOwner ? "/tutor/" : "/"}online/${courseId}/video/${data.id}`)
     }

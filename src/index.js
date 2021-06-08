@@ -4,8 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./core/string.extension"
-import "./core/array.extension"
-import "./core/object.extension"
+
 
 ReactDOM.render(
    <App />,

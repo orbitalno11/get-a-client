@@ -15,7 +15,9 @@ const buttonFull = (buttonColor, size) => {
 
 const iconCoin = ({size}) => {
     const sizeIcon = () =>{
-        if(size === "large"){
+        if(size === "largest"){
+            return 50
+        }else if(size === "large"){
             return 36
         }else if(size === "medium"){
             return 27

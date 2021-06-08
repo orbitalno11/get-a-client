@@ -184,9 +184,9 @@ function getClipOnlineCourse(id) {
         apiURL.apiGetA.get(`/online-course/${id}/clip/`)
             .then(res => {
                 if (res.data.success) {
+                    dispatch(loadingActions.stopLoading())
                     const data = res.data.data
                     dispatch(success(data))
-                    dispatch(loadingActions.stopLoading())
                 }
             })
             .catch((err) => {

@@ -41,11 +41,11 @@ import { userActions } from "./redux/actions";
 import Course from "./components/pages/users/managecourse/manageCourse/Course";
 import Ranking from "./components/pages/users/home/learner/Ranking";
 import { defaultValue } from "./components/defaultValue";
-import ManageCourse from "./components/pages/users/managecourse/manageCourse/ManageCourse";
 import VDO from "./components/pages/users/managecourse/onlineCourse/player/VDO"
 import Profile from "./components/pages/users/profile/profile/Profile";
 import PubilcProfileCourse from "./components/pages/users/profile/profile/publicProflie/PubilcProfileCourse";
 import PubilcProfile from "./components/pages/users/profile/profile/publicProflie/PubilcProfile";
+import ClipList from "./components/pages/users/managecourse/onlineCourse/ClipList";
 
 
 if (localStorage.token) {
@@ -107,7 +107,7 @@ function App() {
           <Route exact path="/:type/:id" component={Course} />
           <Route exact path="/search" component={Search} />
           <Route exact path="/course/online/:id" component={OnlineCourseList} />
-          <Route exact path="/course/online/:courseId/video" component={ManageCourse} />
+          <Route exact path="/course/online/:courseId/video" component={ClipList} />
           <Route exact path="/online/:courseId/video/:videoId" component={VDO} />
           <Route path="*">
             <Redirect path="/" />

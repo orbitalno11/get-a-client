@@ -99,7 +99,6 @@
 
 .textTwoLine {
   @include cutText(2);
-  line-height: 90%;
 }
 
 .textLink{

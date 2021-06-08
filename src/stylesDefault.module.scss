@@ -8,6 +8,7 @@ $red : #840c0c;
 $green : #00B900;
 $black : #000000;
 $silver : #a39b9b;
+$gray3 : "#828282";
 
 .titleH2{
     font-size: 2rem;
@@ -325,4 +326,8 @@ $silver : #a39b9b;
 .textOneLine {
     @include cutText(1)
   }
+  
+.textLineHeight { 
+    line-height: 90%;
+}
   

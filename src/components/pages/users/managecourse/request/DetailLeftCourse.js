@@ -1,4 +1,4 @@
-import { faBook, faBookReader, faClock } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faBookReader, faClock, faUsers, faVideo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Col, Row, Space } from "antd"
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
@@ -12,9 +12,9 @@ import { color } from "../../../../defaultValue";
 import { SkeletonComponent } from "../../../../loading/SkeletonComponent";
 import style from "../styles.module.scss";
 
-export default function DetailLeftCourse() {
+export default function DetailLeftCourse({courseId}) {
     const { loading } = useSelector(state => state.loading)
-    const { data } = useSelector(state => state.offlineCourse)
+    const { data } = useSelector(state => courseId ? state.onlineCourse : state.offlineCourse)
     const { id } = useParams()
     const screens = useBreakpoint();
 
@@ -39,13 +39,15 @@ export default function DetailLeftCourse() {
                     <span className={style.textOne25}>{checkLoading(!isEmpty(data) && data.subject.title)}</span>
                 </Col>
                 <Col className={style.paddingTopOneHalf} span={24}>
-                    <FontAwesomeIcon icon={faClock} className={style.iconmarker} />
-                    <span className={style.textOne25}>{checkLoading(!isEmpty(data) && data.timeText)}</span>
+                    <FontAwesomeIcon icon={courseId ? faUsers : faClock} className={style.iconmarker} />
+                    <span className={style.textOne25}>{checkLoading(!isEmpty(data) && (courseId ? data.numberOfView : data.timeText))}</span>
                 </Col>
                 <Col className={style.paddingTopOneHalf} span={24}>
                     <Space align="center" direction="horizontal">
-                        <styleComponent.iconCoin size="large" />
-                        <span className={`${style.textOne25} ${style.marginLeftOneHalf}`}>{checkLoading(!isEmpty(data) && data.costText)}</span>
+                    {
+                        courseId ? (<FontAwesomeIcon icon={faVideo} className={style.iconmarker} />) : (<styleComponent.iconCoin size="large" />)
+                    }
+                        <span className={`${style.textOne25} ${!courseId && style.marginLeftOneHalf}`}>{checkLoading(!isEmpty(data) && (courseId ? data.numberOfVideo : data.costText))}</span>
                     </Space>
                 </Col>
                 <Col className={style.paddingTopOneHalf} span={24}>
@@ -55,7 +57,7 @@ export default function DetailLeftCourse() {
             </Row>
             {
                 screens.lg && (
-                    <Link to={`/course/${id}`}>
+                    <Link to={`/${courseId ? "online" : "course"}/${courseId ? courseId : id}`}>
                         <Button className={`${style.buttonColor} ${style.marginSection}`} style={styleComponent.buttonFull(color.orange)}>รายละเอียดคอร์สเรียน</Button>
                     </Link>
                 )

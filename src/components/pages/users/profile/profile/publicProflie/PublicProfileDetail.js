@@ -50,6 +50,8 @@ export default function PublicProfileDetail({ isCourse }) {
         }
     }, [favData.favorite])
 
+    console.log(favData.favorite)
+
     return (
         <div >
             {

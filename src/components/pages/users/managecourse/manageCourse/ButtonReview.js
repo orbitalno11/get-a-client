@@ -7,11 +7,12 @@ import { Link } from "react-router-dom"
 import { color } from "../../../../defaultValue"
 import { styleComponent } from "../../../../defaultFunction/style"
 import style from "../styles.module.scss";
+import { useSelector } from "react-redux"
 
 export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewForm, enrollCourse, learn_status, showReview, switchComponent, typeShow }) {
     const { type, id } = useParams()
     const screens = useBreakpoint();
-    
+    const { loading } = useSelector(state => state.loading)
     return (
         <Fragment>
             {
@@ -23,16 +24,18 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                                     <Button
                                         className={`${style.buttonColor} ${style.textOne5}`}
                                         style={styleComponent.buttonFull(color.orange)}
-                                        size="middle">
+                                        size="middle"
+                                        disabled = {loading}
+                                        >
                                         ดูบทเรียน
                                     </Button>
                                 </Link>
                             ) : (
                                 !owner && (
                                     learn_status ? (
-                                        <Button className={`${style.buttonColor} ${style.textOne5}`} size="middle" style={styleComponent.buttonFull(color.orange)} onClick={() => { handleOpenReviewForm() }}>ให้คะแนน</Button>
+                                        <Button disabled = {loading} className={`${style.buttonColor} ${style.textOne5}`} size="middle" style={styleComponent.buttonFull(color.orange)} onClick={() => { handleOpenReviewForm() }}>ให้คะแนน</Button>
                                     ) : (
-                                        <Button className={`${style.buttonColor} ${style.textOne5}`} size="middle" style={styleComponent.buttonFull(color.orange)} onClick={() => enrollCourse()} >สมัครเรียน</Button>
+                                        <Button disabled = {loading} className={`${style.buttonColor} ${style.textOne5}`} size="middle" style={styleComponent.buttonFull(color.orange)} onClick={() => enrollCourse()} >สมัครเรียน</Button>
                                     )
                                 )
                             )
@@ -47,7 +50,8 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                                                     <Button
                                                         className={`${style.buttonColor} ${style.textOne5}`}
                                                         size="large"
-                                                        style={styleComponent.buttonFull(color.orange)}>
+                                                        style={styleComponent.buttonFull(color.orange)}
+                                                        disabled = {loading}>
                                                         อนุมัติคำขอ
                                             </Button>
                                                 </Link>
@@ -59,7 +63,8 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                                             <Button
                                                 className={`${style.buttonColor} ${style.textOne5}`}
                                                 size="large"
-                                                style={styleComponent.buttonFull(color.blue)}>
+                                                style={styleComponent.buttonFull(color.blue)}
+                                                disabled = {loading}>
                                                 แก้ไขคอร์สเรียน
                                     </Button>
                                         </div>
@@ -74,11 +79,11 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                             {
                                 isOfflineCourse ? (
                                     <Link to={`/tutor/course/${id}/enroll`}>
-                                        <button className={style.leftbuttom} >อนุมัติคำขอ</button>
+                                        <button className={style.leftbuttom} disabled = {loading}>อนุมัติคำขอ</button>
                                     </Link>
                                 ) : (
                                     <Link to={`/course/online/${id}/video`}>
-                                        <button className={style.leftbuttom} >ดูบทเรียน</button>
+                                        <button className={style.leftbuttom} disabled = {loading}>ดูบทเรียน</button>
                                     </Link>
                                 )
                             }
@@ -91,13 +96,13 @@ export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewF
                             {
                                 isOfflineCourse ? (
                                     learn_status ? (
-                                        <button className={style.leftbuttom} onClick={() => { handleOpenReviewForm() }}>ให้คะแนน</button>
+                                        <button className={style.leftbuttom} onClick={() => { handleOpenReviewForm() }} disabled = {loading}>ให้คะแนน</button>
                                     ) : (
-                                        <button className={style.leftbuttom} onClick={() => enrollCourse()} >สมัครเรียน</button>
+                                        <button className={style.leftbuttom} onClick={() => enrollCourse()} disabled = {loading}>สมัครเรียน</button>
                                     )
                                 ) : (
                                     <Link to={`/course/online/${id}/video`}>
-                                        <button className={style.leftbuttom} >ดูบทเรียน</button>
+                                        <button className={style.leftbuttom} disabled = {loading}>ดูบทเรียน</button>
                                     </Link>
                                 )
                             }

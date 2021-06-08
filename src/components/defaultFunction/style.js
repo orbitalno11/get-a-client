@@ -20,9 +20,9 @@ const iconCoin = () =>{
 }
 
 
-const text = (color) =>{
+const text = (textColor) =>{
     return ({
-        color: color,
+        color: textColor,
     })
 }
 

@@ -13,18 +13,10 @@ export default function HistoryList() {
   const transaction = useSelector((state) => state.coin.transaction);
 
   const status = {
-    0: {
-      color: color.green
-    },
-    1: {
-      color: color.red
-    },
-    3: {
-      color: color.red
-    },
-    4: {
-      color: color.green
-    }
+    0:  color.green,
+    1:  color.red,
+    3:  color.red,
+    4:  color.green
   }
 
   return (
@@ -36,7 +28,7 @@ export default function HistoryList() {
               <div style={{ paddingTop: "1rem" }} key={index}>
                 <Row>
                   <Col xs={17} sm={18}>
-                    <span className={style.textOne5} style={styleComponent.text(!isEmpty(data.transactionType) ? status[data.transactionType].color : color.black)}>
+                    <span className={style.textOne5} style={styleComponent.text(!isEmpty(data.transactionType) ? status[data.transactionType]: color.black)}>
                       {data&& defaultValue.transactionType[data.transactionType]}
                     </span>
                   </Col>

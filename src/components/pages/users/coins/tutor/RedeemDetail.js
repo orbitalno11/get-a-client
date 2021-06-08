@@ -13,12 +13,18 @@ import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 export default function RedeemDetail({onHandleChange}) {
   const screens = useBreakpoint();
   const { loading } = useSelector((state) => state);
+
   const rateRedeem = useSelector((state) => state.coin.rateCoin);
   const balanceCoin = useSelector((state) => state.coin.balance);
+
   const bahtStd = !isEmpty(rateRedeem) && rateRedeem[0].baht
   const coinStd = !isEmpty(rateRedeem) && rateRedeem[0].coin
+
+
   const amount = balanceCoin&& balanceCoin.amount
+
   const bahtTranfer = ((Number(amount) * Number(bahtStd))/Number(coinStd)).toFixed(2)
+
   const bahtShow = bahtTranfer && bahtTranfer.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   const amountShow = Number(amount).toLocaleString()
 
@@ -36,9 +42,9 @@ export default function RedeemDetail({onHandleChange}) {
                   <Col xs={4} sm={4}>
                     <FontAwesomeIcon icon={faCoins} className={style.redeem2} />
                   </Col> 
-                  { amount ? (                
+                  { balanceCoin ? (                
                   <Col>
-                    <span className={style.headerTwo}>{amountShow}</span>
+                    <span className={style.headerTwo}>{balanceCoin.amount}</span>
                   </Col>
                   ):(
                     <SkeletonComponent.SkeletonText size="default"/>
@@ -50,7 +56,7 @@ export default function RedeemDetail({onHandleChange}) {
                   </Col>                 
                 </Row>
                 <Row className={style.marginTop01}>
-                { rateRedeem?(
+                { (balanceCoin&&rateRedeem) ? (
                   <Col span={24} align="center">
                     <span className={style.headerTwo}>THB {bahtShow}</span>
                   </Col>
@@ -112,7 +118,7 @@ export default function RedeemDetail({onHandleChange}) {
                   <Col md={4} lg={4} xl={3} className={screen.lg? style.paddingCoin : style.paddingCoinMd}>
                     <FontAwesomeIcon icon={faCoins} className={ screens.lg? style.redeem : style.redeemSm } />
                   </Col>
-                  { amount ? ( 
+                  { balanceCoin ? ( 
                     <Col md={5} lg={10} xl={9}>
                         <span className={style.headerFour}>{amountShow}</span>
                     </Col>
@@ -122,7 +128,7 @@ export default function RedeemDetail({onHandleChange}) {
                     </Col>
                   )}
 
-                  { balanceCoin ? (
+                  { (balanceCoin&&rateRedeem) ? (
                     <Col md={10} lg={10} xl={9}>
                         <span className={style.headerFour}> THB {bahtShow}</span>
                     </Col>
@@ -154,3 +160,4 @@ export default function RedeemDetail({onHandleChange}) {
     </Fragment>
   );
 }
+

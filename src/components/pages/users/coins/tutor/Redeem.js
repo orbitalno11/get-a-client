@@ -15,7 +15,7 @@ export default function Redeem() {
   const [tabStart, setTabStart] = useState({
     key: "redeem",
     name: "แลกเหรียญ",
-})
+  })
 
   const tabDetail = [
     {

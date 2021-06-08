@@ -14,18 +14,10 @@ export default function TableHistory() {
   const transaction = useSelector((state) => state.coin.transaction);
 
   const status = {
-    0: {
-      color: color.green
-    },
-    1: {
-      color: color.red
-    },
-    3: {
-      color: color.red
-    },
-    4: {
-      color: color.green
-    }
+    0:  color.green,
+    1:  color.red,
+    3:  color.red,
+    4:  color.green
   }
 
   return (
@@ -55,7 +47,7 @@ export default function TableHistory() {
             <tr style={{ width: "1rem" }} key={index}>
               <td className={style.textOne35}>{index+1}</td>
               <td className={style.textOne35}>{moment(data.transactionDate).format("DD/MM/YYYY")}</td>
-              <td className={style.textOne35} style={styleComponent.text(!isEmpty(data.transactionType) ? status[data.transactionType].color : color.black)}>
+              <td className={style.textOne35} style={styleComponent.text(!isEmpty(data.transactionType) ? status[data.transactionType]: color.black)}>
                 {data&& defaultValue.transactionType[data.transactionType]}
               </td>
               <td className={style.textOne35}>{data&&data.numberOfCoin}</td>

@@ -90,7 +90,10 @@ export default function Request({ onHandleChange, showRequest ,idRequest }) {
   return (
     <Fragment>
       <ModalComponent/>
-      <div className={`${style.marginSection} ${style.contentRequest}`}>
+      <div className={`${style.marginSection} ${style.contentRequest}`}> 
+        <Row className={screens.md ?style.paddingTopHead:style.buttonback} style={{cursor: "pointer",textDecoration: "underline"}} onClick={() => onHandleChange(false)}>
+          <span className={screens.md ?style.textOne35:style.textOne25}>ย้อนกลับ</span> 
+        </Row> 
         {screens.md && (
           <Row className={style.paddingTopHead}>
             <Col md={10} lg={9} xl={12}>

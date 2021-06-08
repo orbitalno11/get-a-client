@@ -3,9 +3,9 @@ import { myCourseConstants } from "../constants"
 import { loadingActions } from "./loading.actions"
 
 function getMyOfflineCourse() {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get("/learner/offline-course")
+        apiURL.apiGetA.get("/learner/offline-course")
             .then(res => {
                 if (res.data.success) {
                     const data = res.data.data
@@ -24,9 +24,9 @@ function getMyOfflineCourse() {
 }
 
 function getMyOnlineCourse() {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-         await apiURL.apiGetA.get("/learner/online-course")
+        apiURL.apiGetA.get("/learner/online-course")
             .then(res => {
                 if (res.data.success) {
                     const data = res.data.data

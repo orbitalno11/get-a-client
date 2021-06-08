@@ -7,9 +7,9 @@ import { modalAction } from "./modal.actions"
 
 
 function getTestings(id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get(`/tutor/${id}/testings`).then((res) => {
+        apiURL.apiGetA.get(`/tutor/${id}/testings`).then((res) => {
             const data = res.data.data
             dispatch(success(data))
             dispatch(loadingActions.stopLoading())
@@ -23,9 +23,9 @@ function getTestings(id) {
 }
 
 function getEducations(id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get(`/tutor/${id}/educations`).then((res) => {
+        apiURL.apiGetA.get(`/tutor/${id}/educations`).then((res) => {
             const data = res.data.data
             dispatch(success(data))
             dispatch(loadingActions.stopLoading())
@@ -39,27 +39,27 @@ function getEducations(id) {
 }
 
 function getTesting(id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get(`/tutor/testing/${id}`).then((res) => {
+        apiURL.apiGetA.get(`/tutor/testing/${id}`).then((res) => {
             const data = res.data.data
             let dataTesting = {}
-            if(data){
+            if (data) {
                 dataTesting = {
-                    exam : data.exam.examText,
-                    subject : data.exam.subjectText,
-                    score : data.exam.score,
-                    year : "2000",
-                    image : [
-                        data.verifiedData.documentUrl1 ,
-                        data.verifiedData.documentUrl2 ,
+                    exam: data.exam.examText,
+                    subject: data.exam.subjectText,
+                    score: data.exam.score,
+                    year: "2000",
+                    image: [
+                        data.verifiedData.documentUrl1,
+                        data.verifiedData.documentUrl2,
                         data.verifiedData.documentUrl3
                     ]
                 }
             }
             dispatch(success({
-                success : true ,
-                data : dataTesting
+                success: true,
+                data: dataTesting
             }))
             dispatch(loadingActions.stopLoading())
         }).catch(err => {
@@ -72,28 +72,28 @@ function getTesting(id) {
 }
 
 function getEducation(id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get(`/tutor/education/${id}`).then((res) => {
+        apiURL.apiGetA.get(`/tutor/education/${id}`).then((res) => {
             const data = res.data.data
             let dataEducation = {}
-            if(data){
+            if (data) {
                 dataEducation = {
-                    grade :"ม.6",
-                    branch : data.educationData.branchText,
-                    institute : data.educationData.instituteText,
-                    gpax : data.educationData.gpax,
-                    status : data.educationData.status,
-                    image : [
-                        data.verifiedData.documentUrl1 ,
-                        data.verifiedData.documentUrl2 ,
+                    grade: "ม.6",
+                    branch: data.educationData.branchText,
+                    institute: data.educationData.instituteText,
+                    gpax: data.educationData.gpax,
+                    status: data.educationData.status,
+                    image: [
+                        data.verifiedData.documentUrl1,
+                        data.verifiedData.documentUrl2,
                         data.verifiedData.documentUrl3
                     ]
                 }
             }
             dispatch(success({
-                success : true ,
-                data : dataEducation
+                success: true,
+                data: dataEducation
             }))
             dispatch(loadingActions.stopLoading())
         }).catch(err => {
@@ -106,9 +106,9 @@ function getEducation(id) {
 }
 
 function createTesting(data) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post("/tutor/testing/verify", data, {
+        apiURL.apiGetA.post("/tutor/testing/verify", data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -119,7 +119,7 @@ function createTesting(data) {
                 text: "เพ่ิมข้อมูลการสอบสำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose : "/me"
+                afterClose: "/me"
             }))
         }).catch(err => {
             dispatch(failure(err.response?.data))
@@ -136,9 +136,9 @@ function createTesting(data) {
 }
 
 function createEducation(data) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post("/tutor/education/verify", data, {
+        apiURL.apiGetA.post("/tutor/education/verify", data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -149,7 +149,7 @@ function createEducation(data) {
                 text: "เพิ่มข้อมูลการศึกษาสำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose : "/me"
+                afterClose: "/me"
             }))
         }).catch(err => {
             dispatch(failure(err.response.data))
@@ -166,9 +166,9 @@ function createEducation(data) {
 }
 
 function updateTesting(data, id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.put(`/tutor/testing/${id}`, data, {
+        apiURL.apiGetA.put(`/tutor/testing/${id}`, data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -179,7 +179,7 @@ function updateTesting(data, id) {
                 text: "แก้ไขข้อมูลการสอบสำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose : "/me"
+                afterClose: "/me"
             }))
         }).catch(err => {
             dispatch(failure(err.response?.data))
@@ -196,9 +196,9 @@ function updateTesting(data, id) {
 }
 
 function updateEducation(data, id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.put(`/tutor/education/${id}`, data, {
+        apiURL.apiGetA.put(`/tutor/education/${id}`, data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -209,7 +209,7 @@ function updateEducation(data, id) {
                 text: "เพิ่มข้อมูลการศึกษาสำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose : "/me"
+                afterClose: "/me"
             }))
         }).catch(err => {
             dispatch(failure(err.response?.data))
@@ -227,9 +227,9 @@ function updateEducation(data, id) {
 
 
 function deleteTesting(id, auth) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.delete(`/tutor/testing/${id}`).then(() => {
+        apiURL.apiGetA.delete(`/tutor/testing/${id}`).then(() => {
             dispatch(success())
             dispatch(loadingActions.stopLoading())
             dispatch(getTestings(auth))
@@ -252,10 +252,10 @@ function deleteTesting(id, auth) {
     function failure(err) { return { type: tutorConstants.DELETE_TESTING_FAILURE, payload: err } }
 }
 
-function deleteEducation(id,auth) {
-    return async dispatch => {
+function deleteEducation(id, auth) {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.delete(`/tutor/education/${id}`).then(() => {
+        apiURL.apiGetA.delete(`/tutor/education/${id}`).then(() => {
             dispatch(success())
             dispatch(loadingActions.stopLoading())
             dispatch(getEducations(auth))
@@ -281,9 +281,9 @@ function deleteEducation(id,auth) {
 
 
 function getListOfflineCourse(id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get(`/tutor/${id}/offline-course`)
+        apiURL.apiGetA.get(`/tutor/${id}/offline-course`)
             .then(res => {
                 if (res.data.success) {
                     const data = res.data.data
@@ -302,9 +302,9 @@ function getListOfflineCourse(id) {
 }
 
 function getListOnlineCourse(id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get(`/tutor/${id}/online-course`)
+        apiURL.apiGetA.get(`/tutor/${id}/online-course`)
             .then(res => {
                 if (res.data.success) {
                     const data = res.data.data
@@ -323,9 +323,9 @@ function getListOnlineCourse(id) {
 }
 
 function getProfileTutor(id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get(`/tutor/${id}`)
+        apiURL.apiGetA.get(`/tutor/${id}`)
             .then((res) => {
                 if (res.data.success) {
                     const data = res.data.data

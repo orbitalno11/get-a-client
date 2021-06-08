@@ -8,9 +8,9 @@ import { offlineCourseAction } from "./offlineCourse.actions"
 import { onlineCourseActions } from "./onlineCourse.actions"
 
 const getReviewByCourse = (id, courseType) => {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get(`/review/course/${id}`, {
+        apiURL.apiGetA.get(`/review/course/${id}`, {
             params: {
                 type: courseType
             }
@@ -32,9 +32,9 @@ const getReviewByCourse = (id, courseType) => {
 }
 
 const createReview = (data) => {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post("/review", data)
+        apiURL.apiGetA.post("/review", data)
             .then(() => {
                 dispatch(loadingActions.stopLoading())
                 dispatch(success())
@@ -70,9 +70,9 @@ const createReview = (data) => {
 
 
 const updateReview = (data) => {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.put("/review", data)
+        apiURL.apiGetA.put("/review", data)
             .then(() => {
                 dispatch(loadingActions.stopLoading())
                 dispatch(success())
@@ -107,9 +107,9 @@ const updateReview = (data) => {
 }
 
 const deleteReviewByCourse = (Reviewid, courseType, idCourse, videoId) => {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.delete(`/review/${Reviewid}`, {
+        apiURL.apiGetA.delete(`/review/${Reviewid}`, {
             params: {
                 course: idCourse,
                 type: courseType,
@@ -150,9 +150,9 @@ const deleteReviewByCourse = (Reviewid, courseType, idCourse, videoId) => {
 }
 
 const getReviewClip = (id) => {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get(`/review/clip/${id}`,).then((res) => {
+        apiURL.apiGetA.get(`/review/clip/${id}`,).then((res) => {
             if (res.data.data) {
                 const data = res.data.data
                 dispatch(loadingActions.stopLoading())

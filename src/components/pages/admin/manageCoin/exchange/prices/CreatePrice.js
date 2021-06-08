@@ -43,7 +43,7 @@ export default function CreatePrice({type}) {
           title: "transfer",
           baht: data.baht,
           coin: data.coin,
-          type: "tranfer",
+          type: "transfer",
           startDate: today,
           endDate: today,
           updtaeDate: today,
@@ -260,7 +260,7 @@ export default function CreatePrice({type}) {
           <tbody>
             {!isEmpty(list) && list.length !== 0 &&
               list
-                .filter((data) => data.type === "tranfer")
+                .filter((data) => data.type === "transfer")
                 .map((data, index) => (
                   <tr style={{ width: "1rem" }} key={index}>
                     <td className={style.textNormal}>{data && data.baht} </td>

@@ -21,7 +21,7 @@ const ModaldeleteRateCoin = ({data}) => {
   }
   return (
     <div style={{ paddingLeft: "1rem" }}>
-      { data.type != "tranfer" ?(
+      { data.type != "transfer" ?(
         <p className={style.titleH4}>ยืนยันลบอัตราการซื้อเหรียญ</p>
         ):(
         <p className={style.titleH4}>ยืนยันลบอัตราการแลกเหรียญ</p>

@@ -33,14 +33,15 @@ export const redeemSchema = yup.object().shape({
                 }
             }
         ).required("กรุณาใส่รูปภาพเอกสารตามรายละเอียด"),
-    coin: yup.number().required("กรุณาใส่จำนวนเหรียญที่ต้องการจะแลก").test(
+    coin: yup.string().required("กรุณาใส่จำนวนเหรียญที่ต้องการจะแลก").test(
+        "coinformat",
         "กรุณาใส่จำนวนเหรียญให้ถูกต้อง",
         value => value > 0
     ),
     accountNo: yup.string().required("กรุณาใส่หมายเลขบัญชี").test(
         "accountNoformat",
         "กรุณาเพิ่มหมายเลขบัญชีที่ถูกต้อง",
-        value => value.length === 10
+        value => value.length === 10 && value>0
     ),
     bank: yup
         .string()

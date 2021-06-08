@@ -33,7 +33,7 @@ export default function Edit({dataRate}) {
   const today = moment().format("MM/DD/YYYY")
   const onSubmit = (data) => {
     if(data){
-      if(dataRate.type != "tranfer"){
+      if(dataRate.type != "transfer"){
         const cost ={
           "title": "std",
           "baht": data.baht,
@@ -47,10 +47,10 @@ export default function Edit({dataRate}) {
         dispatch(coinAction.updateCoinRate(dataRate.id,cost))
       }else{
         const rate ={
-          "title": "tranfer",
+          "title": "transfer",
           "baht": data.baht,
           "coin": data.coin,
-          "type": "tranfer",
+          "type": "transfer",
           "startDate": today,
           "endDate": today,
           "updtaeDate":today,
@@ -66,7 +66,7 @@ export default function Edit({dataRate}) {
     return (
       <div style={{ paddingLeft: "1rem" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          { dataRate.type  != "tranfer" ? (
+          { dataRate.type  != "transfer" ? (
             <span className={style.headerOne35}>แก้ไขอัตราการซื้อเหรียญ</span>
           ):(
             <span className={style.headerOne35}>แก้ไขอัตราการแลกเหรียญ</span>

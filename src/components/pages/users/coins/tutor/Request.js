@@ -80,6 +80,9 @@ export default function Request({ onHandleChange, showRequest ,idRequest }) {
         formdata.append("numberOfCoin", data.coin);
         formdata.append("amount", amount);
         dispatch(coinAction.createRequestRedeem(formdata));
+        for(var pair of formdata.entries()){
+          console.log(pair[0], pair[1]);
+        }
       }
     }
   };
@@ -121,7 +124,8 @@ export default function Request({ onHandleChange, showRequest ,idRequest }) {
                     name="coin"
                     register={register}
                     error={errors.coin}
-                    placeholder="จำนวนเหรียญที่จะแลก"                
+                    placeholder="จำนวนเหรียญที่จะแลก"   
+                    defaultValue={""}            
                   />  
                 )}
               </div>
@@ -174,7 +178,7 @@ export default function Request({ onHandleChange, showRequest ,idRequest }) {
                 <span className={style.textOne5}>หมายเลขบัญชี</span>
                 { !isEmpty(requestDetail) ?(
                   <InputComponents
-                    type="text"
+                    type="number"
                     name="accountNo"
                     register={register}
                     error={errors.accountNo}
@@ -183,7 +187,7 @@ export default function Request({ onHandleChange, showRequest ,idRequest }) {
                   />
                 ):(
                     <InputComponents
-                    type="text"
+                    type="number"
                     name="accountNo"
                     register={register}
                     placeholder="หมายเลขบัญชี"

@@ -44,12 +44,12 @@ export default function DetailLeftCourse() {
                 </Col>
                 <Col className={style.paddingTopOneHalf} span={24}>
                     <Space align="center" direction="horizontal">
-                        <styleComponent.iconCoin size="35" />
+                        <styleComponent.iconCoin size="large" />
                         <span className={`${style.textOne25} ${style.marginLeftOneHalf}`}>{checkLoading(!isEmpty(data) && data.costText)}</span>
                     </Space>
                 </Col>
                 <Col className={style.paddingTopOneHalf} span={24}>
-                    <styleComponent.iconStar size="35" />
+                    <styleComponent.iconStar size="large" />
                     <span className={`${style.textTwo} ${style.marginLeftOne}`}>{checkLoading(!isEmpty(data) && data.rating)}</span>
                 </Col>
             </Row>

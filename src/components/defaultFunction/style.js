@@ -14,9 +14,18 @@ const buttonFull = (buttonColor, size) => {
 }
 
 const iconCoin = ({size}) => {
+    const sizeIcon = () =>{
+        if(size === "large"){
+            return 36
+        }else if(size === "medium"){
+            return 27
+        }else{
+            return 21
+        }
+    }
     const coinStyle = {
-        width: size? size+"px" : "21px",
-        height: size? size+"px" : "21px",
+        width: sizeIcon() +"px",
+        height: sizeIcon() +"px",
     }
     return (
         <Image src={coin} preview={false} style={coinStyle} />

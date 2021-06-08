@@ -37,6 +37,14 @@ export default function DetailCourse() {
         }
     }, [onlineCourse, offlineCourse])
 
+    const textCheckNull = (text) => {
+        return (
+            course ? (
+                <span className={style.textOne5}>{text}</span>
+            ) : (<SkeletonComponent.SkeletonText />)
+        )
+    }
+
     return (
         <Fragment>
             {
@@ -57,9 +65,7 @@ export default function DetailCourse() {
                                 {
                                     course ? (
                                         <span className={`${!screens.md ? style.headerThree : style.headerFour} ${style.textLineHeight}`}>{course.name}</span>
-                                    ) : (
-                                        <SkeletonComponent.SkeletonText />
-                                    )
+                                    ) : (<SkeletonComponent.SkeletonText />)
                                 }
                             </Col>
                             <Col span={24} className={style.paddingTopHalf} align={screens.md ? "start" : "center"}>
@@ -78,82 +84,39 @@ export default function DetailCourse() {
                                     className={style.imageIcon}
                                     preview={false}
                                 />
-                                {
-                                    course ? (
-                                        <span className={style.textOne5}>{owner.fullNameText}</span>
-                                    ) : (
-                                        <SkeletonComponent.SkeletonText />
-                                    )
-                                }
+                                {textCheckNull(owner?.fullNameText)}
                             </Col>
                             <Col xs={24} md={12} xl={isOfflineCourse ? 6 : 8} className={style.paddingTopOneHalf}>
                                 <FontAwesomeIcon icon={faBookReader} className={style.iconmarker} />
-                                {
-                                    course ? (
-                                        <span className={style.textOne5}>{course.grade.title} </span>
-                                    ) : (
-                                        <SkeletonComponent.SkeletonText />
-                                    )
-                                }
+                                {textCheckNull(course?.grade?.title)}
                             </Col>
                             {
                                 isOfflineCourse && (
                                     <Col xs={24} md={12} xl={12} className={style.paddingTopOneHalf}>
                                         <FontAwesomeIcon icon={faClock} className={style.iconmarker} />
-                                        {
-                                            course ? (
-                                                <span className={style.textOne5}>{course.timeText}</span>
-                                            ) : (
-                                                <SkeletonComponent.SkeletonText />
-                                            )
-                                        }
+                                        { textCheckNull(course?.timeText)}
                                     </Col>
                                 )
                             }
                             <Col xs={24} md={12} xl={isOfflineCourse ? 6 : 8} className={style.paddingTopOneHalf}>
                                 <FontAwesomeIcon icon={faUserFriends} className={style.iconmarker} />
-                                {
-                                    course ? (
-                                        <span className={style.textOne5}>{isOfflineCourse ? course.studentNumber : course.numberOfView}</span>
-                                    ) : (
-                                        <SkeletonComponent.SkeletonText />
-                                    )
-                                }
+                                {textCheckNull(isOfflineCourse ? (course?.studentNumber) : (course?.numberOfView))}
                             </Col>
                             <Col xs={24} md={12} xl={isOfflineCourse ? 6 : 8} className={style.paddingTopOneHalf}>
                                 <FontAwesomeIcon icon={faBook} className={style.iconmarker} />
-                                {
-                                    course ? (
-                                        <span className={style.textOne5}>{course.subject.title}</span>
-                                    ) : (
-                                        <SkeletonComponent.SkeletonText />
-                                    )
-                                }
+                                {textCheckNull(course?.subject?.title)}
                             </Col>
                             <Col xs={24} md={12} xl={isOfflineCourse ? 6 : 8} className={style.paddingTopOneHalf}>
                                 <Space align="center" direction="horizontal">
                                     {
-                                        isOfflineCourse ? (<styleComponent.iconCoin size="35" />) : (<FontAwesomeIcon icon={faVideo} className={style.iconmarker} />)
+                                        isOfflineCourse ? (<styleComponent.iconCoin size="large" />) : (<FontAwesomeIcon icon={faVideo} className={style.iconmarker} />)
                                     }
-                                    {
-                                        course ? (
-                                            <span className={`${style.textOne5} ${style.marginLeftOneHalf}`}>{isOfflineCourse ? course.costText : course.numberOfVideo}</span>
-                                        ) : (
-                                            <SkeletonComponent.SkeletonText />
-                                        )
-                                    }
+                                    {textCheckNull(isOfflineCourse ? (course?.costText) : (course?.numberOfVideo))}
                                 </Space>
                             </Col>
-
                             <Col xs={24} md={12} xl={isOfflineCourse ? 6 : 8} className={style.paddingTopOneHalf} >
                                 <FontAwesomeIcon icon={faStar} className={style.iconmarker} style={{ color: color.yellow }} />
-                                {
-                                    course ? (
-                                        <span className={style.textOne5}>{course.rating}</span>
-                                    ) : (
-                                        <SkeletonComponent.SkeletonText />
-                                    )
-                                }
+                                {textCheckNull(course?.rating)}
                             </Col>
                         </Row>
                     </Col>

@@ -19,7 +19,7 @@ export default function ProfileDetail({ data, isTutor }) {
                         <Col span={18}>
                             <Row className={style.marginSection} align="middle" >
                                 <Col span={2}>
-                                    <styleComponent.iconCoin size="36" />
+                                    <styleComponent.iconCoin size="large" />
                                 </Col>
                                 <Col className={style.marginLeftOne} span={19}>
                                     {

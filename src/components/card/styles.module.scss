@@ -97,10 +97,6 @@
   color: $yellow;
 }
 
-.textOneLine {
-  @include cutText(1)
-}
-
 .textTwoLine {
   @include cutText(2);
   line-height: 90%;

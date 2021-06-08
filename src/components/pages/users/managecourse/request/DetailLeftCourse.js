@@ -20,7 +20,7 @@ export default function DetailLeftCourse() {
 
     const checkLoading = (text) => {
         return (
-            loading.loading ? <SkeletonComponent.SkeletonText width="100" /> : text
+            loading ? <SkeletonComponent.SkeletonText /> : text
         )
     }
 

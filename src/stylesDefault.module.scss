@@ -321,3 +321,8 @@ $silver : #a39b9b;
 .fullHeight{
     height: 100%;
 }
+
+.textOneLine {
+    @include cutText(1)
+  }
+  

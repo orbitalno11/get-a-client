@@ -48,7 +48,7 @@ export default function CardCourseTutor({ data, search }) {
                     <Col  xl={search ? 12 : 7} lg={search ? 12 : 7} md={12} sm={12} xs={24} >
                         <div className={`${styles.textOneLine} ${styles.marginTopHalf}`}>
                             <span >
-                                <styleComponent.iconCoin size={27} gray/>
+                                <styleComponent.iconCoin size="medium" gray/>
                             </span>
                             <span className={`${styles.text18} ${styles.marginLeftOneHalf}`}>
                                 {data.costText}

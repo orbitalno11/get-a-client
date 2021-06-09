@@ -93,17 +93,12 @@
 }
 
 .rate {
-  @extend .iconSmall;
+  @extend .textOne25;
   color: $yellow;
-}
-
-.textOneLine {
-  @include cutText(1)
 }
 
 .textTwoLine {
   @include cutText(2);
-  line-height: 90%;
 }
 
 .textLink{

@@ -1,7 +1,7 @@
 @import "../../stylesDefault.module.scss";
 
-
 .tab{
+    @extend .textOne;
     height: 2.5rem;
     width: 8rem;
     text-align: center;

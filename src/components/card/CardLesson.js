@@ -4,17 +4,24 @@ import styles from "./styles.module.scss"
 import { faBook, faBookReader, faCoins, faStar, faUsers, faVideo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import vdoSample from "../images/vdoSample.webp"
+import profileSample from "../images/profile.webp"
 import isMobile from "../isMobile/isMobile";
 import { defaultValue } from "../defaultValue";
 import findKeyObject from "../defaultFunction/findKeyObject";
 import { Fragment } from "react";
+import { useHistory } from "react-router";
 const { useBreakpoint } = Grid;
 
 export default function CardLesson({ data, isCourse, search, course }) {
     const screens = useBreakpoint();
+    const history = useHistory()
 
+    const redirectToCoursePage = () => {
+        history.push(`/online/${data.id}`)
+    }
+ 
     return (
-        <Row className={(isMobile() || search || course) ? `${styles.card} ${styles.paddingOne}` : styles.fullWidth} justify={"center"} align="middle" >
+        <Row className={(isMobile() || search || course) ? `${styles.card} ${styles.paddingOne}` : styles.fullWidth} justify={"center"} onClick={() => redirectToCoursePage()} align="middle" >
             <Col lg={4} md={3} sm={3} xs={3} align="center">
                 <Image
                     src={data.coverUrl ? data.coverUrl : vdoSample}
@@ -74,7 +81,7 @@ export default function CardLesson({ data, isCourse, search, course }) {
                         <Fragment>
                             <Col className={`${styles.paddingTopHalf}  ${styles.textOneLine}`} span={24}>
                                 <Image
-                                    src={data && data.coverUrl}
+                                    src={data ? data?.owner?.picture : profileSample} 
                                     className={styles.imageIcon}
                                     preview={false}
                                 />

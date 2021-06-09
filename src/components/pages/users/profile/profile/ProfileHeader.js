@@ -77,7 +77,7 @@ export default function ProfileHeader({ data, tutorPublic, isTutorInfo, isTutor 
                     {
                         (!tutorPublic && !isMobile()) && (
                             <Row align="middle">
-                                <styleComponent.iconCoin size="36" />
+                                <styleComponent.iconCoin size="large" />
                                 <span className={`${style.textTwo} ${style.marginLeftOne}`}>100,000 เหรียญ</span>
                                 <Button className={`${style.buttonColor} ${style.textOne} ${style.marginLeftOne}`} style={styleComponent.buttonFull(color.yellow, "5rem")} size="small">ซื้อเหรียญ</Button>
                             </Row>

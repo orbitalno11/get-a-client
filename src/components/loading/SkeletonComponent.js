@@ -3,7 +3,7 @@ import React from 'react'
 
 const SkeletonText = ({ size, width }) => {
     return (
-        <Skeleton.Input style={{ width : width ? width : "200px" }} active={true} size={size} />
+        <Skeleton.Input style={{ width : width ? width : "100px" }} active={true} size={size} />
     )
 }
 

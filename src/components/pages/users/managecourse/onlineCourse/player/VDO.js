@@ -152,33 +152,36 @@ export default function ManageClip() {
               }
 
             </Col>
-            <Col className={`${style.section} ${style.marginSection}`} span={24}>
-              {
-                (!isEmpty(profileAccount) && isAuthenticated) ? (
-                  <Row align="middle">
-                    <Col>
-                      <Image src={profileAccount.profileUrl} className={style.imageProfileSmall} preview={false} />
-                    </Col>
-                    <Col className={`${style.marginLeftOneHalf} ${style.textOne25}`}>
-                      <span>{profileAccount.fullNameText}</span>
-                      <div>
-                        <styleComponent.iconCoin />
-                        <span className={`${style.marginLeftOneHalf} ${style.textOne25}`}>0</span>
-                      </div>
-                    </Col>
-                  </Row>
-                ) : (
-                  <Row align="center">
-                    <p className={style.textOne25}>เข้าสู่ระบบเพื่อซื้อวิดิโอนี้</p>
-                    <Col span={24} align="center">
-                      <Button className={style.buttonColor} style={styleComponent.buttonFull(color.orange, "auto")} onClick={() => history.push("/login")}>เข้าสู่ระบบ</Button>
-                      <Button className={`${style.buttonColor} ${style.marginLeftOneHalf}`} style={styleComponent.buttonFull(color.blue, "auto")} onClick={() => history.push("/register")}>สมัครสมาชิก</Button>
-                    </Col>
-                  </Row>
-                )
-              }
-
-            </Col>
+            {
+              screens.md && (
+                <Col className={`${style.section} ${style.marginSection}`} span={24}>
+                  {
+                    (!isEmpty(profileAccount) && isAuthenticated) ? (
+                      <Row align="middle">
+                        <Col>
+                          <Image src={profileAccount.profileUrl} className={style.imageProfileSmall} preview={false} />
+                        </Col>
+                        <Col className={`${style.marginLeftOneHalf} ${style.textOne25}`}>
+                          <span>{profileAccount.fullNameText}</span>
+                          <div>
+                            <styleComponent.iconCoin />
+                            <span className={`${style.marginLeftOneHalf} ${style.textOne25}`}>0</span>
+                          </div>
+                        </Col>
+                      </Row>
+                    ) : (
+                      <Row align="center">
+                        <p className={style.textOne25}>เข้าสู่ระบบเพื่อซื้อวิดิโอนี้</p>
+                        <Col span={24} align="center">
+                          <Button className={style.buttonColor} style={styleComponent.buttonFull(color.orange, "auto")} onClick={() => history.push("/login")}>เข้าสู่ระบบ</Button>
+                          <Button className={`${style.buttonColor} ${style.marginLeftOneHalf}`} style={styleComponent.buttonFull(color.blue, "auto")} onClick={() => history.push("/register")}>สมัครสมาชิก</Button>
+                        </Col>
+                      </Row>
+                    )
+                  }
+                </Col>
+              )
+            }
           </Col>
           <Col xl={8} lg={8} md={24} sm={24} xs={24}>
             <Col className={`${style.section} ${style.marginSection}`} span={24}>

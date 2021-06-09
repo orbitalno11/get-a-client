@@ -16,11 +16,10 @@ export default function TutorLayout() {
     return (
         <Switch>
             <Route exact path="/tutor" component={Home} />
-            <Route exact path="/tutor/course" component={ManageCourse} />
             <Route exact path="/tutor/course/create" component={AddCourse} />
             <Route exact path="/tutor/course/:id/edit" component={AddCourse} />
             <Route exact path="/tutor/course/:id/enroll" component={EnrollRequest} />
-            <Route exact path="/tutor/online" component={ManageCourse} />
+            <Route exact path="/tutor/:type" component={ManageCourse} />
             <Route exact path="/tutor/online/create" component={CreateCourseOnline} />
             <Route exact path="/tutor/online/:id/edit" component={CreateCourseOnline} />
             <Route exact path="/tutor/online/:courseId/video/create" component={CreateClip} />

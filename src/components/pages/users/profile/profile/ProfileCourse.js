@@ -12,7 +12,6 @@ import CardLearnerCourse from "../../../../card/CardLearnerCourse"
 import isEmpty from "../../../../defaultFunction/checkEmptyObject"
 import EmptyImage from "../../../../loading/EmptyImage"
 import Loading from "../../../../loading/Loading"
-import { Link } from "react-router-dom"
 
 export default function ProfileCourse({ isTutorProfile }) {
     const profilePage = window.location.pathname === "/me"
@@ -69,11 +68,9 @@ export default function ProfileCourse({ isTutorProfile }) {
                         {
                             isTutorProfile ? (
                                 courseFocus === "course" ? (
-                                    <CardCourseTutor data={item}/>
+                                    <CardCourseTutor data={item} />
                                 ) : (
-                                    <Link to={`/online/${item.id}`}>
-                                        <CardLesson data={item} isCourse={true} fullWidth />
-                                    </Link>
+                                    <CardLesson data={item} isCourse={true} fullWidth />
                                 )
                             ) : (
                                 <CardLearnerCourse data={item} type={courseFocus === "course" ? "course" : "online"} />

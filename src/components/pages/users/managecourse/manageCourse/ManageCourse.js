@@ -1,79 +1,115 @@
 import React, { Fragment } from "react";
-import { Row, Col, Button, Divider } from "antd";
+import { Row, Col, Button } from "antd";
 import style from "../styles.module.scss";
 import Header from "../../../../headerMobile/Header";
-import ManageCourseDetail from "./ManageCourseDetail";
 import isMobile from "../../../../isMobile/isMobile"
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import isEmpty from "../../../../defaultFunction/checkEmptyObject";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { onlineCourseActions } from "../../../../../redux/actions";
+import { tutorAction } from "../../../../../redux/actions";
+import { useSelector } from "react-redux";
+import isEmpty from "../../../../defaultFunction/checkEmptyObject";
+import { useState } from "react";
+import CardCourseTutor from "../../../../card/CardCourseTutor";
+import CardLesson from "../../../../card/CardLesson";
+import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
+import { color } from "../../../../defaultValue";
+import { styleComponent } from "../../../../defaultFunction/style";
+import EmptyImage from "../../../../loading/EmptyImage";
+import Loading from "../../../../loading/Loading";
 
 export default function ManageCourse() {
-  const location = useLocation()
-  const { courseId } = useParams()
-  const floatRight = {
-    marginLeft: "auto",
-    display: "flex",
-    marginTop: "0.3rem"
-  };
+  const { auth, tutor, loading } = useSelector(state => state)
+  const [courseList, setCourseList] = useState([])
   const dispatch = useDispatch()
-  const isOnline = location.pathname === "/tutor/online" || !isEmpty(courseId)
-  const { auth, onlineCourse } = useSelector(state => state)
-  const course = (courseId && onlineCourse) && onlineCourse.data
-  const owner = (!isEmpty(course) && auth && courseId) && (auth.profile === course.owner.id)
+  const { type } = useParams()
+  const isCourse = type === "course"
+  const screens = useBreakpoint();
 
   useEffect(() => {
-    dispatch(onlineCourseActions.getOnlineCourse(courseId))
+    if (isCourse) {
+      dispatch(tutorAction.getListOfflineCourse(auth.profile))
+    } else {
+      dispatch(tutorAction.getListOnlineCourse(auth.profile))
+    }
     return () => {
-      dispatch(onlineCourseActions.clearListOnlineCourse())
+      dispatch(tutorAction.clearListOfflineCourse())
     }
   }, [])
+
+  useEffect(() => {
+    let courseDetail = null
+    if (isCourse) {
+      courseDetail = !isEmpty(tutor.offlineCourse.data) ? tutor.offlineCourse.data : null
+    } else {
+      courseDetail = !isEmpty(tutor.onlineCourse.data) ? tutor.onlineCourse.data : null
+    }
+    if (!isEmpty(courseDetail)) {
+      setCourseList(courseDetail)
+    }
+  }, [tutor.offlineCourse, tutor.onlineCourse])
 
   return (
     <Fragment>
       {isMobile() && (
-        <Header title={"จัดการคอร์สเรียน" + (isOnline ? "ออนไลน์" : "")} pageBack={courseId && `/online/${courseId}`} />
+        <Header title={`จัดการคอร์สเรียน${!isCourse ? "ออนไลน์" : ""}`} />
       )}
-      <div className={style.container}>
-        <div >
-          {!isMobile() ? (
-            <Row>
-              <Col md={18} lg={19} xl={19}>
-                <span className={style.titleH2}>{((owner && courseId )|| !courseId) ?  "จัดการคอร์สเรียน" : "คอร์สเรียน"}{isOnline && "ออนไลน์"}</span>
+      {
+        loading.loading && (
+          <Loading />
+        )
+      }
+      <div className="container">
+        <div className={style.bodyPaddingTopBottom}>
+          <Row justify={"space-between"}>
+            {screens.md && (
+              <Col className={style.section} span={24}>
+                <span className={style.headerFour}>จัดการคอร์สเรียน{!isCourse ? "ออนไลน์" : ""}</span>
               </Col>
-              <Col md={6} lg={5} xl={5}>
+            )}
+            <Col xl={16} lg={16} md={24} sm={24} xs={24} order={screens.lg ? 1 : 2}>
+              <Row >
                 {
-                  ((owner && courseId )|| !courseId) && (
-                    <Link to={courseId ? `/tutor/online/${courseId}/video/create` : `${location.pathname}/create`}>
-                      <Button
-                        className="buttonColor backgroundBlue"
-                        shape="round"
-                        size="middle"
-                        style={floatRight}
-                      >
-                        เพิ่มบทเรียน
-                    </Button>
-                    </Link>
+                  !isEmpty(courseList) ? (
+                    courseList.map((item) => {
+                      return (
+                        <Col className={`${screens.md && style.section} ${style.marginSection} ${style.cursor}`} key={item.id} span={24}>
+                          {
+                            isCourse ? (<CardCourseTutor data={item} />) : (<CardLesson data={item} isCourse={true} fullWidth />)
+                          }
+                        </Col>
+                      )
+                    })
+                  ) : (
+                    !loading.loading && (
+                      <Col align="center" className={`${screens.md && style.section} ${style.marginSection}`} span={24}>
+                        <EmptyImage size="default" />
+                        <p className={style.textOne5}>คุณยังไม่มีคอร์สเรียน สร้างคอร์สเรียนเพื่อเริ่มการสอนสิ</p>
+                      </Col>
+                    )
                   )
                 }
-              </Col>
-              <Divider type="horizontal" className={style.dividerCourse} />
-            </Row>
-          ) : (
-            (owner && courseId )|| !courseId) && (
-            <Link to={courseId ? `/tutor/online/${courseId}/video/create` : `${location.pathname}/create`}>
-              <button className={style.buttonfixbottom} >
-                <FontAwesomeIcon icon={faPlus} />
-              </button>
-            </Link>
-            )}
+              </Row>
+            </Col>
+            {
+              screens.md ? (
+                <Col xl={7} lg={7} md={24} sm={24} xs={24} order={screens.lg ? 2 : 1} className={style.marginSection}>
+                  <Link to={`/tutor/${type}/create`}>
+                    <Button className={style.buttonColor} style={styleComponent.buttonFull(color.orange)}>สร้างคอร์สเรียนใหม่</Button>
+                  </Link>
+                </Col>
+              ) : (
+                <Link to={`/tutor/${type}/create`}>
+                  <button className={style.buttonfixbottom} >
+                    <FontAwesomeIcon icon={faPlus} />
+                  </button>
+                </Link>
+              )
+            }
+          </Row>
         </div>
-        <ManageCourseDetail />
       </div>
     </Fragment>
   );

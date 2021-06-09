@@ -14,7 +14,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowCircleLeft, faArrowCircleRight } from "@fortawesome/free-solid-svg-icons"
 import isMobile from "../../../isMobile/isMobile"
 import EmptyImage from "../../../loading/EmptyImage"
-import { Link } from "react-router-dom"
 const { useBreakpoint } = Grid;
 
 export default function ResultSearch() {
@@ -65,9 +64,7 @@ export default function ResultSearch() {
                             </Col>
                         ) : (
                             <Col className={style.paddingCardResult} key={item.id} xl={10} lg={10} md={20} sm={24} xs={24} >
-                                <Link to={`/online/${item.id}`}>
-                                    <CardLesson data={item} search />
-                                </Link>
+                                <CardLesson data={item} search />
                             </Col>
                         )
                     )) : (

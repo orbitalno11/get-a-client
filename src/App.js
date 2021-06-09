@@ -34,7 +34,6 @@ import Notification from "./components/pages/users/notifications/Notification"
 import NotificationDetail from "./components/pages/users/notifications/NotificationDetail"
 import Favorite from "./components/pages/users/favorite/Favorite"
 import Search from "./components/pages/users/search/Search";
-import OnlineCourseList from "./components/pages/users/onlineCourseList/OnlineCourseList"
 import { setAuthToken } from "./utils/setAxios";
 import jwtDecode from "jwt-decode";
 import { userActions } from "./redux/actions";
@@ -106,7 +105,6 @@ function App() {
           <Route exact path="/profile/:id" component={PubilcProfile} />
           <Route exact path="/:type/:id" component={Course} />
           <Route exact path="/search" component={Search} />
-          <Route exact path="/course/online/:id" component={OnlineCourseList} />
           <Route exact path="/course/online/:courseId/video" component={ClipList} />
           <Route exact path="/online/:courseId/video/:videoId" component={VDO} />
           <Route path="*">

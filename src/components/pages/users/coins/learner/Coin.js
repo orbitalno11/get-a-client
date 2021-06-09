@@ -1,13 +1,13 @@
-import React, { Fragment } from "react";
-import { Col, Row, Grid, Divider } from "antd";
+import React,{Fragment} from "react";
+import { Col , Row } from "antd";
 import style from "../styles.module.scss";
 import Header from "../../../../headerMobile/Header";
 import isMobile from "../../../../isMobile/isMobile";
-const { useBreakpoint } = Grid;
+import { useSelector } from "react-redux";
 
 export default function Coin() {
-  const screens = useBreakpoint();
 
+  const loading = useSelector((state) => state.loading.loading);
   return (
     <Fragment>
       {isMobile() && <Header title="ร้านค้า" />}

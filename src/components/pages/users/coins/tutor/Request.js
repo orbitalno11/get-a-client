@@ -80,9 +80,6 @@ export default function Request({ onHandleChange, showRequest ,idRequest }) {
         formdata.append("numberOfCoin", data.coin);
         formdata.append("amount", amount);
         dispatch(coinAction.createRequestRedeem(formdata));
-        for(var pair of formdata.entries()){
-          console.log(pair[0], pair[1]);
-        }
       }
     }
   };

@@ -6,11 +6,9 @@ import { useSelector } from "react-redux";
 import Loading from "../../../../loading/Loading";
 import { styleComponent } from "../../../../defaultFunction/style";
 import { SkeletonComponent } from "../../../../loading/SkeletonComponent"
-//import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
 import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 
 export default function RedeemDetail({onHandleChange}) {
-  ////const screens = useBreakpoint();
   const { loading } = useSelector((state) => state);
 
   const rateRedeem = useSelector((state) => state.coin.rateCoin);

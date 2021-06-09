@@ -31,7 +31,7 @@ export default function PromotionList() {
           .filter((data) => data.type === "promo")
           .map((data, index) => (
             <Collapse key={index}>
-              <Panel header={data && data.title} className={style.textOne25}>
+              <Panel header={data && data.title} className={style.textOne4}>
                 <Row align="end">
                     {data.active ? (
                         <Button
@@ -64,38 +64,38 @@ export default function PromotionList() {
                       )}
                 </Row>
                 <Row style={{ marginLeft: "2rem",marginTop:"1rem" }}>
-                  <Col md={4} lg={3} className={style.textOne25}>วันที่เริ่มต้น </Col>
+                  <Col md={4} lg={3} className={style.textOne4}>วันที่เริ่มต้น </Col>
                   <Col  md={7} lg={6} align="center">
-                    <p className={`${style.datetime} ${style.textOne25}`}>
+                    <p className={`${style.datetime} ${style.textOne4}`}>
                       {moment(data.startDate).format("DD/MM/YYYY")}
                     </p>
                   </Col>
-                  <Col md={4} lg={4} align="center" className={style.textOne25}>
+                  <Col md={4} lg={4} align="center" className={style.textOne4}>
                     วันที่สิ้นสุด
                   </Col>
                   <Col md={7} lg={6}>
-                    <p className={`${style.datetime} ${style.textOne25}`}>
+                    <p className={`${style.datetime} ${style.textOne4}`}>
                       {moment(data.endDate).format("DD/MM/YYYY")}
                     </p>
                   </Col>
                 </Row>
-                <span className={style.headerOne35} style={{ marginLeft: "2rem"}}>อัตราการซื้อเหรียญ</span>
+                <span className={style.headerOne5} style={{ marginLeft: "2rem"}}>อัตราการซื้อเหรียญ</span>
                 <Row style={{ marginLeft: "2rem", marginTop: "1rem" }}>
-                  <Col md={3} lg={3} className={style.textOne25}>ราคา </Col>
-                  <Col md={6} lg={6} className={style.textOne25} align="center">
-                    <p className={`${style.datetime} ${style.textOneo25}`}>
+                  <Col md={3} lg={3} className={style.textOne4}>ราคา </Col>
+                  <Col md={6} lg={6} className={style.textOne4} align="center">
+                    <p className={`${style.datetime} ${style.textOne4}`}>
                       {data.baht}
                     </p>
                   </Col>
-                  <Col md={4} lg={4} className={style.textOne25} align="center">
+                  <Col md={4} lg={4} className={style.textOne4} align="center">
                     เท่ากับ
                   </Col>
-                  <Col md={6} lg={6} className={style.textOne25}>
-                    <p className={`${style.datetime} ${style.textOne25}`} align="center">
+                  <Col md={6} lg={6} className={style.textOne4}>
+                    <p className={`${style.datetime} ${style.textOne4}`} align="center">
                       {data.coin}
                     </p>
                   </Col>
-                  <Col md={4} lg={3} className={style.textOne25} align="center">เหรียญ </Col>
+                  <Col md={4} lg={3} className={style.textOne4} align="center">เหรียญ </Col>
                 </Row>
                 <Row className={style.promotion}>
                   <Col md={5} lg={4} xl={2}>

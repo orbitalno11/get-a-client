@@ -1,8 +1,7 @@
 import React, { Fragment,useEffect } from "react";
 import { Row, Col } from "antd";
 import RequesDetail from "./RequesDetail";
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { styleComponent } from "../../../../defaultFunction/style";
 import style from "../styles.module.scss";
 import Loading from "../../../../loading/Loading";
 import { useDispatch,useSelector } from "react-redux";
@@ -22,11 +21,11 @@ export default function Request() {
     <Fragment>
       {loading.loading && <Loading />}
         <Row style={{ marginLeft: "1rem" }}>
-          <Col xs={3} sm={3} md={2} lg={2} xl={1}>
-            <FontAwesomeIcon icon={faCoins} className={style.coins} />
+          <Col xs={3} sm={3} md={2} lg={2} xl={1} style={{paddingTop:"0.2rem"}}>
+              <styleComponent.iconCoin size="medium"/>
           </Col>
           <Col xs={21} sm={21} md={17} lg={18} xl={20}>
-            <span className={style.headerOne35}>
+            <span className={style.headerOne5}>
               คำขอการถอนเหรียญที่ยังไม่ได้รับการอนุมัติ
             </span>
           </Col>

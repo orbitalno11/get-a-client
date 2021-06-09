@@ -3,7 +3,6 @@ import { Grid, Col, Row, Button, Select, Image } from "antd";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import style from "../styles.module.scss";
-import { coinAction } from "../../../../../redux/actions";
 import InputComponents from "../../../../input/InputComponets";
 import { coinAction, modalAction } from "../../../../../redux/actions";
 import { typeModal } from "../../../../modal/TypeModal";
@@ -73,9 +72,6 @@ export default function Request({
       }
     }
   };
-  console.log(errors)
-  const rateId = Number(2)
-  const money = Number(4)
 
   const onSubmit = (data) => {
     if (data) {
@@ -153,7 +149,7 @@ export default function Request({
                   name="amount"
                   placeholder
                   disabled
-                  value={String(amount)}
+                  value={amount}
                 />
               </div>
               {!isEmpty(requestDetail) ? (

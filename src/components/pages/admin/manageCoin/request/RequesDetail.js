@@ -24,7 +24,7 @@ export default  function RequesDetail({data}) {
             <div style={{ paddingLeft: "1rem" }}>
               <Row>
               <Col span={12}>
-                <p  className={style.headerOne35}>
+                <p  className={style.headerOne5}>
                   คำขอการถอนเหรียญ
                 </p>
                 <p className={style.textOne35}>ชื่อ : {data && data.owner.firstname}</p>
@@ -51,7 +51,7 @@ export default  function RequesDetail({data}) {
                       style={{ width: "100px" }}
                       onClick={() => handOnApprove(data.id)}
                     >
-                      <span className={style.textOne35}>ยอมรับ</span>
+                      <span className={style.textOne25}>ยอมรับ</span>
                     </Button>
                 </Col>
                 <Col span={6}>
@@ -62,7 +62,7 @@ export default  function RequesDetail({data}) {
                     style={{ width: "100px" }}
                     onClick={() => handOnDenied(data.id,data.owner.id)}
                   >
-                   <span className={style.textOne35}>ปฏิเสธ</span>
+                   <span className={style.textOne25}>ปฏิเสธ</span>
                   </Button>
                 </Col>
               </Row>

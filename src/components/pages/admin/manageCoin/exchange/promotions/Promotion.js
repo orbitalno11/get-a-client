@@ -40,11 +40,11 @@ export default function Promotion() {
     return (
       <div style={{ paddingLeft: "1rem", justifyContent: "center" }}>
         <form id="addpromotion" onSubmit={handleSubmit(onSubmit)}>
-          <span className={style.headerOne35}>เพิ่มโปรโมชั่น</span>
+          <span className={style.headerOne5}>เพิ่มโปรโมชั่น</span>
           <Row>
             <Col
-              span={6}
-              className={`${style.textOneo25} ${style.paddingInput}`}
+              span={5}
+              className={`${style.textOne25} ${style.paddingInput}`}
             >
               ชื่อโปรโมชั่น :
             </Col>
@@ -60,8 +60,8 @@ export default function Promotion() {
           </Row>
           <Row style={{ marginTop: "1rem", marginBottom: "1rem" }}>
             <Col
-              span={6}
-              className={style.textOneo25}
+              span={5}
+              className={style.textOne25}
             >
               วันที่เริ่มต้น :
             </Col>
@@ -80,8 +80,8 @@ export default function Promotion() {
           </Row>
           <Row style={{ marginTop: "1rem", marginBottom: "1rem" }}>
             <Col
-              span={6}
-              className={style.textOneo25}
+              span={5}
+              className={style.textOne25}
             >
               วันที่สิ้นสุด :
             </Col>
@@ -113,17 +113,18 @@ export default function Promotion() {
             <Col
               span={4}
               align="center"
-              className={`${style.textOneo25} ${style.paddingInput}`}
+              className={`${style.textOne25} ${style.paddingInput}`}
             >
               บาท
             </Col>
             <Col
               span={2}
-              className={`${style.textOneo25} ${style.paddingInput}`}
+              className={`${style.textOne25} ${style.paddingInput}`}
+              align="center"
             >
               =
             </Col>
-            <Col span={7}>
+            <Col span={7} style={{paddingLeft:"0.8rem"}}>
               <InputComponents
                 type="number"
                 name="coin"
@@ -136,13 +137,13 @@ export default function Promotion() {
             <Col
               span={4}
               align="center"
-              className={`${style.textOneo25} ${style.paddingInput}`}
+              className={`${style.textOne25} ${style.paddingInput}`}
             >
               เหรียญ
             </Col>
           </Row>
           <Row className={style.btnRequest}>
-            <Col span={6}>
+            <Col style={{paddingRight:"2rem"}}>
               <Button
                 className="backgroundGreen buttonColor"
                 shape="round"
@@ -150,10 +151,10 @@ export default function Promotion() {
                 style={{ width: "100px" }}
                 htmlType="submit"
               >
-                <span className={style.textNormal}>บันทึก</span>
+                <span className={style.textOne25}>บันทึก</span>
               </Button>
             </Col>
-            <Col span={6}>
+            <Col>
               <Button
                 className="backgroundRed buttonColor"
                 shape="round"
@@ -161,7 +162,7 @@ export default function Promotion() {
                 style={{ width: "100px" }}
                 onClick={() => dispatch(modalAction.closeModal())}
               >
-                <span className={style.textNormal}>ยกเลิก</span>
+                <span className={style.textOne25}>ยกเลิก</span>
               </Button>
             </Col>
           </Row>
@@ -183,11 +184,11 @@ export default function Promotion() {
     <Fragment>
       <ModalComponent />
       <Row style={{ marginLeft: "1rem" }}>
-        <Col md={2} lg={2} xl={1}>
+        <Col md={2} lg={2} xl={1} style={{paddingTop:"0.4rem"}}>
           <FontAwesomeIcon icon={faBullhorn} className={style.coins} />
         </Col>
         <Col md={5} lg={5} xl={3}>
-          <span className={style.titleH4}>จัดการโปรโมชั่น</span>
+          <span className={style.headerOne75}>จัดการโปรโมชั่น</span>
         </Col>
       </Row>
       <Row className={style.pagepaddingleft} style={{ marginLeft: "1rem" }}>
@@ -197,7 +198,7 @@ export default function Promotion() {
             style={{ color: "#F5732E", textDecorationLine: "underline" }}
             onClick={() => createPromotion()}
           >
-            <span className={style.textOne35}>เพิ่มโปรโมชั่น</span>
+            <span className={style.textOne5}>เพิ่มโปรโมชั่น</span>
           </Button>
         </Col>
       </Row>

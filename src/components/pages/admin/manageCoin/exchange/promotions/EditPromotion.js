@@ -51,9 +51,9 @@ export default function EditPromotion({dataPromo}) {
     return (
         <div style={{ paddingLeft: "1rem", justifyContent: "center" }}>
           <form id="addpromotion"onSubmit={handleSubmit(onSubmit)}>
-            <span className={style.headerOne35}>แก้ไขโปรโมชั่น</span>
+            <span className={style.headerOne5}>แก้ไขโปรโมชั่น</span>
             <Row>
-              <Col span={6} className={`${style.textOneo25} ${style.paddingInput}`}>
+              <Col span={5} className={`${style.textOne25} ${style.paddingInput}`}>
                 ชื่อโปรโมชั่น :
               </Col>
               <Col span={18}>
@@ -68,7 +68,7 @@ export default function EditPromotion({dataPromo}) {
               </Col>
             </Row>
             <Row style={{ marginTop: "1rem",marginBottom:"1rem"}}>
-              <Col span={6} className={style.textOneo25}>
+              <Col span={5} className={style.textOne25}>
                 วันที่เริ่มต้น :
               </Col>
               <Col span={18}>
@@ -85,7 +85,7 @@ export default function EditPromotion({dataPromo}) {
               </Col>
             </Row>
             <Row  style={{ marginTop: "1rem",marginBottom:"1rem"}}>
-              <Col span={6} className={style.textOneo25}>
+              <Col span={5} className={style.textOne25}>
                 วันที่สิ้นสุด :
               </Col>
               <Col span={18}>
@@ -113,9 +113,9 @@ export default function EditPromotion({dataPromo}) {
                       min="0"
                     />
               </Col>
-              <Col span={4} align="center" className={`${style.textOneo25} ${style.paddingInput}`}>บาท</Col>
-              <Col span={2}  className={`${style.textOneo25} ${style.paddingInput}`}>=</Col>
-              <Col span={7}>
+              <Col span={4} align="center" className={`${style.textOne25} ${style.paddingInput}`}>บาท</Col>
+              <Col span={2}  className={`${style.textOne25} ${style.paddingInput}`} align="center">=</Col>
+              <Col span={7} style={{paddingLeft:"0.8rem"}}>
                 <InputComponents
                       type="number"
                       name="coin"
@@ -125,10 +125,10 @@ export default function EditPromotion({dataPromo}) {
                       min="0"
                     />
               </Col>
-              <Col span={4} align="center" className={`${style.textOneo25} ${style.paddingInput}`}>เหรียญ</Col>
+              <Col span={4} align="center" className={`${style.textOne25} ${style.paddingInput}`}>เหรียญ</Col>
             </Row>
             <Row className={style.btnRequest}>
-              <Col span={6}>
+              <Col style={{paddingRight:"2rem"}}>
                 <Button
                   className="backgroundGreen buttonColor"
                   shape="round"
@@ -136,10 +136,10 @@ export default function EditPromotion({dataPromo}) {
                   style={{ width: "100px" }}
                   htmlType="submit"
                 >
-                  <span className={style.textNormal}>บันทึก</span>
+                  <span className={style.textOne25}>บันทึก</span>
                 </Button>
               </Col>
-              <Col span={6}>
+              <Col>
                 <Button
                   className="backgroundRed buttonColor"
                   shape="round"
@@ -147,7 +147,7 @@ export default function EditPromotion({dataPromo}) {
                   style={{ width: "100px" }}
                   onClick={() => dispatch(modalAction.closeModal())}
                 >
-                  <span className={style.textNormal}>ยกเลิก</span>
+                  <span className={style.textOne25}>ยกเลิก</span>
                 </Button>
               </Col>
             </Row>

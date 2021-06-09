@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import style from "../styles.module.scss";
 import isMobile from "../../../../isMobile/isMobile";
 import RedeemList from "./RedeemList";
@@ -108,13 +108,6 @@ export default function TableRequest({ onHandleChange}) {
           <RedeemList onHandleChange={onHandleChange} />
         </div>
       )}
-    </div>
-    ):(
-    
-    <div className={style.paddingbody}  >
-      <RedeemList/>
-      </div>
-    )}
     </div>
   );
 }

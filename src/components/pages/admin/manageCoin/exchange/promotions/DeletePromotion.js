@@ -20,9 +20,9 @@ const ModaldeletePromotion = ({ data }) => {
   };
   return (
     <div style={{ paddingLeft: "1rem" }}>
-      <span className={style.titleH4}>ยืนยันลบโปรโมชั่น</span>
+      <span className={style.headerOne5}>ยืนยันลบโปรโมชั่น</span>
       <Row style={{marginTop:"2rem",marginBottom:"2rem",justifyContent:"center"}}>
-        <Col className={style.textNormal}>{data.title}</Col>
+        <Col className={style.textOne5}>{data.title}</Col>
       </Row>
       <Row className={style.btnRequest}>
         <Col span={6}>
@@ -34,7 +34,7 @@ const ModaldeletePromotion = ({ data }) => {
             htmlType="submit"
             onClick={() => removePromotion()}
           >
-            <span className={style.textNormal}>ตกลง</span>
+            <span className={style.textOne25}>ตกลง</span>
           </Button>
         </Col>
         <Col span={6}>
@@ -45,7 +45,7 @@ const ModaldeletePromotion = ({ data }) => {
             style={{ width: "100px" }}
             onClick={() => dispatch(modalAction.closeModal())}
           >
-            <span className={style.textNormal}>ยกเลิก</span>
+            <span className={style.textOne25}>ยกเลิก</span>
           </Button>
         </Col>
       </Row>

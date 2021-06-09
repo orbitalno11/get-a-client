@@ -67,9 +67,9 @@ export default function Edit({dataRate}) {
       <div style={{ paddingLeft: "1rem" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           { dataRate.type  != "transfer" ? (
-            <span className={style.headerOne35}>แก้ไขอัตราการซื้อเหรียญ</span>
+            <span className={style.headerOne5}>แก้ไขอัตราการซื้อเหรียญ</span>
           ):(
-            <span className={style.headerOne35}>แก้ไขอัตราการแลกเหรียญ</span>
+            <span className={style.headerOne5}>แก้ไขอัตราการแลกเหรียญ</span>
           )}
           <Row style={{ marginBottom: "1rem" }}>
             <Col span={6} className={style.columnRate}>
@@ -105,7 +105,7 @@ export default function Edit({dataRate}) {
               style={{ width: "100px" }}
               htmlType="submit"
             >
-              <span className={style.textOneo25}>บันทึก</span>
+              <span className={style.textOne25}>บันทึก</span>
             </Button>
           </Col>
           <Col span={6}>
@@ -116,7 +116,7 @@ export default function Edit({dataRate}) {
               style={{ width: "100px" }}
               onClick={() => dispatch(modalAction.closeModal())}
             >
-             <span className={style.textOneo25}>ยกเลิก</span>
+             <span className={style.textOne25}>ยกเลิก</span>
             </Button>
           </Col>
         </Row>

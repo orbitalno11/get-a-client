@@ -3,11 +3,12 @@ import React, { Fragment, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { exchangeSchema } from "../../../../../../validation/admin/exchangeSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { faCoins, faPowerOff } from "@fortawesome/free-solid-svg-icons";
+import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../../styles.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { modalAction, coinAction } from "../../../../../../redux/actions";
+import { styleComponent } from "../../../../../defaultFunction/style";
 import ModalComponent from "../../../../../modal/ModalComponent";
 import { sizeModal } from "../../../../../modal/SizeModal";
 import InputComponents from "../../../../../input/InputComponets";
@@ -24,7 +25,6 @@ export default function CreatePrice({type}) {
   const dispatch = useDispatch();
   const today = moment().format("MM/DD/YYYY");
 
-  console.log(errors)
   const onSubmit = (data) => {
     if (data) {
       if(type != "rate"){
@@ -70,9 +70,9 @@ export default function CreatePrice({type}) {
       <div style={{ paddingLeft: "1rem" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           { type === "rate" ? (
-          <span className={style.headerOne35}>เพิ่มอัตราการแลกเหรียญ</span>):(
+          <span className={style.headerOne5}>เพิ่มอัตราการแลกเหรียญ</span>):(
 
-            <span className={style.headerOne35}>เพิ่มอัตราการซื้อเหรียญ</span>
+            <span className={style.headerOne5}>เพิ่มอัตราการซื้อเหรียญ</span>
           )}
           <Row style={{ marginBottom: "1rem" }}>
             <p>{errors.baht && errors.baht}</p>
@@ -88,13 +88,13 @@ export default function CreatePrice({type}) {
             </Col>
             <Col
               span={3}
-              className={`${style.textOneo25} ${style.paddingInput}`}
+              className={`${style.textOne35} ${style.paddingInput}`}
             >
               บาท
             </Col>
             <Col
               span={1}
-              className={`${style.textOneo25} ${style.paddingInput}`}
+              className={`${style.textOne35} ${style.paddingInput}`}
             >
               =
             </Col>
@@ -110,7 +110,7 @@ export default function CreatePrice({type}) {
             </Col>
             <Col
               span={3}
-              className={`${style.textOneo25} ${style.paddingInput}`}
+              className={`${style.textOne25} ${style.paddingInput}`}
             >
               เหรียญ
             </Col>
@@ -124,7 +124,7 @@ export default function CreatePrice({type}) {
                 style={{ width: "100px" }}
                 htmlType="submit"
               >
-                <span className={style.textOneo25}>บันทึก</span>
+                <span className={style.textOne25}>บันทึก</span>
               </Button>
             </Col>
             <Col span={6}>
@@ -135,7 +135,7 @@ export default function CreatePrice({type}) {
                 style={{ width: "100px" }}
                 onClick={() => dispatch(modalAction.closeModal())}
               >
-                <span className={style.textOneo25}>ยกเลิก</span>
+                <span className={style.textOne25}>ยกเลิก</span>
               </Button>
             </Col>
           </Row>
@@ -156,16 +156,16 @@ export default function CreatePrice({type}) {
   return (
     <Fragment>
       <Row style={{ marginLeft: "1rem" }}>
-        <Col xs={3} sm={3} md={2} lg={2} xl={1}>
-          <FontAwesomeIcon icon={faCoins} className={style.coins} />
+        <Col xs={3} sm={3} md={2} lg={2} xl={1} style={{paddingTop:"0.55rem"}}>
+            <styleComponent.iconCoin size="medium"/>
         </Col>
         { type != "rate" ?(
         <Col xs={21} sm={21} md={20} lg={22} xl={23}>
-          <span className={style.headerOne35}>ราคาขายปัจจุบัน</span>
+          <span className={style.headerOne75}>ราคาขายปัจจุบัน</span>
         </Col>
         ):(
           <Col xs={21} sm={21} md={20} lg={22} xl={23}>
-          <span className={style.headerOne35}>อัตราการแลกเหรียญปัจจุบัน</span>
+          <span className={style.headerOne75}>อัตราการแลกเหรียญปัจจุบัน</span>
         </Col>
         )}
         <ModalComponent />
@@ -189,7 +189,7 @@ export default function CreatePrice({type}) {
               style={{ color: "#F5732E" }}
               onClick={() => createPrice()}
             >
-              <span className={style.textOne35}> เพิ่มอัตราการแลกเหรียญ</span>
+              <span className={style.textOne5}> เพิ่มอัตราการแลกเหรียญ</span>
             </Button>
           </Col>
         </Row>
@@ -264,8 +264,8 @@ export default function CreatePrice({type}) {
                 .filter((data) => data.type === "transfer")
                 .map((data, index) => (
                   <tr style={{ width: "1rem" }} key={index}>
-                    <td className={style.textNormal}>{data && data.baht} </td>
-                    <td className={style.textNormal}>{data && data.coin}</td>
+                    <td className={style.textOne5}>{data && data.baht} </td>
+                    <td className={style.textOne5}>{data && data.coin}</td>
                     <td>
                       <Edit dataRate={data}/>
                       &emsp;

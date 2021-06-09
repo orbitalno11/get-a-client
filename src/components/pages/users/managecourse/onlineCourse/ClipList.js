@@ -71,11 +71,10 @@ export default function ClipList() {
                 ? (
                     !isEmpty(onFocusCard) && onFocusCard.map(item => (
                         <Row key={item.id} className={`${screens.md && style.section} ${style.marginSection} ${style.cursor}`}>
-                            <CardClip data={item} isOwner={isOwner} all={onFocusAll}/>
+                            <CardClip data={item} isOwner={isOwner} all={onFocusAll} />
                         </Row>
                     ))
-                )
-                : (
+                ) : (
                     !loading && (
                         <div className={`${screens.md && style.section} ${style.marginSection}`} align="center">
                             <EmptyImage size="default" />
@@ -85,10 +84,8 @@ export default function ClipList() {
                         </div>
                     )
                 )
-
         )
     }
-
 
     return (
         <Fragment>
@@ -105,26 +102,29 @@ export default function ClipList() {
                         )
                     }
                     <Col xl={15} lg={15} md={24}>
-                        <Row align="middle" className={`${!isMobile() && style.section} ${!isMobile() && style.marginSection}`}>
-                            {
-                                !isMobile() && (
-                                    <Fragment>
-                                        <Col span={20}>
-                                            <span className={style.headerTwo5} style={{ color: color.orange }}>วิดิโอทั้งหมด</span>
-                                        </Col>
-                                        {
-                                            isOwner && (
-                                                <Col span={4} align="end">
-                                                    <Link to={`/tutor/online/${courseId}/video/create`}>
-                                                        <Button className={`${style.buttonColor} ${style.textOne}`} style={styleComponent.buttonFull(color.orange, "auto")}>เพิ่มบทเรียน</Button>
-                                                    </Link>
+                        {
+                            role !== 1 && (
+                                <Row align="middle" className={`${!isMobile() && style.section} ${!isMobile() && style.marginSection}`}>
+                                    {
+                                        !isMobile() && (
+                                            <Fragment>
+                                                <Col span={20}>
+                                                    <span className={style.headerTwo5} style={{ color: color.orange }}>วิดิโอทั้งหมด</span>
                                                 </Col>
-                                            )
-                                        }
-                                    </Fragment>
-                                )
-                            }
-                        </Row>
+                                                {
+                                                    isOwner && (
+                                                        <Col span={4} align="end">
+                                                            <Link to={`/tutor/online/${courseId}/video/create`}>
+                                                                <Button className={`${style.buttonColor} ${style.textOne}`} style={styleComponent.buttonFull(color.orange, "auto")}>เพิ่มบทเรียน</Button>
+                                                            </Link>
+                                                        </Col>
+                                                    )
+                                                }
+                                            </Fragment>
+                                        )
+                                    }
+                                </Row>
+                            )}
                         {
                             role === 1 && (
                                 <Row className={`${!isMobile() && style.section} ${!isMobile() && style.marginSection}`} >

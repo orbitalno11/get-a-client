@@ -32,7 +32,9 @@ export default function AddClip() {
   });
 
   useEffect(() => {
-    dispatch(onlineCourseActions.getClip(videoId))
+    if(videoId?.isSafeNotBlank()){
+      dispatch(onlineCourseActions.getClip(videoId))
+    }
     return () => {
       dispatch(onlineCourseActions.clearListOnlineCourse())
     }

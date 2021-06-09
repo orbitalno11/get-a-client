@@ -48,7 +48,7 @@ export default function Redeem() {
     <Fragment>
       {loading.loading && <Loading />}
       {isMobile() && (
-        <Header title= "จัดการเหรียญ" pageBack="/tutor/1" />
+        <Header title= "จัดการเหรียญ" pageBack="/me" />
       )}
       <div className="container">
         <div className={style.paddingTopBody}>

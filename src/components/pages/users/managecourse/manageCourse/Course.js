@@ -64,7 +64,7 @@ export default function Course() {
     }, [onlineCourse, offlineCourse])
 
     const trackImpress = () => {
-        const courseType = 1
+        const courseType = isOfflineCourse ? 1 : 3
         if (idCourse?.isSafeNotBlank()) {
             trackImpressCourseDetail(idCourse, courseType)
         }

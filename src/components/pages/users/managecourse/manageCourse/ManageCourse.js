@@ -35,9 +35,10 @@ export default function ManageCourse() {
       dispatch(tutorAction.getListOnlineCourse(auth.profile))
     }
     return () => {
+      setCourseList([])
       dispatch(tutorAction.clearListOfflineCourse())
     }
-  }, [])
+  }, [type])
 
   useEffect(() => {
     let courseDetail = null

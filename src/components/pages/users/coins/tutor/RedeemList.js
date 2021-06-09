@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Row, Col, Divider } from "antd";
-import { faCoins, faTimes, faHourglass, faCheck, faBan } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faHourglass, faCheck, faBan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
 import style from "../styles.module.scss";
@@ -45,8 +45,8 @@ export default function RedeemList({ onHandleChange}) {
             detailRequest.sort((a, b) => (b.requestDate > a.requestDate) ? 1 : -1).map((data, index) => (
               <div style={{ paddingTop: "0.5rem" }} key={index}  onClick={() => onHandleChange(true,data.id)}>
                 <Row>
-                  <Col xs={4} sm={3} className={style.centerPage}>
-                    <FontAwesomeIcon icon={faCoins} className={style.Xs} />
+                  <Col xs={3} sm={2} style={{paddingTop:"0.4rem"}}>
+                      <styleComponent.iconCoin/>
                   </Col>
                   <Col xs={16} sm={15}>
                   <span className={style.textOne5}>{data && data.amountCoin}&nbsp; เหรียญ</span>

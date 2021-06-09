@@ -23,6 +23,7 @@ import { styleComponent } from "../../../../../defaultFunction/style";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
 import BuyClip from "../BuyClip";
 import AllReview from "../../../review/AllReview";
+import { trackImpressClip } from "../../../../../../analytic/Analytic";
 
 export default function ManageClip() {
   const { clip } = useSelector(state => state.onlineCourse)
@@ -40,10 +41,20 @@ export default function ManageClip() {
     display: showMessage ? "block" : "-webkit-box"
   }
 
+  const trackImpress = () => {
+    if (videoId?.isSafeNotBlank()) {
+      trackImpressClip(videoId)
+    }
+}
+
   useEffect(() => {
     dispatch(onlineCourseActions.getClip(videoId))
     dispatch(reviewActions.getReviewClip(videoId))
     dispatch(profileAction.getProfile())
+    if(!owner){
+      trackImpress()
+    }
+
     return () => {
       dispatch(onlineCourseActions.clearListOnlineCourse())
     }
@@ -97,9 +108,6 @@ export default function ManageClip() {
       <div className="container">
         <Row className={style.bodyPaddingTopBottom} justify="space-around" align="center">
           <Col xl={15} lg={15} md={24} sm={24} xs={24}>
-            <Col span={24} >
-
-            </Col>
             <Col span={24} className={`${style.marginSection} ${style.scaleVideo} `} align="center">
               {
                 clip && (
@@ -119,7 +127,7 @@ export default function ManageClip() {
                 )
               }
             </Col>
-            <Col className={`${style.section} ${style.marginSection}`} span={24} onClick={() => setShowMessage(!showMessage)}>
+            <Col className={`${screens.md && style.section} ${style.marginSection}`} span={24} onClick={() => setShowMessage(!showMessage)}>
               {
                 clip ? (
                   <Fragment>
@@ -150,10 +158,9 @@ export default function ManageClip() {
                   </Fragment>
                 )
               }
-
             </Col>
             {
-              screens.md && (
+              screens.lg && (
                 <Col className={`${style.section} ${style.marginSection}`} span={24}>
                   {
                     (!isEmpty(profileAccount) && isAuthenticated) ? (
@@ -184,7 +191,7 @@ export default function ManageClip() {
             }
           </Col>
           <Col xl={8} lg={8} md={24} sm={24} xs={24}>
-            <Col className={`${style.section} ${style.marginSection}`} span={24}>
+            <Col className={`${screens.md && style.section} ${style.marginSection}`} span={24}>
               <span className={style.headerOne75}>รีวิวจากผู้เรียนจริง</span>
             </Col>
             {
@@ -194,9 +201,8 @@ export default function ManageClip() {
                 </Col>
               )
             }
-            <AllReview />
+            <AllReview vdo/>
           </Col>
-
         </Row>
         {
           owner && (

@@ -1,7 +1,6 @@
 import React from "react"
 import { Button, Col, Rate, Row } from "antd";
 import styles from "./styles.module.scss"
-import isMobile from "../isMobile/isMobile"
 import { useState } from "react";
 import { styleComponent } from "../defaultFunction/style";
 import { color } from "../defaultValue";
@@ -9,8 +8,9 @@ import { Fragment } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
+import isEmpty from "../defaultFunction/checkEmptyObject";
 
-export default function CardReview({ data, myReview, handleEdit }) {
+export default function CardReview({ data, myReview, handleEdit, vdo }) {
     const screens = useBreakpoint();
     const [showMessage, setShowMessage] = useState(false)
     
@@ -23,7 +23,7 @@ export default function CardReview({ data, myReview, handleEdit }) {
             color: colorIcon
         })
     }
-
+    console.log(!isEmpty(vdo) && !screens.lg)
     return (
         <Row className={`${!screens.md && `${styles.paddingOne} ${styles.card}`}  ${screens.md  && styles.section} ${styles.marginSection}`} align="middle">
             <Col lg={15} md={15} sm={18} xs={18}>
@@ -33,7 +33,7 @@ export default function CardReview({ data, myReview, handleEdit }) {
             </Col>
             <Col lg={8} md={8} sm={6} xs={6} align={"end"}>
                 {myReview && (
-                    !isMobile() ?
+                    ((isEmpty(vdo) && screens.md) || (!isEmpty(vdo) && !screens.lg && screens.md)) ?
                         (
                             <Fragment>
                                 <Button

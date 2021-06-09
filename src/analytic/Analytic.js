@@ -30,3 +30,13 @@ export function trackImpressCourseDetail(courseId, type) {
         })
     })
 }
+
+export function trackImpressClip(videoId) {
+    launchAnalytic(async () => {
+        await apiURL.apiGetA.get("/analytic/clip", {
+            params: {
+                clipId: videoId,
+            }
+        })
+    })
+}

@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import isEmpty from "../../../defaultFunction/checkEmptyObject";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
 
-export default function AllReview() {
+export default function AllReview({vdo}) {
     const dispatch = useDispatch()
     const { id, videoId, type } = useParams()
     const { offlineCourse, auth, review, onlineCourse, loading } = useSelector(state => state)
@@ -58,7 +58,7 @@ export default function AllReview() {
                         <Row>
                             {!isEmpty(myReview) &&
                                 <Col span={24} >
-                                    <CardReview data={myReview} myReview={true} handleEdit={handleOpenReviewForm} />
+                                    <CardReview data={myReview} myReview={true} handleEdit={handleOpenReviewForm} vdo={vdo && vdo}/>
                                 </Col>
                             }
                             {!isEmpty(reviewList) && reviewList.map((item, index) => (

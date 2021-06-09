@@ -12,7 +12,7 @@ export default function CardClip({ data, isOwner, all }) {
     const history = useHistory()
 
     const redirectClipPage = () => {
-        history.push(`${isOwner ? "/tutor" : "/"}online/${courseId}/video/${data.id}`)
+        history.push(`${isOwner ? "/tutor/" : "/"}online/${courseId}/video/${data.id}`)
     }
 
     const fixHeight = {

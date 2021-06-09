@@ -23,7 +23,7 @@ export default function CardReview({ data, myReview, handleEdit, vdo }) {
             color: colorIcon
         })
     }
-    console.log(!isEmpty(vdo) && !screens.lg)
+
     return (
         <Row className={`${!screens.md && `${styles.paddingOne} ${styles.card}`}  ${screens.md  && styles.section} ${styles.marginSection}`} align="middle">
             <Col lg={15} md={15} sm={18} xs={18}>

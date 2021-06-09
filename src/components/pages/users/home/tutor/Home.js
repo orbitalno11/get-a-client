@@ -1,50 +1,30 @@
-import { Col, Row, Grid, Space, Button } from "antd";
+import { Col, Row, Grid, Space, Button, Divider } from "antd";
 import React, { Fragment, useEffect } from "react"
-import PieChartComponent from "../../../../dashborad/PieChartComponent";
 import style from "../styles.module.scss"
 import Header from "../../../../headerMobile/Header"
 import isMobile from "../../../../isMobile/isMobile";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { color } from "../../../../defaultValue"
 import { styleComponent } from "../../../../defaultFunction/style";
 import { tutorAction } from "../../../../../redux/actions/tutor.actions";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { coinAction } from "../../../../../redux/actions";
 const { useBreakpoint } = Grid;
 
 export default function Home() {
     const screens = useBreakpoint();
     const dispatch = useDispatch()
     const { dashboard } = useSelector(state => state.tutor)
+    const { balance } = useSelector(state => state.coin);
 
     useEffect(() => {
         dispatch(tutorAction.getDashboard())
+        dispatch(coinAction.getCoinBalance());
 
         return () => {
             dispatch(tutorAction.clearListOfflineCourse())
         }
     }, [])
-
-    console.log(dashboard)
-
-    const data = {
-        labels: [
-            'ทั้งหมด',
-            'นัดเจอ',
-            'ออนไลน์'
-        ],
-        datasets: [{
-            data: [300, 50, 100],
-            backgroundColor: [
-                color.CHM,
-                color.MTH,
-                color.PHY
-            ],
-            hoverOffset: 4
-        }]
-    };
 
     const legendStyle = (colorIcon) => {
         return ({
@@ -52,73 +32,81 @@ export default function Home() {
         })
     }
 
+    const dividerMobile = () => {
+        return (isMobile() && <Divider />)
+    }
+
+    const alignInPage = () => {
+        const align = !screens.lg ? "center" : "start"
+        return align
+    }
+
     return (
         <Fragment>
             {isMobile() && <Header title="หน้าหลัก" />}
             <div className="container">
-                <Row justify={"space-between"} className={style.bodyPaddingTopBottom}>
-                    <Col span={24} className={`${!isMobile() && style.section}`} align={isMobile() ? "center" : "start"}>
+                <div className={style.bodyPaddingTopBottom}>
+                    <div span={24} className={`${!isMobile() ? style.section : null}`} align={alignInPage()}>
                         <span className={style.headerFour}>ยินดีต้อนรับ</span>
-                    </Col>
-                    <Col className={`${!isMobile() && style.section} ${style.marginSection}`} lg={14} md={24} sm={24} xs={24} >
-                        <Row justify={!screens.lg && "center"}>
-                            <span className={style.headerTwo25}>สรุปการสอน</span>
-                        </Row>
-                        <Row className={screens.lg && style.marginSection} align="middle" justify={"space-between"}>
-                            <Col order={!screens.lg ? 2 : 1} lg={14} md={24} sm={24} xs={24} className={!screens.lg && style.marginSection}>
-                                <Row align="middle" justify={!screens.lg ? "center" : "start"}>
-                                    <Col>
-                                        <FontAwesomeIcon style={legendStyle(color.CHM)} icon={faCircle} />
+                    </div>
+                    {dividerMobile()}
+                    <Row align="middle" className={`${style.section}  ${style.marginSection}`} justify={alignInPage()}>
+                        <span className={style.headerTwo5} >รีวิว</span>
+                        <span className={`${style.headerTwo75} ${style.paddingbody}`} style={legendStyle(color.orange)}>{dashboard?.statistic ? dashboard?.statistic.rating : "-"}</span>
+                        <span className={style.headerTwo75} >ดาว</span>
+                    </Row>
+                    {dividerMobile()}
+                    <Row justify={"space-between"} gutter={[16, 0]}>
+                        <Col lg={12} md={24} sm={24} xs={24} align="center">
+                            <div className={`${style.section} ${!isMobile() && style.marginSection}`}>
+                                <span className={style.headerThree}>{dashboard?.statistic ? dashboard?.statistic.numberOfOfflineCourse : "-"}</span>
+                                <p className={style.headerOne5}>จำนวนคอร์สเรียนแบบนัดเจอ</p>
+                            </div>
+                        </Col>
+                        {dividerMobile()}
+                        <Col lg={12} md={24} sm={24} xs={24} align="center">
+                            <div className={`${style.section} ${!isMobile() && style.marginSection}`}>
+                                <span className={style.headerThree}>{dashboard?.statistic ? dashboard?.statistic.numberOfOnlineCourse : "-"}</span>
+                                <p className={style.headerOne5}>จำนวนคอร์สเรียนแบบออนไลน์</p>
+                            </div>
+                        </Col>
+                        {dividerMobile()}
+                        <Col lg={12} md={24} sm={24} xs={24} align={alignInPage()}>
+                            <div className={`${style.section} ${!isMobile() && style.marginSection} ${screens.lg && style.fullHeight}`}>
+                                <span className={`${style.headerTwo25}`}>จำนวนคนที่กดถูกใจคุณ</span>
+                                <Row justify="space-between" className={`${style.paddingTopOneHalf}`}>
+                                    <Col lg={12} md={12} sm={24} xs={24} >
+                                        <span className={`${style.textOne5} ${style.width7}`} align="start">ทั้งหมด</span>
+                                        <span className={`${style.textOne5} ${style.width4}`} align="start">{dashboard?.statistic ? dashboard?.statistic.numberOfFavorite : "-"}</span>
+                                        <span className={`${style.textOne5}`} align="start">คน </span>
                                     </Col>
-                                    <Col className={style.marginLeftOneHalf}>
-                                        <span className={`${style.textOne5} ${style.width10}`}>มีผู้เรียนกับคุณ </span>
-                                        <span className={`${style.textOne5} ${style.width4}`}>5,0 </span>
-                                        <span className={`${style.textOne5}`}>คน </span>
+                                    <Col lg={12} md={12} sm={24} xs={24}>
+                                        <span className={`${style.textOne5} ${style.width7}`} align="start">ในอาทิตย์นี้</span>
+                                        <span className={`${style.textOne5} ${style.width4}`} align="start">{dashboard?.statistic ? dashboard?.weekly.numberOfFavorite : "-"}</span>
+                                        <span className={`${style.textOne5}`} align="start">คน </span>
                                     </Col>
                                 </Row>
-                                <Row align="middle" justify={!screens.lg ? "center" : "start"}>
-                                    <Col>
-                                        <FontAwesomeIcon style={legendStyle(color.MTH)} icon={faCircle} />
-                                    </Col>
-                                    <Col className={style.marginLeftOneHalf}>
-                                        <span className={`${style.textOne5} ${style.width10}`}>เรียนแบบนัดเจอ </span>
-                                        <span className={`${style.textOne5} ${style.width4}`}>5,000 </span>
-                                        <span className={`${style.textOne5}`}>คน </span>
-                                    </Col>
-                                </Row>
-                                <Row align="middle" justify={!screens.lg ? "center" : "start"}>
-                                    <Col>
-                                        <FontAwesomeIcon style={legendStyle(color.PHY)} icon={faCircle} />
-                                    </Col>
-                                    <Col className={style.marginLeftOneHalf}>
-                                        <span className={`${style.textOne5} ${style.width10}`}>เรียนแบบออนไลน์ </span>
-                                        <span className={`${style.textOne5} ${style.width4}`}>5,000 </span>
-                                        <span className={`${style.textOne5}`}>คน </span>
-                                    </Col>
-                                </Row>
-                            </Col>
-                            <Col order={!screens.lg ? 1 : 2} lg={9} md={24} sm={24} xs={24}>
-                                <PieChartComponent data={data} radius={1} main="value" value="type" />
-                            </Col>
-                        </Row>
-                    </Col>
-                    <Col className={`${!isMobile() && style.section} ${style.marginSection}`} lg={9} md={24} sm={24} xs={24}>
-                        <Row className={`${style.fullHeight} ${!screens.lg && style.marginSection} `} align="middle" justify={!screens.lg && "space-around"} >
-                            <Col span={24} align={!screens.lg ? "center" : "start"}>
-                                <span className={style.headerTwo25}>ข้อมูลเหรียญ</span>
-                            </Col>
-                            <Col span={17} className={!screens.lg && style.marginSection}>
-                                <Space align="center" direction="horizontal">
-                                    <styleComponent.iconCoin size="medium" />
-                                    <span className={`${!isMobile() ? style.textTwo : style.textOne5} ${style.marginLeftOneHalf}`}> {balanceCoin ? balanceCoin.amount : <SkeletonComponent.SkeletonText />} &nbsp;เหรียญ </span>
-                                </Space>
-                            </Col>
-                            <Col span={screens.lg ? 24 : 7} className={style.marginSection} align="end">
-                                <Button className={`${style.buttonColor} ${!screens.lg && style.textOne}`} style={styleComponent.buttonFull(color.yellow, (!screens.lg && "6.25rem"))}>จัดการเหรียญ</Button>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
+                            </div>
+                        </Col>
+                        {dividerMobile()}
+                        <Col lg={12} md={24} sm={24} xs={24} >
+                            <div className={`${style.section} ${!isMobile() && style.marginSection} ${style.fullHeight}`}>
+                                <div align={alignInPage()}>
+                                    <span className={style.headerTwo25}>ข้อมูลเหรียญ</span>
+                                </div>
+                                <div align={alignInPage()} className={!screens.lg ? style.marginSection : null}>
+                                    <Space align="center" direction="horizontal">
+                                        <styleComponent.iconCoin size={25} />
+                                        <span className={`${style.textOne5} ${style.marginLeftOneHalf}`}>{balance ? balance.amount :"-"} เหรียญ </span>
+                                    </Space>
+                                </div>
+                                <div className={style.marginSection}>
+                                <Button className={`${style.buttonColor} ${style.textOne25}`} style={styleComponent.buttonFull(color.yellow)}>จัดการเหรียญ</Button>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                </div>
             </div>
         </Fragment>
     )

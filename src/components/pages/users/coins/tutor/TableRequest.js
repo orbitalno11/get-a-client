@@ -61,7 +61,7 @@ export default function TableRequest({ onHandleChange}) {
                     <tr
                       style={{ width: "1rem" }}
                       key={index}
-                      onClick={() => onHandleChange(true,data.id)}
+                      onClick={() => onHandleChange(true,data.id,data.status)}
                     >
                       <td className={style.textOne35}>{index + 1}</td>
                       <td className={style.textOne35}>

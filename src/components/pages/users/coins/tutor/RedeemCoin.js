@@ -7,7 +7,6 @@ import RedeemDetail from "./RedeemDetail"
 import { useDispatch, } from "react-redux";
 import { coinAction } from "../../../../../redux/actions";
 
-
 export default function RedeemCoin() {
 
     const dispatch = useDispatch();
@@ -22,9 +21,12 @@ export default function RedeemCoin() {
 
     const [idRequest, setidRequest] = useState()
 
-    const onHandleChange = (show,id) => {     
+    const [status, setStatus] = useState()
+
+    const onHandleChange = (show,id,status) => {     
       setisShowRequest(show)
       setidRequest(id)
+      setStatus(status)
       setRedeem(!redeem)
     }
 
@@ -55,7 +57,7 @@ export default function RedeemCoin() {
 
               </Fragment>
              ) : (
-                <Request onHandleChange={onHandleChange} showRequest={isShowRequest} idRequest={idRequest}/>
+                <Request onHandleChange={onHandleChange} showRequest={isShowRequest} idRequest={idRequest} statusRequest = {status}/>
             )
         }
         </Row>

@@ -120,7 +120,7 @@ export default function RedeemDetail({onHandleChange}) {
                         <span className={style.headerThree}>{amountShow}</span>
                     </Col>
                   ):(
-                    <Col md={6} lg={10} xl={9} style={{paddingTop:"2.5rem"}}>
+                    <Col md={6} lg={10} xl={9} style={{paddingTop:"1.5rem"}}>
                         <SkeletonComponent.SkeletonText/>
                     </Col>
                   )}
@@ -130,7 +130,7 @@ export default function RedeemDetail({onHandleChange}) {
                         <span className={style.headerThree}> THB {bahtShow}</span>
                     </Col>
                     ):(
-                    <Col md={10} lg={10} xl={9} style={{paddingTop:"2.5rem"}}>
+                    <Col md={10} lg={10} xl={9} style={{paddingTop:"1.5rem"}}>
                         <SkeletonComponent.SkeletonText/>
                     </Col>
                   )}

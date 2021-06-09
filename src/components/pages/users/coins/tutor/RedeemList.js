@@ -43,7 +43,7 @@ export default function RedeemList({ onHandleChange}) {
           <div>
             {!isEmpty(detailRequest) &&
             detailRequest.sort((a, b) => (b.requestDate > a.requestDate) ? 1 : -1).map((data, index) => (
-              <div style={{ paddingTop: "0.5rem" }} key={index}  onClick={() => onHandleChange(true,data.id)}>
+              <div style={{ paddingTop: "0.5rem" }} key={index}  onClick={() => onHandleChange(true,data.id,data.status)}>
                 <Row>
                   <Col xs={3} sm={2} style={{paddingTop:"0.4rem"}}>
                       <styleComponent.iconCoin/>

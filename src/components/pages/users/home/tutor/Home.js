@@ -8,20 +8,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { color } from "../../../../defaultValue"
 import { styleComponent } from "../../../../defaultFunction/style";
+import { tutorAction } from "../../../../../redux/actions/tutor.actions";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useDispatch, } from "react-redux";
-import { coinAction } from "../../../../../redux/actions";
-import { SkeletonComponent } from "../../../../loading/SkeletonComponent"
 const { useBreakpoint } = Grid;
 
 export default function Home() {
     const screens = useBreakpoint();
-    const dispatch = useDispatch();
-    const balanceCoin = useSelector((state) => state.coin.balance);
+    const dispatch = useDispatch()
+    const { dashboard } = useSelector(state => state.tutor)
 
     useEffect(() => {
-        dispatch(coinAction.getCoinBalance());
-      }, []);
+        dispatch(tutorAction.getDashboard())
+
+        return () => {
+            dispatch(tutorAction.clearListOfflineCourse())
+        }
+    }, [])
+
+    console.log(dashboard)
 
     const data = {
         labels: [

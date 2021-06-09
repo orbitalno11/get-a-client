@@ -359,6 +359,26 @@ function getProfileTutor(id) {
     function failure(err) { return { type: tutorConstants.GET_TUTOR_PROFILE_FAILURE, payload: err } }
 }
 
+function getDashboard() {
+    return async dispatch => {
+        dispatch(loadingActions.startLoading())
+        await apiURL.apiGetA.get(`/tutor/home/dashboard`)
+            .then((res) => {
+                if (res.data.success) {
+                    const data = res.data.data
+                    dispatch(success(data))
+                    dispatch(loadingActions.stopLoading())
+                }
+            }).catch(err => {
+                dispatch(failure(err?.response?.data))
+                dispatch(loadingActions.stopLoading())
+            })
+    }
+
+    function success(data) { return { type: tutorConstants.GET_TUTOR_DASHBOARD_SUCCESS, payload: data } }
+    function failure(err) { return { type: tutorConstants.GET_TUTOR_DASHBOARD_FAILURE, payload: err } }
+}
+
 function clearListOfflineCourse() {
     return dispatch => { dispatch({ type: tutorConstants.CLEAR_LIST_OFFLINE_COURSE }) }
 }
@@ -377,5 +397,6 @@ export const tutorAction = {
     getListOfflineCourse,
     clearListOfflineCourse,
     getProfileTutor,
-    getListOnlineCourse
+    getListOnlineCourse,
+    getDashboard
 }

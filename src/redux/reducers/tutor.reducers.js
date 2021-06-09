@@ -15,7 +15,8 @@ const initialState = {
         success: false,
         data: null
     },
-    tutorHandle: null
+    tutorHandle: null,
+    dashboard: null
 }
 
 const tutorReducer = (state = initialState, action) => {
@@ -177,6 +178,18 @@ const tutorReducer = (state = initialState, action) => {
                 tutorHandle: null,
                 error: action.payload
             }
+        case tutorConstants.GET_TUTOR_DASHBOARD_SUCCESS:
+            return {
+                ...state,
+                dashboard: action.payload,
+                error: false
+            }
+        case tutorConstants.GET_TUTOR_DASHBOARD_FAILURE:
+            return {
+                ...state,
+                dashboard: null,
+                error: action.payload
+            }
         case tutorConstants.CLEAR_LIST_OFFLINE_COURSE:
             return {
                 ...state,
@@ -193,6 +206,7 @@ const tutorReducer = (state = initialState, action) => {
                 listEducation: null,
                 education: null,
                 testing: null,
+                dashboard: null,
                 error: false
             }
 

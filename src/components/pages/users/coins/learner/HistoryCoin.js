@@ -10,7 +10,7 @@ export default function HistoryCoin() {
   return (
     <Fragment>
        {isMobile() && <Header title="ประวัติการซื้อเหรียญ" pageBack="/learner/1" />}
-      <Row className={style.body}>
+      <Row className={style.container}>
           <HistoryDetails />
       </Row>
     </Fragment>

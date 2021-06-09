@@ -33,7 +33,9 @@ export default function ProfileDetail({ data, isTutor }) {
                             </Row>
                         </Col>
                         <Col span={6} align="end">
-                            <Button className={`${style.buttonColor} ${style.textOne}`} style={styleComponent.buttonFull(color.yellow, "4rem")} size="small">ซื้อเหรียญ</Button>
+                            <Link to={!isTutor ? "/coin" : "/tutor/me/redeem"}>
+                                <Button className={`${style.buttonColor} ${style.textOne}`} style={styleComponent.buttonFull(color.yellow, "5rem")} size="small">{isTutor ? "แลกเหรียญ" : "ซื้อเหรียญ"}</Button>
+                            </Link>        
                         </Col>
                     </Row>
                 )

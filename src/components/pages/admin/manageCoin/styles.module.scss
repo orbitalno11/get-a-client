@@ -15,9 +15,6 @@
   margin-top: 0.25rem;
 }
 
-.pagepaddingleft{
-  padding-left: 2rem;
-}
 
 .rateCoin {
   background: #f5732e !important;
@@ -59,7 +56,7 @@
 }
 
 .btnRequest{
-  padding-top: 0.6rem;
+  padding: 0.6rem;
   justify-content: center !important;
 }
 
@@ -68,10 +65,7 @@
   border-radius:2rem;
 }
 
-.columnRate{
-  margin-left: 1.5rem;
-  margin-right: 1rem;
-}
+
 
 .tablecoins {
   border-collapse: collapse;
@@ -116,4 +110,22 @@
   justify-content: flex-end;
 }
 
+// new
+.paddingInput{
+  padding-top: 1.3rem;
+}
 
+.columnRate{
+  margin-left: 1.5rem;
+  margin-right: 1rem;
+}
+
+.pagepaddingleft{
+  padding-left: 2rem;
+}
+
+.imageRedeem{
+  display: flex;
+  flex-direction: column;  
+  justify-content: center;
+}

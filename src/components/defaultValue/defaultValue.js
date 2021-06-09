@@ -93,6 +93,30 @@ const typeCourse = {
     "นัดเจอ" : 1,
 }
 
+const bank = {
+    "ไทยพาณิชย์" : "SCB",
+    "กรุงไทย" : "KTB",
+    "กสิกรไทย" : "KBANK",
+    "กรุงเทพ" : "BBL"
+}
+
+const redeemType = {
+    0 : "อยู่ระหว่างการพิจารณา",
+    1 : "อนุมัติ", 
+    2 : "โอนเงิน" , 
+    3 : "ปฏิเสธ",
+    4 : "ยกเลิก" 
+}
+
+const transactionType = {
+    0 : "เติมเหรียญ",
+    1 : "ถอนเงิน", 
+    2 : "แลกเหรียญ" , 
+    3 : "ซื้อเหรียญ",
+    4 : "รายได้จากคลิปออนไลน์" ,
+    5 : "คืนเหรียญ"
+}
+
 export const defaultValue = {
     gender,
     grade,
@@ -109,5 +133,8 @@ export const defaultValue = {
     timeFormat,
     enrollStatus,
     userRole,
-    typeCourse
+    typeCourse,
+    bank,
+    transactionType,
+    redeemType
 }

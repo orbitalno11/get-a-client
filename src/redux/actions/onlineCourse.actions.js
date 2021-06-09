@@ -7,9 +7,9 @@ import { modalAction } from "./modal.actions"
 
 // start online course
 function createOnlineCourse(data) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post("/online-course/create", data, {
+        apiURL.apiGetA.post("/online-course/create", data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -39,9 +39,9 @@ function createOnlineCourse(data) {
 }
 
 function updateOnlineCourse(data, id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.put(`/online-course/${id}`, data, {
+        apiURL.apiGetA.put(`/online-course/${id}`, data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -71,9 +71,9 @@ function updateOnlineCourse(data, id) {
 }
 
 function getTutorOnlineCourse(id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get(`/tutor/${id}/online-course`)
+        apiURL.apiGetA.get(`/tutor/${id}/online-course`)
             .then(res => {
                 if (res.data.success) {
                     const data = res.data.data
@@ -94,14 +94,14 @@ function getTutorOnlineCourse(id) {
 
 
 function getOnlineCourse(id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get(`/online-course/${id}`)
+        apiURL.apiGetA.get(`/online-course/${id}`)
             .then(res => {
                 if (res.data.success) {
+                    dispatch(loadingActions.stopLoading())
                     const data = res.data.data
                     dispatch(success(data))
-                    dispatch(loadingActions.stopLoading())
                 }
             })
             .catch((err) => {
@@ -117,9 +117,9 @@ function getOnlineCourse(id) {
 
 // start clip-online course
 function createClipOnlineCourse(data, id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post(`/clip/create`, data, {
+        apiURL.apiGetA.post(`/clip/create`, data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -148,9 +148,9 @@ function createClipOnlineCourse(data, id) {
 
 
 function updateClipOnlineCourse(data, courseId, videoId) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.put(`/clip/${videoId}`, data, {
+        apiURL.apiGetA.put(`/clip/${videoId}`, data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -179,14 +179,14 @@ function updateClipOnlineCourse(data, courseId, videoId) {
 }
 
 function getClipOnlineCourse(id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get(`/online-course/${id}/clip/`)
+        apiURL.apiGetA.get(`/online-course/${id}/clip/`)
             .then(res => {
                 if (res.data.success) {
+                    dispatch(loadingActions.stopLoading())
                     const data = res.data.data
                     dispatch(success(data))
-                    dispatch(loadingActions.stopLoading())
                 }
             })
             .catch((err) => {
@@ -201,9 +201,9 @@ function getClipOnlineCourse(id) {
 }
 
 function getClip(id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get(`/clip/${id}`)
+        apiURL.apiGetA.get(`/clip/${id}`)
             .then(res => {
                 if (res.data.success) {
                     const data = res.data.data
@@ -223,9 +223,9 @@ function getClip(id) {
 }
 
 function deleteClip(courseId, videoId) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.delete(`/clip/${videoId}`)
+        apiURL.apiGetA.delete(`/clip/${videoId}`)
             .then(() => {
                 dispatch(success())
                 dispatch(loadingActions.stopLoading())
@@ -254,9 +254,9 @@ function deleteClip(courseId, videoId) {
 
 
 function buyClip(id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get(`/clip/${id}/buy`)
+        apiURL.apiGetA.get(`/clip/${id}/buy`)
             .then(() => {
                 dispatch(success())
                 dispatch(loadingActions.stopLoading())

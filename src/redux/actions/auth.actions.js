@@ -18,7 +18,7 @@ function checkErrorMessage(errorMessage) {
 }
 
 function loginUser(loginData, path) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
         auth.signInWithEmailAndPassword(loginData.email, loginData.password).then(user => {
             if (user) {
@@ -70,9 +70,9 @@ function loginUser(loginData, path) {
 }
 
 function signUpLearner(signUpData) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post("/learner/create", signUpData, {
+        apiURL.apiGetA.post("/learner/create", signUpData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -102,9 +102,9 @@ function signUpLearner(signUpData) {
 }
 
 function signUpTutor(signUpData) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post("/tutor/create", signUpData, {
+        apiURL.apiGetA.post("/tutor/create", signUpData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }

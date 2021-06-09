@@ -17,10 +17,11 @@ import ModalComponent from "../../../../modal/ModalComponent";
 import Loading from "../../../../loading/Loading";
 import { useSelector } from "react-redux";
 import resizeImage from "../../../../defaultFunction/resizeImage";
-import { defaultValue } from "../../../../defaultValue";
+import { color, defaultValue } from "../../../../defaultValue";
 import Header from "../../../../headerMobile/Header";
 import { useParams } from "react-router";
 import findKeyObject from "../../../../defaultFunction/findKeyObject";
+import { styleComponent } from "../../../../defaultFunction/style";
 
 export default function CreateCourseOnline() {
   const dispatch = useDispatch()
@@ -40,22 +41,30 @@ export default function CreateCourseOnline() {
     }
   }, [])
 
-  useEffect(() => {
-    if(id && dataCourse.data){
+  const resetEditInput = () => {
+    if (id?.isSafeNotBlank()) {
       reset({
         name: dataCourse.data.name,
-        grade: findKeyObject(defaultValue.grade,dataCourse.data.grade.grade),
-        subject: findKeyObject(defaultValue.subject,dataCourse.data.subject.id),
+        grade: findKeyObject(defaultValue.grade, dataCourse.data.grade.grade),
+        subject: findKeyObject(defaultValue.subject, dataCourse.data.subject.id),
       })
-      setimage({imageURL : dataCourse.data.coverUrl})
-    }else{
+      setimage({ imageURL: dataCourse.data.coverUrl })
+    } else {
+      setimage(titleOnlineCourse)
+    }
+  }
+
+  useEffect(() => {
+    if (id?.isSafeNotBlank() && dataCourse.data) {
+      resetEditInput()
+    } else {
       reset({
         name: "",
         grade: "ม.4",
         subject: "คณิตศาสตร์"
       })
+
     }
- 
   }, [dataCourse])
 
   const onChange = async data => {
@@ -85,7 +94,6 @@ export default function CreateCourseOnline() {
       if (image.file) {
         formdata.append("image", image.file)
       }
-      
       if (!id) {
         dispatch(onlineCourseActions.createOnlineCourse(formdata))
       } else {
@@ -96,104 +104,110 @@ export default function CreateCourseOnline() {
 
   return (
     <Fragment>
-      {isMobile() && (<Header title={(id?"แก้ไข":"สร้าง")+"คอร์สเรียน"} pageBack="goback" />)}
+      {isMobile() && (<Header title={(id ? "แก้ไข" : "สร้าง") + "คอร์สเรียน"} pageBack="goback" />)}
       <ModalComponent />
       {
         loading && (
           <Loading />
         )
       }
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Row className={style.container} justify="center">
-          <Col span={24} align="center">
-            {!isMobile() && (
-              <span className={style.titleH2}>{id ? "แก้ไข" : "สร้าง"}คอร์สเรียน </span>
-            )}
-          </Col>
-          <Col xs={24} sm={24} md={10} lg={10} xl={10}>
-            <Row justify="space-between" align="middle">
-              <Col xl={24} md={24} sm={24} xs={24} className={style.subProfile}>
-                <InputComponents
-                  title="ชื่อคอร์ส"
-                  type="text"
-                  name="name"
-                  register={register}
-                  error={errors.name}
-                  placeholder="ชื่อคอร์ส"
-                />
+      <div className="container">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className={style.bodyPaddingTopBottom}>
+            <div className={`${!isMobile() && style.section}`}>
+              {!isMobile() && (
+                <span className={`${style.headerFour}`}>{id ? "แก้ไข" : "สร้าง"}คอร์สเรียนออนไลน์  </span>
+              )}
+            </div>
+            <Row className={`${!isMobile() && style.section} ${!isMobile() && style.marginSection}`} justify="space-between">
+              <Col xs={24} sm={24} md={11} lg={11} xl={11}>
+                <Row >
+                  <Col span={24} className={!isMobile() && style.marginTopOne5}>
+                    <InputComponents
+                      title="ชื่อคอร์ส"
+                      type="text"
+                      name="name"
+                      register={register}
+                      error={errors.name}
+                      placeholder="ชื่อคอร์ส"
+                    />
+                  </Col>
+                  <Col span={24} className={style.marginTopOne5}>
+                    <p className={style.textOne5}>ชั้นเรียน</p>
+                    <Controller
+                      as={
+                        <Select name="grade">
+                          {defaultValue.grade &&
+                            Object.entries(defaultValue.grade).map(([key, value]) => (
+                              <Select.Option key={value} value={key}>
+                                {key}
+                              </Select.Option>
+                            ))}
+                        </Select>
+                      }
+                      name="grade"
+                      control={control}
+                      defaultValue=""
+                    />
+                    {errors.grade && (
+                      <p className="error-input">{errors.grade.message}</p>
+                    )}
+                  </Col>
+                  <Col span={24} className={style.marginTopOne5}>
+                    <p className={style.textOne5}>วิชา</p>
+                    <Controller
+                      as={
+                        <Select name="subject" disabled={id ? true : false}>
+                          {defaultValue.subject &&
+                            Object.entries(defaultValue.subject).map(([key, value]) => (
+                              <Select.Option key={value} value={key}>{key}
+                              </Select.Option>
+                            ))}
+                        </Select>
+                      }
+                      name="subject"
+                      control={control}
+                      defaultValue=""
+                    />
+                    {errors.subject && (
+                      <p className="error-input">{errors.subject.message}</p>
+                    )}
+                  </Col>
+                </Row>
               </Col>
-              <Col span={24} className={style.subProfile}>
-                <p className={style.textNormal}>ชั้นเรียน</p>
-                <Controller
-                  as={
-                    <Select name="grade">
-                      {defaultValue.grade &&
-                        Object.entries(defaultValue.grade).map(([key, value]) => (
-                          <Select.Option key={value} value={key}>
-                            {key}
-                          </Select.Option>
-                        ))}
-                    </Select>
-                  }
-                  name="grade"
-                  control={control}
-                  defaultValue=""
-                />
-                {errors.grade && (
-                  <p className="error-input">{errors.grade.message}</p>
-                )}
+              <Col xs={24} sm={24} md={9} lg={9} xl={9} align="center" className={style.marginSection}>
+                <p className={style.textOne5}>ภาพหน้าปกคอร์ส</p>
+                <div className="imageUpload">
+                  <label htmlFor="file-input">
+                    <Image
+                      className={`${style.a4Image} ${style.borderImage}`}
+                      src={image.imageURL ? image.imageURL : titleOnlineCourse}
+                      preview={false}
+                    />
+                  </label>
+                  <input id="file-input" type="file" name="image" ref={register} onChange={onChange} />
+                </div>
+                {errors.image && <p className="error-input">{errors.image.message}</p>}
               </Col>
-              <Col span={24} className={style.subProfile}>
-                <p className={style.textNormal}>วิชา</p>
-                <Controller
-                  as={
-                    <Select name="subject" disabled={id?true:false}>
-                      {defaultValue.subject &&
-                        Object.entries(defaultValue.subject).map(([key, value]) => (
-                          <Select.Option key={value} value={key}>{key}
-                          </Select.Option>
-                        ))}
-                    </Select>
-                  }
-                  name="subject"
-                  control={control}
-                  defaultValue=""
-                />
-                {errors.subject && (
-                  <p className="error-input">{errors.subject.message}</p>
-                )}
+              <Col className={style.marginTopOne5} span={24} align="center">
+                <Button
+                  className={`${style.buttonColor} ${style.textOne25}`}
+                  style={styleComponent.buttonFull(color.orange, "5rem")}
+                  htmlType="submit">
+                  บันทึก
+              </Button>
+                <Button
+                  className={`${style.buttonColor} ${style.textOne25} ${style.marginLeftOne}`}
+                  style={styleComponent.buttonFull(color.blue, "5rem")}
+                  onClick={() => { resetEditInput() }}
+                  htmlType={id ? "button" : "reset"}>
+                  ยกเลิก
+              </Button>
               </Col>
             </Row>
-          </Col>
-
-          <Col xs={24} sm={24} md={9} lg={9} xl={9} align="center" className={style.subProfile}>
-            <p className={style.textNormal}>ภาพหน้าปกคอร์ส</p>
-            <div className="imageUpload">
-              <label htmlFor="file-input">
-                <Image
-                  className={`${style.a4Image} ${style.borderImage}`}
-                  src={image.imageURL ? image.imageURL : titleOnlineCourse}
-                  preview={false}
-                />
-              </label>
-              <input id="file-input" type="file" name="image" ref={register} onChange={onChange} />
-            </div>
-            {errors.image && <p className="error-input">{errors.image.message}</p>}
-          </Col>
-
-          <Col span={24} align="center" className={style.subProfile}>
-            <Button
-              className="buttonColor backgroundOrange"
-              size="large"
-              shape="round"
-              style={{ width: "7.5rem" }}
-              htmlType="submit">
-              บันทึก
-          </Button>
-          </Col>
-        </Row>
-
-      </form>
+          </div>
+        </form>
+      </div>
     </Fragment>
   );
 }

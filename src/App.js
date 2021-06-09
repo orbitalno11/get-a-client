@@ -34,18 +34,17 @@ import Notification from "./components/pages/users/notifications/Notification"
 import NotificationDetail from "./components/pages/users/notifications/NotificationDetail"
 import Favorite from "./components/pages/users/favorite/Favorite"
 import Search from "./components/pages/users/search/Search";
-import OnlineCourseList from "./components/pages/users/onlineCourseList/OnlineCourseList"
 import { setAuthToken } from "./utils/setAxios";
 import jwtDecode from "jwt-decode";
 import { userActions } from "./redux/actions";
-import OfflineCourse from "./components/pages/users/managecourse/manageCourse/OfflineCourse";
+import Course from "./components/pages/users/managecourse/manageCourse/Course";
 import Ranking from "./components/pages/users/home/learner/Ranking";
 import { defaultValue } from "./components/defaultValue";
-import ManageCourse from "./components/pages/users/managecourse/manageCourse/ManageCourse";
 import VDO from "./components/pages/users/managecourse/onlineCourse/player/VDO"
 import Profile from "./components/pages/users/profile/profile/Profile";
 import PubilcProfileCourse from "./components/pages/users/profile/profile/publicProflie/PubilcProfileCourse";
 import PubilcProfile from "./components/pages/users/profile/profile/publicProflie/PubilcProfile";
+import ClipList from "./components/pages/users/managecourse/onlineCourse/ClipList";
 
 
 if (localStorage.token) {
@@ -104,10 +103,9 @@ function App() {
           <Route exact path="/register/:type" component={RegisterForm} />
           <Route exact path="/profile/:id/course" component={PubilcProfileCourse} />
           <Route exact path="/profile/:id" component={PubilcProfile} />
-          <Route exact path="/:type/:id" component={OfflineCourse} />
+          <Route exact path="/:type/:id" component={Course} />
           <Route exact path="/search" component={Search} />
-          <Route exact path="/course/online/:id" component={OnlineCourseList} />
-          <Route exact path="/course/online/:courseId/video" component={ManageCourse} />
+          <Route exact path="/course/online/:courseId/video" component={ClipList} />
           <Route exact path="/online/:courseId/video/:videoId" component={VDO} />
           <Route path="*">
             <Redirect path="/" />

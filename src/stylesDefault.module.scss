@@ -8,6 +8,7 @@ $red : #840c0c;
 $green : #00B900;
 $black : #000000;
 $silver : #a39b9b;
+$gray3 : "#828282";
 
 .titleH2{
     font-size: 2rem;
@@ -258,7 +259,6 @@ $silver : #a39b9b;
     font-size: 1.75rem;
 }
 
-
 .textOne5{
     font-size: 1.5rem;
 }
@@ -287,6 +287,10 @@ $silver : #a39b9b;
     line-height: 90%
 }
 
+.cursor{
+    cursor: pointer;
+}
+
 .paddingOne{
     padding : 1rem !important
 }
@@ -295,12 +299,24 @@ $silver : #a39b9b;
    padding-top: 0.5rem
 }
 
+.paddingTopOne{
+    padding-top: 1rem
+}
+
+.paddingTopOneHalf{
+    padding-top: 1.5rem
+}
+
+.marginTopOne5{
+    margin-top: 1.5rem;
+}
+
+.marginTopOne25{
+    margin-top: 1.25rem;
+}
+
 .marginTopHalf{
     margin-top: 0.5rem;
-}
-  
-.cursor{
-    cursor: pointer;
 }
 
 .marginRightHalf{
@@ -310,3 +326,12 @@ $silver : #a39b9b;
 .fullHeight{
     height: 100%;
 }
+
+.textOneLine {
+    @include cutText(1)
+  }
+  
+.textLineHeight { 
+    line-height: 90%;
+}
+  

@@ -93,7 +93,7 @@ export default function Home() {
                             </Col>
                             <Col span={17} className={!screens.lg && style.marginSection}>
                                 <Space align="center" direction="horizontal">
-                                    <styleComponent.iconCoin size={25} />
+                                    <styleComponent.iconCoin size="medium" />
                                     <span className={`${!isMobile() ? style.textTwo : style.textOne5} ${style.marginLeftOneHalf}`}>1,000,00 เหรียญ</span>
                                 </Space>
                             </Col>

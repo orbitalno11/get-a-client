@@ -1,14 +1,13 @@
 import React, { Fragment } from "react";
-import { Row, Grid, Col, Button, Divider } from "antd";
+import { Row, Grid, Col, Button } from "antd";
 import style from "../styles.module.scss";
 import Header from "../../../../headerMobile/Header";
 import { clipSchema } from "../../../../../validation/course/clipSchema";
 import isMobile from "../../../../isMobile/isMobile"
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import InputComponents from "../../../../input/InputComponets";
-import TextArea from "antd/lib/input/TextArea";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { onlineCourseActions } from "../../../../../redux/actions";
@@ -16,7 +15,8 @@ import Loading from "../../../../loading/Loading";
 import { useSelector } from "react-redux";
 import ModalComponent from "../../../../modal/ModalComponent";
 import { useEffect } from "react";
-
+import { styleComponent } from "../../../../defaultFunction/style";
+import { color } from "../../../../defaultValue";
 const { useBreakpoint } = Grid;
 
 export default function AddClip() {
@@ -27,19 +27,21 @@ export default function AddClip() {
   const { loading } = useSelector(state => state.loading)
   const [vdo, setVdo] = useState(null)
 
-  const { register, handleSubmit, errors, control, reset } = useForm({
+  const { register, handleSubmit, errors, reset } = useForm({
     resolver: yupResolver(clipSchema(videoId ? true : false)),
   });
 
   useEffect(() => {
-    dispatch(onlineCourseActions.getClip(videoId))
+    if(videoId?.isSafeNotBlank()){
+      dispatch(onlineCourseActions.getClip(videoId))
+    }
     return () => {
       dispatch(onlineCourseActions.clearListOnlineCourse())
     }
   }, [])
 
-  useEffect(() => {
-    if (videoId) {
+  const resetEditInput = () => {
+    if (videoId?.isSafeNotBlank()) {
       reset({
         name: clip && clip.name,
         description: clip && clip.description,
@@ -48,6 +50,14 @@ export default function AddClip() {
       if (clip) {
         setVdo({ VDOURL: clip.clipUrl, name: clip.clipUrl })
       }
+    } else {
+      setVdo(null)
+    }
+  }
+
+  useEffect(() => {
+    if (videoId?.isSafeNotBlank()) {
+      resetEditInput()
     }
   }, [clip])
 
@@ -79,117 +89,99 @@ export default function AddClip() {
 
   return (
     <Fragment>
-
       {isMobile() && (
         <Header title={(videoId ? "แก้ไข" : "เพิ่ม") + "บทเรียน"} pageBack="goback" />
       )}
       {loading && <Loading />}
       <ModalComponent />
-
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className={style.container}>
-
-          {screens.md && (
-            <Row>
-              <span className={style.titleH2}>{videoId ? "แก้ไข" : "เพิ่ม"}บทเรียน</span>
-            </Row>
-          )}
-          <Row >
-
-            <Col xs={24} sm={24} md={24} lg={13} xl={11}>
-
-              <Row justify="space-between" align="middle">
-                <Col span={24} className={style.subProfile}>
-                  <InputComponents
-                    title="ชื่อคอร์ส"
-                    type="text"
-                    name="name"
-                    register={register}
-                    error={errors.name}
-                    placeholder="ชื่อคอร์ส"
-                  />
-                </Col>
-                <Col span={24} className={style.subProfile}>
-                  <p className={style.textNormal}>รายละเอียด</p>
-                  <Controller
-                    as={
-                      <TextArea className="input" name="description" size="large" />
-                    }
-                    name="description"
-                    control={control}
-                    defaultValue={""}
-                    placeholder="คำอธิบายคอร์สเพิ่มเติม"
-                  />
-                  {errors.description && (
-                    <p className="error-input">{errors.description.message}</p>
-                  )}
-                </Col>
-                <Col span={24} className={style.subProfile}>
-                  <InputComponents
-                    title="ราคาคลิปการสอน (เหรียญ)"
-                    type="number"
-                    name="cost"
-                    min={0}
-                    register={register}
-                    error={errors.cost}
-                    placeholder="ราคาของผู้เข้าชม"
-                  />
-                </Col>
-
-                <Col span={24} className={style.subProfile} >
-                  <p className={style.textNormal}>คลิปการสอน</p>
-                  <div className="imageUpload" >
-                    <label htmlFor="file-input">
-                      <span className={style.buttonInputFile}>{!vdo ? "อัปโหลดวิดิโอการสอน" : "แก้ไขวิดิโอการสอน"}</span>
-                      {
-                        isMobile() && (<br />)
-                      }
-                      {
-                        vdo?.file && (
-                          <span className={style.textNormal}>{vdo && vdo.name}</span>
-                        )
-                      }
-                    </label>
-                    <input id="file-input" type="file" name="video" accept="video/mp4" ref={register} onChange={(data) => onChangeVDO(data)} />
-                  </div>
-                  {errors.video && <p className="error-input">{errors.video.message}</p>}
-                </Col>
-              </Row>
-            </Col>
-            {screens.md && (
-              <Col md={3} lg={2} xl={2}>
-                <Divider
-                  type="vertical"
-                  style={{ height: "100%", marginLeft: "3rem" }}
-                />
+      <div className="container">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className={style.bodyPaddingTopBottom}>
+            <div className={`${!isMobile() && style.section}`}>
+              {!isMobile() && (
+                <span className={`${style.headerFour}`}>{videoId ? "แก้ไข" : "เพิ่ม"}บทเรียน  </span>
+              )}
+            </div>
+            <Row className={`${!isMobile() && style.section} ${!isMobile() && style.marginSection}`} justify="space-between">
+              <Col xs={24} sm={24} md={24} lg={13} xl={11}>
+                <Row justify="space-between" align="middle">
+                  <Col span={24} className={!isMobile() && style.marginTopOne5}>
+                    <InputComponents
+                      title="ชื่อคอร์ส"
+                      type="text"
+                      name="name"
+                      register={register}
+                      error={errors.name}
+                      placeholder="ชื่อคอร์ส"
+                    />
+                  </Col>
+                  <Col span={24} className={style.marginTopOne5}>
+                    <p className={style.textOne5}>รายละเอียด</p>
+                    <textarea className="input" name="description" ref={register} placeholder="คำอธิบายคอร์สเพิ่มเติม" />
+                    {errors.description && (
+                      <p className="error-input">{errors.description.message}</p>
+                    )}
+                  </Col>
+                  <Col span={24} className={style.marginTopOne5}>
+                    <InputComponents
+                      title="ราคาคลิปการสอน (เหรียญ)"
+                      type="number"
+                      name="cost"
+                      min={0}
+                      register={register}
+                      error={errors.cost}
+                      placeholder="ราคาของผู้เข้าชม"
+                    />
+                  </Col>
+                  <Col span={24} className={style.marginTopOne5} >
+                    <p className={style.textOne5}>คลิปการสอน</p>
+                    <div className="imageUpload" >
+                      <label htmlFor="file-input">
+                        <span className={style.buttonInputFile}>{!vdo ? "อัปโหลดวิดิโอการสอน" : "แก้ไขวิดิโอการสอน"}</span>
+                        {
+                          isMobile() && (<br />)
+                        }
+                        {
+                          vdo?.file && (
+                            <span className={style.textOne5}>{vdo && vdo.name}</span>
+                          )
+                        }
+                      </label>
+                      <input id="file-input" type="file" name="video" accept="video/mp4" ref={register} onChange={(data) => onChangeVDO(data)} />
+                    </div>
+                    {errors.video && <p className="error-input">{errors.video.message}</p>}
+                  </Col>
+                </Row>
               </Col>
-            )}
-            {
-              vdo?.VDOURL && (
-                <Col xs={24} sm={24} md={24} lg={8} xl={10} className={!screens.lg ? style.subProfile : null} align={!screens.lg ? "start" : "center"}>
-                  <p className={style.textNormal}>ตัวอย่างคลิป</p>
-                  <div className={style.scaleVideo}>
-                    <video className={style.video} src={(!vdo.file ? "https://" : "") + vdo.VDOURL} width={"100%"} height="396" controls controlsList="nodownload" type="video/mp4" ></video>
-                  </div>
-                </Col>
-              )
-            }
-            
-            <Col xl={24} md={24} sm={24} xs={24} align="center" className={style.subProfile}>
-              <Button
-                className="buttonColor backgroundOrange"
-                size="large"
-                shape="round"
-                style={{ width: "7.5rem" }}
-                htmlType="submit"
-              >
-                บันทึก
-          </Button>
-            </Col>
-          </Row>
-        </div>
-
-      </form>
+              {
+                vdo?.VDOURL && (
+                  <Col xs={24} sm={24} md={24} lg={8} xl={10} className={!screens.lg ? style.marginTopOne5 : null} align={!screens.lg ? "start" : "center"}>
+                    <p className={style.textOne5}>ตัวอย่างคลิป</p>
+                    <div className={style.scaleVideo}>
+                      <video className={style.video} src={(!vdo.file ? "https://" : "") + vdo.VDOURL} width={"100%"} height="396" controls controlsList="nodownload" type="video/mp4" ></video>
+                    </div>
+                  </Col>
+                )
+              }
+              <Col className={style.marginTopOne5} span={24} align="center">
+                <Button
+                  className={`${style.buttonColor} ${style.textOne25}`}
+                  style={styleComponent.buttonFull(color.orange, "5rem")}
+                  htmlType="submit">
+                  บันทึก
+              </Button>
+                <Button
+                  className={`${style.buttonColor} ${style.textOne25} ${style.marginLeftOne}`}
+                  style={styleComponent.buttonFull(color.blue, "5rem")}
+                  onClick={() => { resetEditInput() }}
+                  htmlType={videoId ? "button" : "reset"}>
+                  ยกเลิก
+              </Button>
+              </Col>
+            </Row>
+          </div>
+        </form>
+      </div>
     </Fragment>
   );
 }

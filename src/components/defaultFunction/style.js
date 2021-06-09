@@ -13,19 +13,31 @@ const buttonFull = (buttonColor, size) => {
     })
 }
 
-const iconCoin = () => {
+const iconCoin = ({size}) => {
+    const sizeIcon = () =>{
+        if(size === "largest"){
+            return 50
+        }else if(size === "large"){
+            return 36
+        }else if(size === "medium"){
+            return 27
+        }else{
+            return 21
+        }
+    }
     const coinStyle = {
-        width: "21px",
-        height: "21px"
+        width: sizeIcon() +"px",
+        height: sizeIcon() +"px",
     }
     return (
         <Image src={coin} preview={false} style={coinStyle} />
     )
 }
 
-const iconStar = () => {
+const iconStar = ({size}) =>{
     const colorStart = {
-        color: color.yellow
+        color: color.yellow,
+        fontSize : size+"px"
     }
 
     return (

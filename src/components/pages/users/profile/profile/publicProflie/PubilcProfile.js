@@ -17,11 +17,12 @@ import { useState } from "react"
 export default function PubilcProfile({ isCourse }) {
     const dispatch = useDispatch()
     const { tutorHandle } = useSelector(state => state.tutor)
+    const { role } = useSelector(state => state.auth)
     const [dataHeader, setDataHeader] = useState(null)
     const { id } = useParams()
 
     const checkFavorite = () =>{
-        if (id?.isSafeNotBlank()) {
+        if (id?.isSafeNotBlank() && role === 1) {
             dispatch(favoriteAction.checkFavoriteTutor(id))
         }
     }
@@ -35,6 +36,7 @@ export default function PubilcProfile({ isCourse }) {
         checkFavorite()
         return () => {
             dispatch(tutorAction.clearListOfflineCourse())
+            dispatch(favoriteAction.clearListFavorite())
         }
     }, [])
 

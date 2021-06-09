@@ -3,6 +3,7 @@ const blue = "#33658A"
 const yellow = "#F6AE2D"
 const white = "#FFFFFF"
 const gray = "#C4C4C4"
+const gray3 = "#828282"
 const red = "#840c0c"
 const green = "#00B900"
 const black = "#000000"
@@ -18,6 +19,7 @@ const SOC = "#8AB8F6"
 
 export const color = {
     orange,
+    gray3,
     blue,
     yellow,
     white,

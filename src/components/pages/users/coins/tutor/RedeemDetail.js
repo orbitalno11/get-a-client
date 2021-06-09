@@ -1,17 +1,16 @@
 import React, { Fragment} from "react";
 import { Row, Col, Button } from "antd";
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../styles.module.scss";
 import isMobile from "../../../../isMobile/isMobile";
 import { useSelector } from "react-redux";
 import Loading from "../../../../loading/Loading";
+import { styleComponent } from "../../../../defaultFunction/style";
 import { SkeletonComponent } from "../../../../loading/SkeletonComponent"
-import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
+//import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
 import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 
 export default function RedeemDetail({onHandleChange}) {
-  const screens = useBreakpoint();
+  ////const screens = useBreakpoint();
   const { loading } = useSelector((state) => state);
 
   const rateRedeem = useSelector((state) => state.coin.rateCoin);
@@ -39,8 +38,8 @@ export default function RedeemDetail({onHandleChange}) {
                   </Col>
                 </Row>
                 <Row className={style.centerPage}>
-                  <Col xs={4} sm={4}>
-                    <FontAwesomeIcon icon={faCoins} className={style.redeem2} />
+                  <Col xs={3} sm={3}>
+                      <styleComponent.iconCoin size="medium" />
                   </Col> 
                   { balanceCoin ? (                
                   <Col>
@@ -67,11 +66,11 @@ export default function RedeemDetail({onHandleChange}) {
                   )}  
                 </Row>
                 <Row style={{ marginTop:"1rem" }}>
-                  <Col xs={8} sm={6}>
+                  <Col xs={6} sm={4}>
                     <span className={style.headerOne5}>อัตราแลก</span>
                   </Col>
                   <Col xs={4} sm={3} className={style.centerPage}>
-                    <FontAwesomeIcon icon={faCoins} className={style.Xs} />
+                      <styleComponent.iconCoin/>
                   </Col>
                   { rateRedeem? (
                     <Col xs={10} sm={9}>
@@ -115,22 +114,22 @@ export default function RedeemDetail({onHandleChange}) {
                  </Col>
               </Row>
               <Row className={style.paddingTopHead2}>
-                  <Col md={4} lg={4} xl={3} className={screen.lg? style.paddingCoin : style.paddingCoinMd}>
-                    <FontAwesomeIcon icon={faCoins} className={ screens.lg? style.redeem : style.redeemSm } />
+                  <Col md={3} lg={2} xl={2} className={style.paddingCoin}>
+                      <styleComponent.iconCoin size="large" />
                   </Col>
                   { balanceCoin ? ( 
-                    <Col md={5} lg={10} xl={9}>
-                        <span className={style.headerFour}>{amountShow}</span>
+                    <Col md={6} lg={10} xl={10}>
+                        <span className={style.headerThree}>{amountShow}</span>
                     </Col>
                   ):(
-                    <Col md={5} lg={10} xl={9} style={{paddingTop:"2.5rem"}}>
+                    <Col md={6} lg={10} xl={9} style={{paddingTop:"2.5rem"}}>
                         <SkeletonComponent.SkeletonText/>
                     </Col>
                   )}
 
                   { (balanceCoin&&rateRedeem) ? (
                     <Col md={10} lg={10} xl={9}>
-                        <span className={style.headerFour}> THB {bahtShow}</span>
+                        <span className={style.headerThree}> THB {bahtShow}</span>
                     </Col>
                     ):(
                     <Col md={10} lg={10} xl={9} style={{paddingTop:"2.5rem"}}>
@@ -143,7 +142,7 @@ export default function RedeemDetail({onHandleChange}) {
                       <span className={style.textTwo25}>อัตราแลกปัจุบัน</span>
                   </Col>
                   <Col md={2} lg={2} xl={2} className={style.centerPage} >
-                    <FontAwesomeIcon icon={faCoins} className={style.small} />
+                      <styleComponent.iconCoin size="medium" />
                   </Col>
                   { rateRedeem ? (
                   <Col span={12}>

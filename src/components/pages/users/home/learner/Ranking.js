@@ -169,62 +169,6 @@ export default function Ranking() {
         history.push(`/search?grade=&subject=${subject}&gender=&type=&location=`)
     }
 
-    useEffect(() => {
-        if (courseFocus === "course") {
-            setCourse(home.offlineCourseRank)
-        } else {
-            setCourse(home.onlineCourseRank)
-        }
-        return () => {
-            setCourse(null)
-        }
-    }, [courseFocus, home.offlineCourseRank, home.onlineCourseRank])
-
-    const handleSetSelectTab = (key) => {
-        const tabActive = tabDetail.filter(value => value.key === key)[0]
-        setTabStart(tabActive)
-        setCourse(null)
-        setCourseFocus(key)
-    }
-
-    const paddingCard = {
-        paddingBottom: "1rem",
-    }
-
-    const CourseSection = () => {
-        return (
-            (!isEmpty(course) && !loading.loading) && (
-                <Row className={`${style.marginSection}`} justify={"space-between"}>
-                    {
-                        course.map((item) => (
-                            <Col align="center" xl={11} lg={11} md={12} sm={24} xs={24} key={item.id} style={paddingCard}>
-                                <CardCourseLearner data={item} verizontal="true" type={courseFocus} ranking={isMobile()?false:true} />
-                            </Col>
-
-                        ))
-                    }
-                </Row>
-            )
-        )
-    }
-
-    const tabDetail = [
-        {
-            key: "course",
-            name: "ติวเตอร์",
-        },
-        {
-            key: "online",
-            name: "ออนไลน์",
-        },
-    ]
-
-    const iconSubject = (color) => {
-        return ({
-            backgroundColor: color,
-        })
-    }
-    
     return (
         <Fragment>
             {

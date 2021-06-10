@@ -1,6 +1,6 @@
-import { Row, Col, Button } from "antd";
+import { Row, Col, Button , DatePicker } from "antd";
 import React, { Fragment, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm , Controller } from "react-hook-form";
 import { exchangeSchema } from "../../../../../../validation/admin/exchangeSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
@@ -18,7 +18,7 @@ import Delete from "./Delete";
 import moment from "moment";
 
 export default function CreatePrice({type}) {
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors ,control} = useForm({
     resolver: yupResolver(exchangeSchema),
   });
 
@@ -33,8 +33,8 @@ export default function CreatePrice({type}) {
           baht: data.baht,
           coin: data.coin,
           type: "std",
-          startDate: today,
-          endDate: today,
+          startDate: data.startDate,
+          endDate: data.endDate,
           updtaeDate: today,
         };
         dispatch(modalAction.closeModal());
@@ -45,8 +45,8 @@ export default function CreatePrice({type}) {
           baht: data.baht,
           coin: data.coin,
           type: "transfer",
-          startDate: today,
-          endDate: today,
+          startDate: data.startDate,
+          endDate: data.endDate,
           updtaeDate: today,
         };
         dispatch(modalAction.closeModal());
@@ -74,9 +74,55 @@ export default function CreatePrice({type}) {
 
             <span className={style.headerOne5}>เพิ่มอัตราการซื้อเหรียญ</span>
           )}
+          <Row style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+            <Col
+              span={5}
+              className={`${style.textOne25} ${style.paddingInputDate}`}
+            >
+              วันที่เริ่มต้น :
+            </Col>
+            <Col span={18}>
+                <Controller
+                  as={<DatePicker placeholder="" />}
+                  name="startDate"
+                  control={control}
+                  defaultValue={null}
+                  placeholder=""
+                />
+                {errors.startDate && (
+                  <p className="error-input">{errors.startDate.message}</p>
+                )}
+            </Col>
+          </Row>
+          <Row style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+            <Col
+              span={5}
+              className={`${style.textOne25} ${style.paddingInputDate}`}
+            >
+              วันที่สิ้นสุด :
+            </Col>
+            <Col span={18}>
+              <Controller
+                as={<DatePicker placeholder="" />}
+                name="endDate"
+                control={control}
+                defaultValue={null}
+                placeholder=""
+              />
+              {errors.endDate && (
+                <p className="error-input">{errors.endDate.message}</p>
+              )}
+            </Col>
+          </Row>
+          { type === "rate" ? (
+          <span className={style.headerOne35}>อัตราการแลกเหรียญ</span>):(
+
+            <span className={style.headerOne35}>อัตราการซื้อเหรียญ</span>
+          )}
+
           <Row style={{ marginBottom: "1rem" }}>
             <p>{errors.baht && errors.baht}</p>
-            <Col span={6} className={style.columnRate}>
+            <Col span={7} align="start">
               <InputComponents
                 type="number"
                 name="baht"
@@ -87,18 +133,20 @@ export default function CreatePrice({type}) {
               />
             </Col>
             <Col
-              span={3}
+              span={4}
+              align="center"
               className={`${style.textOne35} ${style.paddingInput}`}
             >
               บาท
             </Col>
             <Col
-              span={1}
+              span={2}
               className={`${style.textOne35} ${style.paddingInput}`}
+              align="center"
             >
               =
             </Col>
-            <Col span={6} className={style.columnRate}>
+            <Col span={7} style={{paddingLeft:"0.8rem"}}>
               <InputComponents
                 type="number"
                 name="coin"
@@ -109,7 +157,8 @@ export default function CreatePrice({type}) {
               />
             </Col>
             <Col
-              span={3}
+              span={4}
+              align="center"
               className={`${style.textOne25} ${style.paddingInput}`}
             >
               เหรียญ

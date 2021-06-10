@@ -1,6 +1,6 @@
-import { Row, Col, Button} from "antd";
+import { Row, Col, Button ,DatePicker} from "antd";
 import React, { Fragment,useEffect} from "react";
-import { useForm } from "react-hook-form";
+import { useForm , Controller } from "react-hook-form";
 import { exchangeSchema } from "../../../../../../validation/admin/exchangeSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
@@ -11,11 +11,12 @@ import { modalAction,coinAction } from "../../../../../../redux/actions";
 import isEmpty from "../../../../../defaultFunction/checkEmptyObject";
 import InputComponents from "../../../../../input/InputComponets"
 import { sizeModal } from "../../../../../modal/SizeModal";
+import { defaultValue } from "../../../../../defaultValue";
 import moment from "moment";
 
 export default function Edit({dataRate}) {
 
-  const { register, handleSubmit, errors,reset } = useForm({
+  const { register, handleSubmit, errors,reset,control } = useForm({
     resolver: yupResolver(exchangeSchema),
   });
 
@@ -24,8 +25,8 @@ export default function Edit({dataRate}) {
       "name": (!isEmpty(dataRate)) ? dataRate.name : "",
       "baht": (!isEmpty(dataRate)) ? dataRate.baht : "",
       "coin": (!isEmpty(dataRate)) ? dataRate.coin : "",
-      "startDate": (!isEmpty(dataRate)) ? dataRate.startDate : "",
-      "endDate": (!isEmpty(dataRate)) ? dataRate.endDate : "",
+      "startDate": (!isEmpty(dataRate)) ? moment((dataRate.startDate),defaultValue.dateFormat) : "",
+      "endDate": (!isEmpty(dataRate)) ? moment((dataRate.endDate),defaultValue.dateFormat): "",
     })
   }, [dataRate])
 
@@ -39,8 +40,8 @@ export default function Edit({dataRate}) {
           "baht": data.baht,
           "coin": data.coin,
           "type": "std",
-          "startDate": today,
-          "endDate": today,
+          "startDate":data.startDate,
+          "endDate": data.endDate,
           "updtaeDate":today,
         }
         dispatch(modalAction.closeModal())
@@ -51,8 +52,8 @@ export default function Edit({dataRate}) {
           "baht": data.baht,
           "coin": data.coin,
           "type": "transfer",
-          "startDate": today,
-          "endDate": today,
+          "startDate":data.startDate,
+          "endDate": data.endDate,
           "updtaeDate":today,
         }
         dispatch(modalAction.closeModal())
@@ -71,8 +72,53 @@ export default function Edit({dataRate}) {
           ):(
             <span className={style.headerOne5}>แก้ไขอัตราการแลกเหรียญ</span>
           )}
+          <Row style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+            <Col
+              span={5}
+              className={`${style.textOne25} ${style.paddingInputDate}`}
+            >
+              วันที่เริ่มต้น :
+            </Col>
+            <Col span={18}>
+                <Controller
+                  as={<DatePicker placeholder="" />}
+                  name="startDate"
+                  control={control}
+                  defaultValue={moment()}
+                  placeholder=""
+                />
+                {errors.startDate && (
+                  <p className="error-input">{errors.startDate.message}</p>
+                )}
+            </Col>
+          </Row>
+          <Row style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+            <Col
+              span={5}
+              className={`${style.textOne25} ${style.paddingInputDate}`}
+            >
+              วันที่สิ้นสุด :
+            </Col>
+            <Col span={18}>
+              <Controller
+                as={<DatePicker placeholder="" />}
+                name="endDate"
+                control={control}
+                defaultValue={moment()}
+                placeholder=""
+              />
+              {errors.endDate && (
+                <p className="error-input">{errors.endDate.message}</p>
+              )}
+            </Col>
+          </Row>    
+          { dataRate.type  != "transfer" ? (
+            <span className={style.headerOne35}>อัตราการซื้อเหรียญ</span>
+          ):(
+            <span className={style.headerOne35}>อัตราการแลกเหรียญ</span>
+          )}      
           <Row style={{ marginBottom: "1rem" }}>
-            <Col span={6} className={style.columnRate}>
+            <Col span={7} align="start">
               <InputComponents
                     type="number"
                     name="baht"
@@ -82,9 +128,9 @@ export default function Edit({dataRate}) {
                     min="0"
                   />
             </Col>
-            <Col span={3} className={`${style.textOne5} ${style.paddingInput}`}>บาท</Col>
-            <Col span={1} className={`${style.textOne5} ${style.paddingInput}`}>=</Col>
-            <Col span={6} className={style.columnRate}>
+            <Col span={4} align="center" className={`${style.textOne5} ${style.paddingInput}`}>บาท</Col>
+            <Col span={2} align="center" className={`${style.textOne5} ${style.paddingInput}`}>=</Col>
+            <Col span={7} style={{paddingLeft:"0.8rem"}}>
               <InputComponents
                     type="number"
                     name="coin"
@@ -94,7 +140,7 @@ export default function Edit({dataRate}) {
                     min="0"
                   />
             </Col>
-            <Col span={3} className={`${style.textOne5} ${style.paddingInput}`}>เหรียญ</Col>
+            <Col span={4} align="center" className={`${style.textOne5} ${style.paddingInput}`}>เหรียญ</Col>
           </Row>
           <Row className={style.btnRequest}>
           <Col span={6}>

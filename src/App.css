@@ -8,6 +8,7 @@
   --error-color: #840c0c;
   --green-color: #00b900;
   --red-color : #ab330f;
+  --black-color : #000000;
 }
 
 /* General */
@@ -17,7 +18,7 @@
 }
 
 .error-input{
-  font-size: 0.9rem;
+  font-size: 1rem;
   color:var(--error-color);
   padding-left: 0.625rem;
   margin-top: 0.3rem;
@@ -27,32 +28,31 @@
   margin: 0 auto;
   border: none; /* <-- This thing here */
   border:solid 1px #ccc;
-  border-radius: 1.25rem;
+  border-radius: 0.5rem;
   min-height: 2.5rem;
   padding-right: 1.25rem;
   padding-left: 1.25rem;
   width: 100%;
   outline:none;
+  font-size: 1.25rem;
 }
 
-.imageUpload >input{
+.imageUpload >input,
+.ant-select-arrow{
   display: none !important;
 }
 
 .ant-picker,
 .ant-select{
   width: 100% !important; 
-}
-
-.ant-select-arrow{
-  display: none;
+  font-size: 1.25rem;
 }
 
 .ant-picker,
 .ant-select-selector {
   border: none !important; 
   border:solid 1px #ccc !important;
-  border-radius: 1.25rem !important;
+  border-radius: 0.5rem !important;
   min-height: 2.5rem !important;
   padding: 4.5px !important;
   padding-left: 1.25rem !important;
@@ -65,12 +65,9 @@
   padding-right: 1.25rem !important;
 }
 
-.ant-picker-input > input{
-  font-size: 1.1rem;
-}
-
-.ant-select-arrow{
-  display: none;
+.ant-picker-input > input,
+.ant-select-item-option-content{
+  font-size: 1.25rem;
 }
 
 input :focus{
@@ -81,6 +78,7 @@ input :focus{
   border-style: none  !important;
   color:var(--white-color)  !important;
   height: auto;
+  border-radius: 0.5rem;
 }
 
 .backgroundYellow{
@@ -194,7 +192,7 @@ input :focus{
 
 .big-button{
   height : 10rem ;
-  width : 80%;
+  width : 10rem;
   font-size: 15px;
   font-weight: 600;
   margin-top: 1.25rem;
@@ -259,6 +257,7 @@ input :focus{
 .ant-table-thead > tr > th {
   color: rgba(0, 0, 0, 0.85) !important;
   font-weight: 500 !important;
+  font-size: 1.5rem !important;
   text-align: center !important;
   background: #ffb58d !important;
   border-bottom: 1px solid #f26419 !important;
@@ -275,7 +274,6 @@ input :focus{
   width: 100% !important;
   margin-top: 15px !important;
   text-align: center !important;
-  border-collapse: collapse !important;
 }
 .tablecoins td, .tablecoins th {
   padding: 8px!important;
@@ -347,9 +345,67 @@ span{
 }
 
 textarea{
-  font-size: 1.1rem !important;
+  font-size: 1.25rem;
 }
 
-#reviewForm .ant-spin-dot-item {
+#whiteSpin .ant-spin-dot-item {
   background-color: var(--white-color) !important;
 }
+
+.tabStyle .ant-tabs-ink-bar {
+  height: 0.25rem !important;
+  background: var(--orange-color);
+}
+
+.tabStyle .ant-tabs-tab-btn {
+  color: var(--black-color) !important;
+  font-size: 1.5rem !important;
+  font-weight: 500;
+  height: 2.5rem;
+  padding : 0 1rem 0 1rem
+}
+
+.tabStyle .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--orange-color) !important;
+}
+
+.ant-tabs > .ant-tabs-nav .ant-tabs-nav-list, .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-list{
+  position: relative;
+  display: flex;
+  flex: none!important;
+  transition: transform 0.3s;
+}
+
+.anticon.anticon {
+  margin-right: 10px !important;
+  font-size: 20px !important;
+}
+
+.ant-table-tbody > tr > td{
+  font-size: 1.5rem !important;
+}
+
+
+.TableRedeem{
+  border-collapse: collapse !important;
+  width: 100% !important;
+  margin-top: 15px !important;
+  text-align: center !important;
+}
+.TableRedeem td ,.TableRedeem th{
+  padding: 10px !important;
+  text-align: center !important;
+  border-bottom: 1px solid #ddd !important;
+}
+
+.TableRedeem tr {background-color: white !important;}
+.TableRedeem tr:hover {background-color:#f5f5f5 !important;}
+.TableRedeem th {
+  text-align: center !important;
+  background: #ffb58d !important;
+  border-bottom: 1px solid #f26419 !important;
+}
+
+.slick-dots li button:before{
+  font-size: 0.5rem;
+} 

@@ -54,27 +54,6 @@
   padding-top: 5rem;
 }
 
-.coinbody{
-  @extend .paddingbody;
-  padding-top: 2rem;
-  width: 100%;
-}
-
-.tablecoin{
-  width: 95%;
-}
-
-.alignCenter {
-  display: flex;
-  justify-content: center;
-}
-
-.alignCenterBtn {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
 .subProfile {
   margin-top: 1.56rem;
 }
@@ -82,35 +61,6 @@
 .pageredeem {
   @extend .paddingTopBody;
   padding-bottom: 3.75rem;
-}
-
-.pageredeemsm {
-  padding-left: 15%;
-  padding-right: 15%;
-}
-
-.subredeem {
-  font-size: 1.4rem;
-  padding-left: 1rem;
-  padding-top: 0.8rem;
-}
-
-.subredeem2 {
-  font-size: 1.5rem;
-  padding-left: 1rem;
-  padding-top: 0.8rem;
-}
-
-.redeem {
-  @extend .iconNormal;
-  margin-right: 1.5rem;
-  color: $yellow;
-}
-
-.Small {
-  @extend .iconSmall;
-  margin-right: 1.5rem;
-  color: $yellow;
 }
 
 .Xs {
@@ -133,12 +83,7 @@
   padding: 0.8rem;
 }
 
-.allow{
-  margin-top: -5.5rem;
-  margin-left: auto;
-}
-
-.list{
+.hisList{
  @extend .paddingbody;
  width: 100%;
 }
@@ -146,4 +91,137 @@
 .marginright{
   display: flex;
   justify-content: flex-end;
+}
+
+// NEW
+.contentRequest{
+  width: 100%;
+  border-radius: 8px;
+  background-color:white;
+}
+
+.paddingTop13{
+  padding-top: 13px;
+  padding-left: 68px;
+}
+
+.paddingTopHead{
+  padding-top: 23px;
+  padding-left: 30px;
+}
+
+.paddingTopHead2{
+  padding-top: 30px;
+  padding-left: 62px;
+}
+
+.margin20{
+  margin-top: 20px;
+}
+
+.editButton {
+  @extend .buttonCircle;
+  background-color: $blue;
+}
+
+.marginTop01{
+  margin-top: 1.5rem;
+}
+
+.marginBottom40{
+  @extend .horizontalCenter;
+  margin-top: 45px;
+  margin-bottom: 15px;
+}
+
+.marginleft18{
+  margin-left: 1.813rem;
+}
+
+.marginTop04{
+  margin-top: 4rem;
+}
+
+.marginRight01{
+  margin-left: auto;
+  margin-right: 2.8rem;
+}
+
+.paddingCoin{
+  padding-top: 19.5px;
+  padding-left: 25px;
+}
+
+.paddingCoinMd{
+  padding-top: 26px;
+  padding-left: 25px;
+}
+
+.redeem2{
+  @extend .iconTwo;
+  color: $yellow;
+}
+
+.subredeem2 {
+  padding-left: 1rem;
+  padding-top: 0.8rem;
+}
+
+.redeem {
+  @extend .iconFour;
+  color: $yellow;
+}
+
+.redeemSm {
+  @extend .centerPage;
+  @extend .iconTwo5;
+  color: $yellow;
+}
+
+.small {
+  @extend .iconOne75;
+  color: $yellow;
+}
+
+.coinbody{
+  @extend .textOne5;
+  padding-top: 2rem;
+  width: 100%;
+}
+
+.tablecoin{
+  width: 100%;
+}
+
+.paddingRequest{
+  @extend .paddingbody;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.marginBottomSm{
+  @extend .horizontalCenter;
+  margin-top: 25px;
+  margin-bottom: 45px;
+}
+
+.status{
+  @extend .buttonCircle;
+}
+
+.bookBank{
+  width: 20rem !important;
+  height: 26rem !important;
+  @extend .borderImage; 
+}
+
+.bookBankSm{
+  width: 10rem !important;
+  height: 14rem !important;
+  @extend .borderImage; 
+  margin-top: 3rem;
+}
+
+.buttonback{
+  padding-left: 1rem;
 }

@@ -1,4 +1,4 @@
-import { Badge, Button, Col, DatePicker, Grid, Image, Row, Select } from "antd"
+import { Badge, Col, DatePicker, Grid, Image, Row, Select } from "antd"
 import React, { Fragment, useCallback, useEffect, useState } from "react"
 import style from "../../styles.module.scss"
 import { profileSchema } from "../../../../../../validation/validation";
@@ -10,7 +10,7 @@ import isMobile from "../../../../../isMobile/isMobile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { profileAction } from "../../../../../../redux/actions";
-import { defaultValue } from "../../../../../defaultValue";
+import { color, defaultValue } from "../../../../../defaultValue";
 import { formUpdateProfile } from "../formUpdateProfile";
 import findKeyObject from "../../../../../defaultFunction/findKeyObject";
 import ModalComponent from "../../../../../modal/ModalComponent";
@@ -18,7 +18,7 @@ import moment from "moment";
 import Loading from "../../../../../loading/Loading"
 import ProfileSample from "../../../../../images/profile.webp"
 import InputComponents from "../../../../../input/InputComponets";
-
+import { styleComponent } from "../../../../../defaultFunction/style";
 const { useBreakpoint } = Grid;
 
 export default function EditProfile() {
@@ -43,7 +43,7 @@ export default function EditProfile() {
                 firstname: detailProfile.firstname,
                 lastname: detailProfile.lastname,
                 gender: findKeyObject(defaultValue.gender, detailProfile.gender),
-                dateOfBirth: moment(detailProfile.dateOfBirth, defaultValue.dateFormat),
+                dateOfBirth: (moment(new Date(detailProfile.dateOfBirth),defaultValue.dateFormat)),
                 grade: detailProfile.grade.grade,
                 email: detailProfile.email,
                 facebook: detailProfile.contact.facebookUrl,
@@ -74,19 +74,25 @@ export default function EditProfile() {
 
     return (
         <Fragment>
-            {isMobile() && <Header title="แก้ไข" pageBack={"goback"} />}
+            {isMobile() && <Header title="แก้ไขข้อมูลส่วนตัว" pageBack={"goback"} />}
             <ModalComponent />
             {
                 loader && (
                     <Loading />
                 )}
-            <div>
+            <div className="container"> 
                 <div className={style.container}>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <Row justify="space-between" align="middle">
-                            <Col span={24} align="center">
-                                <h2 className={style.titleH2}>แก้ไขโปรไฟล์</h2>
-                            </Col>
+                        {
+                                !isMobile() && (
+                                    <Col className={style.section} span={24} align="center">
+                                        <span className={style.headerThree}>แก้ไขโปรไฟล์</span>
+                                    </Col>
+                                )
+                            }
+                        </Row>
+                        <Row className={`${style.section} ${!isMobile() && style.marginSection}`} align="middle" justify={"space-between"}>
                             <Col lg={5} md={6} sm={24} xs={24} align="center">
                                 <div className="imageUpload" >
                                     <label htmlFor="file-input" >
@@ -104,9 +110,9 @@ export default function EditProfile() {
                                     errors.image && <p className="error-input">{errors.image.message}</p>
                                 }
                             </Col>
-                            <Col lg={17} md={17} sm={24} xs={24}>
+                            <Col lg={17} md={15} sm={24} xs={24}>
                                 <Row justify="space-around">
-                                    <Col className={screens.md ? style.marginTop20 : null} lg={11} sm={24} md={10} xs={24}>
+                                    <Col className={screens.md ? style.marginTop20 : null} lg={11} sm={24} md={20} xs={24}>
                                         <InputComponents
                                             title="ชื่อ"
                                             type="text"
@@ -116,7 +122,7 @@ export default function EditProfile() {
                                             placeholder="ชื่อ"
                                         />
                                     </Col>
-                                    <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
+                                    <Col className={style.marginTop20} lg={11} sm={24} md={20} xs={24}>
                                         <InputComponents
                                             title="นามสกุล"
                                             type="text"
@@ -127,8 +133,8 @@ export default function EditProfile() {
                                         />
                                     </Col>
                                     <input name="gender" type="string" ref={register} hidden />
-                                    <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
-                                        <p className={style.textNormal}>วันเดือนปีเกิด</p>
+                                    <Col className={style.marginTop20} lg={11} sm={24} md={20} xs={24}>
+                                        <p className={style.textOne5}>วันเดือนปีเกิด</p>
                                         <Controller
                                             as={
                                                 <DatePicker placeholder="" disabled />
@@ -143,8 +149,8 @@ export default function EditProfile() {
                                         }
                                     </Col>
 
-                                    <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
-                                        <p className={style.textNormal}>ระดับชั้น</p>
+                                    <Col className={style.marginTop20} lg={11} sm={24} md={20} xs={24}>
+                                        <p className={style.textOne5}>ระดับชั้น</p>
                                         <Controller
                                             as={
                                                 <Select name="grade"  >
@@ -163,15 +169,13 @@ export default function EditProfile() {
                                         {
                                             errors && errors.grade && <p className="error-input">{errors.grade.message}</p>
                                         }
-
                                     </Col>
                                 </Row>
                             </Col>
                         </Row>
-
-                        <Row justify="space-between" className={style.marginTop} style={{ paddingTop: !isMobile() ? "1.5rem" : "0rem" }}>
+                        <Row justify="space-between" className={`${style.section} ${style.marginSection} ${style.marginTop}`} style={{ paddingTop: !isMobile() ? "1.5rem" : "0rem" }}>
                             <Col span={24}>
-                                <span className={`${style.marginTop} ${style.titleH3}`}>ช่องทางในการติดต่อ</span>
+                                <span className={`${style.marginTop} ${style.headerOne75}`}>ช่องทางในการติดต่อ</span>
                             </Col>
                             <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
                                 <InputComponents
@@ -215,12 +219,11 @@ export default function EditProfile() {
                             </Col>
                         </Row>
                         <div className={style.buttonEdit}>
-                            <Button className="backgroundOrange buttonColor" shape="round" size="large" htmlType="submit">บันทึกข้อมูล</Button>
+                            <button className={`${style.buttonColor} ${style.margintop20}`} style={styleComponent.buttonFull(color.orange, "7rem")} type="submit">บันทึกข้อมูล</button>
                         </div>
                     </form>
                 </div>
             </div>
-
         </Fragment>
     )
 }

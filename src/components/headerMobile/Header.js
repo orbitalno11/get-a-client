@@ -4,7 +4,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "./styles.module.scss"
-import { NavLink, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 export default function Header({ title, pageBack }) {
     const history = useHistory();
@@ -17,17 +17,17 @@ export default function Header({ title, pageBack }) {
                     (
                         pageBack === "goback" ?
                             (
-                                <FontAwesomeIcon onClick={() => history.goBack()} className={style.icon} icon={faChevronLeft} />
+                                <FontAwesomeIcon className={style.fontWhite} onClick={() => history.goBack()} icon={faChevronLeft} />
                             ) :
                             (
-                                <NavLink to={pageBack}>
-                                    <FontAwesomeIcon onClick={() => history.goBack()} className={style.icon} icon={faChevronLeft} />
-                                </NavLink>
+                                <Link to={pageBack}>
+                                    <FontAwesomeIcon className={style.fontWhite} icon={faChevronLeft} />
+                                </Link>
                             )
                     )
                 }
                 {
-                    title ? <span className={style.h1}>{title}</span> : null
+                    title ? <span className={style.textHeader}>{title}</span> : null
                 }
             </div>
             <div className={style.rightHeader}>

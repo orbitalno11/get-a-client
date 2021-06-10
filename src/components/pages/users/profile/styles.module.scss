@@ -1,25 +1,15 @@
 @import "../../../../stylesDefault.module.scss";
 
-
-.paddingEdit{
-    padding-left: 10%;
-    padding-right: 10%;
-}
-
-.bodyEdit{
-    padding-top: 2.5rem;
-}
-
 .imageProfile {
     border-radius: 50% !important;
     height: 8rem;
     width: 8rem;
 }
 
-.imageProfilePubile {
+.imageProfileSmall {
     border-radius: 50% !important;
-    height: 10rem;
-    width: 10rem;
+    height: 7rem;
+    width: 7rem;
 }
 
 .profileSet{
@@ -27,17 +17,8 @@
     flex-flow: row;
 }
 
-.marginLeft{
-    margin-left: 2.5rem;
-}
-
 .subProfile{
     margin-top: 1.5rem;
-}
-
-.subTitle{
-    @extend .TitleCoin;
-    padding-left: 1.25rem;
 }
 
 .TitleCoin{
@@ -47,7 +28,7 @@
 }
 
 .icon{
-    font-size: 1.7rem;
+    font-size: 2rem;
     margin-right: 1.25rem;
 }
 
@@ -65,10 +46,6 @@
     @extend .icon;
     @extend .fontBlue;
     font-size: 1.5rem;
-}
-
-.padding{
-    padding: 0.6rem;
 }
 
 .floatLeft{
@@ -93,26 +70,14 @@
     padding-bottom: 3.75rem;
 }
 
-.banner{
-    height: 16rem;
-    padding-top: 3rem;
-    width: 100%;
-    background-color: $blue
-}
-
-.bannerEditProfile{
-    @extend .banner;
-    @extend .VerizontalPage;
-    justify-content: center;
-}
-
-.columnJustify{
-    @extend .horizontalCenter;
-    flex-flow: column;
-}
-
 .colorGray{
     color:$gray !important;
+    border-style: none  !important;
+    margin-top: 0.6rem
+}
+
+.colorOrange{
+    color:$orange !important;
     border-style: none  !important;
     margin-top: 0.6rem
 }
@@ -127,8 +92,8 @@
     display: flex;
     flex-flow: column;
     position: absolute;
-    bottom: 0rem;
-    right: 0rem;
+    bottom: 6rem;
+    right: 2rem;
 }
 
 .infoButton{
@@ -155,12 +120,6 @@
     background-color: $blue;
 }
 
-.removeButton {
-    @extend .buttonCircle;
-    margin-left: 0.2rem;
-    background-color: $gray;
-}
-
 .centerPage{
     display: flex;
     align-items: center;
@@ -168,17 +127,21 @@
     flex-flow: column;
 }
 
-.removeImage{
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
+.paddingBottom{
+    margin-bottom: 1rem;
 }
-  
-.backgroundProfile{
-    @extend .textNormal;
-    background-color: rgba($color: $white, $alpha: 0.8);
-    padding: 1rem;
-    border-radius: 0.5rem;
+
+.paddingProfileMobile{
+    padding: 0rem 0.75rem 0rem 0.75rem ;
+}
+
+.iconGray {
+    color:$gray;
+    margin-right: 1.25rem;
+    width: 2rem !important;
+    height : 2rem !important;
+}
+
+.marginLeft{
+    margin-left: 0.5rem;
 }

@@ -5,62 +5,10 @@ import { profileConstants } from "../constants"
 import { loadingActions } from "./loading.actions"
 import { modalAction } from "./modal.actions"
 
-const data =
-{
-    firstname: "พิคาชู",
-    lastname: "หนูเทพซาโตชิ",
-    sex: 1,
-    coin: "1000",
-    place: "บางมด, ทุ่งครุ",
-    introduction: "แนะนำตัว",
-    contact: {
-        facebook: "Picacha",
-        email: "Picacha.k@gmail.com",
-        line: "Picacha",
-        phone: "09123456"
-    },
-    grade: "10",
-    course: {
-        tutor:
-            [
-                {
-                    name: "หนูเทพซาโตชิ",
-                    place: "บางมด, ทุ่งครุ",
-                    subject: "ชีววิทยา",
-                    date: "1 มกราคม 2563"
-                },
-                {
-                    name: "พิคาชู หนูเทพซาโตชิ",
-                    place: "บางมด, ทุ่งครุ",
-                    subject: "ชีววิทยา",
-                    date: "1 มกราคม 2563"
-                }
-            ],
-        course: []
-    },
-    history: [
-        {
-            type: "education",
-            name: "โรงชื่อยาว",
-            brance: " วิทยาศาสตร์ - คณิตศาสตร์",
-            grade: "4.00",
-            status: "2"
-        },
-        {
-            type: "test",
-            name: "ผลสอบ O-NET",
-            brance: "คณิตศาสตร์",
-            grade: "150",
-            status: "0"
-        },
-
-    ]
-}
-
 function getProfile() {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get("/me").then(res => {
+        apiURL.apiGetA.get("/me").then(res => {
             dispatch(loadingActions.stopLoading())
             const profileDetail = res.data.data
             dispatch(success(profileDetail))
@@ -73,17 +21,10 @@ function getProfile() {
     function failure(err) { return { type: profileConstants.GET_PROFILE_FAILURE, payload: err } }
 }
 
-function getHandleProfile() {
-    return async dispatch => {
-        dispatch(success(data))
-    }
-    function success(data) { return { type: profileConstants.GET_HANDLE_PROFILE, payload: data } }
-}
-
 function updateProfileLearner(data, profileId) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post(`/me`,data, {
+        apiURL.apiGetA.post(`/me`, data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -112,31 +53,30 @@ function updateProfileLearner(data, profileId) {
 }
 
 function getIdentifyTutor() {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get("/me/identity").then((res) => {
+        apiURL.apiGetA.get("/me/identity").then((res) => {
             const data = res.data.data
-            if(data){
+            if (data) {
                 dispatch(loadingActions.stopLoading())
                 dispatch(success(data.verifiedData))
             }
-           
+
         }).catch((err) => {
             dispatch(loadingActions.stopLoading())
             dispatch(failure(err.response?.data))
         })
 
     }
-    function success(data) { return { type: profileConstants.GET_IDENTIFY_TUTOR_SUCCESS, payload : data} }
+    function success(data) { return { type: profileConstants.GET_IDENTIFY_TUTOR_SUCCESS, payload: data } }
     function failure(err) { return { type: profileConstants.GET_IDENTIFY_TUTOR_FAILURE, payload: err } }
 }
 
 
 function updateIdentifyTutor(data) {
-    return async dispatch => {
-     
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post("/me/identity/update", data, {
+        apiURL.apiGetA.post("/me/identity/update", data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -161,16 +101,15 @@ function updateIdentifyTutor(data) {
         })
 
     }
-    function success() { return { type: profileConstants.UPDATE_IDENTIFY_TUTOR_SUCCESS} }
+    function success() { return { type: profileConstants.UPDATE_IDENTIFY_TUTOR_SUCCESS } }
     function failure(err) { return { type: profileConstants.UPDATE_IDENTIFY_TUTOR_FAILURE, payload: err } }
 }
 
 
 function createIdentifyTutor(data) {
-    return async dispatch => {
-     
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post("/me/identity", data, {
+        apiURL.apiGetA.post("/me/identity", data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -195,14 +134,14 @@ function createIdentifyTutor(data) {
         })
 
     }
-    function success() { return { type: profileConstants.CREATE_IDENTIFY_TUTOR_SUCCESS} }
+    function success() { return { type: profileConstants.CREATE_IDENTIFY_TUTOR_SUCCESS } }
     function failure(err) { return { type: profileConstants.CREATE_IDENTIFY_TUTOR_FAILURE, payload: err } }
 }
 
 function setAddress(address) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post("/me/address", address)
+        apiURL.apiGetA.post("/me/address", address)
             .then(() => {
                 dispatch(modalAction.openModal({
                     text: "แก้ไขข้อมูลสำเร็จ",
@@ -223,20 +162,20 @@ function setAddress(address) {
 }
 
 function getAddress() {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get("/me/address")
+        apiURL.apiGetA.get("/me/address")
             .then(res => {
                 dispatch(loadingActions.stopLoading())
                 const data = res.data.data.filter(item => item.type === 1)[0]
                 let address = {}
-                if(data){
+                if (data) {
                     address = {
-                        "fullAddress" :data.fullAddressText,
+                        "fullAddress": data.fullAddressText,
                         "address": data.address ? data.address : "",
                         "hintAddress": data.hintAddress ? data.hintAddress : null,
                         "road": data.road ? data.road : "",
-                        "subDistrict": data.subDistrict.id  ? data.subDistrict.id : "",
+                        "subDistrict": data.subDistrict.id ? data.subDistrict.id : "",
                         "district": data.district.id ? data.district.id : "",
                         "province": data.province.id ? data.province.id : "",
                         "postcode": data.postcode ? data.postcode : "",
@@ -245,7 +184,7 @@ function getAddress() {
                         "geoSubDistrict": data.subDistrict.title ? data.subDistrict.title : "",
                         "geoDistrict": data.district.title ? data.district.title : "",
                         "geoProvince": data.province.title ? data.province.title : "",
-                        "type" : data.type
+                        "type": data.type
                     }
                 }
                 dispatch(success(address))
@@ -255,14 +194,13 @@ function getAddress() {
                 dispatch(failure(err.response?.data))
             })
     }
-    function success(data) {  return { type: profileConstants.GET_ADDRESS_SUCCESS, payload: data } }
+    function success(data) { return { type: profileConstants.GET_ADDRESS_SUCCESS, payload: data } }
     function failure(err) { return { type: profileConstants.GET_ADDRESS_FAILURE, payload: err } }
 }
 
 
 export const profileAction = {
     getProfile,
-    getHandleProfile,
     updateProfileLearner,
     setAddress,
     getAddress,

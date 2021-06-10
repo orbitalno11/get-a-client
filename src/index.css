@@ -6,10 +6,19 @@
 }
 
 * {
-  font-family: "FC-Iconic","Prompt", sans-serif;
-  font-size: 1.1rem;
+  font-family: "FC-Iconic";
 }
 
 #root{
   height: 100%;
+}
+
+body{
+  background-color: #F2F2F2 !important;
+}
+
+@media only screen and (max-width: 768px) {
+  body{
+    background-color: white !important;
+  }
 }

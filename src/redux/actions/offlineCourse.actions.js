@@ -7,9 +7,9 @@ import { modalAction } from "./modal.actions"
 
 
 function updatefflineCourse(id, data) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.put(`/offline-course/${id}`, data)
+        apiURL.apiGetA.put(`/offline-course/${id}`, data)
             .then(() => {
                 dispatch(loadingActions.stopLoading())
                 dispatch(success())
@@ -17,11 +17,11 @@ function updatefflineCourse(id, data) {
                     text: "แก้ไขคอร์สเรียนสำเร็จ",
                     size: sizeModal.small,
                     alert: typeModal.corrent,
-                    afterClose: `/tutor/course/${id}`
+                    afterClose: `/course/${id}`
                 }))
             }).catch(err => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response?.data))
+                dispatch(failure(err?.response?.data))
                 dispatch(modalAction.openModal({
                     text: "แก้ไขคอร์สเรียนไม่สำเร็จ",
                     size: sizeModal.small,
@@ -34,30 +34,29 @@ function updatefflineCourse(id, data) {
     function failure(err) { return { type: offlineCourseConstants.UPDATE_OFFLINE_COURSE_FAILURE, payload: err } }
 }
 
-
-function createOfflineCourse(data){
-    return async dispatch => {
+function createOfflineCourse(data) {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post("/offline-course/create",data)
-        .then(() => {
-            dispatch(loadingActions.stopLoading())
-            dispatch(success())
-            dispatch(modalAction.openModal({
-                text: "สร้างคอร์สเรียนสำเร็จ",
-                size: sizeModal.small,
-                alert: typeModal.corrent,
-                afterClose: "/tutor/course"
-            }))
-        }).catch(err => {
-            dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response?.data))
-            dispatch(modalAction.openModal({
-                text: "สร้างคอร์สเรียนไม่สำเร็จ",
-                size: sizeModal.small,
-                alert: typeModal.wrong,
-                afterClose: "/tutor/course"
-            }))
-        })
+        apiURL.apiGetA.post("/offline-course/create", data)
+            .then(() => {
+                dispatch(loadingActions.stopLoading())
+                dispatch(success())
+                dispatch(modalAction.openModal({
+                    text: "สร้างคอร์สเรียนสำเร็จ",
+                    size: sizeModal.small,
+                    alert: typeModal.corrent,
+                    afterClose: "/tutor/course"
+                }))
+            }).catch(err => {
+                dispatch(loadingActions.stopLoading())
+                dispatch(failure(err?.response?.data))
+                dispatch(modalAction.openModal({
+                    text: "สร้างคอร์สเรียนไม่สำเร็จ",
+                    size: sizeModal.small,
+                    alert: typeModal.wrong,
+                    afterClose: "/tutor/course"
+                }))
+            })
     }
 
     function success() { return { type: offlineCourseConstants.CREATE_OFFLINE_COURSE_SUCCESS } }
@@ -65,19 +64,19 @@ function createOfflineCourse(data){
 }
 
 function getOfflineCourse(id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get(`/offline-course/${id}`)
+        apiURL.apiGetA.get(`/offline-course/${id}`)
             .then(res => {
                 if (res.data.success) {
                     const data = res.data.data
-                    dispatch(success(data))
                     dispatch(loadingActions.stopLoading())
+                    dispatch(success(data))
                 }
             })
             .catch((err) => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response?.data))
+                dispatch(failure(err?.response?.data))
             })
     }
 
@@ -86,15 +85,15 @@ function getOfflineCourse(id) {
 }
 
 function enRollOfflineCourse(id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post(`/offline-course/${id}/enroll`)
+        apiURL.apiGetA.post(`/offline-course/${id}/enroll`)
             .then(() => {
                 dispatch(success())
                 dispatch(loadingActions.stopLoading())
             })
             .catch(err => {
-                dispatch(failure(err.response?.data))
+                dispatch(failure(err?.response?.data))
                 dispatch(loadingActions.stopLoading())
             })
     }
@@ -105,9 +104,9 @@ function enRollOfflineCourse(id) {
 
 
 function getEnrollOfflineCourse(id) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get(`/offline-course/${id}/enroll`)
+        apiURL.apiGetA.get(`/offline-course/${id}/enroll`)
             .then((res) => {
                 if (res.data.success) {
                     const data = res.data.data
@@ -116,7 +115,7 @@ function getEnrollOfflineCourse(id) {
                 }
             })
             .catch(err => {
-                dispatch(failure(err.response?.data))
+                dispatch(failure(err?.response?.data))
                 dispatch(loadingActions.stopLoading())
 
             })
@@ -127,9 +126,9 @@ function getEnrollOfflineCourse(id) {
 }
 
 function acceptEnrollOfflineCourse(idCourse, learnerid, status) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get(`/offline-course/${idCourse}/accept`, {
+        apiURL.apiGetA.get(`/offline-course/${idCourse}/accept`, {
             params: {
                 learnerId: learnerid,
                 action: status
@@ -145,7 +144,7 @@ function acceptEnrollOfflineCourse(idCourse, learnerid, status) {
             }))
         })
             .catch(err => {
-                dispatch(failure(err.response?.data))
+                dispatch(failure(err?.response?.data))
                 dispatch(loadingActions.stopLoading())
                 dispatch(modalAction.openModal({
                     text: "จัดการการอนุมัติเข้าเรียนไม่สำเร็จ",
@@ -161,9 +160,9 @@ function acceptEnrollOfflineCourse(idCourse, learnerid, status) {
 
 
 function getLearnerOfflineCourse() {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.get("/learner/offline-course")
+        apiURL.apiGetA.get("/learner/offline-course")
             .then(res => {
                 if (res.data.success) {
                     const data = res.data.data
@@ -173,7 +172,7 @@ function getLearnerOfflineCourse() {
             })
             .catch((err) => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response?.data))
+                dispatch(failure(err?.response?.data))
             })
     }
 

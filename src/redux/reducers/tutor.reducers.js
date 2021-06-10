@@ -11,6 +11,10 @@ const initialState = {
         success: false,
         data: null
     },
+    onlineCourse: {
+        success: false,
+        data: null
+    },
     tutorHandle: null
 }
 
@@ -143,6 +147,24 @@ const tutorReducer = (state = initialState, action) => {
                 },
                 error: action.payload
             }
+        case tutorConstants.GET_LIST_ONLINE_COURSE_SUCCESS:
+            return {
+                ...state,
+                onlineCourse: {
+                    success: true,
+                    data: action.payload
+                },
+                error: false
+            }
+        case tutorConstants.GET_LIST_ONLINE_COURSE_FAILURE:
+            return {
+                ...state,
+                onlineCourse: {
+                    success: true,
+                    data: null
+                },
+                error: action.payload
+            }
         case tutorConstants.GET_TUTOR_PROFILE_SUCCESS:
             return {
                 ...state,
@@ -160,6 +182,10 @@ const tutorReducer = (state = initialState, action) => {
                 ...state,
                 tutorHandle: null,
                 offlineCourse: {
+                    success: false,
+                    data: null
+                },
+                onlineCourse: {
                     success: false,
                     data: null
                 },

@@ -20,7 +20,7 @@ const subject = {
     "ฟิสิกส์":"PHY",
     "เคมี":"CHM",
     "ชีววิทยา":"BIO",
-    "สัมคมศึกษา":"SOC",
+    "สังคมศึกษา":"SOC",
     "ภาษาอังกฤษ":"ENG"
 }
 
@@ -88,6 +88,35 @@ const userRole = {
     "tutor" : 2
 }
 
+const typeCourse = {
+    "ออนไลน์" : 3,
+    "นัดเจอ" : 1,
+}
+
+const bank = {
+    "ไทยพาณิชย์" : "SCB",
+    "กรุงไทย" : "KTB",
+    "กสิกรไทย" : "KBANK",
+    "กรุงเทพ" : "BBL"
+}
+
+const redeemType = {
+    0 : "อยู่ระหว่างการพิจารณา",
+    1 : "อนุมัติ", 
+    2 : "โอนเงิน" , 
+    3 : "ปฏิเสธ",
+    4 : "ยกเลิก" 
+}
+
+const transactionType = {
+    0 : "เติมเหรียญ",
+    1 : "ถอนเงิน", 
+    2 : "แลกเหรียญ" , 
+    3 : "ซื้อเหรียญ",
+    4 : "รายได้จากคลิปออนไลน์" ,
+    5 : "คืนเหรียญ"
+}
+
 export const defaultValue = {
     gender,
     grade,
@@ -103,5 +132,9 @@ export const defaultValue = {
     typeAcion,
     timeFormat,
     enrollStatus,
-    userRole
+    userRole,
+    typeCourse,
+    bank,
+    transactionType,
+    redeemType
 }

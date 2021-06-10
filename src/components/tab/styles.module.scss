@@ -1,11 +1,12 @@
 @import "../../stylesDefault.module.scss";
 
-
 .tab{
+    @extend .textOne;
+    display: table-cell;
     height: 2.5rem;
     width: 8rem;
     text-align: center;
-    line-height: 2rem !important;
+    vertical-align: middle;
 }
 
 .radio{
@@ -28,15 +29,6 @@
     @extend .tab;
     border-top-right-radius: 0.95rem !important;
     border-bottom-right-radius: 0.95rem !important;
-}
-
-.tabs{
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    margin: 0;
-    padding: 0;
-    width: auto;
 }
 
 .tabPane{

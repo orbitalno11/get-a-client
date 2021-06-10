@@ -1,30 +1,18 @@
-import { Divider, Image, Button } from "antd";
-import React, { Fragment } from "react";
+import { Image, Divider, Row, Col, Button } from "antd";
+import React from "react";
 import styles from "../styles.module.scss";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { color, defaultValue } from "../../../../defaultValue";
-import isMobile from "../../../../isMobile/isMobile";
 import { useDispatch } from "react-redux";
 import { offlineCourseAction } from "../../../../../redux/actions";
+import { Fragment } from "react";
+import { styleComponent } from "../../../../defaultFunction/style";
+import isMobile from "../../../../isMobile/isMobile";
+import SampleProfile from "../../../../images/profile.webp"
 
-export default function Request({ id, data }) {
-
+export default function Request({ id, data, line, request }) {
   const dispatch = useDispatch()
-
-  const marginLeft = {
-    marginLeft: "1rem",
-  }
-
-  const iconMarker = {
-    color: color.gray,
-    marginRight: "1rem"
-  }
-
-  const buttonEnroll = {
-    width: "5rem",
-    margin: "0.1rem 0.1rem 0.1rem 0.2rem",
-  }
 
   const enrollCourse = (status) => {
     dispatch(offlineCourseAction.acceptEnrollOfflineCourse(id, data.userId, status))
@@ -32,43 +20,53 @@ export default function Request({ id, data }) {
 
   const ButtonEnrool = () => {
     return (
-      <div className={styles.floatLeft}>
-        <Button className="buttonColor backgroundOrange" size="medium" shape="round" style={buttonEnroll} onClick={() => enrollCourse(defaultValue.enrollStatus["APPROVE"])}>อนุมัติ</Button>
-        <Button className="buttonColor backgroundGray" size="medium" shape="round" style={buttonEnroll} onClick={() => enrollCourse(defaultValue.enrollStatus["DENIED"])}>ลบคำขอ</Button>
-      </div>
+      <Fragment>
+        <Button className={`${styles.buttonColor} ${isMobile() ? styles.textOne : styles.textOne25}`} size="small" style={styleComponent.buttonFull(color.orange, "5rem")} onClick={() => enrollCourse(defaultValue.enrollStatus["APPROVE"])}>อนุมัติ</Button>
+        <Button className={`${styles.buttonColor} ${isMobile() ? styles.textOne : styles.textOne25} ${styles.marginLeftOneHalf}`} size="small" style={styleComponent.buttonFull(color.gray, "5rem")} onClick={() => enrollCourse(defaultValue.enrollStatus["DENIED"])}>ปฏิเสธ</Button>
+      </Fragment>
     )
   }
 
-
-
   return (
-    <Fragment>
-      <div className={styles.profileSet}>
+    <Row align="middle" justify={"space-around"}>
+      <Col xl={5} lg={4} md={5} sm={6} xs={9}>
         <Image
-          className={styles.imageProfilesmall}
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          className={styles.imageRequest}
+          src={data?.photoUrl ? data.photoUrl : SampleProfile}
           preview={false}
         />
-        <div>
-          <div style={marginLeft}>
-            <span className={styles.titleH5}>{data && data.fullNameText}</span>
-            <br />
-            {data.address &&
-              <span >
-                <FontAwesomeIcon icon={faMapMarkerAlt} style={iconMarker} />
-                {data.address.district.title}
-              </span>
-            }
-          </div>
+      </Col>
+      <Col xl={17} lg={17} md={17} sm={17} xs={15}>
+        <Row>
+          <Col span={!isMobile() ? 13 : 24}>
+            <Row >
+              <Col span={24}>
+                <span className={`${styles.headerOne75} ${styles.textOneLine}`}>{data && data.fullNameText}</span>
+              </Col>
+              <Col span={24}>
+                {data.address &&
+                  <Fragment>
+                    <FontAwesomeIcon icon={faMapMarkerAlt} className={`${styles.textOne25}`} style={{ color: color.gray }} />
+                    <span className={`${styles.textOne25} ${styles.marginLeftOneHalf}`}>
+                      {data?.address?.district?.title}
+                    </span>
+                  </Fragment>
+                }
+              </Col>
+            </Row>
+          </Col>
           {
-            isMobile() && (<ButtonEnrool />)
+            request && (
+              <Col className={!isMobile() && styles.paddingTopHalf} span={!isMobile() ? 11 : 24} align={isMobile() ? "start" : "end"}>
+                <ButtonEnrool />
+              </Col>
+            )
           }
-        </div>
-        {
-          !isMobile() && (<ButtonEnrool />)
-        }
-      </div>
-      <Divider type="horizontal" style={{ height: "100%" }} />
-    </Fragment>
+        </Row>
+      </Col>
+      {
+        line && (<Divider type="horizontal" style={{ height: "100%" }} />)
+      }
+    </Row>
   );
 }

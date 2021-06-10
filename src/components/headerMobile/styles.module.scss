@@ -1,20 +1,18 @@
 @import "../../stylesDefault.module.scss";
 
 .header{
+    @extend .centerPage;
     position: fixed;
-    height: 4.55rem;
+    height: auto;
     width: 100%;
     background-color:$orange;
     z-index: 10;
-    display: flex;
-    flex-flow: row;
-    align-items: center;
 }
 
 .leftHeader {
+    @extend .VerizontalPage;
     padding-left: 2rem;
-    display: flex;
-    align-items: center;
+    margin:0.5rem 0rem 0.5rem 0rem;
 }
 
 .rightHeader{
@@ -22,14 +20,12 @@
     padding-right: 2rem;
 }
 
-.h1 {
-    font-size: 2rem ;
-    font-weight: 600;
-    padding-left: 0.6rem;
-    color:$white 
+.fontWhite{
+    @extend .headerOne75;
+    color:$white ;
 }
 
-.icon{
-    font-size: 35pt ;
-    color:$white 
+.textHeader {
+    @extend .fontWhite;
+    margin-left: 0.5rem
 }

@@ -1,26 +1,30 @@
 import React, { Fragment } from "react"
 import { Menu, Button, Row, Col } from "antd";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
     faHome,
     faChalkboardTeacher,
     faUserCircle,
     faTachometerAlt,
     faGraduationCap,
+    faSearch,
+    faHeart
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../redux/actions/auth.actions";
 import isMobile from "./isMobile/isMobile";
+import { styleComponent } from "./defaultFunction/style";
+import { color } from "./defaultValue";
+import style from "./../stylesDefault.module.scss"
 
 const NavMenu = () => {
     const auth = useSelector(state => state.auth)
     const dispatch = useDispatch()
     const statusTutor = auth.role === 2
     const status = auth.isAuthenticated
-    const profileLearnerURL = "/learner/" + auth.profile
-    const profileTutorURL = "/tutor/" + auth.profile
+    const isLearner = auth.role === 1
     const UserMenu = () => {
 
         return (
@@ -28,26 +32,37 @@ const NavMenu = () => {
                 <Menu.Item key="/">
                     <NavLink to="/">
                         หน้าแรก
-                </NavLink>
+                    </NavLink>
                 </Menu.Item>
-                <Menu.Item key="/tutor/ranking" >
-                    <NavLink to="/tutor/ranking">
+                <Menu.Item key="/popular" >
+                    <NavLink to="/popular">
                         ติวเตอร์
-                </NavLink></Menu.Item>
+                    </NavLink>
+                </Menu.Item>
                 {/* <Menu.Item key="/course" >
                     <NavLink to="/course">
                         คอร์สเรียน
                 </NavLink>
                 </Menu.Item>
+                */}
                 <Menu.Item key="/search" >
                     <NavLink to="/search">
                         ค้นหา
                 </NavLink>
-                </Menu.Item> */}
+                </Menu.Item>
+                {
+                    isLearner && (
+                        <Menu.Item key="/favorite" >
+                            <NavLink to="/favorite">
+                                รายการที่ถูกใจ
+                        </NavLink>
+                        </Menu.Item>
+                    )
+                }
                 {
                     status ? (
-                        <Menu.Item key={profileLearnerURL} >
-                            <NavLink to={profileLearnerURL}>
+                        <Menu.Item key="/me" >
+                            <NavLink to="/me">
                                 โปรไฟล์
                         </NavLink>
                         </Menu.Item>
@@ -79,6 +94,11 @@ const NavMenu = () => {
                         จัดการคอร์สเรียน
                 </NavLink>
                 </Menu.Item>
+                <Menu.Item key="/tutor/online"  >
+                    <NavLink to="/tutor/online">
+                        จัดการคอร์สออนไลน์
+                </NavLink>
+                </Menu.Item>
                 {/* <Menu.Item key="/notification"  >
                     <NavLink to="/notification">
                         แจ้งเตือน
@@ -86,8 +106,8 @@ const NavMenu = () => {
                 </Menu.Item> */}
                 {
                     status ? (
-                        <Menu.Item key={profileTutorURL} >
-                            <NavLink to={profileTutorURL}>
+                        <Menu.Item key="/me" >
+                            <NavLink to="/me">
                                 โปรไฟล์
                         </NavLink>
                         </Menu.Item>
@@ -116,22 +136,22 @@ const NavMenu = () => {
                     </NavLink>
                 </Col>
                 <Col span={4} className="iconMenu">
-                    <NavLink to="/tutor/ranking">
+                    <NavLink to="/course">
                         <FontAwesomeIcon icon={faChalkboardTeacher} className="icon" />
                     </NavLink>
                 </Col>
-                {/* <Col span={4} className="iconMenu">
-                    <NavLink to="/">
+                <Col span={4} className="iconMenu">
+                    <NavLink to="/search">
                         <FontAwesomeIcon icon={faSearch} className="icon" />
                     </NavLink>
-                </Col>
+                </Col> 
                 <Col span={4} className="iconMenu">
                     <NavLink to="/favorite">
                         <FontAwesomeIcon icon={faHeart} className="icon" />
                     </NavLink>
-                </Col> */}
+                </Col>
                 <Col span={4} className="iconMenu">
-                    <NavLink to={profileLearnerURL}>
+                    <NavLink to="/me">
                         <FontAwesomeIcon icon={faUserCircle} className="icon" />
                     </NavLink>
                 </Col>
@@ -145,7 +165,7 @@ const NavMenu = () => {
     const ToturMenuMobile = () => {
         return (
             <Row justify="space-around">
-                 <Col span={6.5} className="iconMenu">
+                <Col span={6.5} className="iconMenu">
                     <NavLink to="/">
                         <FontAwesomeIcon icon={faHome} className="icon" />
                     </NavLink>
@@ -161,18 +181,18 @@ const NavMenu = () => {
                         <FontAwesomeIcon icon={faGraduationCap} className="icon" />
                     </NavLink>
                 </Col>
-                {/* <Col span={6.5} className="iconMenu">
-                    <NavLink to="/">
+                <Col span={6.5} className="iconMenu">
+                    <NavLink to="/tutor/online">
                         <FontAwesomeIcon icon={faChalkboardTeacher} className="icon" />
                     </NavLink>
-                </Col> */}
+                </Col>
                 {/* <Col span={6.5} className="iconMenu">
                     <NavLink to="/">
                         <FontAwesomeIcon icon={faBell} className="icon" />
                     </NavLink>
                 </Col> */}
                 <Col span={6.5} className="iconMenu">
-                    <NavLink to={ profileTutorURL }>
+                    <NavLink to="/me">
                         <FontAwesomeIcon icon={faUserCircle} className="icon" />
                     </NavLink>
                 </Col>
@@ -183,11 +203,11 @@ const NavMenu = () => {
     const MenuDesktop = () => {
         return (
             <nav className="menuBar">
-                <Link to="/">
+                <NavLink to="/">
                     <span className="logo">GET-A</span>
-                </Link>
+                </NavLink>
                 <div className="floatRight">
-                    <Row>
+                    <Row align="middle">
                         <Col >
                             {
                                 statusTutor ? <TutorMenu /> : <UserMenu />
@@ -195,9 +215,9 @@ const NavMenu = () => {
                         </Col>
                         {
                             !status ? (
-                                <Col style={{ display: "flex", alignItems: "center" }}>
+                                <Col>
                                     <NavLink to="/login">
-                                        <Button id="/login" className="buttonColor backgroundBlue" shape="round" size="middle">เข้าสู่ระบบ</Button>
+                                        <Button id="/login" className={`${style.buttonColor} ${style.textOne}`} style={styleComponent.buttonFull(color.blue, "auto")} shape="round" size="middle">เข้าสู่ระบบ</Button>
                                     </NavLink>
                                     <NavLink to="/register">
                                         <Button className="buttonText" type="link" >หรือ สมัครสมาชิก</Button>

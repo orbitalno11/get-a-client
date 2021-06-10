@@ -1,117 +1,121 @@
 import React, { Fragment } from 'react'
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Rate, Spin } from "antd"
+import { Button, Rate } from "antd"
 import { Controller, useForm } from "react-hook-form";
 import { reviewSchema } from "../../../../validation/review/reviewSchema";
 import { color } from "../../../defaultValue";
 import style from "./styles.module.scss"
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
-import { reviewActions } from "../../../../redux/actions";
+import { modalAction, onlineCourseActions, reviewActions } from "../../../../redux/actions";
 import { useDispatch } from "react-redux";
 import isEmpty from "../../../defaultFunction/checkEmptyObject";
 import { useEffect } from "react";
+import { styleComponent } from "../../../defaultFunction/style";
 
-export function DeleteForm({ idReview }) {
+export function DeleteForm({ idReview, type }) {
     const dispatch = useDispatch()
-    const { id } = useParams()
+    const { id, courseId, videoId } = useParams()
     const { loading } = useSelector(state => state.loading)
+    const offlineCourse = useSelector(state => state.offlineCourse)
+
+    const text = type === "review" ? "ความคิดเห็น" : "คลิปการสอน"
     const styleWarningText = {
         color: color.red,
     }
 
-    const buttonDelete = {
-        width : "100%",
-        marginTop : "1rem"
-    }
-
     const handleDeleteComment = () => {
-        dispatch(reviewActions.deleteReviewByCourse(idReview, 1,id))
+        if (type === "review") {
+            if (videoId) {
+                dispatch(reviewActions.deleteReviewByCourse(idReview, 3, courseId, videoId))
+            } else {
+                dispatch(reviewActions.deleteReviewByCourse(idReview, offlineCourse?.data?.type, id))
+            }
+        } else {
+            dispatch(modalAction.closeModal())
+            dispatch(onlineCourseActions.deleteClip(courseId, videoId))
+        }
     }
 
     return (
         <div align="center">
-            <h3 className={style.titleH4}>
-                ยืนยันการลบความคิดเห็นของบทเรียนนี้
+            <h3 className={style.headerTwo25}>
+                ยืนยันการลบ{text}ของบทเรียนนี้
             </h3>
-            <p style={styleWarningText}>หากลบความคิดเห็นแล้วจะไม่สามารถกู้ความมเห็นคืนได้</p>
-            <Button  className="buttonColor backgroundRed" style={buttonDelete} id="reviewForm" shape="round" onClick={()=>handleDeleteComment()} disabled={loading ? true : false}>
+            <p className={style.textOne25} style={styleWarningText}>หากลบ{text}แล้วจะไม่สามารถกู้{text}ได้</p>
+            <Button size={"middle"} className={`${style.buttonColor} ${style.textOne25} ${style.marginSection}`} style={styleComponent.buttonFull(color.red)} htmlType="submit" disabled={loading ? true : false} onClick={() => handleDeleteComment()}>
                 {
                     loading && (
                         <Fragment>
-                            <Spin style={{ marginRight: "0.5rem" }} /> 
+                            <styleComponent.spinLoading />
                             <span>กำลัง</span>
                         </Fragment>
                     )
                 }
-                    ลบความคิดเห็นนี้
-                </Button>
+            ลบ{text}นี้
+            </Button>
         </div>
     )
 }
 
 export default function ReviewForm({ idReview }) {
-    const { id } = useParams()
+    const { id, videoId, courseId } = useParams()
     const dispatch = useDispatch()
     const { loading } = useSelector(state => state.loading)
-    const { review, modal } = useSelector(state => state)
-    const myReview = review.reviews && review.reviews.filter((item) => item.id === idReview)[0]
+    const { review, modal, offlineCourse } = useSelector(state => state)
+    const myReview = review.reviews && review.reviews.filter((item) => item.owner === true)[0]
     const { register, handleSubmit, errors, control, reset } = useForm({
         resolver: yupResolver(reviewSchema),
     });
 
     useEffect(() => {
         reset({
-            "rate": (!isEmpty(idReview) && !isEmpty(myReview)) ? myReview.rating : "0",
-            "comment": (!isEmpty(idReview) && !isEmpty(myReview)) ? myReview.review : ""
+            "rate": (!isEmpty(myReview)) ? myReview.rating : "0",
+            "comment": (!isEmpty(myReview)) ? myReview.review : ""
         })
     }, [idReview, modal.status])
 
     const textarea = {
         resize: "none",
         marginTop: "1rem",
-        marginBottom: "1rem",
+        marginBottom: "0.5rem",
         border: `0.15rem solid ${color.orange}`,
-        paddingTop : "0.75rem"
+        paddingTop: "0.75rem"
     }
 
-    const buttonReview = {
-        width : "100%"
-    }
-    
     const onSubmit = (data) => {
         if (data) {
-
-            if (isEmpty(idReview)) {
+            if (isEmpty(myReview)) {
                 const formData = {
-                    "courseId": id,
+                    "courseId": videoId ? courseId : id,
                     "rating": data.rate,
                     "comment": data.comment,
-                    "isClip": false,
-                    "courseType": 1
+                    "isClip": videoId ? true : false,
+                    "clipId": videoId && videoId,
+                    "courseType": videoId ? 3 : offlineCourse.data.type
                 }
                 dispatch(reviewActions.createReview(formData))
-            } else{
+            } else {
                 const formData = {
-                    "courseId": id,
-                    "reviewId": idReview,
+                    "courseId": videoId ? courseId : id,
+                    "reviewId": myReview.id,
                     "rating": data.rate,
                     "comment": data.comment,
-                    "isClip": false,
-                    "courseType": 1
+                    "isClip": videoId ? true : false,
+                    "clipId": videoId && videoId,
+                    "courseType": videoId ? 3 : offlineCourse.data.type
                 }
-                console.log(formData)
                 dispatch(reviewActions.updateReview(formData))
             }
-
         }
     }
 
     return (
         <div align="center">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <span className={style.titleH2}>ความคิดเห็น</span>
-                <br />
+                <div>
+                    <span className={style.headerTwo5}>ความคิดเห็น</span>
+                </div>
                 <Controller
                     as={
                         <Rate name="rate" className={style.rate} />
@@ -123,15 +127,15 @@ export default function ReviewForm({ idReview }) {
                 {
                     errors.rate && <p className="error-input">{errors.rate.message}</p>
                 }
-                <textarea name="comment" className="input" rows="8" style={textarea} ref={register} placeholder="ความคิดเห็นในบทเรียนนี้" />
+                <textarea name="comment" className="input" rows="6" style={textarea} ref={register} placeholder="ความคิดเห็นในบทเรียนนี้" />
                 {
                     errors.comment && <p className="error-input">{errors.comment.message}</p>
                 }
-                <Button id="reviewForm" className="buttonColor backgroundOrange" shape="round" style={buttonReview} htmlType="submit" disabled={loading ? true : false}>
+                <Button className={`${style.buttonColor} ${style.textOne25}`} style={styleComponent.buttonFull(color.orange)} htmlType="submit" disabled={loading ? true : false}>
                     {
                         loading && (
                             <Fragment>
-                                <Spin style={{ marginRight: "0.5rem" }} /> 
+                                <styleComponent.spinLoading />
                                 <span>กำลัง</span>
                             </Fragment>
                         )
@@ -142,4 +146,3 @@ export default function ReviewForm({ idReview }) {
         </div>
     )
 }
-

@@ -1,104 +1,151 @@
-import { Grid, Row, Col } from "antd";
 import React, { Fragment } from 'react'
-import CardCourseLearner from "../../../card/CardCourseLearner"
-import Header from "../../../headerMobile/Header";
-import isMobile from "../../../isMobile/isMobile";
-import TabHorizontal from "../../../tab/TabHorizontal";
-import style from './styles.module.scss'
+import TabHorizontal from "../../../tab/TabHorizontal"
+import { useState } from "react"
+import { useSelector } from "react-redux"
+import isEmpty from "../../../defaultFunction/checkEmptyObject"
+import { useDispatch } from "react-redux"
+import { useEffect } from "react"
+import { searchActions } from "../../../../redux/actions/search.actions"
+import CardCourseTutor from "../../../card/CardCourseTutor"
+import { Button, Col, Row, Grid } from "antd"
+import CardLesson from "../../../card/CardLesson"
+import style from "./styles.module.scss"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faArrowCircleLeft, faArrowCircleRight } from "@fortawesome/free-solid-svg-icons"
+import isMobile from "../../../isMobile/isMobile"
+import EmptyImage from "../../../loading/EmptyImage"
 const { useBreakpoint } = Grid;
 
 export default function ResultSearch() {
     const screens = useBreakpoint();
+    const [tabStart, setTabStart] = useState({
+        key: "all",
+        name: "ทั้งหมด",
+    })
+    const dispatch = useDispatch()
+    const search = useSelector(state => state.search)
+    const [course, setCourse] = useState()
 
-    const courseTutor = [
-        {
-            name: "1 หนูเทพซาโตชิ",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
-        },
-        {
-            name: "2 พิคาชู",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
-        },
-        {
-            name: "3 หนูเทพซาโตชิ",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
-        },
-        {
-            name: "4 พิคาชู หนูเทพซาโตชิ",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
-        },
-        {
-            name: "5 หนูเทพซาโตชิ",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
-        },
-        {
-            name: "6 พิคาชู หนูเทพซาโตชิ",
-            place: "บางมด, ทุ่งครุ",
-            subject: "ชีววิทยา",
-            date: "1 มกราคม 2563"
+    useEffect(() => {
+        if (search.offlineCourse || search.onlineCourse) {
+            setCourse({
+                offlineCourse: search.offlineCourse,
+                onlineCourse: search.onlineCourse,
+                nearby: search.nearby,
+                links: search.links,
+                meta: search.meta,
+                type: search.type,
+                location: search.location
+            })
         }
-    ]
+    }, [search.onlineCourse, search.offlineCourse, search.nearby])
 
-    const CardResults = () => {
+    const onHandleChangePage = (redirectPath, typeFocus) => {
+        dispatch(searchActions.getSearch({
+            redirectPath: redirectPath,
+            typeFocus: typeFocus,
+            type: course.type,
+        }))
+    }
+    const CardResult = ({ type, data }) => {
+        const checkNotNull = !isEmpty(course[type])
+        const prevPage = (checkNotNull && !isEmpty(course.links[type].previous)) ? false : true
+        const nextPage = (checkNotNull && !isEmpty(course.links[type].next)) ? false : true
+        const currentPage = (checkNotNull && !isEmpty(course.meta[type].currentPage)) && course.meta[type].currentPage
+        const denineLocation = (type === "nearby" && isEmpty(course[type]) && !course.location)
+
         return (
-            <Row >
+            <Row className={(!isMobile() && course.type !== 3) ? style.padding1 : null} justify={screens.lg ? "space-between" : "center"} >
                 {
-                    courseTutor && courseTutor.map((item1, index) => (
-                        <Col lg={8} md={12} sm={24} xs={24} key={index} className={style.cardResult}>
-                            <CardCourseLearner data={item1} />
+                    checkNotNull ? data.map((item) => (
+                        (type !== "onlineCourse") ? (
+                            <Col className={style.paddingCardResult} key={item.id} xl={10} lg={10} md={20} sm={24} xs={24} >
+                                <CardCourseTutor data={item} search />
+                            </Col>
+                        ) : (
+                            <Col className={style.paddingCardResult} key={item.id} xl={10} lg={10} md={20} sm={24} xs={24} >
+                                <CardLesson data={item} search />
+                            </Col>
+                        )
+                    )) : (
+                        <Col span={24} align="center">
+
+                            <EmptyImage size="default" />
+                            <p className={style.textNormal}>{
+                                denineLocation ?
+                                    "ไม่สามารถค้นหาบทเรียนที่อยู่ใกล้คุณได้ เนื่ืองจากถูกปฎิเสธในการขอตำแหน่งที่ตั้ง"
+                                    : "ไม่พบข้อมูลในส่วนนี้"
+                            }</p>
                         </Col>
-                    ))
+                    )
+                }
+                {
+                    checkNotNull && (
+                        <Col className={style.marginTop2} span={24} align="center">
+                            <Button className="buttonColor" shape="circle" hidden={prevPage} onClick={() => onHandleChangePage(course.links[type].previous, type)}>
+                                <FontAwesomeIcon className={style.pageHeader} icon={faArrowCircleLeft} />
+                            </Button>
+                            {
+                                course.meta[type].totalPages !== 1 && (
+                                    <span className={`${style.paddingPage} ${style.textOne5}`}>หน้าที่ {currentPage}</span>
+                                )
+                            }
+                            <Button className="buttonColor" shape="circle" hidden={nextPage} onClick={() => onHandleChangePage(course.links[type].next, type)}>
+                                <FontAwesomeIcon className={style.pageHeader} icon={faArrowCircleRight} />
+                            </Button>
+                        </Col>
+                    )
                 }
             </Row>
         )
     }
 
-    const tabStart = {
-        key: "tutor",
-        name: "Tutor"
+    const tabDetail = () => {
+        const data = [
+            {
+                key: "offlineCourse",
+                name: "ทั้งหมด",
+                tab: <CardResult data={course.offlineCourse} type="offlineCourse" />
+            },
+            {
+                key: "nearby",
+                name: "ใกล้คุณ",
+                tab: <CardResult data={course.nearby} type="nearby" />
+            },
+            {
+                key: "onlineCourse",
+                name: "ออนไลน์",
+                tab: <CardResult data={course.onlineCourse} type="onlineCourse" />
+            },
+        ]
+
+        if (course.type === 1) {
+            return data.filter(value => value.key !== "onlineCourse")
+        } else if (course.type === "N/A") {
+            return data
+        }
     }
 
-    const tabDetail = [
-        {
-            key: "tutor",
-            name: "Tutor",
-            tab: <CardResults />
-        },
-        {
-            key: "course",
-            name: "Course",
-            tab: <CardResults />
-        },
-        {
-            key: "course1",
-            name: "Course1",
-            tab: <CardResults />
-        },
-
-    ]
+    const handleSetSelectTab = (key) => {
+        const tabActive = tabDetail().filter(value => value.key === key)[0]
+        setTabStart(tabActive)
+    }
 
 
     return (
         <Fragment>
-            {(isMobile()) && <Header pageBack="goback" title="ผลการค้นหา" />}
-            <div className={`${style.bodymobileprofile} ${style.paddingTopBody}`} >
+            <div id="showCard">
                 {
-                    screens.md && (
-                        <span className={style.titleH2}>ผลการค้นหา</span>
+                    (course && !isEmpty(course.type) && course.type !== 3) && (
+                        <TabHorizontal ontal type="tab" tabStart={tabStart} tabDetail={tabDetail()} style={"TabPane"} handleSetSelectTab={handleSetSelectTab} />
                     )
                 }
-                <TabHorizontal type="tab" tabStart={tabStart} tabDetail={tabDetail} style="TabPane" />
             </div>
-        </Fragment> 
+            {
+                course?.type === 3 && (
+                    <CardResult data={course.onlineCourse} type="onlineCourse" />
+                )
+            }
+        </Fragment>
     )
 }

@@ -1,10 +1,10 @@
-import axios from 'axios';
-import { BASE_API_URL, LONGDO_MAP_URL } from "../config/environmentConfig";
+import axios from 'axios'
+import { BASE_API_URL, LONGDO_MAP_URL } from "../config/environmentConfig"
 
 let apiGetA = axios.create({
     baseURL: BASE_API_URL,
-    timeout: 10000,
-  });
+    withCredentials: true
+  })
 
 let apiMap = axios.create({
     baseURL : LONGDO_MAP_URL,
@@ -19,8 +19,8 @@ export const setAuthToken = token => {
     }
 }
 
+
 export const apiURL = {
     apiGetA,
     apiMap
 }
-

@@ -1,47 +1,76 @@
 import React from "react"
-import { Col, Rate, Row } from "antd";
+import { Button, Col, Rate, Row } from "antd";
 import styles from "./styles.module.scss"
-import isMobile from "../isMobile/isMobile"
 import { useState } from "react";
+import { styleComponent } from "../defaultFunction/style";
+import { color } from "../defaultValue";
+import { Fragment } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinusCircle, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
+import isEmpty from "../defaultFunction/checkEmptyObject";
 
-export default function CardReview({ data, myReview, handleEdit }) {
-
+export default function CardReview({ data, myReview, handleEdit, vdo }) {
+    const screens = useBreakpoint();
     const [showMessage, setShowMessage] = useState(false)
-
+    
     const showtext = {
         display: showMessage ? "block" : "-webkit-box"
     }
 
+    const colorIcon = (colorIcon) => {
+        return ({
+            color: colorIcon
+        })
+    }
+
     return (
-        <Row className={`${styles.card} ${styles.paddingCard}`} >
-            <Col lg={15} md={15} sm={15} xs={24}>
-                <span className={`${styles.titleH5} ${styles.textOneLine}`}>
+        <Row className={`${!screens.md && `${styles.paddingOne} ${styles.card}`}  ${screens.md  && styles.section} ${styles.marginSection}`} align="middle">
+            <Col lg={15} md={15} sm={18} xs={18}>
+                <span className={`${styles.textOne75} ${styles.textOneLine}`}>
                     {data.reviewer.fullName}
                 </span>
             </Col>
-            <Col lg={9} md={9} sm={9} xs={24} align={isMobile() ? "start" : "end"}>
-                <span className={styles.floatRight}>วันที่ {new Date(data.reviewDate).toLocaleDateString()}</span>
-            </Col>
-            <Col lg={24} md={24} sm={24} xs={24} className={styles.marginTop1}>
-                <Rate disabled value={data.rating} className={styles.rate} />
-            </Col>
+            <Col lg={8} md={8} sm={6} xs={6} align={"end"}>
+                {myReview && (
+                    ((isEmpty(vdo) && screens.md) || (!isEmpty(vdo) && !screens.lg && screens.md)) ?
+                        (
+                            <Fragment>
+                                <Button
+                                    className={`${styles.buttonColor} ${styles.textOne}`}
+                                    style={styleComponent.buttonFull(color.blue, "5rem")}
+                                    onClick={() => handleEdit(data.id, "edit")}
+                                    size={"middle"}>
+                                    แก้ไข
+                                </Button>
+                                <Button
+                                    className={`${styles.buttonColor} ${styles.textOne} ${styles.marginLeftOneHalf}`}
+                                    style={styleComponent.buttonFull(color.gray, "5rem")}
+                                    onClick={() => handleEdit(data.id, "delete")}>
+                                    ลบ
+                            </Button>
+                            </Fragment>
+                        ) : (
+                            <Fragment>
+                                <FontAwesomeIcon className={`${styles.textOne5} ${styles.cursor}`} icon={faPencilAlt} onClick={() => handleEdit(data.id, "edit")} style={colorIcon(color.blue)} />
+                                <FontAwesomeIcon className={`${styles.textOne5} ${styles.marginLeftOne} ${styles.cursor}`} icon={faMinusCircle} onClick={() => handleEdit(data.id, "delete")} style={colorIcon(color.gray)} />
+                            </Fragment>
 
-            {myReview && (
-                <Col lg={24} md={24} sm={24} xs={24}>
-                    <u onClick={() => handleEdit(data.id, "edit")} className={styles.textLink}>
-                        {myReview && "(แก้ไขความคิดเห็นของคุณ)"}
-                    </u>
-                    &nbsp;
-                    <u onClick={() => handleEdit(data.id, "delete")} className={styles.textLinkDelete}>
-                        {myReview && "(ลบความคิดเห็น)"}
-                    </u>
-                </Col>
-            )}
+                        )
+                )
+                }
+            </Col>
+            <Col lg={24} md={24} sm={24} xs={24} >
+                <Row align="bottom">
+                    <Rate disabled value={data.rating} className={styles.rate} />
+                    <span className={`${styles.textOne} ${styles.marginLeftOne}`}>วันที่ {new Date(data.reviewDate).toLocaleDateString()}</span>
+                </Row>
+            </Col>
             <Col lg={24} md={24} sm={24} xs={24} id="comment" >
-                <span className={`${styles.textNormal} ${styles.textThreeLine}`} style={showtext}>
+                <span className={`${styles.textOne25} ${styles.textThreeLine} ${styles.marginTopHalf}`} style={showtext}>
                     {data.review}
                 </span>
-                <u onClick={() => setShowMessage(!showMessage)}>{showMessage ? "ย่อความคิดเห็น" : "ดูความเห็นเพิ่มเติม"}</u>
+                <u className={`${styles.cursor} ${styles.textOne}`} onClick={() => setShowMessage(!showMessage)}>{showMessage ? "ย่อความคิดเห็น" : "ดูความเห็นเพิ่มเติม"}</u>
             </Col>
         </Row>
     )

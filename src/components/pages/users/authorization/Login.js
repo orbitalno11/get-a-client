@@ -3,37 +3,32 @@ import { Button } from "antd";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "../../../../validation/validation"
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import style from "./styles.module.scss"
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../../../redux/actions";
 import ModalComponent from "../../../modal/ModalComponent";
 import Loading from "../../../loading/Loading";
-import { useEffect } from "react";
+import { styleComponent } from "../../../defaultFunction/style";
 import { color } from "../../../defaultValue";
 
 export default function Login() {
     const dispatch = useDispatch()
     const { loading } = useSelector(state => state)
+    const { search } = useLocation()
+    const params = new URLSearchParams(search)
+    const path =params.get("path")
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(loginSchema),
     });
 
-    useEffect(() => {
-        document.body.style.backgroundColor = color.orange
-        return () => {
-            document.body.style.backgroundColor = ""
-        }
-    }, [])
-
     const onSubmit = (data) => {
-        dispatch(userActions.loginUser(data))
+        dispatch(userActions.loginUser(data, path))
     };
 
     const titleStyle = {
         marginTop: '1rem'
     }
-
 
     return (
         <Fragment>
@@ -60,10 +55,10 @@ export default function Login() {
                             }
                         </div>
                         <div className={style.margintop20}>
-                            <Button className="buttonColor backgroundBlue" shape="round" size="large" htmlType="submit">เข้าสู่ระบบ</Button>
+                            <button className={`${style.buttonColor} ${style.margintop20}`} style={styleComponent.buttonFull(color.blue,"7rem")} type="submit">เข้าสู่ระบบ</button>
                         </div>
-                        <div className={style.margintop10} >
-                            <Link to="/register">
+                        <div className={style.marginSection} >
+                            <Link to={`/register${path ? "/"+path : ""}`}>
                                 <Button className={style.buttonText} type="link" >สมัครสมาชิก</Button>
                             </Link>
                         </div>

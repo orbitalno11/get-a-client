@@ -8,12 +8,7 @@ $red : #840c0c;
 $green : #00B900;
 $black : #000000;
 $silver : #a39b9b;
-
-// for register page 
-.titleH1{
-    font-size: 3.75rem;
-    font-weight: 600;
-}
+$gray3 : "#828282";
 
 .titleH2{
     font-size: 2rem;
@@ -48,7 +43,7 @@ $silver : #a39b9b;
 }
 
 .iconLargeRegister{
-    font-size: 3.125rem;
+    font-size: 3rem;
 }
 
 .iconLarge{
@@ -69,11 +64,15 @@ $silver : #a39b9b;
 }
 
 .paddingTopBody{
-    padding-top: 6rem;
+    padding-top: 5rem;
 }
 
 .paddingBottomBody {
     padding-bottom: 3.75rem;
+}
+
+.padding1{
+    padding : 2rem
 }
 
 .body {
@@ -87,6 +86,10 @@ $silver : #a39b9b;
     @extend .paddingBottomBody;
 }
 
+.bodyPaddingTopBottom{
+    @extend .paddingTopBody;
+    @extend .paddingBottomBody;
+}
 
 .horizontalCenter {
     display: flex !important;
@@ -113,8 +116,8 @@ $silver : #a39b9b;
 }
 
 .HDImage {
-  width: 320px !important;
-  height: 180px !important;
+  width: 288px !important;
+  height: 162px !important;
 }
 
 .buttonCircle{
@@ -161,4 +164,218 @@ $silver : #a39b9b;
     display: -webkit-box; 
     -webkit-line-clamp: $line; 
     -webkit-box-orient: vertical;
+}
+
+.section {
+    background-color: $white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.marginSection {
+    margin-top:1rem
+}
+
+.button {
+    border-style: none  !important;
+    color:var(--white-color)  !important;
+    outline:none !important;
+}
+
+.buttonColor{
+    @extend .textOne5;
+    @extend .button;
+    height: auto;
+    border-radius: 0.5rem;
+}
+
+
+.marginLeftThree {
+    margin-left: 3rem;
+}
+
+.marginLeftOne5 {
+    margin-left: 1.5rem;
+}
+
+.marginLeftOne {
+    margin-left: 1rem;
+}
+
+.marginLeftOneHalf {
+    margin-left: 0.5rem;
+}
+
+.a4ImageSm {
+    width: 9rem !important;
+    height: 13rem !important;
+  }
+
+// new font 
+
+.headerFour{
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+.headerThree{
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.headerTwo75{
+    font-size: 2.75rem;
+    font-weight: 700;
+}
+
+.headerTwo5{
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.headerTwo25{
+    font-size: 2.25rem;
+    font-weight: 700;
+}
+
+.headerTwo{
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.headerOne75{
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.headerOne5{
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.headerOne35{
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.textTwo5{
+    font-size: 2.5rem;
+}
+
+.textTwo25{
+    font-size: 2.25rem;
+}
+
+.textTwo{
+    font-size: 2rem !important; 
+}
+
+.textOne75{
+    font-size: 1.75rem;
+}
+
+.textOne5{
+    font-size: 1.5rem;
+}
+
+.textOne4{
+    font-size: 1.4rem;
+}
+
+.textOne35{
+    font-size: 1.35rem;
+}
+
+.textOne25{
+    font-size: 1.25rem;
+}
+
+.textOne{
+    font-size: 1rem;
+}
+
+.text18{
+    font-size: 18px;
+}
+
+.colorYellow{
+    color : $yellow !important
+}
+
+.fullWidth{
+    width: 100%;
+}
+
+.TextHeight{
+    line-height: 90%
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+.paddingOne{
+    padding : 1rem !important
+}
+
+.paddingTopHalf{
+   padding-top: 0.5rem
+}
+
+.paddingTopOne{
+    padding-top: 1rem
+}
+
+.paddingTopOneHalf{
+    padding-top: 1.5rem
+}
+
+.marginTopOne5{
+    margin-top: 1.5rem;
+}
+
+.marginTopOne25{
+    margin-top: 1.25rem;
+}
+
+.marginTopHalf{
+    margin-top: 0.5rem;
+}
+
+.marginRightHalf{
+    margin-right: 0.5rem;
+}
+
+.marginRightOne {
+    margin-right: 1rem;
+}
+
+.fullHeight{
+    height: 100%;
+}
+
+.textOneLine {
+    @include cutText(1)
+  }
+  
+.textLineHeight { 
+    line-height: 90%;
+}
+  
+// new icon
+
+.iconFour{
+    font-size: 4rem;
+}
+
+.iconOne75{
+    font-size: 1.75rem;
+}
+
+.iconTwo{
+    font-size: 2rem;
+}
+
+.iconTwo5{
+    font-size: 2.5rem;
 }

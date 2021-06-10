@@ -17,8 +17,8 @@ function checkErrorMessage(errorMessage) {
     return message
 }
 
-function loginUser(loginData) {
-    return async dispatch => {
+function loginUser(loginData, path) {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
         auth.signInWithEmailAndPassword(loginData.email, loginData.password).then(user => {
             if (user) {
@@ -31,14 +31,22 @@ function loginUser(loginData) {
                         const getAToken = res.data.data
                         const user = jwtDecode(getAToken);
                         localStorage.setItem('token', getAToken);
-                        setAuthToken(getAToken)                    
+                        setAuthToken(getAToken)
                         dispatch(success(user))
                         dispatch(loadingActions.stopLoading())
                         if (user.role === 2) {
                             trackTutorLogin()
-                            window.location.href = "/tutor"
+                            if (path) {
+                                window.location.href = decodeURIComponent(path)
+                            } else {
+                                window.location.href = "/tutor"
+                            }
                         } else if (user.role === 1) {
-                            window.location.href = "/"
+                            if (path) {
+                                window.location.href = decodeURIComponent(path)
+                            } else {
+                                window.location.href = "/"
+                            }
                         } else if (user.role === 0) {
                             window.location.href = "/admin"
                         }
@@ -62,9 +70,9 @@ function loginUser(loginData) {
 }
 
 function signUpLearner(signUpData) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post("/learner/create", signUpData, {
+        apiURL.apiGetA.post("/learner/create", signUpData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -94,9 +102,9 @@ function signUpLearner(signUpData) {
 }
 
 function signUpTutor(signUpData) {
-    return async dispatch => {
+    return dispatch => {
         dispatch(loadingActions.startLoading())
-        await apiURL.apiGetA.post("/tutor/create", signUpData, {
+        apiURL.apiGetA.post("/tutor/create", signUpData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }

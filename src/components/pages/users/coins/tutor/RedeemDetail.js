@@ -15,7 +15,7 @@ export default function RedeemDetail({onHandleChange}) {
   const bahtStd = !isEmpty(rateRedeem) && rateRedeem[0].baht
   const coinStd = !isEmpty(rateRedeem) && rateRedeem[0].coin
   const amount = balanceCoin&& balanceCoin.amount
-  const bahtTranfer = ((Number(amount) * Number(bahtStd))/Number(coinStd)).toFixed(2)
+  const bahtTranfer = (Math.round((Number(amount) + Number.EPSILON) * 100) / 100).toFixed(2)
   const amountShow = Number(amount).toLocaleString()
   const bahtShow =  Number(bahtTranfer).toLocaleString()
 

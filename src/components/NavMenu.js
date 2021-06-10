@@ -15,12 +15,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../redux/actions/auth.actions";
 import isMobile from "./isMobile/isMobile";
+import { styleComponent } from "./defaultFunction/style";
+import { color } from "./defaultValue";
+import style from "./../stylesDefault.module.scss"
 
 const NavMenu = () => {
     const auth = useSelector(state => state.auth)
     const dispatch = useDispatch()
     const statusTutor = auth.role === 2
     const status = auth.isAuthenticated
+    const isLearner = auth.role === 1
     const UserMenu = () => {
 
         return (
@@ -30,14 +34,9 @@ const NavMenu = () => {
                         หน้าแรก
                     </NavLink>
                 </Menu.Item>
-                <Menu.Item key="/rank" >
-                    <NavLink to="/rank">
+                <Menu.Item key="/popular" >
+                    <NavLink to="/popular">
                         ติวเตอร์
-                    </NavLink>
-                </Menu.Item>
-                <Menu.Item key="/favorite" >
-                    <NavLink to="/favorite">
-                        รายการที่ถูกใจ
                     </NavLink>
                 </Menu.Item>
                 {/* <Menu.Item key="/course" >
@@ -50,7 +49,16 @@ const NavMenu = () => {
                     <NavLink to="/search">
                         ค้นหา
                 </NavLink>
-                </Menu.Item> 
+                </Menu.Item>
+                {
+                    isLearner && (
+                        <Menu.Item key="/favorite" >
+                            <NavLink to="/favorite">
+                                รายการที่ถูกใจ
+                        </NavLink>
+                        </Menu.Item>
+                    )
+                }
                 {
                     status ? (
                         <Menu.Item key="/me" >
@@ -132,7 +140,7 @@ const NavMenu = () => {
                         <FontAwesomeIcon icon={faChalkboardTeacher} className="icon" />
                     </NavLink>
                 </Col>
-               <Col span={4} className="iconMenu">
+                <Col span={4} className="iconMenu">
                     <NavLink to="/search">
                         <FontAwesomeIcon icon={faSearch} className="icon" />
                     </NavLink>
@@ -157,7 +165,7 @@ const NavMenu = () => {
     const ToturMenuMobile = () => {
         return (
             <Row justify="space-around">
-                 <Col span={6.5} className="iconMenu">
+                <Col span={6.5} className="iconMenu">
                     <NavLink to="/">
                         <FontAwesomeIcon icon={faHome} className="icon" />
                     </NavLink>
@@ -199,7 +207,7 @@ const NavMenu = () => {
                     <span className="logo">GET-A</span>
                 </NavLink>
                 <div className="floatRight">
-                    <Row>
+                    <Row align="middle">
                         <Col >
                             {
                                 statusTutor ? <TutorMenu /> : <UserMenu />
@@ -207,9 +215,9 @@ const NavMenu = () => {
                         </Col>
                         {
                             !status ? (
-                                <Col style={{ display: "flex", alignItems: "center" }}>
+                                <Col>
                                     <NavLink to="/login">
-                                        <Button id="/login" className="buttonColor backgroundBlue" shape="round" size="middle">เข้าสู่ระบบ</Button>
+                                        <Button id="/login" className={`${style.buttonColor} ${style.textOne}`} style={styleComponent.buttonFull(color.blue, "auto")} shape="round" size="middle">เข้าสู่ระบบ</Button>
                                     </NavLink>
                                     <NavLink to="/register">
                                         <Button className="buttonText" type="link" >หรือ สมัครสมาชิก</Button>

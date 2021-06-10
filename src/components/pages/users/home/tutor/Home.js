@@ -87,7 +87,7 @@ export default function Home() {
                         </Row>
                     </Col>
                     <Col className={`${!isMobile() && style.section} ${style.marginSection}`} lg={9} md={24} sm={24} xs={24}>
-                        <Row className={`${style.height} ${!screens.lg && style.marginSection} `} align="middle" justify={!screens.lg && "space-around"} >
+                        <Row className={`${style.fullHeight} ${!screens.lg && style.marginSection} `} align="middle" justify={!screens.lg && "space-around"} >
                             <Col span={24} align={!screens.lg ? "center" : "start"}>
                                 <span className={style.headerTwo25}>ข้อมูลเหรียญ</span>
                             </Col>

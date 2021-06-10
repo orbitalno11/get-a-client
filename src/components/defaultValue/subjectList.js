@@ -5,49 +5,49 @@ import { color } from "./color";
 const subjectList = [
     {
         subject: "คณิตศาสตร์",
-        link: "",
+        id : "MTH",
         icon: faSquareRootAlt,
         color: color.MTH
     },
     {
         subject: "ภาษาไทย",
-        link: "",
+        id : "THA",
         icon: faInfinity,
         color: color.THA
     },
     {
         subject: "วิทยาศาสตร์",
-        link: "",
+        id : "SCI",
         icon: faMicroscope,
         color: color.SCI
     },
     {
         subject: "ชีววิทยา",
-        link: "",
+        id : "BIO",
         icon: faDna,
         color: color.BIO
     },
     {
         subject: "เคมี",
-        link: "faFlask",
+        id : "CHM",
         icon: faFlask,
         color: color.CHM
     },
     {
         subject: "ฟิสิกส์",
-        link: "",
+        id : "PHY",
         icon: faAtom,
         color: color.PHY
     },
     {
         subject: "อังกฤษ",
-        link: "",
+        id : "ENG",
         icon: faAmilia,
         color: color.ENG
     },
     {
         subject: "สังคมศึกษา",
-        link: "",
+        id : "SOC",
         icon: faGlobeAsia,
         color: color.SOC
     }

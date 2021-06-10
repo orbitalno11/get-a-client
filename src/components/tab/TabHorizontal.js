@@ -65,7 +65,6 @@ export default function TabHorizontal({ type, tabStart, tabDetail, name, style, 
                                 }
                             </Radio.Group>
                         </Row>
-
                         {
                             type == "tab" && tabDetail !== null && tab !== null &&
                             (

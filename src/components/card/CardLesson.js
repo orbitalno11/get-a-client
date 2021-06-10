@@ -32,7 +32,7 @@ export default function CardLesson({ data, isCourse, search, course }) {
             <Col lg={15} md={15} sm={15} xs={15} align="start" className={styles.marginLeftThree}>
                 <Row align="middle">
                     <Col span={13} >
-                        <span className={`${styles.textOne75} ${styles.textTwoLine}`}>{data.name}</span>
+                        <span className={`${styles.textOne75} ${styles.textOneLine}`}>{data.name}</span>
                     </Col>
                     {
                         !course && (

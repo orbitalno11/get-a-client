@@ -406,10 +406,6 @@ textarea{
   border-bottom: 1px solid #f26419 !important;
 }
 
-.ant-tabs > .ant-tabs-nav .ant-tabs-nav-list, .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-list {
-  position: relative;
-  display: flex;
-  flex:none !important;
-  transition: transform 0.3s;
-}
-
+.slick-dots li button:before{
+  font-size: 0.5rem;
+} 

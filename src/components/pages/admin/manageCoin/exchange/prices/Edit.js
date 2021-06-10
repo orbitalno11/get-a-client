@@ -54,7 +54,7 @@ export default function Edit({dataRate}) {
           "type": "transfer",
           "startDate":data.startDate,
           "endDate": data.endDate,
-          "updtaeDate":data.startDate,
+          "updtaeDate":today,
         }
         dispatch(modalAction.closeModal())
         dispatch(coinAction.updateCoinRate(dataRate.id,rate))

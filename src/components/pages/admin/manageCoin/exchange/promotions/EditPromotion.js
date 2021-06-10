@@ -76,7 +76,6 @@ export default function EditPromotion({dataPromo}) {
                     as={<DatePicker placeholder="" />}
                     name="startDate"
                     control={control}
-                    defaultValue={moment()}
                     placeholder=""
                   />
                   {errors.startDate && (
@@ -93,7 +92,6 @@ export default function EditPromotion({dataPromo}) {
                     as={<DatePicker placeholder="" />}
                     name="endDate"
                     control={control}
-                    defaultValue={moment()}
                     placeholder=""
                   />
                   {errors.endDate && (

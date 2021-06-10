@@ -18,7 +18,7 @@ export default function ProfileDetail({ data, isTutor }) {
                     <Row align="middle" className={style.paddingProfileMobile} >
                         <Col span={18}>
                             <Row className={style.marginSection} align="middle" >
-                                <Col span={2}>
+                                <Col span={3}>
                                     <styleComponent.iconCoin size="large" />
                                 </Col>
                                 <Col className={style.marginLeftOne} span={19}>
@@ -26,14 +26,14 @@ export default function ProfileDetail({ data, isTutor }) {
                                         !data ? (
                                             <SkeletonComponent.SkeletonText size="default" width="150px" />
                                         ) : (
-                                            <span className={`${style.textOne25} ${style.marginLeftOne}`}>100,000 เหรียญ</span>
+                                            <span className={`${style.textOne25} ${style.marginLeftOne}`}>  {data ? data.coin : <SkeletonComponent.SkeletonText size="default" width="150px" />} &nbsp;เหรียญ</span>
                                         )
                                     }
                                 </Col>
                             </Row>
                         </Col>
                         <Col span={6} align="end">
-                            <Link to={!isTutor ? "/coin" : "/tutor/me/redeem"}>
+                            <Link to={!isTutor ? "/coin" : "/redeem"}>
                                 <Button className={`${style.buttonColor} ${style.textOne}`} style={styleComponent.buttonFull(color.yellow, "5rem")} size="small">{isTutor ? "แลกเหรียญ" : "ซื้อเหรียญ"}</Button>
                             </Link>        
                         </Col>

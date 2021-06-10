@@ -83,7 +83,7 @@ export default function Delete({data}) {
         className="backgroundRed buttonColor"
         shape="round"
         size="middle"
-        style={{ width: "60px" }}
+        style={{ width: "50px" }}
         icon={<FontAwesomeIcon icon={faTrashAlt} style={{ color: "white" }} />}
       >
       </Button>

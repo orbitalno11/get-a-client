@@ -33,6 +33,7 @@
     "react-scripts": "4.0.1",
     "react-simple-timefield": "^3.2.3",
     "react-slick": "^0.28.0",
+    "react-time-picker": "^4.3.0",
     "reactjs-media": "^1.5.1",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",

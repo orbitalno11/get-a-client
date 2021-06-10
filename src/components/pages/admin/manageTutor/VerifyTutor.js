@@ -25,7 +25,7 @@ export default function VerifyTutor() {
       <table className="verify">
         <thead>
           <tr>
-            <th className={style.textNormal}>เอกสารยืนยันตัวตน</th>
+            <th className={style.textOne5}>เอกสารยืนยันตัวตน</th>
           </tr>
         </thead>
         {list && list.length ? (
@@ -42,7 +42,7 @@ export default function VerifyTutor() {
                             className={style.iconCloseemail}
                           />
                         </Col>
-                        <Col md={10} lg={9} xl={7} className={style.textNormal}>
+                        <Col md={10} lg={9} xl={7} className={style.textOne35}>
                           {item && item.fullNameRequest}
                         </Col>
                         <Col
@@ -65,7 +65,7 @@ export default function VerifyTutor() {
         ) : (
           <div align="center">
             <EmptyImage size="default" />
-            <p className={style.textNormal}>ยังไม่มีเอกสารยืนยันตัวตน&nbsp;</p>
+            <p className={style.textOne5}>ยังไม่มีเอกสารยืนยันตัวตน&nbsp;</p>
           </div>
         )}
       </table>

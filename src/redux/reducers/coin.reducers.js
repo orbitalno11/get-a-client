@@ -2,10 +2,16 @@ import { coinConstants } from "../constants"
 
 const initialState = {
     rateCoin :  null,
-    coinUser :  null,
-    createCoin : null,
-    error: null
-
+    balance :  null,
+    redeem :  null,
+    transaction :  null,
+    error: null,
+    activate:null,
+    redeemList:null,
+    approve:null,
+    denide:null,
+    requestRedeem:null,
+    cancle:null,
 }
 
 const coinReducer = (state = initialState , action)=>{
@@ -26,35 +32,211 @@ const coinReducer = (state = initialState , action)=>{
             }
 
         }
-        case coinConstants.GET_COIN_USER_LIST_SUCCESS:{
+        case coinConstants.GET_COIN_BALANCE_SUCCESS:{
             return {
                 ...state,
-                coinUser : action.payload,
+                balance : action.payload,
                 error : false
             }
 
         }
-        case coinConstants.GET_COIN_USER_LIST_FAILURE:{
+        case coinConstants.GET_COIN_BALANCE_FAILURE:{
             return {
                 ...state,
-                coinUser : null,
+                balance : null,
                 error : true
             }
 
         }
-        case coinConstants.GET_COIN_CREATE_LIST_SUCCESS:{
+        case coinConstants.GET_COIN_TRANSACTION_SUCCESS:{
             return {
                 ...state,
-                createCoin : action.payload,
+                transaction : action.payload,
                 error : false
             }
 
         }
-        case coinConstants.GET_COIN_CREATE_LIST_FAILURE:{
+        case coinConstants.GET_COIN_TRANSACTION_FAILURE:{
             return {
                 ...state,
-                createCoin : null,
+                transaction : null,
                 error : true
+            }
+
+        }
+        case coinConstants.GET_COIN_REDEEM_SUCCESS:{
+            return {
+                ...state,
+                redeem : action.payload,
+                error : false
+            }
+
+        }
+        case coinConstants.GET_COIN_REDEEM_FAILURE:{
+            return {
+                ...state,
+                redeem : null,
+                error : true
+            }
+
+        }
+        case coinConstants.CREATE_COIN_RATE_SUCCESS:{
+            return {
+                ...state,
+                error : false
+            }
+
+        }
+        case coinConstants.CREATE_COIN_RATE_FAILURE:{
+            return {
+                ...state,
+                error : action.payload
+            }
+
+        }
+        case coinConstants.UPDATE_COIN_RATE_SUCCESS:{
+            return {
+                ...state,
+                error : false
+            }
+
+        }
+        case coinConstants.UPDATE_COIN_RATE_FAILURE:{
+            return {
+                ...state,
+                error : action.payload
+            }
+
+        }
+        case coinConstants.DELETE_COIN_RATE_SUCCESS:{
+            return {
+                ...state,
+                error : false
+            }
+
+        }
+        case coinConstants.DELETE_COIN_RATE_FAILURE:{
+            return {
+                ...state,
+                error : action.payload
+            }
+
+        }
+        case coinConstants.ACTIVATE_COIN_RATE_SUCCESS:{
+            return {
+                ...state,
+                activate : action.payload,
+                error : false
+            }
+
+        }
+        case coinConstants.ACTIVATE_COIN_RATE_FAILURE:{
+            return {
+                ...state,
+                activate : null,
+                error : true
+            }
+
+        }
+        case coinConstants.CLEAR_COIN_RATE:{
+            return {
+                ...state,
+                rateCoin : null,
+                error: null
+            }
+
+        }
+        case coinConstants.REDEEM_LIST_SUCCESS:{
+            return {
+                ...state,
+                redeemList : action.payload,
+                error : false
+            }
+
+        }
+        case coinConstants.REDEEM_LIST_FAILURE:{
+            return {
+                ...state,
+                redeemList : null,
+                error : true
+            }
+
+        }
+        case coinConstants.APPROVE_REQUEST_REDEEM_SUCCESS:{
+            return {
+                ...state,
+                approve : action.payload,
+                error : false
+            }
+
+        }
+        case coinConstants.APPROVE_REQUEST_REDEEM_FAILURE:{
+            return {
+                ...state,
+                approve : null,
+                error : true
+            }
+
+        }
+        case coinConstants.DENIED_REQUEST_REDEEM_SUCCESS:{
+            return {
+                ...state,
+                denide : action.payload,
+                error : false
+            }
+
+        }
+        case coinConstants.DENIED_REQUEST_REDEEM_FAILURE:{
+            return {
+                ...state,
+                denide : null,
+                error : true
+            }
+
+        }
+        case coinConstants.CREATE_REQUEST_REDEEM_SUCCESS:{
+            return {
+                ...state,
+                error : false
+            }
+
+        }
+        case coinConstants.CREATE_REQUEST_REDEEM_FAILURE:{
+            return {
+                ...state,
+                error : action.payload
+            }
+
+        }
+        case coinConstants.CANCEL_REQUEST_REDEEM_SUCCESS:{
+            return {
+                ...state,
+                cancle : action.payload,
+                error : false
+            }
+
+        }
+        case coinConstants.CANCEL_REQUEST_REDEEM_FAILURE:{
+            return {
+                ...state,
+                cancle : null,
+                error : action.payload
+            }
+
+        }
+        case coinConstants.GET_REQUEST_REDEEM_SUCCESS:{
+            return {
+                ...state,
+                requestRedeem : action.payload,
+                error : false
+            }
+
+        }
+        case coinConstants.GET_REQUEST_REDEEM_FAILURE:{
+            return {
+                ...state,
+                requestRedeem : null,
+                error : action.payload
             }
 
         }

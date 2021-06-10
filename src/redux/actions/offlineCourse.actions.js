@@ -34,7 +34,6 @@ function updatefflineCourse(id, data) {
     function failure(err) { return { type: offlineCourseConstants.UPDATE_OFFLINE_COURSE_FAILURE, payload: err } }
 }
 
-
 function createOfflineCourse(data) {
     return dispatch => {
         dispatch(loadingActions.startLoading())

@@ -51,9 +51,16 @@ const spinLoading = () => {
     )
 }
 
-export const styleComponent = {
+const text = (textColor) =>{
+    return ({
+        color: textColor,
+    })
+}
+
+export  const styleComponent = {
     buttonFull,
     iconCoin,
     iconStar,
-    spinLoading
-}
+    spinLoading,
+    text
+} 

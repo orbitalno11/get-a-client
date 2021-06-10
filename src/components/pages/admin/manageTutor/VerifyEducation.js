@@ -25,7 +25,7 @@ export default function VerifyEducation() {
       <table className="verify">
         <thead>
           <tr>
-            <th className={style.textNormal}>เอกสารยืนยันประวัติการศึกษา</th>
+            <th className={style.textOne5}>เอกสารยืนยันประวัติการศึกษา</th>
           </tr>
         </thead>
         {list && list.length ? (
@@ -42,7 +42,7 @@ export default function VerifyEducation() {
                             className={style.iconCloseemail}
                           />
                         </Col>
-                        <Col md={10} lg={9} xl={7} className={style.textNormal}>
+                        <Col md={10} lg={9} xl={7} className={style.textOne35}>
                           {item && item.fullRequestName}
                         </Col>
                         <Col
@@ -65,7 +65,7 @@ export default function VerifyEducation() {
         ) : (
           <div align="center">
             <EmptyImage size="default" />
-            <p className={style.textNormal}>ยังไม่มีเอกสารยืนยันประวัติการศึกษา&nbsp;</p>
+            <p className={style.textOne5}>ยังไม่มีเอกสารยืนยันประวัติการศึกษา&nbsp;</p>
           </div>
         )}
       </table>

@@ -3,6 +3,7 @@ import { onlineCourseConstants } from "../constants"
 const initialState = {
     listOnlineTutor: null,
     listClip: null,
+    newCourse : null,
     clip: null,
     data: null,
     error: null,
@@ -42,6 +43,18 @@ const onlineCourseReducer = (state = initialState, action) => {
             return {
                 ...state,
                 data: null,
+                error: action.payload
+            }
+        case onlineCourseConstants.GET_ONLINE_COURSE_NEW_SUCCESS:
+            return {
+                ...state,
+                newCourse: action.payload,
+                error: null
+            }
+        case onlineCourseConstants.GET_ONLINE_COURSE_NEW_FAILURE:
+            return {
+                ...state,
+                newCourse: null,
                 error: action.payload
             }
         case onlineCourseConstants.GET_LIST_ONLINE_COURSE_TUTOR_SUCCESS:
@@ -115,13 +128,13 @@ const onlineCourseReducer = (state = initialState, action) => {
         case onlineCourseConstants.BUY_CLIP_COURSE_SUCCESS:
             return {
                 ...state,
-                clip : {...state.clip , bought : true},
+                clip: { ...state.clip, bought: true },
                 error: null
             }
         case onlineCourseConstants.BUY_CLIP_COURSE_FAILURE:
             return {
                 ...state,
-                clip : {...state.clip , bought : false},
+                clip: { ...state.clip, bought: false },
                 error: action.payload
             }
         case onlineCourseConstants.CLEAR_LIST_ONLINE_COURSE:
@@ -129,6 +142,7 @@ const onlineCourseReducer = (state = initialState, action) => {
                 ...state,
                 listOnlineTutor: null,
                 listClip: null,
+                newCourse : null,
                 clip: null,
                 data: null,
                 error: null,

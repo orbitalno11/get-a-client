@@ -9,37 +9,39 @@ import { homeActions } from "../../../../../redux/actions"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import Loading from "../../../../loading/Loading"
+import subjectList from "../../../../defaultValue/subjectList"
+import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import SliderComponent from "./SliderComponent"
+import { useHistory } from "react-router"
 
 export default function Home() {
     const dispatch = useDispatch()
     const loading = useSelector(state => state.loading)
     const { offlineCourseRank, onlineCourseRank } = useSelector(state => state.home)
+    const screens = useBreakpoint()
+    const history = useHistory()
 
     useEffect(() => {
-        dispatch(homeActions.getRank())
-        dispatch(homeActions.getRankOnline())
+        dispatch(homeActions.getRank(5))
+        dispatch(homeActions.getRankOnline(5))
     }, [])
 
-    // const renderSlides = () => {
-    //     let size = !screens.xs ? screens.md ? 6 : 5 : 3
-    //     const chunksSubject = chunksArray(subject, size)
-    //     return (
-    //         chunksSubject && chunksSubject.map((item, index) => (
-    //             <div key={index}>
-    //                 {
-    //                     item && item.map((item1, index) => (
-    //                         <Fragment key={index}>
-    //                             <Button className={style.button}>
-    //                                 <FontAwesomeIcon className={style.iconSmall} icon={item1.icon} style={{ backgroundColor: item1.color, fontSize: "10pt" }} />
-    //                                 <p>{item1.subject}</p>
-    //                             </Button>
-    //                         </Fragment>
-    //                     ))
-    //                 }
-    //             </div>
-    //         ))
-    //     )
-    // }
+    const onHandleSearch = (subject) => {
+        history.push(`/search?grade=&subject=${subject}&gender=&type=&location=`)
+    }
+    const data = () => {
+        return (
+            subjectList && subjectList.map((item, index) => {
+                return (
+                    <div className={`${style.fullWidth} ${style.cursor}`} align="center" key={index} onClick={() => onHandleSearch(item.id)} >
+                        <FontAwesomeIcon className={style.iconlarge} icon={item.icon} style={{ backgroundColor: item.color }} />
+                        <p className={style.textOne}>{item.subject}</p>
+                    </div>
+                )
+            })
+        )
+    }
 
     return (
         <Fragment >
@@ -53,40 +55,28 @@ export default function Home() {
                 <div className={style.banner}>
                     ติวเตอร์ที่ใช่ สถานที่ที่ชอบ คุณภาพการสอนที่ลงตัว
                 </div>
-                <div className={style.paddingTop}>
-                    {/* {
-                        screens.lg ?
-                            (
-                                <div className={style.subjectMenu}>
-                                    {
-                                        subject && subject.map((item, index) => {
-                                            return (
-                                                <div key={index} style={{ width: "100px" }}>
-                                                    <Button className={style.button}>
-                                                        <FontAwesomeIcon className={style.iconlarge} icon={item.icon} style={{ backgroundColor: item.color, fontSize: "10pt" }} />
-                                                        <p>{item.subject}</p>
-                                                    </Button>
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            ) :
-                            (
-                                <div className={style.Slide}>
-                                    <SliderComponent dot={true} item={renderSlides()} />
-                                </div>
-                            )
-                    } */}
+                <div className="container">
+                    {
+                        screens.lg ? (
+                            <div className={`${style.subjectMenu} ${style.section}`}>
+                                {data()}
+                            </div>
+                        ) : (
+                            <div className={`${style.section}`}>
+                                <SliderComponent data={data()} />
+                            </div>
+                        )
+                    }
                 </div>
-                <div className={!isMobile() ? "container" : "" }>
+                <div className={!isMobile() ? "container" : ""}>
                     {/* For Offline Course */}
-                    <CourseComponet title="ครูสอนพิเศษยอดนิยม" array={offlineCourseRank} type="course" />
+                    <div className={style.marginSection}>
+                        <CourseComponet title="ครูสอนพิเศษยอดนิยม" array={offlineCourseRank} type="course" />
+                    </div>
                     {/* For Online Course */}
                     <div className={style.marginSection}>
-                    <CourseComponet title="คอร์สเรียนออนไลน์ยอดนิยม" array={onlineCourseRank} type="online" />
+                        <CourseComponet title="คอร์สเรียนออนไลน์ยอดนิยม" array={onlineCourseRank} type="online" />
                     </div>
-                   
                 </div>
             </div>
         </Fragment>

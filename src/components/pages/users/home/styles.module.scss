@@ -1,16 +1,6 @@
 
 @import "../profile/styles.module.scss";
 
-@mixin paddingSide($top,$right,$bottom,$left) {
-    padding :$top $right $bottom $left
-}
-
-.paddingCenter{
-    @extend .body;
-    @extend .centerPage;
-    flex-flow: column
-}
-
 .banner{
     @extend .centerPage;
     height: 22rem;
@@ -32,14 +22,10 @@
     }
 }
 
-.paddingBody{
-    @include paddingSide(2% ,10% ,0 ,10% )
-}
-
 .subjectMenu {
     @extend .horizontalCenter;
     flex-flow: row  ;
-    height: 6.25rem;
+    max-height: 7.25rem;
     margin-top: 1.25rem;
 }
 
@@ -56,11 +42,11 @@
     color: white;
 }
 
-
 .iconlarge{
     @extend .iconSubject;
-    height: 3.75rem !important;
-    width: 3.75rem !important;
+    @extend .textOne ;
+    height: 3.5rem !important;
+    width: 3.5rem !important;
 }
 
 .iconSubjectSmall{
@@ -72,40 +58,6 @@
 
 .flexRow{
     @extend .VerizontalPage;
-    flex-flow: row;
-}
-
-.paddingLeft{
-    padding-left: 1.25rem;
-}
-
-.Slide {
-    text-align: center;
-    width:100%;
-    padding: 2rem;
-}
-
-.paddingTop{
-    padding-top: 2rem;
-}
-
-.paddingTop60{
-    padding-top: 3.75rem;
-}
-
-.scroll {
-    margin: 4px, 4px;
-    padding: 4px;
-    width: 100%;
-    overflow-y: scroll;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
-}
-
-.row{
-    display: flex !important;
     flex-flow: row;
 }
 
@@ -124,6 +76,15 @@
     width: 4rem !important;
 }
 
-.height {
-    height: 100%;
+.paddingCardShow {
+    padding : 0rem 0.5rem 0rem 0.5rem
+}
+
+.paddingListSlider {
+    padding : 0rem 1rem 1rem 1rem
+}
+
+.pageHeader {
+    @extend .textOne5;
+    color : $blue;
 }

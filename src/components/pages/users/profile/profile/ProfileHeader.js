@@ -26,7 +26,7 @@ export default function ProfileHeader({ data, tutorPublic, isTutorInfo, isTutor 
             }
         } else {
             const urlPathNow = encodeURIComponent(window.location.pathname)
-            history.push("/login?path="+urlPathNow)
+            history.push("/login?from="+urlPathNow)
         }
     };
 

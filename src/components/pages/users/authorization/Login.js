@@ -17,7 +17,7 @@ export default function Login() {
     const { loading } = useSelector(state => state)
     const { search } = useLocation()
     const params = new URLSearchParams(search)
-    const path =params.get("path")
+    const path =params.get("from")
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(loginSchema),
     });

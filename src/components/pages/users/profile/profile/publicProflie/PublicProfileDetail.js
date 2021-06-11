@@ -39,7 +39,7 @@ export default function PublicProfileDetail({ isCourse }) {
             }
         } else {
             const urlPathNow = encodeURIComponent(window.location.pathname)
-            history.push("/login?path=" + urlPathNow)
+            history.push("/login?from=" + urlPathNow)
         }
     };
 

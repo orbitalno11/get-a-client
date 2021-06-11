@@ -10,21 +10,14 @@ import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 
 export default function RedeemDetail({onHandleChange}) {
   const { loading } = useSelector((state) => state);
-
   const rateRedeem = useSelector((state) => state.coin.rateCoin);
   const balanceCoin = useSelector((state) => state.coin.balance);
-
   const bahtStd = !isEmpty(rateRedeem) && rateRedeem[0].baht
   const coinStd = !isEmpty(rateRedeem) && rateRedeem[0].coin
-
-
   const amount = balanceCoin&& balanceCoin.amount
-
-  const bahtTranfer = ((Number(amount) * Number(bahtStd))/Number(coinStd)).toFixed(2)
-
-  const bahtShow = bahtTranfer && bahtTranfer.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  const bahtTranfer = (Math.round((Number(amount) + Number.EPSILON) * 100) / 100)
   const amountShow = Number(amount).toLocaleString()
-
+  const bahtShow =  Number(bahtTranfer).toLocaleString()
 
   return (
     <Fragment>

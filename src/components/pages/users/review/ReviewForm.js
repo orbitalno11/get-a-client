@@ -114,7 +114,7 @@ export default function ReviewForm({ idReview }) {
         <div align="center">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                    <span className={style.headerTwo5}>ความคิดเห็น</span>
+                    <span className={style.headerTwo5}>{isEmpty(myReview) ? "แสดง" : "แก้ไข"}ความคิดเห็น</span>
                 </div>
                 <Controller
                     as={

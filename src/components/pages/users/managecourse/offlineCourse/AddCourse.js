@@ -18,6 +18,7 @@ import Loading from "../../../../loading/Loading";
 import TimeField from 'react-simple-timefield';
 import { styleComponent } from "../../../../defaultFunction/style";
 import { color } from "../../../../defaultValue";
+import { useHistory } from "react-router-dom";
 const { useBreakpoint } = Grid;
 
 export default function AddCourse() {
@@ -27,6 +28,7 @@ export default function AddCourse() {
   const dataDetaill = offlineCourse.data && offlineCourse.data
   const param = useParams();
   const { id } = param
+  const history = useHistory()
 
   const { register, handleSubmit, errors, control, reset } = useForm({
     resolver: yupResolver(courseSchema),
@@ -264,8 +266,7 @@ export default function AddCourse() {
                 <Button
                   className={`${style.buttonColor} ${style.textOne25} ${style.marginLeftOne}`}
                   style={styleComponent.buttonFull(color.blue, "5rem")}
-                  onClick={() => { id && resetEditInput() }}
-                  htmlType={id ? "button" : "reset"}>
+                  onClick={()=> history.goBack()}>
                   ยกเลิก
                 </Button>
               </Col>

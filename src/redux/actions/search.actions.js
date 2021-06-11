@@ -1,7 +1,6 @@
 import { searchConstants } from "../constants"
 import { loadingActions } from "./loading.actions"
 import { apiURL } from "../../utils/setAxios"
-import isEmpty from "../../components/defaultFunction/checkEmptyObject"
 
 function getSearch({ data, redirectPath, typeFocus, type }) {
     return dispatch => {
@@ -26,7 +25,7 @@ function getSearch({ data, redirectPath, typeFocus, type }) {
                         resultSearch: result,
                         type: type ? type : "N/A",
                         typeFocus: typeFocus,
-                        location: data && !isEmpty(data.location)
+                        location: data.location
                     }))
                 }
             })

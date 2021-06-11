@@ -27,7 +27,7 @@ export default function CardCourseTutor({ data, search }) {
                 <span className={`${styles.textTwo} ${styles.textOneLine}`}>{data.name}</span>
             </Col>
             <Col span={8}>
-                <div className={`${styles.textTwo} ${styles.textOneLine} ${styles.floatRight}`}>
+                <div className={`${styles.textTwo} ${styles.textOneLine}`} align="end">
                     <FontAwesomeIcon icon={faStar} className={`${styles.icon} ${styles.colorYellow} ${styles.textOne75}`} />
                     <span className={`${styles.textTwo} ${styles.marginLeftOneHalf}`}>
                         {data.rating}

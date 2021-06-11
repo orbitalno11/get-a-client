@@ -44,7 +44,7 @@ import Profile from "./components/pages/users/profile/profile/Profile";
 import PubilcProfileCourse from "./components/pages/users/profile/profile/publicProflie/PubilcProfileCourse";
 import PubilcProfile from "./components/pages/users/profile/profile/publicProflie/PubilcProfile";
 import ClipList from "./components/pages/users/managecourse/onlineCourse/ClipList";
-
+import ScrollToTop from "./components/ScrollToTop"
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
@@ -60,13 +60,14 @@ if (localStorage.token) {
 }
 
 function App() {
-  
+
   const admin = store.getState().auth.role === defaultValue.userRole["admin"]
   const tutor = store.getState().auth.role === defaultValue.userRole["tutor"]
 
   return (
     <Provider store={store}>
       <Router>
+      <ScrollToTop />
         {
           !admin && <NavMenu />
         }

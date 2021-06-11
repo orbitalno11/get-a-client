@@ -166,7 +166,7 @@ export default function ManageClip() {
                     (!isEmpty(profileAccount) && isAuthenticated) ? (
                       <Row align="middle">
                         <Col>
-                          <Image src={profileAccount.profileUrl} className={style.imageProfileSmall} preview={false} />
+                          <Image src={profileAccount.profileUrl} className={style.imageProfileVideo} preview={false} />
                         </Col>
                         <Col className={`${style.marginLeftOneHalf} ${style.textOne25}`}>
                           <span>{profileAccount.fullNameText}</span>
@@ -190,7 +190,7 @@ export default function ManageClip() {
               )
             }
           </Col>
-          <Col xl={8} lg={8} md={24} sm={24} xs={24}>
+          <Col className={!screens.lg && style.paddingBottomBody} xl={8} lg={8} md={24} sm={24} xs={24} >
             <Col className={`${screens.md && style.section} ${style.marginSection}`} span={24}>
               <span className={style.headerOne75}>รีวิวจากผู้เรียนจริง</span>
             </Col>

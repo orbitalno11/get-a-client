@@ -224,11 +224,6 @@ input :focus{
     font-size: 13px;
   }
 
-  .image-person {
-    height: 7.5rem;
-    width: 7.5rem;
-  }
-
   .input-form{
     width: 60%;
   }

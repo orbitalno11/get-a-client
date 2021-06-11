@@ -44,7 +44,7 @@ export default function Course() {
             dispatch(onlineCourseActions.getOnlineCourse(idCourse))
         }
 
-        if (!owner) {
+        if (!isEmpty(course?.owner?.id) && !owner) {
             trackImpress()
         }
 

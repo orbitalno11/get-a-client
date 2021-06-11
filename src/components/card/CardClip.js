@@ -19,7 +19,7 @@ export default function CardClip({ data, isOwner, all }) {
     }
 
     return (
-        <Row className={(isMobile()) ? `${styles.card} ${styles.paddingOne}` : styles.fullWidth} onClick={() => redirectClipPage()} style={fixHeight}>
+        <Row className={`${(isMobile()) && `${styles.card} ${styles.paddingOne}`} ${styles.fullWidth}` } onClick={() => redirectClipPage()} style={fixHeight}>
             <Col span={all ? 17 : 24}>
                 <span className={`${styles.textTwo} ${styles.textOneLine}`}>{data.name}</span>
             </Col>

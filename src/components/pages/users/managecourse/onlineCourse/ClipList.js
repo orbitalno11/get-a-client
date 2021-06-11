@@ -19,6 +19,8 @@ import { useState } from "react"
 import CardClip from "../../../../card/CardClip"
 import EmptyImage from "../../../../loading/EmptyImage"
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
+import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function ClipList() {
     const dispatch = useDispatch()
@@ -101,12 +103,12 @@ export default function ClipList() {
                             </Col>
                         )
                     }
-                    <Col xl={15} lg={15} md={24}>
+                    <Col xl={15} lg={15} md={24} sm={24} xs={24}>
                         {
                             role !== 1 && (
                                 <Row align="middle" className={`${!isMobile() && style.section} ${!isMobile() && style.marginSection}`}>
                                     {
-                                        !isMobile() && (
+                                        !isMobile() ? (
                                             <Fragment>
                                                 <Col span={20}>
                                                     <span className={style.headerTwo5} style={{ color: color.orange }}>วิดิโอทั้งหมด</span>
@@ -121,6 +123,12 @@ export default function ClipList() {
                                                     )
                                                 }
                                             </Fragment>
+                                        ) : (
+                                            <Link to={`/tutor/online/${courseId}/video/create`}>
+                                                <button className={style.buttonfixbottom} >
+                                                    <FontAwesomeIcon icon={faPlus} />
+                                                </button>
+                                            </Link>
                                         )
                                     }
                                 </Row>

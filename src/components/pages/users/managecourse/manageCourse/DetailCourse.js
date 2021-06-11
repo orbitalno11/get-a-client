@@ -4,8 +4,9 @@ import {
     faBook,
     faBookReader,
     faClock,
+    faEye,
     faStar,
-    faUserFriends,
+    faUsers,
     faVideo,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -99,7 +100,7 @@ export default function DetailCourse() {
                                 )
                             }
                             <Col xs={24} md={12} xl={isOfflineCourse ? 6 : 8} className={style.paddingTopOneHalf}>
-                                <FontAwesomeIcon icon={faUserFriends} className={style.iconmarker} />
+                                <FontAwesomeIcon icon={isOfflineCourse ? faUsers : faEye} className={style.iconmarker} />
                                 {textCheckNull(isOfflineCourse ? (course?.studentNumber) : (course?.numberOfView))}
                             </Col>
                             <Col xs={24} md={12} xl={isOfflineCourse ? 6 : 8} className={style.paddingTopOneHalf}>

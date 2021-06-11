@@ -31,7 +31,7 @@ export default function Edit({dataRate}) {
   }, [dataRate])
 
   const dispatch = useDispatch();
-  const today = moment().format("MM/DD/YYYY")
+  // const today = moment().format("MM/DD/YYYY")
   const onSubmit = (data) => {
     if(data){
       if(dataRate.type != "transfer"){
@@ -42,7 +42,7 @@ export default function Edit({dataRate}) {
           "type": "std",
           "startDate":data.startDate,
           "endDate": data.endDate,
-          "updtaeDate":today,
+          "updtaeDate":data.startDate,
         }
         dispatch(modalAction.closeModal())
         dispatch(coinAction.updateCoinRate(dataRate.id,cost))
@@ -54,7 +54,7 @@ export default function Edit({dataRate}) {
           "type": "transfer",
           "startDate":data.startDate,
           "endDate": data.endDate,
-          "updtaeDate":today,
+          "updtaeDate":data.startDate,
         }
         dispatch(modalAction.closeModal())
         dispatch(coinAction.updateCoinRate(dataRate.id,rate))
@@ -187,7 +187,7 @@ export default function Edit({dataRate}) {
         className="backgroundOrange buttonColor"
         shape="round"
         size="middle"
-        style={{ width: "60px" }}
+        style={{ width: "50px" }}
         icon={<FontAwesomeIcon icon={faPen} style={{ color: "white" }} />}
       >
       </Button>

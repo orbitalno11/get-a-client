@@ -1,4 +1,4 @@
-import { Row, Col, Button , DatePicker } from "antd";
+import { Row, Col, Button , DatePicker} from "antd";
 import React, { Fragment, useEffect } from "react";
 import { useForm , Controller } from "react-hook-form";
 import { exchangeSchema } from "../../../../../../validation/admin/exchangeSchema";
@@ -17,7 +17,9 @@ import Edit from "./Edit";
 import Delete from "./Delete";
 import moment from "moment";
 
+
 export default function CreatePrice({type}) {
+
   const { register, handleSubmit, errors ,control} = useForm({
     resolver: yupResolver(exchangeSchema),
   });
@@ -248,13 +250,19 @@ export default function CreatePrice({type}) {
         <table className={style.tablecoins}>
           <thead>
             <tr>
-              <th span={8} className={style.textOne5}>
+              <th span={5} className={style.textOne5}>
+                วันที่เริ่มต้น
+              </th>
+              <th span={5} className={style.textOne5}>
+                วันที่สิ้นสุด
+              </th>
+              <th span={3} className={style.textOne5}>
                 จำนวนเงิน (บาท)
               </th>
-              <th span={8} className={style.textOne5}>
+              <th span={3} className={style.textOne5}>
                 จำนวนเหรียญ
               </th>
-              <th span={8} className={style.textOne5}>
+              <th span={4} className={style.textOne5}>
                 การจัดการ
               </th>
             </tr>
@@ -266,6 +274,8 @@ export default function CreatePrice({type}) {
                 .filter((data) => data.type === "std")
                 .map((data, index) => (
                   <tr style={{ width: "1rem" }} key={index}>
+                    <td className={style.textOne5}>{moment(data.startDate).format("DD/MM/YYYY")}</td>
+                    <td className={style.textOne5}>{moment(data.endDate).format("DD/MM/YYYY")}</td>
                     <td className={style.textOne5}>{data && data.baht} </td>
                     <td className={style.textOne5}>{data && data.coin}</td>
                     <td>
@@ -278,7 +288,7 @@ export default function CreatePrice({type}) {
                           className="backgroundGreen buttonColor"
                           shape="round"
                           size="middle"
-                          style={{ width: "60px" }}
+                          style={{ width: "50px" }}
                           icon={
                             <FontAwesomeIcon
                               icon={faPowerOff}
@@ -292,7 +302,7 @@ export default function CreatePrice({type}) {
                           className="backgroundGray buttonColor"
                           shape="round"
                           size="middle"
-                          style={{ width: "60px" }}
+                          style={{ width: "50px" }}
                           icon={
                             <FontAwesomeIcon
                               icon={faPowerOff}
@@ -312,7 +322,9 @@ export default function CreatePrice({type}) {
               list
                 .filter((data) => data.type === "transfer")
                 .map((data, index) => (
-                  <tr style={{ width: "1rem" }} key={index}>
+                  <tr key={index}>
+                    <td className={style.textOne5}>{moment(data.startDate).format("DD/MM/YYYY")}</td>
+                    <td className={style.textOne5}>{moment(data.endDate).format("DD/MM/YYYY")}</td>
                     <td className={style.textOne5}>{data && data.baht} </td>
                     <td className={style.textOne5}>{data && data.coin}</td>
                     <td>

@@ -10,7 +10,8 @@ import style from "../styles.module.scss";
 import { useSelector } from "react-redux"
 
 export default function ButtonReview({ owner, isOfflineCourse, handleOpenReviewForm, enrollCourse, learn_status, showReview, switchComponent, typeShow }) {
-    const { type, id } = useParams()
+    const { id } = useParams()
+    const type = window.location.pathname.split("/")[1] 
     const screens = useBreakpoint();
     const { loading } = useSelector(state => state.loading)
     return (

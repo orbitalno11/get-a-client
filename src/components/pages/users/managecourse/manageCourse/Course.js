@@ -33,7 +33,8 @@ export default function Course() {
     const dispatch = useDispatch()
     const screens = useBreakpoint();
     const params = useParams();
-    const isOfflineCourse = params.type === "course"
+    const type = window.location.pathname.split("/")[1] 
+    const isOfflineCourse = type === "course"
     const learn_status = (auth.role === 1 && course && isOfflineCourse) ? course.enrolled : false
     const idCourse = params.id
     const myReview = !isEmpty(reviews) ? reviews.filter(value => value.reviewer.id === auth.profile)[0] : []
@@ -168,7 +169,7 @@ export default function Course() {
 
     return (
         <Fragment>
-            {isMobile() && <Header pageBack={!owner ? "goback" : `/tutor/${params.type}`} />}
+            {isMobile() && <Header pageBack={!owner ? "goback" : `/tutor/${type}`} />}
             <ModalComponent />
             <div className="container">
                 <Row className={style.bodyPaddingTopBottom} justify="space-between" style={{ paddingBottom: "7.5rem" }}>

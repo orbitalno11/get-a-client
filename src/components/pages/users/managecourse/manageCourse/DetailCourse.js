@@ -18,12 +18,11 @@ import { color } from "../../../../defaultValue";
 import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useParams } from "react-router";
 import { styleComponent } from "../../../../defaultFunction/style";
 const { useBreakpoint } = Grid;
 
 export default function DetailCourse() {
-    const { type } = useParams();
+    const type = window.location.pathname.split("/")[1] 
     const [course, setCourse] = useState()
     const { onlineCourse, offlineCourse } = useSelector(state => state)
     const owner = !isEmpty(course) && course.owner

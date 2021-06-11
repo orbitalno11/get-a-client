@@ -19,6 +19,7 @@ import moment from "moment";
 
 
 export default function CreatePrice({type}) {
+
   const { register, handleSubmit, errors ,control} = useForm({
     resolver: yupResolver(exchangeSchema),
   });

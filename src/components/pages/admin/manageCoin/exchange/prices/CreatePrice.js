@@ -250,19 +250,16 @@ export default function CreatePrice({type}) {
         <table className={style.tablecoins}>
           <thead>
             <tr>
-              <th span={5} className={style.textOne5}>
-                วันที่เริ่มต้น
-              </th>
-              <th span={5} className={style.textOne5}>
+              <th span={4} className={style.textOne5}>
                 วันที่สิ้นสุด
               </th>
-              <th span={3} className={style.textOne5}>
+              <th span={5} className={style.textOne5}>
                 จำนวนเงิน (บาท)
               </th>
-              <th span={3} className={style.textOne5}>
+              <th span={5} className={style.textOne5}>
                 จำนวนเหรียญ
               </th>
-              <th span={4} className={style.textOne5}>
+              <th span={10} className={style.textOne5}>
                 การจัดการ
               </th>
             </tr>
@@ -274,7 +271,6 @@ export default function CreatePrice({type}) {
                 .filter((data) => data.type === "std")
                 .map((data, index) => (
                   <tr style={{ width: "1rem" }} key={index}>
-                    <td className={style.textOne5}>{moment(data.startDate).format("DD/MM/YYYY")}</td>
                     <td className={style.textOne5}>{moment(data.endDate).format("DD/MM/YYYY")}</td>
                     <td className={style.textOne5}>{data && data.baht} </td>
                     <td className={style.textOne5}>{data && data.coin}</td>
@@ -323,7 +319,6 @@ export default function CreatePrice({type}) {
                 .filter((data) => data.type === "transfer")
                 .map((data, index) => (
                   <tr key={index}>
-                    <td className={style.textOne5}>{moment(data.startDate).format("DD/MM/YYYY")}</td>
                     <td className={style.textOne5}>{moment(data.endDate).format("DD/MM/YYYY")}</td>
                     <td className={style.textOne5}>{data && data.baht} </td>
                     <td className={style.textOne5}>{data && data.coin}</td>

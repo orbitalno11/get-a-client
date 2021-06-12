@@ -1,19 +1,24 @@
 import axios from 'axios'
-import { BASE_API_URL, LONGDO_MAP_URL } from "../config/environmentConfig"
+import { BASE_API_URL, LONGDO_MAP_URL, API_ENDPOINT } from "../config/environmentConfig"
 
 let apiGetA = axios.create({
     baseURL: BASE_API_URL,
     withCredentials: true
-  })
+})
+
+let apiGetAData = axios.create({
+    baseURL: API_ENDPOINT,
+    withCredentials: true
+})
 
 let apiMap = axios.create({
-    baseURL : LONGDO_MAP_URL,
+    baseURL: LONGDO_MAP_URL,
     timeout: 10000
 })
 
 export const setAuthToken = token => {
     if (token) {
-        apiGetA.defaults.headers.common['Authorization'] = "Bearer "+token;
+        apiGetA.defaults.headers.common['Authorization'] = "Bearer " + token;
     } else {
         delete apiGetA.defaults.headers.common['Authorization'];
     }
@@ -22,5 +27,6 @@ export const setAuthToken = token => {
 
 export const apiURL = {
     apiGetA,
-    apiMap
+    apiMap,
+    apiGetAData
 }

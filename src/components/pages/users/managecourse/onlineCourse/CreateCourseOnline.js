@@ -20,7 +20,6 @@ import resizeImage from "../../../../defaultFunction/resizeImage";
 import { color, defaultValue } from "../../../../defaultValue";
 import Header from "../../../../headerMobile/Header";
 import { useParams } from "react-router";
-import findKeyObject from "../../../../defaultFunction/findKeyObject";
 import { styleComponent } from "../../../../defaultFunction/style";
 
 export default function CreateCourseOnline() {
@@ -45,8 +44,8 @@ export default function CreateCourseOnline() {
     if (id?.isSafeNotBlank()) {
       reset({
         name: dataCourse.data.name,
-        grade: findKeyObject(defaultValue.grade, dataCourse.data.grade.grade),
-        subject: findKeyObject(defaultValue.subject, dataCourse.data.subject.id),
+        grade: dataCourse.data.grade.grade,
+        subject: dataCourse.data.subject.id,
       })
       setimage({ imageURL: dataCourse.data.coverUrl })
     } else {
@@ -57,13 +56,6 @@ export default function CreateCourseOnline() {
   useEffect(() => {
     if (id?.isSafeNotBlank() && dataCourse.data) {
       resetEditInput()
-    } else {
-      reset({
-        name: "",
-        grade: "ม.4",
-        subject: "คณิตศาสตร์"
-      })
-
     }
   }, [dataCourse])
 
@@ -83,13 +75,12 @@ export default function CreateCourseOnline() {
       }
     }
   }
-  
   const onSubmit = (data) => {
     if (data) {
       let formdata = new FormData()
       formdata.append("name", data.name)
-      formdata.append("grade", defaultValue.grade[data.grade])
-      formdata.append("subject", defaultValue.subject[data.subject])
+      formdata.append("grade", data.grade)
+      formdata.append("subject", data.subject)
 
       if (image.file) {
         formdata.append("image", image.file)
@@ -137,17 +128,17 @@ export default function CreateCourseOnline() {
                     <Controller
                       as={
                         <Select name="grade">
-                          {defaultValue.grade &&
-                            Object.entries(defaultValue.grade).map(([key, value]) => (
-                              <Select.Option key={value} value={key}>
-                                {key}
-                              </Select.Option>
-                            ))}
+                          {
+                            defaultValue.grade && Object.entries(defaultValue.grade).map(([key, value]) => (
+                              <Select.Option key={value} value={value}>{key}</Select.Option>
+                            ))
+                          }
                         </Select>
                       }
                       name="grade"
                       control={control}
-                      defaultValue=""
+                      placeholder="ระดับชั้น"
+                      defaultValue={null}
                     />
                     {errors.grade && (
                       <p className="error-input">{errors.grade.message}</p>
@@ -158,16 +149,17 @@ export default function CreateCourseOnline() {
                     <Controller
                       as={
                         <Select name="subject" disabled={id ? true : false}>
-                          {defaultValue.subject &&
-                            Object.entries(defaultValue.subject).map(([key, value]) => (
-                              <Select.Option key={value} value={key}>{key}
-                              </Select.Option>
-                            ))}
+                          {
+                            defaultValue.subject && Object.entries(defaultValue.subject).map(([key, value]) => (
+                              <Select.Option key={value} value={value}>{key}</Select.Option>
+                            ))
+                          }
                         </Select>
                       }
                       name="subject"
                       control={control}
-                      defaultValue=""
+                      placeholder="วิชา"
+                      defaultValue={null}
                     />
                     {errors.subject && (
                       <p className="error-input">{errors.subject.message}</p>
@@ -195,14 +187,14 @@ export default function CreateCourseOnline() {
                   style={styleComponent.buttonFull(color.orange, "5rem")}
                   htmlType="submit">
                   บันทึก
-              </Button>
+                </Button>
                 <Button
                   className={`${style.buttonColor} ${style.textOne25} ${style.marginLeftOne}`}
                   style={styleComponent.buttonFull(color.blue, "5rem")}
                   onClick={() => { resetEditInput() }}
                   htmlType={id ? "button" : "reset"}>
                   ยกเลิก
-              </Button>
+                </Button>
               </Col>
             </Row>
           </div>

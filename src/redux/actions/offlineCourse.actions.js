@@ -54,7 +54,6 @@ function createOfflineCourse(data) {
                     text: "สร้างคอร์สเรียนไม่สำเร็จ",
                     size: sizeModal.small,
                     alert: typeModal.wrong,
-                    afterClose: "/tutor/course"
                 }))
             })
     }

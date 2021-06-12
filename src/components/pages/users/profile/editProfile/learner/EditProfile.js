@@ -164,7 +164,7 @@ export default function EditProfile() {
                                             name="grade"
                                             placeholder="ระดับชั้น"
                                             control={control}
-                                            defaultValue={1}
+                                            defaultValue={null}
                                         />
                                         {
                                             errors && errors.grade && <p className="error-input">{errors.grade.message}</p>

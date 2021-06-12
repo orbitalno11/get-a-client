@@ -63,7 +63,7 @@ export default function ReviewForm({ idReview }) {
     const dispatch = useDispatch()
     const { loading } = useSelector(state => state.loading)
     const { review, modal, offlineCourse } = useSelector(state => state)
-    const myReview = review.reviews && review.reviews.filter((item) => item.owner === true)[0]
+    const myReview = review?.reviews?.data && review?.reviews?.data.find((item) => item.owner === true)
     const { register, handleSubmit, errors, control, reset } = useForm({
         resolver: yupResolver(reviewSchema),
     });

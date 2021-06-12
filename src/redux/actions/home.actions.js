@@ -12,6 +12,7 @@ function getRank(number) {
         }).then((res) => {
             if (res.data.success) {
                 const data = res.data.data
+                console.log(res.data.data)
                 dispatch(success(data))
                 dispatch(loadingActions.stopLoading())
             }

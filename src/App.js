@@ -101,7 +101,8 @@ function App() {
           <Route exact path="/register/:type" component={RegisterForm} />
           <Route exact path="/profile/:id/course" component={PubilcProfileCourse} />
           <Route exact path="/profile/:id" component={PubilcProfile} />
-          <Route exact path="/:type/:id" component={Course} />
+          <Route exact path="/course/:id" component={Course} />
+          <Route exact path="/online/:id" component={Course} />
           <Route exact path="/search" component={Search} />
           <Route exact path="/course/online/:courseId/video" component={ClipList} />
           <Route exact path="/online/:courseId/video/:videoId" component={VDO} />

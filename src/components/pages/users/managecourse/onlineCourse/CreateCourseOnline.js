@@ -21,6 +21,7 @@ import { color, defaultValue } from "../../../../defaultValue";
 import Header from "../../../../headerMobile/Header";
 import { useParams } from "react-router";
 import { styleComponent } from "../../../../defaultFunction/style";
+import { useHistory } from "react-router-dom";
 
 export default function CreateCourseOnline() {
   const dispatch = useDispatch()
@@ -28,6 +29,7 @@ export default function CreateCourseOnline() {
   const dataCourse = useSelector(state => state.onlineCourse)
   const [image, setimage] = useState(titleOnlineCourse)
   const { id } = useParams()
+  const history = useHistory()
 
   const { register, handleSubmit, errors, control, reset } = useForm({
     resolver: yupResolver(courseClipSchema(id ? true : false)),
@@ -191,8 +193,7 @@ export default function CreateCourseOnline() {
                 <Button
                   className={`${style.buttonColor} ${style.textOne25} ${style.marginLeftOne}`}
                   style={styleComponent.buttonFull(color.blue, "5rem")}
-                  onClick={() => { resetEditInput() }}
-                  htmlType={id ? "button" : "reset"}>
+                  onClick={()=> history.goBack()}>
                   ยกเลิก
                 </Button>
               </Col>

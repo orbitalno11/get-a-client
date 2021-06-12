@@ -1,4 +1,4 @@
-import { faMapMarkerAlt, faStar, faUser } from "@fortawesome/free-solid-svg-icons"
+import { faMapMarkerAlt, faStar, faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Row, Col, Button } from "antd"
 import React from 'react'
@@ -85,7 +85,7 @@ export default function PublicProfileDetail({ isCourse }) {
                 }
                 <Row className={style.marginSection} align="middle" >
                     <Col span={3}>
-                        <FontAwesomeIcon className={`${style.iconGray} ${style.marginLeftOneHalf}`} icon={faUser} />
+                        <FontAwesomeIcon className={`${style.iconGray} ${style.marginLeftOneHalf}`} icon={faUsers} />
                     </Col>
                     <Col className={style.marginLeftOne} span={19}>
                         <span className={style.textOne25}>

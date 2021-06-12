@@ -17,6 +17,7 @@ import ModalComponent from "../../../../modal/ModalComponent";
 import { useEffect } from "react";
 import { styleComponent } from "../../../../defaultFunction/style";
 import { color } from "../../../../defaultValue";
+import { useHistory } from "react-router-dom";
 const { useBreakpoint } = Grid;
 
 export default function AddClip() {
@@ -26,6 +27,7 @@ export default function AddClip() {
   const { courseId, videoId } = useParams()
   const { loading } = useSelector(state => state.loading)
   const [vdo, setVdo] = useState(null)
+  const history = useHistory()
 
   const { register, handleSubmit, errors, reset } = useForm({
     resolver: yupResolver(clipSchema(videoId ? true : false)),
@@ -173,8 +175,7 @@ export default function AddClip() {
                 <Button
                   className={`${style.buttonColor} ${style.textOne25} ${style.marginLeftOne}`}
                   style={styleComponent.buttonFull(color.blue, "5rem")}
-                  onClick={() => { resetEditInput() }}
-                  htmlType={videoId ? "button" : "reset"}>
+                  onClick={()=> history.goBack()}>
                   ยกเลิก
               </Button>
               </Col>

@@ -81,11 +81,6 @@ $gray3 : "#828282";
     @extend .paddingBottomBody;
 }
 
-.bodymobileprofile{
-    @extend .paddingbody;
-    @extend .paddingBottomBody;
-}
-
 .bodyPaddingTopBottom{
     @extend .paddingTopBody;
     @extend .paddingBottomBody;
@@ -130,14 +125,6 @@ $gray3 : "#828282";
     cursor: pointer;
 }
 
-.borderImage{
-    border: 0.15rem solid  !important;
-    border-color : $orange !important;
-    border-radius: 0.75rem;
-    padding : 0.5rem;
-    background-color: rgba($color: $gray, $alpha: 0.22);
-}
-
 .a4Image {
   width: 13rem !important;
   height: 16rem !important;
@@ -148,13 +135,6 @@ $gray3 : "#828282";
 
     @media only screen and (max-width: 768px){
         padding:  6.25rem 1.5rem 4rem 1.5rem;
-    }
-}
-
-.containerSection {
-    padding: 0 7.5rem 0 7.5rem;
-    @media only screen and (max-width: 768px){
-        padding:  0 1.5rem 0 1.5rem;
     }
 }
 
@@ -205,11 +185,6 @@ $gray3 : "#828282";
 .marginLeftOneHalf {
     margin-left: 0.5rem;
 }
-
-.a4ImageSm {
-    width: 9rem !important;
-    height: 13rem !important;
-  }
 
 // new font 
 
@@ -357,10 +332,6 @@ $gray3 : "#828282";
 .textOneLine {
     @include cutText(1)
   }
-  
-.textLineHeight { 
-    line-height: 90%;
-}
   
 // new icon
 

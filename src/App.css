@@ -70,7 +70,8 @@
   font-size: 1.25rem;
 }
 
-input :focus{
+input :focus,
+.ant-modal-close{
   outline: none !important
 }
 

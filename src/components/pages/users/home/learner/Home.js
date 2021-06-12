@@ -14,6 +14,7 @@ import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import SliderComponent from "./SliderComponent"
 import { useHistory } from "react-router"
+import {serverSocket} from "../../../../../utils/socket";
 
 export default function Home() {
     const dispatch = useDispatch()
@@ -22,7 +23,17 @@ export default function Home() {
     const screens = useBreakpoint()
     const history = useHistory()
 
+    let params = new URLSearchParams(window.location.search)
+
     useEffect(() => {
+        const tId = params.get("tid")
+        // send transaction to server
+        serverSocket.emit("observe-payment", tId)
+
+        // receive payment result from server
+        serverSocket.on("payment-result", (data) => {
+            // TODO do something with data
+        })
         dispatch(homeActions.getRank(5))
         dispatch(homeActions.getRankOnline(5))
     }, [])

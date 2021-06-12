@@ -3,7 +3,7 @@ import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import style from "../styles.module.scss";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Header from "../../../../headerMobile/Header";
 import ModalComponent from "../../../../modal/ModalComponent";
 import AllReview from "../../review/AllReview";
@@ -13,7 +13,7 @@ import ReviewForm from "../../review/ReviewForm";
 import { sizeModal } from "../../../../modal/SizeModal";
 import isMobile from "../../../../isMobile/isMobile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMobileAlt} from "@fortawesome/free-solid-svg-icons";
+import { faMobileAlt } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import FormEnroll from "./FormEnroll";
 import { SkeletonComponent } from "../../../../loading/SkeletonComponent";
@@ -38,6 +38,8 @@ export default function Course() {
     const learn_status = (auth.role === 1 && course && isOfflineCourse) ? course.enrolled : false
     const idCourse = params.id
     const myReview = !isEmpty(reviews) ? reviews.filter(value => value.reviewer.id === auth.profile)[0] : []
+    const history = useHistory()
+    
     useEffect(() => {
         if (isOfflineCourse) {
             dispatch(offlineCourseAction.getOfflineCourse(idCourse))
@@ -72,7 +74,8 @@ export default function Course() {
 
     const enrollCourse = () => {
         if (!auth.isAuthenticated) {
-            window.location.href = "/login"
+            const urlPathNow = encodeURIComponent(window.location.pathname)
+            history.push("/login?from=" + urlPathNow)
         } else {
             const dataEnroll = course && {
                 id: course.id,
@@ -101,7 +104,7 @@ export default function Course() {
             <div className={`${style.marginSection}`}>
                 {/* online */}
                 {
-                    screens.lg  && (
+                    screens.lg && (
                         <ButtonReview
                             owner={owner}
                             isOfflineCourse={isOfflineCourse}
@@ -136,7 +139,7 @@ export default function Course() {
                                             size="middle"
                                             style={styleComponent.buttonFull(color.blue)}>
                                             ดูข้อมูลครูสอนพิเศษเพิ่มเติม
-                                    </Button>
+                                        </Button>
                                     </Link>
                                 </div>
                             )
@@ -174,7 +177,7 @@ export default function Course() {
             <div className="container">
                 <Row className={style.bodyPaddingTopBottom} justify="space-between" style={{ paddingBottom: "7.5rem" }}>
                     <Col className={`${!isMobile() && style.section}`} xl={24} lg={24} md={24} sm={24} xs={24} >
-                     <DetailCourse />
+                        <DetailCourse />
                     </Col>
                     <Col xl={15} lg={15} md={24} sm={24} xs={24} id="switchComponent" >
                         {

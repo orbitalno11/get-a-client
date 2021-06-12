@@ -20,6 +20,7 @@ import { useSelector } from "react-redux";
 import Loading from "../../../loading/Loading";
 import { useHistory } from "react-router";
 import findKeyObject from "../../../defaultFunction/findKeyObject";
+import { loadingActions } from "../../../../redux/actions/loading.actions";
 
 const { useBreakpoint } = Grid;
 
@@ -46,14 +47,18 @@ export default function Search() {
                 }
             })
             setGeolocation({
+                request: true,
                 data: dataAddress.data.geocode.substring(0, 4),
                 success: true
             })
         } catch {
             setGeolocation({
+                request: true,
                 data: null,
                 success: true
             })
+        } finally{
+            dispatch(loadingActions.stopLoading())
         }
     }
 
@@ -75,61 +80,64 @@ export default function Search() {
     }, [])
 
     useEffect(() => {
+        dispatch(loadingActions.startLoading())
         if (!isEmpty(currentLocation)) {
             getGeolocation()
         }
     }, [currentLocation])
 
     useEffect(() => {
-        if (params.has("type")) {
-            const formData = {
-                grade: !isEmpty(params.get("grade")) && Number(params.get("grade")),
-                subject: params.get("subject"),
-                gender: !isEmpty(params.get("gender")) && Number(params.get("gender")),
-                type: !isEmpty(params.get("type")) && Number(params.get("type")),
-                location: !isEmpty(params.get("location")) && Number(params.get("location")),
+        if (!isEmpty(geolocation?.request)) {
+            if (params.has("type")) {
+                const formData = {
+                    grade: !isEmpty(params.get("grade")) && Number(params.get("grade")),
+                    subject: params.get("subject"),
+                    gender: !isEmpty(params.get("gender")) && Number(params.get("gender")),
+                    type: !isEmpty(params.get("type")) && Number(params.get("type")),
+                    location: !isEmpty(params.get("location")) && Number(params.get("location")),
+                }
+
+                reset({
+                    grade: findKeyObject(defaultValue.grade, formData.grade) ? findKeyObject(defaultValue.grade, formData.grade) : "ไม่ระบุ",
+                    subject: findKeyObject(defaultValue.subject, formData.subject) ? findKeyObject(defaultValue.subject, formData.subject) : "ไม่ระบุ",
+                    gender: findKeyObject(defaultValue.gender, formData.gender) ? findKeyObject(defaultValue.gender, formData.gender) : "ไม่ระบุ",
+                    courseType: findKeyObject(defaultValue.typeCourse, formData.type) ? findKeyObject(defaultValue.typeCourse, formData.type) : "ไม่ระบุ",
+                })
+
+                dispatch(searchActions.getSearch({
+                    data: formData,
+                    redirectPath: "/search",
+                    limit: 5,
+                    type: formData.type
+                }))
+            } else {
+                const formData = {
+                    grade: null,
+                    subject: null,
+                    gender: null,
+                    type: null,
+                    location: (currentLocation.permission && geolocation.success) ? geolocation.data : null,
+                }
+
+                reset({
+                    grade: "ไม่ระบุ",
+                    subject: "ไม่ระบุ",
+                    gender: "ไม่ระบุ",
+                    courseType: "ไม่ระบุ",
+                })
+
+                dispatch(searchActions.getSearch({
+                    data: formData,
+                    redirectPath: "/search",
+                    limit: 5,
+                    type: formData.type
+                }))
             }
-
-            reset({
-                grade: findKeyObject(defaultValue.grade, formData.grade) ? formData.grade : "N/A",
-                subject: findKeyObject(defaultValue.subject, formData.subject) ? formData.subject : "N/A",
-                gender: findKeyObject(defaultValue.gender, formData.gender) ? findKeyObject(defaultValue.gender, formData.gender) : "ไม่ระบุ",
-                courseType: findKeyObject(defaultValue.typeCourse, formData.type) ? findKeyObject(defaultValue.typeCourse, formData.type) : "ไม่ระบุ",
-            })
-            
-            dispatch(searchActions.getSearch({
-                data: formData,
-                redirectPath: "/search",
-                limit: 5,
-                type: formData.type
-            }))
-        }else{
-            const formData = {
-                grade: null,
-                subject: null,
-                gender: null,
-                type: null,
-                location: (currentLocation.permission && geolocation.success) ? geolocation.data : null,
-            }
-
-            reset({
-                grade: "ไม่ระบุ",
-                subject: "N/A",
-                gender: "N/A",
-                courseType: "ไม่ระบุ",
-            })
-
-            dispatch(searchActions.getSearch({
-                data: formData,
-                redirectPath: "/search",
-                limit: 5,
-                type: formData.type
-            }))
         }
         return () => {
             dispatch(searchActions.clearSearch())
         }
-    }, [params.toString()])
+    }, [params.toString(), geolocation?.request])
 
     const onSubmit = (data) => {
         if ((currentLocation.permission && geolocation.success) || !currentLocation.permission) {
@@ -267,11 +275,11 @@ export default function Search() {
                     </form>
                     <div className={`${!isMobile() && style.marginSection}`} >
                         <Row className={`${style.section}`}  >
-                            <Col  id="searchResult">
+                            <Col id="searchResult">
                                 <span className={style.textTwo} span={24} >ผลการค้นหา</span>
                             </Col>
                             <Col span={24} className={style.marginSection} >
-                            <ResultSearch />
+                                <ResultSearch />
                             </Col>
                         </Row>
                     </div>

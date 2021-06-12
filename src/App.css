@@ -121,6 +121,7 @@ input :focus{
   align-items: center;
   padding: 0 1.25rem;
   border-bottom: solid 0px transparent;
+  font-size: 1.25rem;
 }
 
 .menuBar .floatRight{
@@ -135,15 +136,11 @@ input :focus{
 
 .ant-menu-horizontal > .ant-menu-item:hover,
 .ant-menu-horizontal > .ant-menu-item-active,
-.ant-menu-horizontal > .ant-menu-submenu-open
+.ant-menu-horizontal > .ant-menu-submenu-open,
+.ant-menu-horizontal > .ant-menu-item-selected
 {
   color:  var(--white-color)  !important;
   border-bottom: 0.125rem solid  var(--white-color) !important;
-}
-
-.ant-menu-horizontal > .ant-menu-item-selected
-{
-  border-bottom: 0.125rem solid  transparent !important;
 }
 
 .ant-menu-horizontal a{
@@ -151,6 +148,7 @@ input :focus{
 }
 
 .buttonText{
+  font-size: 1.25rem;
   color:var(--white-color)  !important;
 }
 
@@ -179,6 +177,11 @@ input :focus{
 }
 
 .icon :active{
+  color : var(--orange-color) !important;
+}
+
+.iconActive{
+  font-size: 1.35rem;
   color : var(--orange-color) !important;
 }
 

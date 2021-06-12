@@ -79,7 +79,7 @@ export default function ProfileHeader({ data, tutorPublic, isTutorInfo, isTutor 
                             <Row align="middle">
                                 <styleComponent.iconCoin size="large" />
                                 <span className={`${style.textTwo} ${style.marginLeftOne}`}>100,000 เหรียญ</span>
-                                <Link to={!isTutor ? "/coin" : "/tutor/me/redeem"}>
+                                <Link to={!isTutor ? "/coin" : "/redeem"}>
                                     <Button className={`${style.buttonColor} ${style.textOne} ${style.marginLeftOne}`} style={styleComponent.buttonFull(color.yellow, "5rem")} size="small">{isTutor ? "แลกเหรียญ" : "ซื้อเหรียญ"}</Button>
                                 </Link>
                             </Row>

@@ -46,7 +46,7 @@ export default function CardCourseLearner({ data, verizontal, type, ranking }) {
                             <Col span={8} >
                                 <Image
                                     src={data ? (isOffline ? data.pictureUrl : data.coverUrl) : ProfileSample}
-                                    className={screen.md ? styles.imageLarge : styles.image}
+                                    className={screen.md ? styles.imageLarge : styles.imageClip}
                                     preview={false}
                                 />
                             </Col>

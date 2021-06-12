@@ -31,7 +31,7 @@ export default function Edit({dataRate}) {
   }, [dataRate])
 
   const dispatch = useDispatch();
-  // const today = moment().format("MM/DD/YYYY")
+  const today = moment().format("MM/DD/YYYY")
   const onSubmit = (data) => {
     if(data){
       if(dataRate.type != "transfer"){
@@ -42,7 +42,7 @@ export default function Edit({dataRate}) {
           "type": "std",
           "startDate":data.startDate,
           "endDate": data.endDate,
-          "updtaeDate":data.startDate,
+          "updtaeDate":today,
         }
         dispatch(modalAction.closeModal())
         dispatch(coinAction.updateCoinRate(dataRate.id,cost))

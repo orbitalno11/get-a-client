@@ -6,7 +6,7 @@ import ProfileRight from "./ProfileRight"
 import ProfileDetail from "./ProfileDetail"
 import ProfileHeader from "./ProfileHeader"
 import { useCallback } from "react"
-import { myCourseAction, profileAction, tutorAction } from "../../../../../redux/actions"
+import { myCourseAction, profileAction, tutorAction , coinAction} from "../../../../../redux/actions"
 import { useSelector, useDispatch } from "react-redux"
 import { Fragment } from "react"
 import Header from "../../../../headerMobile/Header"
@@ -22,13 +22,15 @@ export default function Profile() {
     const [dataDetail, setDataDetail] = useState(null)
     const profilePage = window.location.pathname === "/me"
     const isTutor = auth.role === 2
+    const balanceCoin = useSelector((state) => state.coin.balance);
 
     useEffect(() => {
-        if (profile.profile) {
+        if (profile.profile && balanceCoin) {
             setDataHeader({
                 firstname: profile.profile.firstname,
                 lastname: profile.profile.lastname,
                 profileUrl: profile.profile.profileUrl,
+                coin : balanceCoin.amount,
             })
 
             setDataDetail({
@@ -38,7 +40,8 @@ export default function Profile() {
                     facebookUrl: profile.profile.contact.facebookUrl ? profile.profile.contact.facebookUrl : "ยังไม่ได้กำหนด",
                     lineId: profile.profile.contact.lineId ? profile.profile.contact.lineId : "ยังไม่ได้กำหนด",
                     phoneNumber: profile.profile.contact.phoneNumber ? profile.profile.contact.phoneNumber : "ยังไม่ได้กำหนด",
-                }
+                },
+                coin : balanceCoin.amount,
             })
         }
     }, [profile])
@@ -46,6 +49,7 @@ export default function Profile() {
     const fetchProfile = useCallback(() => {
         dispatch(profileAction.getProfile(auth.profile))
         dispatch(profileAction.getAddress())
+        dispatch(coinAction.getCoinBalance());
         if (isTutor) {
             dispatch(tutorAction.getEducations(auth.profile))
             dispatch(tutorAction.getTestings(auth.profile))

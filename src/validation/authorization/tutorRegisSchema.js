@@ -41,10 +41,20 @@ export const tutorRegisSchema = yup.object().shape({
         .max(moment(), "กรุณากรอกวันเดือนปีเกิดอีกครั้ง")
         .required("กรุณากรอกวันเดือนปีเกิด")
         .nullable(),
-    subject: yup
-        .array()
-        .max(3, "วิชาที่สอนสามารถกรอกได้มากที่สุด 3 วิชา")
-        .min(1, "กรุณากรอกวิชาที่สอนอย่างน้อย 1 วิชา ไม่เกิน 3 วิชา"),
+    subject1: yup
+        .string()
+        .nullable()
+        .test(
+            "valueSelector",
+            "กรุณาเลือกวิชาที่สอนอับดับ 1",
+            value => value !== null && defaultValue.subject[value] !== null
+        ),
+    subject2: yup
+        .string()
+        .nullable(),
+    subject3: yup
+        .string()
+        .nullable(),
     email: yup
         .string()
         .email()

@@ -1,4 +1,3 @@
-
 import { Badge, Image, Row, Col, Select, DatePicker } from "antd"
 import React, { Fragment, useState } from "react"
 import { Controller, useForm } from "react-hook-form";
@@ -34,14 +33,15 @@ export default function RegisterForm() {
     const dispatch = useDispatch()
     const params = useParams();
     const type = params.type
-
     const inputForm = {
         width: (isMobile() ? "100%" : "50%"),
     }
 
-    const { register, handleSubmit, errors, control } = useForm({
+    const { register, handleSubmit, errors, control, watch } = useForm({
         resolver: yupResolver(type === "tutor" ? tutorRegisSchema : learnnerRegisSchema),
     });
+
+    const watchInput = watch()
 
     const onChangeImage = data => {
         const fileInput = data.target.files[0]
@@ -80,12 +80,15 @@ export default function RegisterForm() {
             formdata.append("image", image.file)
 
             if (type === "learner") {
-                formdata.append("grade", defaultValue.grade[data.grade])
+                formdata.append("grade", data.grade)
                 dispatch(userActions.signUpLearner(formdata))
             } else if (type === "tutor") {
-                const length = data.subject.length
-                for (let i = 0; i < length; i++) {
-                    formdata.append(`subject${i + 1}`, defaultValue.subject[data.subject[i]])
+                formdata.append(`subject1`, data.subject1)
+                if(data.subject2 !== "N/A" && !isEmpty(data?.subject2)){
+                    formdata.append(`subject2`, data.subject2 )
+                }
+                if(data.subject3 !== "N/A" && !isEmpty(data?.subject3)){
+                    formdata.append(`subject3`, data.subject3 )
                 }
                 dispatch(userActions.signUpTutor(formdata))
             }
@@ -105,7 +108,7 @@ export default function RegisterForm() {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={style.bodyPaddingTopBottom} >
                         <div className={style.section}>
-                            <span className={style.headerThree}>ลงทะเบียน{type === "tutor" ? "ครูสอนพิเศษ" : "นักเรียน"}</span>
+                            <span className={`${style.headerThree} ${style.TextHeight}`}>ลงทะเบียน{type === "tutor" ? "ครูสอนพิเศษ" : "นักเรียน"}</span>
                         </div>
 
                         <div className={`${style.section} ${!isMobile() && style.marginSection}`}>
@@ -181,37 +184,107 @@ export default function RegisterForm() {
                                         errors.dateOfBirth && <p className="error-input">{errors.dateOfBirth.message}</p>
                                     }
                                 </Col>
-                                <Col className={style.marginSection} span={24} align="start">
-                                    <p className={style.textOne5}>{type === "tutor" ? "วิชาที่สอน" : "ระดับชั้น"}</p>
-                                    <Controller
-                                        as={
-                                            <Select name={type === "tutor" ? "subject" : "grade"} optionLabelProp="label" mode={type === "tutor" ? "multiple" : false}  >
+                                {
+                                    type === "tutor" ? (
+                                        <Fragment>
+                                            <Col className={style.marginSection} span={24} align="start">
+                                                <p className={style.textOne5}>วิชาที่สอนอับดับ1</p>
+                                                <Controller
+                                                    as={
+                                                        <Select name={"subject1"}>
+                                                            {
+                                                                defaultValue.subject && Object.entries(defaultValue.subject).map(([key, value]) => (
+                                                                    <Select.Option key={value} value={value}>{key}</Select.Option>
+                                                                ))
+                                                            }
+                                                        </Select>
+                                                    }
+                                                    name={`subject1`}
+                                                    control={control}
+                                                    defaultValue={null}
+                                                    placeholder={"วิชาที่ต้องการสอน"}
+                                                />
                                                 {
-                                                    type === "tutor" ?
-                                                        (
-                                                            defaultValue.subject && Object.entries(defaultValue.subject).map(([key, value]) => (
-                                                                <Select.Option key={value} value={key}>{key}</Select.Option>
-                                                            ))
-                                                        ):(
-                                                            defaultValue.grade && Object.entries(defaultValue.grade).map(([key, value]) => (
-                                                                <Select.Option key={value} value={key}>{key}</Select.Option>
-                                                            ))
-                                                        )
+                                                    errors.subject1 && <p className="error-input">{errors.subject1.message}</p>
                                                 }
-                                            </Select>
-                                        }
-                                        name={type === "tutor" ? "subject" : "grade"}
-                                        control={control}
-                                        defaultValue={type === "tutor" ? [] : null}
-                                        placeholder={type === "tutor" ? "วิชาที่ต้องการสอน" : "ระดับชั้น"}
-                                    />
-                                    {
-                                        type === "tutor" ?
-                                            errors.subject && <p className="error-input">{errors.subject.message}</p>
-                                            :
-                                            errors.grade && <p className="error-input">{errors.grade.message}</p>
-                                    }
-                                </Col>
+                                            </Col>
+                                            {
+                                                !isEmpty(watchInput.subject1) && (
+                                                    <Col className={style.marginSection} span={24} align="start">
+                                                        <p className={style.textOne5}>วิชาที่สอนอับดับ2</p>
+                                                        <Controller
+                                                            as={
+                                                                <Select name={"subject2"}>
+                                                                    <Select.Option value="N/A">ไม่ระบุ</Select.Option>
+                                                                    {
+                                                                        defaultValue.subject && Object.entries(defaultValue.subject).filter(value => value[1] !== watchInput.subject1).map(([key, value]) => (
+                                                                            <Select.Option key={value} value={value}>{key}</Select.Option>
+                                                                        ))
+                                                                    }
+                                                                </Select>
+                                                            }
+                                                            name={`subject2`}
+                                                            control={control}
+                                                            defaultValue={"N/A"}
+                                                            placeholder={"วิชาที่ต้องการสอน"}
+                                                        />
+                                                        {
+                                                            errors.subject2 && <p className="error-input">{errors.subject2.message}</p>
+                                                        }
+                                                    </Col>
+                                                )
+                                            }
+                                            {
+                                                !isEmpty(watchInput.subject2) && watchInput?.subject2 !== "N/A" && (
+                                                    <Col className={style.marginSection} span={24} align="start">
+                                                        <p className={style.textOne5}>วิชาที่สอนอับดับ3</p>
+                                                        <Controller
+                                                            as={
+                                                                <Select name={"subject3"}>
+                                                                    <Select.Option value="N/A">ไม่ระบุ</Select.Option>
+                                                                    {
+                                                                        defaultValue.subject && Object.entries(defaultValue.subject).filter(value => value[1] !== watchInput.subject1 && value[1] !== watchInput.subject2).map(([key, value]) => (
+                                                                            <Select.Option key={value} value={value}>{key}</Select.Option>
+                                                                        ))
+                                                                    }
+                                                                </Select>
+                                                            }
+                                                            name={`subject3`}
+                                                            control={control}
+                                                            defaultValue={"N/A"}
+                                                            placeholder={"วิชาที่ต้องการสอน"}
+                                                        />
+                                                        {
+                                                            errors.subject3 && <p className="error-input">{errors.subject3.message}</p>
+                                                        }
+                                                    </Col>
+                                                )
+                                            }
+                                        </Fragment>
+                                    ) : (
+                                        <Col className={style.marginSection} span={24} align="start">
+                                            <p className={style.textOne5}>{"ระดับชั้น"}</p>
+                                            <Controller
+                                                as={
+                                                    <Select name={"grade"}>
+                                                        {
+                                                            defaultValue.grade && Object.entries(defaultValue.grade).map(([key, value]) => (
+                                                                <Select.Option key={value} value={value}>{key}</Select.Option>
+                                                            ))
+                                                        }
+                                                    </Select>
+                                                }
+                                                name={"grade"}
+                                                control={control}
+                                                defaultValue={null}
+                                                placeholder={"ระดับชั้น"}
+                                            />
+                                            {
+                                                errors.grade && <p className="error-input">{errors.grade.message}</p>
+                                            }
+                                        </Col>
+                                    )
+                                }
                                 <Col className={style.marginSection} span={24} align="start">
                                     <InputComponents
                                         title="อีเมล"

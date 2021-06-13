@@ -1,9 +1,19 @@
+import isEmpty from "../../components/defaultFunction/checkEmptyObject"
+import { updateProfileErrorMessage } from "../../components/defaultValue/errorMessage/updateProfile"
 import { sizeModal } from "../../components/modal/SizeModal"
 import { typeModal } from "../../components/modal/TypeModal"
 import { apiURL } from "../../utils/setAxios"
 import { profileConstants } from "../constants"
 import { loadingActions } from "./loading.actions"
 import { modalAction } from "./modal.actions"
+
+function checkErrorMessage(errorMessage) {
+    let message = !isEmpty(errorMessage) && updateProfileErrorMessage[Object.values(errorMessage)[0].toString()]
+    if (!message) {
+        message = updateProfileErrorMessage["default"]
+    }
+    return message
+}
 
 function getProfile() {
     return dispatch => {
@@ -14,7 +24,7 @@ function getProfile() {
             dispatch(success(profileDetail))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response?.data))
+            dispatch(failure(err?.response?.data))
         })
     }
     function success(data) { return { type: profileConstants.GET_PROFILE_SUCCESS, payload: data } }
@@ -39,9 +49,10 @@ function updateProfileLearner(data, profileId) {
 
         }).catch((err) => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response?.data))
+            const message = checkErrorMessage(err?.response?.data?.data)
+            dispatch(failure(message))
             dispatch(modalAction.openModal({
-                text: "แก้ไขข้อมูลไม่สำเร็จ",
+                text: message,
                 size: sizeModal.small,
                 alert: typeModal.wrong
             }))
@@ -64,7 +75,7 @@ function getIdentifyTutor() {
 
         }).catch((err) => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response?.data))
+            dispatch(failure(err?.response?.data))
         })
 
     }
@@ -92,7 +103,7 @@ function updateIdentifyTutor(data) {
 
         }).catch((err) => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response?.data))
+            dispatch(failure(err?.response?.data))
             dispatch(modalAction.openModal({
                 text: "แก้ไขข้อมูลไม่สำเร็จ",
                 size: sizeModal.small,
@@ -125,7 +136,7 @@ function createIdentifyTutor(data) {
 
         }).catch((err) => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response?.data))
+            dispatch(failure(err?.response?.data))
             dispatch(modalAction.openModal({
                 text: "แก้ไขข้อมูลไม่สำเร็จ",
                 size: sizeModal.small,
@@ -154,7 +165,13 @@ function setAddress(address) {
 
             .catch(err => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response?.data))
+                const message = checkErrorMessage(err?.response?.data?.data)
+                dispatch(failure(message))
+                dispatch(modalAction.openModal({
+                    text: message,
+                    size: sizeModal.small,
+                    alert: typeModal.wrong
+                }))
             })
     }
     function success() { return { type: profileConstants.SET_ADDRESS_SUCCESS } }
@@ -191,7 +208,7 @@ function getAddress() {
             })
             .catch(err => {
                 dispatch(loadingActions.stopLoading())
-                dispatch(failure(err.response?.data))
+                dispatch(failure(err?.response?.data))
             })
     }
     function success(data) { return { type: profileConstants.GET_ADDRESS_SUCCESS, payload: data } }

@@ -8,13 +8,18 @@ import { typeModal } from "../../components/modal/TypeModal"
 import { authErrorMessage } from "../../components/defaultValue"
 import { loadingActions } from "./loading.actions"
 import { trackTutorLogin } from "../../analytic/Analytic"
+import isEmpty from "../../components/defaultFunction/checkEmptyObject"
 
 function checkErrorMessage(errorMessage) {
-    let message = authErrorMessage.authMessage[errorMessage]
-    if (!message) {
-        message = authErrorMessage.authMessage["default"]
+    const messageEmail = !isEmpty(errorMessage?.message) && authErrorMessage[errorMessage?.message]
+    if (!messageEmail) {
+        let message = !isEmpty(errorMessage?.data) && authErrorMessage[Object.values(errorMessage?.data)[0].toString()]
+        if (!message) {
+            message = authErrorMessage["default"]
+        }
+        return message
     }
-    return message
+    return messageEmail
 }
 
 function loginUser(loginData, path) {
@@ -56,7 +61,7 @@ function loginUser(loginData, path) {
 
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
-            dispatch(failure(err.response?.data))
+            dispatch(failure(err?.response?.data))
             dispatch(modalAction.openModal({
                 text: "ข้อมูลผู้ใช้งานไม่ถูกต้อง",
                 size: sizeModal.small,
@@ -76,19 +81,18 @@ function signUpLearner(signUpData) {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
-        }).then(res => {
+        }).then(() => {
             dispatch(loadingActions.stopLoading())
-            const message = checkErrorMessage(res.data.message)
-            dispatch(success(message))
+            dispatch(success())
             dispatch(modalAction.openModal({
-                text: message,
+                text: "สร้างบัญชีผู้ใช้สำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
                 afterClose: "/login"
             }))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
-            const message = checkErrorMessage(err.response?.data?.message?.message)
+            const message = checkErrorMessage(err?.response?.data)
             dispatch(failure(message))
             dispatch(modalAction.openModal({
                 text: message,
@@ -108,18 +112,17 @@ function signUpTutor(signUpData) {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
-        }).then(res => {
+        }).then(() => {
             dispatch(loadingActions.stopLoading())
-            const message = checkErrorMessage(res.data.message)
-            dispatch(success(message))
+            dispatch(success())
             dispatch(modalAction.openModal({
-                text: message,
+                text: "สร้างบัญชีผู้ใช้สำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
                 afterClose: "/login"
             }))
         }).catch(err => {
-            const message = checkErrorMessage(err.response?.data?.message?.message)
+            const message = checkErrorMessage(err?.response?.data)
             dispatch(loadingActions.stopLoading())
             dispatch(failure(message))
             dispatch(modalAction.openModal({

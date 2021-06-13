@@ -19,9 +19,9 @@ import EmptyImage from "../../../../loading/EmptyImage";
 export default function EnrollRequest() {
   const dispatch = useDispatch()
   const { id } = useParams()
-  const { offlineCourse, loading } = useSelector(state => state)
-  const requestOfflineCourse = offlineCourse.enrollList && offlineCourse.enrollList.filter(item => item.status === 0)
-  const learnerOfflineCourse = offlineCourse.enrollList && offlineCourse.enrollList.filter(item => item.status === 1)
+  const { offlineCourse } = useSelector(state => state)
+  const requestOfflineCourse = offlineCourse?.enrollList?.data && offlineCourse?.enrollList?.data.filter(item => item.status === 0)
+  const learnerOfflineCourse = offlineCourse?.enrollList?.data && offlineCourse?.enrollList?.data.filter(item => item.status === 1)
   const screens = useBreakpoint();
   const [tabStart, setTabStart] = useState({
     key: "request",
@@ -56,16 +56,20 @@ export default function EnrollRequest() {
   }, [])
 
   const CardRequestFocus = () => {
-    const dataFocus = courseFocus === "request" ? requestOfflineCourse : learnerOfflineCourse
+    const dataFocus = {
+      data: courseFocus === "request" ? requestOfflineCourse : learnerOfflineCourse,
+      success: offlineCourse?.enrollList?.success
+    }
+
     return (
-      !isEmpty(dataFocus) ? (
+      !isEmpty(dataFocus?.data) ? (
         <div className={`${screens.md && style.section} ${style.marginSection}`}>
-          {dataFocus.map((item, index) => (
-            <Request id={id} data={item} key={index} line={dataFocus.length !== index + 1} request={courseFocus === "request"} />
+          {dataFocus?.data.map((item, index) => (
+            <Request id={id} data={item} key={index} line={dataFocus?.data.length !== index + 1} request={courseFocus === "request"} />
           ))}
         </div>
       ) : (
-        !loading.loading && (
+        dataFocus?.success === true && (
           <div className={`${screens.md && style.section} ${style.marginSection}`} align="center">
             <EmptyImage size="default" />
             <p className={style.textNormal}>{

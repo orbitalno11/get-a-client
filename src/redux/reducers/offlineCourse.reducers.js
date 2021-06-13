@@ -69,13 +69,19 @@ const offlineCourseReducer = (state = initialState, action) => {
         case offlineCourseConstants.GET_ENROLL_OFFLINE_COURSE_SUCCESS:
             return {
                 ...state,
-                enrollList: action.payload,
+                enrollList: {
+                    data : action.payload,
+                    success : true
+                },
                 error: false,
             }
         case offlineCourseConstants.GET_ENROLL_OFFLINE_COURSE_FAILURE:
             return {
                 ...state,
-                enrollList: null,
+                enrollList: {
+                    data : null,
+                    success : true
+                },
                 error: action.payload
             }
         case offlineCourseConstants.ACCEPT_ENROLL_OFFLINE_COURSE_SUCCESS:

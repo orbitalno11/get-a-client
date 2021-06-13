@@ -37,7 +37,7 @@ export default function Course() {
     const isOfflineCourse = type === "course"
     const learn_status = (auth.role === 1 && course && isOfflineCourse) ? course.enrolled : false
     const idCourse = params.id
-    const myReview = !isEmpty(reviews) ? reviews.filter(value => value.reviewer.id === auth.profile)[0] : []
+    const myReview = !isEmpty(reviews?.data) ? reviews?.data.find(value => value.reviewer.id === auth.profile) : []
     const history = useHistory()
     
     useEffect(() => {

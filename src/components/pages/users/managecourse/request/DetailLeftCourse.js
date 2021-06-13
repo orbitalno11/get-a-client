@@ -11,8 +11,9 @@ import { styleComponent } from "../../../../defaultFunction/style";
 import { color } from "../../../../defaultValue";
 import { SkeletonComponent } from "../../../../loading/SkeletonComponent";
 import style from "../styles.module.scss";
+import Loading from "../../../../loading/Loading";
 
-export default function DetailLeftCourse({courseId}) {
+export default function DetailLeftCourse({ courseId }) {
     const { loading } = useSelector(state => state.loading)
     const { data } = useSelector(state => courseId ? state.onlineCourse : state.offlineCourse)
     const { id } = useParams()
@@ -20,13 +21,16 @@ export default function DetailLeftCourse({courseId}) {
 
     const checkLoading = (text) => {
         return (
-            loading ? <SkeletonComponent.SkeletonText /> : text
+            loading && isEmpty(data) ? <SkeletonComponent.SkeletonText /> : text
         )
     }
 
     return (
         <div>
             <Row className={`${screens.md && style.section} ${style.marginSection}`}>
+                {
+                    loading && <Loading />
+                }
                 <Col span={24}>
                     <span className={style.headerTwo25}>{checkLoading(!isEmpty(data) && data.name)}</span>
                 </Col>
@@ -44,9 +48,9 @@ export default function DetailLeftCourse({courseId}) {
                 </Col>
                 <Col className={style.paddingTopOneHalf} span={24}>
                     <Space align="center" direction="horizontal">
-                    {
-                        courseId ? (<FontAwesomeIcon icon={faVideo} className={style.iconmarker} />) : (<styleComponent.iconCoin size="large" />)
-                    }
+                        {
+                            courseId ? (<FontAwesomeIcon icon={faVideo} className={style.iconmarker} />) : (<styleComponent.iconCoin size="large" />)
+                        }
                         <span className={`${style.textOne25} ${!courseId && style.marginLeftOneHalf}`}>{checkLoading(!isEmpty(data) && (courseId ? data.numberOfVideo : data.costText))}</span>
                     </Space>
                 </Col>

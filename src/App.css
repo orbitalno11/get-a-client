@@ -408,3 +408,8 @@ textarea{
 .slick-dots li button:before{
   font-size: 0.5rem;
 } 
+
+#listRequest .ant-badge-count{
+  position: absolute;
+  top : 0 !important;
+}

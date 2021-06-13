@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Row, Col, Button } from "antd";
+import { Row, Col, Button, Badge } from "antd";
 import style from "../styles.module.scss";
 import Header from "../../../../headerMobile/Header";
 import isMobile from "../../../../isMobile/isMobile"
@@ -76,11 +76,17 @@ export default function ManageCourse() {
                   !isEmpty(courseList) ? (
                     courseList.map((item) => {
                       return (
-                        <Col className={`${screens.md && style.section} ${style.marginSection} ${style.cursor}`} key={item.id} span={24}>
+
+                        <Col id="listRequest" className={`${screens.md && style.section} ${style.marginSection} ${style.cursor}`} key={item.id} span={24}>
                           {
-                            isCourse ? (<CardCourseTutor data={item} />) : (<CardLesson data={item} isCourse={true} fullWidth />)
+                            isCourse ? (
+                              <Badge className={style.fullWidth} count={item.requestNumber}  offset={[!screens.md ? 0 : 15, !screens.md ? 0 : -10]}>
+                                <CardCourseTutor data={item} />
+                              </Badge>
+                            ) : (<CardLesson data={item} isCourse={true} fullWidth />)
                           }
                         </Col>
+
                       )
                     })
                   ) : (

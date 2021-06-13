@@ -13,7 +13,6 @@ import SampleProfile from "../../../../images/profile.webp"
 
 export default function Request({ id, data, line, request }) {
   const dispatch = useDispatch()
-
   const enrollCourse = (status) => {
     dispatch(offlineCourseAction.acceptEnrollOfflineCourse(id, data.userId, status))
   }

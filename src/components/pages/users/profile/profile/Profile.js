@@ -25,12 +25,12 @@ export default function Profile() {
     const balanceCoin = useSelector((state) => state.coin.balance);
 
     useEffect(() => {
-        if (profile.profile && balanceCoin) {
+        if (profile.profile) {
             setDataHeader({
                 firstname: profile.profile.firstname,
                 lastname: profile.profile.lastname,
                 profileUrl: profile.profile.profileUrl,
-                coin : balanceCoin.amount,
+                coin : balanceCoin&&balanceCoin.amount,
             })
 
             setDataDetail({
@@ -41,7 +41,7 @@ export default function Profile() {
                     lineId: profile.profile.contact.lineId ? profile.profile.contact.lineId : "ยังไม่ได้กำหนด",
                     phoneNumber: profile.profile.contact.phoneNumber ? profile.profile.contact.phoneNumber : "ยังไม่ได้กำหนด",
                 },
-                coin : balanceCoin.amount,
+                coin : balanceCoin&&balanceCoin.amount,
             })
         }
     }, [profile])

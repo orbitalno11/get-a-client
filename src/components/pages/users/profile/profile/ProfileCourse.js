@@ -62,7 +62,7 @@ export default function ProfileCourse({ isTutorProfile }) {
 
     const CardCoursePublicTutor = () => {
         return (
-            (!isEmpty(course.data) && (courseFocus === course.type)) && (
+            (!isEmpty(course.data) && (courseFocus === course.type)) ? (
                 course?.data.map((item) => (
                     <Row className={`${!isMobile() && style.section} ${style.marginSection} ${style.cursor}`} key={item.id}>
                         {
@@ -78,6 +78,13 @@ export default function ProfileCourse({ isTutorProfile }) {
                         }
                     </Row>
                 ))
+            ) : (
+                (!isEmpty(course.type) && !loading) && (
+                    <div align="center"  className={`${!isMobile() && style.section} ${style.marginSection}`} >
+                    <EmptyImage size="default" />
+                    <p className={style.textOne25}>ผู้สอนยังไม่มีบทเรียนในส่วนนี้&nbsp;</p>
+                </div>
+                )
             )
         )
     }

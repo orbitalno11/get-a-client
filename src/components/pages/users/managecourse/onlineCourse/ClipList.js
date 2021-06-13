@@ -77,7 +77,7 @@ export default function ClipList() {
                         </Row>
                     ))
                 ) : (
-                    !loading && (
+                    (!loading && !onFocusAll) && (
                         <div className={`${screens.md && style.section} ${style.marginSection}`} align="center">
                             <EmptyImage size="default" />
                             <p className={style.textNormal}>{

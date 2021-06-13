@@ -16,7 +16,7 @@ export default function AllReview({vdo}) {
     const dispatch = useDispatch()
     const { id, videoId } = useParams()
     const type = window.location.pathname.split("/")[1] 
-    const { offlineCourse, auth, review, onlineCourse, loading } = useSelector(state => state)
+    const { offlineCourse, auth, review, onlineCourse } = useSelector(state => state)
     const course = videoId ? (onlineCourse.clip && onlineCourse.data) : (offlineCourse.data && offlineCourse.data)
     const owner = (course && auth) && (auth.profile === course.owner.id)
     const isCourse = type === "course"

@@ -40,9 +40,10 @@ export default function Request({
   const watchInput = watch();
   const [amount, setAmount] = useState(0);
 
+
   useEffect(() => {
     setAmount(
-      ((watchInput.coin * Number(bahtStd)) / Number(coinStd)).toFixed(2)
+      (Math.round((((watchInput.coin * Number(bahtStd)) / Number(coinStd))+ Number.EPSILON)* 100)/100)
     );
   }, [watchInput.coin]);
 

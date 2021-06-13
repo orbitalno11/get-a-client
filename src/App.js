@@ -45,6 +45,8 @@ import PubilcProfileCourse from "./components/pages/users/profile/profile/public
 import PubilcProfile from "./components/pages/users/profile/profile/publicProflie/PubilcProfile";
 import ClipList from "./components/pages/users/managecourse/onlineCourse/ClipList";
 import ScrollToTop from "./components/ScrollToTop"
+import Redeem from "./components/pages/users/coins/tutor/Redeem"
+
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
@@ -81,6 +83,7 @@ function App() {
           <PrivateRoute exact path="/me" component={Profile} />
           <PrivateRoute exact path="/me/edit" component={EditProfile} />
           <PrivateRoute exact path="/me/edit/map" component={EditProfileMap} />
+          <PrivateRoute exact path="/redeem" component={Redeem} />
           <PrivateRoute exact path="/coin" component={Coins} />
           <PrivateRoute exact path="/coinshop/payment" component={Payment} />
           <PrivateRoute exact path="/historycoin" component={HistoryCoin} />

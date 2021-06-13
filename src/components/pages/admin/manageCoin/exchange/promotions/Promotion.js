@@ -61,7 +61,7 @@ export default function Promotion() {
           <Row style={{ marginTop: "1rem", marginBottom: "1rem" }}>
             <Col
               span={5}
-              className={style.textOne25}
+              className={`${style.textOne25} ${style.paddingInputDate}`}
             >
               วันที่เริ่มต้น :
             </Col>
@@ -81,7 +81,7 @@ export default function Promotion() {
           <Row style={{ marginTop: "1rem", marginBottom: "1rem" }}>
             <Col
               span={5}
-              className={style.textOne25}
+              className={`${style.textOne25} ${style.paddingInputDate}`}
             >
               วันที่สิ้นสุด :
             </Col>

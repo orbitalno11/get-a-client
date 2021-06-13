@@ -1,5 +1,5 @@
 import { Col, Row, Grid, Space, Button } from "antd";
-import React, { Fragment } from "react"
+import React, { Fragment, useEffect } from "react"
 import PieChartComponent from "../../../../dashborad/PieChartComponent";
 import style from "../styles.module.scss"
 import Header from "../../../../headerMobile/Header"
@@ -8,10 +8,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { color } from "../../../../defaultValue"
 import { styleComponent } from "../../../../defaultFunction/style";
+import { useSelector } from "react-redux";
+import { useDispatch, } from "react-redux";
+import { coinAction } from "../../../../../redux/actions";
+import { SkeletonComponent } from "../../../../loading/SkeletonComponent"
 const { useBreakpoint } = Grid;
 
 export default function Home() {
     const screens = useBreakpoint();
+    const dispatch = useDispatch();
+    const balanceCoin = useSelector((state) => state.coin.balance);
+
+    useEffect(() => {
+        dispatch(coinAction.getCoinBalance());
+      }, []);
 
     const data = {
         labels: [
@@ -94,7 +104,7 @@ export default function Home() {
                             <Col span={17} className={!screens.lg && style.marginSection}>
                                 <Space align="center" direction="horizontal">
                                     <styleComponent.iconCoin size="medium" />
-                                    <span className={`${!isMobile() ? style.textTwo : style.textOne5} ${style.marginLeftOneHalf}`}>1,000,00 เหรียญ</span>
+                                    <span className={`${!isMobile() ? style.textTwo : style.textOne5} ${style.marginLeftOneHalf}`}> {balanceCoin ? balanceCoin.amount : <SkeletonComponent.SkeletonText />} &nbsp;เหรียญ </span>
                                 </Space>
                             </Col>
                             <Col span={screens.lg ? 24 : 7} className={style.marginSection} align="end">

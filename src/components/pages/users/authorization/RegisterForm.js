@@ -107,8 +107,8 @@ export default function RegisterForm() {
             <div className="container" align="center">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={style.bodyPaddingTopBottom} >
-                        <div className={style.section}>
-                            <span className={`${style.headerThree} ${style.TextHeight}`}>ลงทะเบียน{type === "tutor" ? "ครูสอนพิเศษ" : "นักเรียน"}</span>
+                        <div className={!isMobile() && style.section}>
+                            <span className={`${style.headerThree}`}>ลงทะเบียน{type === "tutor" ? "ครูสอนพิเศษ" : "นักเรียน"}</span>
                         </div>
 
                         <div className={`${style.section} ${!isMobile() && style.marginSection}`}>

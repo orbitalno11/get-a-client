@@ -80,7 +80,7 @@ export default function Profile() {
                     </Col>
                     <Col xl={13} lg={13} md={13} sm={24} xs={24}>
                         {
-                           ((isTutor) || (!isTutor && screens.md)) && (<ProfileRight isTutor={isTutor} />)
+                           ((isTutor) || (!isTutor && screens.md) || !profilePage) && (<ProfileRight isTutor={isTutor} />)
                         }
                     </Col>
                 </Row>

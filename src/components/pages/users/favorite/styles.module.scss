@@ -1,54 +1,19 @@
 @import "../../../../stylesDefault.module.scss";
 
-.padding{
-    padding: 0.5rem;
-}
-
-.marginTop {
-    margin-top: 2rem;
-}
-
-.marginTop20 {
-    margin-top: 1.25rem;
-}
-
-.paddingTitel{
-    padding: 1.5rem 0rem 1.5rem 2.75rem;
-}
-
-.titleFav{
-    background-color: white;
-    border-radius: 0.5rem;
-    width: 100%;
-    margin-bottom: 1.25rem;
-}
-
-.contentFav{
-    width: 60%;
-}
-
-.contentFavSm{
-    background-color: white;
-}
-
-.contentFavXl{
-    width: 73%;
-}
-
 .contentRecommend{
     background-color: white;
-    border-radius: 0.625rem;
+    border-radius: 0.5rem;
     width: 38%;
     margin-left: 2%;
     padding: 1rem;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
 }
 
 .contentRecommendXl{
     background-color: white;
-    border-radius: 0.625rem;
+    border-radius: 0.5rem;
     width: 25%;
     margin-left: 2%;
     padding: 1rem;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
 }

@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { favoriteAction, homeActions } from "../../../../redux/actions";
 import Loading from "../../../loading/Loading";
 import EmptyImage from "../../../loading/EmptyImage";
+import isEmpty from "../../../defaultFunction/checkEmptyObject";
 const { useBreakpoint } = Grid;
 
 export default function Favorite() {
@@ -22,74 +23,81 @@ export default function Favorite() {
     dispatch(homeActions.getRank(5));
   }, []);
 
+  const paddingCard = {
+    paddingBottom: "1rem",
+  };
+
+  const CourseSection = () => {
+    return (
+      !isEmpty(list) &&
+      !loading.loading && (
+        <Fragment>
+            <Row
+              gutter={[16, 0]}
+              className={`${style.marginSection}`}
+              justify={"space-between"}
+            >
+              {list &&
+                list.map((item) => (
+                  <Col
+                    align="center"
+                    xl={12}
+                    lg={12}
+                    md={24}
+                    sm={24}
+                    xs={24}
+                    key={item.id}
+                    style={paddingCard}
+                  >
+                    <CardCourseLearner
+                      data={item}
+                      verizontal="true"
+                      type="course"
+                      ranking={!screens.md ? false : true}
+                    />
+                  </Col>
+                ))}
+            </Row>
+        </Fragment>
+      )
+    );
+  };
+
   return (
     <Fragment>
       {loading.loading && <Loading />}
       {isMobile() && <Header title="ที่คุณถูกใจ" />}
-        <div className={style.container}>
+      <div className="container">
+        <div className={style.bodyPaddingTopBottom}>
           {screens.md && (
-            <div className={style.titleFav}>
-              <span className={`${style.headerFour} ${style.paddingTitel}`}>
+            <div className={style.section}>
+              <span className={style.headerFour}>
                 รายการที่คุณถูกใจ
               </span>
             </div>
           )}
-          {isMobile() ? (                      
-            <div>
-              {list && list.length ? (
-              <Row>
-                {list &&
-                  list.map((item, index) => (
-                    <Col
-                      xs={24}
-                      sm={24}
-                      md={24}
-                      lg={24}
-                      xl={12}
-                      className={style.padding}
-                      key={index}
-                    >
-                      <CardCourseLearner data={item} verizontal="true"  type="course"/>
-                    </Col>
-                  ))}
-              </Row>
-              ): (
-                <div align="center" className={style.container}>
+          <Row justify={"space-between"}>
+            <Col xl={17} lg={17} md={14} sm={24} xs={24}>
+            {list && list.length ? (
+              <CourseSection />
+              ) : (
+                <div align="center">
                   <EmptyImage size="default" />
-                  <p className={style.textOneo25}>คุณยังไม่ได้กดถูกใจติวเตอร์ &nbsp;</p>
+                  <p className={style.textNormal}>
+                    คุณยังไม่ได้กดถูกใจติวเตอร์ &nbsp;
+                  </p>
                 </div>
               )}
-            </div>                    
-          ):(
-            <Row>
-              <div className={!screens.xl ? style.contentFav : style.contentFavXl}>
-                {list && list.length ? (
-                <Row>
-                  {list &&
-                    list.map((item, index) => (
-                      <Col
-                        xs={24}
-                        sm={24}
-                        md={24}
-                        lg={24}
-                        xl={12}
-                        className={style.padding}
-                        key={index}
-                      >
-                        <CardCourseLearner data={item} verizontal="true" type="course" ranking={true}/>
-                      </Col>
-                    ))}
-                </Row>
-                ): (
-                  <div align="center">
-                    <EmptyImage size="default" />
-                    <p className={style.textNormal}>คุณยังไม่ได้กดถูกใจติวเตอร์ &nbsp;</p>
-                  </div>
-                )}
-              </div>
+            </Col>
+            {screens.md && (
               <div
-                className={!screens.xl? style.contentRecommend: style.contentRecommendXl}>
-                <span className={style.headerOne75}>เป็นที่นิยม</span>
+                className={
+                  !screens.lg
+                    ? style.contentRecommend
+                    : style.contentRecommendXl
+                }
+              >
+                <b className={style.textOne75}>เป็นที่นิยม</b>
                 {home.offlineCourseRank &&
                   home.offlineCourseRank.map((item) => (
                     <Row key={item.id}>
@@ -97,9 +105,10 @@ export default function Favorite() {
                     </Row>
                   ))}
               </div>
-            </Row>
             )}
+          </Row>
         </div>
+      </div>
     </Fragment>
   );
 }

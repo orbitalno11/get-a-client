@@ -1,5 +1,5 @@
 import { Button, Col, Image, Row } from "antd"
-import React from 'react'
+import React ,{useEffect} from "react"
 import ProfileSample from "../../../../images/profile.webp"
 import style from "./../styles.module.scss"
 import isMobile from "../../../../isMobile/isMobile";
@@ -11,7 +11,7 @@ import { SkeletonComponent } from "../../../../loading/SkeletonComponent";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { favoriteAction } from "../../../../../redux/actions"
+import { favoriteAction , coinAction} from "../../../../../redux/actions"
 export default function ProfileHeader({ data, tutorPublic, isTutorInfo, isTutor }) {
     const history = useHistory()
     const auth = useSelector(state => state.auth)
@@ -29,6 +29,10 @@ export default function ProfileHeader({ data, tutorPublic, isTutorInfo, isTutor 
             history.push("/login?from="+urlPathNow)
         }
     };
+
+    useEffect(() => {
+        dispatch(coinAction.getCoinBalance());
+      }, []);
 
     return (
         <div>

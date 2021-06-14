@@ -33,7 +33,7 @@ export default function Educate() {
     <Fragment>
       {loading.loading && <Loading />}
       {list && (
-        <table className="profile">
+        <table className={style.profile}>
           <tbody>
             <tr>
               <td style={{ paddingLeft: "2.3rem" }}>

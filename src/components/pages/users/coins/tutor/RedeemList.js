@@ -48,7 +48,7 @@ export default function RedeemList({ onHandleChange}) {
                   <Col xs={3} sm={2} style={{paddingTop:"0.4rem"}}>
                       <styleComponent.iconCoin/>
                   </Col>
-                  <Col xs={16} sm={15}>
+                  <Col xs={18} sm={18}>
                   <span className={style.textOne5}>{data && data.amountCoin}&nbsp; เหรียญ</span>
                   </Col>
                   <Col align="end" xs={3} sm={2} >

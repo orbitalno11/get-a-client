@@ -310,7 +310,7 @@ function createRequestRedeem(data){
                 text: "ดำเนินการสำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose : "/tutor/me/redeem"
+                afterClose : "/redeem"
             }))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())
@@ -337,7 +337,7 @@ function CancelRequestsRedeem(id){
                 text: "ดำเนินการสำเร็จ",
                 size: sizeModal.small,
                 alert: typeModal.corrent,
-                afterClose : "/tutor/me/redeem"
+                afterClose : "/redeem"
                 }))
         }).catch(err => {
             dispatch(loadingActions.stopLoading())

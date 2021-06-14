@@ -163,8 +163,8 @@ const NavMenu = () => {
                         <FontAwesomeIcon icon={faHome} className={currentPath === "/" ? "iconActive" : "icon"} />
                     </NavLink>
                 </Col>
-                <Col span={4} className="iconMenu" onClick={() => handleChangePath("/course")}>
-                    <NavLink to="/course">
+                <Col span={4} className="iconMenu" onClick={() => handleChangePath(statusUser() !== "visitor" ? "/course" : "/login")}>
+                    <NavLink to={statusUser() !== "visitor" ? "/course" : "/login"}>
                         <FontAwesomeIcon icon={faChalkboardTeacher} className={currentPath === "/course" ? "iconActive" : "icon"} />
                     </NavLink>
                 </Col>
@@ -173,13 +173,13 @@ const NavMenu = () => {
                         <FontAwesomeIcon icon={faSearch} className={currentPath === "/search" ? "iconActive" : "icon"} />
                     </NavLink>
                 </Col>
-                <Col span={4} className="iconMenu" onClick={() => handleChangePath("/favorite")}>
-                    <NavLink to="/favorite">
+                <Col span={4} className="iconMenu" onClick={() => handleChangePath(statusUser() !== "visitor" ? "/favorite" : "/login")}>
+                    <NavLink to={statusUser() !== "visitor" ? "/favorite" : "/login"}>
                         <FontAwesomeIcon icon={faHeart} className={currentPath === "/favorite" ? "iconActive" : "icon"} />
                     </NavLink>
                 </Col>
-                <Col span={4} className="iconMenu" onClick={() => handleChangePath("/me")}>
-                    <NavLink to="/me">
+                <Col span={4} className="iconMenu" onClick={() => handleChangePath(statusUser() !== "visitor" ? "/me" : "/login")}>
+                <NavLink to={statusUser() !== "visitor" ? "/me" : "/login"}>
                         <FontAwesomeIcon icon={faUserCircle} className={currentPath === "/me" ? "iconActive" : "icon"} />
                     </NavLink>
                 </Col>

@@ -57,7 +57,7 @@ if (localStorage.token) {
 
   if (user.exp < currentTime) {
     store.dispatch(userActions.logout())
-    window.location.href = "/login"
+    window.location.href = "/"
   }
 }
 

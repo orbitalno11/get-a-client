@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import isMobile from "../../../../../isMobile/isMobile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { profileAction } from "../../../../../../redux/actions";
+import { profileAction, userActions } from "../../../../../../redux/actions";
 import { color, defaultValue } from "../../../../../defaultValue";
 import { formUpdateProfile } from "../formUpdateProfile";
 import findKeyObject from "../../../../../defaultFunction/findKeyObject";
@@ -261,7 +261,10 @@ export default function EditProfileDetail() {
                             </Col>
                         </Row>
                         <div className={style.buttonEdit}>
-                            <button className={`${style.buttonColor} ${style.margintop20}`} style={styleComponent.buttonFull(color.orange, "7rem")} type="submit">บันทึกข้อมูล</button>
+                            {
+                                isMobile() && <button className={`${style.buttonColor} ${style.margintop20}`} style={styleComponent.buttonFull(color.gray, "7rem")} type="button" onClick={() => dispatch(userActions.logout())}>ออกจากระบบ</button>
+                            }
+                            <button className={`${style.buttonColor} ${style.margintop20} ${style.marginLeftOne}`} style={styleComponent.buttonFull(color.orange, "7rem")} type="submit">บันทึกข้อมูล</button>
                         </div>
                     </form>
                 </div>

@@ -204,7 +204,7 @@ export default function EditProfileDetail() {
 
                         <Row justify="space-between" className={`${style.section} ${style.marginSection} ${style.marginTop}`} style={{ paddingTop: !isMobile() ? "1.5rem" : "0rem" }}>
                             <Col span={24}>
-                                <span className={`${style.marginTop} ${style.titleH3}`}>ช่องทางในการติดต่อ</span>
+                                <span className={`${style.marginTop} ${style.headerOne5}`}>ช่องทางในการติดต่อ</span>
                             </Col>
                             <Col className={style.marginTop20} lg={11} sm={24} md={10} xs={24}>
                                 <InputComponents

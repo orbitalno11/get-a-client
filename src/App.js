@@ -29,8 +29,6 @@ import NavMenu from "./components/NavMenu";
 import Coins from "./components/pages/users/coins/learner/Coin"
 import Payment from "./components/pages/users/coins/learner/Payment"
 import HistoryCoin from "./components/pages/users/coins/learner/HistoryCoin"
-import Notification from "./components/pages/users/notifications/Notification"
-import NotificationDetail from "./components/pages/users/notifications/NotificationDetail"
 import Favorite from "./components/pages/users/favorite/Favorite"
 import Search from "./components/pages/users/search/Search";
 import { setAuthToken } from "./utils/setAxios";
@@ -86,8 +84,6 @@ function App() {
           <PrivateRoute exact path="/coin" component={Coins} />
           <PrivateRoute exact path="/coinshop/payment" component={Payment} />
           <PrivateRoute exact path="/historycoin" component={HistoryCoin} />
-          <PrivateRoute exact path="/notification" component={Notification} />
-          <PrivateRoute exact path="/notification/:id" component={NotificationDetail} />
           <PrivateRoute exact path="/favorite" component={Favorite} />
           <PrivateRoute exact path="/course" component={Profile} />
           {

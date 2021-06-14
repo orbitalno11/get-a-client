@@ -22,7 +22,7 @@ export default function FormEnroll({ data }) {
 
     return (
         <div align="center">
-            <p className={style.titleH3}>คุณต้องการสมัครเรียน {data.name} </p>
+            <p className={style.headerOne5}>คุณต้องการสมัครเรียน {data.name} </p>
             <p> ระดับชั้น{data.grade}  วิชา{data.subject}</p>
             <p>ผู้สอน : {data.owner}</p>
 

@@ -3,7 +3,6 @@ import { Grid, Col, Button, Radio, Row,Divider } from "antd";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../styles.module.scss";
-// import Linepay from "../../../../images/Linepay2.webp"
 const { useBreakpoint } = Grid;
 
 export default function PaymentDetail() {
@@ -52,7 +51,6 @@ export default function PaymentDetail() {
           <span className={style.titleH5}>ชำระผ่าน</span>
           <div>            
               <Radio style={radioStyle} value={1} onChange={onChange}>
-                {/* <Image src={Linepay} preview={false} /> */}
               </Radio>
           </div>
           <Row className={style.payment}>

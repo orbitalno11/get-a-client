@@ -64,7 +64,7 @@ export default function Profile() {
 
     return (
         <Fragment>
-            {isMobile() && <Header title="โปรไฟล์" />}
+            {isMobile() && <Header title={profilePage ? "โปรไฟล์" : "บทเรียนของฉัน"} />}
             <ModalComponent />
             <div className="container">
                 <Row className={style.bodyPaddingTopBottom} justify={"space-between"}>

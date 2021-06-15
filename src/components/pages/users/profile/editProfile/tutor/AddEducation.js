@@ -22,7 +22,6 @@ import resizeImage from "../../../../../defaultFunction/resizeImage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import Loading from "../../../../../loading/Loading";
-import findKeyObject from "../../../../../defaultFunction/findKeyObject";
 import { styleComponent } from "../../../../../defaultFunction/style";
 
 export default function AddEducation() {
@@ -112,7 +111,7 @@ export default function AddEducation() {
                         branch: dataDetail.data.branch,
                         institute: dataDetail.data.institute,
                         gpax: dataDetail.data.gpax,
-                        status: findKeyObject(defaultValue.educationStatus, dataDetail.data.status),
+                        status:dataDetail.data.status,
                     })
                 }
                 document.getElementById("image1").value = "image"
@@ -167,7 +166,6 @@ export default function AddEducation() {
     }, [imageName])
 
     const onSubmit = (data) => {
-
         if (data) {
             let formData = new FormData()
             if (checkTypeTesting()) {
@@ -186,8 +184,8 @@ export default function AddEducation() {
                 }
             } else {
                 formData.append("grade", data.grade)
-                formData.append("branch", "1")
-                formData.append("institute", "1")
+                formData.append("branch", data.branch)
+                formData.append("institute", data.institute)
                 formData.append("status", data.status)
                 formData.append("gpax", data.gpax)
                 imageName.forEach((item, index) =>
@@ -250,7 +248,7 @@ export default function AddEducation() {
                                                 {
                                                     checkTypeTesting() ? (
                                                         defaultValue.examType && Object.entries(defaultValue.examType).map(([key, value]) => (
-                                                            <Select.Option key={value} value={key}>{key}</Select.Option>
+                                                            <Select.Option key={value} value={value}>{key}</Select.Option>
                                                         ))
                                                     ) : (
                                                         defaultValue.grade && Object.entries(defaultValue.grade).map(([key, value]) => (

@@ -59,10 +59,10 @@ function getTesting(id) {
             let dataTesting = {}
             if (data) {
                 dataTesting = {
-                    exam: data.exam.examText,
-                    subject: data.exam.subjectText,
+                    exam: data.exam.exam.id,
+                    subject: data.exam.subject.id,
                     score: data.exam.score,
-                    year: "2000",
+                    year: Number(data.exam.year),
                     image: [
                         data.verifiedData.documentUrl1,
                         data.verifiedData.documentUrl2,
@@ -92,9 +92,9 @@ function getEducation(id) {
             let dataEducation = {}
             if (data) {
                 dataEducation = {
-                    grade: "ม.6",
-                    branch: data.educationData.branchText,
-                    institute: data.educationData.instituteText,
+                    grade: data.educationData.grade.grade,
+                    branch: data.educationData.branch.id,
+                    institute: data.educationData.institute.id,
                     gpax: data.educationData.gpax,
                     status: data.educationData.status,
                     image: [

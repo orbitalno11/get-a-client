@@ -14,13 +14,14 @@ import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
 
 export default function AllReview({vdo}) {
     const dispatch = useDispatch()
-    const { id, videoId, type } = useParams()
-    const { offlineCourse, auth, review, onlineCourse, loading } = useSelector(state => state)
+    const { id, videoId } = useParams()
+    const type = window.location.pathname.split("/")[1] 
+    const { offlineCourse, auth, review, onlineCourse } = useSelector(state => state)
     const course = videoId ? (onlineCourse.clip && onlineCourse.data) : (offlineCourse.data && offlineCourse.data)
     const owner = (course && auth) && (auth.profile === course.owner.id)
     const isCourse = type === "course"
-    const reviewList = !isEmpty(review.reviews) ? review.reviews.filter(value => value.owner !== true) : []
-    const myReview = !isEmpty(review.reviews) ? review.reviews.filter(value => value.owner === true)[0] : []
+    const reviewList = !isEmpty(review?.reviews?.data) ? review?.reviews?.data.filter(value => value.owner !== true) : []
+    const myReview = !isEmpty(review?.reviews?.data) ? review?.reviews?.data.find(value => value.owner === true) : []
     const screens = useBreakpoint();
 
     useEffect(() => {
@@ -49,12 +50,12 @@ export default function AllReview({vdo}) {
             }))
         }
     }
-    
+
     return (
         <Fragment>
             <div>
                 {
-                    !isEmpty(review.reviews) ? (
+                    !isEmpty(review?.reviews?.data) ? (
                         <Row>
                             {!isEmpty(myReview) &&
                                 <Col span={24} >
@@ -68,7 +69,7 @@ export default function AllReview({vdo}) {
                             ))}
                         </Row>
                     ) : (
-                        !loading.loading && (
+                        review?.reviews?.success && (
                             <div className={`${screens.md && style.section} ${style.marginSection}`} align="center">
                                 <EmptyImage size="default" />
                                 <p className={style.textOne25}>บทเรียนนี้ยังไม่มีผู้แสดงความคิดเห็น&nbsp;

@@ -14,35 +14,29 @@ import ModalComponent from "../../../../modal/ModalComponent"
 import { useDispatch } from "react-redux";
 import { offlineCourseAction } from "../../../../../redux/actions";
 import { useSelector } from "react-redux";
-import findKeyObject from "../../../../defaultFunction/findKeyObject";
 import Loading from "../../../../loading/Loading";
 import TimeField from 'react-simple-timefield';
 import { styleComponent } from "../../../../defaultFunction/style";
 import { color } from "../../../../defaultValue";
+import { useHistory } from "react-router-dom";
 const { useBreakpoint } = Grid;
 
 export default function AddCourse() {
   const screens = useBreakpoint();
   const dispatch = useDispatch()
   const { offlineCourse, loading } = useSelector(state => state)
+  const dataDetaill = offlineCourse.data && offlineCourse.data
   const param = useParams();
   const { id } = param
+  const history = useHistory()
 
   const { register, handleSubmit, errors, control, reset } = useForm({
     resolver: yupResolver(courseSchema),
   });
-  const dataDetaill = offlineCourse.data && offlineCourse.data
 
   useEffect(() => {
     if (id?.isSafeNotBlank()) {
       dispatch(offlineCourseAction.getOfflineCourse(id))
-    } else {
-      reset({
-        subject: "คณิตศาสตร์",
-        grade: "ม.1",
-        type: "กลุ่ม",
-        dateOfWeek: "ไม่ระบุวัน",
-      })
     }
     return () => {
       dispatch(offlineCourseAction.clearOfflineCourse())
@@ -53,10 +47,10 @@ export default function AddCourse() {
     if (dataDetaill) {
       reset({
         namecourse: dataDetaill.name,
-        subject: dataDetaill.subject.title,
-        grade: findKeyObject(defaultValue.grade, dataDetaill.grade.grade),
-        type: "กลุ่ม",
-        dateOfWeek: findKeyObject(defaultValue.dateOfWeek, dataDetaill.dayOfWeek),
+        subject: dataDetaill.subject.id,
+        grade: dataDetaill.grade.grade,
+        type: dataDetaill.type,
+        dateOfWeek: dataDetaill.dayOfWeek,
         start: dataDetaill.startTime,
         end: dataDetaill.endTime,
         price: dataDetaill.cost,
@@ -73,11 +67,11 @@ export default function AddCourse() {
     if (data) {
       const formData = {
         "name": data.namecourse,
-        "subject": id ? dataDetaill.subject.id : defaultValue.subject[data.subject],
+        "subject": id ? dataDetaill.subject.id : data.subject,
         "description": data.description,
-        "grade": defaultValue.grade[data.grade],
-        "type": defaultValue.type[data.type],
-        "dayOfWeek": defaultValue.dateOfWeek[data.dateOfWeek],
+        "grade": data.grade,
+        "type": data.type,
+        "dayOfWeek": Number(data.dateOfWeek),
         "startTime": data.start,
         "endTime": data.end,
         "cost": data.price
@@ -129,19 +123,17 @@ export default function AddCourse() {
                 <Controller
                   as={
                     <Select name="subject" disabled={id ? true : false}>
-                      {defaultValue.subject &&
-                        Object.entries(defaultValue.subject).map(
-                          ([value]) => (
-                            <Select.Option key={value} value={value}>
-                              {value}
-                            </Select.Option>
-                          )
-                        )}
+                      {
+                        defaultValue.subject && Object.entries(defaultValue.subject).map(([key, value]) => (
+                          <Select.Option key={value} value={value}>{key}</Select.Option>
+                        ))
+                      }
                     </Select>
                   }
                   name="subject"
                   control={control}
-                  defaultValue=""
+                  placeholder="วิชา"
+                  defaultValue={null}
                 />
                 {errors.subject && (
                   <p className="error-input">{errors.subject.message}</p>
@@ -152,17 +144,17 @@ export default function AddCourse() {
                 <Controller
                   as={
                     <Select name="grade">
-                      {defaultValue.grade &&
-                        Object.entries(defaultValue.grade).map(([value]) => (
-                          <Select.Option key={value} value={value}>
-                            {value}
-                          </Select.Option>
-                        ))}
+                      {
+                        defaultValue.grade && Object.entries(defaultValue.grade).map(([key, value]) => (
+                          <Select.Option key={value} value={value}>{key}</Select.Option>
+                        ))
+                      }
                     </Select>
                   }
                   name="grade"
                   control={control}
-                  defaultValue=""
+                  placeholder="ระดับชั้น"
+                  defaultValue={null}
                 />
                 {errors.grade && (
                   <p className="error-input">{errors.grade.message}</p>
@@ -174,16 +166,17 @@ export default function AddCourse() {
                   as={
                     <Select name="type">
                       {defaultValue.type &&
-                        Object.entries(defaultValue.type).map(([value]) => (
+                        Object.entries(defaultValue.type).map(([key, value]) => (
                           <Select.Option key={value} value={value}>
-                            {value}
+                            {key}
                           </Select.Option>
                         ))}
                     </Select>
                   }
                   name="type"
                   control={control}
-                  defaultValue=""
+                  placeholder="ประเภทการสอน"
+                  defaultValue={null}
                 />
                 {errors.type && (
                   <p className="error-input">{errors.type.message}</p>
@@ -196,9 +189,9 @@ export default function AddCourse() {
                     <Select name="dateOfWeek">
                       {defaultValue.dateOfWeek &&
                         Object.entries(defaultValue.dateOfWeek).map(
-                          ([value]) => (
+                          ([key, value]) => (
                             <Select.Option key={value} value={value}>
-                              {value}
+                              {key}
                             </Select.Option>
                           )
                         )}
@@ -206,7 +199,8 @@ export default function AddCourse() {
                   }
                   name="dateOfWeek"
                   control={control}
-                  defaultValue=""
+                  placeholder="วันที่สอน"
+                  defaultValue={null}
                 />
                 {errors.dateOfWeek && (
                   <p className="error-input">{errors.dateOfWeek.message}</p>
@@ -268,14 +262,13 @@ export default function AddCourse() {
                   style={styleComponent.buttonFull(color.orange, "5rem")}
                   htmlType="submit">
                   บันทึก
-              </Button>
+                </Button>
                 <Button
                   className={`${style.buttonColor} ${style.textOne25} ${style.marginLeftOne}`}
                   style={styleComponent.buttonFull(color.blue, "5rem")}
-                  onClick={()=>{id && resetEditInput()}}
-                  htmlType={id ? "button" : "reset"}>
+                  onClick={()=> history.goBack()}>
                   ยกเลิก
-              </Button>
+                </Button>
               </Col>
             </Row>
           </div>

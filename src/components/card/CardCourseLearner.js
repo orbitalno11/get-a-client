@@ -2,7 +2,7 @@ import React from "react"
 import { Col, Image, Row} from "antd";
 import styles from "./styles.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBook, faLocationArrow, faStar, faUserAlt } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faLocationArrow, faMapMarkerAlt, faStar, faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router";
 import { color } from "../defaultValue";
 import { Fragment } from "react";
@@ -28,13 +28,13 @@ export default function CardCourseLearner({ data, verizontal, type, ranking }) {
         alignItems: "center",
         padding: '0.5rem',
         height: "9rem",
-        border : ranking ? "none" : ""
+        border: ranking ? "none" : ""
     }
 
     const styleRow = {
         position: "relative",
         height: "100%",
-        width:"100%"
+        width: "100%"
     }
 
     return (
@@ -46,23 +46,27 @@ export default function CardCourseLearner({ data, verizontal, type, ranking }) {
                             <Col span={8} >
                                 <Image
                                     src={data ? (isOffline ? data.pictureUrl : data.coverUrl) : ProfileSample}
-                                    className={screen.md ? styles.imageLarge : styles.image}
+                                    className={isOffline ? styles.imageLarge : styles.imageClip}
                                     preview={false}
                                 />
                             </Col>
                             <Col span={16} align="start" style={{ paddingLeft: "1rem" }}>
                                 <span className={`${styles.titleH5} ${styles.textOneLine}`}>{data && (isOffline ? data.fullNameText : data.name)}</span>
-                                <span className={styles.textSmall}>
-                                    <FontAwesomeIcon icon={faStar} className={styles.icon} style={{ color: color.yellow }} />
-                                    {data && data.rating}
-                                </span>
-                                <br />
+                                <Row align="start">
+                                    <Col className={styles.widthIcon}><FontAwesomeIcon icon={faStar} className={styles.icon} style={{ color: color.yellow }} /></Col>
+                                    <Col ><span className={styles.textOne}>{data && data.rating}</span></Col>
+                                </Row>
                                 {
                                     isOffline ? (
                                         <Fragment>
-                                            <span className={styles.textSmall}> <FontAwesomeIcon icon={faLocationArrow} className={styles.icon} /> {data.address ? data.address.district.title : "ยังไม่ได้กำหนด"}</span>
-                                            <br />
-                                            <span > <FontAwesomeIcon icon={faBook} className={styles.icon} /> {data && data.subject.title}</span>
+                                            <Row align="start">
+                                                <Col className={styles.widthIcon}><FontAwesomeIcon icon={faMapMarkerAlt} className={styles.icon} /></Col>
+                                                <Col ><span className={styles.textOne}>{data.address ? data.address.district.title : "ยังไม่ได้กำหนด"}</span></Col>
+                                            </Row>
+                                            <Row align="start">
+                                                <Col className={styles.widthIcon}><FontAwesomeIcon icon={faBook} className={styles.icon} /></Col>
+                                                <Col ><span className={styles.textOne}>{data && data.subject.title}</span></Col>
+                                            </Row>
                                         </Fragment>
                                     ) : (
                                         <Fragment>
@@ -86,25 +90,27 @@ export default function CardCourseLearner({ data, verizontal, type, ranking }) {
                                 <span className={`${styles.titleH5} ${styles.textOneLine}`}>{data && (isOffline ? data.fullNameText : data.name)}</span>
                             </Col>
 
-                            <Col span={24} align="center">
-                                <span className={styles.textOne}>
-                                    <FontAwesomeIcon icon={faStar} className={styles.icon} style={{ color: color.yellow }} />
-                                    {data && data.rating}
-                                </span>
-                            </Col>
+                            <Row align="start">
+                                <Col className={styles.widthIcon}><FontAwesomeIcon icon={faStar} className={styles.icon} style={{ color: color.yellow }} /></Col>
+                                <Col ><span className={styles.textOne}>{data && data.rating}</span></Col>
+                            </Row>
+
                         </Row>
                         <Row align="center">
                             {
                                 isOffline ? (
                                     <Fragment>
                                         <Col span={12} align="center">
-
-                                            <Fragment>
-                                                <span className={`${styles.textSmall}  ${styles.textOneLine}`}> <FontAwesomeIcon icon={faLocationArrow} className={styles.icon} /> {data.address ? data.address.district.title : "ยังไม่ได้กำหนด"}</span>
-                                            </Fragment>
+                                            <Row align="center">
+                                                <Col className={styles.widthIcon}><FontAwesomeIcon icon={faMapMarkerAlt} className={styles.icon} /></Col>
+                                                <Col ><span className={styles.textOne}>{data.address ? data.address.district.title : "ยังไม่ได้กำหนด"}</span></Col>
+                                            </Row>
                                         </Col>
                                         <Col span={12} align="center">
-                                            <span > <FontAwesomeIcon icon={faBook} className={styles.icon} /> {data && data.subject.title}</span>
+                                            <Row align="center">
+                                                <Col className={styles.widthIcon}><FontAwesomeIcon icon={faBook} className={styles.icon} /></Col>
+                                                <Col ><span className={styles.textOne}>{data && data.subject.title}</span></Col>
+                                            </Row>
                                         </Col>
                                     </Fragment>
                                 ) : (

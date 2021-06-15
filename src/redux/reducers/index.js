@@ -13,6 +13,7 @@ import onlineCourseReducer from "./onlineCourse.reducers"
 import searchReducer from "./search.reducers"
 import favoriteReducer from "./favorite.reducers"
 import myCourseReducer from "./myCourse.reducers"
+import generalReducer from "./general.reducers"
 
 const rootReducer = combineReducers({
     profile:profileReducers,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
     search : searchReducer,
     favorite : favoriteReducer,
     myCourse : myCourseReducer,
+    general : generalReducer
 });
 
 export default rootReducer;

@@ -4,8 +4,9 @@ import {
     faBook,
     faBookReader,
     faClock,
+    faEye,
     faStar,
-    faUserFriends,
+    faUsers,
     faVideo,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,12 +18,11 @@ import { color } from "../../../../defaultValue";
 import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useParams } from "react-router";
 import { styleComponent } from "../../../../defaultFunction/style";
 const { useBreakpoint } = Grid;
 
 export default function DetailCourse() {
-    const { type } = useParams();
+    const type = window.location.pathname.split("/")[1] 
     const [course, setCourse] = useState()
     const { onlineCourse, offlineCourse } = useSelector(state => state)
     const owner = !isEmpty(course) && course.owner
@@ -99,7 +99,7 @@ export default function DetailCourse() {
                                 )
                             }
                             <Col xs={24} md={12} xl={isOfflineCourse ? 6 : 8} className={style.paddingTopOneHalf}>
-                                <FontAwesomeIcon icon={faUserFriends} className={style.iconmarker} />
+                                <FontAwesomeIcon icon={isOfflineCourse ? faUsers : faEye} className={style.iconmarker} />
                                 {textCheckNull(isOfflineCourse ? (course?.studentNumber) : (course?.numberOfView))}
                             </Col>
                             <Col xs={24} md={12} xl={isOfflineCourse ? 6 : 8} className={style.paddingTopOneHalf}>

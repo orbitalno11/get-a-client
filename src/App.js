@@ -44,6 +44,8 @@ import Profile from "./components/pages/users/profile/profile/Profile";
 import PubilcProfileCourse from "./components/pages/users/profile/profile/publicProflie/PubilcProfileCourse";
 import PubilcProfile from "./components/pages/users/profile/profile/publicProflie/PubilcProfile";
 import ClipList from "./components/pages/users/managecourse/onlineCourse/ClipList";
+import ScrollToTop from "./components/ScrollToTop"
+import Redeem from "./components/pages/users/coins/tutor/Redeem"
 
 
 if (localStorage.token) {
@@ -55,18 +57,18 @@ if (localStorage.token) {
 
   if (user.exp < currentTime) {
     store.dispatch(userActions.logout())
-    window.location.href = "/login"
+    window.location.href = "/"
   }
 }
 
 function App() {
-  
   const admin = store.getState().auth.role === defaultValue.userRole["admin"]
   const tutor = store.getState().auth.role === defaultValue.userRole["tutor"]
 
   return (
     <Provider store={store}>
       <Router>
+      <ScrollToTop />
         {
           !admin && <NavMenu />
         }
@@ -80,6 +82,7 @@ function App() {
           <PrivateRoute exact path="/me" component={Profile} />
           <PrivateRoute exact path="/me/edit" component={EditProfile} />
           <PrivateRoute exact path="/me/edit/map" component={EditProfileMap} />
+          <PrivateRoute exact path="/redeem" component={Redeem} />
           <PrivateRoute exact path="/coin" component={Coins} />
           <PrivateRoute exact path="/coinshop/payment" component={Payment} />
           <PrivateRoute exact path="/historycoin" component={HistoryCoin} />
@@ -101,7 +104,8 @@ function App() {
           <Route exact path="/register/:type" component={RegisterForm} />
           <Route exact path="/profile/:id/course" component={PubilcProfileCourse} />
           <Route exact path="/profile/:id" component={PubilcProfile} />
-          <Route exact path="/:type/:id" component={Course} />
+          <Route exact path="/course/:id" component={Course} />
+          <Route exact path="/online/:id" component={Course} />
           <Route exact path="/search" component={Search} />
           <Route exact path="/course/online/:courseId/video" component={ClipList} />
           <Route exact path="/online/:courseId/video/:videoId" component={VDO} />

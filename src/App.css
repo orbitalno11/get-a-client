@@ -60,7 +60,7 @@
 }
 
 .ant-picker{
-  padding: 8px !important;
+  height: 40px;
   padding-left: 1.25rem !important;
   padding-right: 1.25rem !important;
 }
@@ -70,7 +70,8 @@
   font-size: 1.25rem;
 }
 
-input :focus{
+input :focus,
+.ant-modal-close{
   outline: none !important
 }
 
@@ -121,6 +122,7 @@ input :focus{
   align-items: center;
   padding: 0 1.25rem;
   border-bottom: solid 0px transparent;
+  font-size: 1.25rem;
 }
 
 .menuBar .floatRight{
@@ -135,15 +137,11 @@ input :focus{
 
 .ant-menu-horizontal > .ant-menu-item:hover,
 .ant-menu-horizontal > .ant-menu-item-active,
-.ant-menu-horizontal > .ant-menu-submenu-open
+.ant-menu-horizontal > .ant-menu-submenu-open,
+.ant-menu-horizontal > .ant-menu-item-selected
 {
   color:  var(--white-color)  !important;
   border-bottom: 0.125rem solid  var(--white-color) !important;
-}
-
-.ant-menu-horizontal > .ant-menu-item-selected
-{
-  border-bottom: 0.125rem solid  transparent !important;
 }
 
 .ant-menu-horizontal a{
@@ -151,6 +149,7 @@ input :focus{
 }
 
 .buttonText{
+  font-size: 1.25rem;
   color:var(--white-color)  !important;
 }
 
@@ -179,6 +178,11 @@ input :focus{
 }
 
 .icon :active{
+  color : var(--orange-color) !important;
+}
+
+.iconActive{
+  font-size: 1.35rem;
   color : var(--orange-color) !important;
 }
 
@@ -222,11 +226,6 @@ input :focus{
 
   .icon-addimage{
     font-size: 13px;
-  }
-
-  .image-person {
-    height: 7.5rem;
-    width: 7.5rem;
   }
 
   .input-form{
@@ -409,3 +408,8 @@ textarea{
 .slick-dots li button:before{
   font-size: 0.5rem;
 } 
+
+#listRequest .ant-badge-count{
+  position: absolute;
+  top : 0 !important;
+}

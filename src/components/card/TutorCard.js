@@ -27,8 +27,8 @@ export default function TutorCard({data}) {
             <span className={styles.textOneLine}>
               {data && data.fullNameText}
             </span>
-            <div className={styles.marginTop1}>
-                <FontAwesomeIcon icon={faBook} className={`${styles.icon} ${styles.marginRight1}`} />
+            <div className={styles.marginRightOne}>
+                <FontAwesomeIcon icon={faBook} className={`${styles.icon} ${styles.marginRightHalf}`} />
                 <span className={styles.textOne}>{data && data.subject.title}</span>
             </div>
           </Col>

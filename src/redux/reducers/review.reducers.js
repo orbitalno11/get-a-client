@@ -20,13 +20,19 @@ const reviewReducer = (state = initialState, action) => {
         case reviewConstants.GET_REVIEW_SUCCESS:
             return {
                 ...state,
-                reviews: action.payload,
+                reviews: {
+                    data : action.payload,
+                    success : true
+                },
                 error: null
             }
         case reviewConstants.GET_REVIEW__FAILURE:
             return {
                 ...state,
-                reviews: null,
+                reviews: {
+                    data : null,
+                    success : true
+                },
                 error: action.payload
             }
         case reviewConstants.UPDATE_REVIEW_SUCCESS:

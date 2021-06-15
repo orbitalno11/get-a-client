@@ -1,5 +1,4 @@
 import * as yup from "yup";
-import { defaultValue } from "../../components/defaultValue";
 
 export const courseClipSchema = (isEdit) =>{
     return (
@@ -8,19 +7,11 @@ export const courseClipSchema = (isEdit) =>{
             subject: yup
                 .string()
                 .nullable()
-                .test(
-                    "valueSelector",
-                    "กรุณาเลือกวิชา",
-                    value => value !== null && defaultValue.subject[value] !== null
-                ),
+                .required("กรุณาเลือกวิชา"),
             grade: yup
                 .string()
                 .nullable()
-                .test(
-                    "valueSelector",
-                    "กรุณาเลือกระดับชั้น",
-                    value => value !== null && defaultValue.grade[value] !== null
-                ),
+                .required("กรุณาเลือกระดับชั้น"),
             image: yup
                 .mixed()
                 .nullable()

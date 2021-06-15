@@ -63,7 +63,7 @@ export default function ReviewForm({ idReview }) {
     const dispatch = useDispatch()
     const { loading } = useSelector(state => state.loading)
     const { review, modal, offlineCourse } = useSelector(state => state)
-    const myReview = review.reviews && review.reviews.filter((item) => item.owner === true)[0]
+    const myReview = review?.reviews?.data && review?.reviews?.data.find((item) => item.owner === true)
     const { register, handleSubmit, errors, control, reset } = useForm({
         resolver: yupResolver(reviewSchema),
     });
@@ -114,7 +114,7 @@ export default function ReviewForm({ idReview }) {
         <div align="center">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                    <span className={style.headerTwo5}>ความคิดเห็น</span>
+                    <span className={style.headerTwo5}>{isEmpty(myReview) ? "แสดง" : "แก้ไข"}ความคิดเห็น</span>
                 </div>
                 <Controller
                     as={

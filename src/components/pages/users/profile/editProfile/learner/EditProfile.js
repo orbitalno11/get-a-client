@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import isMobile from "../../../../../isMobile/isMobile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { profileAction } from "../../../../../../redux/actions";
+import { profileAction, userActions } from "../../../../../../redux/actions";
 import { color, defaultValue } from "../../../../../defaultValue";
 import { formUpdateProfile } from "../formUpdateProfile";
 import findKeyObject from "../../../../../defaultFunction/findKeyObject";
@@ -43,7 +43,7 @@ export default function EditProfile() {
                 firstname: detailProfile.firstname,
                 lastname: detailProfile.lastname,
                 gender: findKeyObject(defaultValue.gender, detailProfile.gender),
-                dateOfBirth: (moment(new Date(detailProfile.dateOfBirth),defaultValue.dateFormat)),
+                dateOfBirth: (moment(new Date(detailProfile.dateOfBirth), defaultValue.dateFormat)),
                 grade: detailProfile.grade.grade,
                 email: detailProfile.email,
                 facebook: detailProfile.contact.facebookUrl,
@@ -80,11 +80,11 @@ export default function EditProfile() {
                 loader && (
                     <Loading />
                 )}
-            <div className="container"> 
+            <div className="container">
                 <div className={style.container}>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <Row justify="space-between" align="middle">
-                        {
+                            {
                                 !isMobile() && (
                                     <Col className={style.section} span={24} align="center">
                                         <span className={style.headerThree}>แก้ไขโปรไฟล์</span>
@@ -164,7 +164,7 @@ export default function EditProfile() {
                                             name="grade"
                                             placeholder="ระดับชั้น"
                                             control={control}
-                                            defaultValue={1}
+                                            defaultValue={null}
                                         />
                                         {
                                             errors && errors.grade && <p className="error-input">{errors.grade.message}</p>
@@ -219,7 +219,10 @@ export default function EditProfile() {
                             </Col>
                         </Row>
                         <div className={style.buttonEdit}>
-                            <button className={`${style.buttonColor} ${style.margintop20}`} style={styleComponent.buttonFull(color.orange, "7rem")} type="submit">บันทึกข้อมูล</button>
+                            {
+                                isMobile() && <button className={`${style.buttonColor} ${style.margintop20}`} style={styleComponent.buttonFull(color.gray, "7rem")} type="button" onClick={()=>dispatch(userActions.logout())}>ออกจากระบบ</button>
+                            }
+                            <button className={`${style.buttonColor} ${style.margintop20} ${style.marginLeftOne}`} style={styleComponent.buttonFull(color.orange, "7rem")} type="submit">บันทึกข้อมูล</button>
                         </div>
                     </form>
                 </div>

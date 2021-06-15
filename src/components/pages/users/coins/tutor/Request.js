@@ -3,6 +3,7 @@ import { Grid, Col, Row, Button, Select, Image } from "antd";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import style from "../styles.module.scss";
+import isMobile from "../../../../isMobile/isMobile";
 import InputComponents from "../../../../input/InputComponets";
 import { coinAction, modalAction } from "../../../../../redux/actions";
 import { typeModal } from "../../../../modal/TypeModal";
@@ -40,9 +41,10 @@ export default function Request({
   const watchInput = watch();
   const [amount, setAmount] = useState(0);
 
+
   useEffect(() => {
     setAmount(
-      ((watchInput.coin * Number(bahtStd)) / Number(coinStd)).toFixed(2)
+      (Math.round((((watchInput.coin * Number(bahtStd)) / Number(coinStd))+ Number.EPSILON)* 100)/100)
     );
   }, [watchInput.coin]);
 
@@ -102,18 +104,16 @@ export default function Request({
             ย้อนกลับ
           </span>
         </Row>
-        {screens.md && (
-          <Row className={style.paddingTopHead}>
+          <Row className={!isMobile()?style.paddingTopHead:style.paddingTopHeadSm}>
             <Col md={10} lg={9} xl={12}>
-              <span className={style.headerTwo}>คำขอแลกเหรียญ</span>
+              <span className={!isMobile()?style.headerTwo:style.headerOne75}>คำขอแลกเหรียญ</span>
             </Col>
             <Col md={13} lg={13} xl={12} style={{ paddingTop: "6px" }}>
-              <span className={screens.lg ? style.textOne75 : style.textOne25}>
+              <span className={screens.lg ? style.textOne75 : style.textOne35}>
                 อัตราแลกเหรียญปัจจุบัน {coinStd} เหรียญ มีมูลค่า {bahtStd} บาท
               </span>
             </Col>
           </Row>
-        )}
         <form onSubmit={handleSubmit(onSubmit)}>
           <Row
             className={screens.lg ? style.paddingTop13 : style.paddingRequest}

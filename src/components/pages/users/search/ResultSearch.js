@@ -59,11 +59,11 @@ export default function ResultSearch() {
                 {
                     checkNotNull ? data.map((item) => (
                         (type !== "onlineCourse") ? (
-                            <Col className={style.paddingCardResult} key={item.id} xl={10} lg={10} md={20} sm={24} xs={24} >
+                            <Col className={style.paddingCardResult} key={item.id} xl={11} lg={11} md={20} sm={24} xs={24} >
                                 <CardCourseTutor data={item} search />
                             </Col>
                         ) : (
-                            <Col className={style.paddingCardResult} key={item.id} xl={10} lg={10} md={20} sm={24} xs={24} >
+                            <Col className={style.paddingCardResult} key={item.id} xl={11} lg={11} md={20} sm={24} xs={24} >
                                 <CardLesson data={item} search />
                             </Col>
                         )

@@ -40,12 +40,11 @@ function loginUser(loginData, path) {
                         dispatch(success(user))
                         dispatch(loadingActions.stopLoading())
                         if (user.role === 2) {
-                            trackTutorLogin()
-                            if (path) {
-                                window.location.href = decodeURIComponent(path)
-                            } else {
+                            trackTutorLogin().then(() => {
                                 window.location.href = "/tutor"
-                            }
+                            }).catch(() => {
+                                window.location.href = "/tutor"
+                            })
                         } else if (user.role === 1) {
                             if (path) {
                                 window.location.href = decodeURIComponent(path)

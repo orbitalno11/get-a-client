@@ -32,7 +32,7 @@ export default function ProfileEducation() {
                 </Col>
                 <Col span={6} align="end">
                     <Link to={"/tutor/edit/identity"}>
-                        <Button className={`${style.buttonColor} ${style.textOne}`} style={styleComponent.buttonFull(color.yellow, "5rem")} size="small">ยืนยัน</Button>
+                        <Button className={`${style.buttonColor} ${style.textOne}`} style={styleComponent.buttonFull(auth?.verified ?color.yellow : color.red, auth?.verified ?"5rem" :"7rem")} size="small">{auth?.verified ? "ยืนยัน" : "ยังไม่ยืนยันตัวตน" }</Button>
                     </Link>
                 </Col>
             </Row>

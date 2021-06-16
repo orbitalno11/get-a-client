@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { tutorAction } from "../../../../../redux/actions";
+import { modalAction, tutorAction } from "../../../../../redux/actions";
 import { useSelector } from "react-redux";
 import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 import { useState } from "react";
@@ -19,6 +19,9 @@ import { color } from "../../../../defaultValue";
 import { styleComponent } from "../../../../defaultFunction/style";
 import EmptyImage from "../../../../loading/EmptyImage";
 import Loading from "../../../../loading/Loading";
+import VerifyModal from "./VerifyModal";
+import { sizeModal } from "../../../../modal/SizeModal";
+import ModalComponent from "../../../../modal/ModalComponent";
 
 export default function ManageCourse() {
   const { auth, tutor, loading } = useSelector(state => state)
@@ -34,11 +37,19 @@ export default function ManageCourse() {
     } else {
       dispatch(tutorAction.getListOnlineCourse(auth.profile))
     }
+
+    if(!auth?.verified){
+      dispatch(modalAction.openModal({
+          body : <VerifyModal/>,
+          size: sizeModal.default,
+      }))
+  }
+
     return () => {
       setCourseList([])
       dispatch(tutorAction.clearListOfflineCourse())
     }
-  }, [type])
+  }, [type, auth.verified])
 
   useEffect(() => {
     let courseDetail = null
@@ -62,6 +73,7 @@ export default function ManageCourse() {
           <Loading />
         )
       }
+       <ModalComponent />
       <div className="container">
         <div className={style.bodyPaddingTopBottom}>
           <Row justify={"space-between"}>
@@ -104,7 +116,7 @@ export default function ManageCourse() {
               screens.md ? (
                 <Col xl={7} lg={7} md={24} sm={24} xs={24} order={screens.lg ? 2 : 1} className={style.marginSection}>
                   <Link to={`/tutor/${type}/create`}>
-                    <Button className={style.buttonColor} style={styleComponent.buttonFull(color.orange)}>สร้างคอร์สเรียนใหม่</Button>
+                    <Button className={style.buttonColor} style={styleComponent.buttonFull(color.orange)} disabled={!auth.verified}>สร้างคอร์สเรียนใหม่</Button>
                   </Link>
                 </Col>
               ) : (

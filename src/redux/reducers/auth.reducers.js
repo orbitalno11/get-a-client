@@ -6,6 +6,7 @@ const initialState = {
     loading : false ,
     error : null,
     profile : null,
+    verified : null,
     email : null
 }
 
@@ -28,6 +29,7 @@ const authReducer = (state = initialState, action) => {
             role: action.payload.role,
             profile : action.payload.id,
             email :  action.payload.email,
+            verified :  action.payload.verified,
             loading: false,
             error : false
         }
@@ -39,6 +41,7 @@ const authReducer = (state = initialState, action) => {
             profile : null,
             email:null,
             loading: false,
+            verified : null,
             error : action.payload
         }
     case authConstants.LOGOUT:

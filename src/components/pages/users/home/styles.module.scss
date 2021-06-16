@@ -56,24 +56,9 @@
     width: 2.25rem  !important;
 }
 
-.flexRow{
-    @extend .VerizontalPage;
-    flex-flow: row;
-}
-
 .subjectSelect{
     @extend .marginSection;
     cursor: pointer;
-}
-
-.width10{
-    display: inline-block;
-    width: 9rem !important;
-}
-
-.width4{
-    display: inline-block;
-    width: 4rem !important;
 }
 
 .paddingCardShow {
@@ -89,11 +74,6 @@
     color : $blue;
 }
 
-.row{
-    display: flex !important;
-    flex-flow: row;
-}
-
 .subjectSelect{
     @extend .marginSection;
     cursor: pointer;
@@ -107,8 +87,4 @@
 .width4{
     display: inline-block;
     width: 4rem !important;
-}
-
-.height {
-    height: 100%;
 }

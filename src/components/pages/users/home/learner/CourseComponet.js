@@ -23,7 +23,7 @@ export default function CourseComponet({ title, array, type }) {
         <div className={style.section} style={{ overflow: "hidden" }}>
             <div className={style.flexRow}>
                 <div className={isMobile() ? style.paddingbody : null}>
-                    <span className={style.titleH2}>{title}</span>
+                    <span className={style.headerTwo}>{title}</span>
                     <Link to={`/popular/${type}`} >
                         <u className={style.marginLeftOneHalf} style={{ color: color.black }}>ดูเพิ่มเติม</u>
                     </Link>

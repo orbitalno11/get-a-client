@@ -81,7 +81,7 @@ export default function CreateCourseOnline() {
     if (data) {
       let formdata = new FormData()
       formdata.append("name", data.name)
-      formdata.append("grade", data.grade)
+      formdata.append("grade", Number(data.grade))
       formdata.append("subject", data.subject)
 
       if (image.file) {

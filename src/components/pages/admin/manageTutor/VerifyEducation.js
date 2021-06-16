@@ -22,7 +22,7 @@ export default function VerifyEducation() {
   return (
     <Fragment>
       {loading.loading && <Loading />}
-      <table className="verify">
+      <table className={style.verify}>
         <thead>
           <tr>
             <th className={style.textOne5}>เอกสารยืนยันประวัติการศึกษา</th>

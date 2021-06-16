@@ -1,121 +1,27 @@
 @import "../../../../stylesDefault.module.scss";
 
-.coins {
-  font-size: 1.7rem;
-  margin-right: 1.25rem;
-  color: $yellow;
+.contentRequest {
+  width           : 100%;
+  border-radius   : 8px;
+  background-color: white;
 }
 
-.Big {
-  @extend .iconLarge;
-  margin-right: 1.5rem;
-  color: $yellow;
-}
-
-.coinlist {
-  padding-top: 3rem;
-  margin-left: 3%;
-}
-
-.coinshop {
-  margin-left: 30%;
-  padding-top: 1rem;
-}
-
-.subcoin {
-  padding-top: 1rem;
-  padding-left: 3rem;
-}
-
-.payment {
-  padding-top: 3rem;
-}
-
-.paymentPage {
-  margin-left: 3rem;
-  padding-top: 1.5rem;
-}
-
-.buttonpayment {
-  border: 0.15rem solid #f26419 !important;
-  color: black !important;
-  padding: 4px 16px !important;
-  height: auto!important;
-}
-
-.buttonpayment:hover {
-  background-color: #fff !important;
-  color: #f26419 !important;
-  border-color: #f26419 !important;
-}
-
-้.hiscoin {
-  margin-left: 10rem;
-  padding-top: 5rem;
-}
-
-.subProfile {
-  margin-top: 1.56rem;
-}
-
-.pageredeem {
-  @extend .paddingTopBody;
-  padding-bottom: 3.75rem;
-}
-
-.Xs {
-  font-size: 1.3rem;
-  margin-right: 1.5rem;
-  color: $yellow;
-  margin-top: 0.27rem;
-}
-
-.flexredeem {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-}
-
-.columredeem {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0.8rem;
-}
-
-.hisList{
- @extend .paddingbody;
- width: 100%;
-}
-
-.marginright{
-  display: flex;
-  justify-content: flex-end;
-}
-
-// NEW
-.contentRequest{
-  width: 100%;
-  border-radius: 8px;
-  background-color:white;
-}
-
-.paddingTop13{
-  padding-top: 13px;
+.paddingTop13 {
+  padding-top : 13px;
   padding-left: 68px;
 }
 
-.paddingTopHead{
-  padding-top: 23px;
+.paddingTopHead {
+  padding-top : 23px;
   padding-left: 30px;
 }
 
-.paddingTopHead2{
-  padding-top: 30px;
+.paddingTopHead2 {
+  padding-top : 30px;
   padding-left: 62px;
 }
 
-.margin20{
+.margin20 {
   margin-top: 20px;
 }
 
@@ -124,47 +30,47 @@
   background-color: $blue;
 }
 
-.marginTop01{
+.marginTop01 {
   margin-top: 1.5rem;
 }
 
-.marginBottom40{
+.marginBottom40 {
   @extend .horizontalCenter;
-  margin-top: 45px;
+  margin-top   : 45px;
   margin-bottom: 15px;
 }
 
-.marginleft18{
+.marginleft18 {
   margin-left: 1.813rem;
 }
 
-.marginTop04{
+.marginTop04 {
   margin-top: 4rem;
 }
 
-.marginRight01{
-  margin-left: auto;
+.marginRight01 {
+  margin-left : auto;
   margin-right: 2.8rem;
 }
 
-.paddingCoin{
-  padding-top: 19.5px;
+.paddingCoin {
+  padding-top : 19.5px;
   padding-left: 25px;
 }
 
-.paddingCoinMd{
-  padding-top: 26px;
+.paddingCoinMd {
+  padding-top : 26px;
   padding-left: 25px;
 }
 
-.redeem2{
+.redeem2 {
   @extend .iconTwo;
   color: $yellow;
 }
 
 .subredeem2 {
   padding-left: 1rem;
-  padding-top: 0.8rem;
+  padding-top : 0.8rem;
 }
 
 .redeem {
@@ -183,42 +89,42 @@
   color: $yellow;
 }
 
-.coinbody{
+.coinbody {
   @extend .textOne5;
   padding-top: 2rem;
+  width      : 100%;
+}
+
+.tablecoin {
   width: 100%;
 }
 
-.tablecoin{
-  width: 100%;
-}
-
-.paddingRequest{
+.paddingRequest {
   @extend .paddingbody;
-  padding-top: 5%;
+  padding-top   : 5%;
   padding-bottom: 5%;
 }
 
-.marginBottomSm{
+.marginBottomSm {
   @extend .horizontalCenter;
-  margin-top: 25px;
+  margin-top   : 25px;
   margin-bottom: 45px;
 }
 
-.status{
+.status {
   @extend .buttonCircle;
 }
 
-.bookBank{
-  width: 20rem !important;
+.bookBank {
+  width : 20rem !important;
   height: 26rem !important;
-  @extend .borderImage; 
+  @extend .borderImage;
 }
 
-.bookBankSm{
-  width: 10rem !important;
+.bookBankSm {
+  width : 10rem !important;
   height: 14rem !important;
-  @extend .borderImage; 
+  @extend .borderImage;
   margin-top: 3rem;
 }
 

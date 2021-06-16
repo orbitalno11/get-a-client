@@ -1,7 +1,7 @@
 import { faBook, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Button, Row, Col } from "antd"
-import React from 'react'
+import React,{useEffect} from 'react'
 import { styleComponent } from "../../../../defaultFunction/style"
 import { color } from "../../../../defaultValue"
 import isMobile from "../../../../isMobile/isMobile"
@@ -9,8 +9,17 @@ import ProfileContact from "./ProfileContact"
 import style from "./../styles.module.scss"
 import { SkeletonComponent } from "../../../../loading/SkeletonComponent"
 import { Link } from "react-router-dom"
+import { coinAction } from "../../../../../redux/actions"
+import { useDispatch } from "react-redux"
 
 export default function ProfileDetail({ data, isTutor }) {
+
+    const dispatch = useDispatch()
+    
+    useEffect(() => {
+        dispatch(coinAction.getCoinBalance());
+      }, []);
+
     return (
         <div >
             {
@@ -26,7 +35,7 @@ export default function ProfileDetail({ data, isTutor }) {
                                         !data ? (
                                             <SkeletonComponent.SkeletonText size="default" width="150px" />
                                         ) : (
-                                            <span className={`${style.textOne25} ${style.marginLeftOne}`}>  {data ? data.coin : <SkeletonComponent.SkeletonText size="default" width="150px" />} &nbsp;เหรียญ</span>
+                                            <span className={`${style.textOne25} ${style.marginLeftOne}`}>  {data && data.coin} &nbsp;เหรียญ</span>
                                         )
                                     }
                                 </Col>

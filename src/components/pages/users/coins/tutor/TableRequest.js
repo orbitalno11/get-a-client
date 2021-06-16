@@ -32,7 +32,7 @@ export default function TableRequest({ onHandleChange}) {
       {!isMobile() ? (
         <div>
           {detailRequest && detailRequest.length ? (
-            <table className="TableRedeem">
+            <table className={style.TableRedeem}>
               <thead>
                 <tr>
                   <th span={8} className={style.textOne35}>

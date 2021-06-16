@@ -77,7 +77,7 @@ export default function AddClip() {
       formData.append("name", data.name)
       formData.append("courseId", courseId)
       formData.append("description", data.description)
-      formData.append("cost", data.cost)
+      formData.append("cost",Number(data.cost))
       if (vdo?.file) {
         formData.append("video", vdo.file)
       }

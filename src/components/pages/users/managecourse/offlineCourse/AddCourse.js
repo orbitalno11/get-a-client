@@ -69,12 +69,12 @@ export default function AddCourse() {
         "name": data.namecourse,
         "subject": id ? dataDetaill.subject.id : data.subject,
         "description": data.description,
-        "grade": data.grade,
-        "type": data.type,
+        "grade": Number(data.grade),
+        "type": Number(data.type),
         "dayOfWeek": Number(data.dateOfWeek),
         "startTime": data.start,
         "endTime": data.end,
-        "cost": data.price
+        "cost": Number(data.price)
       }
 
       if (id?.isSafeNotBlank()) {

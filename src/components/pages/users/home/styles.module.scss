@@ -79,12 +79,32 @@
     cursor: pointer;
 }
 
+.width7{
+    display: inline-block;
+    width: 7rem !important;
+}
+
 .width10{
     display: inline-block;
     width: 9rem !important;
 }
 
+.width15{
+    display: inline-block;
+    width: 15rem !important;
+}
+
 .width4{
     display: inline-block;
     width: 4rem !important;
+}
+
+.height {
+    height: 100%;
+}
+
+.boderOrange{
+    border: 0.15rem solid $gray;
+    padding : 1rem;
+    border-radius: 0.5rem;
 }

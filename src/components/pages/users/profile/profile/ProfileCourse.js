@@ -80,10 +80,10 @@ export default function ProfileCourse({ isTutorProfile }) {
                 ))
             ) : (
                 (!isEmpty(course.type) && !loading) && (
-                    <div align="center"  className={`${!isMobile() && style.section} ${style.marginSection}`} >
-                    <EmptyImage size="default" />
-                    <p className={style.textOne25}>ผู้สอนยังไม่มีบทเรียนในส่วนนี้&nbsp;</p>
-                </div>
+                    <div align="center" className={`${!isMobile() && style.section} ${style.marginSection}`} >
+                        <EmptyImage size="default" />
+                        <p className={style.textOne25}>ผู้สอนยังไม่มีบทเรียนในส่วนนี้&nbsp;</p>
+                    </div>
                 )
             )
         )

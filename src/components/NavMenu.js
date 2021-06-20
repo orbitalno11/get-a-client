@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react"
 import { Menu, Button, Row, Col } from "antd";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
     faHome,
     faChalkboardTeacher,

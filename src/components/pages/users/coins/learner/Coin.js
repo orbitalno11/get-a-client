@@ -14,7 +14,38 @@ import isEmpty from "../../../../defaultFunction/checkEmptyObject";
 const { useBreakpoint } = Grid;
 
 export default function Coin() {
-  const loading = useSelector((state) => state.loading.loading);
+    const screens = useBreakpoint();
+    const dispatch = useDispatch();
+    const loading = useSelector((state) => state.loading.loading);
+    const list = useSelector((state) => state.coin.rateCoin);
+    const rateId = !isEmpty(list) && list[0].id;
+    const bahtInititate = !isEmpty(list) && list[0].baht;
+    const coinInititate = !isEmpty(list) && list[0].coin;
+      
+    const [rateData, setRateData] = useState(null)
+  
+    const onClickBuy = (id,baht,coin) => {
+      const  newArr = {
+          "id"  : id,
+          "baht": baht,
+          "coin": coin
+        }
+        setRateData(newArr)
+    }
+    
+    useEffect(() => {
+      dispatch(coinAction.getCoinRatesLearner());
+    }, []);
+
+    useEffect(() => {
+      const  newArr = {
+        "id"  : rateId,
+        "baht": bahtInititate,
+        "coin": coinInititate
+      }
+      setRateData(newArr)
+    }, [list]);
+
   return (
     <Fragment>
       {loading.loading && <Loading />}

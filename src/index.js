@@ -4,7 +4,9 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./core/string.extension"
+// import VConsole from 'vconsole';
 
+// const vConsole = new VConsole();
 
 ReactDOM.render(
    <App />,

@@ -6,7 +6,7 @@ import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import isMobile from "../../../../../isMobile/isMobile"
 import { useHistory, useParams } from "react-router";
-import { modalAction, onlineCourseActions, profileAction, reviewActions } from "../../../../../../redux/actions";
+import { modalAction, onlineCourseActions, profileAction, reviewActions, coinAction } from "../../../../../../redux/actions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -30,6 +30,7 @@ export default function ManageClip() {
   const { profile, isAuthenticated } = useSelector(state => state.auth)
   const { loading } = useSelector(state => state.loading)
   const profileAccount = useSelector(state => state.profile.profile)
+  const balanceCoin = useSelector((state) => state.coin.balance);
   const [showMessage, setShowMessage] = useState(false)
   const { videoId, courseId } = useParams()
   const owner = (!isEmpty(clip) && profile) && (profile === clip.owner.id)
@@ -48,6 +49,7 @@ export default function ManageClip() {
   }
 
   useEffect(() => {
+    dispatch(coinAction.getCoinBalance());
     dispatch(onlineCourseActions.getClip(videoId))
     dispatch(reviewActions.getReviewClip(videoId))
     dispatch(profileAction.getProfile())
@@ -177,7 +179,7 @@ export default function ManageClip() {
                           <span>{profileAccount.fullNameText}</span>
                           <div>
                             <styleComponent.iconCoin />
-                            <span className={`${style.marginLeftOneHalf} ${style.textOne25}`}>0</span>
+                            <span className={`${style.marginLeftOneHalf} ${style.textOne25}`}>{balanceCoin&&balanceCoin.amount}</span>
                           </div>
                         </Col>
                       </Row>

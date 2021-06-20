@@ -27,7 +27,10 @@ import EditProfile from "./components/pages/users/profile/editProfile/learner/Ed
 import EditProfileMap from "./components/pages/users/profile/editProfile/learner/EditProfileMap";
 import NavMenu from "./components/NavMenu";
 import Coins from "./components/pages/users/coins/learner/Coin"
+import BuyCoin from "./components/pages/users/coins/learner/BuyCoin"
 import Payment from "./components/pages/users/coins/learner/Payment"
+import Complete from "./components/pages/users/coins/learner/Complete"
+import PaymentSCB from "./components/pages/users/coins/learner/PaymentSCB"
 import HistoryCoin from "./components/pages/users/coins/learner/HistoryCoin"
 import Favorite from "./components/pages/users/favorite/Favorite"
 import Search from "./components/pages/users/search/Search";
@@ -82,7 +85,10 @@ function App() {
           <PrivateRoute exact path="/me/edit/map" component={EditProfileMap} />
           <PrivateRoute exact path="/redeem" component={Redeem} />
           <PrivateRoute exact path="/coin" component={Coins} />
-          <PrivateRoute exact path="/coinshop/payment" component={Payment} />
+          <PrivateRoute exact path="/transaction" component={BuyCoin} />
+          <PrivateRoute exact path="/payment/complete" component={Complete} />
+          <PrivateRoute exact path="/payment" component={Payment} />
+          <PrivateRoute exact path="/payment/scbeasy" component={PaymentSCB} />
           <PrivateRoute exact path="/historycoin" component={HistoryCoin} />
           <PrivateRoute exact path="/favorite" component={Favorite} />
           <PrivateRoute exact path="/course" component={Profile} />

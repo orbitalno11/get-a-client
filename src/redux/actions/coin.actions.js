@@ -19,7 +19,7 @@ function getCoinRatesLearner(){
             dispatch(loadingActions.startLoading())
             apiURL.apiGetA.get("/coin/rates?user=1").then(res => {
                 dispatch(loadingActions.stopLoading())
-                const coin = res.data.data.filter((item) => item.type === "std")
+                const coin = res.data.data.filter((item) => item.type != "transfer")
                 dispatch(success(coin))
             }).catch(err => {
                 dispatch(loadingActions.stopLoading())
@@ -369,6 +369,96 @@ function getRequestsDetail(id){
     function failure(err) { return { type: coinConstants.GET_REQUEST_REDEEM_FAILURE, payload: err } }
     
 }
+
+async function createTransaction(rateId){
+    try {
+        const data = {rate:rateId}
+        const res = await apiURL.apiGetA.post("/coin/buy",data)
+        const transactionId = res.data.data
+        return transactionId
+    } catch (error) {
+        throw new Error(error.response.data)
+    }
+}
+
+async function payByQrCode(rateId) {
+    try {
+        const transactionId = await createTransaction(rateId)
+        const res = await apiURL.apiGetA.get("/payment/pay/qrcode",{
+            params:{
+                transId:transactionId
+            }
+        })
+        const qrCode = res.data.data
+        return {
+                "transactionId" : transactionId,
+                "qrCode"        : qrCode,
+               }
+    } catch (error) {
+        throw new Error(error.response.data)
+    }
+}
+
+async function payByScbEasy(rateId) {
+    try {
+        const transactionId = await createTransaction(rateId)
+        const res = await apiURL.apiGetA.get("/payment/pay/scbeasy",{
+            params:{
+                transId:transactionId
+            }
+        })
+        const deeplink = res.data.data
+        return deeplink
+    } catch (error) {
+        throw new Error(error.response.data)
+    }
+}
+
+function createPayment(paymentType, rateId){
+    return async (dispatch) => {
+        dispatch(loadingActions.startLoading())
+        try{
+            if (paymentType === "qrCode") {
+                const dataQrCode = await payByQrCode(rateId)
+                dispatch(success(dataQrCode))
+            } else if (paymentType === "scbEasy") {
+                const scbEasy = await payByScbEasy(rateId)
+                dispatch(success(scbEasy))
+            } else {
+                dispatch(failure("payment type invalid"))
+            }
+        }catch(error){
+            dispatch(failure(error.message))
+        }finally{
+            dispatch(loadingActions.stopLoading())
+        }
+    }
+     function success(data) { return { type: coinConstants.CREATE_PAYMENT_SUCCESS, payload: data } }
+     function failure(err) { return { type: coinConstants.CREATE_PAYMENT_FAILURE, payload: err } }
+}       
+
+function createNewQR(transactionId){
+    return async (dispatch) => {
+        dispatch(loadingActions.startLoading())
+        try{
+            const res = await apiURL.apiGetA.get("/payment/pay/qrcode",{
+                params:{
+                    transId:transactionId
+                }
+            })
+            const qrCode = res.data.data
+            dispatch(success(qrCode))
+        }catch(error){
+            dispatch(failure(error.response.data))
+        }finally{
+            dispatch(loadingActions.stopLoading())
+        }
+    }
+    function success(data) { return { type: coinConstants.CREATE_NEW_QRCODE_SUCCESS, payload: data } }
+    function failure(err) { return { type: coinConstants.CREATE_NEW_QRCODE_FAILURE, payload: err } }
+}   
+
+
 export const coinAction = {
     getCoinRatesLearner,
     getCoinRatesTutor,
@@ -386,5 +476,8 @@ export const coinAction = {
     createRequestRedeem,
     getCoinRedeem,
     CancelRequestsRedeem,
-    getRequestsDetail
+    getRequestsDetail,
+    createPayment,
+    createNewQR,
+    payByQrCode
 }

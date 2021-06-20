@@ -25,7 +25,7 @@ export default function TableHistory() {
     { !isMobile() ? (
       <div>
       {transaction && transaction.length ? (
-        <table className= "TableRedeem">
+        <table className={style.TableRedeem}>
           <thead>
             <tr>
               <th span={8} className={style.textOne35}>

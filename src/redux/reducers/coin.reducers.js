@@ -12,6 +12,8 @@ const initialState = {
     denide:null,
     requestRedeem:null,
     cancle:null,
+    payment:null,
+    newQr:null,
 }
 
 const coinReducer = (state = initialState , action)=>{
@@ -236,6 +238,38 @@ const coinReducer = (state = initialState , action)=>{
             return {
                 ...state,
                 requestRedeem : null,
+                error : action.payload
+            }
+
+        }
+        case coinConstants.CREATE_PAYMENT_SUCCESS:{
+            return {
+                ...state,
+                payment : action.payload,
+                error : false
+            }
+
+        }
+        case coinConstants.CREATE_PAYMENT_FAILURE:{
+            return {
+                ...state,
+                payment : null,
+                error : action.payload
+            }
+
+        }
+        case coinConstants.CREATE_NEW_QRCODE_SUCCESS:{
+            return {
+                ...state,
+                newQr : action.payload,
+                error : false
+            }
+
+        }
+        case coinConstants.CREATE_NEW_QRCODE_FAILURE:{
+            return {
+                ...state,
+                newQr : null,
                 error : action.payload
             }
 

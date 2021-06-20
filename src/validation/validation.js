@@ -7,6 +7,7 @@ import {profileTestSchema} from "./profile/profileTestSchema"
 import {profileEducationSchema} from "./profile/profileEducationSchema" 
 import {searchSchema} from "./search/searchSchema" 
 import {redeemSchema} from "./coin/redeemSchema" 
+import {paymentSchema} from "./coin/paymentSchema" 
 
 export {
     loginSchema ,
@@ -17,5 +18,6 @@ export {
     profileTestSchema ,
     profileEducationSchema ,
     searchSchema,
-    redeemSchema
+    redeemSchema,
+    paymentSchema
 }

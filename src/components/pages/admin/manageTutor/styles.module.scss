@@ -33,3 +33,48 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.verify {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 15px;
+  border-collapse: collapse;
+  padding-left: 2em;
+}
+.verify td, .verify th {
+  padding: 8px;
+  border-bottom: 2px solid #ddd;  
+  padding-left: 2em;
+}
+.verify tr:hover {background-color: #ddd;}
+.verify th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #33658A;
+  color: white;
+  padding-left: 2em;
+}
+
+.profile {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 15px;
+  border-collapse: collapse;
+  padding-left: 2em;
+}
+
+.profiletd, .profile th {
+  padding: 8px;
+  border-bottom: 2px solid white;  
+  padding-left: 2em;
+}
+
+.profile tr {background-color: white;}
+
+.profile th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #33658A;
+  color: white;
+  padding-left: 2em;
+}

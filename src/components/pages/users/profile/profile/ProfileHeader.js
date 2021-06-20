@@ -1,5 +1,5 @@
 import { Button, Col, Image, Row } from "antd"
-import React from 'react'
+import React ,{useEffect} from "react"
 import ProfileSample from "../../../../images/profile.webp"
 import style from "./../styles.module.scss"
 import isMobile from "../../../../isMobile/isMobile";
@@ -11,7 +11,7 @@ import { SkeletonComponent } from "../../../../loading/SkeletonComponent";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { favoriteAction } from "../../../../../redux/actions"
+import { favoriteAction , coinAction} from "../../../../../redux/actions"
 export default function ProfileHeader({ data, tutorPublic, isTutorInfo, isTutor }) {
     const history = useHistory()
     const auth = useSelector(state => state.auth)
@@ -29,6 +29,10 @@ export default function ProfileHeader({ data, tutorPublic, isTutorInfo, isTutor 
             history.push("/login?from="+urlPathNow)
         }
     };
+
+    useEffect(() => {
+        dispatch(coinAction.getCoinBalance());
+      }, []);
 
     return (
         <div>
@@ -78,7 +82,9 @@ export default function ProfileHeader({ data, tutorPublic, isTutorInfo, isTutor 
                         (!tutorPublic && !isMobile()) && (
                             <Row align="middle">
                                 <styleComponent.iconCoin size="large" />
-                                <span className={`${style.textTwo} ${style.marginLeftOne}`}>{data ? data.coin : <SkeletonComponent.SkeletonText size="default"/>} &nbsp;เหรียญ</span>
+                                <Link to={!isTutor && "/historycoin"}>
+                                    <span className={`${style.textTwo} ${style.marginLeftOne} ${style.textCoin}`}>{data ? data.coin : <SkeletonComponent.SkeletonText size="default"/>} &nbsp;เหรียญ</span>
+                                </Link>
                                 <Link to={!isTutor ? "/coin" : "/redeem"}>
                                     <Button className={`${style.buttonColor} ${style.textOne} ${style.marginLeftOne}`} style={styleComponent.buttonFull(color.yellow, "5rem")} size="small">{isTutor ? "แลกเหรียญ" : "ซื้อเหรียญ"}</Button>
                                 </Link>

@@ -142,7 +142,7 @@ export default function EducationTutor({ data, type, status }) {
             {
                 data && data.map((item) => {
                     return (
-                        <Row className={`${(screens.md && status!=="learner") && style.section} ${style.marginSection}`} key={item.id} align="middle">
+                        <Row className={`${(screens.md && status!=="learner") && style.section} ${style.marginSection} ${style.fullWidth}`} key={item.id} align="middle">
                             <Col span={24} className={style.profileSet} >
                                 {
                                     (screens.md && status !== "learner") && (

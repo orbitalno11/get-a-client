@@ -253,85 +253,10 @@ input :focus,
   border-color: transparent !important;
 }
 
-.ant-table-thead > tr > th {
-  color: rgba(0, 0, 0, 0.85) !important;
-  font-weight: 500 !important;
-  font-size: 1.5rem !important;
-  text-align: center !important;
-  background: #ffb58d !important;
-  border-bottom: 1px solid #f26419 !important;
-}
-
 .ant-image-img {
   display:initial !important; 
   width: 100%;
   height: auto;
-}
-
-.tablecoins {
-  border-collapse: collapse !important;
-  width: 100% !important;
-  margin-top: 15px !important;
-  text-align: center !important;
-}
-.tablecoins td, .tablecoins th {
-  padding: 8px!important;
-  text-align: center!important;
-  border-bottom: 2px solid #ddd!important;  
-}
-.tablecoins tr:nth-child(even){background-color: #f2f2f2 !important;}
-.tablecoins tr:hover {background-color: #ddd!important;}
-.tablecoins th {
-  padding-top: 12px!important;
-  padding-bottom: 12px!important;
-  text-align: center !important;
-  background-color: #303A53 !important;
-  color: white!important;
-}
-
-.verify {
-  border-collapse: collapse;
-  width: 100%;
-  margin-top: 15px;
-  border-collapse: collapse;
-  padding-left: 2em;
-}
-.verify td, .verify th {
-  padding: 8px;
-  border-bottom: 2px solid #ddd;  
-  padding-left: 2em;
-}
-.verify tr:hover {background-color: #ddd;}
-.verify th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  background-color: #33658A;
-  color: white;
-  padding-left: 2em;
-}
-
-.profile {
-  border-collapse: collapse;
-  width: 100%;
-  margin-top: 15px;
-  border-collapse: collapse;
-  padding-left: 2em;
-}
-
-.profiletd, .profile th {
-  padding: 8px;
-  border-bottom: 2px solid white;  
-  padding-left: 2em;
-}
-
-.profile tr {background-color: white;}
-
-.profile th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  background-color: #33658A;
-  color: white;
-  padding-left: 2em;
 }
 
 ::placeholder{
@@ -382,27 +307,6 @@ textarea{
 
 .ant-table-tbody > tr > td{
   font-size: 1.5rem !important;
-}
-
-
-.TableRedeem{
-  border-collapse: collapse !important;
-  width: 100% !important;
-  margin-top: 15px !important;
-  text-align: center !important;
-}
-.TableRedeem td ,.TableRedeem th{
-  padding: 10px !important;
-  text-align: center !important;
-  border-bottom: 1px solid #ddd !important;
-}
-
-.TableRedeem tr {background-color: white !important;}
-.TableRedeem tr:hover {background-color:#f5f5f5 !important;}
-.TableRedeem th {
-  text-align: center !important;
-  background: #ffb58d !important;
-  border-bottom: 1px solid #f26419 !important;
 }
 
 .slick-dots li button:before{

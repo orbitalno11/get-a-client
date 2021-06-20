@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { coinAction } from "../../../../../redux/actions";
 import logoSCB from "../../../../images/scblogo.webp"
 
-export default function Coin() {
+export default function PaymentSCB() {
 
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.loading);

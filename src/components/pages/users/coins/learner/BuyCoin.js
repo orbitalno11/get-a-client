@@ -52,7 +52,7 @@ export default function BuyCoin({ rateData }) {
                     </span>
                   </Button>
                 </Col>
-                <Col>
+                {!screens.md && (   <Col>
                   <Button
                     className="backgroundOrange buttonColor"
                     shape="round"
@@ -64,7 +64,7 @@ export default function BuyCoin({ rateData }) {
                       ตกลง
                     </span>
                   </Button>
-                </Col>
+                </Col>)}
               </Row>
               ):(
                 <Row style={{ paddingTop: "1.5rem",width:"100%"}} className={style.horizontalCenter}>

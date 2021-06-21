@@ -2,15 +2,13 @@ import React from 'react'
 import PaymentFailure from "./PaymentFailure"
 import PaymentSuccess from "./PaymentSuccess"
 
-export default function ProfileRight() {
+export default function Complete() {
     const params = new URLSearchParams(window.location.search);
     const status = params.get("status")
 
-    console.log(status)
-
     return (
         <div>
-            { status === "true" ? <PaymentSuccess/> : <PaymentFailure/> }
+            { (status === "true" || status === "success")  ? <PaymentSuccess/> : <PaymentFailure/> }
         </div>
     )
 }

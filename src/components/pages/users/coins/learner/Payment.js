@@ -16,7 +16,7 @@ import { serverSocket } from "../../../../../utils/socket";
 import { useState } from "react";
 const { useBreakpoint } = Grid;
 
-export default function CoinDetail() {
+export default function Payment() {
   const screens = useBreakpoint();
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loading);

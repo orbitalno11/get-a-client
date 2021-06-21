@@ -30,7 +30,7 @@ export default function PaymentSuccess() {
                 <Col xl={7} lg={7} md={24} sm={24} xs={24} className={style.centerPage}>
                   <img src={check} width="150" height="150" className={isMobile()?style.paddingTopOne:null} />                
                 </Col>
-                { !screens.xs&&
+                { screens.xs&&
                   <Col xl={12} lg={12} md={24} sm={24} xs={24} className={!screens.lg?style.orderOne:null}>
                     <Row className={!screens.lg? !screens.md ?style.left:style.horizontalCenter:style.null}>
                       <span className={style.headerOne75}>รายละเอียดคำสั่งซื้อของคุณ</span><br/>

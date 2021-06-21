@@ -7,6 +7,10 @@ import { paymentSchema } from "../../../../../validation/coin/paymentSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { modalAction} from "../../../../../redux/actions";
+import ModalComponent from "../../../../modal/ModalComponent";
+import { sizeModal } from "../../../../modal/SizeModal";
 const { useBreakpoint } = Grid;
 
 export default function BuyCoin({ rateData }) {
@@ -14,18 +18,63 @@ export default function BuyCoin({ rateData }) {
     resolver: yupResolver(paymentSchema),
   });
   const screens = useBreakpoint()
-
+  const dispatch = useDispatch();
   const history = useHistory();
+  const Scb = ({param})=>{
+    return(
+      <div>
+          <Row>
+              <span className={style.textOne5}>การชำระผ่าน SCB EAZY จะต้องทำการชำบนโทรศัพท์มือถือ ที่ติดตั้งแอพลิเคชั่น SCB EAZY APP เท่านั้น</span>
+              <Row style={{ paddingTop: "2rem",width:"100%" }} className={style.horizontalCenter}>
+                <Col xs={9} sm={9} md={7} lg={7} xl={6}>
+                  <Button
+                    className= {style.buttonCancel}
+                    shape="round"
+                    size="middle"
+                    style={{ width: "6rem" }}
+                    onClick={() => dispatch(modalAction.closeModal())}
+                  >
+                    <span className={screens.md ? style.textOne5 : style.textOne35}>
+                      ยกเลิก
+                    </span>
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className="backgroundOrange buttonColor"
+                    shape="round"
+                    size="middle"
+                    style={{ width: "6rem" }}
+                    onClick={()=>history.push("/payment"+param)}
+                  >
+                    <span className={screens.md ? style.textOne5 : style.textOne35}>
+                      ตกลง
+                    </span>
+                  </Button>
+                </Col>
+              </Row>
+          </Row>
+      </div>
+    );
+  }
 
   const onSubmit = (data) => {
     if (data) {
       const param = (data.payment === "scbEasy"?"/scbeasy":"")+"?type="+ data.payment+"&rateId="+rateData.id+"&rateBaht="+rateData.baht+"&rateCoin="+rateData.coin
-      history.push("/payment"+param)
+     if(data.payment === "scbEasy"){
+      dispatch(modalAction.openModal({
+        body: <Scb param = {param}/>,
+        size: sizeModal.medium,
+        })
+      )}else{
+        history.push("/payment"+param)
+      }
     }
   };
 
   return (
     <Fragment>
+      <ModalComponent />
       <div className={`${!isMobile()?style.section:null} ${!isMobile()?style.marginSection:null}`}>
         <div className={!isMobile()? style.coinlist:null}>
           <Row>

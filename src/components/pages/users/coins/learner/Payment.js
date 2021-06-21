@@ -29,7 +29,6 @@ export default function Payment() {
   const baht = params.get("rateBaht")
   
   const [paymentRes, setPaymentRes] = useState(null)
-  console.log(paymentRes)
 
   useEffect(() => {
     const type = params.get("type")
@@ -111,14 +110,6 @@ export default function Payment() {
                     <SkeletonComponent.SkeletonText size="default"/>
                   )}
                   <Row style={{ paddingTop: "1rem" }}>
-                    <Col xs={4} sm={4} md={3} lg={4} xl={4} >
-                      <styleComponent.iconCoin size="large" />
-                    </Col>
-                    <Col xs={11} sm={10} md={9} lg={10} xl={9}>
-                      <span className={style.textOne5}>
-                        {coin&&coin} เหรียญ
-                      </span>
-                    </Col>
                     <Col xs={9} sm={10} md={7} lg={9} xl={10} >
                       <Button
                         className="backgroundOrange buttonColor"
@@ -130,6 +121,14 @@ export default function Payment() {
                           THB {baht&&baht}
                         </span>
                       </Button>
+                    </Col>
+                    <Col xs={4} sm={4} md={3} lg={4} xl={4} >
+                      <styleComponent.iconCoin size="large" />
+                    </Col>
+                    <Col xs={11} sm={10} md={9} lg={10} xl={9}>
+                      <span className={style.textOne5}>
+                        {coin&&coin} เหรียญ
+                      </span>
                     </Col>
                   </Row>
                 </div>

@@ -32,12 +32,13 @@ export default function PaymentSuccess() {
                   <img src={check} width="150" height="150" className={isMobile()?style.paddingTopOne:null} />                
                 </Col>
                 <Col xl={12} lg={12} md={24} sm={24} xs={24} className={!screens.lg?style.orderOne:null}>
+                { status != "success" &&
                   <Row className={!screens.lg? !screens.md ?style.left:style.horizontalCenter:style.left}>
                     <span className={style.headerOne75}>รายละเอียดคำสั่งซื้อของคุณ</span><br/>
-                    { status != "success" &&
                       <span className={style.textOne75}>หมายเลขคำสั่งซื้อ: {tid}</span>
-                    }
+                    
                   </Row>
+                }
                   { status != "success" &&
                     <Row style={{ width:"100%" }} className={!screens.lg?style.horizontalCenter:null}>
                         <Col xs={24} sm={24} md={24} lg={24} xl={24} >

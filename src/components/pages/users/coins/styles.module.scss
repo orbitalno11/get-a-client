@@ -369,3 +369,9 @@
   background: #ffb58d !important;
   border-bottom: 1px solid #f26419 !important;
 }
+
+.textAlert{
+  text-align:center;
+  width: 100%;
+  @extend .textOne25;
+}

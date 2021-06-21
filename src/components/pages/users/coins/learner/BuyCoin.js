@@ -24,18 +24,18 @@ export default function BuyCoin({ rateData }) {
     return(
       <div>
           <Row style={{paddingTop:"1rem"}}>
-            {screens.xs? (
-            <div className={style.textAlert}>
-              <span>การชำระผ่าน SCB Easy App จะต้องทำการชำระบน</span><br/>
-              <span>โทรศัพท์มือถือที่ติดตั้งแอพลิเคชั่น</span><br/>
-              <span>SCB Easy App เท่านั้น</span>
-            </div>
-            ):(
+              {screens.xs? (
               <div className={style.textAlert}>
-                <span>การชำระผ่าน SCB Easy App จะต้องทำการชำระบนโทรศัพท์มือถือ</span><br/>
-                <span>ที่ติดตั้งแอพลิเคชั่น SCB Easy App เท่านั้น</span>
+                <span>การชำระผ่าน SCB Easy App จะต้องทำการชำระบน</span><br/>
+                <span>โทรศัพท์มือถือที่ติดตั้งแอพลิเคชั่น</span><br/>
+                <span>SCB Easy App เท่านั้น</span>
               </div>
-            )}
+              ):(
+                <div className={style.textAlert}>
+                  <span>การชำระผ่าน SCB Easy App จะต้องทำการชำระบนโทรศัพท์มือถือ</span><br/>
+                  <span>ที่ติดตั้งแอพลิเคชั่น SCB Easy App เท่านั้น</span>
+                </div>
+              )}
 
               { !screens.md? (
               <Row style={{ paddingTop: "1.5rem",width:"100%" }} className={style.horizontalCenter}>
